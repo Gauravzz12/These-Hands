@@ -1032,12 +1032,14 @@
         };
 
         const card = document.createElement('div');
-        card.className = 'v2-card' + (cfg.idx === 9 ? ' is-boss' : '');
+        const isBoss = cfg.idx === 9 || cfg.idx === 19;
+        const isElite = cfg.idx === 4 || cfg.idx === 14 || cfg.idx === 18;
+        card.className = 'v2-card' + (isBoss ? ' is-boss' : '');
         card.id = 'v2-card-' + idx;
 
         const poseKeys = Object.keys(cfg.poses);
         const poseButtonsHtml = poseKeys.map(k => 
-          `<button class="v2-btn-pose ${k === 'idle' ? 'active' : ''}" data-idx="${idx}" data-pose="${k}">${k.replace('bananaSling', 'Banana Sling')}</button>`
+          `<button class="v2-btn-pose ${k === 'idle' ? 'active' : ''}" data-idx="${idx}" data-pose="${k}">${k.replace('bananaSling', 'Banana Sling').replace('rockStun1', 'Rock Stun 1').replace('rockStun2', 'Rock Stun 2')}</button>`
         ).join('');
 
         card.innerHTML = `
@@ -1046,7 +1048,7 @@
               <div class="v2-name">${cfg.name}</div>
               <span style="font-size: 0.75rem; color: var(--text-sub);">#${idx + 1} · Index ${idx}</span>
             </div>
-            <span class="v2-badge ${cfg.idx === 9 ? 'boss' : ''}">${cfg.idx === 9 ? '👑 BOSS' : (cfg.idx === 4 ? 'ELITE' : 'NORMAL')}</span>
+            <span class="v2-badge ${isBoss ? 'boss' : ''}">${isBoss ? '👑 BOSS' : (isElite ? 'ELITE' : 'NORMAL')}</span>
           </div>
           <div class="v2-stage-wrap">
             <canvas class="v2-canvas" id="v2-canvas-${idx}" width="280" height="250"></canvas>
