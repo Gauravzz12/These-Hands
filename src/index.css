@@ -419,7 +419,7 @@ font-family: "Nunito", sans-serif;
 color: #2b1c10;
 }
 .ecard:active { transform: scale(.97); }
-.ecard img { width: 54px; height: 54px; image-rendering: pixelated; }
+.ecard img { width: 54px; height: 54px; object-fit: contain; object-position: bottom center; }
 .ecard .nm { font-weight: 800; font-size: 12px; line-height: 1.2; min-height: 29px; display: flex; align-items: center; justify-content: center; }
 .ecard .st { font-size: 11px; font-weight: 700; color: #6d573f; line-height: 1.5; }
 .ecard .state { font-size: 10px; font-weight: 800; letter-spacing: .06em; margin-top: 2px; }
@@ -563,7 +563,7 @@ text-shadow: 0 2px 0 rgba(43,28,16,.18);
 #endSprite {
 width: 92px; height: 92px;
 object-fit: contain;
-image-rendering: pixelated;
+object-position: bottom center;
 margin: 8px auto 2px;
 }
 #endOverlay.lose #endSprite { filter: saturate(.55); }
@@ -1712,7 +1712,7 @@ animation: biPulse .45s ease-in-out infinite alternate;
 @keyframes biPulse { from { transform: scale(1); } to { transform: scale(1.06); } }
 #biSprite {
 object-fit: contain;
-image-rendering: pixelated;
+object-position: bottom center;
 margin-top: 16px;
 filter: drop-shadow(0 10px 22px rgba(0,0,0,.6));
 animation: biRise 1.8s ease-out;
