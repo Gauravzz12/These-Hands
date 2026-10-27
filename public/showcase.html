@@ -1065,7 +1065,7 @@
           return map[name] || name.charAt(0).toUpperCase() + name.slice(1);
         };
 
-        const poseKeys = Object.keys(cfg.poses);
+        const poseKeys = Object.keys(cfg.poses).filter(k => k !== 'attack' || !cfg.poses.attack2);
         const poseButtonsHtml = poseKeys.map(k => 
           `<button class="v2-btn-pose ${k === 'idle' ? 'active' : ''}" data-idx="${idx}" data-pose="${k}">${formatPoseLabel(k)}</button>`
         ).join('');

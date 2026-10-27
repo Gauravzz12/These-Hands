@@ -23,25 +23,10 @@ export const V2_CONFIGS = [
         "w": 546,
         "h": 907
       },
-      "attack1": {
+      "attack": {
         "src": "/enemy-sprites-v2/poses/01-training-dummy-attack.png",
         "w": 884,
         "h": 909
-      },
-      "attack2": {
-        "src": "/enemy-sprites-v2/poses/01-training-dummy-attack-mallet.png",
-        "w": 1027,
-        "h": 1075
-      },
-      "attack": {
-        "src": "/enemy-sprites-v2/poses/01-training-dummy-attack-mallet.png",
-        "w": 1027,
-        "h": 1075
-      },
-      "mallet": {
-        "src": "/enemy-sprites-v2/poses/01-training-dummy-attack-mallet.png",
-        "w": 1027,
-        "h": 1075
       },
       "dizzy": {
         "src": "/enemy-sprites-v2/poses/01-training-dummy-dizzy.png",
@@ -86,16 +71,6 @@ export const V2_CONFIGS = [
         "w": 1530,
         "h": 1420
       },
-      "water": {
-        "src": "/enemy-sprites-v2/poses/02-rubber-duck-attack-water.png",
-        "w": 1530,
-        "h": 1420
-      },
-      "squeak": {
-        "src": "/enemy-sprites-v2/poses/02-rubber-duck-attack-squeak.png",
-        "w": 986,
-        "h": 982
-      },
       "dizzy": {
         "src": "/enemy-sprites-v2/poses/02-rubber-duck-dizzy.png",
         "w": 626,
@@ -124,22 +99,7 @@ export const V2_CONFIGS = [
         "w": 507,
         "h": 902
       },
-      "attack1": {
-        "src": "/enemy-sprites-v2/poses/03-rubber-chicken-attack.png",
-        "w": 1133,
-        "h": 865
-      },
-      "attack2": {
-        "src": "/enemy-sprites-v2/poses/03-rubber-chicken-attack-egg.png",
-        "w": 1111,
-        "h": 1535
-      },
       "attack": {
-        "src": "/enemy-sprites-v2/poses/03-rubber-chicken-attack-egg.png",
-        "w": 1111,
-        "h": 1535
-      },
-      "egg": {
         "src": "/enemy-sprites-v2/poses/03-rubber-chicken-attack-egg.png",
         "w": 1111,
         "h": 1535
@@ -172,25 +132,10 @@ export const V2_CONFIGS = [
         "w": 796,
         "h": 888
       },
-      "attack1": {
+      "attack": {
         "src": "/enemy-sprites-v2/poses/04-cardboard-knight-attack.png",
         "w": 745,
         "h": 869
-      },
-      "attack2": {
-        "src": "/enemy-sprites-v2/poses/04-cardboard-knight-attack-shield.png",
-        "w": 1123,
-        "h": 1523
-      },
-      "attack": {
-        "src": "/enemy-sprites-v2/poses/04-cardboard-knight-attack-shield.png",
-        "w": 1123,
-        "h": 1523
-      },
-      "shield": {
-        "src": "/enemy-sprites-v2/poses/04-cardboard-knight-attack-shield.png",
-        "w": 1123,
-        "h": 1523
       },
       "dizzy": {
         "src": "/enemy-sprites-v2/poses/04-cardboard-knight-dizzy.png",
@@ -220,22 +165,7 @@ export const V2_CONFIGS = [
         "w": 601,
         "h": 908
       },
-      "attack1": {
-        "src": "/enemy-sprites-v2/poses/05-slime-blob-attack.png",
-        "w": 768,
-        "h": 835
-      },
-      "attack2": {
-        "src": "/enemy-sprites-v2/poses/05-slime-blob-attack-2.png",
-        "w": 593,
-        "h": 891
-      },
       "attack": {
-        "src": "/enemy-sprites-v2/poses/05-slime-blob-attack-2.png",
-        "w": 593,
-        "h": 891
-      },
-      "goo": {
         "src": "/enemy-sprites-v2/poses/05-slime-blob-attack-2.png",
         "w": 593,
         "h": 891
@@ -268,22 +198,7 @@ export const V2_CONFIGS = [
         "w": 902,
         "h": 877
       },
-      "attack1": {
-        "src": "/enemy-sprites-v2/poses/06-sassy-goblin-sprout-attack.png",
-        "w": 870,
-        "h": 842
-      },
-      "attack2": {
-        "src": "/enemy-sprites-v2/poses/06-sassy-goblin-sprout-attack-slingshot.png",
-        "w": 1547,
-        "h": 1548
-      },
       "attack": {
-        "src": "/enemy-sprites-v2/poses/06-sassy-goblin-sprout-attack-slingshot.png",
-        "w": 1547,
-        "h": 1548
-      },
-      "slingshot": {
         "src": "/enemy-sprites-v2/poses/06-sassy-goblin-sprout-attack-slingshot.png",
         "w": 1547,
         "h": 1548
@@ -316,22 +231,7 @@ export const V2_CONFIGS = [
         "w": 458,
         "h": 883
       },
-      "attack1": {
-        "src": "/enemy-sprites-v2/poses/07-mime-attack.png",
-        "w": 1185,
-        "h": 837
-      },
-      "attack2": {
-        "src": "/enemy-sprites-v2/poses/07-mime-attack-rope.png",
-        "w": 1256,
-        "h": 1556
-      },
       "attack": {
-        "src": "/enemy-sprites-v2/poses/07-mime-attack-rope.png",
-        "w": 1256,
-        "h": 1556
-      },
-      "rope": {
         "src": "/enemy-sprites-v2/poses/07-mime-attack-rope.png",
         "w": 1256,
         "h": 1556
@@ -364,22 +264,7 @@ export const V2_CONFIGS = [
         "w": 544,
         "h": 902
       },
-      "attack1": {
-        "src": "/enemy-sprites-v2/poses/08-cocky-goose-attack.png",
-        "w": 1279,
-        "h": 783
-      },
-      "attack2": {
-        "src": "/enemy-sprites-v2/poses/08-cocky-goose-attack-honk.png",
-        "w": 1209,
-        "h": 725
-      },
       "attack": {
-        "src": "/enemy-sprites-v2/poses/08-cocky-goose-attack-honk.png",
-        "w": 1209,
-        "h": 725
-      },
-      "honk": {
         "src": "/enemy-sprites-v2/poses/08-cocky-goose-attack-honk.png",
         "w": 1209,
         "h": 725
@@ -412,25 +297,10 @@ export const V2_CONFIGS = [
         "w": 693,
         "h": 885
       },
-      "attack1": {
+      "attack": {
         "src": "/enemy-sprites-v2/poses/09-trash-panda-attack.png",
         "w": 963,
         "h": 908
-      },
-      "attack2": {
-        "src": "/enemy-sprites-v2/poses/09-trash-panda-attack-garbage.png",
-        "w": 1512,
-        "h": 1524
-      },
-      "attack": {
-        "src": "/enemy-sprites-v2/poses/09-trash-panda-attack-garbage.png",
-        "w": 1512,
-        "h": 1524
-      },
-      "garbage": {
-        "src": "/enemy-sprites-v2/poses/09-trash-panda-attack-garbage.png",
-        "w": 1512,
-        "h": 1524
       },
       "dizzy": {
         "src": "/enemy-sprites-v2/poses/09-trash-panda-dizzy.png",
@@ -466,21 +336,11 @@ export const V2_CONFIGS = [
         "h": 908
       },
       "attack2": {
-        "src": "/enemy-sprites-v2/poses/10-mischievous-monkey-attack-vine.png",
-        "w": 1085,
-        "h": 1079
+        "src": "/enemy-sprites-v2/poses/10-mischievous-monkey-attack-tailhang.png",
+        "w": 1049,
+        "h": 1091
       },
       "attack": {
-        "src": "/enemy-sprites-v2/poses/10-mischievous-monkey-attack-vine.png",
-        "w": 1085,
-        "h": 1079
-      },
-      "vine": {
-        "src": "/enemy-sprites-v2/poses/10-mischievous-monkey-attack-vine.png",
-        "w": 1085,
-        "h": 1079
-      },
-      "tailhang": {
         "src": "/enemy-sprites-v2/poses/10-mischievous-monkey-attack-tailhang.png",
         "w": 1049,
         "h": 1091
