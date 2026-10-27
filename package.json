@@ -14,7 +14,6 @@
     "react-dom": "^19.3.1"
   },
   "devDependencies": {
-    "@rolldown/binding-win32-x64-msvc": "^1.2.15",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
     "@vitejs/plugin-react": "^6.1.2",
