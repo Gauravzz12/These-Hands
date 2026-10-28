@@ -40,103 +40,66 @@ export default function App() {
 
       <main id="pages">
       <section id="pageHome" className="page active" aria-label="Home">
-        <div className="hub-head">
-          <div className="pill mini" aria-label="Coins">
-            <svg className="coin-ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#f2b01e" stroke="#b97e08" strokeWidth="2"/><circle cx="12" cy="12" r="5.5" fill="none" stroke="#b97e08" strokeWidth="2"/></svg>
-            <span id="hubCoinCount">0</span>
-          </div>
-          <div className="pill gem mini" aria-label="Gems">
-            <svg className="gem-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h10l4 6-9 12L3 9l4-6z" fill="#39c2d8" stroke="#177e96" strokeWidth="1.6" strokeLinejoin="round"/><path d="M3 9h18M12 21 8.5 9 12 3l3.5 6L12 21" fill="none" stroke="#177e96" strokeWidth="1.3" strokeLinejoin="round"/></svg>
-            <span id="hubGemCount">0</span>
-          </div>
-          <div className="spacer"></div>
-          <div className="pill level" aria-label="Player level">LV <span id="hubLevelVal">1</span></div>
-          <div className="pill level" id="hubTestTag" style={{'display': 'none', 'background': '#9c27b0', 'color': '#fff', 'cursor': 'pointer'}} title="Test Mode Active — all enemies unlocked">TEST MODE ★</div>
-          <div className="pill level" id="hubDoneTag" style={{'display': 'none', 'background': 'var(--gold)', 'color': '#2b1c10'}} aria-label="Game completed">COMPLETED ★</div>
-          <div className="pill level" id="hubDragonTag" style={{'display': 'none', 'background': '#8f1f16', 'color': '#ffe9c9'}} aria-label="Dragon Slayer milestone">DRAGON SLAYER ★</div>
-        </div>
         <div id="saveNotice" style={{'display': 'none'}} role="status" title="Tap to dismiss">Save data was corrupted — started fresh. Backup kept.<span className="sn-x" aria-hidden="true">✕</span></div>
         <div id="skinNotice" style={{'display': 'none'}} role="status" title="Tap to dismiss"><span className="sn-msg"></span><span className="sn-x" aria-hidden="true">✕</span></div>
-                <div id="storageNotice" style={{'display': 'none'}} role="status" title="Tap to dismiss">Saving unavailable in this browser context — progress won't persist here.<span className="sn-x" aria-hidden="true">✕</span></div>
+        <div id="storageNotice" style={{'display': 'none'}} role="status" title="Tap to dismiss">Saving unavailable in this browser context — progress won't persist here.<span className="sn-x" aria-hidden="true">✕</span></div>
+        
         <div className="hub-stage" id="hubStage" aria-hidden="true">
-            <div className="hub-wall"></div>
-            <div className="hub-floor"></div>
-            <div className="hub-rug"></div>
-            <span className="hub-spark s1"></span><span className="hub-spark s2"></span><span className="hub-spark s3"></span><span className="hub-spark s4"></span><span className="hub-spark s5"></span>
-            <span className="hub-coin c1"></span><span className="hub-coin c2"></span><span className="hub-coin c3"></span>
-            <div className="hub-guest-wrap" id="hubGuestWrap">
-              <img id="hubGuest" alt="" />
-              <div className="hub-podium"></div>
-            </div>
-            <div className="hub-burst" id="hubBurst"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1l2.6 7.2L22 9.3l-5.8 4.9L18 22l-6-4.6L6 22l1.8-7.8L2 9.3l7.4-1.1L12 1z" fill="currentColor"/></svg></div>
-            <div className="hub-guest-cap" id="hubGuestCap">NEXT TARGET</div>
-            <div className="hub-hand-wrap left"><img id="hubHandL" src="data:," alt="" /></div>
-            <div className="hub-hand-wrap right"><img id="hubHandR" src="data:," alt="" /></div>
+          <div className="hub-wall"></div>
+          <div className="hub-floor"></div>
+          <div className="hub-rug"></div>
+          <span className="hub-spark s1"></span><span className="hub-spark s2"></span><span className="hub-spark s3"></span><span className="hub-spark s4"></span><span className="hub-spark s5"></span>
+          <span className="hub-coin c1"></span><span className="hub-coin c2"></span><span className="hub-coin c3"></span>
+          <div className="hub-guest-wrap" id="hubGuestWrap">
+            <img id="hubGuest" alt="" />
+            <div className="hub-podium"></div>
           </div>
-        <div className="hub-scroll">
-      <div id="awayCard" role="dialog" aria-label="Offline earnings">
-        <div className="away-inner">
-          <div className="away-head">WHILE YOU WERE AWAY</div>
-          <div className="away-sub" id="awayText"></div>
-          <div className="away-amt" id="awayAmt"></div>
-          <button id="awayClaim">CLAIM</button>
+          <div className="hub-burst" id="hubBurst"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1l2.6 7.2L22 9.3l-5.8 4.9L18 22l-6-4.6L6 22l1.8-7.8L2 9.3l7.4-1.1L12 1z" fill="currentColor"/></svg></div>
+          <div className="hub-guest-cap" id="hubGuestCap"><span className="cap-k">NEXT TARGET</span>TRAINING DUMMY</div>
+          <div className="hub-hand-wrap left"><img id="hubHandL" src="data:," alt="" /></div>
+          <div className="hub-hand-wrap right"><img id="hubHandR" src="data:," alt="" /></div>
         </div>
-      </div>
+
+        <div className="hub-content">
+          <div id="awayCard" role="dialog" aria-label="Offline earnings">
+            <div className="away-inner">
+              <div className="away-head">WHILE YOU WERE AWAY</div>
+              <div className="away-sub" id="awayText"></div>
+              <div className="away-amt" id="awayAmt"></div>
+              <button id="awayClaim">CLAIM</button>
+            </div>
+          </div>
+
           <button type="button" id="chestCard" style={{'display': 'none'}} aria-label="Daily chest"></button>
-<nav className="hub-menu" aria-label="Game sections">
-            <button className="hub-item battle wide" data-goto="battle">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3 4 6l4 4 3-3-4-4zm10 0-4 4 3 3 4-4-3-3zM5 13c-1.2 1.5-2 3.4-2 5 1.9-.1 3.6-.8 5-2l-3-3zm14 0-3 3c1.4 1.2 3.1 1.9 5 2-.1-1.6-.8-3.5-2-5zM12 8l-2.5 2.5L12 13l2.5-2.5L12 8z" fill="currentColor"/></svg>
-              <span className="hi-main"><span className="hi-name">BATTLE</span><span className="hi-sub" id="hubBattleSub"></span></span>
-              <span className="hi-arrow">›</span>
-            </button>
-            <button className="hub-item" data-goto="attrs">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 7h-4v11h-6V10H5l7-7z" fill="currentColor"/></svg>
-              <span className="hi-main"><span className="hi-name">ATTRIBUTES</span><span className="hi-sub" id="hubAttrsSub"></span></span>
-              <span className="hi-arrow">›</span>
-            </button>
-            <button className="hub-item" data-goto="levels">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="7" height="7" rx="1.5" fill="currentColor"/><rect x="13" y="4" width="7" height="7" rx="1.5" fill="currentColor"/><rect x="4" y="13" width="7" height="7" rx="1.5" fill="currentColor"/><rect x="13" y="13" width="7" height="7" rx="1.5" fill="currentColor"/></svg>
-              <span className="hi-main"><span className="hi-name">LEVELS</span><span className="hi-sub" id="hubLevelsSub"></span></span>
-              <span className="hi-arrow">›</span>
-            </button>
-            <button className="hub-item" data-goto="skills">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8L12 2z" fill="currentColor"/></svg>
-              <span className="hi-main"><span className="hi-name">SKILLS</span><span className="hi-sub" id="hubSkillsSub"></span></span>
-              <span className="hi-arrow">›</span>
-            </button>
-            <button className="hub-item" data-goto="specials">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2 4.5 13.5H11L9.5 22 19 10h-6.5L13 2z" fill="currentColor"/></svg>
-              <span className="hi-main"><span className="hi-name">SPECIALS</span><span className="hi-sub" id="hubSpecSub"></span></span>
-              <span className="hi-arrow">›</span>
-            </button>
-            <button className="hub-item" data-goto="quests">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3h14a1 1 0 0 1 1 1v13.2a2 2 0 0 1-3.2 1.6L12 15.6l-4.8 3.2A2 2 0 0 1 4 17.2V4a1 1 0 0 1 1-1zm3 4v2h8V7H8zm0 4v2h5v-2H8z" fill="currentColor"/></svg>
-              <span className="hi-main"><span className="hi-name">QUESTS</span><span className="hi-sub" id="hubQuestsSub"></span></span>
-              <span className="hi-badge" id="hubQuestBadge" style={{'display': 'none'}}>0</span>
-              <span className="hi-arrow">›</span>
-            </button>
-            <button className="hub-item" data-goto="awards">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2h12v3h4v2a5 5 0 0 1-5 5h-.42A6 6 0 0 1 13 15.92V18h4v3H7v-3h4v-2.08A6 6 0 0 1 7.42 12H7a5 5 0 0 1-5-5V5h4V2zm-2 5a3 3 0 0 0 3 3V7H4zm16 0h-3v3a3 3 0 0 0 3-3z" fill="currentColor"/></svg>
-              <span className="hi-main"><span className="hi-name">AWARDS</span><span className="hi-sub" id="hubAwardsSub"></span></span>
-              <span className="hi-arrow">›</span>
-            </button>
-            <button className="hub-item wide" data-goto="shop">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7 5.6 3h12.8L20 7H4zm0 2v10a1.5 1.5 0 0 0 1.5 1.5h13A1.5 1.5 0 0 0 20 19V9h-5.5a2.75 2.75 0 0 1-5 0H4zm5.5 2.2a.8.8 0 0 1 1.5 0V13H9.5v-1.8z" fill="currentColor"/></svg>
-              <span className="hi-main"><span className="hi-name">SHOP</span><span className="hi-sub" id="hubShopSub"></span></span>
-              <span className="hi-arrow">›</span>
-            </button>
-            </nav>
-          <div className="hub-bottom-row">
-<button className="hub-item" data-goto="help">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm.2 15.6a1.7 1.7 0 1 1 0-3.4 1.7 1.7 0 0 1 0 3.4zM12 5.5c1.9 0 3.3 1.2 3.3 2.9 0 1.4-.9 2.1-1.8 2.7-.6.4-.8.6-.9 1.3h-1.7c.1-1.6.7-2.2 1.5-2.8.4-.3.7-.5.7-1 0-.6-.5-1-1.1-1-.7 0-1.2.4-1.3 1.3H8.9C9 6.6 10.2 5.5 12 5.5z" fill="currentColor"/></svg>
-              <span className="hi-main"><span className="hi-name">HOW TO PLAY</span><span className="hi-sub" id="hubHelpSub">THE RULES OF SLAPPING</span></span>
-              <span className="hi-arrow">›</span>
-            </button>
-            <button className="hub-item" data-goto="settings">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.4 13a7.6 7.6 0 0 0 0-2l2-1.6-2-3.4-2.4 1a7.7 7.7 0 0 0-1.7-1L14.8 3H9.2L8.7 5.6a7.7 7.7 0 0 0-1.7 1l-2.4-1-2 3.4L4.6 11a7.6 7.6 0 0 0 0 2l-2 1.6 2 3.4 2.4-1a7.7 7.7 0 0 0 1.7 1l.5 2.6h5.6l.5-2.6a7.7 7.7 0 0 0 1.7-1l2.4 1 2-3.4-2-1.6zM12 15.5a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7z" fill="currentColor"/></svg>
-              <span className="hi-main"><span className="hi-name">SETTINGS</span><span className="hi-sub" id="hubSettingsSub"></span></span>
-              <span className="hi-arrow">›</span>
-            </button>
+
+          <button className="hub-battle-cta" data-goto="battle" id="hubBattleCta">
+            <span className="hbc-ico">
+              <svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path d="M7 3 4 6l4 4 3-3-4-4zm10 0-4 4 3 3 4-4-3-3zM5 13c-1.2 1.5-2 3.4-2 5 1.9-.1 3.6-.8 5-2l-3-3zm14 0-3 3c1.4 1.2 3.1 1.9 5 2-.1-1.6-.8-3.5-2-5zM12 8l-2.5 2.5L12 13l2.5-2.5L12 8z" fill="currentColor"/></svg>
+            </span>
+            <span className="hbc-text">
+              <span className="hbc-title">BATTLE</span>
+              <span className="hbc-sub" id="hubBattleSub">VS TRAINING DUMMY</span>
+            </span>
+            <span className="hbc-arrow">›</span>
+          </button>
+
+          <div style={{'display': 'none'}} aria-hidden="true">
+            <span id="hubCoinCount">0</span>
+            <span id="hubGemCount">0</span>
+            <span id="hubLevelVal">1</span>
+            <span id="hubTestTag"></span>
+            <span id="hubDoneTag"></span>
+            <span id="hubDragonTag"></span>
+            <span id="hubAttrsSub"></span>
+            <span id="hubLevelsSub"></span>
+            <span id="hubSkillsSub"></span>
+            <span id="hubSpecSub"></span>
+            <span id="hubQuestsSub"></span>
+            <span id="hubQuestBadge"></span>
+            <span id="hubAwardsSub"></span>
+            <span id="hubShopSub"></span>
+            <span id="hubSettingsSub"></span>
+            <span id="hubHelpSub"></span>
           </div>
         </div>
       </section>
@@ -146,11 +109,6 @@ export default function App() {
         <div id="enemyName">Training Dummy</div>
         <div id="enemyMeta"></div>
         <div id="hpTrack"><div id="hpFill"></div><span id="hpText"></span><span id="bossMark"><svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true"><path d="M3 18h18l-1.5-9L14 13l-2-6-2 6-5.5-4L3 18zm0 2.2h18V22H3v-1.8z" fill="currentColor"/></svg></span></div>
-        <div id="atkRow">
-          <span className="atk-lbl">ENEMY ATTACK</span>
-          <div id="atkTrack"><div id="atkFill"></div></div>
-          <span id="atkTime">4.2s</span>
-        </div>
       </div>
 
 
@@ -181,6 +139,12 @@ export default function App() {
         <svg className="heart-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21C6 16.5 2.5 12.8 2.5 8.9 2.5 5.9 4.9 3.5 7.9 3.5c1.7 0 3.2.8 4.1 2.1.9-1.3 2.4-2.1 4.1-2.1 3 0 5.4 2.4 5.4 5.4 0 3.9-3.5 7.6-9.5 12.1z" fill="#d63c30" stroke="#8f1f16" strokeWidth="1.4"/></svg>
         <div id="playerTrack"><div id="playerFill"></div><span id="playerText"></span></div>
         <span id="swTag" className="sw-tag" style={{'display': 'none'}}></span>
+      </div>
+
+      <div id="atkRow">
+        <span className="atk-lbl">ENEMY ATTACK</span>
+        <div id="atkTrack"><div id="atkFill"></div></div>
+        <span id="atkTime">4.2s</span>
       </div>
 
       <section id="attrPanel" aria-label="Attributes">
@@ -501,6 +465,85 @@ export default function App() {
         <span id="hangMsg"></span>
         <button id="hangRetry" type="button">RETRY</button>
         <button id="hangDismiss" type="button" aria-label="Dismiss">✕</button>
+      </div>
+
+      <nav id="bottomNav" aria-label="Main Navigation">
+        <button className="bnav-btn active" data-tab="home" data-goto="home" aria-label="Home">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 2.5 11h2.7v9h5.3v-6h3v6h5.3v-9h2.7L12 3z" fill="currentColor"/></svg>
+          <span>HOME</span>
+        </button>
+        <button className="bnav-btn" data-tab="levels" data-goto="levels" aria-label="Levels">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="7" height="7" rx="1.5" fill="currentColor"/><rect x="13" y="4" width="7" height="7" rx="1.5" fill="currentColor"/><rect x="4" y="13" width="7" height="7" rx="1.5" fill="currentColor"/><rect x="13" y="13" width="7" height="7" rx="1.5" fill="currentColor"/></svg>
+          <span>LEVELS</span>
+        </button>
+        <button className="bnav-btn" data-tab="skills" data-goto="skills" aria-label="Skills">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8L12 2z" fill="currentColor"/></svg>
+          <span>SKILLS</span>
+        </button>
+        <button className="bnav-btn" data-tab="shop" data-goto="shop" aria-label="Shop">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7 5.6 3h12.8L20 7H4zm0 2v10a1.5 1.5 0 0 0 1.5 1.5h13A1.5 1.5 0 0 0 20 19V9h-5.5a2.75 2.75 0 0 1-5 0H4zm5.5 2.2a.8.8 0 0 1 1.5 0V13H9.5v-1.8z" fill="currentColor"/></svg>
+          <span>SHOP</span>
+        </button>
+        <button className="bnav-btn" data-tab="more" id="bnavMoreBtn" aria-label="More sections">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="5" cy="12" r="2.2" fill="currentColor"/><circle cx="12" cy="12" r="2.2" fill="currentColor"/><circle cx="19" cy="12" r="2.2" fill="currentColor"/></svg>
+          <span>MORE</span>
+        </button>
+      </nav>
+
+      <div id="moreSheetOverlay" className="sheet-overlay" style={{'display': 'none'}}>
+        <div id="moreSheet" className="more-sheet" role="dialog" aria-label="More options">
+          <div className="sheet-handle"></div>
+          <div className="more-list">
+            <button className="more-row" data-goto="attrs">
+              <span className="mr-ico orange"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 7h-4v11h-6V10H5l7-7z" fill="currentColor"/></svg></span>
+              <span className="mr-main">
+                <span className="mr-title">ATTRIBUTES</span>
+                <span className="mr-sub" id="moreAttrsSub">LEVEL 1 · CAP 5 · DPS 5</span>
+              </span>
+              <span className="mr-arrow">›</span>
+            </button>
+            <button className="more-row" data-goto="specials">
+              <span className="mr-ico yellow"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2 4.5 13.5H11L9.5 22 19 10h-6.5L13 2z" fill="currentColor"/></svg></span>
+              <span className="mr-main">
+                <span className="mr-title">SPECIALS</span>
+                <span className="mr-sub" id="moreSpecSub">0 / 5 UNLOCKED</span>
+              </span>
+              <span className="mr-arrow">›</span>
+            </button>
+            <button className="more-row" data-goto="quests">
+              <span className="mr-ico orange"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3h14a1 1 0 0 1 1 1v13.2a2 2 0 0 1-3.2 1.6L12 15.6l-4.8 3.2A2 2 0 0 1 4 17.2V4a1 1 0 0 1 1-1zm3 4v2h8V7H8zm0 4v2h5v-2H8z" fill="currentColor"/></svg></span>
+              <span className="mr-main">
+                <span className="mr-title">QUESTS</span>
+                <span className="mr-sub" id="moreQuestsSub">🔒 DEFEAT THE MONKEY (#10)</span>
+              </span>
+              <span className="mr-arrow">›</span>
+            </button>
+            <button className="more-row" data-goto="awards">
+              <span className="mr-ico gold"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2h12v3h4v2a5 5 0 0 1-5 5h-.42A6 6 0 0 1 13 15.92V18h4v3H7v-3h4v-2.08A6 6 0 0 1 7.42 12H7a5 5 0 0 1-5-5V5h4V2zm-2 5a3 3 0 0 0 3 3V7H4zm16 0h-3v3a3 3 0 0 0 3-3z" fill="currentColor"/></svg></span>
+              <span className="mr-main">
+                <span className="mr-title">AWARDS</span>
+                <span className="mr-sub" id="moreAwardsSub">0 / 104 DONE</span>
+              </span>
+              <span className="mr-arrow">›</span>
+            </button>
+            <button className="more-row" data-goto="help">
+              <span className="mr-ico gold"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm.2 15.6a1.7 1.7 0 1 1 0-3.4 1.7 1.7 0 0 1 0 3.4zM12 5.5c1.9 0 3.3 1.2 3.3 2.9 0 1.4-.9 2.1-1.8 2.7-.6.4-.8.6-.9 1.3h-1.7c.1-1.6.7-2.2 1.5-2.8.4-.3.7-.5.7-1 0-.6-.5-1-1.1-1-.7 0-1.2.4-1.3 1.3H8.9C9 6.6 10.2 5.5 12 5.5z" fill="currentColor"/></svg></span>
+              <span className="mr-main">
+                <span className="mr-title">HOW TO PLAY</span>
+                <span className="mr-sub">THE RULES OF SLAPPING</span>
+              </span>
+              <span className="mr-arrow">›</span>
+            </button>
+            <button className="more-row" data-goto="settings">
+              <span className="mr-ico orange"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.4 13a7.6 7.6 0 0 0 0-2l2-1.6-2-3.4-2.4 1a7.7 7.7 0 0 0-1.7-1L14.8 3H9.2L8.7 5.6a7.7 7.7 0 0 0-1.7 1l-2.4-1-2 3.4L4.6 11a7.6 7.6 0 0 0 0 2l-2 1.6 2 3.4 2.4-1a7.7 7.7 0 0 0 1.7 1l.5 2.6h5.6l.5-2.6a7.7 7.7 0 0 0 1.7-1l2.4 1 2-3.4-2-1.6zM12 15.5a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7z" fill="currentColor"/></svg></span>
+              <span className="mr-main">
+                <span className="mr-title">SETTINGS</span>
+                <span className="mr-sub">MUSIC ON · SFX ON</span>
+              </span>
+              <span className="mr-arrow">›</span>
+            </button>
+          </div>
+        </div>
       </div>
     </div>
     </>

@@ -52,9 +52,14 @@ export function persistSave(save) {
 // ──────────────────────────────────────────────
 // Attribute helpers
 // ──────────────────────────────────────────────
-export function attrCost(key, currentLevel) {
+export function attrCost(key, currentLevel, playerLevel) {
   const { baseCost, growth } = CONFIG.attrs[key];
-  return Math.floor(baseCost * Math.pow(growth, currentLevel));
+  const raw = Math.floor(baseCost * Math.pow(growth, currentLevel));
+  if (playerLevel != null) {
+    const maxAllowed = Math.round(levelUpCost(playerLevel) * 0.85);
+    return Math.min(raw, maxAllowed);
+  }
+  return raw;
 }
 
 export function attrCap(playerLevel) {
