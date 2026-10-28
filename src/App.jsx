@@ -485,7 +485,7 @@ export default function App() {
         </div>
         <div className="menu-summary">
           <span className="ms">⚔️ 100 UNIQUE BOSSES</span>
-          <span className="ms">🥊 12 ATTRIBUTES</span>
+          <span className="ms">🥊 13 ATTRIBUTES</span>
           <span className="ms">⚡ 24 SKILLS & SPECIALS</span>
           <span className="ms">💰 OFFLINE REWARDS</span>
         </div>
