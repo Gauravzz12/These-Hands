@@ -60,6 +60,12 @@ export const CONFIG = {
       "growth": 1.38,
       "maxLevel": 20
     },
+    "accuracy": {
+      "name": "Accuracy",
+      "baseCost": 60,
+      "growth": 1.42,
+      "maxLevel": 9
+    },
     "bossDamage": {
       "name": "Boss Hunter",
       "baseCost": 70,
@@ -94,6 +100,7 @@ export const CONFIG = {
     "stun",
     "combo",
     "coinMult",
+    "accuracy",
     "bossDamage",
     "vampirism",
     "luck",
@@ -594,51 +601,61 @@ export const CONFIG = {
     "9": {
       "name": "BANANA SLING",
       "kind": "acc",
+      "dur": 6, "blurb": "Accuracy -30% for 6s - your slaps can MISS",
       "desc": "Launches high-velocity banana volleys"
     },
     "19": {
       "name": "IRON BULWARK",
       "kind": "shield",
+      "hits": 5, "blurb": "Shield up - your next 5 slaps deal half damage",
       "desc": "Raises an impenetrable iron shield"
     },
     "29": {
       "name": "SHADOW FLURRY",
       "kind": "acc",
+      "dur": 6, "blurb": "Accuracy -30% for 6s - your slaps can MISS",
       "desc": "Swift katana slashes in the blink of an eye"
     },
     "39": {
       "name": "PHARAOH'S CURSE",
       "kind": "slow",
+      "dur": 5, "amt": 0.25, "blurb": "Attack speed -25% for 5s",
       "desc": "Ancient sands wither your slapping speed"
     },
     "49": {
       "name": "ABYSSAL GRASP",
       "kind": "slow",
+      "dur": 4, "amt": 0.35, "blurb": "Attack speed -35% for 4s",
       "desc": "Crushing ocean pressure drags you down"
     },
     "59": {
       "name": "TYRANT ROAR",
       "kind": "stun",
+      "dur": 2, "blurb": "Stunned for 2s - you cannot slap",
       "desc": "Deafening prehistoric roar that stuns the senses"
     },
     "69": {
       "name": "DIVINE THUNDER",
       "kind": "stun",
+      "dur": 1.5, "blurb": "Stunned for 1.5s - you cannot slap",
       "desc": "Lightning bolt from Mount Olympus"
     },
     "79": {
       "name": "SYSTEM LOCKDOWN",
       "kind": "lock",
+      "dur": 6, "blurb": "Specials locked for 6s",
       "desc": "Alien tech freezes your abilities"
     },
     "89": {
       "name": "DRAGON INFERNO",
       "kind": "burn",
+      "dur": 4, "mult": 0.6, "blurb": "Burns you over 4s",
       "desc": "Caldera blaze that scorches your hands"
     },
     "99": {
       "name": "THE SLAP OF GOD",
       "kind": "godhand",
+      "mult": 2, "stun": 2, "blurb": "A slap-back at 2x power + 2s stun",
       "desc": "The supreme slap of the universe"
     }
   },
