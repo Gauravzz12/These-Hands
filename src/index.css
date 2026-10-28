@@ -281,8 +281,26 @@ background: var(--gold); color: #2b1c10; white-space: nowrap; margin-top: 2px;
 .ar-btn .ar-up-label { font-family: "Bungee", system-ui, sans-serif; font-size: 11.5px; line-height: 1.1; letter-spacing: .02em; }
 .ar-btn .ar-up-vals { display: inline-flex; align-items: center; justify-content: center; gap: 6px; font-size: 11.5px; font-weight: 800; line-height: 1.1; white-space: nowrap; }
 .ar-btn .ar-up-next { color: #fff; white-space: nowrap; }
-.ar-btn .ar-up-cost { display: inline-flex; align-items: center; gap: 3px; color: #ffcf3f; white-space: nowrap; }
-.ar-btn .ar-up-cost .coin-ico { width: 13px; height: 13px; flex: none; }
+.ar-btn .ar-up-cost {
+  display: inline-flex;
+  align-items: center;
+  gap: 3.5px;
+  color: #ffffff;
+  font-weight: 900;
+  white-space: nowrap;
+  background: rgba(45, 18, 0, 0.46);
+  padding: 1.5px 7px 1.5px 5px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 235, 150, 0.35);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.35), 0 1px 0 rgba(255, 255, 255, 0.25);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.85);
+}
+.ar-btn .ar-up-cost .coin-ico {
+  width: 14px;
+  height: 14px;
+  flex: none;
+  filter: drop-shadow(0 1px 1.5px rgba(0, 0, 0, 0.65));
+}
 #perksHead { font-weight: 800; font-size: 12.5px; color: var(--ink-soft); letter-spacing: .03em; margin: 4px 2px 0; }
 #perksIcons { display: flex; gap: 5px; flex-wrap: wrap; margin: 2px 2px 0; }
 #perksIcons:empty { display: none; }
@@ -332,8 +350,29 @@ font-size: 11px;
 padding: 8px 4px;
 }
 .up-btn .up-target { font-size: 11px; font-weight: 800; line-height: 1.15; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; color: #fff; }
-.up-btn .up-price { font-size: 10.5px; font-weight: 900; display: inline-flex; align-items: center; justify-content: center; gap: 3px; line-height: 1.1; white-space: nowrap; color: #ffcf3f; }
-.up-btn .up-price .coin-ico { width: 12px; height: 12px; flex: none; }
+.up-btn .up-price {
+  font-size: 10.5px;
+  font-weight: 900;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3.5px;
+  line-height: 1.1;
+  white-space: nowrap;
+  color: #ffffff;
+  background: rgba(45, 18, 0, 0.46);
+  padding: 1.5px 6px 1.5px 4px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 235, 150, 0.35);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.35), 0 1px 0 rgba(255, 255, 255, 0.25);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.85);
+}
+.up-btn .up-price .coin-ico {
+  width: 13px;
+  height: 13px;
+  flex: none;
+  filter: drop-shadow(0 1px 1.5px rgba(0, 0, 0, 0.65));
+}
 #controls {
 display: flex;
 align-items: center;
@@ -2301,4 +2340,260 @@ margin-top: 7px;
   font-weight: 800;
   color: var(--ink-soft);
   letter-spacing: .06em;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   CLASH ROYALE GLOSSY ARCADE POLISH & BUTTON POP
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ─── Glossy Top HUD Pills ─── */
+.pill {
+  background: linear-gradient(180deg, #3d2a1b 0%, #26190e 100%) !important;
+  border: 2px solid #5a3d24 !important;
+  box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.28), inset 0 -2px 0 rgba(0, 0, 0, 0.4), 0 3px 0 rgba(43, 28, 16, 0.3) !important;
+  text-shadow: 0 1.5px 0 rgba(0, 0, 0, 0.6);
+  position: relative;
+  overflow: hidden;
+}
+.pill::after {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 42%;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.18) 0%, transparent 100%);
+  pointer-events: none;
+}
+.pill.level {
+  background: linear-gradient(180deg, #f87171 0%, #ef4444 50%, #dc2626 100%) !important;
+  border: 2px solid #7f1d1d !important;
+  box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.55), inset 0 -2px 0 rgba(0, 0, 0, 0.25), 0 3px 0 #7f1d1d !important;
+  text-shadow: 0 1.5px 0 rgba(0, 0, 0, 0.4) !important;
+}
+.pill.dps {
+  background: linear-gradient(180deg, #ffffff 0%, #fffbf2 40%, #faebd7 100%) !important;
+  border: 2px solid #c9b48c !important;
+  box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.9), 0 3px 0 rgba(43, 28, 16, 0.16) !important;
+}
+
+/* ─── Circular Back/Home Button ─── */
+.home-btn {
+  background: linear-gradient(180deg, #ffffff 0%, #fef3c7 40%, #fde68a 100%) !important;
+  border: 2px solid #b45309 !important;
+  box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.9), 0 3px 0 #92400e, 0 4px 8px rgba(0, 0, 0, 0.12) !important;
+  color: #78350f !important;
+  transition: transform 0.1s ease, box-shadow 0.1s ease !important;
+}
+.home-btn:active {
+  transform: translateY(2px) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9), 0 1px 0 #92400e !important;
+}
+
+/* ─── Clash Royale Battle CTA Button ─── */
+.hub-battle-cta {
+  background: linear-gradient(180deg, #ffd752 0%, #f59e0b 50%, #d97706 100%) !important;
+  border: 3px solid #78350f !important;
+  box-shadow: inset 0 3px 0 #fff2b8, inset 0 -3px 0 rgba(0, 0, 0, 0.2), 0 5px 0 #78350f, 0 8px 18px rgba(43, 28, 16, 0.28) !important;
+  position: relative;
+  overflow: hidden;
+}
+.hub-battle-cta::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 44%;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.38) 0%, transparent 100%);
+  pointer-events: none;
+}
+.hub-battle-cta:active {
+  transform: translateY(3px) !important;
+  box-shadow: inset 0 2px 0 #fff2b8, 0 2px 0 #78350f !important;
+}
+.hub-battle-cta .hbc-title {
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+.hub-battle-cta .hbc-arrow {
+  background: linear-gradient(180deg, #ffffff 0%, #fde68a 100%) !important;
+  border: 1.5px solid #92400e !important;
+  box-shadow: inset 0 1px 0 #fff, 0 2px 0 #92400e !important;
+  color: #78350f !important;
+}
+
+/* ─── Glossy Quick Cards ─── */
+.hub-card {
+  background: linear-gradient(180deg, #ffffff 0%, #fffbf2 40%, #faedd3 100%) !important;
+  border: 2px solid #d4c096 !important;
+  box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.95), inset 0 -2px 0 rgba(43, 28, 16, 0.06), 0 3.5px 0 rgba(43, 28, 16, 0.18) !important;
+  transition: transform 0.1s ease, box-shadow 0.1s ease !important;
+}
+.hub-card:active {
+  transform: translateY(2px) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.95), 0 1px 0 rgba(43, 28, 16, 0.18) !important;
+}
+.hub-card .hc-ico {
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7), 0 1.5px 3px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+.hub-card .hc-title {
+  letter-spacing: .02em;
+  color: #1f140a !important;
+}
+
+/* ─── Hero Record Card ─── */
+.hub-stats-card {
+  background: linear-gradient(180deg, #ffffff 0%, #fffbf2 40%, #faedd3 100%) !important;
+  border: 2px solid #d4c096 !important;
+  box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.95), inset 0 -2px 0 rgba(43, 28, 16, 0.06), 0 3.5px 0 rgba(43, 28, 16, 0.18) !important;
+  transition: transform 0.1s ease;
+}
+.hub-stats-card:active {
+  transform: translateY(2px);
+}
+.hsc-claim-pill {
+  margin-left: 8px;
+  background: linear-gradient(180deg, #4ade80 0%, #22c55e 100%);
+  color: #fff;
+  border: 1px solid #14532d;
+  font-family: "Bungee", system-ui, sans-serif;
+  font-size: 9px;
+  padding: 2px 7px;
+  border-radius: 999px;
+  box-shadow: 0 2px 4px rgba(34, 197, 94, 0.4);
+  animation: badgePop 1.8s ease-in-out infinite;
+}
+
+/* ─── Upgrade Buttons Pop (.up-btn, .ar-btn) ─── */
+.up-btn, .ar-btn {
+  background: linear-gradient(180deg, #ffd752 0%, #f59e0b 55%, #d97706 100%) !important;
+  border: 2px solid #854d0e !important;
+  box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.7), inset 0 -2px 0 rgba(0, 0, 0, 0.15), 0 3px 0 #854d0e, 0 4px 8px rgba(0, 0, 0, 0.12) !important;
+  color: #2b1c10 !important;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+  font-weight: 800;
+  transition: transform 0.1s ease, box-shadow 0.1s ease !important;
+}
+.up-btn:active, .ar-btn:active {
+  transform: translateY(2px) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7), 0 1px 0 #854d0e !important;
+}
+
+/* ─── Bottom Navigation Polished Bar & Red Badges ─── */
+#bottomNav {
+  background: linear-gradient(180deg, #ffffff 0%, #fffbf2 35%, #faedd3 100%) !important;
+  border-top: 2.5px solid #d8c49a !important;
+  box-shadow: 0 -4px 20px rgba(43, 28, 16, 0.14), inset 0 1.5px 0 rgba(255, 255, 255, 0.95) !important;
+}
+.bnav-btn {
+  position: relative;
+  transition: all 0.15s ease;
+}
+.bnav-btn.active {
+  color: var(--accent) !important;
+}
+.bnav-btn.active svg {
+  filter: drop-shadow(0 2px 5px rgba(214, 60, 48, 0.35));
+  transform: translateY(-1px);
+}
+.bnav-btn.active::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 20%; right: 20%; height: 3px;
+  background: linear-gradient(90deg, #f59e0b, #ef4444);
+  border-radius: 0 0 3px 3px;
+}
+.bnav-badge {
+  position: absolute;
+  top: 3px;
+  right: 12%;
+  background: linear-gradient(180deg, #f87171 0%, #ef4444 60%, #dc2626 100%);
+  color: #ffffff;
+  font-family: "Bungee", system-ui, sans-serif;
+  font-size: 9px;
+  min-width: 17px;
+  height: 17px;
+  padding: 0 4px;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px solid #ffffff;
+  box-shadow: 0 2px 6px rgba(239, 68, 68, 0.65);
+  animation: badgePop 1.8s ease-in-out infinite;
+  z-index: 5;
+}
+.mr-badge {
+  background: linear-gradient(180deg, #f87171 0%, #ef4444 60%, #dc2626 100%);
+  color: #ffffff;
+  font-family: "Bungee", system-ui, sans-serif;
+  font-size: 10px;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 5px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px solid #ffffff;
+  box-shadow: 0 2px 6px rgba(239, 68, 68, 0.5);
+  margin-right: 8px;
+}
+@keyframes badgePop {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.18); }
+}
+
+/* ─── Interactive Achievement Claim Button ─── */
+.ach-claim-btn {
+  background: linear-gradient(180deg, #4ade80 0%, #22c55e 50%, #16a34a 100%);
+  border: 2px solid #14532d;
+  box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.65), 0 3px 0 #14532d, 0 4px 10px rgba(34, 197, 94, 0.35);
+  color: #ffffff;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+  font-family: "Bungee", system-ui, sans-serif;
+  font-size: 11px;
+  padding: 7px 13px;
+  border-radius: 999px;
+  cursor: pointer;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  flex: none;
+  animation: claimPulse 1.6s ease-in-out infinite alternate;
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+.ach-claim-btn:active {
+  transform: translateY(2px);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.65), 0 1px 0 #14532d;
+}
+@keyframes claimPulse {
+  0% { transform: scale(1); box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.65), 0 3px 0 #14532d, 0 3px 8px rgba(34, 197, 94, 0.3); }
+  100% { transform: scale(1.05); box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.65), 0 3px 0 #14532d, 0 6px 16px rgba(34, 197, 94, 0.55); }
+}
+.ach-row.claimable {
+  background: linear-gradient(180deg, #f0fdf4 0%, #dcfce7 100%) !important;
+  border-color: #86efac !important;
+  box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.9), 0 3px 0 rgba(34, 197, 94, 0.25) !important;
+}
+.ach-ready-pill {
+  font-size: 8.5px;
+  font-weight: 800;
+  padding: 1.5px 6px;
+  border-radius: 999px;
+  background: #22c55e;
+  color: #fff;
+  vertical-align: middle;
+  margin-left: 4px;
+}
+.ach-gem-hint {
+  color: #0284c7;
+  font-weight: 800;
+  margin-right: 2px;
+}
+.ach-state.claimed {
+  background: #f1f5f9;
+  color: #64748b;
+  border: 1.5px solid #cbd5e1;
+  font-size: 10px;
+  padding: 5px 10px;
+  border-radius: 999px;
+  font-weight: 800;
+  box-shadow: inset 0 1px 0 #fff;
 }

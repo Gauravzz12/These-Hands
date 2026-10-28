@@ -22,7 +22,7 @@ export default function App() {
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 2.5 11h2.7v9h5.3v-6h3v6h5.3v-9h2.7L12 3z" fill="currentColor"/></svg>
         </button>
         <div className="pill" id="coinPill" aria-label="Coins">
-          <svg className="coin-ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#f2b01e" stroke="#b97e08" strokeWidth="2"/><circle cx="12" cy="12" r="5.5" fill="none" stroke="#b97e08" strokeWidth="2"/></svg>
+          <svg className="coin-ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9.5" fill="#fde047" stroke="#652b00" strokeWidth="1.8"/><circle cx="12" cy="12" r="6.5" fill="#eab308" stroke="#a16207" strokeWidth="1.1"/><path d="M12 8.5v7M8.5 12h7" stroke="#fef08a" strokeWidth="1.8" strokeLinecap="round"/><circle cx="12" cy="12" r="1.5" fill="#ffffff"/><path d="M6 10a7 7 0 0 1 8-4" fill="none" stroke="#ffffff" strokeWidth="1.6" strokeLinecap="round" opacity="0.9"/></svg>
           <span id="coinCount">0</span>
         </div>
         <div className="pill gem" id="gemPill" aria-label="Gems">
@@ -136,13 +136,14 @@ export default function App() {
             </button>
           </div>
 
-          <div className="hub-stats-card" id="hubStatsCard">
+          <div className="hub-stats-card" id="hubStatsCard" data-goto="awards" style={{ cursor: 'pointer' }}>
             <div className="hsc-head">
               <span className="hsc-title">
                 <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" style={{ verticalAlign: 'middle', marginRight: '6px' }}>
                   <path d="M12 2l2.4 7.2L22 9.3l-5.8 4.9 1.8 7.8L12 17.5 5.9 22l1.8-7.8L2 9.3l7.6-.1L12 2z" fill="#f59e0b"/>
                 </svg>
                 HERO RECORD
+                <span className="hsc-claim-pill" id="hscClaimPill" style={{ display: 'none' }}>🎁 CLAIM</span>
               </span>
               <span className="hsc-badge" id="hscBadge">ROOKIE SLAPPER</span>
             </div>
@@ -574,6 +575,11 @@ export default function App() {
           <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="7" height="7" rx="1.5" fill="currentColor"/><rect x="13" y="4" width="7" height="7" rx="1.5" fill="currentColor"/><rect x="4" y="13" width="7" height="7" rx="1.5" fill="currentColor"/><rect x="13" y="13" width="7" height="7" rx="1.5" fill="currentColor"/></svg>
           <span>STAGES</span>
         </button>
+        <button className="bnav-btn" data-tab="awards" data-goto="awards" id="bnavAwardsBtn" aria-label="Achievements">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2h12v3h4v2a5 5 0 0 1-5 5h-.42A6 6 0 0 1 13 15.92V18h4v3H7v-3h4v-2.08A6 6 0 0 1 7.42 12H7a5 5 0 0 1-5-5V5h4V2zm-2 5a3 3 0 0 0 3 3V7H4zm16 0h-3v3a3 3 0 0 0 3-3z" fill="currentColor"/></svg>
+          <span>AWARDS</span>
+          <span className="bnav-badge" id="bnavAwardsBadge" style={{ display: 'none' }}>0</span>
+        </button>
         <button className="bnav-btn" data-tab="more" id="bnavMoreBtn" aria-label="More sections">
           <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="5" cy="12" r="2.2" fill="currentColor"/><circle cx="12" cy="12" r="2.2" fill="currentColor"/><circle cx="19" cy="12" r="2.2" fill="currentColor"/></svg>
           <span>MORE</span>
@@ -622,6 +628,7 @@ export default function App() {
                 <span className="mr-title">AWARDS</span>
                 <span className="mr-sub" id="moreAwardsSub">0 / 104 DONE</span>
               </span>
+              <span className="mr-badge" id="moreAwardsBadge" style={{ display: 'none' }}>0</span>
               <span className="mr-arrow">›</span>
             </button>
             <button className="more-row" data-goto="help">
