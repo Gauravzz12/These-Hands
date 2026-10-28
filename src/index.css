@@ -2150,9 +2150,14 @@ margin-top: 7px;
 #pageHome {
   overflow-y: auto;
   padding-bottom: 72px;
+}
+#pageHome.active {
   display: flex;
   flex-direction: column;
   min-height: 100%;
+}
+#pageHome:not(.active) {
+  display: none !important;
 }
 #pageAttrs, #pageLevels, #pageSkills, #pageShop, #pageSpecials, #pageAwards, #pageQuests, #pageSettings, #pageHelp {
   padding-bottom: 68px;
