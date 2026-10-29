@@ -910,17 +910,22 @@ gap: 6px;
 align-items: center;
 }
 #playBtn {
-margin-top: 2px;
+margin-top: 10px;
 flex: none;
 border: none;
 cursor: pointer;
 background: var(--gold);
 color: #2b1c10;
 font-family: "Bungee", "Nunito", sans-serif;
-font-size: 27px;
-padding: 16px 66px;
-border-radius: 14px;
-box-shadow: 0 5px 0 rgba(43,28,16,.35);
+font-size: 34px;
+letter-spacing: 1px;
+padding: 20px 96px;
+border-radius: 16px;
+box-shadow: 0 6px 0 rgba(43,28,16,.35);
+}
+#playBtn:active {
+transform: translateY(3px);
+box-shadow: 0 3px 0 rgba(43,28,16,.35);
 }
 #menuMusicBtn {
 position: absolute;
