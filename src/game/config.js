@@ -16,7 +16,7 @@ export const CONFIG = {
       "name": "Power",
       "baseCost": 30,
       "growth": 1.35,
-      "maxLevel": 50
+      "maxLevel": 120
     },
     "speed": {
       "name": "Speed",
@@ -114,8 +114,9 @@ export const CONFIG = {
     "comboPerStackPerLevel": 0.015,
     "comboBaseStacks": 4,
     "coinPerLevel": 0.06,
-    "accuracyBase": 0.9,
+    "accuracyBase": 0.92,
     "accuracyPerLevel": 0.01,
+    "powerGrowth": 1.055,
     "accuracyCap": 0.99,
     "bossDmgPerLevel": 0.025,
     "luckPerLevel": 0.006,
@@ -149,7 +150,7 @@ export const CONFIG = {
     "hpTailMid": 1.15,
     "hpTailMid2": 1.13,
     "hpTailEnd2": 1.12,
-    "rateBase": 0.75,
+    "rateBase": 1.125,
     "rateGrowth": 1.1,
     "rateTailGrowth": 1.24,
     "bossSteps": [
@@ -631,10 +632,10 @@ export const CONFIG = {
       "desc": "Ancient sands wither your slapping speed"
     },
     "49": {
-      "name": "ABYSSAL GRASP",
-      "kind": "slow",
-      "dur": 4, "amt": 0.35, "blurb": "Attack speed -35% for 4s",
-      "desc": "Crushing ocean pressure drags you down"
+      "name": "DRAGON INFERNO",
+      "kind": "burn",
+      "dur": 4, "mult": 0.6, "blurb": "Burns you over 4s",
+      "desc": "Caldera blaze that scorches your hands"
     },
     "59": {
       "name": "TYRANT ROAR",
@@ -655,10 +656,10 @@ export const CONFIG = {
       "desc": "Alien tech freezes your abilities"
     },
     "89": {
-      "name": "DRAGON INFERNO",
-      "kind": "burn",
-      "dur": 4, "mult": 0.6, "blurb": "Burns you over 4s",
-      "desc": "Caldera blaze that scorches your hands"
+      "name": "ABYSSAL GRASP",
+      "kind": "slow",
+      "dur": 4, "amt": 0.35, "blurb": "Attack speed -35% for 4s",
+      "desc": "Crushing ocean pressure drags you down"
     },
     "99": {
       "name": "THE SLAP OF GOD",
@@ -669,7 +670,7 @@ export const CONFIG = {
   },
   "healBosses": {
     "39": {"name": "ETERNAL RENEWAL", "pct": 0.1, "every": 11, "max": 3, "blurb": "The tomb restores him — heals 10% of his HP, up to 3 times per fight."},
-    "89": {"name": "DRAGON RENEWAL", "pct": 0.08, "every": 13, "max": 3, "blurb": "Ancient blood knits shut — heals 8% of his HP, up to 3 times per fight."}
+    "49": {"name": "DRAGON RENEWAL", "pct": 0.08, "every": 13, "max": 3, "blurb": "Ancient blood knits shut — heals 8% of his HP, up to 3 times per fight."}
   },
   "gauntlet": {"bonusMult": 2, "gemFirst": 1},
   "weakSpot": {"mult": 2, "dur": 1.4, "durHard": 1.1, "firstAt": 2.5, "everyMin": 6, "everyMax": 9, "frenzyGain": 10, "capBase": 3, "capPerLuck": 5, "capMax": 6, "luckScale": 0.06},
@@ -685,7 +686,7 @@ export const CONFIG = {
     "gems": 25
   },
   "offline": {
-    "rate": 0.25,
+    "rate": 0.375,
     "capSeconds": 28800,
     "minAway": 60,
     "price": 10
@@ -899,10 +900,10 @@ export const CONFIG = {
     "speedMult": 1.3
   },
   "daily": {
-    "chestDayMult": 0.35,
+    "chestDayMult": 0.525,
     "chestDay7Mult": 2.5,
     "chestDay7Gems": 10,
-    "chestMinCoins": 40,
+    "chestMinCoins": 60,
     "questPool": [
       "defeats",
       "battleCoins",
@@ -982,8 +983,8 @@ export const GROUPS = [
     "theme": "Earth, stone, and mountain giants"
   },
   {
-    "name": "Deep Sea Abyss",
-    "theme": "The ocean trenches — where everything glows or bites"
+    "name": "Dragon Lair",
+    "theme": "The supreme dragon broods atop the caldera"
   },
   {
     "name": "Frozen Wastes",
@@ -1014,8 +1015,8 @@ export const GROUPS = [
     "theme": "Ancient titans and guardians above the storm"
   },
   {
-    "name": "Dragon Lair",
-    "theme": "The supreme dragon broods atop the caldera"
+    "name": "Deep Sea Abyss",
+    "theme": "The ocean trenches — where everything glows or bites"
   },
   {
     "name": "Cosmic Void",
@@ -1254,29 +1255,29 @@ export const ROSTER = [
     "stone"
   ],
   [
-    "Bubble Crab",
-    "crab",
-    "bubble"
+    "Elder Dragon",
+    "dragon",
+    "elder"
   ],
   [
-    "Sailor Squid",
-    "squid",
-    "sailor"
+    "Dragon Champion",
+    "dragon",
+    "champion"
   ],
   [
-    "Hammerhead Brawler",
-    "shark",
-    "hammerhead"
+    "Infernal Dragon",
+    "dragon",
+    "infernal"
   ],
   [
-    "Angler Horror",
-    "fish",
-    "angler"
+    "Ancient Dragon",
+    "dragon",
+    "ancient"
   ],
   [
-    "Kraken Spawn",
-    "kraken",
-    "spawn"
+    "Final Dragon Boss",
+    "dragon",
+    "final"
   ],
   [
     "Frost Wolf Alpha",
@@ -1454,29 +1455,29 @@ export const ROSTER = [
     "phoenix"
   ],
   [
-    "Elder Dragon",
-    "dragon",
-    "elder"
+    "Bubble Crab",
+    "crab",
+    "bubble"
   ],
   [
-    "Dragon Champion",
-    "dragon",
-    "champion"
+    "Sailor Squid",
+    "squid",
+    "sailor"
   ],
   [
-    "Infernal Dragon",
-    "dragon",
-    "infernal"
+    "Hammerhead Brawler",
+    "shark",
+    "hammerhead"
   ],
   [
-    "Ancient Dragon",
-    "dragon",
-    "ancient"
+    "Angler Horror",
+    "fish",
+    "angler"
   ],
   [
-    "Final Dragon Boss",
-    "dragon",
-    "final"
+    "Kraken Spawn",
+    "kraken",
+    "spawn"
   ],
   [
     "Void Walker",
