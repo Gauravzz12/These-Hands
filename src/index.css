@@ -117,6 +117,19 @@ padding: 6px 12px;
 #hud .home-btn { width: 38px; height: 38px; }
 #hud .dps-act { font-family: "Nunito", sans-serif; font-weight: 800; font-size: 9.5px; letter-spacing: .05em; color: var(--ink-soft); }
 #hud .dps-act b { color: var(--ink); font-size: 12px; font-family: "Bungee", "Nunito", sans-serif; }
+@media (max-width: 480px) {
+#hud { gap: 4px; padding-left: 8px; padding-right: 8px; }
+#hud .pill { font-size: 13px; padding: 4px 8px 4px 4px; gap: 4px; }
+#hud .pill.level { font-size: 11px; padding: 4px 7px; }
+#hud .pill.dps { font-size: 12px; padding: 4px 7px; gap: 4px; }
+#hud .pill.dps .lbl { font-size: 8px; }
+#hud .dps-act { font-size: 8.5px; }
+#hud .dps-act b { font-size: 11px; }
+#hud .coin-ico { width: 16px; height: 16px; }
+#hud .gem-ico { width: 15px; height: 15px; }
+#hud .home-btn { width: 34px; height: 34px; }
+#levelUpBtn { font-size: 12px; padding: 7px 9px; }
+}
 @media (max-width: 374px) {
 #hud { gap: 4px; padding-left: 6px; padding-right: 6px; }
 #hud .pill { font-size: 13.5px; padding: 5px 7px 5px 4px; }
@@ -220,7 +233,8 @@ font-family: "Bungee", "Nunito", sans-serif;
 font-size: 14px;
 padding: 7px 2px;
 }
-#attrToggle .cap { font-family: "Nunito", sans-serif; font-weight: 800; font-size: 11px; color: var(--ink-soft); letter-spacing: .04em; }
+#attrToggle .cap { font-family: "Nunito", sans-serif; font-weight: 800; font-size: 11px; color: var(--ink-soft); letter-spacing: .04em; white-space: nowrap; }
+#attrToggle { min-width: 0; flex: none; }
 #attrToggle svg { width: 16px; height: 16px; flex: none; transition: transform .18s ease; }
 #attrPanel.open #attrToggle svg { transform: rotate(180deg); }
 #levelUpBtn {
@@ -631,6 +645,7 @@ margin-top: 13px;
 }
 .end-stats .es {
 flex: 1;
+min-width: 0;
 border: 2px solid var(--chrome-edge);
 border-radius: 11px;
 padding: 7px 4px 6px;
@@ -648,6 +663,7 @@ font-family: "Bungee", "Nunito", sans-serif;
 font-weight: 400;
 font-size: 17px;
 margin-top: 2px;
+overflow-wrap: anywhere;
 }
 .end-tip {
 display: none;
@@ -1048,7 +1064,7 @@ margin-top: 7px;
 .awards-reset { margin-top: 16px; text-align: center; }
 #achToast {
 position: absolute;
-top: 64px;
+top: 128px;
 left: 50%;
 transform: translate(-50%, -16px);
 z-index: 70;
