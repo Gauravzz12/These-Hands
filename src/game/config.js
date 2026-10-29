@@ -1220,7 +1220,7 @@ export const ROSTER = [
     "orc"
   ],
   [
-    "Elite Orc",
+    "Bog Witch",
     "ogre",
     "eliteorc"
   ],
