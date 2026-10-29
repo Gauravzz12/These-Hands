@@ -481,6 +481,7 @@ export default function App() {
           <div className="floor"></div>
           <div className="rug"></div>
           <img id="menuEnemy" alt="" />
+          <img id="menuHand" alt="" />
           <div className="menu-burst"></div>
         </div>
         <div className="menu-summary">
