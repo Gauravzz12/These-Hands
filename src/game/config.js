@@ -9,20 +9,25 @@ export const CONFIG = {
   "capPerLevel": 3,
   "levelUp": {
     "base": 220,
-    "growth": 1.62
+    "growth": 1.62,
+    "lateStart": 4,
+    "lateGrowth": 2.75,
+    "tailStart": 25,
+    "tailGrowth": 1.35
   },
+  "levelCap": 100,
   "attrs": {
     "power": {
       "name": "Power",
       "baseCost": 30,
       "growth": 1.45,
-      "maxLevel": 120
+      "maxLevel": 100
     },
     "speed": {
       "name": "Speed",
       "baseCost": 75,
       "growth": 1.52,
-      "maxLevel": 20
+      "maxLevel": 25
     },
     "critChance": {
       "name": "Crit Chance",
@@ -83,12 +88,6 @@ export const CONFIG = {
       "baseCost": 75,
       "growth": 1.47,
       "maxLevel": 15
-    },
-    "tenacity": {
-      "name": "Tenacity",
-      "baseCost": 65,
-      "growth": 1.43,
-      "maxLevel": 15
     }
   },
   "attrOrder": [
@@ -103,29 +102,28 @@ export const CONFIG = {
     "accuracy",
     "bossDamage",
     "vampirism",
-    "luck",
-    "tenacity"
+    "luck"
   ],
   "fx": {
     "skillCostMult": 1.5,
-    "speedPerLevel": 0.975,
-    "speedFloor": 0.3,
+    "speedPerLevel": 0.963,
+    "speedFloor": 0.6,
     "critChancePerLevel": 0.015,
     "critDamagePerLevel": 0.15,
     "comboPerStackPerLevel": 0.015,
     "comboBaseStacks": 4,
     "coinPerLevel": 0.06,
-    "accuracyBase": 0.92,
+    "accuracyBase": 0.8,
     "accuracyPerLevel": 0.01,
-    "powerGrowth": 1.055,
+    "powerGrowth": 1.26,
     "accuracyCap": 0.99,
     "bossDmgPerLevel": 0.025,
     "luckPerLevel": 0.006,
     "luckDmgMult": 1.5,
     "luckCoinMult": 3,
     "vampPerLevel": 1,
-    "tenacityPerLevel": 0.02,
-    "tenacityCap": 0.3,
+    "speedCostLateMult": 3,
+    "speedCostLatePow": 6,
     "specialPerLevel": 0.005,
     "stunChanceBase": 0.05,
     "stunChancePerLevel": 0.012,
@@ -152,7 +150,7 @@ export const CONFIG = {
     "hpTailMid2": 1.13,
     "hpTailEnd2": 1.12,
     "rateBase": 1.05,
-    "rateGrowth": 1.1,
+    "rateGrowth": 0.96,
     "rateTailGrowth": 1.24,
     "bossSteps": [
       2.5,
