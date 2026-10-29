@@ -1130,7 +1130,7 @@ export const ROSTER = [
     "rooster"
   ],
   [
-    "Guard",
+    "Royal Executioner",
     "knight",
     "guard"
   ],
