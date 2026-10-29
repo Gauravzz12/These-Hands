@@ -931,8 +931,8 @@ export const V2_CONFIGS = [
     },
     "attack": {
       "src": "/enemy-sprites-v2/poses/26-ninja-recruit-attack.png",
-      "w": 950,
-      "h": 954
+      "w": 893,
+      "h": 950
     },
     "dizzy": {
       "src": "/enemy-sprites-v2/poses/26-ninja-recruit-dizzy.png",
@@ -964,8 +964,8 @@ export const V2_CONFIGS = [
     },
     "attack": {
       "src": "/enemy-sprites-v2/poses/27-shuriken-master-attack.png",
-      "w": 1050,
-      "h": 857
+      "w": 690,
+      "h": 950
     },
     "dizzy": {
       "src": "/enemy-sprites-v2/poses/27-shuriken-master-dizzy.png",
@@ -997,8 +997,8 @@ export const V2_CONFIGS = [
     },
     "attack": {
       "src": "/enemy-sprites-v2/poses/28-samurai-duelist-attack.png",
-      "w": 622,
-      "h": 954
+      "w": 984,
+      "h": 950
     },
     "dizzy": {
       "src": "/enemy-sprites-v2/poses/28-samurai-duelist-dizzy.png",
@@ -1030,8 +1030,8 @@ export const V2_CONFIGS = [
     },
     "attack": {
       "src": "/enemy-sprites-v2/poses/29-shadow-assassin-attack.png",
-      "w": 880,
-      "h": 963
+      "w": 756,
+      "h": 950
     },
     "dizzy": {
       "src": "/enemy-sprites-v2/poses/29-shadow-assassin-dizzy.png",
@@ -1063,8 +1063,8 @@ export const V2_CONFIGS = [
     },
     "attack": {
       "src": "/enemy-sprites-v2/poses/30-shogun-warlord-attack.png",
-      "w": 634,
-      "h": 877
+      "w": 697,
+      "h": 1300
     },
     "dizzy": {
       "src": "/enemy-sprites-v2/poses/30-shogun-warlord-dizzy.png",
