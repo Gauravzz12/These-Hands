@@ -898,8 +898,8 @@ export const V2_CONFIGS = [
     },
     "attack": {
       "src": "/enemy-sprites-v2/poses/26-ninja-recruit-attack.png",
-      "w": 950,
-      "h": 954
+      "w": 893,
+      "h": 950
     },
     "dizzy": {
       "src": "/enemy-sprites-v2/poses/26-ninja-recruit-dizzy.png",
@@ -931,8 +931,8 @@ export const V2_CONFIGS = [
     },
     "attack": {
       "src": "/enemy-sprites-v2/poses/27-shuriken-master-attack.png",
-      "w": 1050,
-      "h": 857
+      "w": 690,
+      "h": 950
     },
     "dizzy": {
       "src": "/enemy-sprites-v2/poses/27-shuriken-master-dizzy.png",
@@ -964,8 +964,8 @@ export const V2_CONFIGS = [
     },
     "attack": {
       "src": "/enemy-sprites-v2/poses/28-samurai-duelist-attack.png",
-      "w": 622,
-      "h": 954
+      "w": 984,
+      "h": 950
     },
     "dizzy": {
       "src": "/enemy-sprites-v2/poses/28-samurai-duelist-dizzy.png",
@@ -997,8 +997,8 @@ export const V2_CONFIGS = [
     },
     "attack": {
       "src": "/enemy-sprites-v2/poses/29-shadow-assassin-attack.png",
-      "w": 880,
-      "h": 963
+      "w": 756,
+      "h": 950
     },
     "dizzy": {
       "src": "/enemy-sprites-v2/poses/29-shadow-assassin-dizzy.png",
@@ -1030,8 +1030,8 @@ export const V2_CONFIGS = [
     },
     "attack": {
       "src": "/enemy-sprites-v2/poses/30-shogun-warlord-attack.png",
-      "w": 634,
-      "h": 877
+      "w": 697,
+      "h": 1300
     },
     "dizzy": {
       "src": "/enemy-sprites-v2/poses/30-shogun-warlord-dizzy.png",
@@ -1076,6 +1076,30 @@ function loadPoseImage(poseDef) {
     poseDef.imgWhite = buildSilhouetteCanvas(c);
     poseDef.w = c.width;
     poseDef.h = c.height;
+    // Measure the opaque content box so the renderer can plant the
+    // character's feet exactly on the stage ground line, whatever
+    // transparent padding the pose art happens to carry.
+    try {
+      const iw = c.width, ih = c.height;
+      const step = Math.max(1, Math.floor(Math.min(iw, ih) / 160));
+      const data = ctx.getImageData(0, 0, iw, ih).data;
+      let top = ih, bot = -1, left = iw, right = -1;
+      for (let y = 0; y < ih; y += step) {
+        for (let x = 0; x < iw; x += step) {
+          if (data[(y * iw + x) * 4 + 3] > 24) {
+            if (y < top) top = y;
+            if (y > bot) bot = y;
+            if (x < left) left = x;
+            if (x > right) right = x;
+          }
+        }
+      }
+      if (bot >= 0) {
+        poseDef.gTop = top / ih;
+        poseDef.gBot = Math.min(1, (bot + step) / ih);
+        poseDef.gCx = ((left + right) / 2) / iw;
+      }
+    } catch (err) { /* measurement is best-effort; defaults keep old behaviour */ }
     poseDef.ready = true;
     poseDef.loading = false;
   };
@@ -1117,6 +1141,9 @@ export function getV2Sprite(index) {
       h: pDef.h,
       ready: false,
       loading: false,
+      gTop: 0,
+      gBot: 1,
+      gCx: 0.5,
       img: fallbackCanvas,
       imgWhite: fallbackCanvas
     };
