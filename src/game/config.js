@@ -115,7 +115,7 @@ export const CONFIG = {
     "coinPerLevel": 0.06,
     "accuracyBase": 0.8,
     "accuracyPerLevel": 0.01,
-    "powerGrowth": 1.26,
+    "powerGrowth": 1.145,
     "accuracyCap": 0.99,
     "bossDmgPerLevel": 0.025,
     "luckPerLevel": 0.006,
