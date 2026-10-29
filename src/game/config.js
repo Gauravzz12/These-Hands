@@ -659,6 +659,12 @@ export const CONFIG = {
       "desc": "The supreme slap of the universe"
     }
   },
+  "healBosses": {
+    "39": {"name": "ETERNAL RENEWAL", "pct": 0.1, "every": 11, "max": 3, "blurb": "The tomb restores him — heals 10% of his HP, up to 3 times per fight."},
+    "89": {"name": "DRAGON RENEWAL", "pct": 0.08, "every": 13, "max": 3, "blurb": "Ancient blood knits shut — heals 8% of his HP, up to 3 times per fight."}
+  },
+  "gauntlet": {"bonusMult": 2, "gemFirst": 1},
+  "blitz": {"bonusMult": 0.5, "parMult": 1.2, "parMin": 6},
   "gems": {
     "elite": 1,
     "pairBoss": 3,
