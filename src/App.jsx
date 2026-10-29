@@ -30,12 +30,6 @@ export default function App() {
           <span id="gemCount">0</span>
         </div>
         <div className="pill level" id="levelPill" aria-label="Player level">LV <span id="levelVal">1</span></div>
-        <div className="pill dps" id="dpsPill" aria-label="Damage per second">
-          <svg className="bolt-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2 4.5 13.5H11L9.8 22 19 10h-6.5L13 2z" fill="currentColor"/></svg>
-          <span className="lbl">DPS</span>
-          <span id="dpsValue">0</span>
-          <span className="dps-act">ACT <b id="dpsActual">0.0</b></span>
-        </div>
       </header>
 
       <main id="pages">
@@ -490,12 +484,10 @@ export default function App() {
 
       <div id="startMenu" className="open" role="dialog" aria-label="Start menu">
         <div className="menu-top-bar">
-          <span className="menu-tag">★ RETRO AUTO-SLAPPER ★</span>
           <button id="menuMusicBtn" aria-label="Toggle music" aria-pressed="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l6 5V4L8 9H4z" fill="currentColor"/><path className="mwave" d="M16.5 8.5a5 5 0 0 1 0 7" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/><path className="mwave" d="M19 6a8.5 8.5 0 0 1 0 12" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/></svg></button>
         </div>
         <div className="menu-header">
           <div className="menu-logo">THESE<br /><span>HANDS</span></div>
-          <div className="menu-sub">THE RETRO AUTO-SLAP RPG · 100 BOSSES</div>
         </div>
         <div className="menu-stage" aria-hidden="true">
           <div className="floor"></div>
@@ -504,15 +496,8 @@ export default function App() {
           <img id="menuHand" alt="" />
           <div className="menu-burst"></div>
         </div>
-        <div className="menu-summary">
-          <span className="ms">⚔️ 100 UNIQUE BOSSES</span>
-          <span className="ms">🥊 13 ATTRIBUTES</span>
-          <span className="ms">⚡ 25 SKILLS & SPECIALS</span>
-          <span className="ms">💰 OFFLINE REWARDS</span>
-        </div>
         <div className="menu-actions">
           <button id="playBtn">PLAY</button>
-          <div className="menu-hint">SOUND ON RECOMMENDED · v1.2.0</div>
         </div>
       </div>
 
