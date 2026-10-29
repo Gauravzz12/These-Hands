@@ -8,86 +8,86 @@ export const CONFIG = {
   },
   "capPerLevel": 3,
   "levelUp": {
-    "base": 150,
-    "growth": 1.55
+    "base": 220,
+    "growth": 1.62
   },
   "attrs": {
     "power": {
       "name": "Power",
       "baseCost": 30,
-      "growth": 1.35,
+      "growth": 1.45,
       "maxLevel": 120
     },
     "speed": {
       "name": "Speed",
       "baseCost": 75,
-      "growth": 1.45,
+      "growth": 1.52,
       "maxLevel": 20
     },
     "critChance": {
       "name": "Crit Chance",
       "baseCost": 60,
-      "growth": 1.42,
+      "growth": 1.49,
       "maxLevel": 20
     },
     "critDamage": {
       "name": "Crit Damage",
       "baseCost": 60,
-      "growth": 1.42,
+      "growth": 1.49,
       "maxLevel": 20
     },
     "defense": {
       "name": "Defense",
       "baseCost": 55,
-      "growth": 1.4,
+      "growth": 1.45,
       "maxLevel": 20
     },
     "stun": {
       "name": "Stun",
       "baseCost": 70,
-      "growth": 1.45,
+      "growth": 1.5,
       "maxLevel": 15
     },
     "combo": {
       "name": "Combo",
       "baseCost": 65,
-      "growth": 1.42,
+      "growth": 1.49,
       "maxLevel": 20
     },
     "coinMult": {
       "name": "Coin Mult.",
       "baseCost": 50,
-      "growth": 1.38,
+      "growth": 1.45,
       "maxLevel": 20
     },
     "accuracy": {
       "name": "Accuracy",
       "baseCost": 60,
-      "growth": 1.42,
+      "growth": 1.47,
       "maxLevel": 9
     },
     "bossDamage": {
       "name": "Boss Hunter",
       "baseCost": 70,
-      "growth": 1.4,
+      "growth": 1.47,
       "maxLevel": 20
     },
     "vampirism": {
       "name": "Life Leech",
       "baseCost": 80,
-      "growth": 1.45,
+      "growth": 1.5,
       "maxLevel": 15
     },
     "luck": {
       "name": "Fortune Luck",
       "baseCost": 75,
-      "growth": 1.42,
+      "growth": 1.47,
       "maxLevel": 15
     },
     "tenacity": {
       "name": "Tenacity",
       "baseCost": 65,
-      "growth": 1.38,
+      "growth": 1.43,
       "maxLevel": 15
     }
   },
@@ -107,6 +107,7 @@ export const CONFIG = {
     "tenacity"
   ],
   "fx": {
+    "skillCostMult": 1.5,
     "speedPerLevel": 0.975,
     "speedFloor": 0.3,
     "critChancePerLevel": 0.015,
@@ -150,7 +151,7 @@ export const CONFIG = {
     "hpTailMid": 1.15,
     "hpTailMid2": 1.13,
     "hpTailEnd2": 1.12,
-    "rateBase": 1.125,
+    "rateBase": 1.05,
     "rateGrowth": 1.1,
     "rateTailGrowth": 1.24,
     "bossSteps": [
@@ -167,10 +168,10 @@ export const CONFIG = {
     ]
   },
   "hard": {
-    "hpMult": 10,
-    "atkMult": 1.8,
-    "intervalMult": 0.75,
-    "coinMult": 4,
+    "hpMult": 6,
+    "atkMult": 1.6,
+    "intervalMult": 0.85,
+    "coinMult": 2,
     "gemReward": 2
   },
   "playerHp": {
