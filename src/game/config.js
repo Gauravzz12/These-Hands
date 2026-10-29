@@ -2,7 +2,7 @@
 export const CONFIG = {
   "playerBase": {
     "damage": 5,
-    "attackInterval": 1,
+    "attackInterval": 1.5,
     "critChance": 0.1,
     "critMult": 2
   },
