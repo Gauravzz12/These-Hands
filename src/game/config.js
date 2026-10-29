@@ -287,6 +287,14 @@ export const CONFIG = {
       "fx": "12% chance a slap lands HEAVY for 3x damage."
     },
     {
+      "id": "precisionInstinct",
+      "name": "Precision Instinct",
+      "tier": 2,
+      "cost": 26000,
+      "prereq": "strongerHands",
+      "fx": "Unlocks PRECISION strikes: a gold weak spot flashes on the enemy mid-fight — tap it for a guaranteed 2x crit. Fortune Luck makes it appear more often. Max 3 per fight (+1 per 5 Luck, max 6)."
+    },
+    {
       "id": "comboMastery",
       "name": "Combo Mastery",
       "tier": 3,
@@ -664,8 +672,7 @@ export const CONFIG = {
     "89": {"name": "DRAGON RENEWAL", "pct": 0.08, "every": 13, "max": 3, "blurb": "Ancient blood knits shut — heals 8% of his HP, up to 3 times per fight."}
   },
   "gauntlet": {"bonusMult": 2, "gemFirst": 1},
-  "weakSpot": {"mult": 2, "dur": 1.4, "durHard": 1.1, "firstAt": 2.5, "everyMin": 6, "everyMax": 9, "frenzyGain": 10},
-  "blitz": {"bonusMult": 0.5, "parMult": 1.2, "parMin": 6},
+  "weakSpot": {"mult": 2, "dur": 1.4, "durHard": 1.1, "firstAt": 2.5, "everyMin": 6, "everyMax": 9, "frenzyGain": 10, "capBase": 3, "capPerLuck": 5, "capMax": 6, "luckScale": 0.06},
   "gems": {
     "elite": 1,
     "pairBoss": 3,
@@ -1082,17 +1089,17 @@ export const ROSTER = [
     "bodybuilder"
   ],
   [
-    "Wild Boar",
+    "Kickboxer",
     "boar",
     "base"
   ],
   [
-    "Wolf",
+    "Luchador Wrestler",
     "wolf",
     "wolf"
   ],
   [
-    "Giant Rooster",
+    "Sumo Champion",
     "chicken",
     "rooster"
   ],
