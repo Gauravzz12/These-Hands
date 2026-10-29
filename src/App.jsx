@@ -127,6 +127,22 @@ export default function App() {
               <span className="hi-badge" id="hubQuestBadge" style={{ display: 'none', position: 'absolute', top: '6px', right: '6px' }}></span>
             </button>
 
+            <button className="hub-card" id="hubRushCard" type="button">
+              <span className="hc-ico gold"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M3 7l4.5 4L12 4l4.5 7L21 7l-1.6 10.2a2 2 0 0 1-2 1.8H6.6a2 2 0 0 1-2-1.8L3 7zm3.4 13.5h11.2V22H6.4v-1.5z" fill="currentColor"/></svg></span>
+              <span className="hc-main">
+                <span className="hc-title">BOSS RUSH</span>
+                <span className="hc-sub" id="hubRushSub">BEAT 2 BOSSES TO UNLOCK</span>
+              </span>
+            </button>
+
+            <button className="hub-card" id="hubEndlessCard" type="button">
+              <span className="hc-ico blue"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M2 15c2-1.6 4-1.6 6 0s4 1.6 6 0 4-1.6 6 0v3c-2-1.6-4-1.6-6 0s-4 1.6-6 0-4-1.6-6 0v-3zm0-5c2-1.6 4-1.6 6 0s4 1.6 6 0 4-1.6 6 0v3c-2-1.6-4-1.6-6 0s-4 1.6-6 0-4-1.6-6 0V10z" fill="currentColor"/></svg></span>
+              <span className="hc-main">
+                <span className="hc-title">ENDLESS</span>
+                <span className="hc-sub" id="hubEndlessSub">BEST WAVE 0</span>
+              </span>
+            </button>
+
             <button className="hub-card" data-goto="shop" type="button">
               <span className="hc-ico green"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M4 7 5.6 3h12.8L20 7H4zm0 2v10a1.5 1.5 0 0 0 1.5 1.5h13A1.5 1.5 0 0 0 20 19V9h-5.5a2.75 2.75 0 0 1-5 0H4zm5.5 2.2a.8.8 0 0 1 1.5 0V13H9.5v-1.8z" fill="currentColor"/></svg></span>
               <span className="hc-main">
