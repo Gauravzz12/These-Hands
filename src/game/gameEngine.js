@@ -53,7 +53,7 @@ export function initGameEngine() {
       }
       runningHp = Math.round(runningHp * stepMult);
     }
-    const hpBase2 = i === 0 ? Math.round(runningHp * 0.9) : i>=1&&i<=9 ? Math.round(runningHp*(1+0.30*(9-i)/8)) : runningHp; const hp = i === 0 ? hpBase2 : Math.max(hpBase2, lastHp * 2); lastHp = hp; // round-13: Gaurav ladder rule — every next enemy has AT LEAST 2x the previous enemy HP (boss step multipliers can push higher); the old round-11 ramp is superseded. Dummy at 90% HP (tutorial fight); early-game ramp idx1-9 kept inside hpBase2
+    const hpBase2 = i === 0 ? Math.round(runningHp * 0.9) : i>=1&&i<=9 ? Math.round(runningHp*(1+0.30*(9-i)/8)) : runningHp; let stepFloor = 0; if (i > 0) { const fb = Math.max(1.10, 1.76 + (1.13 - 1.76) * Math.min(1, (i - 1) / 48)); const pPos = (i - 1) % 5; const pBoss = (i - 1) % 10 === 9; const pMini = pPos === 4 && !pBoss; stepFloor = pBoss ? fb * 0.85 : pMini ? fb * 0.93 : boss ? fb * 1.45 : miniBoss ? fb * 1.18 : fb; } const hp = i === 0 ? hpBase2 : Math.max(hpBase2, Math.round(lastHp * stepFloor)); lastHp = hp; // round-13b: Gaurav decaying ladder — per-step HP multiplier starts at 1.76 and decays to 1.13 by the Final Dragon (idx49 lands ~15B HP); boss steps spike x1.45, elite steps x1.18, steps right after a boss/elite ease to x0.85 / x0.93 of the base step. Dummy at 90% HP (tutorial fight); early-game ramp idx1-9 kept inside hpBase2
     const coinRate = S.rateBase * Math.pow(S.rateGrowth, Math.min(i, 49)) * Math.pow(S.rateTailGrowth, Math.max(0, i - 49));
     const bounty = Math.max(10, Math.round(hp * Math.min(1.5, coinRate / 10)));
     let interval = Math.max(A.intervalFloor, A.intervalStart * Math.pow(A.intervalDecay, i));
