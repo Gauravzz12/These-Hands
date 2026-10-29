@@ -902,7 +902,7 @@ export const CONFIG = {
     },
     {
       "id": "inferno",
-      "name": "Inferno Bundle",
+      "name": "Thunder Bundle",
       "price": "₹399",
       "skin": "thor",
       "coins": 100000,
