@@ -1109,6 +1109,30 @@ function loadPoseImage(poseDef) {
     poseDef.imgWhite = buildSilhouetteCanvas(c);
     poseDef.w = c.width;
     poseDef.h = c.height;
+    // Measure the opaque content box so the renderer can plant the
+    // character's feet exactly on the stage ground line, whatever
+    // transparent padding the pose art happens to carry.
+    try {
+      const iw = c.width, ih = c.height;
+      const step = Math.max(1, Math.floor(Math.min(iw, ih) / 160));
+      const data = ctx.getImageData(0, 0, iw, ih).data;
+      let top = ih, bot = -1, left = iw, right = -1;
+      for (let y = 0; y < ih; y += step) {
+        for (let x = 0; x < iw; x += step) {
+          if (data[(y * iw + x) * 4 + 3] > 24) {
+            if (y < top) top = y;
+            if (y > bot) bot = y;
+            if (x < left) left = x;
+            if (x > right) right = x;
+          }
+        }
+      }
+      if (bot >= 0) {
+        poseDef.gTop = top / ih;
+        poseDef.gBot = Math.min(1, (bot + step) / ih);
+        poseDef.gCx = ((left + right) / 2) / iw;
+      }
+    } catch (err) { /* measurement is best-effort; defaults keep old behaviour */ }
     poseDef.ready = true;
     poseDef.loading = false;
   };
@@ -1150,6 +1174,9 @@ export function getV2Sprite(index) {
       h: pDef.h,
       ready: false,
       loading: false,
+      gTop: 0,
+      gBot: 1,
+      gCx: 0.5,
       img: fallbackCanvas,
       imgWhite: fallbackCanvas
     };
