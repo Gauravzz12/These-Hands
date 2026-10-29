@@ -1079,14 +1079,14 @@ export const ROSTER = [
     "base"
   ],
   [
-    "Adult Boxer",
-    "boxer",
-    "boxer"
-  ],
-  [
     "Bodybuilder",
     "boxer",
     "bodybuilder"
+  ],
+  [
+    "Luchador Wrestler",
+    "wolf",
+    "wolf"
   ],
   [
     "Kickboxer",
@@ -1094,9 +1094,9 @@ export const ROSTER = [
     "base"
   ],
   [
-    "Luchador Wrestler",
-    "wolf",
-    "wolf"
+    "Adult Boxer",
+    "boxer",
+    "boxer"
   ],
   [
     "Sumo Champion",

@@ -989,7 +989,8 @@ border-top: 2px solid var(--chrome-edge);
 margin-top: 4px;
 padding: 11px 12px calc(12px + env(safe-area-inset-bottom));
 display: flex;
-gap: 12px;
+flex-wrap: wrap;
+gap: 10px 12px;
 align-items: center;
 flex: none;
 }
@@ -1006,7 +1007,8 @@ background: var(--chrome);
 #skillDetail .sd-name { font-family: "Bungee", "Nunito", sans-serif; font-size: 16px; line-height: 1.15; }
 #skillDetail .sd-fx { font-size: 12px; font-weight: 700; color: var(--ink-soft); line-height: 1.35; margin-top: 2px; }
 #skillDetail .sd-meta { font-size: 11px; font-weight: 800; letter-spacing: .04em; color: var(--ink-soft); margin-top: 3px; }
-#skillBuyBtn { flex: none; }
+#skillBuyBtn { flex: 1 1 100%; width: 100%; margin-top: 2px; }
+#skillDetail .sd-owned { flex: 1 1 100%; text-align: center; }
 #skillBuyBtn.poor { background: var(--track); opacity: .75; }
 .sd-owned {
 flex: none;
