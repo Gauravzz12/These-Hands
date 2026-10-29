@@ -664,6 +664,7 @@ export const CONFIG = {
     "89": {"name": "DRAGON RENEWAL", "pct": 0.08, "every": 13, "max": 3, "blurb": "Ancient blood knits shut — heals 8% of his HP, up to 3 times per fight."}
   },
   "gauntlet": {"bonusMult": 2, "gemFirst": 1},
+  "weakSpot": {"mult": 2, "dur": 1.4, "durHard": 1.1, "firstAt": 2.5, "everyMin": 6, "everyMax": 9, "frenzyGain": 10},
   "blitz": {"bonusMult": 0.5, "parMult": 1.2, "parMin": 6},
   "gems": {
     "elite": 1,
