@@ -324,14 +324,14 @@ export default function App() {
               <div id="attrsList"></div>
             </div>
           </div>
-          <div id="perksAccordion" className="perks-accordion open">
-            <button type="button" id="perksToggle" className="perks-toggle" aria-expanded="true" aria-controls="perksCollapse">
+          <div id="perksAccordion" className="perks-accordion">
+            <button type="button" id="perksToggle" className="perks-toggle" aria-expanded="false" aria-controls="perksCollapse">
               <div className="perks-toggle-left">
                 <span className="perks-toggle-title">LEVEL PERKS &amp; ABILITIES</span>
                 <span className="perks-toggle-sub" id="perksToggleSub">LV 2 TO 20+ · 0/20 ACTIVE</span>
               </div>
               <div className="perks-toggle-right">
-                <span className="perks-toggle-hint" id="perksToggleHint">HIDE</span>
+                <span className="perks-toggle-hint" id="perksToggleHint">SHOW</span>
                 <svg viewBox="0 0 24 24" aria-hidden="true" className="perks-chevron"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
               </div>
             </button>
@@ -368,17 +368,28 @@ export default function App() {
         <div id="skillsScroll">
           <div id="skillTreeWrap"></div>
           <div id="skillDetail"></div>
-          <div id="abilitiesWrap">
-            <div className="aw-sec">LEVEL ABILITIES</div>
-            <div className="sel-sub" style={{'marginBottom': '2px'}}>Granted automatically as you level up — permanent, no purchase needed.</div>
-            <div id="abilitiesList"></div>
+          <div id="skillsAbilitiesAccordion" className="perks-accordion">
+            <button type="button" id="skillsAbilitiesToggle" className="perks-toggle" aria-expanded="false" aria-controls="skillsAbilitiesCollapse">
+              <div className="perks-toggle-left">
+                <span className="perks-toggle-title">LEVEL UP SKILLS</span>
+                <span className="perks-toggle-sub" id="skillsAbilitiesToggleSub">LV 2 TO 20+ · UNLOCKED ON LEVEL UP</span>
+              </div>
+              <div className="perks-toggle-right">
+                <span className="perks-toggle-hint" id="skillsAbilitiesToggleHint">SHOW</span>
+                <svg viewBox="0 0 24 24" aria-hidden="true" className="perks-chevron"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+              </div>
+            </button>
+            <div id="skillsAbilitiesCollapse" className="perks-collapse">
+              <div className="sel-sub" style={{'margin': '4px 2px 8px'}}>Granted automatically as you level up — permanent, no purchase needed.</div>
+              <div id="abilitiesList"></div>
+            </div>
           </div>
 
           <div id="specialsWrap">
             <div className="aw-sec" style={{'marginTop': '22px'}}>SPECIAL SKILLS</div>
             <div className="sel-sub" style={{'marginBottom': '8px'}} id="specSub">Unlocked by defeating bosses. Tap to upgrade.</div>
             <div id="specList"></div>
-            <div className="pack-note" style={{'marginTop': '12px'}}>Every upgrade adds +25% effect and trims the cooldown by 4%.</div>
+            <div className="pack-note" style={{'marginTop': '12px'}}>Each upgrade increases damage and reduces cooldown down to the max rank.</div>
           </div>
         </div>
       </section>
