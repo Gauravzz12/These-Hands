@@ -130,7 +130,6 @@ padding: 6px 12px;
 #hud .coin-ico { width: 16px; height: 16px; }
 #hud .gem-ico { width: 15px; height: 15px; }
 #hud .home-btn { width: 34px; height: 34px; }
-#levelUpBtn { font-size: 12px; padding: 7px 9px; }
 }
 @media (max-width: 374px) {
 #hud { gap: 4px; padding-left: 6px; padding-right: 6px; }
@@ -221,49 +220,66 @@ background: var(--chrome);
 display: flex;
 align-items: center;
 justify-content: space-between;
-gap: 8px;
+gap: 6px;
+width: 100%;
+box-sizing: border-box;
 }
 #attrToggle {
   display: inline-flex;
   align-items: center;
-  gap: 5px;
+  gap: 4px;
   background: none;
   border: none;
   cursor: pointer;
   color: var(--ink);
   font-family: "Bungee", "Nunito", sans-serif;
-  font-size: 13px;
-  padding: 6px 0;
+  font-size: 12px;
+  padding: 5px 0;
   min-width: 0;
-  flex-shrink: 1;
+  flex: 1 1 auto;
+  overflow: hidden;
 }
-#attrToggle .cap { font-family: "Nunito", sans-serif; font-weight: 800; font-size: 10.5px; color: var(--ink-soft); letter-spacing: .03em; white-space: nowrap; }
-#attrToggle svg { width: 15px; height: 15px; flex: none; transition: transform .18s ease; }
+#attrToggle span:first-child { flex-shrink: 0; }
+#attrToggle .cap { font-family: "Nunito", sans-serif; font-weight: 800; font-size: 10px; color: var(--ink-soft); letter-spacing: .02em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; flex-shrink: 1; min-width: 0; }
+#attrToggle svg { width: 14px; height: 14px; flex: none; transition: transform .18s ease; }
 #attrPanel.open #attrToggle svg { transform: rotate(180deg); }
 #levelUpBtn {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 4px;
   border: none;
   cursor: pointer;
-  border-radius: 9px;
+  border-radius: 8px;
   padding: 5px 8px;
   font-family: "Nunito", sans-serif;
   font-weight: 800;
-  font-size: 11.5px;
+  font-size: 11px;
   background: var(--gold);
   color: #2b1c10;
   white-space: nowrap;
   flex-shrink: 0;
   box-shadow: 0 1px 3px rgba(0,0,0,.15);
+  max-width: 55%;
+  box-sizing: border-box;
+}
+#levelUpBtn .lu-cost {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
 }
 #levelUpBtn svg {
-  width: 14px;
-  height: 14px;
+  width: 13px;
+  height: 13px;
   flex-shrink: 0;
 }
 #levelUpBtn:active { transform: scale(.96); }
 #levelUpBtn:disabled { opacity: .35; cursor: default; transform: none; }
+@media (max-width: 374px) {
+  #levelUpBtn { font-size: 10px; padding: 4px 6px; gap: 3px; }
+  #attrToggle { font-size: 11px; }
+  #attrToggle .cap { font-size: 9px; }
+}
 #attrList { display: none; }
 #attrPanel.open #attrList {
 display: grid;

@@ -270,13 +270,13 @@ export const CONFIG = {
       "fx": "+5% crit chance."
     },
     {
-      "id": "parry",
-      "name": "Counter-Slap",
+      "id": "retaliation",
+      "name": "Retaliation",
       "tier": 2,
       "cost": 45000,
       "prereq": "staminaTraining",
       "reqBoss": 4,
-      "fx": "When attacked, 15% chance to deflect 50% damage and counter-slap."
+      "fx": "When attacked, absorb 20% incoming damage and immediately strike back with a ferocious 3x counter-slap!"
     },
     {
       "id": "heavySlap",
@@ -292,7 +292,7 @@ export const CONFIG = {
       "tier": 2,
       "cost": 26000,
       "prereq": "strongerHands",
-      "fx": "Unlocks PRECISION strikes: a gold weak spot flashes on the enemy mid-fight — tap it for a guaranteed 2x crit. Fortune Luck makes it appear more often. Max 3 per fight (+1 per 5 Luck, max 6)."
+      "fx": "Unlocks PRECISION strikes: a gold weak spot flashes on the enemy mid-fight — tap it for a devastating 4.5x critical strike! Fortune Luck makes it appear more often. Max 3 per fight (+1 per 5 Luck, max 6)."
     },
     {
       "id": "comboMastery",
@@ -315,7 +315,7 @@ export const CONFIG = {
       "name": "Adrenaline Rush",
       "tier": 3,
       "cost": 3800000,
-      "prereq": "parry",
+      "prereq": "retaliation",
       "fx": "Below 35% HP: gain +20% attack speed and +25% damage."
     },
     {
@@ -439,6 +439,8 @@ export const CONFIG = {
     "barrageMult": 0.5,
     "ultEvery": 15,
     "ultMult": 10,
+    "retaliationMitigate": 0.20,
+    "retaliationMult": 3.0,
     "parryChance": 0.15,
     "parryDeflect": 0.5,
     "dizzyMult": 1.35,
@@ -511,7 +513,7 @@ export const CONFIG = {
       "level": 11,
       "id": "counterCadence",
       "name": "Counter-Cadence",
-      "fx": "Parrying an attack guarantees your next slap lands as a 2.5x critical hit."
+      "fx": "Retaliating against an enemy attack guarantees your next slap lands as a 2.5x critical hit."
     },
     {
       "level": 12,
@@ -642,7 +644,7 @@ export const CONFIG = {
     "49": {"name": "DRAGON RENEWAL", "pct": 0.12, "every": 8, "max": 3, "blurb": "Ancient blood knits shut — heals 12% of his HP, up to 3 times per fight."}
   },
   "gauntlet": {"bonusMult": 2, "gemFirst": 1},
-  "weakSpot": {"mult": 2, "dur": 1.4, "durHard": 1.1, "firstAt": 2.5, "everyMin": 6, "everyMax": 9, "frenzyGain": 10, "capBase": 3, "capPerLuck": 5, "capMax": 6, "luckScale": 0.06},
+  "weakSpot": {"mult": 4.5, "dur": 1.4, "durHard": 1.1, "firstAt": 2.5, "everyMin": 6, "everyMax": 9, "frenzyGain": 10, "capBase": 3, "capPerLuck": 5, "capMax": 6, "luckScale": 0.06},
   "gems": {
     "elite": 1,
     "pairBoss": 3,
