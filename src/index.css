@@ -319,6 +319,8 @@ background: var(--gold); color: #2b1c10; white-space: nowrap; margin-top: 2px;
 }
 /* ─── Level Perks & Abilities Collapsible Accordion ─── */
 .perks-accordion {
+  flex-shrink: 0 !important;
+  min-height: min-content !important;
   margin: 16px 2px 10px;
   border: 2px solid var(--chrome-edge);
   border-radius: 14px;
@@ -334,6 +336,7 @@ background: var(--gold); color: #2b1c10; white-space: nowrap; margin-top: 2px;
 
 .perks-toggle {
   width: 100%;
+  min-height: 52px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -346,6 +349,10 @@ background: var(--gold); color: #2b1c10; white-space: nowrap; margin-top: 2px;
   user-select: none;
   -webkit-tap-highlight-color: transparent;
   transition: background .15s ease;
+}
+
+.perks-toggle * {
+  pointer-events: none;
 }
 
 .perks-toggle:hover, .perks-toggle:active {
