@@ -150,7 +150,7 @@ export const CONFIG = {
     "hpTailMid2": 1.13,
     "hpTailEnd2": 1.12,
     "rateBase": 1.05,
-    "rateGrowth": 0.96,
+    "rateGrowth": 1.05,
     "rateTailGrowth": 1.24,
     "bossSteps": [
       2.5,
