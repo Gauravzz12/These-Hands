@@ -107,7 +107,8 @@ padding: 6px 12px;
 .pill.mini { min-width: 0; font-size: 14px; padding: 5px 11px 5px 6px; }
 .pill.mini .coin-ico { width: 18px; height: 18px; }
 .pill.mini .gem-ico { width: 16px; height: 16px; }
-#app:not([data-screen="battle"]) #hud { display: none; }
+#app:not([data-screen="battle"]):not([data-screen="home"]) #hud { display: none; }
+#app[data-screen="home"] #hudHomeBtn { display: none; }
 #hud { gap: 6px; padding-left: 8px; padding-right: 8px; flex-wrap: nowrap; }
 #hud .pill { min-width: 0; font-size: 15px; padding: 5px 9px 5px 5px; gap: 5px; white-space: nowrap; }
 #hud .pill.level { font-size: 12.5px; padding: 5px 8px; }
@@ -3493,4 +3494,72 @@ margin-top: 7px;
 .booster-circle-btn:disabled {
   cursor: default;
   pointer-events: none;
+}
+
+/* Floating side boosters on home showcase */
+.hub-side-boosters {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  z-index: 10;
+  pointer-events: auto;
+}
+.hub-side-boosters .booster-slot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+}
+.hub-side-boosters .booster-circle-btn {
+  width: 48px;
+  height: 48px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.45), inset 0 1px 2px rgba(255, 255, 255, 0.25);
+}
+.hub-side-boosters .b-ring-svg-wrap,
+.hub-side-boosters .b-ring-svg {
+  width: 48px;
+  height: 48px;
+}
+.hub-side-boosters .b-ico {
+  font-size: 20px;
+}
+.hub-side-boosters .b-mult {
+  font-size: 11px;
+}
+.hub-side-boosters .b-ad-badge {
+  top: -3px;
+  right: -3px;
+  font-size: 8px;
+  padding: 1px 4px;
+}
+.hub-side-boosters .b-name {
+  font-family: "Bungee", "Nunito", sans-serif;
+  font-size: 8px;
+  color: #ffffff;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.9), 0 0 4px rgba(0,0,0,0.8);
+  letter-spacing: 0.03em;
+  line-height: 1.1;
+  margin-top: 1px;
+}
+.hub-side-boosters .b-timer {
+  font-family: "Nunito", sans-serif;
+  font-weight: 800;
+  font-size: 8px;
+  color: #ffdf40;
+  background: rgba(22, 12, 6, 0.85);
+  padding: 1px 5px;
+  border-radius: 999px;
+  border: 1px solid rgba(253, 224, 71, 0.35);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+  text-transform: uppercase;
+  white-space: nowrap;
+  letter-spacing: 0.04em;
+}
+
+/* Balance 7 hub-grid cards by spanning the 7th across two columns */
+.hub-grid .hub-card:last-child:nth-child(odd) {
+  grid-column: span 2;
 }

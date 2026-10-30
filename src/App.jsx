@@ -46,7 +46,7 @@ export default function App() {
         <div id="skinNotice" style={{'display': 'none'}} role="status" title="Tap to dismiss"><span className="sn-msg"></span><span className="sn-x" aria-hidden="true">✕</span></div>
         <div id="storageNotice" style={{'display': 'none'}} role="status" title="Tap to dismiss">Saving unavailable in this browser context — progress won't persist here.<span className="sn-x" aria-hidden="true">✕</span></div>
         
-        <div className="hub-stage" id="hubStage" aria-hidden="true">
+        <div className="hub-stage" id="hubStage">
           <div className="hub-wall"></div>
           <div className="hub-floor"></div>
           <div className="hub-rug"></div>
@@ -60,21 +60,8 @@ export default function App() {
           <div className="hub-guest-cap" id="hubGuestCap"><span className="cap-k">NEXT TARGET</span>TRAINING DUMMY</div>
           <div className="hub-hand-wrap left"><img id="hubHandL" src="data:," alt="" /></div>
           <div className="hub-hand-wrap right"><img id="hubHandR" src="data:," alt="" /></div>
-        </div>
 
-        <div className="hub-content">
-          <div id="awayCard" role="dialog" aria-label="Offline earnings">
-            <div className="away-inner">
-              <div className="away-head">WHILE YOU WERE AWAY</div>
-              <div className="away-sub" id="awayText"></div>
-              <div className="away-amt" id="awayAmt"></div>
-              <button id="awayClaim">CLAIM</button>
-            </div>
-          </div>
-
-          <button type="button" id="chestCard" style={{'display': 'none'}} aria-label="Daily chest"></button>
-
-          <div className="hub-boosters-row" id="hubBoostersRow">
+          <div className="hub-side-boosters" id="hubSideBoosters">
             <div className="booster-slot">
               <button className="booster-circle-btn coin" id="boostCoinBtn" type="button" aria-label="Watch Ad for 10 min 2x Coins">
                 <span className="b-ring-svg-wrap">
@@ -89,11 +76,6 @@ export default function App() {
               </button>
               <div className="b-name">2x COINS</div>
               <div className="b-timer" id="boostCoinTimer">WATCH AD</div>
-            </div>
-
-            <div className="booster-center-showcase" id="hubBoosterShowcase">
-              <div className="bcs-title">PASSIVE BUFFS</div>
-              <div className="bcs-desc" id="hubBoosterShowcaseDesc">TAP TO BOOST 10 MINS</div>
             </div>
 
             <div className="booster-slot">
@@ -112,6 +94,19 @@ export default function App() {
               <div className="b-timer" id="boostDmgTimer">WATCH AD</div>
             </div>
           </div>
+        </div>
+
+        <div className="hub-content">
+          <div id="awayCard" role="dialog" aria-label="Offline earnings">
+            <div className="away-inner">
+              <div className="away-head">WHILE YOU WERE AWAY</div>
+              <div className="away-sub" id="awayText"></div>
+              <div className="away-amt" id="awayAmt"></div>
+              <button id="awayClaim">CLAIM</button>
+            </div>
+          </div>
+
+          <button type="button" id="chestCard" style={{'display': 'none'}} aria-label="Daily chest"></button>
 
           <button className="hub-battle-cta" data-goto="battle" id="hubBattleCta">
             <span className="hbc-ico">
@@ -173,14 +168,6 @@ export default function App() {
               <span className="hc-main">
                 <span className="hc-title">BOSS RUSH</span>
                 <span className="hc-sub" id="hubRushSub">BEAT 2 BOSSES TO UNLOCK</span>
-              </span>
-            </button>
-
-            <button className="hub-card" id="hubEndlessCard" type="button">
-              <span className="hc-ico blue"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M2 15c2-1.6 4-1.6 6 0s4 1.6 6 0 4-1.6 6 0v3c-2-1.6-4-1.6-6 0s-4 1.6-6 0-4-1.6-6 0v-3zm0-5c2-1.6 4-1.6 6 0s4 1.6 6 0 4-1.6 6 0v3c-2-1.6-4-1.6-6 0s-4 1.6-6 0-4-1.6-6 0V10z" fill="currentColor"/></svg></span>
-              <span className="hc-main">
-                <span className="hc-title">ENDLESS</span>
-                <span className="hc-sub" id="hubEndlessSub">BEST WAVE 0</span>
               </span>
             </button>
 
@@ -507,17 +494,6 @@ export default function App() {
           <div className="set-row">
             <div className="set-main"><div className="set-name">UNLOCK ALL ENEMIES</div><div className="set-desc">Permanently unlocks all 100 enemies in your save data.</div></div>
             <button className="set-toggle" id="unlockAllBtn" style={{'background': '#4a3b2c', 'color': '#f2b01e'}}>UNLOCK ALL</button>
-          </div>
-          <div className="set-row col">
-            <div className="set-main"><div className="set-name">SAVE DATA — EXPORT / IMPORT</div><div className="set-desc">Your save lives only on this device — export a code to move it to another phone or browser. Codes are tamper-signed: an edited code won't load.</div></div>
-            <div className="save-io">
-              <button className="set-toggle" id="exportBtn">EXPORT SAVE</button>
-              <textarea id="exportBox" className="save-box" rows="3" readOnly placeholder="Your save code appears here." style={{'display': 'none'}}></textarea>
-              <button className="set-toggle ghost" id="copyCodeBtn" style={{'display': 'none'}}>COPY CODE</button>
-              <textarea id="importBox" className="save-box" rows="3" placeholder="Paste a save code here to import it."></textarea>
-              <button className="set-toggle" id="importBtn">IMPORT SAVE</button>
-              <div className="save-msg" id="saveIoMsg" role="status"></div>
-            </div>
           </div>
           <div className="set-row danger">
             <div className="set-main"><div className="set-name">RESET SAVE</div><div className="set-desc">Wipe coins, gems, progress, skills and skins — everything. Can't be undone.</div></div>
