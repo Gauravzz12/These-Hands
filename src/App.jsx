@@ -475,6 +475,14 @@ export default function App() {
             <div className="set-main"><div className="set-name">MUSIC</div><div className="set-desc">Synthesised loops — a calm one for the menus, a driving one for battle.</div></div>
             <button className="set-toggle" id="setMusicBtn" aria-pressed="true">ON</button>
           </div>
+          <div className="set-row set-slider-row">
+            <div className="set-top">
+              <div className="set-name">MUSIC VOLUME</div>
+              <div id="musicVolVal" style={{fontFamily: 'Bungee, Nunito, sans-serif', color: 'var(--gold-dark)', fontSize: '14px'}}>70%</div>
+            </div>
+            <div className="set-desc">Adjust background music volume in battle and menus.</div>
+            <input type="range" id="musicVolSlider" min="0" max="100" defaultValue="70" className="set-slider" aria-label="Music volume" />
+          </div>
           <div className="set-row">
             <div className="set-main"><div className="set-name">SOUND FX</div><div className="set-desc">Slaps, coins, roars and clicks. The battle mute button is this same switch.</div></div>
             <button className="set-toggle" id="setSfxBtn" aria-pressed="true">ON</button>

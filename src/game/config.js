@@ -8,8 +8,8 @@ export const CONFIG = {
   },
   "capPerLevel": 3,
   "levelUp": {
-    "base": 220,
-    "growth": 1.62,
+    "base": 350,
+    "growth": 1.65,
     "lateStart": 4,
     "lateGrowth": 2.75,
     "tailStart": 25,
@@ -19,75 +19,75 @@ export const CONFIG = {
   "attrs": {
     "power": {
       "name": "Power",
-      "baseCost": 30,
+      "baseCost": 60,
       "growth": 1.45,
-      "maxLevel": 100
+      "maxLevel": 200
     },
     "speed": {
       "name": "Speed",
-      "baseCost": 75,
-      "growth": 1.52,
-      "maxLevel": 25
+      "baseCost": 160,
+      "growth": 1.38,
+      "maxLevel": 50
     },
     "critChance": {
       "name": "Crit Chance",
-      "baseCost": 60,
-      "growth": 1.49,
-      "maxLevel": 20
+      "baseCost": 140,
+      "growth": 1.36,
+      "maxLevel": 50
     },
     "critDamage": {
       "name": "Crit Damage",
-      "baseCost": 60,
-      "growth": 1.49,
-      "maxLevel": 20
+      "baseCost": 140,
+      "growth": 1.36,
+      "maxLevel": 50
     },
     "defense": {
       "name": "Defense",
-      "baseCost": 55,
-      "growth": 1.45,
-      "maxLevel": 20
+      "baseCost": 130,
+      "growth": 1.35,
+      "maxLevel": 50
     },
     "stun": {
       "name": "Stun",
-      "baseCost": 70,
-      "growth": 1.5,
-      "maxLevel": 15
+      "baseCost": 150,
+      "growth": 1.36,
+      "maxLevel": 45
     },
     "combo": {
       "name": "Combo",
-      "baseCost": 65,
-      "growth": 1.49,
-      "maxLevel": 20
+      "baseCost": 140,
+      "growth": 1.36,
+      "maxLevel": 50
     },
     "coinMult": {
       "name": "Coin Mult.",
-      "baseCost": 50,
-      "growth": 1.45,
-      "maxLevel": 20
+      "baseCost": 120,
+      "growth": 1.35,
+      "maxLevel": 50
     },
     "accuracy": {
       "name": "Accuracy",
-      "baseCost": 60,
-      "growth": 1.47,
-      "maxLevel": 9
+      "baseCost": 130,
+      "growth": 1.36,
+      "maxLevel": 30
     },
     "bossDamage": {
       "name": "Boss Hunter",
-      "baseCost": 70,
-      "growth": 1.47,
-      "maxLevel": 20
+      "baseCost": 150,
+      "growth": 1.36,
+      "maxLevel": 50
     },
     "vampirism": {
       "name": "Life Leech",
-      "baseCost": 80,
-      "growth": 1.5,
-      "maxLevel": 15
+      "baseCost": 160,
+      "growth": 1.36,
+      "maxLevel": 45
     },
     "luck": {
       "name": "Fortune Luck",
-      "baseCost": 75,
-      "growth": 1.47,
-      "maxLevel": 15
+      "baseCost": 150,
+      "growth": 1.36,
+      "maxLevel": 45
     }
   },
   "attrOrder": [
@@ -106,32 +106,32 @@ export const CONFIG = {
   ],
   "fx": {
     "skillCostMult": 1.5,
-    "speedPerLevel": 0.963,
+    "speedPerLevel": 0.9813,
     "speedFloor": 0.6,
-    "critChancePerLevel": 0.015,
-    "critDamagePerLevel": 0.15,
-    "comboPerStackPerLevel": 0.015,
+    "critChancePerLevel": 0.006,
+    "critDamagePerLevel": 0.06,
+    "comboPerStackPerLevel": 0.006,
     "comboBaseStacks": 4,
-    "coinPerLevel": 0.06,
+    "coinPerLevel": 0.024,
     "accuracyBase": 0.8,
-    "accuracyPerLevel": 0.01,
+    "accuracyPerLevel": 0.00633,
     "powerGrowth": 1.145,
     "accuracyCap": 0.99,
-    "bossDmgPerLevel": 0.025,
-    "luckPerLevel": 0.006,
+    "bossDmgPerLevel": 0.006,
+    "luckPerLevel": 0.002,
     "luckDmgMult": 1.5,
     "luckCoinMult": 3,
-    "vampPerLevel": 1,
+    "vampPerLevel": 0.334,
     "speedCostLateMult": 3,
     "speedCostLatePow": 6,
     "specialPerLevel": 0.005,
     "stunChanceBase": 0.05,
-    "stunChancePerLevel": 0.012,
+    "stunChancePerLevel": 0.004,
     "stunChanceCap": 0.23,
     "stunDurBase": 0.5,
-    "stunDurPerLevel": 0.06,
+    "stunDurPerLevel": 0.02,
     "stunDurCap": 1.4,
-    "defensePerLevel": 0.015,
+    "defensePerLevel": 0.006,
     "defenseCap": 0.3
   },
   "enemyScale": {
