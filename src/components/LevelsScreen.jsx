@@ -28,7 +28,7 @@ export default function LevelsScreen() {
         <div>
           <div className="sel-title">CHOOSE YOUR VICTIM</div>
           <div className="sel-sub">
-            {state.testMode ? 100 : save.currentEnemyId + 1} / 100 UNLOCKED {state.testMode ? '· ⚡ TEST MODE' : ''}
+            {state.testMode ? 100 : save.currentEnemyId + 1} / 50 UNLOCKED {state.testMode ? '· ⚡ TEST MODE' : ''}
           </div>
         </div>
         <button

@@ -316,7 +316,7 @@ export default function HomeScreen() {
             <GridIcon />
             <div className="hi-main">
               <span className="hi-name">LEVELS</span>
-              <span className="hi-sub">{defeatedCount} / 100 DEFEATED</span>
+              <span className="hi-sub">{defeatedCount} / 50 DEFEATED</span>
             </div>
             <span className="hi-arrow">›</span>
           </button>

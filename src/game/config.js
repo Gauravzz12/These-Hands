@@ -688,7 +688,7 @@ export const CONFIG = {
     "rate": 0.375,
     "capSeconds": 28800,
     "minAway": 60,
-    "price": 10
+    "price": 100
   },
   "skins": [
     {
@@ -1055,7 +1055,7 @@ export const CONFIG = {
       "name": "Offline Slap Miner",
       "badge": "PASSIVE INCOME",
       "cur": "gems",
-      "price": 10,
+      "price": 100,
       "desc": "Earn coins while away — 25% of your DPS, up to 8 hours, paid on a claim card when you return."
     },
     {

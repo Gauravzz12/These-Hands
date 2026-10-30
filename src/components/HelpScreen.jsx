@@ -25,7 +25,7 @@ const HELP_CARDS = [
     title: 'CLIMB THE ROSTER',
     body: (
       <>
-        Beat an enemy to unlock the next — 100 of them in 20 distinct groups, with a boss every 10th enemy. Bosses enrage under 30% HP! Every defeated enemy also unlocks a <b>HARD rematch</b> on the Levels screen: far tougher, but pays <b>2.5× coins</b> and a one-time <b>Gem</b>.
+        Beat an enemy to unlock the next — 50 of them in 10 distinct groups, with a boss every 10th enemy. Bosses enrage under 30% HP! Every defeated enemy also unlocks a <b>HARD rematch</b> on the Levels screen: far tougher, but pays <b>2.5× coins</b> and a one-time <b>Gem</b>.
       </>
     ),
   },
