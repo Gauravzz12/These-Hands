@@ -210,6 +210,7 @@ export default function App() {
             <span id="hubTestTag"></span>
             <span id="hubDoneTag"></span>
             <span id="hubDragonTag"></span>
+            <span id="hubSpecSub"></span>
             <span id="hubAwardsSub"></span>
             <span id="hubSettingsSub"></span>
             <span id="hubHelpSub"></span>
@@ -337,19 +338,21 @@ export default function App() {
           </div>
           <div className="pill" id="skillCoins" aria-label="Coins"></div>
         </div>
-        <div id="skillTreeWrap"></div>
-        <div id="skillDetail"></div>
-        <div id="abilitiesWrap">
-          <div className="aw-sec">LEVEL ABILITIES</div>
-          <div className="sel-sub" style={{'marginBottom': '2px'}}>Granted automatically as you level up — permanent, no purchase needed.</div>
-          <div id="abilitiesList"></div>
-        </div>
+        <div id="skillsScroll">
+          <div id="skillTreeWrap"></div>
+          <div id="skillDetail"></div>
+          <div id="abilitiesWrap">
+            <div className="aw-sec">LEVEL ABILITIES</div>
+            <div className="sel-sub" style={{'marginBottom': '2px'}}>Granted automatically as you level up — permanent, no purchase needed.</div>
+            <div id="abilitiesList"></div>
+          </div>
 
-        <div id="specialsWrap">
-          <div className="aw-sec" style={{'marginTop': '22px'}}>SPECIAL SKILLS</div>
-          <div className="sel-sub" style={{'marginBottom': '8px'}} id="specSub">Unlocked by defeating bosses. Tap to upgrade.</div>
-          <div id="specList"></div>
-          <div className="pack-note" style={{'marginTop': '12px'}}>Every upgrade adds +25% effect and trims the cooldown by 4%.</div>
+          <div id="specialsWrap">
+            <div className="aw-sec" style={{'marginTop': '22px'}}>SPECIAL SKILLS</div>
+            <div className="sel-sub" style={{'marginBottom': '8px'}} id="specSub">Unlocked by defeating bosses. Tap to upgrade.</div>
+            <div id="specList"></div>
+            <div className="pack-note" style={{'marginTop': '12px'}}>Every upgrade adds +25% effect and trims the cooldown by 4%.</div>
+          </div>
         </div>
       </section>
 

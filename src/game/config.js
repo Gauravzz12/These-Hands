@@ -658,7 +658,7 @@ export const CONFIG = {
     "rate": 0.375,
     "capSeconds": 28800,
     "minAway": 60,
-    "price": 100
+    "price": 200
   },
   "skins": [
     {
@@ -902,7 +902,7 @@ export const CONFIG = {
       "valPrice": "₹499",
       "skin": "spidey",
       "coins": 25000,
-      "gems": 50,
+      "gems": 200,
       "tagline": "The Webbed Crusader Set",
       "desc": "Equip the Spider-Man glove (+10% Slap Speed & Web Yank stun) plus instant coin and gem boost!"
     },
@@ -914,7 +914,7 @@ export const CONFIG = {
       "valPrice": "₹799",
       "skin": "logan",
       "coins": 80000,
-      "gems": 120,
+      "gems": 400,
       "tagline": "Adamantium Rage Set",
       "desc": "Unleash Wolverine (+15% Crit Chance & Adamantium Claws bleeding strikes) with heavy gold and gems."
     },
@@ -926,7 +926,7 @@ export const CONFIG = {
       "valPrice": "₹1,199",
       "skin": "thor",
       "coins": 250000,
-      "gems": 250,
+      "gems": 800,
       "tagline": "Lord of Asgard Set",
       "desc": "Harness Thor (+20% Slap Power & Lightning Strike shockwaves) with massive coin and gem reserves."
     },
@@ -938,7 +938,7 @@ export const CONFIG = {
       "valPrice": "₹2,499",
       "skin": "hulk",
       "coins": 1000000,
-      "gems": 600,
+      "gems": 1600,
       "tagline": "Gamma Breaker Set",
       "desc": "Smash obstacles with Hulk (+30% Boss Damage & Gamma Smash tremor) alongside a colossal treasury."
     },
@@ -961,7 +961,7 @@ export const CONFIG = {
       "name": "Offline Slap Miner",
       "badge": "PASSIVE INCOME",
       "cur": "gems",
-      "price": 100,
+      "price": 200,
       "desc": "Earn coins while away — 25% of your DPS, up to 8 hours, paid on a claim card when you return."
     },
     {
