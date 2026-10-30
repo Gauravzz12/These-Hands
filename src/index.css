@@ -3212,17 +3212,19 @@ margin-top: 7px;
 }
 
 .hud-boost-pill.coin {
-  background: rgba(245, 158, 11, 0.22);
+  background: #92400e;
   border-color: #f59e0b;
-  color: #fef08a;
-  box-shadow: 0 0 8px rgba(245, 158, 11, 0.35);
+  color: #fffbeb;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.6);
+  box-shadow: 0 2px 8px rgba(245, 158, 11, 0.45);
 }
 
 .hud-boost-pill.dmg {
-  background: rgba(239, 68, 68, 0.22);
+  background: #991b1b;
   border-color: #ef4444;
-  color: #fca5a5;
-  box-shadow: 0 0 8px rgba(239, 68, 68, 0.35);
+  color: #fff1f2;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.6);
+  box-shadow: 0 2px 8px rgba(239, 68, 68, 0.45);
 }
 
 .hud-boost-pill b {
@@ -3571,4 +3573,40 @@ margin-top: 7px;
 /* Balance 7 hub-grid cards by spanning the 7th across two columns */
 .hub-grid .hub-card:last-child:nth-child(odd) {
   grid-column: span 2;
+}
+
+/* Active In-Game Ad Boost Chips in fxChips */
+.fx-chip.ad-coin {
+  background: linear-gradient(135deg, #b45309, #d97706);
+  border: 1.5px solid #fde047;
+  color: #ffffff;
+  font-weight: 900;
+  box-shadow: 0 2px 8px rgba(245, 158, 11, 0.6);
+  animation: chipPulse 1.8s infinite ease-in-out;
+}
+
+.fx-chip.ad-dmg {
+  background: linear-gradient(135deg, #b91c1c, #ef4444);
+  border: 1.5px solid #fca5a5;
+  color: #ffffff;
+  font-weight: 900;
+  box-shadow: 0 2px 8px rgba(239, 68, 68, 0.6);
+  animation: chipPulse 1.8s infinite ease-in-out;
+}
+
+@keyframes chipPulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+/* Specials Section in Skills Tab */
+#specialsWrap {
+  padding: 10px 14px 28px;
+}
+#specList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 8px;
 }

@@ -146,14 +146,6 @@ export default function App() {
               </span>
             </button>
 
-            <button className="hub-card" data-goto="specials" type="button">
-              <span className="hc-ico yellow"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M13 2 4.5 13.5H11L9.5 22 19 10h-6.5L13 2z" fill="currentColor"/></svg></span>
-              <span className="hc-main">
-                <span className="hc-title">SPECIALS</span>
-                <span className="hc-sub" id="hubSpecSub">0 / 5 UNLOCKED</span>
-              </span>
-            </button>
-
             <button className="hub-card" data-goto="quests" type="button" style={{ position: 'relative' }}>
               <span className="hc-ico purple"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M5 3h14a1 1 0 0 1 1 1v13.2a2 2 0 0 1-3.2 1.6L12 15.6l-4.8 3.2A2 2 0 0 1 4 17.2V4a1 1 0 0 1 1-1zm3 4v2h8V7H8zm0 4v2h5v-2H8z" fill="currentColor"/></svg></span>
               <span className="hc-main">
@@ -352,24 +344,16 @@ export default function App() {
           <div className="sel-sub" style={{'marginBottom': '2px'}}>Granted automatically as you level up — permanent, no purchase needed.</div>
           <div id="abilitiesList"></div>
         </div>
-      </section>
 
-            <section id="pageSpecials" className="page" aria-label="Special skills">
-        <div className="sel-head">
-          <button className="home-btn" data-goto="home" aria-label="Back to home"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 2.5 11h2.7v9h5.3v-6h3v6h5.3v-9H21.5L12 3z" fill="currentColor"/></svg></button>
-          <div>
-            <div className="sel-title">SPECIALS</div>
-            <div className="sel-sub" id="specSub"></div>
-          </div>
-          <div className="pill mini" id="specCoins" style={{'marginLeft': 'auto'}} aria-label="Coins"></div>
-        </div>
-        <div id="specScroll">
+        <div id="specialsWrap">
+          <div className="aw-sec" style={{'marginTop': '22px'}}>SPECIAL SKILLS</div>
+          <div className="sel-sub" style={{'marginBottom': '8px'}} id="specSub">Unlocked by defeating bosses. Tap to upgrade.</div>
           <div id="specList"></div>
-          <div className="pack-note">Specials drop from bosses #10, #30, #50, #70 and #90. Every upgrade adds +25% effect and trims the cooldown by 4%.</div>
+          <div className="pack-note" style={{'marginTop': '12px'}}>Every upgrade adds +25% effect and trims the cooldown by 4%.</div>
         </div>
       </section>
 
-<section id="pageAwards" className="page" aria-label="Awards and stats">
+            <section id="pageAwards" className="page" aria-label="Awards and stats">
         <div className="sel-head">
           <button className="home-btn" data-goto="home" aria-label="Back to home"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 2.5 11h2.7v9h5.3v-6h3v6h5.3v-9h2.7L12 3z" fill="currentColor"/></svg></button>
           <div>
@@ -422,7 +406,7 @@ export default function App() {
           <div className="help-card"><div className="help-h">3 · CLIMB THE ROSTER</div><p>Beat an enemy to unlock the next — 50 of them, in 10 groups, with a boss every 10th. Clearing an odd-numbered group (1, 3, 5, …) opens its <b>TRIO GAUNTLET</b> — the group's 3 toughest back-to-back, your HP carrying over — and beating it is <b>required</b> to unlock the next group. Even-numbered groups end in a boss instead — no trio needed there. Bosses enrage under 30% HP. Beaten enemies can be re-fought any time for coins, and every defeated enemy unlocks a <b>HARD</b> rematch on the Levels screen (red button): far tougher, pays 2.5× coins and a one-time gem.</p></div>
           <div className="help-card"><div className="help-h">4 · EVERY DAY COUNTS</div><p>Defeat the <b>Slime Blob (#5)</b> to unlock the <b>daily chest</b> — a 7-day login streak that pays coins every day and gems on day 7, with amounts that grow with your progress. Defeat the <b>Mischievous Monkey (#10)</b> to unlock <b>daily quests</b>. Check <b>Awards</b> for lifetime stats and achievements (every achievement pays gems), and spend gems in the <b>Shop</b> on hand skins, coin packs and the Offline Earnings unlock.</p></div>
           <div className="help-card"><div className="help-h">5 · WATCH THE COUNTDOWN</div><p>Enemies hit back on the timer under their HP bar. Your HP refills every fight, and levelling up is also defence. If you're walled, the answer is almost always: farm the best enemy you can beat, buy what's cheapest for damage, and come back.</p></div>
-          <div className="help-card"><div className="help-h">6 · SPECIAL SKILLS</div><p>Bosses drop <b>special skills</b>: the Mischievous Monkey (#10) grants <b>Double Slap</b> — both hands at once — and #30, #50, #70 and #90 drop stronger ones: a meteor, an orbital laser, a pharaoh's curse, and finally <b>Zeus's Wrath</b>. Fire them from the specials rail in battle, and upgrade each one to Lv5 on the <b>Specials</b> screen. Equipped hand skins also grant small bonuses — check the Shop cards.</p></div>
+          <div className="help-card"><div className="help-h">6 · SPECIAL SKILLS</div><p>Bosses drop <b>special skills</b>: the Mischievous Monkey (#10) grants <b>Double Slap</b> — both hands at once — and Shogun (#30) grants <b>Meteor Strike</b>. Fire them from the specials rail in battle, and upgrade them to Lv5 inside the <b>Skills</b> tab. Equipped hand skins also grant small bonuses — check the Shop cards.</p></div>
         </div>
       </section>
 
@@ -688,14 +672,6 @@ export default function App() {
               <span className="mr-main">
                 <span className="mr-title">ATTRIBUTES</span>
                 <span className="mr-sub" id="moreAttrsSub">LEVEL 1 · CAP 5 · DPS 5</span>
-              </span>
-              <span className="mr-arrow">›</span>
-            </button>
-            <button className="more-row" data-goto="specials">
-              <span className="mr-ico yellow"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2 4.5 13.5H11L9.5 22 19 10h-6.5L13 2z" fill="currentColor"/></svg></span>
-              <span className="mr-main">
-                <span className="mr-title">SPECIALS</span>
-                <span className="mr-sub" id="moreSpecSub">0 / 5 UNLOCKED</span>
               </span>
               <span className="mr-arrow">›</span>
             </button>
