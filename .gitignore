@@ -28,9 +28,13 @@ dist-ssr
 android/.gradle
 android/build
 android/app/build
+android/app/debug
+android/app/release
 android/app/src/main/assets/public
 android/app/src/main/assets/capacitor.config.json
 *.keystore
 *.jks
+keystore.properties
+*.properties.local
 assets_backup/
 
