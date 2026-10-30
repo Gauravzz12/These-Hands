@@ -13,7 +13,7 @@ export const CONFIG = {
     "lateStart": 4,
     "lateGrowth": 2.75,
     "tailStart": 25,
-    "tailGrowth": 1.35
+    "tailGrowth": 1.55
   },
   "levelCap": 100,
   "attrs": {
@@ -167,9 +167,9 @@ export const CONFIG = {
   },
   "hard": {
     "hpMult": 6,
-    "atkMult": 1.6,
+    "atkMult": 1.8,
     "intervalMult": 0.85,
-    "coinMult": 2,
+    "coinMult": 3.5,
     "gemReward": 2
   },
   "playerHp": {
@@ -298,7 +298,7 @@ export const CONFIG = {
       "id": "comboMastery",
       "name": "Combo Mastery",
       "tier": 3,
-      "cost": 180000,
+      "cost": 1800000,
       "prereq": "onTarget",
       "fx": "Combo cap +5 stacks and +0.5% damage per stack."
     },
@@ -306,7 +306,7 @@ export const CONFIG = {
       "id": "dizzyPunisher",
       "name": "Opportunist",
       "tier": 3,
-      "cost": 260000,
+      "cost": 2600000,
       "prereq": "quickReflexes",
       "fx": "Slaps deal +35% damage to Stunned enemies."
     },
@@ -314,7 +314,7 @@ export const CONFIG = {
       "id": "clutchSurge",
       "name": "Adrenaline Rush",
       "tier": 3,
-      "cost": 380000,
+      "cost": 3800000,
       "prereq": "parry",
       "fx": "Below 35% HP: gain +20% attack speed and +25% damage."
     },
@@ -322,7 +322,7 @@ export const CONFIG = {
       "id": "coinMagnet",
       "name": "Coin Magnet",
       "tier": 3,
-      "cost": 550000,
+      "cost": 5500000,
       "prereq": "criticalSlaps",
       "fx": "+20% coins from every KO."
     },
@@ -330,7 +330,7 @@ export const CONFIG = {
       "id": "bossHunter",
       "name": "Boss Hunter",
       "tier": 3,
-      "cost": 850000,
+      "cost": 8500000,
       "prereq": "heavySlap",
       "reqBoss": 19,
       "fx": "+25% damage vs group elites and bosses."
@@ -339,7 +339,7 @@ export const CONFIG = {
       "id": "echoStrike",
       "name": "Acoustic Echo",
       "tier": 4,
-      "cost": 3200000,
+      "cost": 35000000,
       "prereq": "comboMastery",
       "fx": "Critical slaps have a 25% chance to echo for 40% bonus damage."
     },
@@ -347,7 +347,7 @@ export const CONFIG = {
       "id": "dualHand",
       "name": "Dual-Hand Technique",
       "tier": 4,
-      "cost": 5500000,
+      "cost": 65000000,
       "prereq": "dizzyPunisher",
       "fx": "+15% attack speed — both hands blur."
     },
@@ -355,7 +355,7 @@ export const CONFIG = {
       "id": "unstoppable",
       "name": "Unstoppable Hands",
       "tier": 4,
-      "cost": 9000000,
+      "cost": 110000000,
       "prereq": "clutchSurge",
       "fx": "+100 max HP and regenerate 2 HP/s during fights."
     },
@@ -363,7 +363,7 @@ export const CONFIG = {
       "id": "kineticShield",
       "name": "Kinetic Barrier",
       "tier": 4,
-      "cost": 14000000,
+      "cost": 160000000,
       "prereq": "clutchSurge",
       "reqBoss": 29,
       "fx": "Every 20 slaps builds a shield absorbing 30 enemy damage (max 90)."
@@ -372,7 +372,7 @@ export const CONFIG = {
       "id": "goldenTouch",
       "name": "Treasure Hunter",
       "tier": 4,
-      "cost": 22000000,
+      "cost": 250000000,
       "prereq": "coinMagnet",
       "fx": "Elites and Bosses drop +50% bonus coins, and defeat grants +1 extra Gem."
     },
@@ -380,7 +380,7 @@ export const CONFIG = {
       "id": "frenzy",
       "name": "Frenzy",
       "tier": 4,
-      "cost": 35000000,
+      "cost": 380000000,
       "prereq": "bossHunter",
       "fx": "Slaps charge FRENZY: 10s of +50% damage and +30% speed."
     },
@@ -388,7 +388,7 @@ export const CONFIG = {
       "id": "titanSlayer",
       "name": "Colossus Bane",
       "tier": 4,
-      "cost": 55000000,
+      "cost": 550000000,
       "prereq": "bossHunter",
       "reqBoss": 39,
       "fx": "+35% damage vs Giant, Titan, and Dragon enemies."
@@ -397,7 +397,7 @@ export const CONFIG = {
       "id": "rapidBarrage",
       "name": "Rapid Barrage",
       "tier": 5,
-      "cost": 140000000,
+      "cost": 1200000000,
       "prereq": "dualHand",
       "fx": "Every 10th slap unleashes a barrage: 3 extra hits at 50% damage."
     },
@@ -405,7 +405,7 @@ export const CONFIG = {
       "id": "aegisBulwark",
       "name": "Aegis Retaliation",
       "tier": 5,
-      "cost": 280000000,
+      "cost": 2500000000,
       "prereq": "kineticShield",
       "fx": "When Defense or Barrier mitigates damage, 50% of the blocked damage is reflected back."
     },
@@ -413,7 +413,7 @@ export const CONFIG = {
       "id": "ultimateSlap",
       "name": "Ultimate Slap",
       "tier": 5,
-      "cost": 650000000,
+      "cost": 5000000000,
       "prereq": "titanSlayer",
       "reqBoss": 49,
       "fx": "Every 15s of combat, your next slap is an ULTIMATE: 10x damage."
@@ -621,7 +621,7 @@ export const CONFIG = {
     "29": {
       "name": "KATANA OMNISLASH",
       "kind": "heavy",
-      "mult": 1.8, "stun": 1.2, "blurb": "Devastating blade strike dealing 1.8× damage and 1.2s stagger!",
+      "mult": 3.5, "stun": 2.0, "blurb": "Devastating blade strike dealing 3.5× damage and 2.0s stagger!",
       "desc": "Swift dual-blade strike leaving you staggered"
     },
     "39": {
@@ -633,13 +633,13 @@ export const CONFIG = {
     "49": {
       "name": "DRAGON HELLFIRE",
       "kind": "burn",
-      "dur": 5, "mult": 0.8, "blurb": "Caldera blaze burns you over 5s!",
+      "dur": 5, "mult": 4.5, "blurb": "Caldera blaze burns you fiercely over 5s!",
       "desc": "Fiery dragon breath scorching everything"
     }
   },
   "healBosses": {
-    "39": {"name": "ETERNAL RENEWAL", "pct": 0.1, "every": 11, "max": 3, "blurb": "The tomb restores him — heals 10% of his HP, up to 3 times per fight."},
-    "49": {"name": "DRAGON RENEWAL", "pct": 0.08, "every": 13, "max": 3, "blurb": "Ancient blood knits shut — heals 8% of his HP, up to 3 times per fight."}
+    "39": {"name": "ETERNAL RENEWAL", "pct": 0.15, "every": 7, "max": 3, "blurb": "The tomb restores him — heals 15% of his HP, up to 3 times per fight."},
+    "49": {"name": "DRAGON RENEWAL", "pct": 0.12, "every": 8, "max": 3, "blurb": "Ancient blood knits shut — heals 12% of his HP, up to 3 times per fight."}
   },
   "gauntlet": {"bonusMult": 2, "gemFirst": 1},
   "weakSpot": {"mult": 2, "dur": 1.4, "durHard": 1.1, "firstAt": 2.5, "everyMin": 6, "everyMax": 9, "frenzyGain": 10, "capBase": 3, "capPerLuck": 5, "capMax": 6, "luckScale": 0.06},
