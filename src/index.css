@@ -317,8 +317,122 @@ background: var(--gold); color: #2b1c10; white-space: nowrap; margin-top: 2px;
   flex: none;
   filter: drop-shadow(0 1px 1.5px rgba(0, 0, 0, 0.65));
 }
-#perksHead { font-weight: 800; font-size: 12.5px; color: var(--ink-soft); letter-spacing: .03em; margin: 4px 2px 0; }
-#perksIcons { display: flex; gap: 5px; flex-wrap: wrap; margin: 2px 2px 0; }
+/* ─── Level Perks & Abilities Collapsible Accordion ─── */
+.perks-accordion {
+  margin: 16px 2px 10px;
+  border: 2px solid var(--chrome-edge);
+  border-radius: 14px;
+  background: var(--chrome);
+  box-shadow: 0 2px 4px rgba(43, 28, 16, 0.06);
+  transition: border-color .2s ease;
+  overflow: hidden;
+}
+
+.perks-accordion.open {
+  border-color: rgba(185, 126, 8, 0.55);
+}
+
+.perks-toggle {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 12px 14px;
+  background: rgba(59, 42, 20, 0.04);
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  transition: background .15s ease;
+}
+
+.perks-toggle:hover, .perks-toggle:active {
+  background: rgba(59, 42, 20, 0.08);
+}
+
+.perks-toggle-left {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+  flex: 1;
+}
+
+.perks-toggle-title {
+  font-family: "Bungee", "Nunito", sans-serif;
+  font-size: 13.5px;
+  color: var(--ink);
+  letter-spacing: .03em;
+  line-height: 1.2;
+}
+
+.perks-toggle-sub {
+  font-family: "Nunito", sans-serif;
+  font-weight: 800;
+  font-size: 11px;
+  color: var(--ink-soft);
+  letter-spacing: .04em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.perks-toggle-right {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex: none;
+}
+
+.perks-toggle-hint {
+  font-family: "Nunito", sans-serif;
+  font-weight: 800;
+  font-size: 10.5px;
+  letter-spacing: .06em;
+  color: var(--gold-dark);
+  background: rgba(242, 176, 30, 0.15);
+  border: 1px solid rgba(242, 176, 30, 0.35);
+  border-radius: 6px;
+  padding: 3px 8px;
+  text-transform: uppercase;
+}
+
+.perks-chevron {
+  width: 18px;
+  height: 18px;
+  flex: none;
+  color: var(--ink);
+  transition: transform .22s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.perks-accordion.open .perks-chevron {
+  transform: rotate(180deg);
+}
+
+.perks-collapse {
+  display: none;
+  padding: 10px 12px 14px;
+  border-top: 1px solid rgba(59, 42, 20, 0.09);
+}
+
+.perks-accordion.open .perks-collapse {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+#pageSkills #abilitiesWrap.perks-accordion {
+  margin: 16px 12px 14px;
+  padding: 0;
+}
+#pageSkills #abilitiesWrap .perks-collapse {
+  padding: 10px 12px 14px;
+}
+
+#perksHead { font-weight: 800; font-size: 12.5px; color: var(--ink-soft); letter-spacing: .03em; margin: 4px 2px 2px; }
+#perksIcons { display: flex; gap: 5px; flex-wrap: wrap; margin: 4px 2px 6px; }
 #perksIcons:empty { display: none; }
 #perksIcons img { width: 30px; height: 30px; image-rendering: pixelated; border-radius: 7px; }
 #perksList { display: flex; flex-direction: column; gap: 6px; margin-top: 4px; }
