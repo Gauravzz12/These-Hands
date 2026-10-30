@@ -309,15 +309,29 @@ export default function App() {
             <div className="atop-line" id="attrsDps"></div>
             <button id="attrsLevelUpBtn"></button>
           </div>
-          <div id="attrsList"></div>
-          <div id="perksAccordion" className="perks-accordion">
-            <button type="button" id="perksToggle" className="perks-toggle" aria-expanded="false" aria-controls="perksCollapse">
+          <div id="pageAttrsAccordion" className="perks-accordion">
+            <button type="button" id="pageAttrsToggle" className="perks-toggle" aria-expanded="false" aria-controls="pageAttrsCollapse">
+              <div className="perks-toggle-left">
+                <span className="perks-toggle-title">ATTRIBUTES (12)</span>
+                <span className="perks-toggle-sub" id="pageAttrsToggleSub">CAP LV 5 · TAP TO UPGRADE STATS</span>
+              </div>
+              <div className="perks-toggle-right">
+                <span className="perks-toggle-hint" id="pageAttrsToggleHint">SHOW</span>
+                <svg viewBox="0 0 24 24" aria-hidden="true" className="perks-chevron"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+              </div>
+            </button>
+            <div id="pageAttrsCollapse" className="perks-collapse">
+              <div id="attrsList"></div>
+            </div>
+          </div>
+          <div id="perksAccordion" className="perks-accordion open">
+            <button type="button" id="perksToggle" className="perks-toggle" aria-expanded="true" aria-controls="perksCollapse">
               <div className="perks-toggle-left">
                 <span className="perks-toggle-title">LEVEL PERKS &amp; ABILITIES</span>
                 <span className="perks-toggle-sub" id="perksToggleSub">LV 2 TO 20+ · 0/20 ACTIVE</span>
               </div>
               <div className="perks-toggle-right">
-                <span className="perks-toggle-hint" id="perksToggleHint">SHOW</span>
+                <span className="perks-toggle-hint" id="perksToggleHint">HIDE</span>
                 <svg viewBox="0 0 24 24" aria-hidden="true" className="perks-chevron"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
               </div>
             </button>
@@ -354,21 +368,10 @@ export default function App() {
         <div id="skillsScroll">
           <div id="skillTreeWrap"></div>
           <div id="skillDetail"></div>
-          <div id="abilitiesWrap" className="perks-accordion">
-            <button type="button" id="abilitiesToggle" className="perks-toggle" aria-expanded="false" aria-controls="abilitiesCollapse">
-              <div className="perks-toggle-left">
-                <span className="perks-toggle-title">LEVEL ABILITIES</span>
-                <span className="perks-toggle-sub" id="abilitiesToggleSub">GRANTED ON LEVEL UP · NO PURCHASE NEEDED</span>
-              </div>
-              <div className="perks-toggle-right">
-                <span className="perks-toggle-hint" id="abilitiesToggleHint">SHOW</span>
-                <svg viewBox="0 0 24 24" aria-hidden="true" className="perks-chevron"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
-              </div>
-            </button>
-            <div id="abilitiesCollapse" className="perks-collapse">
-              <div className="sel-sub" style={{'margin': '4px 2px 8px'}}>Granted automatically as you level up — permanent, no purchase needed.</div>
-              <div id="abilitiesList"></div>
-            </div>
+          <div id="abilitiesWrap">
+            <div className="aw-sec">LEVEL ABILITIES</div>
+            <div className="sel-sub" style={{'marginBottom': '2px'}}>Granted automatically as you level up — permanent, no purchase needed.</div>
+            <div id="abilitiesList"></div>
           </div>
 
           <div id="specialsWrap">
