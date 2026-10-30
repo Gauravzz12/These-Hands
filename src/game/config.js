@@ -194,10 +194,10 @@ export const CONFIG = {
     "bossFrac": 0.5
   },
   "slap": {
-    "windup": 0.26,
-    "strikeEnd": 0.46,
-    "holdEnd": 0.56,
-    "recoverEnd": 0.86
+    "windup": 0.22,
+    "strikeEnd": 0.3,
+    "holdEnd": 0.38,
+    "recoverEnd": 0.68
   },
   "feel": {
     "dizzyBelow": 0.5,
