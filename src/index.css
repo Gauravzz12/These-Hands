@@ -882,7 +882,7 @@ min-height: 280px;
 margin-top: 10px;
 border: 2px solid var(--chrome-edge);
 border-radius: 16px;
-background: #a8c6d8 url("/stage-bg/g0.jpg") center / cover no-repeat;
+background: #a8c6d8 url("/stage-bg/g0.webp") center / cover no-repeat;
 overflow: hidden;
 }
 .menu-stage .floor, .menu-stage .rug { display: none; }
