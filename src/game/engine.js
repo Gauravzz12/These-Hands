@@ -252,9 +252,53 @@ export function exportSave(save) {
 }
 
 export function importSave(code) {
+  if (typeof code !== 'string' || !code.trim() || code.length > 65536) return null;
   try {
     const json = atob(code.trim());
     const parsed = JSON.parse(json);
-    return { ...createInitialSave(), ...parsed };
+    if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed)) return null;
+
+    const base = createInitialSave();
+    const clean = Object.create(null);
+
+    const safeNum = (v, min, max, dflt) =>
+      typeof v === 'number' && Number.isFinite(v) ? Math.max(min, Math.min(max, Math.floor(v))) : dflt;
+
+    clean.coins = safeNum(parsed.coins, 0, 1e15, base.coins);
+    clean.kills = safeNum(parsed.kills, 0, 1000000, base.kills);
+    clean.playerLevel = safeNum(parsed.playerLevel, 1, 100, base.playerLevel);
+    clean.highestClearedEnemy = safeNum(parsed.highestClearedEnemy, 0, 1000, base.highestClearedEnemy);
+    clean.currentEnemyId = safeNum(parsed.currentEnemyId, 0, 1000, base.currentEnemyId);
+    clean.lastSeen = safeNum(parsed.lastSeen, 0, Date.now() + 86400000, Date.now());
+    clean.offlineEarningsUnlocked = Boolean(parsed.offlineEarningsUnlocked);
+
+    clean.attrs = { ...base.attrs };
+    if (parsed.attrs && typeof parsed.attrs === 'object' && !Array.isArray(parsed.attrs)) {
+      for (const k of Object.keys(base.attrs)) {
+        if (typeof parsed.attrs[k] === 'number' && Number.isFinite(parsed.attrs[k])) {
+          clean.attrs[k] = Math.max(0, Math.min(100, Math.floor(parsed.attrs[k])));
+        }
+      }
+    }
+
+    clean.skills = { ...base.skills };
+    if (parsed.skills && typeof parsed.skills === 'object' && !Array.isArray(parsed.skills)) {
+      for (const k of Object.keys(base.skills)) {
+        if (typeof parsed.skills[k] === 'boolean') {
+          clean.skills[k] = parsed.skills[k];
+        }
+      }
+    }
+
+    clean.stats = { ...base.stats };
+    if (parsed.stats && typeof parsed.stats === 'object' && !Array.isArray(parsed.stats)) {
+      for (const k of Object.keys(base.stats)) {
+        if (typeof parsed.stats[k] === 'number' && Number.isFinite(parsed.stats[k])) {
+          clean.stats[k] = Math.max(0, Math.floor(parsed.stats[k]));
+        }
+      }
+    }
+
+    return { ...base, ...clean };
   } catch { return null; }
 }
