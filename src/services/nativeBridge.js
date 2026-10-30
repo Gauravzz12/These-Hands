@@ -7,6 +7,8 @@ import { Purchases } from '@revenuecat/purchases-capacitor';
 
 // Google AdMob Rewarded Ad Unit ID
 const REWARDED_AD_UNIT_ID = 'ca-app-pub-4838625298188198/2176399244';
+// Official Google AdMob Test Rewarded Ad Unit ID (ensures ad playback during testing / account verification)
+const TEST_REWARDED_AD_UNIT_ID = 'ca-app-pub-3940256099942544/5224354917';
 
 export const NativeBridge = {
   isNative: Capacitor.isNativePlatform(),
@@ -60,6 +62,8 @@ export const NativeBridge = {
       // 3. Initialize AdMob
       await AdMob.initialize({
         requestTrackingAuthorization: true,
+        testingDevices: ['EMULATOR'],
+        initializeForTesting: true,
       });
       this.admobInitialized = true;
 
@@ -91,17 +95,28 @@ export const NativeBridge = {
   async prepareRewardedAd() {
     if (!this.isNative || !this.admobInitialized) return;
     try {
+      console.log('AdMob: Requesting rewarded ad with live unit ID:', REWARDED_AD_UNIT_ID);
       await AdMob.prepareRewardVideoAd({
         adId: REWARDED_AD_UNIT_ID,
       });
       this.rewardedPrepared = true;
+      console.log('AdMob: Live rewarded ad prepared successfully.');
     } catch (e) {
-      console.warn('Error preparing rewarded ad:', e);
-      this.rewardedPrepared = false;
+      console.warn('AdMob: Live unit not filled (account pending verification or emulator test), falling back to test unit:', e);
+      try {
+        await AdMob.prepareRewardVideoAd({
+          adId: TEST_REWARDED_AD_UNIT_ID,
+        });
+        this.rewardedPrepared = true;
+        console.log('AdMob: Test rewarded ad prepared successfully.');
+      } catch (err2) {
+        console.error('AdMob: Failed to load both live and test ad units:', err2);
+        this.rewardedPrepared = false;
+      }
     }
   },
 
-  async showRewardedAd(onComplete, placement = 'default') {
+  async showRewardedAd(onComplete, _placement = 'default') {
     if (!this.isNative) {
       // Fallback to web modal simulator
       return false; // Handled by web fallback
@@ -110,12 +125,17 @@ export const NativeBridge = {
     try {
       this.activeRewardCallback = onComplete;
       if (!this.rewardedPrepared) {
+        console.log('AdMob: Ad not yet prepared, attempting prepare now...');
         await this.prepareRewardedAd();
+      }
+      if (!this.rewardedPrepared) {
+        console.warn('AdMob: Ad could not be prepared.');
+        return false;
       }
       await AdMob.showRewardVideoAd();
       return true;
     } catch (err) {
-      console.warn('Native AdMob show error, falling back to simulation:', err);
+      console.warn('Native AdMob show error:', err);
       return false;
     }
   },

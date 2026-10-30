@@ -3458,3 +3458,8 @@ margin-top: 7px;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
 }
+
+.booster-circle-btn:disabled {
+  cursor: default;
+  pointer-events: none;
+}

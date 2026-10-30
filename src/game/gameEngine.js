@@ -765,12 +765,19 @@ let adTimeout = null;
 
 function playRewardedAd(onComplete, placement) {
   if (typeof window !== "undefined" && window.__nativeBridge && window.__nativeBridge.isNative) {
+    toast("📺 Loading AdMob Video...", 2000);
     window.__nativeBridge.showRewardedAd((success) => {
       if (onComplete) onComplete(success);
     }, placement).then((shown) => {
-      if (!shown) showWebAdModal(onComplete, placement);
-    }).catch(() => {
-      showWebAdModal(onComplete, placement);
+      if (!shown) {
+        toast("Ad is preparing... please try again in a few seconds.", 3000);
+        if (window.__nativeBridge.prepareRewardedAd) {
+          window.__nativeBridge.prepareRewardedAd();
+        }
+      }
+    }).catch((err) => {
+      console.warn("Native AdMob error:", err);
+      toast("Unable to play ad right now. Check connection.", 3000);
     });
     return;
   }
@@ -853,11 +860,20 @@ function finishRewardedAd() {
 }
 
 function activateCoinBoost() {
+  const now = Date.now();
+  if (G.adCoinBoostUntil && G.adCoinBoostUntil > now) {
+    const leftSec = Math.ceil((G.adCoinBoostUntil - now) / 1000);
+    const m = Math.floor(leftSec / 60);
+    const s = leftSec % 60;
+    toast("⏳ 2X COIN BOOST IS ALREADY ACTIVE! (" + m + ":" + (s < 10 ? "0" : "") + s + " LEFT)", 2500);
+    return;
+  }
   try { Sound.tap && Sound.tap(); } catch(e){}
   playRewardedAd((success) => {
     if (!success) return;
-    const now = Date.now();
-    G.adCoinBoostUntil = Math.max(now, G.adCoinBoostUntil || 0) + 10 * 60 * 1000;
+    const curNow = Date.now();
+    // Strictly set 10 minutes from now — NO stacking allowed
+    G.adCoinBoostUntil = curNow + 10 * 60 * 1000;
     Save.store();
     updateAdBoostersUi();
     toast("💰 2X COIN BOOST ACTIVE FOR 10 MINUTES!", 3200);
@@ -866,11 +882,20 @@ function activateCoinBoost() {
 }
 
 function activateDmgBoost() {
+  const now = Date.now();
+  if (G.adDmgBoostUntil && G.adDmgBoostUntil > now) {
+    const leftSec = Math.ceil((G.adDmgBoostUntil - now) / 1000);
+    const m = Math.floor(leftSec / 60);
+    const s = leftSec % 60;
+    toast("⏳ 2X DAMAGE BOOST IS ALREADY ACTIVE! (" + m + ":" + (s < 10 ? "0" : "") + s + " LEFT)", 2500);
+    return;
+  }
   try { Sound.tap && Sound.tap(); } catch(e){}
   playRewardedAd((success) => {
     if (!success) return;
-    const now = Date.now();
-    G.adDmgBoostUntil = Math.max(now, G.adDmgBoostUntil || 0) + 10 * 60 * 1000;
+    const curNow = Date.now();
+    // Strictly set 10 minutes from now — NO stacking allowed
+    G.adDmgBoostUntil = curNow + 10 * 60 * 1000;
     Save.store();
     updateAdBoostersUi();
     toast("💥 2X DAMAGE BOOST ACTIVE FOR 10 MINUTES!", 3200);
@@ -900,6 +925,7 @@ function updateAdBoostersUi() {
   if (coinBtn && coinRing && coinTimer) {
     if (coinActive) {
       coinBtn.classList.add("active");
+      coinBtn.disabled = true;
       coinTimer.textContent = fmtMinSec(coinLeft);
       const frac = Math.min(1, coinLeft / (10 * 60 * 1000));
       coinRing.style.strokeDasharray = CIRCLE_CIRCUMFERENCE;
@@ -908,6 +934,7 @@ function updateAdBoostersUi() {
       if (badge) badge.textContent = "ON";
     } else {
       coinBtn.classList.remove("active");
+      coinBtn.disabled = false;
       coinTimer.textContent = "WATCH AD";
       coinRing.style.strokeDasharray = CIRCLE_CIRCUMFERENCE;
       coinRing.style.strokeDashoffset = CIRCLE_CIRCUMFERENCE;
@@ -923,6 +950,7 @@ function updateAdBoostersUi() {
   if (dmgBtn && dmgRing && dmgTimer) {
     if (dmgActive) {
       dmgBtn.classList.add("active");
+      dmgBtn.disabled = true;
       dmgTimer.textContent = fmtMinSec(dmgLeft);
       const frac = Math.min(1, dmgLeft / (10 * 60 * 1000));
       dmgRing.style.strokeDasharray = CIRCLE_CIRCUMFERENCE;
@@ -931,6 +959,7 @@ function updateAdBoostersUi() {
       if (badge) badge.textContent = "ON";
     } else {
       dmgBtn.classList.remove("active");
+      dmgBtn.disabled = false;
       dmgTimer.textContent = "WATCH AD";
       dmgRing.style.strokeDasharray = CIRCLE_CIRCUMFERENCE;
       dmgRing.style.strokeDashoffset = CIRCLE_CIRCUMFERENCE;
@@ -1048,7 +1077,7 @@ $("startMenu").addEventListener("click", (e) => {
   if (e.target && e.target.id === "menuMusicBtn") return;
   $("playBtn").click();
 });
-$("playBtn").addEventListener("click",()=>{const t0=performance.now();hideHangToast();try{Sound.unlock();if(Sound.ctx&&Sound.ctx.state!=="running")Sound.ctx.resume()}catch(e){}if(hubReadyState==="ready"){enterHub(t0);return}ensureHubReady().then(()=>{enterHub(t0)}).catch(()=>{enterHub(t0)})});function fmtAway(seconds){const h=Math.floor(seconds/3600),m=Math.floor(seconds%3600/60);if(h>0)return h+"h "+m+"m";if(m>0)return m+"m";return Math.floor(seconds)+"s"}function maybeShowAwayCard(){const p=G.pendingOffline;if(!p||!(p.coins>0)||G.menuOpen)return;awayTextEl.textContent="Your hands kept slapping for "+fmtAway(p.away)+" while you were gone (25% efficiency, up to 8 hours). Here's what they earned:";awayAmtEl.innerHTML=COIN_SVG+" +"+fmtNum(p.coins);awayCardEl.classList.add("open")}$("awayClaim").addEventListener("click",()=>{const p=G.pendingOffline;if(!p){awayCardEl.classList.remove("open");return}if(AdsManager.canShow("rewarded_offline_double")){AdsManager.showRewarded("rewarded_offline_double")}G.pendingOffline=null;G.totalCoins+=p.coins;G.stats.coinsEarned+=p.coins;G.stats.offlineCoins=(G.stats.offlineCoins||0)+p.coins;G.stats.offlineClaims=(G.stats.offlineClaims||0)+1;awayCardEl.classList.remove("open");syncCoinsToTruth();renderHub();Sound.win();checkAchievements();Save.store()});const stageWrap=$("stageWrap"),canvas=$("game"),ctx=canvas.getContext("2d");canvas.addEventListener("pointerdown",(ev)=>{if(G.tab!=="battle"||G.menuOpen||G.phase!=="fighting"||!G.weak||!G.weak.active)return;const r=canvas.getBoundingClientRect();const x=ev.clientX-r.left,y=ev.clientY-r.top;const rad=Math.max(48,enemyGeom().h*0.17);const dx=x-G.weak.x,dy=y-G.weak.y;if(dx*dx+dy*dy<=rad*rad)precisionSlap()});let W=0,H=0,DPR=1;function resize(){DPR=Math.min(window.devicePixelRatio||1,2);W=stageWrap.clientWidth;H=stageWrap.clientHeight;canvas.width=Math.round(W*DPR);canvas.height=Math.round(H*DPR)}window.addEventListener("resize",resize);function coinTarget(){const r=canvas.getBoundingClientRect(),p=coinPillEl.getBoundingClientRect();return{x:p.left+p.width/2-r.left,y:p.top+p.height/2-r.top}}const STAGE_FLOOR=[0.80,0.85,0.68,0.83,0.85,0.82,0.90,0.86,0.86,0.84,0.82,0.88,0.88,0.80,0.88,0.80,0.88,0.88,0.90,0.82];function enemyGeom(){const spr=G.enemy.spr;const sc=G.enemy.scale||1.0;let h=Math.min(H*0.50*sc,H*0.72);let w=h*(spr.cols/spr.rows);const maxW=Math.max(120,W-60);if(w>maxW){h*=maxW/w;w=maxW}return{spr,w,h,cx:W/2,feetY:H*(STAGE_FLOOR[G.enemy.group]||0.78),px:h/spr.rows}}function slapBounds(){const I=cycleInterval(),S=CONFIG.slap;return{I,windup:S.windup*I,strikeEnd:S.strikeEnd*I,holdEnd:S.holdEnd*I,recoverEnd:S.recoverEnd*I}}function spawnSkinBurst(x,y,tag,procId){const id=G.skin;if(id==="classic"||!skinDef().power)return;const big=!!procId||tag==="crit"||tag==="heavy"||tag==="ultimate";const n=procId?14:big?9:6;const cols={stone:["#8d8578","#6e675c","#a89e8c","#575046"],void:["#7c3aed","#a78bfa","#4c1d95","#e9d5ff"],venom:["#43b04c","#7ed957","#1d6b2a","#c8f169"],flaming:["#ef7d1a","#d63c30","#ffcf3f","#b3540a"],dragon:["#d63c30","#ef7d1a","#8f1f16","#ffcf3f"]}[id];if(!cols)return;for(let i=0;i<n;i++){const a=Math.random()*Math.PI*2,sp=(procId?150:90)+Math.random()*(procId?190:130);G.bursts.push({x,y,vx:Math.cos(a)*sp,vy:Math.sin(a)*sp-(id==="flaming"?120:40),grav:id==="stone"?950:id==="void"?-160:id==="venom"?560:id==="flaming"?-260:700,size:(procId?7:5)+Math.random()*6,col:cols[i%cols.length],shape:id==="void"?"shard":"rect",t:0,life:0.45+Math.random()*0.25,rot:Math.random()*Math.PI,vr:(Math.random()*2-1)*9})}if(id==="dragon"){const m=procId?5:3;for(let i=0;i<m;i++)G.claws.push({x:x+(i-(m-1)/2)*13,y:y+(i%2?5:-5),t:0,life:procId?0.4:0.28,rot:(Math.random()*0.3-0.15)+(i%2?0.25:-0.25),big:!!procId})}if(id==="venom")G.venomT=Math.max(G.venomT,0.2);if(id==="void")G.voidT=Math.max(G.voidT,0.2)}
+$("playBtn").addEventListener("click",()=>{const t0=performance.now();hideHangToast();try{Sound.unlock();if(Sound.ctx&&Sound.ctx.state!=="running")Sound.ctx.resume()}catch(e){}if(hubReadyState==="ready"){enterHub(t0);return}ensureHubReady().then(()=>{enterHub(t0)}).catch(()=>{enterHub(t0)})});function fmtAway(seconds){const h=Math.floor(seconds/3600),m=Math.floor(seconds%3600/60);if(h>0)return h+"h "+m+"m";if(m>0)return m+"m";return Math.floor(seconds)+"s"}function maybeShowAwayCard(){const p=G.pendingOffline;if(!p||!(p.coins>0)||G.menuOpen)return;awayTextEl.textContent="Your hands kept slapping for "+fmtAway(p.away)+" while you were gone (25% efficiency, up to 8 hours). Here's what they earned:";awayAmtEl.innerHTML=COIN_SVG+" +"+fmtNum(p.coins);awayCardEl.classList.add("open")}$("awayClaim").addEventListener("click",()=>{const p=G.pendingOffline;if(!p){awayCardEl.classList.remove("open");return}G.pendingOffline=null;G.totalCoins+=p.coins;G.stats.coinsEarned+=p.coins;G.stats.offlineCoins=(G.stats.offlineCoins||0)+p.coins;G.stats.offlineClaims=(G.stats.offlineClaims||0)+1;awayCardEl.classList.remove("open");syncCoinsToTruth();renderHub();Sound.win();checkAchievements();Save.store()});const stageWrap=$("stageWrap"),canvas=$("game"),ctx=canvas.getContext("2d");canvas.addEventListener("pointerdown",(ev)=>{if(G.tab!=="battle"||G.menuOpen||G.phase!=="fighting"||!G.weak||!G.weak.active)return;const r=canvas.getBoundingClientRect();const x=ev.clientX-r.left,y=ev.clientY-r.top;const rad=Math.max(48,enemyGeom().h*0.17);const dx=x-G.weak.x,dy=y-G.weak.y;if(dx*dx+dy*dy<=rad*rad)precisionSlap()});let W=0,H=0,DPR=1;function resize(){DPR=Math.min(window.devicePixelRatio||1,2);W=stageWrap.clientWidth;H=stageWrap.clientHeight;canvas.width=Math.round(W*DPR);canvas.height=Math.round(H*DPR)}window.addEventListener("resize",resize);function coinTarget(){const r=canvas.getBoundingClientRect(),p=coinPillEl.getBoundingClientRect();return{x:p.left+p.width/2-r.left,y:p.top+p.height/2-r.top}}const STAGE_FLOOR=[0.80,0.85,0.68,0.83,0.85,0.82,0.90,0.86,0.86,0.84,0.82,0.88,0.88,0.80,0.88,0.80,0.88,0.88,0.90,0.82];function enemyGeom(){const spr=G.enemy.spr;const sc=G.enemy.scale||1.0;let h=Math.min(H*0.50*sc,H*0.72);let w=h*(spr.cols/spr.rows);const maxW=Math.max(120,W-60);if(w>maxW){h*=maxW/w;w=maxW}return{spr,w,h,cx:W/2,feetY:H*(STAGE_FLOOR[G.enemy.group]||0.78),px:h/spr.rows}}function slapBounds(){const I=cycleInterval(),S=CONFIG.slap;return{I,windup:S.windup*I,strikeEnd:S.strikeEnd*I,holdEnd:S.holdEnd*I,recoverEnd:S.recoverEnd*I}}function spawnSkinBurst(x,y,tag,procId){const id=G.skin;if(id==="classic"||!skinDef().power)return;const big=!!procId||tag==="crit"||tag==="heavy"||tag==="ultimate";const n=procId?14:big?9:6;const cols={stone:["#8d8578","#6e675c","#a89e8c","#575046"],void:["#7c3aed","#a78bfa","#4c1d95","#e9d5ff"],venom:["#43b04c","#7ed957","#1d6b2a","#c8f169"],flaming:["#ef7d1a","#d63c30","#ffcf3f","#b3540a"],dragon:["#d63c30","#ef7d1a","#8f1f16","#ffcf3f"]}[id];if(!cols)return;for(let i=0;i<n;i++){const a=Math.random()*Math.PI*2,sp=(procId?150:90)+Math.random()*(procId?190:130);G.bursts.push({x,y,vx:Math.cos(a)*sp,vy:Math.sin(a)*sp-(id==="flaming"?120:40),grav:id==="stone"?950:id==="void"?-160:id==="venom"?560:id==="flaming"?-260:700,size:(procId?7:5)+Math.random()*6,col:cols[i%cols.length],shape:id==="void"?"shard":"rect",t:0,life:0.45+Math.random()*0.25,rot:Math.random()*Math.PI,vr:(Math.random()*2-1)*9})}if(id==="dragon"){const m=procId?5:3;for(let i=0;i<m;i++)G.claws.push({x:x+(i-(m-1)/2)*13,y:y+(i%2?5:-5),t:0,life:procId?0.4:0.28,rot:(Math.random()*0.3-0.15)+(i%2?0.25:-0.25),big:!!procId})}if(id==="venom")G.venomT=Math.max(G.venomT,0.2);if(id==="void")G.voidT=Math.max(G.voidT,0.2)}
 function applyHit(kind){const e=G.enemy;if(!e||e.dead)return;const st=stats();const hitSide=kind==="barrage"?(Math.random()<0.5?"L":"R"):(hasSkill("secondHand")?G.slapHand:"R");const isPrimary=kind!=="barrage"&&kind!=="special";const pity=isPrimary&&(G.missStreak||0)>=2;if(isPrimary&&!pity&&PFX.accT>0&&Math.random()<0.3){G.slapCount+=1;G.missStreak=(G.missStreak||0)+1;if(!hasSkill("onTarget")){G.comboStack=0;updateComboTag()}if(G.frenzyT<=0&&hasSkill("frenzy")){G.frenzyMeter=Math.min(100,G.frenzyMeter+50*cycleInterval()/CONFIG.frenzy.cadence);updateFrenzyBar()}const geoB=enemyGeom();G.dmgNums.push({x:geoB.cx+(Math.random()*24-12),y:geoB.feetY-geoB.h*0.74,vy:-44,t:0,life:0.8,text:"MISS",tag:"miss",rot:0});Sound.whiff();return}if(!pity&&Math.random()>=st.hitChance){if(isPrimary){G.slapCount+=1;G.missStreak=(G.missStreak||0)+1;}if(!hasSkill("onTarget")){G.comboStack=0;updateComboTag()}const geoM=enemyGeom();G.dmgNums.push({x:geoM.cx+(Math.random()*24-12),y:geoM.feetY-geoM.h*0.74,vy:-44,t:0,life:0.8,text:"MISS",tag:"miss",rot:0});Sound.whiff();return}if(isPrimary)G.missStreak=0;const r=DamageCalculator.roll(kind);let damage=r.damage;if(isPrimary&&e.bsShield>0){damage=Math.max(1,Math.round(damage*0.5));e.bsShield-=1;updateFxChips()}let tag = r.tag,F=CONFIG.feel,sf=CONFIG.skillFx;let lucky=false;if(isPrimary&&Math.random()<st.luckChance){lucky=true;damage=Math.max(1,Math.round(damage*CONFIG.fx.luckDmgMult));G.stats.luckyHits=(G.stats.luckyHits||0)+1}if(isPrimary){
     if((G.attrs.vampirism||0)>0 && G.slapCount % 4 === 0) { const hv=(G.attrs.vampirism||0)*(CONFIG.fx.vampPerLevel||1); if(hv>0&&G.playerHp<playerMaxHp()){ G.playerHp=Math.min(playerMaxHp(),G.playerHp+hv); G.heals.push({x:W*0.24,y:H*0.82,vy:-42,t:0,life:0.9,text:"+"+hv+" HP"}); updatePlayerBar(); } }
   G.slapCount+=1;
@@ -1169,19 +1198,30 @@ const endAdDoubleBtn = $("endAdDoubleBtn");
 if (endAdDoubleBtn) {
   endAdDoubleBtn.addEventListener("click", () => {
     try { Sound.unlock && Sound.unlock(); } catch(e){}
-    if (G.adRewardClaimed) return;
+    if (G.adRewardClaimed) {
+      toast("Reward already claimed for this battle!", 2000);
+      return;
+    }
+    // Lock immediately upon click to prevent double-tap / reward stacking
+    G.adRewardClaimed = true;
+    endAdDoubleBtn.disabled = true;
+    endAdDoubleBtn.classList.add("claimed");
+
     const bonus = G.pendingAdDoubleCoins || 100;
     playRewardedAd((success) => {
-      if (!success) return;
-      G.adRewardClaimed = true;
+      if (!success) {
+        // Unlock if ad failed/cancelled so player can try again
+        G.adRewardClaimed = false;
+        endAdDoubleBtn.disabled = false;
+        endAdDoubleBtn.classList.remove("claimed");
+        return;
+      }
       G.totalCoins += bonus;
       G.shownCoins = G.totalCoins;
       if (G.stats) G.stats.coinsEarned = (G.stats.coinsEarned || 0) + bonus;
       if (typeof coinCountEl !== "undefined" && coinCountEl) coinCountEl.textContent = fmtNum(G.shownCoins);
       Save.store();
 
-      endAdDoubleBtn.classList.add("claimed");
-      endAdDoubleBtn.disabled = true;
       const dText = $("endAdDoubleText");
       const dBonus = $("endAdDoubleBonus");
       if (dText) dText.textContent = "DOUBLED! REWARD APPLIED";
