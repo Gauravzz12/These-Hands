@@ -1,6 +1,6 @@
 {
   "appId": "com.thesehands.game",
-  "appName": "These Hands",
+  "appName": "Idle-Slapper",
   "webDir": "dist",
   "server": {
     "androidScheme": "https"
@@ -15,7 +15,8 @@
     },
     "StatusBar": {
       "style": "DARK",
-      "backgroundColor": "#1a0f08"
+      "backgroundColor": "#1a0f08",
+      "overlaysWebView": true
     }
   }
 }

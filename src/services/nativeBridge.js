@@ -24,10 +24,23 @@ export const NativeBridge = {
     }
 
     try {
-      // 1. Status Bar & Splash Screen
-      await StatusBar.setStyle({ style: Style.Dark });
-      await StatusBar.setBackgroundColor({ color: '#1a0f08' });
+      // 1. Status Bar & Splash Screen (True Fullscreen)
+      try {
+        await StatusBar.hide();
+      } catch (e) {
+        await StatusBar.setStyle({ style: Style.Dark }).catch(() => {});
+      }
       await SplashScreen.hide();
+
+      // App state change (Mute audio on minimize / background)
+      App.addListener('appStateChange', ({ isActive }) => {
+        if (!isActive) {
+          if (typeof window.__handleAppHide === 'function') window.__handleAppHide();
+        } else {
+          if (typeof window.__handleAppShow === 'function') window.__handleAppShow();
+          StatusBar.hide().catch(() => {});
+        }
+      });
 
       // 2. Hardware Back Button Handling
       App.addListener('backButton', () => {

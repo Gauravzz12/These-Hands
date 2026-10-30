@@ -7,9 +7,9 @@
          game opens. The game fills in real progress (code + save loaded,
          art decoded, first frame painted) and only then fades this out
          to reveal the start screen. */
-      #bootShell{position:fixed;inset:0;z-index:999;background:#fff8ea;color:#2b1c10;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:13px;padding:24px}
+      #bootShell{position:fixed;inset:0;z-index:9999;background:#1a0f08;color:#fff8ea;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:24px}
       
-      #bootShell.bs-hide{opacity:0;pointer-events:none;transition:opacity .18s ease-out}
+      #bootShell.bs-hide{opacity:0;pointer-events:none;transition:opacity .35s ease-out}
       #bootShell .bs-logo{font-family:"Bungee",system-ui,sans-serif;font-size:46px;line-height:.95;text-align:center;letter-spacing:.01em}
       #bootShell .bs-logo span{color:#d63c30}
       #bootShell .bs-hand{width:92px;height:auto;animation:bsSlap .9s ease-in-out infinite;transform-origin:50% 85%}
@@ -421,6 +421,30 @@ color: var(--ink);
 border: 2px solid var(--chrome-edge);
 }
 .icon-btn svg { width: 21px; height: 21px; }
+.auto-advance-btn {
+  padding: 8px 12px;
+  font-family: "Bungee", system-ui, sans-serif;
+  font-size: 11.5px;
+  letter-spacing: 0.05em;
+  background: var(--chrome, #fff8ea);
+  color: var(--ink, #2b1c10);
+  border: 2px solid var(--chrome-edge, #d8c49a);
+  border-radius: 12px;
+  transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+.auto-advance-btn .auto-ico {
+  font-size: 13px;
+  line-height: 1;
+}
+.auto-advance-btn.active {
+  background: #15803d !important;
+  color: #ffffff !important;
+  border-color: #4ade80 !important;
+  box-shadow: 0 0 12px rgba(74, 222, 128, 0.6);
+}
 .ctl-right { display: flex; gap: 8px; }
 #killCount { font-weight: 800; font-size: 13px; color: var(--ink-soft); text-align: center; }
 #resetBtn {
@@ -2920,8 +2944,8 @@ margin-top: 7px;
   gap: 10px;
   margin: 10px 14px 6px;
   padding: 10px 12px;
-  background: rgba(30, 18, 10, 0.55);
-  border: 2px solid rgba(242, 176, 30, 0.28);
+  background: #1e1108;
+  border: 2px solid #d97706;
   border-radius: 18px;
   backdrop-filter: blur(6px);
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
@@ -3053,28 +3077,32 @@ margin-top: 7px;
 
 .b-name {
   font-family: "Bungee", system-ui, sans-serif;
-  font-size: 9.5px;
-  color: #e2d2b5;
+  font-size: 11px;
+  color: #fef08a;
   letter-spacing: 0.04em;
   text-align: center;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9);
 }
 
 .b-timer {
   font-family: "Bungee", system-ui, sans-serif;
-  font-size: 9px;
-  color: #fbbf24;
-  background: rgba(0, 0, 0, 0.55);
-  padding: 2px 7px;
-  border-radius: 8px;
-  border: 1px solid rgba(245, 158, 11, 0.35);
+  font-size: 11px;
+  font-weight: 900;
+  color: #ffffff;
+  background: #0d0703;
+  padding: 3px 8px;
+  border-radius: 9px;
+  border: 1.5px solid #f59e0b;
   text-align: center;
   white-space: nowrap;
+  text-shadow: 0 1px 2px #000;
 }
 
 .booster-circle-btn.active + .b-name + .b-timer {
   color: #4ade80;
-  border-color: rgba(74, 222, 128, 0.6);
-  background: rgba(16, 185, 129, 0.2);
+  border-color: #22c55e;
+  background: #052e16;
+  text-shadow: 0 0 6px rgba(74, 222, 128, 0.6);
 }
 
 /* 2. Booster Center Showcase */
@@ -3085,28 +3113,31 @@ margin-top: 7px;
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 8px 6px;
-  background: rgba(18, 10, 5, 0.65);
-  border: 1.5px solid rgba(242, 176, 30, 0.22);
-  border-radius: 12px;
+  padding: 10px 8px;
+  background: #140b05;
+  border: 2px solid rgba(245, 158, 11, 0.45);
+  border-radius: 14px;
   min-height: 60px;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.6);
   transition: all 0.3s ease;
 }
 
 .bcs-title {
   font-family: "Bungee", system-ui, sans-serif;
-  font-size: 11px;
+  font-size: 12.5px;
   letter-spacing: 0.05em;
-  color: #e2d2b5;
+  color: #fbbf24;
   line-height: 1.2;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.9);
 }
 
 .bcs-desc {
-  font-size: 9.5px;
+  font-size: 11px;
   font-weight: 800;
-  color: rgba(226, 210, 181, 0.72);
-  margin-top: 3px;
+  color: #ffffff;
+  margin-top: 4px;
   line-height: 1.25;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.9);
 }
 
 .booster-center-showcase.coin-active {

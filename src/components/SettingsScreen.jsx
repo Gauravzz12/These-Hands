@@ -229,7 +229,7 @@ export default function SettingsScreen() {
         {/* About Block */}
         <div style={{ textAlign: 'center', padding: '16px 8px', marginTop: '10px' }}>
           <div style={{ fontFamily: 'Bungee, sans-serif', fontSize: '16px', letterSpacing: '.05em' }}>
-            THESE HANDS
+            IDLE SLAPPER
           </div>
           <div style={{ fontSize: '11.5px', fontWeight: 700, color: 'var(--ink-soft)', marginTop: '4px' }}>
             Version 1.1.0 · React Edition
