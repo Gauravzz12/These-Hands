@@ -1741,16 +1741,30 @@ function loadPoseImage(poseDef) {
   const img = new Image();
   img.crossOrigin = 'anonymous';
   img.onload = () => {
+    const origW = img.naturalWidth || poseDef.w;
+    const origH = img.naturalHeight || poseDef.h;
+
+    // Scale down oversized source textures (e.g. 1530x1420 down to max 500px).
+    // The screen display size of enemies is ~250-350px. Capping at 500px keeps visuals
+    // pin-sharp on retina while cutting memory & fill rate by up to 10x!
+    const MAX_DIM = 500;
+    let cw = origW, ch = origH;
+    if (cw > MAX_DIM || ch > MAX_DIM) {
+      const s = MAX_DIM / Math.max(cw, ch);
+      cw = Math.round(cw * s);
+      ch = Math.round(ch * s);
+    }
+
     const c = document.createElement('canvas');
-    c.width = img.naturalWidth || poseDef.w;
-    c.height = img.naturalHeight || poseDef.h;
+    c.width = cw;
+    c.height = ch;
     const ctx = c.getContext('2d');
-    ctx.drawImage(img, 0, 0);
+    ctx.drawImage(img, 0, 0, cw, ch);
 
     poseDef.img = c;
     poseDef.imgWhite = buildSilhouetteCanvas(c);
-    poseDef.w = c.width;
-    poseDef.h = c.height;
+    poseDef.w = origW;
+    poseDef.h = origH;
     // Measure the opaque content box so the renderer can plant the
     // character's feet exactly on the stage ground line. Robust version:
     // rows are grouped into clusters and only the heaviest cluster (the
