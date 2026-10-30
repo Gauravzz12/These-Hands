@@ -25,10 +25,10 @@
 
         </activity>
 
-        <!-- Google AdMob Application ID (Google Test ID - replace with live ID before store release) -->
+        <!-- Google AdMob Application ID -->
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-3940256099942544~3347511713" />
+            android:value="ca-app-pub-4838625298188198~2817903781" />
 
         <provider
             android:name="androidx.core.content.FileProvider"

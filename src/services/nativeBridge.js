@@ -5,8 +5,8 @@ import { SplashScreen } from '@capacitor/splash-screen';
 import { AdMob, RewardAdPluginEvents } from '@capacitor-community/admob';
 import { Purchases } from '@revenuecat/purchases-capacitor';
 
-// Google Official Test Rewarded Ad Unit ID for Android
-const TEST_REWARDED_AD_UNIT_ID = 'ca-app-pub-3940256099942544/5224354917';
+// Google AdMob Rewarded Ad Unit ID
+const REWARDED_AD_UNIT_ID = 'ca-app-pub-4838625298188198/2176399244';
 
 export const NativeBridge = {
   isNative: Capacitor.isNativePlatform(),
@@ -28,7 +28,7 @@ export const NativeBridge = {
       await SplashScreen.hide();
 
       // 2. Hardware Back Button Handling
-      App.addListener('backButton', ({ canGoBack }) => {
+      App.addListener('backButton', () => {
         // Close modals if open
         const mockModal = document.getElementById('mockCheckout');
         const adModal = document.getElementById('adModal');
@@ -60,8 +60,6 @@ export const NativeBridge = {
       // 3. Initialize AdMob
       await AdMob.initialize({
         requestTrackingAuthorization: true,
-        testingDevices: ['EMULATOR'],
-        initializeForTesting: true,
       });
       this.admobInitialized = true;
 
@@ -94,7 +92,7 @@ export const NativeBridge = {
     if (!this.isNative || !this.admobInitialized) return;
     try {
       await AdMob.prepareRewardVideoAd({
-        adId: TEST_REWARDED_AD_UNIT_ID,
+        adId: REWARDED_AD_UNIT_ID,
       });
       this.rewardedPrepared = true;
     } catch (e) {
