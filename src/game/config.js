@@ -879,42 +879,202 @@ export const CONFIG = {
   ],
   "coinPacks": [
     {
-      "coins": 10000,
-      "gems": 10
+      "name": "Pocket of Coins",
+      "coins": 25000,
+      "gems": 15,
+      "bonus": "",
+      "tag": "QUICK BOOST",
+      "desc": "A handful of freshly minted gold coins to jumpstart your DPS."
     },
     {
-      "coins": 100000,
-      "gems": 75
+      "name": "Bag of Gold",
+      "coins": 150000,
+      "gems": 75,
+      "bonus": "+25% BONUS",
+      "tag": "POPULAR",
+      "desc": "Sturdy leather coin sack packed tight. Great for mid-tier attribute upgrades."
     },
     {
-      "coins": 500000,
-      "gems": 300
+      "name": "Chest of Gold",
+      "coins": 650000,
+      "gems": 250,
+      "bonus": "+45% BONUS",
+      "tag": "GREAT VALUE",
+      "desc": "Reinforced wooden chest filled with golden coins. Crush boss walls with ease."
+    },
+    {
+      "name": "Royal Treasury",
+      "coins": 2500000,
+      "gems": 800,
+      "bonus": "+70% BONUS",
+      "tag": "BEST VALUE",
+      "desc": "Massive palace vault shipment. Skyrocket attributes and clear gauntlets."
+    },
+    {
+      "name": "Dragon's Hoard",
+      "coins": 10000000,
+      "gems": 2500,
+      "bonus": "+100% 2X BONUS",
+      "tag": "WHALE TIER",
+      "desc": "Legendary dragon lair fortune. Max out high-tier mastery and attributes."
+    }
+  ],
+  "gemPacks": [
+    {
+      "id": "gem_pouch",
+      "name": "Pouch of Gems",
+      "gems": 80,
+      "bonusGems": 0,
+      "price": "₹49",
+      "tag": "STARTER",
+      "desc": "A gleaming starter pouch of rare cut diamonds."
+    },
+    {
+      "id": "gem_sack",
+      "name": "Sack of Gems",
+      "gems": 240,
+      "bonusGems": 35,
+      "price": "₹149",
+      "tag": "POPULAR",
+      "desc": "A traveler's gem pouch with 35 bonus diamonds included."
+    },
+    {
+      "id": "gem_chest",
+      "name": "Chest of Gems",
+      "gems": 700,
+      "bonusGems": 150,
+      "price": "₹399",
+      "tag": "+25% BONUS",
+      "desc": "An iron-bound chest brimming with sparkling blue gems."
+    },
+    {
+      "id": "gem_vault",
+      "name": "Vault of Gems",
+      "gems": 1600,
+      "bonusGems": 500,
+      "price": "₹799",
+      "tag": "BEST VALUE",
+      "desc": "Heavily fortified vault crate. Affords top-tier hero skins and perks."
+    },
+    {
+      "id": "gem_treasury",
+      "name": "Titan's Treasury",
+      "gems": 3800,
+      "bonusGems": 1800,
+      "price": "₹1,699",
+      "tag": "+50% BONUS",
+      "desc": "Ancient mountain treasure chamber filled with mystical crystals."
+    },
+    {
+      "id": "gem_mountain",
+      "name": "Cosmic Hoard",
+      "gems": 9000,
+      "bonusGems": 6000,
+      "price": "₹3,499",
+      "tag": "65% BONUS · ULTIMATE",
+      "desc": "Infinite cosmic crystal fortune. Instantly unlock the Mythic Gauntlet & all perks!"
     }
   ],
   "bundles": [
     {
       "id": "starter",
       "name": "Starter Bundle",
+      "badge": "STARTER DEAL",
       "price": "₹149",
+      "valPrice": "₹499",
       "skin": "spidey",
-      "coins": 10000,
-      "gems": 25
+      "coins": 25000,
+      "gems": 50,
+      "tagline": "The Webbed Crusader Set",
+      "desc": "Equip the Spider-Man glove (+10% Slap Speed & Web Yank stun) plus instant coin and gem boost!"
+    },
+    {
+      "id": "weapon_x",
+      "name": "Weapon X Bundle",
+      "badge": "FEROCIOUS DEAL",
+      "price": "₹249",
+      "valPrice": "₹799",
+      "skin": "logan",
+      "coins": 80000,
+      "gems": 120,
+      "tagline": "Adamantium Rage Set",
+      "desc": "Unleash Wolverine (+15% Crit Chance & Adamantium Claws bleeding strikes) with heavy gold and gems."
     },
     {
       "id": "inferno",
       "name": "Thunder Bundle",
+      "badge": "HOT DEAL",
       "price": "₹399",
+      "valPrice": "₹1,199",
       "skin": "thor",
-      "coins": 100000,
-      "gems": 150
+      "coins": 250000,
+      "gems": 250,
+      "tagline": "Lord of Asgard Set",
+      "desc": "Harness Thor (+20% Slap Power & Lightning Strike shockwaves) with massive coin and gem reserves."
     },
     {
       "id": "dragon",
       "name": "Hero Bundle",
+      "badge": "MOST POPULAR",
       "price": "₹799",
+      "valPrice": "₹2,499",
       "skin": "hulk",
-      "coins": 500000,
-      "gems": 500
+      "coins": 1000000,
+      "gems": 600,
+      "tagline": "Gamma Breaker Set",
+      "desc": "Smash obstacles with Hulk (+30% Boss Damage & Gamma Smash tremor) alongside a colossal treasury."
+    },
+    {
+      "id": "steel",
+      "name": "Man of Steel Bundle",
+      "badge": "LEGENDARY VALUE",
+      "price": "₹1,299",
+      "valPrice": "₹3,999",
+      "skin": "super",
+      "coins": 3000000,
+      "gems": 1200,
+      "tagline": "Solar Paragon Set",
+      "desc": "Unrivaled Kryptonian Might (+35% Crit Mult & Heat Vision incinerator) and millions in battle funds."
+    },
+    {
+      "id": "cosmic",
+      "name": "Cosmic Infinity Bundle",
+      "badge": "SUPREME · 5X VALUE",
+      "price": "₹2,499",
+      "valPrice": "₹9,999",
+      "skin": "gauntlet",
+      "coins": 10000000,
+      "gems": 3000,
+      "tagline": "Omnipotent Snap Set",
+      "desc": "Wield the Mythic Infinity Gauntlet (all 6 stones, 50% HP reality snap) with ultimate coin and gem fortune!"
+    }
+  ],
+  "features": [
+    {
+      "id": "offline",
+      "name": "Offline Slap Miner",
+      "badge": "PASSIVE INCOME",
+      "cur": "gems",
+      "price": 10,
+      "desc": "Earn coins while away — 25% of your DPS, up to 8 hours, paid on a claim card when you return."
+    },
+    {
+      "id": "vip",
+      "name": "Golden Slapper VIP Pass",
+      "badge": "PERMANENT VIP",
+      "cur": "money",
+      "price": "₹199",
+      "valPrice": "₹599",
+      "desc": "Permanent +25% bonus coins from all enemy knockouts, prestige golden frame on your battle hand, and golden player crown!"
+    },
+    {
+      "id": "frenzy_boost",
+      "name": "Frenzy Overcharge Booster",
+      "badge": "TURBO BOOST",
+      "cur": "money",
+      "price": "₹99",
+      "valPrice": "₹299",
+      "desc": "Frenzy charges 25% faster from slaps, and Frenzy duration extends to 13 seconds (normally 10s)!"
     }
   ],
   "frenzy": {
@@ -944,6 +1104,11 @@ export const CONFIG = {
       "ref": "starter"
     },
     {
+      "id": "bundle_weapon_x",
+      "kind": "bundle",
+      "ref": "weapon_x"
+    },
+    {
       "id": "bundle_inferno",
       "kind": "bundle",
       "ref": "inferno"
@@ -954,9 +1119,59 @@ export const CONFIG = {
       "ref": "dragon"
     },
     {
+      "id": "bundle_steel",
+      "kind": "bundle",
+      "ref": "steel"
+    },
+    {
+      "id": "bundle_cosmic",
+      "kind": "bundle",
+      "ref": "cosmic"
+    },
+    {
       "id": "feature_offline",
       "kind": "feature",
       "ref": "offline"
+    },
+    {
+      "id": "feature_vip",
+      "kind": "feature",
+      "ref": "vip"
+    },
+    {
+      "id": "feature_frenzy_boost",
+      "kind": "feature",
+      "ref": "frenzy_boost"
+    },
+    {
+      "id": "gem_pouch",
+      "kind": "gem",
+      "ref": "gem_pouch"
+    },
+    {
+      "id": "gem_sack",
+      "kind": "gem",
+      "ref": "gem_sack"
+    },
+    {
+      "id": "gem_chest",
+      "kind": "gem",
+      "ref": "gem_chest"
+    },
+    {
+      "id": "gem_vault",
+      "kind": "gem",
+      "ref": "gem_vault"
+    },
+    {
+      "id": "gem_treasury",
+      "kind": "gem",
+      "ref": "gem_treasury"
+    },
+    {
+      "id": "gem_mountain",
+      "kind": "gem",
+      "ref": "gem_mountain"
     }
   ],
   "ads": {

@@ -30,6 +30,14 @@ export default function App() {
           <span id="gemCount">0</span>
         </div>
         <div className="pill level" id="levelPill" aria-label="Player level">LV <span id="levelVal">1</span></div>
+        <div className="hud-boosters" id="hudBoosters" style={{'display': 'none'}}>
+          <span className="hud-boost-pill coin" id="hudBoostCoinPill" style={{'display': 'none'}}>
+            💰 2x <b id="hudBoostCoinTime">10:00</b>
+          </span>
+          <span className="hud-boost-pill dmg" id="hudBoostDmgPill" style={{'display': 'none'}}>
+            💥 2x <b id="hudBoostDmgTime">10:00</b>
+          </span>
+        </div>
       </header>
 
       <main id="pages">
@@ -65,6 +73,45 @@ export default function App() {
           </div>
 
           <button type="button" id="chestCard" style={{'display': 'none'}} aria-label="Daily chest"></button>
+
+          <div className="hub-boosters-row" id="hubBoostersRow">
+            <div className="booster-slot">
+              <button className="booster-circle-btn coin" id="boostCoinBtn" type="button" aria-label="Watch Ad for 10 min 2x Coins">
+                <span className="b-ring-svg-wrap">
+                  <svg viewBox="0 0 54 54" className="b-ring-svg">
+                    <circle className="b-ring-bg" cx="27" cy="27" r="23" />
+                    <circle className="b-ring-fill" id="boostCoinRing" cx="27" cy="27" r="23" />
+                  </svg>
+                </span>
+                <span className="b-ico">💰</span>
+                <span className="b-mult">2x</span>
+                <span className="b-ad-badge">AD</span>
+              </button>
+              <div className="b-name">2x COINS</div>
+              <div className="b-timer" id="boostCoinTimer">WATCH AD</div>
+            </div>
+
+            <div className="booster-center-showcase" id="hubBoosterShowcase">
+              <div className="bcs-title">PASSIVE BUFFS</div>
+              <div className="bcs-desc" id="hubBoosterShowcaseDesc">TAP TO BOOST 10 MINS</div>
+            </div>
+
+            <div className="booster-slot">
+              <button className="booster-circle-btn dmg" id="boostDmgBtn" type="button" aria-label="Watch Ad for 10 min 2x Damage">
+                <span className="b-ring-svg-wrap">
+                  <svg viewBox="0 0 54 54" className="b-ring-svg">
+                    <circle className="b-ring-bg" cx="27" cy="27" r="23" />
+                    <circle className="b-ring-fill" id="boostDmgRing" cx="27" cy="27" r="23" />
+                  </svg>
+                </span>
+                <span className="b-ico">💥</span>
+                <span className="b-mult">2x</span>
+                <span className="b-ad-badge">AD</span>
+              </button>
+              <div className="b-name">2x DAMAGE</div>
+              <div className="b-timer" id="boostDmgTimer">WATCH AD</div>
+            </div>
+          </div>
 
           <button className="hub-battle-cta" data-goto="battle" id="hubBattleCta">
             <span className="hbc-ico">
@@ -338,11 +385,19 @@ export default function App() {
             <div className="sel-title">AWARDS</div>
             <div className="sel-sub">LIFETIME STATS + ACHIEVEMENTS</div>
           </div>
+          <button id="claimAllAwardsBtn" className="claim-all-btn" style={{'marginLeft': 'auto', 'display': 'none'}} aria-label="Claim all completed achievements">
+            CLAIM ALL
+          </button>
         </div>
         <div id="awardsScroll">
           <div className="aw-sec">LIFETIME STATS</div>
           <div id="statsGrid"></div>
-          <div className="aw-sec" id="achSecHead" style={{'marginTop': '16px'}}>ACHIEVEMENTS</div>
+          <div className="ach-head-row">
+            <div className="aw-sec" id="achSecHead" style={{'margin': 0}}>ACHIEVEMENTS</div>
+            <button id="claimAllAchBtn" className="claim-all-btn" style={{'display': 'none'}} aria-label="Claim all completed achievements">
+              CLAIM ALL
+            </button>
+          </div>
           <div id="achList"></div>
         </div>
       </section>
@@ -380,26 +435,37 @@ export default function App() {
         </div>
       </section>
 
-      <section id="pageShop" className="page" aria-label="Hand skins shop">
-        <div className="sel-head">
+      <section id="pageShop" className="page" aria-label="The Bazaar - Shop and Vault">
+        <div className="sel-head shop-head">
           <button className="home-btn" data-goto="home" aria-label="Back to home"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 2.5 11h2.7v9h5.3v-6h3v6h5.3v-9h2.7L12 3z" fill="currentColor"/></svg></button>
           <div>
-            <div className="sel-title">HAND SKINS</div>
-            <div className="sel-sub" id="shopSub"></div>
+            <div className="sel-title shop-title">THE BAZAAR</div>
+            <div className="sel-sub" id="shopSub">VAULT · OFFERS · SKINS · PERKS</div>
           </div>
           <div style={{'marginLeft': 'auto', 'display': 'flex', 'gap': '6px', 'alignItems': 'center'}}>
             <div className="pill mini" id="shopCoins" aria-label="Coins"></div>
             <div className="pill gem mini" id="shopGems" aria-label="Gems"></div>
           </div>
         </div>
+        <div className="shop-filter-bar" id="shopFilterBar" role="tablist">
+          <button className="shop-filter-btn active" data-filter="all">ALL</button>
+          <button className="shop-filter-btn" data-filter="gems">💎 GEMS</button>
+          <button className="shop-filter-btn" data-filter="bundles">🎁 BUNDLES</button>
+          <button className="shop-filter-btn" data-filter="perks">⚡ PERKS</button>
+          <button className="shop-filter-btn" data-filter="skins">🥊 SKINS</button>
+          <button className="shop-filter-btn" data-filter="coins">🪙 COIN PACKS</button>
+        </div>
         <div id="shopScroll">
+          <div id="shopPromo"></div>
+          <div id="shopGemVault"></div>
+          <div id="shopBundles"></div>
           <div id="shopFeatures"></div>
           <div id="shopList"></div>
           <div id="shopPacks"></div>
-          <div id="shopBundles"></div>
           <div id="shopFooter">
-            <button className="skin-btn" id="restoreBtn">RESTORE PURCHASES</button>
-            <div className="pack-note">Re-applies any one-time bundle or feature this device's purchase record says you own.</div>
+            <button className="skin-btn restore-btn" id="restoreBtn">RESTORE PURCHASES</button>
+            <div className="pack-note">Re-applies any one-time bundle, VIP pass, or permanent feature previously acquired.</div>
+            <div className="shop-sandbox-tag">🛡️ TEST STORE · NO REAL PAYMENT REQUIRED</div>
           </div>
         </div>
         <div id="shopToast" role="status"></div>
@@ -473,6 +539,13 @@ export default function App() {
           <div className="end-unlock" id="endUnlock"></div>
           <div className="end-stats" id="endStats"></div>
           <div className="end-tip" id="endTip"></div>
+          <div id="endAdDoubleWrap" className="end-ad-double-wrap">
+            <button className="end-ad-double-btn" id="endAdDoubleBtn" type="button">
+              <span className="ead-icon">🎬</span>
+              <span className="ead-text" id="endAdDoubleText">WATCH AD TO DOUBLE REWARDS</span>
+              <span className="ead-bonus" id="endAdDoubleBonus">+0</span>
+            </button>
+          </div>
           <div className="end-btns">
             <button className="ctl-btn end-next" id="nextBtn">NEXT VICTIM →</button>
             <button className="ctl-btn end-again" id="againBtn">FIGHT AGAIN</button>
@@ -520,16 +593,34 @@ export default function App() {
         </div>
       </div>
 
+      <div id="adModal" role="dialog" aria-label="Rewarded Advertisement" style={{'display': 'none'}}>
+        <div className="ad-card">
+          <div className="ad-header-row">
+            <span className="ad-badge">🎬 SPONSORED AD</span>
+            <span className="ad-countdown" id="adCountdown">Reward in 2s</span>
+          </div>
+          <div className="ad-media-box">
+            <div className="ad-screen-icon" id="adScreenIcon">📺</div>
+            <div className="ad-sponsor-title" id="adSponsorTitle">Slap Master 3D</div>
+            <div className="ad-tagline" id="adTagline">Maximum slaps. Zero cooldown. Play now!</div>
+            <div className="ad-loading-dots"><span></span><span></span><span></span></div>
+          </div>
+          <div className="ad-progress-bar"><div className="ad-progress-fill" id="adProgressFill"></div></div>
+          <button className="ctl-btn ad-claim-btn" id="adClaimBtn" style={{'display': 'none'}}>CLAIM REWARD ✕</button>
+        </div>
+      </div>
+
       <div id="mockCheckout" role="dialog" aria-label="Mock checkout">
         <div className="mock-card">
-          <div className="mock-head">MOCK CHECKOUT</div>
-          <div className="mock-note">Test purchase — no real money is charged, no payment details are involved. This is a pretend storefront for trying the bundles.</div>
+          <div className="mock-badge">🛡️ SANDBOX TEST STORE</div>
+          <div className="mock-head">CONFIRM ORDER</div>
+          <div className="mock-note">Simulation Mode: No real currency is charged. Try all bundles, gem hoards, and VIP passes freely.</div>
           <div className="mock-item" id="mockItemName"></div>
           <div className="mock-lines" id="mockLines"></div>
           <div className="mock-total" id="mockTotal"></div>
           <div className="mock-btns">
             <button className="ctl-btn" id="mockCancel">CANCEL</button>
-            <button className="ctl-btn end-again" id="mockConfirm">CONFIRM MOCK PURCHASE</button>
+            <button className="ctl-btn end-again" id="mockConfirm">CONFIRM PURCHASE</button>
           </div>
         </div>
       </div>
