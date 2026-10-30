@@ -30,17 +30,19 @@ android {
                 storePassword props['storePassword']
                 keyAlias props['keyAlias'] ?: "TheseHands"
                 keyPassword props['keyPassword'] ?: props['storePassword']
-            } else {
+            } else if (System.getenv("KEYSTORE_PASSWORD") || project.hasProperty("KEYSTORE_PASSWORD")) {
                 storeFile rootProject.file("../release.keystore")
-                storePassword System.getenv("KEYSTORE_PASSWORD") ?: (project.findProperty("KEYSTORE_PASSWORD") ?: "")
+                storePassword System.getenv("KEYSTORE_PASSWORD") ?: project.property("KEYSTORE_PASSWORD")
                 keyAlias System.getenv("KEY_ALIAS") ?: (project.findProperty("KEY_ALIAS") ?: "TheseHands")
-                keyPassword System.getenv("KEY_PASSWORD") ?: (project.findProperty("KEY_PASSWORD") ?: System.getenv("KEYSTORE_PASSWORD"))
+                keyPassword System.getenv("KEY_PASSWORD") ?: (project.findProperty("KEY_PASSWORD") ?: storePassword)
             }
         }
     }
     buildTypes {
         release {
-            signingConfig signingConfigs.release
+            if (signingConfigs.release.storeFile != null && signingConfigs.release.storePassword != null) {
+                signingConfig signingConfigs.release
+            }
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
