@@ -8,85 +8,83 @@ export const CONFIG = {
   },
   "capPerLevel": 3,
   "levelUp": {
-    "base": 350,
-    "growth": 1.65,
-    "lateStart": 4,
-    "lateGrowth": 2.75,
-    "tailStart": 25,
-    "tailGrowth": 1.55
+    "base": 40,
+    "growth": 1.26,
+    "lateStart": 10,
+    "lateGrowth": 1.24
   },
   "levelCap": 100,
   "attrs": {
     "power": {
       "name": "Power",
-      "baseCost": 60,
-      "growth": 1.45,
+      "baseCost": 15,
+      "growth": 1.14,
       "maxLevel": 100
     },
     "speed": {
       "name": "Speed",
-      "baseCost": 160,
-      "growth": 1.38,
+      "baseCost": 25,
+      "growth": 1.14,
       "maxLevel": 50
     },
     "critChance": {
       "name": "Crit Chance",
-      "baseCost": 140,
-      "growth": 1.36,
+      "baseCost": 25,
+      "growth": 1.14,
       "maxLevel": 50
     },
     "critDamage": {
       "name": "Crit Damage",
-      "baseCost": 140,
-      "growth": 1.36,
+      "baseCost": 25,
+      "growth": 1.14,
       "maxLevel": 50
     },
     "defense": {
       "name": "Defense",
-      "baseCost": 130,
-      "growth": 1.35,
+      "baseCost": 30,
+      "growth": 1.14,
       "maxLevel": 50
     },
     "stun": {
       "name": "Stun",
-      "baseCost": 150,
-      "growth": 1.36,
+      "baseCost": 30,
+      "growth": 1.14,
       "maxLevel": 45
     },
     "combo": {
       "name": "Combo",
-      "baseCost": 140,
-      "growth": 1.36,
+      "baseCost": 25,
+      "growth": 1.14,
       "maxLevel": 50
     },
     "coinMult": {
       "name": "Coin Mult.",
-      "baseCost": 120,
-      "growth": 1.35,
+      "baseCost": 25,
+      "growth": 1.14,
       "maxLevel": 50
     },
     "accuracy": {
       "name": "Accuracy",
-      "baseCost": 130,
-      "growth": 1.36,
+      "baseCost": 25,
+      "growth": 1.14,
       "maxLevel": 30
     },
     "bossDamage": {
       "name": "Boss Hunter",
-      "baseCost": 150,
-      "growth": 1.36,
+      "baseCost": 35,
+      "growth": 1.14,
       "maxLevel": 50
     },
     "vampirism": {
       "name": "Life Leech",
-      "baseCost": 160,
-      "growth": 1.36,
+      "baseCost": 35,
+      "growth": 1.14,
       "maxLevel": 45
     },
     "luck": {
       "name": "Fortune Luck",
-      "baseCost": 150,
-      "growth": 1.36,
+      "baseCost": 35,
+      "growth": 1.14,
       "maxLevel": 45
     }
   },

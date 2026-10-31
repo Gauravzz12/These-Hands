@@ -52,14 +52,22 @@ export function persistSave(save) {
 // ──────────────────────────────────────────────
 // Attribute helpers
 // ──────────────────────────────────────────────
-export function attrCost(key, currentLevel, playerLevel) {
-  const { baseCost, growth } = CONFIG.attrs[key];
-  const raw = Math.floor(baseCost * Math.pow(growth, currentLevel));
-  if (playerLevel != null) {
-    const maxAllowed = Math.round(levelUpCost(playerLevel) * 0.85);
-    return Math.min(raw, maxAllowed);
+export function attrCost(key, currentLevel) {
+  const d = CONFIG.attrs[key];
+  if (!d) return 999999;
+  const base = d.baseCost || 25;
+  const lvl = currentLevel || 0;
+  if (lvl <= 10) {
+    return Math.round(base * Math.pow(1.14, lvl));
   }
-  return raw;
+  const cost10 = base * Math.pow(1.14, 10);
+  const extra = lvl - 10;
+  let cost = cost10 * Math.pow(1.18, extra) * (1 + 0.02 * extra);
+  if (key === 'speed' && d.maxLevel && lvl >= 30) {
+    const prog = lvl / d.maxLevel;
+    cost *= (1 + 1.5 * Math.pow(prog, 4));
+  }
+  return Math.round(cost);
 }
 
 export function attrCap(playerLevel) {
@@ -67,7 +75,14 @@ export function attrCap(playerLevel) {
 }
 
 export function levelUpCost(currentLevel) {
-  return Math.round(0.7 * Math.floor(CONFIG.levelUp.base * Math.pow(CONFIG.levelUp.growth, currentLevel - 1)));
+  const lv = currentLevel || 1;
+  const base = CONFIG.levelUp.base || 40;
+  if (lv <= 10) {
+    return Math.round(base * Math.pow(1.26, lv - 1));
+  }
+  const cost10 = base * Math.pow(1.26, 9);
+  const extra = lv - 10;
+  return Math.round(cost10 * Math.pow(1.24, extra) * (1 + 0.04 * extra));
 }
 
 // ──────────────────────────────────────────────
