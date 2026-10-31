@@ -67,7 +67,7 @@ export function attrCap(playerLevel) {
 }
 
 export function levelUpCost(currentLevel) {
-  return Math.floor(CONFIG.levelUp.base * Math.pow(CONFIG.levelUp.growth, currentLevel - 1));
+  return Math.round(0.7 * Math.floor(CONFIG.levelUp.base * Math.pow(CONFIG.levelUp.growth, currentLevel - 1)));
 }
 
 // ──────────────────────────────────────────────
@@ -215,15 +215,15 @@ export function todayKey() {
 // ──────────────────────────────────────────────
 export const ACHIEVEMENTS = [
   { id:'firstKO',    name:'First Blood',       desc:'KO your first enemy',                 target:1,   stat:'totalKOs',  reward:5  },
-  { id:'slapper10',  name:'Slapper',            desc:'Land 1,000 slaps',                    target:1000, stat:'totalSlaps',reward:5  },
-  { id:'slapper50',  name:'Slap Machine',       desc:'Land 10,000 slaps',                   target:10000,stat:'totalSlaps',reward:15 },
-  { id:'kos10',      name:'Fighter',            desc:'KO 50 enemies',                       target:50,  stat:'totalKOs',  reward:10 },
-  { id:'kos50',      name:'Champion',           desc:'KO 250 enemies',                      target:250, stat:'totalKOs',  reward:25 },
-  { id:'coins1k',    name:'Penny Pincher',      desc:'Earn 10,000 coins total',             target:10000,stat:'totalCoins',reward:10 },
-  { id:'coins100k',  name:'Money Bags',         desc:'Earn 100,000 coins total',            target:100000,stat:'totalCoins',reward:25 },
-  { id:'level5',     name:'Rising Star',        desc:'Reach player level 5',                target:5,   stat:'playerLevel',reward:10 },
-  { id:'level10',    name:'Veteran Slapper',    desc:'Reach player level 10',               target:10,  stat:'playerLevel',reward:25 },
-  { id:'crits100',   name:'Crit Happy',         desc:'Score 100 critical hits',             target:100, stat:'totalCrits', reward:10 },
+  { id:'slapper10',  name:'Slapper',            desc:'Land 2,500 slaps',                    target:2500, stat:'totalSlaps',reward:5  },
+  { id:'slapper50',  name:'Slap Machine',       desc:'Land 25,000 slaps',                   target:25000,stat:'totalSlaps',reward:15 },
+  { id:'kos10',      name:'Fighter',            desc:'KO 100 enemies',                      target:100, stat:'totalKOs',  reward:10 },
+  { id:'kos50',      name:'Champion',           desc:'KO 500 enemies',                      target:500, stat:'totalKOs',  reward:25 },
+  { id:'coins1k',    name:'Penny Pincher',      desc:'Earn 50,000 coins total',             target:50000,stat:'totalCoins',reward:10 },
+  { id:'coins100k',  name:'Money Bags',         desc:'Earn 500,000 coins total',            target:500000,stat:'totalCoins',reward:25 },
+  { id:'level5',     name:'Rising Star',        desc:'Reach player level 7',                target:7,   stat:'playerLevel',reward:10 },
+  { id:'level10',    name:'Veteran Slapper',    desc:'Reach player level 15',               target:15,  stat:'playerLevel',reward:25 },
+  { id:'crits100',   name:'Crit Happy',         desc:'Score 250 critical hits',             target:250, stat:'totalCrits', reward:10 },
 ];
 
 // ──────────────────────────────────────────────
