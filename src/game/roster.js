@@ -85,7 +85,7 @@ export const ROSTER = [
     "guard"
   ],
   [
-    "Armored Warrior",
+    "Knight",
     "knight",
     "warrior"
   ],

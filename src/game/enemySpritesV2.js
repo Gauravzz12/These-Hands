@@ -602,35 +602,35 @@ export const V2_CONFIGS = [
   },
   {
   "idx": 17,
-  "id": "18-armored-warrior",
-  "name": "Armored Warrior",
+  "id": "18-knight",
+  "name": "Knight",
   "refH": 900,
   "cheekX": 0.5,
-  "cheekY": 0.34,
-  "colors": ["#000000", "#0060d0", "#f0c0a0", "#b0c0c0", "#f0f0f0"],
+  "cheekY": 0.42,
+  "colors": ["#000000", "#463b45", "#aba598", "#1e0a0c", "#000204"],
   "poses": {
     "idle": {
-      "src": "/enemy-sprites-v2/poses/18-armored-warrior-idle.webp",
-      "w": 666,
+      "src": "/enemy-sprites-v2/poses/18-knight-idle.webp",
+      "w": 564,
       "h": 900
     },
     "attack1": {
-      "src": "/enemy-sprites-v2/poses/18-armored-warrior-attack.webp",
-      "w": 1041,
-      "h": 894
+      "src": "/enemy-sprites-v2/poses/18-knight-attack.webp",
+      "w": 1001,
+      "h": 853
     },
     "attack": {
-      "src": "/enemy-sprites-v2/poses/18-armored-warrior-attack.webp",
-      "w": 1041,
-      "h": 894
+      "src": "/enemy-sprites-v2/poses/18-knight-attack.webp",
+      "w": 1001,
+      "h": 853
     },
     "dizzy": {
-      "src": "/enemy-sprites-v2/poses/18-armored-warrior-dizzy.webp",
-      "w": 978,
-      "h": 739
+      "src": "/enemy-sprites-v2/poses/18-knight-dizzy.webp",
+      "w": 821,
+      "h": 755
     }
   },
-  "thumb": "/enemy-sprites-v2/thumbs/18-armored-warrior-thumb.webp"
+  "thumb": "/enemy-sprites-v2/thumbs/18-knight-thumb.webp"
 },
   {
   "idx": 18,
