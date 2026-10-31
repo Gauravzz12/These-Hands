@@ -1,5 +1,16 @@
 // Game Engine — core logic for "These Hands"
-import { CONFIG, ALL_ENEMIES } from './config.js';
+import {
+  CONFIG,
+  ALL_ENEMIES,
+  calcLevelUpCost,
+  calcAttrCost,
+  calcAttrCap,
+  calcEnemyHp,
+  calcEnemyDamage,
+  calcEnemyInterval,
+  calcEnemyBounty,
+  calcPlayerMaxHp
+} from './config.js';
 
 // ──────────────────────────────────────────────
 // Save / Load
@@ -53,42 +64,15 @@ export function persistSave(save) {
 // Attribute helpers
 // ──────────────────────────────────────────────
 export function attrCost(key, currentLevel) {
-  const d = CONFIG.attrs[key];
-  if (!d) return 999999;
-  const base = d.baseCost || 25;
-  const lvl = currentLevel != null ? currentLevel : 0;
-  if (lvl <= 10) return Math.round(base * Math.pow(1.38, lvl));
-  const cost10 = base * Math.pow(1.38, 10);
-  const extra = lvl - 10;
-  if (lvl <= 50) return Math.round(cost10 * Math.pow(1.48, extra) * (1 + 0.05 * extra));
-  const cost50 = cost10 * Math.pow(1.48, 40) * (1 + 0.05 * 40);
-  const extra50 = lvl - 50;
-  return Math.round(cost50 * Math.pow(1.20, extra50) * (1 + 0.03 * extra50));
+  return calcAttrCost(key, currentLevel);
 }
 
 export function attrCap(playerLevel) {
-  return playerLevel * CONFIG.capPerLevel;
+  return calcAttrCap(playerLevel);
 }
 
 export function levelUpCost(currentLevel) {
-  const lv = currentLevel != null ? currentLevel : 1;
-  if (CONFIG.levelCap && lv >= CONFIG.levelCap) return Infinity;
-  const base = CONFIG.levelUp.base || 80;
-  if (lv === 1) return base;
-  if (lv <= 5) return Math.round(base * Math.pow(2.1, lv - 1));
-  const cost5 = Math.round(base * Math.pow(2.1, 4));
-  if (lv <= 15) {
-    const extra = lv - 5;
-    return Math.round(cost5 * Math.pow(2.15, extra) * (1 + 0.04 * extra));
-  }
-  const cost15 = Math.round(cost5 * Math.pow(2.15, 10) * (1 + 0.04 * 10));
-  if (lv <= 30) {
-    const extra = lv - 15;
-    return Math.round(cost15 * Math.pow(1.85, extra) * (1 + 0.03 * extra));
-  }
-  const cost30 = Math.round(cost15 * Math.pow(1.85, 15) * (1 + 0.03 * 15));
-  const extra = lv - 30;
-  return Math.round(cost30 * Math.pow(1.50, extra) * (1 + 0.02 * extra));
+  return calcLevelUpCost(currentLevel);
 }
 
 // ──────────────────────────────────────────────
@@ -157,54 +141,22 @@ export function computePlayerStats(save) {
 // Enemy helpers
 // ──────────────────────────────────────────────
 export function computeEnemyHp(enemyId) {
-  const sc = CONFIG.enemyScale;
-  let hp = sc.hpBase;
-  const early = sc.hpEarly;
-  for (let i = 0; i < enemyId; i++) {
-    let mult;
-    if (i < early.length) {
-      mult = early[i];
-    } else if (i < 59) {
-      mult = sc.hpLateStart + (sc.hpLateEnd - sc.hpLateStart) * (i - early.length) / (59 - early.length);
-    } else if (i < 79) {
-      mult = sc.hpTailStart + (sc.hpTailMid - sc.hpTailStart) * (i - 59) / 20;
-    } else if (i < 89) {
-      mult = sc.hpTailMid + (sc.hpTailMid2 - sc.hpTailMid) * (i - 79) / 10;
-    } else {
-      mult = sc.hpTailMid2 + (sc.hpTailEnd2 - sc.hpTailMid2) * (i - 89) / 10;
-    }
-    const enemy = ALL_ENEMIES[i];
-    if (enemy?.elite) mult *= sc.eliteHp;
-    hp *= mult;
-  }
-  return Math.ceil(hp);
+  const enemy = ALL_ENEMIES ? ALL_ENEMIES[enemyId] : null;
+  return calcEnemyHp(enemyId, enemy?.boss, enemy?.elite);
 }
 
 export function computeEnemyAttack(enemyId) {
-  const sc = CONFIG.enemyScale;
-  const ea = CONFIG.enemyAttack;
-  const isBoss = ALL_ENEMIES[enemyId]?.elite;
-
-  let interval = ea.intervalStart * Math.pow(ea.intervalDecay, enemyId);
-  interval = Math.max(ea.intervalFloor, interval);
-  if (isBoss) {
-    interval *= ea.eliteIntervalMult;
-    interval = Math.max(ea.eliteIntervalFloor, interval);
-  }
-
-  const atkRatio = Math.min(ea.ratioCap, ea.ratioBase + ea.ratioSlope * (enemyId / 99) + (isBoss ? ea.bossRatioBonus : 0));
-  const basePlayerDmg = CONFIG.playerBase.damage;
-  const atkDmg = Math.ceil(basePlayerDmg * atkRatio * (1 + enemyId * 0.018));
-
+  const enemy = ALL_ENEMIES ? ALL_ENEMIES[enemyId] : null;
+  const interval = calcEnemyInterval(enemyId, enemy?.boss, enemy?.elite && !enemy?.boss);
+  const atkDmg = calcEnemyDamage(enemyId, enemy?.boss, enemy?.elite);
   return { interval, atkDmg };
 }
 
 export function getEnemyCoinReward(enemyId, coinMult) {
-  const enemy = ALL_ENEMIES[enemyId];
-  const base = 3 + enemyId * 0.8;
-  let reward = base * coinMult;
-  if (enemy?.elite) reward *= CONFIG.groupReward.bountyMult;
-  return Math.floor(reward);
+  const enemy = ALL_ENEMIES ? ALL_ENEMIES[enemyId] : null;
+  const hp = enemy ? enemy.hp : calcEnemyHp(enemyId);
+  const { bounty } = calcEnemyBounty(hp, enemyId);
+  return Math.floor(bounty * (coinMult || 1));
 }
 
 // ──────────────────────────────────────────────

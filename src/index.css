@@ -1479,16 +1479,13 @@ min-width: 0;
 position: relative;
 border: 2px solid var(--chrome-edge);
 border-radius: 16px;
-background: #a8c6d8;
+background: #1a120b url("/stage-bg/g0.webp") center / cover no-repeat;
 overflow: hidden;
 }
-.hub-stage .hub-wall { position: absolute; left: 0; right: 0; bottom: 18%; height: 12%; background: #8fb4c9; }
-.hub-stage .hub-floor { position: absolute; left: 0; right: 0; bottom: 0; height: 18%; background: #7d4f26; }
+.hub-stage .hub-wall,
+.hub-stage .hub-floor,
 .hub-stage .hub-rug {
-position: absolute; left: 50%; bottom: 4%;
-transform: translateX(-50%);
-width: 72%; height: 11%; border-radius: 50%;
-background: #b8452f;
+display: none !important;
 }
 .hub-hand-wrap {
 position: absolute;

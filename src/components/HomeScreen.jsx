@@ -159,17 +159,13 @@ export default function HomeScreen() {
             height: '190px',
             borderRadius: '16px',
             border: '2px solid var(--chrome-edge)',
-            background: '#a8c6d8',
+            background: `url(/stage-bg/g${currentEnemy.group}.webp) center / cover no-repeat`,
             overflow: 'hidden',
             cursor: 'pointer',
             flex: 'none'
           }}
           title="Tap to slap!"
         >
-          {/* Wall, Floor, Rug */}
-          <div style={{ position: 'absolute', inset: 'auto 0 18% 0', height: '12%', background: '#8fb4c9' }} />
-          <div style={{ position: 'absolute', inset: 'auto 0 0 0', height: '18%', background: '#7d4f26' }} />
-          <div style={{ position: 'absolute', left: '50%', bottom: '4%', transform: 'translateX(-50%)', width: '70%', height: '12%', borderRadius: '50%', background: '#b8452f' }} />
 
           {/* Guest target on podium */}
           <div style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', pointerEvents: 'none' }}>

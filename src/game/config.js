@@ -12,8 +12,13 @@ export const CONFIG = {
     "growth": 2.1,
     "rampStart": 5,
     "midGrowth": 2.15,
+    "midLinear": 0.04,
     "midStart": 15,
-    "lateGrowth": 1.85
+    "lateGrowth": 1.85,
+    "lateLinear": 0.03,
+    "endStart": 30,
+    "endGrowth": 1.50,
+    "endLinear": 0.02
   },
   "levelCap": 100,
   "attrs": {
@@ -133,6 +138,40 @@ export const CONFIG = {
     "stunDurCap": 1.4,
     "defensePerLevel": 0.01,
     "defenseCap": 0.50
+  },
+  "enemyProgression": {
+    "hp": {
+      "base0": 55,
+      "earlyMult": [1, 1.35, 1.38, 1.42, 1.70, 1.25, 1.30, 1.35, 1.40, 2.20],
+      "base10": 17500,
+      "growth": 1.328,
+      "bossMult": 1.45,
+      "eliteMult": 1.25
+    },
+    "damage": {
+      "earlyDmg": [12, 16, 20, 24, 35, 40, 48, 55, 65, 95],
+      "base10": 130,
+      "growth": 1.092,
+      "bossMult": 1.40,
+      "eliteMult": 1.20
+    },
+    "interval": {
+      "base": 2.8,
+      "decay": 0.982,
+      "floor": 1.15,
+      "bossMult": 0.90,
+      "bossFloor": 1.10,
+      "miniBossMult": 0.94
+    },
+    "bounty": {
+      "earlyRate": 0.48,
+      "baseRate": 0.50,
+      "rateDecay": 0.995,
+      "minRate": 0.38,
+      "minBounty": 25,
+      "normalKillBonusMult": 0.25,
+      "hardKillBonusMult": 1.0
+    }
   },
   "enemyScale": {
     "hpBase": 65,
@@ -1178,6 +1217,93 @@ export const GROUPS = [
     "theme": "The celestial threshold — something divine awaits"
   }
 ];
+
+
+// Centralized formula calculators driven entirely by CONFIG
+export function calcLevelUpCost(currentLevel) {
+  const lv = currentLevel != null ? currentLevel : 1;
+  if (CONFIG.levelCap && lv >= CONFIG.levelCap) return Infinity;
+  const c = CONFIG.levelUp;
+  const base = c.base || 80;
+  if (lv === 1) return base;
+  if (lv <= c.rampStart) return Math.round(base * Math.pow(c.growth, lv - 1));
+  const costRamp = Math.round(base * Math.pow(c.growth, c.rampStart - 1));
+  if (lv <= c.midStart) {
+    const extra = lv - c.rampStart;
+    return Math.round(costRamp * Math.pow(c.midGrowth, extra) * (1 + (c.midLinear || 0.04) * extra));
+  }
+  const costMid = Math.round(costRamp * Math.pow(c.midGrowth, c.midStart - c.rampStart) * (1 + (c.midLinear || 0.04) * (c.midStart - c.rampStart)));
+  const endStart = c.endStart || 30;
+  if (lv <= endStart) {
+    const extra = lv - c.midStart;
+    return Math.round(costMid * Math.pow(c.lateGrowth, extra) * (1 + (c.lateLinear || 0.03) * extra));
+  }
+  const costLate = Math.round(costMid * Math.pow(c.lateGrowth, endStart - c.midStart) * (1 + (c.lateLinear || 0.03) * (endStart - c.midStart)));
+  const extra = lv - endStart;
+  return Math.round(costLate * Math.pow(c.endGrowth || 1.50, extra) * (1 + (c.endLinear || 0.02) * extra));
+}
+
+export function calcAttrCost(key, currentLevel) {
+  const def = CONFIG.attrs[key];
+  if (!def) return 999999;
+  const lvl = currentLevel != null ? currentLevel : 0;
+  return Math.round(def.baseCost * Math.pow(def.growth, lvl));
+}
+
+export function calcAttrCap(playerLevel) {
+  const capPer = CONFIG.capPerLevel || 3;
+  return (playerLevel != null ? playerLevel : 1) * capPer;
+}
+
+export function calcEnemyHp(i, isBoss = false, isElite = false) {
+  const cfg = CONFIG.enemyProgression.hp;
+  if (i === 0) return cfg.base0;
+  if (i < 10) {
+    let h = cfg.base0;
+    for (let k = 1; k <= i; k++) h = Math.round(h * cfg.earlyMult[k]);
+    return h;
+  }
+  const step = i - 10;
+  let h = cfg.base10 * Math.pow(cfg.growth, step);
+  if (isBoss) h *= cfg.bossMult;
+  else if (isElite) h *= cfg.eliteMult;
+  return Math.round(h);
+}
+
+export function calcEnemyDamage(i, isBoss = false, isElite = false) {
+  const cfg = CONFIG.enemyProgression.damage;
+  if (i < 10) return cfg.earlyDmg[i];
+  const step = i - 10;
+  let d = cfg.base10 * Math.pow(cfg.growth, step);
+  if (isBoss) d *= cfg.bossMult;
+  else if (isElite) d *= cfg.eliteMult;
+  return Math.round(d);
+}
+
+export function calcEnemyInterval(i, isBoss = false, isMiniBoss = false) {
+  const cfg = CONFIG.enemyProgression.interval;
+  let interval = Math.max(cfg.floor, cfg.base * Math.pow(cfg.decay, i));
+  if (isBoss) interval = Math.max(cfg.bossFloor, interval * cfg.bossMult);
+  else if (isMiniBoss) interval = Math.max(cfg.floor, interval * cfg.miniBossMult);
+  return Math.round(interval * 100) / 100;
+}
+
+export function calcEnemyBounty(hp, i) {
+  const cfg = CONFIG.enemyProgression.bounty;
+  let coinRate = i < 10 ? cfg.earlyRate : Math.max(cfg.minRate, cfg.baseRate * Math.pow(cfg.rateDecay, i - 10));
+  coinRate = Math.round(coinRate * 1000) / 1000;
+  const bounty = Math.max(cfg.minBounty, Math.round(hp * coinRate));
+  return { coinRate, bounty };
+}
+
+export function calcPlayerMaxHp(playerLevel, hasStamina = false, hasUnstoppable = false) {
+  const hpCfg = CONFIG.playerHp;
+  const skCfg = CONFIG.skillFx;
+  let hp = hpCfg.base + hpCfg.perLevel * Math.max(0, (playerLevel || 1) - 1);
+  if (hasStamina) hp += skCfg.staminaHp || 50;
+  if (hasUnstoppable) hp += skCfg.unstoppableHp || 100;
+  return hp;
+}
 
 export { ROSTER } from './roster.js';
 
