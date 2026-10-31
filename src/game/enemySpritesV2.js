@@ -572,10 +572,10 @@ export const V2_CONFIGS = [
     "cheekY": 0.3,
     "colors": ["#2f5d8a", "#7a4a21", "#8b93a0", "#3b2a1a", "#101820"],
     "poses": {
-      "idle": {"src": "/enemy-sprites-v2/poses/16-castle-guard-idle.webp", "w": 491, "h": 900},
-      "attack1": {"src": "/enemy-sprites-v2/poses/16-castle-guard-attack.webp", "w": 545, "h": 900},
-      "attack": {"src": "/enemy-sprites-v2/poses/16-castle-guard-attack.webp", "w": 545, "h": 900},
-      "dizzy": {"src": "/enemy-sprites-v2/poses/16-castle-guard-dizzy.webp", "w": 600, "h": 900}
+      "idle": {"src": "/enemy-sprites-v2/poses/16-castle-guard-idle.webp", "w": 530, "h": 900},
+      "attack1": {"src": "/enemy-sprites-v2/poses/16-castle-guard-attack.webp", "w": 520, "h": 900},
+      "attack": {"src": "/enemy-sprites-v2/poses/16-castle-guard-attack.webp", "w": 520, "h": 900},
+      "dizzy": {"src": "/enemy-sprites-v2/poses/16-castle-guard-dizzy.webp", "w": 528, "h": 900}
     },
     "thumb": "/enemy-sprites-v2/thumbs/16-castle-guard-thumb.webp"
   },
@@ -1286,12 +1286,12 @@ export const V2_CONFIGS = [
       },
       "attack1": {
         "src": "/enemy-sprites-v2/poses/48-crystal-dragon-attack.webp",
-        "w": 663,
+        "w": 672,
         "h": 900
       },
       "attack": {
         "src": "/enemy-sprites-v2/poses/48-crystal-dragon-attack.webp",
-        "w": 663,
+        "w": 672,
         "h": 900
       },
       "dizzy": {
