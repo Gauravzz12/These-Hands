@@ -1,6 +1,6 @@
 {
   "appId": "com.thesehands.game",
-  "appName": "Idle-Slapper",
+  "appName": "Idle Slapper",
   "webDir": "dist",
   "server": {
     "androidScheme": "https"

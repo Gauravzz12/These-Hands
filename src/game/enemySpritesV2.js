@@ -565,63 +565,41 @@ export const V2_CONFIGS = [
   },
   {
     "idx": 15,
-    "id": "16-royal-executioner",
+    "id": "16-castle-guard",
+    "name": "Castle Guard",
+    "refH": 900,
+    "cheekX": 0.5,
+    "cheekY": 0.3,
+    "colors": ["#2f5d8a", "#7a4a21", "#8b93a0", "#3b2a1a", "#101820"],
+    "poses": {
+      "idle": {"src": "/enemy-sprites-v2/poses/16-castle-guard-idle.webp", "w": 491, "h": 900},
+      "attack1": {"src": "/enemy-sprites-v2/poses/16-castle-guard-attack.webp", "w": 545, "h": 900},
+      "attack": {"src": "/enemy-sprites-v2/poses/16-castle-guard-attack.webp", "w": 545, "h": 900},
+      "dizzy": {"src": "/enemy-sprites-v2/poses/16-castle-guard-dizzy.webp", "w": 600, "h": 900}
+    },
+    "thumb": "/enemy-sprites-v2/thumbs/16-castle-guard-thumb.webp"
+  },
+  {
+    "idx": 16,
+    "id": "17-royal-executioner",
     "name": "Royal Executioner",
     "refH": 521,
     "cheekX": 0.2,
     "cheekY": 0.56,
     "colors": ["#000000", "#503030", "#303030", "#101010", "#301010"],
     "poses": {
-      "attack1": {"src": "/enemy-sprites-v2/poses/16-royal-executioner-attack.webp", "w": 991, "h": 906},
+      "attack1": {"src": "/enemy-sprites-v2/poses/17-royal-executioner-attack.webp", "w": 991, "h": 906},
       "attack2": {
-        "src": "/enemy-sprites-v2/poses/16-royal-executioner-attack.webp",
+        "src": "/enemy-sprites-v2/poses/17-royal-executioner-attack.webp",
         "w": 266,
         "h": 421
       },
-      "dizzy": {"src": "/enemy-sprites-v2/poses/16-royal-executioner-dizzy.webp", "w": 911, "h": 586},
-      "idle": {"src": "/enemy-sprites-v2/poses/16-royal-executioner-idle.webp", "w": 778, "h": 900},
-      "attack": {"src": "/enemy-sprites-v2/poses/16-royal-executioner-attack.webp", "w": 991, "h": 906}
+      "dizzy": {"src": "/enemy-sprites-v2/poses/17-royal-executioner-dizzy.webp", "w": 911, "h": 586},
+      "idle": {"src": "/enemy-sprites-v2/poses/17-royal-executioner-idle.webp", "w": 778, "h": 900},
+      "attack": {"src": "/enemy-sprites-v2/poses/17-royal-executioner-attack.webp", "w": 991, "h": 906}
     },
-    "thumb": "/enemy-sprites-v2/thumbs/16-royal-executioner-thumb.webp"
+    "thumb": "/enemy-sprites-v2/thumbs/17-royal-executioner-thumb.webp"
   },
-  {
-  "idx": 16,
-  "id": "17-knight",
-  "name": "Knight",
-  "refH": 900,
-  "cheekX": 0.5,
-  "cheekY": 0.42,
-  "colors": [
-    "#000000",
-    "#463b45",
-    "#aba598",
-    "#1e0a0c",
-    "#000204"
-  ],
-  "poses": {
-    "idle": {
-      "src": "/enemy-sprites-v2/poses/17-knight-idle.webp",
-      "w": 564,
-      "h": 900
-    },
-    "attack1": {
-      "src": "/enemy-sprites-v2/poses/17-knight-attack.webp",
-      "w": 1001,
-      "h": 853
-    },
-    "attack": {
-      "src": "/enemy-sprites-v2/poses/17-knight-attack.webp",
-      "w": 1001,
-      "h": 853
-    },
-    "dizzy": {
-      "src": "/enemy-sprites-v2/poses/17-knight-dizzy.webp",
-      "w": 821,
-      "h": 755
-    }
-  },
-  "thumb": "/enemy-sprites-v2/thumbs/17-knight-thumb.webp"
-},
   {
   "idx": 17,
   "id": "18-armored-warrior",
@@ -1294,35 +1272,35 @@ export const V2_CONFIGS = [
   },
   {
     "idx": 47,
-    "id": "48-infernal-dragon",
-    "name": "Infernal Dragon",
+    "id": "48-crystal-dragon",
+    "name": "Crystal Dragon",
     "refH": 900,
     "cheekX": 0.5,
-    "cheekY": 0.34,
-    "colors": ["#000000", "#303030", "#101010", "#303040", "#201020"],
+    "cheekY": 0.31,
+    "colors": ["#7c6cf0", "#4a3fb0", "#bfeaff", "#8f7ff5", "#2c2470"],
     "poses": {
       "idle": {
-        "src": "/enemy-sprites-v2/poses/48-infernal-dragon-idle.webp",
-        "w": 659,
+        "src": "/enemy-sprites-v2/poses/48-crystal-dragon-idle.webp",
+        "w": 656,
         "h": 900
       },
       "attack1": {
-        "src": "/enemy-sprites-v2/poses/48-infernal-dragon-attack.webp",
-        "w": 704,
-        "h": 1053
+        "src": "/enemy-sprites-v2/poses/48-crystal-dragon-attack.webp",
+        "w": 663,
+        "h": 900
       },
       "attack": {
-        "src": "/enemy-sprites-v2/poses/48-infernal-dragon-attack.webp",
-        "w": 704,
-        "h": 1053
+        "src": "/enemy-sprites-v2/poses/48-crystal-dragon-attack.webp",
+        "w": 663,
+        "h": 900
       },
       "dizzy": {
-        "src": "/enemy-sprites-v2/poses/48-infernal-dragon-dizzy.webp",
-        "w": 693,
-        "h": 675
+        "src": "/enemy-sprites-v2/poses/48-crystal-dragon-dizzy.webp",
+        "w": 649,
+        "h": 900
       }
     },
-    "thumb": "/enemy-sprites-v2/thumbs/48-infernal-dragon-thumb.webp"
+    "thumb": "/enemy-sprites-v2/thumbs/48-crystal-dragon-thumb.webp"
   },
   {
     "idx": 48,

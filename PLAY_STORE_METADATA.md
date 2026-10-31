@@ -1,4 +1,4 @@
-# Google Play Store Listing & Metadata — These Hands
+# Google Play Store Listing & Metadata — Idle Slapper
 
 Use the text and assets below when filling out your Google Play Console store presence.
 
@@ -7,7 +7,7 @@ Use the text and assets below when filling out your Google Play Console store pr
 ## 1. Store Text & Descriptions
 
 ### App Name (Max 30 characters)
-`These Hands: Slap Idle RPG`  *(26 / 30 chars)*
+`Idle Slapper: Slap Idle RPG`  *(26 / 30 chars)*
 
 ### Short Description (Max 80 characters)
 `Slap bosses, unlock superhero hands, trigger Frenzy, and conquer epic stages!`  *(79 / 80 chars)*
@@ -15,9 +15,9 @@ Use the text and assets below when filling out your Google Play Console store pr
 ### Full Description (Up to 4,000 characters)
 
 ```markdown
-Step into the ultimate slap battle arena! In **These Hands**, your hands are the ultimate weapon. Face off against dozens of eccentric, hilarious bosses across vibrant biomes, upgrade your slap attributes, unleash devastating special abilities, and collect legendary hero hands.
+Step into the ultimate slap battle arena! In **Idle Slapper**, your hands are the ultimate weapon. Face off against dozens of eccentric, hilarious bosses across vibrant biomes, upgrade your slap attributes, unleash devastating special abilities, and collect legendary hero hands.
 
-Whether you prefer furious high-speed tapping or relaxing idle progression, These Hands packs nonstop action, satisfying retro pixel art, and punchy combat sound effects.
+Whether you prefer furious high-speed tapping or relaxing idle progression, Idle Slapper packs nonstop action, satisfying retro pixel art, and punchy combat sound effects.
 
 🥊 INTENSE SLAP COMBAT & BOSS FIGHTS
 Take on over 50 unique bosses—from the Street Gang and Neon Brawlers to Mystic Samurai and Mythic Titans. Time your slaps, counter incoming enemy attacks, and land critical strikes to break their guard!
@@ -49,7 +49,7 @@ Upgrade your core stats to match your combat style:
 
 Offline progress support lets your hands keep mining coins while you're away!
 
-Do you have what it takes to slap your way into legend? Download **These Hands** now and start slapping!
+Do you have what it takes to slap your way into legend? Download **Idle Slapper** now and start slapping!
 ```
 
 ---

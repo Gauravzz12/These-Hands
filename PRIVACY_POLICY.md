@@ -1,14 +1,14 @@
-# Privacy Policy for These Hands
+# Privacy Policy for Idle Slapper
 
 **Last updated: October 30, 2026**
 
-This Privacy Policy applies to the mobile game **These Hands** ("the Game", "we", "us", or "our"). We are committed to protecting your privacy and ensuring transparency about how data is handled.
+This Privacy Policy applies to the mobile game **Idle Slapper** ("the Game", "we", "us", or "our"). We are committed to protecting your privacy and ensuring transparency about how data is handled.
 
 ---
 
 ### 1. Information We Collect
 
-"These Hands" is primarily an offline-capable client-side game. We do not require account registration or collect personal identifying information (such as your real name, email address, physical address, or phone number) directly on our own servers.
+"Idle Slapper" is primarily an offline-capable client-side game. We do not require account registration or collect personal identifying information (such as your real name, email address, physical address, or phone number) directly on our own servers.
 
 However, the game integrates trusted third-party service providers that may collect certain information automatically:
 
@@ -51,14 +51,14 @@ The Game uses the following third-party SDKs:
 
 ### 4. Children's Privacy (COPPA Compliance)
 
-"These Hands" does not knowingly collect personally identifiable information from children under the age of 13. If you believe that your child has provided us with personal information, please contact us so we can take appropriate measures.
+"Idle Slapper" does not knowingly collect personally identifiable information from children under the age of 13. If you believe that your child has provided us with personal information, please contact us so we can take appropriate measures.
 
 ---
 
 ### 5. Data Retention & Deletion
 
 Because game data is stored locally on your device, you can delete your data at any time by clearing the application storage via:
-**Settings > Apps > These Hands > Storage > Clear Data**.
+**Settings > Apps > Idle Slapper > Storage > Clear Data**.
 
 To reset your advertising identifier, you can do so in your Android device settings under:
 **Settings > Google > Ads > Reset advertising ID**.
