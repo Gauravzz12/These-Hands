@@ -6,55 +6,53 @@ import { getV2Sprite, isV2Enemy } from './enemySpritesV2.js';
 export const GIANT_SCALE = {"Giant Rooster":1.6,"Giant Spider":1.6,"Giant Serpent":1.6,"Giant Scorpion":1.6,"Storm Giant":1.65,"Kraken Spawn":1.6,"T-Rex King":1.6,"Glacier Titan":1.65};
 
 export const ALL_ENEMIES = (() => {
-  let runningHp = 45;
   return ROSTER.map((r, i) => {
     const pos = i % 5;
     const elite = pos === 4;
     const boss = i % 10 === 9;
     const miniBoss = elite && !boss;
-    let stepMult;
+
+    let hp;
     if (i === 0) {
-      stepMult = 1;
+      hp = 55;
     } else if (i < 10) {
-      stepMult = boss ? 2.0 : miniBoss ? 1.5 : ((i - 1) % 5 === 4) ? 1.15 : 1.28;
-    } else if (i < 30) {
-      const prevWasBoss = (i - 1) % 10 === 9;
-      const prevWasMini = (i - 1) % 5 === 4 && !prevWasBoss;
-      stepMult = boss ? 1.85 : miniBoss ? 1.45 : prevWasBoss ? 1.10 : prevWasMini ? 1.12 : 1.20;
+      const earlyMult = [1, 1.35, 1.38, 1.42, 1.70, 1.25, 1.30, 1.35, 1.40, 2.20];
+      let h = 55;
+      for (let k = 1; k <= i; k++) h = Math.round(h * earlyMult[k]);
+      hp = h;
     } else {
-      const prevWasBoss = (i - 1) % 10 === 9;
-      const prevWasMini = (i - 1) % 5 === 4 && !prevWasBoss;
-      stepMult = boss ? 1.75 : miniBoss ? 1.40 : prevWasBoss ? 1.08 : prevWasMini ? 1.10 : 1.16;
+      // Start Bodybuilder at 17,500 and scale exponentially to ~1.6B at Final Dragon
+      const base10 = 17500;
+      const step = i - 10;
+      let h = base10 * Math.pow(1.328, step);
+      if (boss) h *= 1.45;
+      else if (elite) h *= 1.25;
+      hp = Math.round(h);
     }
-    if (i > 0) runningHp = Math.round(runningHp * stepMult);
-    const hp = runningHp;
 
-    let bounty;
-    if (i < 10) {
-      bounty = Math.max(20, Math.round(hp * 0.38));
-    } else if (i < 30) {
-      bounty = Math.round(hp * Math.max(0.12, 0.35 * Math.pow(0.97, i)));
-    } else {
-      bounty = Math.round(hp * Math.max(0.04, 0.15 * Math.pow(0.98, i - 30)));
-    }
-    const coinRate = Math.round((bounty / hp) * 1000) / 1000;
+    // Money earning: generous coin rate so earning money is easy!
+    let coinRate = i < 10 ? 0.48 : Math.max(0.38, 0.50 * Math.pow(0.995, i - 10));
+    coinRate = Math.round(coinRate * 1000) / 1000;
+    const bounty = Math.max(25, Math.round(hp * coinRate));
 
-    let interval = Math.max(1.2, 3.0 * Math.pow(0.985, i));
-    if (boss) interval = Math.max(1.1, interval * 0.88);
-    else if (miniBoss) interval = Math.max(1.15, interval * 0.92);
+    let interval = Math.max(1.15, 2.8 * Math.pow(0.982, i));
+    if (boss) interval = Math.max(1.1, interval * 0.90);
+    else if (miniBoss) interval = Math.max(1.15, interval * 0.94);
     interval = Math.round(interval * 100) / 100;
 
-    const expectedLevel = Math.min(50, 1 + Math.floor(i / 1.4));
-    const playerHp = 100 + 25 * (expectedLevel - 1);
-    let dmgFraction;
+    let atkDmg;
     if (i < 10) {
-      dmgFraction = (boss ? 0.18 : miniBoss ? 0.14 : 0.09) + 0.005 * i;
-    } else if (i < 30) {
-      dmgFraction = (boss ? 0.35 : miniBoss ? 0.28 : 0.22) + 0.003 * (i - 10);
+      const earlyDmg = [12, 16, 20, 24, 35, 40, 48, 55, 65, 95];
+      atkDmg = earlyDmg[i];
     } else {
-      dmgFraction = (boss ? 0.52 : miniBoss ? 0.42 : 0.34) + 0.003 * (i - 30);
+      // Bodybuilder at i=10 starts at 130, scaling to ~5,600 at i=49
+      const baseDmg10 = 130;
+      const dmgStep = i - 10;
+      let d = baseDmg10 * Math.pow(1.092, dmgStep);
+      if (boss) d *= 1.40;
+      else if (elite) d *= 1.20;
+      atkDmg = Math.round(d);
     }
-    const atkDmg = Math.max(6, Math.round(playerHp * dmgFraction));
 
     const built = {
       idx: i,
