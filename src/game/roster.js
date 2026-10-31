@@ -75,14 +75,14 @@ export const ROSTER = [
     "rooster"
   ],
   [
-    "Royal Executioner",
-    "knight",
+    "Castle Guard",
+    "guard",
     "guard"
   ],
   [
-    "Knight",
+    "Royal Executioner",
     "knight",
-    "knight"
+    "guard"
   ],
   [
     "Armored Warrior",
@@ -235,9 +235,9 @@ export const ROSTER = [
     "champion"
   ],
   [
-    "Infernal Dragon",
+    "Crystal Dragon",
     "dragon",
-    "infernal"
+    "crystal"
   ],
   [
     "Ancient Dragon",
