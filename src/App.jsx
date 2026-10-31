@@ -598,14 +598,13 @@ export default function App() {
           <div className="menu-kicker">THE IDLE BRAWLER</div>
           <img className="menu-logo-img" src="/logo.png" alt="Idle Slapper" />
         </div>
-        <div className="menu-stage" aria-hidden="true">
-          <div className="menu-spotlight"></div>
-          <div className="floor"></div>
-          <div className="rug"></div>
-          <div className="menu-enemy-ring"></div>
-          <img id="menuHandL" alt="" />
-          <img id="menuHand" alt="" />
-          <div className="menu-burst" id="menuBurst"></div>
+        <div className="menu-stage trio" aria-hidden="true">
+          <div className="menu-trio">
+            <img className="trio-e trio-1" src="/enemy-sprites-v2/poses/05-slime-blob-idle.webp" alt="" />
+            <img className="trio-e trio-2" src="/enemy-sprites-v2/poses/06-sassy-goblin-sprout-idle.webp" alt="" />
+            <img className="trio-e trio-3" src="/enemy-sprites-v2/poses/10-mischievous-monkey-idle.webp" alt="" />
+            <div className="trio-bench"></div>
+          </div>
         </div>
         <div className="menu-actions">
           <button id="playBtn">PLAY</button>

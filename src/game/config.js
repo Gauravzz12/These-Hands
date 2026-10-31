@@ -27,7 +27,7 @@ export const CONFIG = {
     "stun": { "name": "Stun", "baseCost": 30, "growth": 1.25, "maxLevel": 30 },
     "combo": { "name": "Combo", "baseCost": 25, "growth": 1.24, "maxLevel": 40 },
     "coinMult": { "name": "Coin Mult.", "baseCost": 20, "growth": 1.24, "maxLevel": 40 },
-    "accuracy": { "name": "Accuracy", "baseCost": 20, "growth": 1.24, "maxLevel": 25 },
+    "accuracy": { "name": "Accuracy", "baseCost": 200, "growth": 1.42, "maxLevel": 14 },
     "bossDamage": { "name": "Boss Hunter", "baseCost": 30, "growth": 1.25, "maxLevel": 40 },
     "vampirism": { "name": "Life Leech", "baseCost": 30, "growth": 1.25, "maxLevel": 35 },
     "luck": { "name": "Fortune Luck", "baseCost": 30, "growth": 1.25, "maxLevel": 30 }
