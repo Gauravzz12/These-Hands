@@ -9,28 +9,28 @@ export const CONFIG = {
   "capPerLevel": 3,
   "levelUp": {
     "base": 60,
-    "growth": 1.38,
-    "rampStart": 10,
-    "midGrowth": 1.24,
+    "growth": 1.40,
+    "rampStart": 4,
+    "midGrowth": 1.36,
     "midStart": 30,
-    "lateGrowth": 1.22,
+    "lateGrowth": 1.16,
     "grindStart": 40,
-    "endGrowth": 1.20
+    "endGrowth": 1.10
   },
   "levelCap": 50,
   "attrs": {
-    "power": { "name": "Power", "baseCost": 15, "growth": 1.24, "maxLevel": 50 },
-    "speed": { "name": "Speed", "baseCost": 20, "growth": 1.24, "maxLevel": 40 },
-    "critChance": { "name": "Crit Chance", "baseCost": 25, "growth": 1.24, "maxLevel": 35 },
-    "critDamage": { "name": "Crit Damage", "baseCost": 25, "growth": 1.24, "maxLevel": 40 },
-    "defense": { "name": "Defense", "baseCost": 20, "growth": 1.24, "maxLevel": 40 },
-    "stun": { "name": "Stun", "baseCost": 30, "growth": 1.25, "maxLevel": 30 },
-    "combo": { "name": "Combo", "baseCost": 25, "growth": 1.24, "maxLevel": 40 },
-    "coinMult": { "name": "Coin Mult.", "baseCost": 20, "growth": 1.24, "maxLevel": 40 },
-    "accuracy": { "name": "Accuracy", "baseCost": 200, "growth": 1.42, "maxLevel": 14 },
-    "bossDamage": { "name": "Boss Hunter", "baseCost": 30, "growth": 1.25, "maxLevel": 40 },
-    "vampirism": { "name": "Life Leech", "baseCost": 30, "growth": 1.25, "maxLevel": 35 },
-    "luck": { "name": "Fortune Luck", "baseCost": 30, "growth": 1.25, "maxLevel": 30 }
+    "power": { "name": "Power", "baseCost": 15, "growth": 1.245, "maxLevel": 50 },
+    "speed": { "name": "Speed", "baseCost": 22, "growth": 1.31, "maxLevel": 40 },
+    "critChance": { "name": "Crit Chance", "baseCost": 40, "growth": 1.34, "maxLevel": 35 },
+    "critDamage": { "name": "Crit Damage", "baseCost": 25, "growth": 1.305, "maxLevel": 40 },
+    "defense": { "name": "Defense", "baseCost": 22, "growth": 1.31, "maxLevel": 40 },
+    "stun": { "name": "Stun", "baseCost": 60, "growth": 1.4, "maxLevel": 30 },
+    "combo": { "name": "Combo", "baseCost": 25, "growth": 1.305, "maxLevel": 40 },
+    "coinMult": { "name": "Coin Mult.", "baseCost": 22, "growth": 1.31, "maxLevel": 40 },
+    "accuracy": { "name": "Accuracy", "baseCost": 600, "growth": 1.55, "maxLevel": 14 },
+    "bossDamage": { "name": "Boss Hunter", "baseCost": 25, "growth": 1.305, "maxLevel": 40 },
+    "vampirism": { "name": "Life Leech", "baseCost": 40, "growth": 1.34, "maxLevel": 35 },
+    "luck": { "name": "Fortune Luck", "baseCost": 60, "growth": 1.4, "maxLevel": 30 }
   },
   "attrOrder": [
     "power",
@@ -747,7 +747,7 @@ export const CONFIG = {
       },
       "power": {
         "name": "TIME STOP",
-        "desc": "every 10th slap stops time for 2.5s: +50% damage and your slaps fly faster"
+        "desc": "every 10th slap stops time for 5s: +50% damage and your slaps fly faster"
       },
       "price": {
         "cur": "gems",
@@ -902,7 +902,7 @@ export const CONFIG = {
       "coins": 80000,
       "gems": 400,
       "tagline": "Adamantium Rage Set",
-      "desc": "Unleash Wolverine (+15% Crit Chance & Adamantium Claws bleeding strikes) with heavy gold and gems."
+      "desc": "Unleash Wolverine (+8% Crit Chance & Berserker Barrage bleeding slashes) with heavy gold and gems."
     },
     {
       "id": "inferno",
@@ -914,7 +914,7 @@ export const CONFIG = {
       "coins": 250000,
       "gems": 800,
       "tagline": "Lord of Asgard Set",
-      "desc": "Harness Thor (+20% Slap Power & Lightning Strike shockwaves) with massive coin and gem reserves."
+      "desc": "Harness Thor (+10% Damage & Mjolnir Slam lightning strikes) with massive coin and gem reserves."
     },
     {
       "id": "dragon",
@@ -926,7 +926,7 @@ export const CONFIG = {
       "coins": 1000000,
       "gems": 1600,
       "tagline": "Gamma Breaker Set",
-      "desc": "Smash obstacles with Hulk (+30% Boss Damage & Gamma Smash tremor) alongside a colossal treasury."
+      "desc": "Smash obstacles with Hulk (+20% Damage & screen-shaking Thunderclap) alongside a colossal treasury."
     },
     {
       "id": "cosmic",
@@ -938,7 +938,7 @@ export const CONFIG = {
       "coins": 10000000,
       "gems": 3000,
       "tagline": "Omnipotent Snap Set",
-      "desc": "Wield the Mythic Infinity Gauntlet (all 6 stones, 50% HP reality snap) with ultimate coin and gem fortune!"
+      "desc": "Wield the Mythic Infinity Gauntlet (all 6 stones, Time Stop frenzy) with ultimate coin and gem fortune!"
     }
   ],
   "features": [
