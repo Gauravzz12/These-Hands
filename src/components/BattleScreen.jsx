@@ -512,6 +512,22 @@ export default function BattleScreen() {
               <div className="end-head lose">KNOCKED OUT</div>
               <div style={{ fontSize:72, margin:'8px 0', filter:'saturate(.4)' }}>{ENEMY_EMOJIS[bs.enemyId]}</div>
               <div className="end-sub">Defeated by {enemy.name}</div>
+              {isBoss && (
+                <div style={{ margin: '8px 0', padding: '10px', background: 'rgba(239, 68, 68, 0.15)', border: '2px solid #ef4444', borderRadius: 10, textAlign: 'center' }}>
+                  <div style={{ fontWeight: 800, fontSize: 13, color: '#ef4444' }}>💥 NEED MORE POWER?</div>
+                  <div style={{ fontSize: 11, color: 'var(--ink-soft)', marginBottom: 6 }}>Watch an ad to get 2× DAMAGE for 10 minutes!</div>
+                  <button
+                    className="btn-primary"
+                    style={{ fontSize: 13, padding: '7px 12px', background: '#ef4444', border: 'none' }}
+                    onClick={() => {
+                      dispatch({ type: 'ACTIVATE_DMG_BOOST' });
+                      fightAgain();
+                    }}
+                  >
+                    ⚡ WATCH AD — 2× DAMAGE
+                  </button>
+                </div>
+              )}
               <div className="end-btns">
                 <button className="btn-primary" style={{ width:'100%', background:'var(--accent)', color:'#fff', fontSize:16, padding:'13px 16px' }} onClick={fightAgain}>TRY AGAIN</button>
                 <button className="btn-dark" style={{ width:'100%', justifyContent:'center', background:'transparent', color:'var(--ink)', border:'2px solid var(--chrome-edge)' }} onClick={chooseEnemy}>CHOOSE ENEMY</button>

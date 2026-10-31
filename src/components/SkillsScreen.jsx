@@ -8,20 +8,25 @@ const NODE_POSITIONS = {
   basic:          { x: 50, y: 8  },
   secondHand:     { x: 25, y: 26 },
   strongerHands:  { x: 50, y: 26 },
-  quickReflexes:  { x: 75, y: 26 },
-  onTarget:       { x: 25, y: 48 },
-  criticalSlaps:  { x: 40, y: 48 },
-  heavySlap:      { x: 60, y: 48 },
-  staminaTraining:{ x: 70, y: 48 },
-  frenzy:         { x: 80, y: 48 },
-  comboMastery:   { x: 20, y: 70 },
-  dualHand:       { x: 33, y: 70 },
-  bossHunter:     { x: 55, y: 70 },
-  coinMagnet:     { x: 43, y: 70 },
-  rapidBarrage:   { x: 28, y: 90 },
-  unstoppable:    { x: 60, y: 90 },
-  goldenTouch:    { x: 45, y: 90 },
-  ultimateSlap:   { x: 65, y: 90 },
+  staminaTraining:{ x: 75, y: 26 },
+  quickReflexes:  { x: 20, y: 48 },
+  onTarget:       { x: 35, y: 48 },
+  criticalSlaps:  { x: 50, y: 48 },
+  thunderclap:    { x: 65, y: 48 },
+  heavySlap:      { x: 80, y: 48 },
+  kineticShield:  { x: 15, y: 70 },
+  comboMastery:   { x: 30, y: 70 },
+  dualHand:       { x: 45, y: 70 },
+  echoPalm:       { x: 60, y: 70 },
+  bossHunter:     { x: 75, y: 70 },
+  coinMagnet:     { x: 90, y: 70 },
+  unstoppable:    { x: 20, y: 85 },
+  goldenTouch:    { x: 40, y: 85 },
+  frenzy:         { x: 60, y: 85 },
+  titanSlayer:    { x: 80, y: 85 },
+  rapidBarrage:   { x: 30, y: 95 },
+  aegisBulwark:   { x: 50, y: 95 },
+  ultimateSlap:   { x: 70, y: 95 },
 };
 
 function fmtCoins(n) {
@@ -39,13 +44,15 @@ export default function SkillsScreen() {
   const selectedSkill = CONFIG.skills.find(s => s.id === selected);
   const isOwned   = save.skills[selected];
   const prereqMet = !selectedSkill?.prereq || save.skills[selectedSkill.prereq];
+  const reqBossMet = selectedSkill?.reqBoss == null || !!save.defeatedEnemies?.[selectedSkill.reqBoss];
   const canAfford = save.coins >= (selectedSkill?.cost || 0);
-  const canBuy    = prereqMet && canAfford && !isOwned && selectedSkill?.cost > 0;
+  const canBuy    = prereqMet && reqBossMet && canAfford && !isOwned && selectedSkill?.cost > 0;
 
   const getNodeClass = (skill) => {
     if (save.skills[skill.id]) return 'owned';
     const prereqOwned = !skill.prereq || save.skills[skill.prereq];
-    if (!prereqOwned) return 'locked';
+    const bossReqMet = skill.reqBoss == null || !!save.defeatedEnemies?.[skill.reqBoss];
+    if (!prereqOwned || !bossReqMet) return 'locked';
     if (save.coins >= skill.cost) return 'ready';
     return 'poor';
   };
@@ -54,9 +61,10 @@ export default function SkillsScreen() {
   const SKILL_ICONS = {
     basic:'🤚', secondHand:'🙌', strongerHands:'💪', quickReflexes:'⚡',
     criticalSlaps:'🎯', heavySlap:'🔨', onTarget:'🎳', staminaTraining:'🛡️',
-    frenzy:'🌀', comboMastery:'🔥', dualHand:'✌️', bossHunter:'🏹',
-    coinMagnet:'🪙', rapidBarrage:'💥', unstoppable:'🦾', goldenTouch:'✨',
-    ultimateSlap:'⚡',
+    thunderclap:'⛈️', kineticShield:'🔰', comboMastery:'🔥', dualHand:'✌️',
+    echoPalm:'🌊', bossHunter:'🏹', coinMagnet:'🪙', unstoppable:'🦾',
+    goldenTouch:'✨', frenzy:'🌀', titanSlayer:'🗡️', rapidBarrage:'💥',
+    aegisBulwark:'🏰', ultimateSlap:'⚡',
   };
 
   const owned = CONFIG.skills.filter(s => save.skills[s.id]).length;
@@ -77,8 +85,9 @@ export default function SkillsScreen() {
 
       {/* Skill grid */}
       <div style={{ overflowY:'auto', padding:'12px', flex:1, minHeight:0, display:'flex', flexDirection:'column', gap:14 }}>
-        {[1,2,3,4].map(tier => {
+        {[1,2,3,4,5].map(tier => {
           const tierSkills = CONFIG.skills.filter(s => s.tier === tier);
+          if (!tierSkills.length) return null;
           return (
             <div key={tier}>
               <h3 style={{ margin:'0 0 7px', fontFamily:'Bungee,sans-serif', fontSize:14, fontWeight:400, color:'var(--ink-soft)', letterSpacing:'.04em' }}>
@@ -120,7 +129,7 @@ export default function SkillsScreen() {
           {CONFIG.levelAbilities.map(ab => {
             const unlocked = ab.level <= save.playerLevel;
             return (
-              <div key={ab.id} className={`attr-row ${unlocked ? '' : ''}`} style={{ marginBottom:7, opacity: unlocked ? 1 : 0.5 }}>
+              <div key={ab.id} className="attr-row" style={{ marginBottom:7, opacity: unlocked ? 1 : 0.5 }}>
                 <div style={{ fontSize:24 }}>{['✨','⚡','🛡️','💰','🩸','🎯','💚','🏹','✨'][CONFIG.levelAbilities.indexOf(ab)] || '⭐'}</div>
                 <div className="ar-main">
                   <div className="ar-name">
@@ -149,7 +158,8 @@ export default function SkillsScreen() {
             <div style={{ fontFamily:'Bungee,sans-serif', fontSize:16, lineHeight:1.15 }}>{selectedSkill.name}</div>
             <div style={{ fontSize:12, fontWeight:700, color:'var(--ink-soft)', lineHeight:1.35, marginTop:2 }}>{selectedSkill.fx}</div>
             <div style={{ fontSize:11, fontWeight:800, letterSpacing:'.04em', color:'var(--ink-soft)', marginTop:3 }}>
-              {selectedSkill.prereq && `Requires: ${CONFIG.skills.find(s => s.id === selectedSkill.prereq)?.name}`}
+              {selectedSkill.prereq && `Requires: ${CONFIG.skills.find(s => s.id === selectedSkill.prereq)?.name || selectedSkill.prereq}`}
+              {selectedSkill.reqBoss != null && ` · Defeat Boss #${selectedSkill.reqBoss + 1}`}
             </div>
           </div>
           {isOwned ? (

@@ -23,7 +23,7 @@ export function createInitialSave() {
     gems: 0,
     playerLevel: 1,
     xp: 0,
-    attrs: { power:0, speed:0, critChance:0, critDamage:0, combo:0, coinMult:0, accuracy:0, bossDamage:0, luck:0, special:0 },
+    attrs: { power:0, speed:0, critChance:0, critDamage:0, defense:0, stun:0, combo:0, coinMult:0, accuracy:0, bossDamage:0, vampirism:0, luck:0, special:0 },
     skills: { basic: true },
     defeatedEnemies: {},       // { [enemyId]: true }
     hardDefeatedEnemies: {},   // { [enemyId]: true }
@@ -37,6 +37,8 @@ export function createInitialSave() {
     dailyChest: { streak:0, lastDay:null },
     offlineEarningsUnlocked: false,
     lastSeen: Date.now(),
+    adCoinBoostUntil: 0,
+    adDmgBoostUntil: 0,
     specials: {},
     music: true,
     sfx: true,
@@ -48,7 +50,13 @@ export function loadSave() {
     const raw = localStorage.getItem(SAVE_KEY);
     if (!raw) return createInitialSave();
     const parsed = JSON.parse(raw);
-    return { ...createInitialSave(), ...parsed };
+    const initial = createInitialSave();
+    return {
+      ...initial,
+      ...parsed,
+      attrs: { ...initial.attrs, ...(parsed.attrs || {}) },
+      stats: { ...initial.stats, ...(parsed.stats || {}) },
+    };
   } catch {
     return createInitialSave();
   }
@@ -79,60 +87,74 @@ export function levelUpCost(currentLevel) {
 // Derived player stats from save
 // ──────────────────────────────────────────────
 export function computePlayerStats(save) {
-  const a = save.attrs;
-  const s = save.skills;
-  const ab = save.playerLevel;
+  const a = save.attrs || {};
+  const s = save.skills || {};
+  const ab = save.playerLevel || 1;
   const fx = CONFIG.fx;
   const sfx = CONFIG.skillFx;
   const afxMap = CONFIG.abilityFx;
 
-  // Base damage
-  let dmg = CONFIG.playerBase.damage;
+  // Active ad damage boost (strictly 2x outgoing damage)
+  const adDmgMult = (save.adDmgBoostUntil && save.adDmgBoostUntil > Date.now()) ? 2.0 : 1.0;
+
+  // Base damage matching runtime combat engine
+  let dmg = (CONFIG.playerBase.damage + (a.power || 0) * 2);
   if (s.strongerHands) dmg *= sfx.strongerDmg;
   if (ab >= 2) dmg *= afxMap.ironPalm;
-  dmg *= 1 + a.power * 0.15;
+  if (ab >= 20) dmg *= afxMap.godhandDmg || 1.15;
+  if (ab > 20) dmg *= 1 + (afxMap.masteryPer || 0.02) * (ab - 20);
+  dmg *= adDmgMult;
 
   // Attack interval (lower = faster)
   let interval = CONFIG.playerBase.attackInterval;
-  interval *= Math.max(fx.speedFloor, Math.pow(fx.speedPerLevel, a.speed));
+  interval *= Math.max(fx.speedFloor, Math.pow(fx.speedPerLevel, a.speed || 0));
   if (s.quickReflexes) interval *= sfx.quickSpeed;
   if (s.dualHand) interval *= sfx.dualSpeed;
   if (ab >= 3) interval *= afxMap.quickening;
-  if (s.secondHand) interval *= 0.5; // two hands = half the interval per hand
+  if (ab >= 20) interval *= afxMap.godhandSpeed || 0.92;
+  if (s.secondHand) interval *= 0.5; // two hands = half interval per hand
+  interval = Math.max(0.12, interval);
 
   // Crit
-  let critChance = CONFIG.playerBase.critChance + a.critChance * fx.critChancePerLevel;
+  let critChance = CONFIG.playerBase.critChance + (a.critChance || 0) * fx.critChancePerLevel;
   if (s.criticalSlaps) critChance += sfx.critSlaps;
   if (ab >= 7) critChance += afxMap.critSurge;
-  critChance = Math.min(0.95, critChance);
+  critChance = Math.min(0.60, critChance);
 
-  let critMult = CONFIG.playerBase.critMult + a.critDamage * fx.critDamagePerLevel;
+  let critMult = CONFIG.playerBase.critMult + (a.critDamage || 0) * fx.critDamagePerLevel;
 
   // Combo
   const comboBaseStacks = fx.comboBaseStacks + (s.comboMastery ? sfx.comboMasteryStacks : 0);
-  const comboPerStack = a.combo * fx.comboPerStackPerLevel + (s.comboMastery ? sfx.comboMasteryPer : 0);
+  const comboPerStack = (a.combo || 0) * fx.comboPerStackPerLevel + (s.comboMastery ? sfx.comboMasteryPer : 0);
 
-  // Coins
-  let coinMult = 1 + a.coinMult * fx.coinPerLevel;
+  // Active ad coin boost (strictly 2x coin rewards)
+  const adCoinMult = (save.adCoinBoostUntil && save.adCoinBoostUntil > Date.now()) ? 2.0 : 1.0;
+  let coinMult = 1 + (a.coinMult || 0) * fx.coinPerLevel;
   if (ab >= 5) coinMult *= afxMap.greed;
-  if (ab >= 10) coinMult *= afxMap.goldenAura;
+  if (ab >= 9) coinMult *= afxMap.goldenAura;
   if (s.coinMagnet) coinMult *= sfx.magnetCoins;
   if (s.goldenTouch) coinMult *= sfx.goldenCoins;
+  coinMult *= adCoinMult;
 
   // Accuracy
-  let accuracy = Math.min(fx.accuracyCap, fx.accuracyBase + a.accuracy * fx.accuracyPerLevel);
+  let accuracy = Math.min(fx.accuracyCap, fx.accuracyBase + (a.accuracy || 0) * fx.accuracyPerLevel);
 
   // Boss damage multiplier
-  let bossDmgMult = 1 + a.bossDamage * fx.bossDmgPerLevel;
+  let bossDmgMult = 1 + (a.bossDamage || 0) * fx.bossDmgPerLevel;
   if (s.bossHunter) bossDmgMult *= sfx.bossMult;
-  if (ab >= 9) bossDmgMult *= afxMap.bossBane;
+  if (ab >= 8) bossDmgMult *= afxMap.bossBane;
 
   // HP
   let maxHp = CONFIG.playerHp.base + (ab - 1) * CONFIG.playerHp.perLevel;
   if (s.staminaTraining) maxHp += sfx.staminaHp;
   if (s.unstoppable) maxHp += sfx.unstoppableHp;
 
-  const dps = dmg / interval;
+  // Theoretical DPS with heavy hits, combos, and crits
+  const pH = s.heavySlap ? sfx.heavyChance : 0;
+  const maxStacks = comboBaseStacks + Math.round((a.combo || 0) * 0.4);
+  const avgComboMult = 1 + (maxStacks * 0.7) * comboPerStack;
+  let dps = (dmg * avgComboMult * ((1 - pH) * (1 + critChance * (critMult - 1)) + pH * sfx.heavyMult)) / interval;
+  if (s.rapidBarrage) dps *= 1 + sfx.barrageHits * sfx.barrageMult / sfx.barrageEvery;
 
   return { dmg, interval, critChance, critMult, comboBaseStacks, comboPerStack, coinMult, accuracy, bossDmgMult, maxHp, dps };
 }
@@ -206,12 +228,33 @@ export function calcOfflineEarnings(save) {
   const cfg = CONFIG.offline;
   if (!save.offlineEarningsUnlocked) return 0;
   const now = Date.now();
-  const awayMs = now - (save.lastSeen || now);
-  const awaySecs = Math.min(awayMs / 1000, cfg.capSeconds);
-  if (awaySecs < cfg.minAway) return 0;
-  const stats = computePlayerStats(save);
-  const coinsPerSec = stats.dps * cfg.rate * stats.coinMult;
-  return Math.floor(coinsPerSec * awaySecs);
+  const lastSeen = save.lastSeen || now;
+  if (now <= lastSeen) return 0; // clock manipulation protection
+  
+  const rawAwaySecs = Math.max(0, (now - lastSeen) / 1000);
+  if (rawAwaySecs < cfg.minAway) return 0; // anti-exploit threshold
+  const totalAwaySecs = Math.min(rawAwaySecs, cfg.capSeconds);
+
+  // Base player stats without temporary ad coin boost
+  const baseSave = { ...save, adCoinBoostUntil: 0 };
+  const stats = computePlayerStats(baseSave);
+  const baseCoinsPerSec = stats.dps * cfg.rate * stats.coinMult;
+
+  // Split away time into boosted and unboosted portions
+  const boostExpiry = save.adCoinBoostUntil || 0;
+  let boostedSecs = 0;
+  if (boostExpiry > lastSeen) {
+    const boostEndMs = Math.min(lastSeen + totalAwaySecs * 1000, boostExpiry);
+    boostedSecs = Math.max(0, (boostEndMs - lastSeen) / 1000);
+  }
+  const unboostedSecs = Math.max(0, totalAwaySecs - boostedSecs);
+
+  // 2x Coins applies strictly to the boostedSecs portion
+  const unboostedCoins = Math.floor(baseCoinsPerSec * unboostedSecs);
+  const boostedCoins = Math.floor(baseCoinsPerSec * 2.0 * boostedSecs);
+  const totalCoins = unboostedCoins + boostedCoins;
+
+  return totalCoins;
 }
 
 // ──────────────────────────────────────────────

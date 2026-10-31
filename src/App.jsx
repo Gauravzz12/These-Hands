@@ -104,6 +104,7 @@ export default function App() {
               <div className="away-sub" id="awayText"></div>
               <div className="away-amt" id="awayAmt"></div>
               <button id="awayClaim">CLAIM</button>
+              <button id="awayDoubleBtn" className="away-double-btn">📺 WATCH AD TO DOUBLE (2X)</button>
             </div>
           </div>
 
@@ -309,6 +310,16 @@ export default function App() {
             <div className="atop-line">PLAYER LEVEL <b id="attrsLevelVal">1</b> · CAP <b id="attrsCapVal">5</b> PER ATTRIBUTE</div>
             <div className="atop-line" id="attrsDps"></div>
             <button id="attrsLevelUpBtn"></button>
+            <div className="attrs-booster-banner" id="attrsBoosterBanner">
+              <div className="abb-left">
+                <span className="abb-ico">💰</span>
+                <div>
+                  <div className="abb-title" id="attrsBoosterTitle">2× COINS BOOST (10 MINS)</div>
+                  <div className="abb-sub" id="attrsBoosterSub">Double all coin rewards</div>
+                </div>
+              </div>
+              <button className="abb-btn" id="attrsBoostBtn" type="button">WATCH AD</button>
+            </div>
           </div>
           <div id="pageAttrsAccordion" className="perks-accordion">
             <button type="button" id="pageAttrsToggle" className="perks-toggle" aria-expanded="false" aria-controls="pageAttrsCollapse">
@@ -559,6 +570,13 @@ export default function App() {
               <span className="ead-icon">🎬</span>
               <span className="ead-text" id="endAdDoubleText">WATCH AD TO DOUBLE REWARDS</span>
               <span className="ead-bonus" id="endAdDoubleBonus">+0</span>
+            </button>
+          </div>
+          <div id="endBossDmgAdWrap" className="end-boss-ad-wrap" style={{'display': 'none'}}>
+            <div className="eba-title">💥 BOSS TOUGH TO BEAT?</div>
+            <div className="eba-sub">Power up your hands with 2× DAMAGE for 10 minutes!</div>
+            <button className="end-boss-dmg-btn" id="endBossDmgAdBtn" type="button">
+              ⚡ WATCH AD — 2× DAMAGE (10m)
             </button>
           </div>
           <div className="end-btns">

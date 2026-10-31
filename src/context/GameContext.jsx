@@ -131,7 +131,17 @@ function reducer(state, action) {
     }
 
     case 'CLAIM_OFFLINE': {
-      return { ...state, save: { ...s, coins: s.coins + action.amount }, offlineEarnings: 0 };
+      return { ...state, save: { ...s, coins: s.coins + action.amount, lastSeen: Date.now() }, offlineEarnings: 0 };
+    }
+
+    case 'ACTIVATE_COIN_BOOST': {
+      const curNow = Date.now();
+      return { ...state, save: { ...s, adCoinBoostUntil: curNow + 10 * 60 * 1000 } };
+    }
+
+    case 'ACTIVATE_DMG_BOOST': {
+      const curNow = Date.now();
+      return { ...state, save: { ...s, adDmgBoostUntil: curNow + 10 * 60 * 1000 } };
     }
 
     case 'INIT_QUESTS': {

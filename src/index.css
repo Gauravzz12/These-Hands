@@ -4230,3 +4230,124 @@ margin-top: 7px;
   gap: 8px;
   margin-top: 8px;
 }
+
+/* ── Rewarded Boosters Placements (Attrs & Defeat & Offline) ── */
+.attrs-booster-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: rgba(242, 176, 30, 0.12);
+  border: 2px solid var(--gold-dark);
+  margin-top: 6px;
+}
+.attrs-booster-banner.active {
+  background: rgba(34, 197, 94, 0.15);
+  border-color: #22c55e;
+}
+.attrs-booster-banner .abb-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.attrs-booster-banner .abb-ico {
+  font-size: 22px;
+}
+.attrs-booster-banner .abb-title {
+  font-family: "Bungee", "Nunito", sans-serif;
+  font-size: 11.5px;
+  color: var(--ink);
+}
+.attrs-booster-banner.active .abb-title {
+  color: #15803d;
+}
+.attrs-booster-banner .abb-sub {
+  font-size: 10.5px;
+  font-weight: 700;
+  color: var(--ink-soft);
+}
+.attrs-booster-banner .abb-btn {
+  border: none;
+  cursor: pointer;
+  border-radius: 8px;
+  padding: 6px 12px;
+  font-family: "Nunito", sans-serif;
+  font-weight: 900;
+  font-size: 11.5px;
+  background: var(--gold);
+  color: #2b1c10;
+  white-space: nowrap;
+}
+.attrs-booster-banner.active .abb-btn {
+  background: #22c55e;
+  color: #ffffff;
+}
+
+.end-boss-ad-wrap {
+  width: 100%;
+  margin: 10px 0 6px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: rgba(239, 68, 68, 0.12);
+  border: 2px solid #ef4444;
+  text-align: center;
+}
+.end-boss-ad-wrap .eba-title {
+  font-family: "Bungee", "Nunito", sans-serif;
+  font-size: 13px;
+  color: #dc2626;
+  margin-bottom: 2px;
+}
+.end-boss-ad-wrap .eba-sub {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--ink-soft);
+  margin-bottom: 8px;
+}
+.end-boss-dmg-btn {
+  width: 100%;
+  max-width: 280px;
+  border: none;
+  cursor: pointer;
+  border-radius: 10px;
+  padding: 8px 12px;
+  font-family: "Nunito", sans-serif;
+  font-weight: 900;
+  font-size: 13px;
+  background: #ef4444;
+  color: #ffffff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+.end-boss-dmg-btn:active {
+  transform: scale(0.97);
+}
+
+.away-double-btn {
+  width: 100%;
+  margin-top: 8px;
+  padding: 9px 12px;
+  border-radius: 10px;
+  border: 2px solid #22c55e;
+  background: rgba(34, 197, 94, 0.15);
+  color: #15803d;
+  font-family: "Nunito", sans-serif;
+  font-weight: 900;
+  font-size: 13px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+.away-double-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  border-color: #9ca3af;
+  color: #6b7280;
+  background: rgba(156, 163, 175, 0.15);
+}

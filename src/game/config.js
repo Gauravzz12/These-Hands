@@ -8,92 +8,29 @@ export const CONFIG = {
   },
   "capPerLevel": 3,
   "levelUp": {
-    "base": 80,
-    "growth": 2.1,
-    "rampStart": 5,
-    "midGrowth": 2.15,
-    "midLinear": 0.04,
-    "midStart": 15,
-    "lateGrowth": 1.85,
-    "lateLinear": 0.03,
-    "endStart": 30,
-    "endGrowth": 1.50,
-    "endLinear": 0.02
+    "base": 60,
+    "growth": 1.38,
+    "rampStart": 10,
+    "midGrowth": 1.24,
+    "midStart": 30,
+    "lateGrowth": 1.22,
+    "grindStart": 40,
+    "endGrowth": 1.20
   },
-  "levelCap": 100,
+  "levelCap": 50,
   "attrs": {
-    "power": {
-      "name": "Power",
-      "baseCost": 18,
-      "growth": 1.38,
-      "maxLevel": 100
-    },
-    "speed": {
-      "name": "Speed",
-      "baseCost": 25,
-      "growth": 1.38,
-      "maxLevel": 50
-    },
-    "critChance": {
-      "name": "Crit Chance",
-      "baseCost": 25,
-      "growth": 1.38,
-      "maxLevel": 50
-    },
-    "critDamage": {
-      "name": "Crit Damage",
-      "baseCost": 25,
-      "growth": 1.38,
-      "maxLevel": 50
-    },
-    "defense": {
-      "name": "Defense",
-      "baseCost": 30,
-      "growth": 1.38,
-      "maxLevel": 50
-    },
-    "stun": {
-      "name": "Stun",
-      "baseCost": 30,
-      "growth": 1.38,
-      "maxLevel": 45
-    },
-    "combo": {
-      "name": "Combo",
-      "baseCost": 25,
-      "growth": 1.38,
-      "maxLevel": 50
-    },
-    "coinMult": {
-      "name": "Coin Mult.",
-      "baseCost": 25,
-      "growth": 1.38,
-      "maxLevel": 50
-    },
-    "accuracy": {
-      "name": "Accuracy",
-      "baseCost": 25,
-      "growth": 1.38,
-      "maxLevel": 30
-    },
-    "bossDamage": {
-      "name": "Boss Hunter",
-      "baseCost": 35,
-      "growth": 1.38,
-      "maxLevel": 50
-    },
-    "vampirism": {
-      "name": "Life Leech",
-      "baseCost": 35,
-      "growth": 1.38,
-      "maxLevel": 45
-    },
-    "luck": {
-      "name": "Fortune Luck",
-      "baseCost": 35,
-      "growth": 1.38,
-      "maxLevel": 45
-    }
+    "power": { "name": "Power", "baseCost": 15, "growth": 1.24, "maxLevel": 50 },
+    "speed": { "name": "Speed", "baseCost": 20, "growth": 1.24, "maxLevel": 40 },
+    "critChance": { "name": "Crit Chance", "baseCost": 25, "growth": 1.24, "maxLevel": 35 },
+    "critDamage": { "name": "Crit Damage", "baseCost": 25, "growth": 1.24, "maxLevel": 40 },
+    "defense": { "name": "Defense", "baseCost": 20, "growth": 1.24, "maxLevel": 40 },
+    "stun": { "name": "Stun", "baseCost": 30, "growth": 1.25, "maxLevel": 30 },
+    "combo": { "name": "Combo", "baseCost": 25, "growth": 1.24, "maxLevel": 40 },
+    "coinMult": { "name": "Coin Mult.", "baseCost": 20, "growth": 1.24, "maxLevel": 40 },
+    "accuracy": { "name": "Accuracy", "baseCost": 20, "growth": 1.24, "maxLevel": 25 },
+    "bossDamage": { "name": "Boss Hunter", "baseCost": 30, "growth": 1.25, "maxLevel": 40 },
+    "vampirism": { "name": "Life Leech", "baseCost": 30, "growth": 1.25, "maxLevel": 35 },
+    "luck": { "name": "Fortune Luck", "baseCost": 30, "growth": 1.25, "maxLevel": 30 }
   },
   "attrOrder": [
     "power",
@@ -141,34 +78,36 @@ export const CONFIG = {
   },
   "enemyProgression": {
     "hp": {
-      "base0": 55,
-      "earlyMult": [1, 1.35, 1.38, 1.42, 1.70, 1.25, 1.30, 1.35, 1.40, 2.20],
-      "base10": 17500,
-      "growth": 1.328,
-      "bossMult": 1.45,
-      "eliteMult": 1.25
+      "base0": 65,
+      "early": [65, 95, 140, 210, 350, 520, 780, 1150, 1700, 3200],
+      "base10": 4200,
+      "growth": 1.140,
+      "bossMult": 1.50,
+      "eliteMult": 1.22
     },
     "damage": {
-      "earlyDmg": [12, 16, 20, 24, 35, 40, 48, 55, 65, 95],
-      "base10": 130,
-      "growth": 1.092,
-      "bossMult": 1.40,
-      "eliteMult": 1.20
+      "earlyDmg": [6, 9, 12, 16, 22, 28, 35, 42, 50, 68],
+      "base10": 42,
+      "growth": 1.026,
+      "bossMult": 1.32,
+      "eliteMult": 1.15
     },
     "interval": {
       "base": 2.8,
-      "decay": 0.982,
-      "floor": 1.15,
-      "bossMult": 0.90,
-      "bossFloor": 1.10,
-      "miniBossMult": 0.94
+      "decay": 0.992,
+      "floor": 1.70,
+      "bossMult": 0.95,
+      "bossFloor": 1.60,
+      "miniBossMult": 0.96
     },
     "bounty": {
-      "earlyRate": 0.48,
-      "baseRate": 0.50,
-      "rateDecay": 0.995,
-      "minRate": 0.38,
+      "earlyRate": 0.45,
+      "baseRate": 0.45,
+      "rateDecay": 0.996,
+      "minRate": 0.35,
       "minBounty": 25,
+      "scale": 0.35,
+      "bossBonusMult": 1.40,
       "normalKillBonusMult": 0.25,
       "hardKillBonusMult": 1.0
     }
@@ -452,9 +391,9 @@ export const CONFIG = {
       "id": "ultimateSlap",
       "name": "Ultimate Slap",
       "tier": 5,
-      "cost": 18000000,
+      "cost": 12000000,
       "prereq": "titanSlayer",
-      "reqBoss": 49,
+      "reqBoss": 39,
       "fx": "Every 15s of combat, your next slap is an ULTIMATE: 10x damage."
     }
   ],
@@ -1224,23 +1163,24 @@ export function calcLevelUpCost(currentLevel) {
   const lv = currentLevel != null ? currentLevel : 1;
   if (CONFIG.levelCap && lv >= CONFIG.levelCap) return Infinity;
   const c = CONFIG.levelUp;
-  const base = c.base || 80;
+  const base = c.base || 60;
   if (lv === 1) return base;
-  if (lv <= c.rampStart) return Math.round(base * Math.pow(c.growth, lv - 1));
-  const costRamp = Math.round(base * Math.pow(c.growth, c.rampStart - 1));
-  if (lv <= c.midStart) {
-    const extra = lv - c.rampStart;
-    return Math.round(costRamp * Math.pow(c.midGrowth, extra) * (1 + (c.midLinear || 0.04) * extra));
+  if (lv <= (c.rampStart || 10)) return Math.round(base * Math.pow(c.growth || 1.38, lv - 1));
+  const costRamp = Math.round(base * Math.pow(c.growth || 1.38, (c.rampStart || 10) - 1));
+  const midStart = c.midStart || 30;
+  if (lv <= midStart) {
+    const extra = lv - (c.rampStart || 10);
+    return Math.round(costRamp * Math.pow(c.midGrowth || 1.24, extra));
   }
-  const costMid = Math.round(costRamp * Math.pow(c.midGrowth, c.midStart - c.rampStart) * (1 + (c.midLinear || 0.04) * (c.midStart - c.rampStart)));
-  const endStart = c.endStart || 30;
-  if (lv <= endStart) {
-    const extra = lv - c.midStart;
-    return Math.round(costMid * Math.pow(c.lateGrowth, extra) * (1 + (c.lateLinear || 0.03) * extra));
+  const costMid = Math.round(costRamp * Math.pow(c.midGrowth || 1.24, midStart - (c.rampStart || 10)));
+  const grindStart = c.grindStart || 40;
+  if (lv <= grindStart) {
+    const extra = lv - midStart;
+    return Math.round(costMid * Math.pow(c.lateGrowth || 1.22, extra));
   }
-  const costLate = Math.round(costMid * Math.pow(c.lateGrowth, endStart - c.midStart) * (1 + (c.lateLinear || 0.03) * (endStart - c.midStart)));
-  const extra = lv - endStart;
-  return Math.round(costLate * Math.pow(c.endGrowth || 1.50, extra) * (1 + (c.endLinear || 0.02) * extra));
+  const costGrind = Math.round(costMid * Math.pow(c.lateGrowth || 1.22, grindStart - midStart));
+  const extra = lv - grindStart;
+  return Math.round(costGrind * Math.pow(c.endGrowth || 1.20, extra));
 }
 
 export function calcAttrCost(key, currentLevel) {
@@ -1259,6 +1199,7 @@ export function calcEnemyHp(i, isBoss = false, isElite = false) {
   const cfg = CONFIG.enemyProgression.hp;
   if (i === 0) return cfg.base0;
   if (i < 10) {
+    if (cfg.early && cfg.early[i] != null) return cfg.early[i];
     let h = cfg.base0;
     for (let k = 1; k <= i; k++) h = Math.round(h * cfg.earlyMult[k]);
     return h;
@@ -1284,15 +1225,16 @@ export function calcEnemyInterval(i, isBoss = false, isMiniBoss = false) {
   const cfg = CONFIG.enemyProgression.interval;
   let interval = Math.max(cfg.floor, cfg.base * Math.pow(cfg.decay, i));
   if (isBoss) interval = Math.max(cfg.bossFloor, interval * cfg.bossMult);
-  else if (isMiniBoss) interval = Math.max(cfg.floor, interval * cfg.miniBossMult);
+  else if (isMiniBoss) interval = Math.max(cfg.floor, interval * (cfg.miniBossMult || 0.95));
   return Math.round(interval * 100) / 100;
 }
 
-export function calcEnemyBounty(hp, i) {
+export function calcEnemyBounty(hp, i, isBoss = false) {
   const cfg = CONFIG.enemyProgression.bounty;
   let coinRate = i < 10 ? cfg.earlyRate : Math.max(cfg.minRate, cfg.baseRate * Math.pow(cfg.rateDecay, i - 10));
   coinRate = Math.round(coinRate * 1000) / 1000;
-  const bounty = Math.max(cfg.minBounty, Math.round(hp * coinRate));
+  let bounty = Math.max(cfg.minBounty, Math.round(hp * coinRate * (cfg.scale || 0.35)));
+  if (isBoss && cfg.bossBonusMult) bounty = Math.round(bounty * cfg.bossBonusMult);
   return { coinRate, bounty };
 }
 
@@ -1306,6 +1248,30 @@ export function calcPlayerMaxHp(playerLevel, hasStamina = false, hasUnstoppable 
 }
 
 export { ROSTER } from './roster.js';
-
 export { ALL_ENEMIES, ENEMIES } from './enemies.js';
-export { GROUPS as ENEMY_GROUPS };
+
+// Lazy-mapped ENEMY_GROUPS ensuring each group always has .enemies populated
+export const ENEMY_GROUPS = new Proxy(GROUPS, {
+  get(target, prop, receiver) {
+    if (prop === 'map') {
+      return (cb) => target.map((g, gi) => {
+        const enriched = {
+          ...g,
+          enemies: Array.isArray(ALL_ENEMIES) ? ALL_ENEMIES.slice(gi * 5, gi * 5 + 5).map((e, idx) => ({ ...e, id: gi * 5 + idx })) : []
+        };
+        return cb(enriched, gi, target);
+      });
+    }
+    const val = Reflect.get(target, prop, receiver);
+    if (typeof prop === 'string' && !isNaN(Number(prop))) {
+      const gi = Number(prop);
+      if (val && !val.enemies) {
+        return {
+          ...val,
+          enemies: Array.isArray(ALL_ENEMIES) ? ALL_ENEMIES.slice(gi * 5, gi * 5 + 5).map((e, idx) => ({ ...e, id: gi * 5 + idx })) : []
+        };
+      }
+    }
+    return val;
+  }
+});

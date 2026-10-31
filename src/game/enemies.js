@@ -17,7 +17,7 @@ function buildAllEnemies() {
     const miniBoss = elite && !boss;
 
     const hp = calcEnemyHp(i, boss, elite);
-    const { coinRate, bounty } = calcEnemyBounty(hp, i);
+    const { coinRate, bounty } = calcEnemyBounty(hp, i, boss);
     const interval = calcEnemyInterval(i, boss, miniBoss);
     const atkDmg = calcEnemyDamage(i, boss, elite);
 
@@ -46,11 +46,20 @@ function buildAllEnemies() {
     return built;
   });
 
+  // Ensure monotonic progression between normal enemies
   for (let i = 1; i < _allEnemies.length; i++) {
-    const p = _allEnemies[i - 1], c = _allEnemies[i];
-    if (c.hp <= p.hp) c.hp = Math.round(p.hp * 1.15);
-    if (c.bounty <= p.bounty) c.bounty = Math.round(p.bounty * 1.12);
-    if (c.atkDmg < p.atkDmg) c.atkDmg = p.atkDmg;
+    const c = _allEnemies[i];
+    if (!c.boss && !c.elite) {
+      for (let j = i - 1; j >= 0; j--) {
+        const p = _allEnemies[j];
+        if (!p.boss && !p.elite) {
+          if (c.hp < p.hp) c.hp = Math.round(p.hp * 1.05);
+          if (c.bounty < p.bounty) c.bounty = Math.round(p.bounty * 1.03);
+          if (c.atkDmg < p.atkDmg) c.atkDmg = p.atkDmg;
+          break;
+        }
+      }
+    }
   }
 
   return _allEnemies;
