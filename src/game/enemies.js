@@ -1,5 +1,5 @@
 // These Hands — Authentic Enemies Definition & Sprite Generation
-import { CONFIG, ROSTER, GROUPS } from './config.js';
+import { ROSTER } from './roster.js';
 import { ENEMY_ART, makeSprite } from './artData.js';
 import { getV2Sprite, isV2Enemy } from './enemySpritesV2.js';
 

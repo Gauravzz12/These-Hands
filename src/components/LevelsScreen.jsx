@@ -84,7 +84,8 @@ export default function LevelsScreen() {
                   const done = save.defeatedEnemies[enemy.id];
                   const isCurrent = enemy.id === save.currentEnemyId;
                   const hardDone = save.hardDefeatedEnemies[enemy.id];
-                  const hardAvail = done;
+                  const groupCleared = group.enemies.every(e => save.defeatedEnemies[e.id]);
+                  const hardAvail = (state.testMode || groupCleared) && done;
                   const hp = computeEnemyHp(enemy.id);
 
                   let stateLabel = 'LOCKED';
@@ -116,7 +117,7 @@ export default function LevelsScreen() {
                           FIGHT!
                         </button>
                       )}
-                      {hardAvail && !isCurrent && (
+                      {hardAvail && !isCurrent ? (
                         <button
                           className={`ecard-hard ${hardDone ? 'done' : ''}`}
                           onClick={(e) => { e.stopPropagation(); startFight(enemy.id, true); }}
@@ -124,7 +125,9 @@ export default function LevelsScreen() {
                           <svg viewBox="0 0 24 24" width="13" height="13"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" fill="none" stroke="currentColor" strokeWidth="2"/></svg>
                           {hardDone ? 'HARD ✓' : 'HARD MODE'}
                         </button>
-                      )}
+                      ) : done && !isCurrent ? (
+                        <div className="ecard-hard locked">CLEAR STAGE FIRST</div>
+                      ) : null}
                     </div>
                   );
                 })}

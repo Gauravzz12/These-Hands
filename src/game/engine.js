@@ -73,17 +73,22 @@ export function attrCap(playerLevel) {
 export function levelUpCost(currentLevel) {
   const lv = currentLevel != null ? currentLevel : 1;
   if (CONFIG.levelCap && lv >= CONFIG.levelCap) return Infinity;
-  const base = CONFIG.levelUp.base || 40;
-  if (lv <= 6) return Math.round(base * Math.pow(1.45, lv - 1));
-  const cost6 = Math.round(base * Math.pow(1.45, 5));
-  const extra = lv - 6;
-  if (lv <= 20) return Math.round(cost6 * Math.pow(1.70, extra) * (1 + 0.05 * extra));
-  const cost20 = Math.round(cost6 * Math.pow(1.70, 14) * (1 + 0.05 * 14));
-  const extra20 = lv - 20;
-  if (lv <= 50) return Math.round(cost20 * Math.pow(1.42, extra20) * (1 + 0.03 * extra20));
-  const cost50 = Math.round(cost20 * Math.pow(1.42, 30) * (1 + 0.03 * 30));
-  const extra50 = lv - 50;
-  return Math.round(cost50 * Math.pow(1.18, extra50) * (1 + 0.02 * extra50));
+  const base = CONFIG.levelUp.base || 80;
+  if (lv === 1) return base;
+  if (lv <= 5) return Math.round(base * Math.pow(2.1, lv - 1));
+  const cost5 = Math.round(base * Math.pow(2.1, 4));
+  if (lv <= 15) {
+    const extra = lv - 5;
+    return Math.round(cost5 * Math.pow(2.15, extra) * (1 + 0.04 * extra));
+  }
+  const cost15 = Math.round(cost5 * Math.pow(2.15, 10) * (1 + 0.04 * 10));
+  if (lv <= 30) {
+    const extra = lv - 15;
+    return Math.round(cost15 * Math.pow(1.85, extra) * (1 + 0.03 * extra));
+  }
+  const cost30 = Math.round(cost15 * Math.pow(1.85, 15) * (1 + 0.03 * 15));
+  const extra = lv - 30;
+  return Math.round(cost30 * Math.pow(1.50, extra) * (1 + 0.02 * extra));
 }
 
 // ──────────────────────────────────────────────
