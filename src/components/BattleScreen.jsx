@@ -139,7 +139,7 @@ export default function BattleScreen() {
       lastDmg: 0,
       lastActualDps: 0,
       bossEnraged: false,
-      secondWind: save.playerLevel >= 8,
+      secondWind: save.playerLevel >= 15,
       slapCount: 0,
       ultTimer: 0,
       barrageCount: 0,

@@ -74,13 +74,16 @@ export function levelUpCost(currentLevel) {
   const lv = currentLevel != null ? currentLevel : 1;
   if (CONFIG.levelCap && lv >= CONFIG.levelCap) return Infinity;
   const base = CONFIG.levelUp.base || 40;
-  if (lv <= 10) return Math.round(base * Math.pow(1.34, lv - 1));
-  const cost10 = base * Math.pow(1.34, 9);
-  const extra = lv - 10;
-  if (lv <= 50) return Math.round(cost10 * Math.pow(1.46, extra) * (1 + 0.04 * extra));
-  const cost50 = cost10 * Math.pow(1.46, 40) * (1 + 0.04 * 40);
+  if (lv <= 6) return Math.round(base * Math.pow(1.45, lv - 1));
+  const cost6 = Math.round(base * Math.pow(1.45, 5));
+  const extra = lv - 6;
+  if (lv <= 20) return Math.round(cost6 * Math.pow(1.70, extra) * (1 + 0.05 * extra));
+  const cost20 = Math.round(cost6 * Math.pow(1.70, 14) * (1 + 0.05 * 14));
+  const extra20 = lv - 20;
+  if (lv <= 50) return Math.round(cost20 * Math.pow(1.42, extra20) * (1 + 0.03 * extra20));
+  const cost50 = Math.round(cost20 * Math.pow(1.42, 30) * (1 + 0.03 * 30));
   const extra50 = lv - 50;
-  return Math.round(cost50 * Math.pow(1.20, extra50) * (1 + 0.03 * extra50));
+  return Math.round(cost50 * Math.pow(1.18, extra50) * (1 + 0.02 * extra50));
 }
 
 // ──────────────────────────────────────────────

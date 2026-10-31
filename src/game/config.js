@@ -9,9 +9,11 @@ export const CONFIG = {
   "capPerLevel": 3,
   "levelUp": {
     "base": 40,
-    "growth": 1.26,
-    "lateStart": 10,
-    "lateGrowth": 1.24
+    "earlyGrowth": 1.45,
+    "rampStart": 6,
+    "midGrowth": 1.70,
+    "midStart": 20,
+    "lateGrowth": 1.42
   },
   "levelCap": 100,
   "attrs": {
@@ -491,51 +493,51 @@ export const CONFIG = {
     },
     {
       "level": 8,
-      "id": "secondWind",
-      "name": "Second Wind",
-      "fx": "Once per fight, a killing blow instead leaves you at 25% HP."
-    },
-    {
-      "level": 9,
       "id": "bossBane",
       "name": "Boss Bane",
       "fx": "+20% damage vs elites and bosses."
     },
     {
-      "level": 10,
+      "level": 9,
       "id": "goldenAura",
       "name": "Golden Aura",
       "fx": "+25% coins — strikes and kill bonuses."
     },
     {
-      "level": 11,
+      "level": 10,
       "id": "counterCadence",
       "name": "Counter-Cadence",
       "fx": "Retaliating against an enemy attack guarantees your next slap lands as a 2.5x critical hit."
     },
     {
-      "level": 12,
+      "level": 11,
       "id": "battleFocus",
       "name": "Battle Focus",
       "fx": "At 8+ Combo stacks, gain +12% stun chance to lock enemies down."
     },
     {
-      "level": 13,
+      "level": 12,
       "id": "toughGrit",
       "name": "Tough Grit",
       "fx": "Below 50% HP: take 15% less damage and heal +1 HP on every slap."
     },
     {
-      "level": 14,
+      "level": 13,
       "id": "overcharge",
       "name": "Overcharge Wave",
       "fx": "Critical hits emit a shockwave dealing true bonus damage equal to 5x Defense."
     },
     {
-      "level": 15,
+      "level": 14,
       "id": "giantStature",
       "name": "Giant Stature",
       "fx": "+75 Max HP permanently, and slaps against Elites/Bosses build double combo."
+    },
+    {
+      "level": 15,
+      "id": "secondWind",
+      "name": "Second Wind",
+      "fx": "Once per fight, a killing blow instead leaves you at 25% HP."
     },
     {
       "level": 16,
