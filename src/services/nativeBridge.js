@@ -10,6 +10,14 @@ const REWARDED_AD_UNIT_ID = 'ca-app-pub-4838625298188198/2176399244';
 // Official Google AdMob Test Rewarded Ad Unit ID (ensures ad playback during testing / account verification)
 const TEST_REWARDED_AD_UNIT_ID = 'ca-app-pub-3940256099942544/5224354917';
 
+// Google AdMob Interstitial + Banner Ad Unit IDs
+// TODO(wire): replace the empty strings with the real unit IDs from the AdMob console.
+// Until then the official Google TEST units are used so the flow can be verified in dev builds.
+const INTERSTITIAL_AD_UNIT_ID = '';
+const TEST_INTERSTITIAL_AD_UNIT_ID = 'ca-app-pub-3940256099942544/1033173712';
+const BANNER_AD_UNIT_ID = '';
+const TEST_BANNER_AD_UNIT_ID = 'ca-app-pub-3940256099942544/6300978111';
+
 export const NativeBridge = {
   isNative: Capacitor.isNativePlatform(),
   admobInitialized: false,
@@ -149,6 +157,47 @@ export const NativeBridge = {
       return true;
     } catch (err) {
       console.warn('Native AdMob show error:', err);
+      return false;
+    }
+  },
+
+  // Interstitial: game logic (frequency caps, win counter, remove-ads) lives in the
+  // engine's Ads manager — this only prepares/shows. No-op on web.
+  async showInterstitial() {
+    if (!this.isNative) {
+      console.log('[Ads] Interstitial requested (web mode — no-op).');
+      return false;
+    }
+    try {
+      const adId = INTERSTITIAL_AD_UNIT_ID || TEST_INTERSTITIAL_AD_UNIT_ID;
+      await AdMob.prepareInterstitial({ adId });
+      await AdMob.showInterstitial();
+      return true;
+    } catch (err) {
+      console.warn('Native AdMob interstitial error:', err);
+      return false;
+    }
+  },
+
+  // Banner: shown only on home/shop by the engine's Ads manager. No-op on web.
+  async showBanner() {
+    if (!this.isNative) return false;
+    try {
+      const adId = BANNER_AD_UNIT_ID || TEST_BANNER_AD_UNIT_ID;
+      await AdMob.showBanner({ adId, adSize: 'ADAPTIVE_BANNER', position: 'BOTTOM_CENTER', margin: 60 });
+      return true;
+    } catch (err) {
+      console.warn('Native AdMob banner error:', err);
+      return false;
+    }
+  },
+
+  async hideBanner() {
+    if (!this.isNative) return false;
+    try {
+      await AdMob.hideBanner();
+      return true;
+    } catch (err) {
       return false;
     }
   },
