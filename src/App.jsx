@@ -697,6 +697,8 @@ export default function App() {
         <button id="hangDismiss" type="button" aria-label="Dismiss">✕</button>
       </div>
 
+      <div id="adBanner" className="ad-banner" style={{display: 'none'}} aria-hidden="true"><span>AD</span></div>
+
       <nav id="bottomNav" aria-label="Main Navigation">
         <button className="bnav-btn active" data-tab="home" data-goto="home" aria-label="Home">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 2.5 11h2.7v9h5.3v-6h3v6h5.3v-9h2.7L12 3z" fill="currentColor"/></svg>

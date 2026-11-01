@@ -4379,3 +4379,22 @@ margin-top: 7px;
 .trio-2 { left: 50%; transform: translateX(-50%); height: 52%; animation-delay: .45s; }
 .trio-3 { right: 8%; animation-delay: .95s; }
 @keyframes trioBob { 0%, 100% { margin-bottom: 0; } 50% { margin-bottom: 6px; } }
+
+.ad-banner {
+  position: fixed;
+  bottom: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 520px;
+  height: 50px;
+  background: #efe6d0;
+  border-top: 2px dashed #b09b6d;
+  color: #8a7648;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  letter-spacing: 3px;
+  z-index: 40;
+}

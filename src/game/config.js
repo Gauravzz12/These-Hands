@@ -11,26 +11,26 @@ export const CONFIG = {
     "base": 60,
     "growth": 1.40,
     "rampStart": 4,
-    "midGrowth": 1.36,
-    "midStart": 30,
+    "midGrowth": 1.55,
+    "midStart": 20,
     "lateGrowth": 1.16,
     "grindStart": 40,
     "endGrowth": 1.10
   },
   "levelCap": 50,
   "attrs": {
-    "power": { "name": "Power", "baseCost": 15, "growth": 1.245, "maxLevel": 50 },
-    "speed": { "name": "Speed", "baseCost": 22, "growth": 1.31, "maxLevel": 40 },
-    "critChance": { "name": "Crit Chance", "baseCost": 40, "growth": 1.34, "maxLevel": 35 },
-    "critDamage": { "name": "Crit Damage", "baseCost": 25, "growth": 1.305, "maxLevel": 40 },
-    "defense": { "name": "Defense", "baseCost": 22, "growth": 1.31, "maxLevel": 40 },
-    "stun": { "name": "Stun", "baseCost": 60, "growth": 1.4, "maxLevel": 30 },
-    "combo": { "name": "Combo", "baseCost": 25, "growth": 1.305, "maxLevel": 40 },
-    "coinMult": { "name": "Coin Mult.", "baseCost": 22, "growth": 1.31, "maxLevel": 40 },
-    "accuracy": { "name": "Accuracy", "baseCost": 600, "growth": 1.55, "maxLevel": 14 },
-    "bossDamage": { "name": "Boss Hunter", "baseCost": 25, "growth": 1.305, "maxLevel": 40 },
-    "vampirism": { "name": "Life Leech", "baseCost": 40, "growth": 1.34, "maxLevel": 35 },
-    "luck": { "name": "Fortune Luck", "baseCost": 60, "growth": 1.4, "maxLevel": 30 }
+    "power": { "name": "Power", "baseCost": 200, "growth": 1.19, "maxLevel": 50 },
+    "speed": { "name": "Speed", "baseCost": 220, "growth": 1.24, "maxLevel": 40 },
+    "critChance": { "name": "Crit Chance", "baseCost": 260, "growth": 1.27, "maxLevel": 35 },
+    "critDamage": { "name": "Crit Damage", "baseCost": 220, "growth": 1.24, "maxLevel": 40 },
+    "defense": { "name": "Defense", "baseCost": 220, "growth": 1.24, "maxLevel": 40 },
+    "stun": { "name": "Stun", "baseCost": 300, "growth": 1.31, "maxLevel": 30 },
+    "combo": { "name": "Combo", "baseCost": 220, "growth": 1.24, "maxLevel": 40 },
+    "coinMult": { "name": "Coin Mult.", "baseCost": 220, "growth": 1.24, "maxLevel": 40 },
+    "accuracy": { "name": "Accuracy", "baseCost": 800, "growth": 1.45, "maxLevel": 14 },
+    "bossDamage": { "name": "Boss Hunter", "baseCost": 220, "growth": 1.24, "maxLevel": 40 },
+    "vampirism": { "name": "Life Leech", "baseCost": 260, "growth": 1.27, "maxLevel": 35 },
+    "luck": { "name": "Fortune Luck", "baseCost": 300, "growth": 1.31, "maxLevel": 30 }
   },
   "attrOrder": [
     "power",
@@ -624,6 +624,7 @@ export const CONFIG = {
     "49": {"name": "DRAGON RENEWAL", "pct": 0.20, "every": 6, "max": 4, "blurb": "Ancient blood knits shut — heals 20% of his HP, up to 4 times per fight."}
   },
   "gauntlet": {"bonusMult": 4.5, "gemFirst": 1},
+  "ads": {"interstitialEveryWins": 4, "interstitialMinGapSec": 180},
   "weakSpot": {"mult": 8.5, "dur": 1.5, "durHard": 1.2, "firstAt": 2.2, "everyMin": 5, "everyMax": 8, "frenzyGain": 12, "capBase": 3, "capPerLuck": 5, "capMax": 6, "luckScale": 0.06},
   "gems": {
     "elite": 1,
@@ -967,6 +968,15 @@ export const CONFIG = {
       "price": "₹99",
       "valPrice": "₹299",
       "desc": "Frenzy charges 25% faster from slaps, and Frenzy duration extends to 13 seconds (normally 10s)!"
+    },
+    {
+      "id": "remove_ads",
+      "name": "Remove Ads",
+      "badge": "NO ADS",
+      "cur": "money",
+      "price": "₹199",
+      "valPrice": "₹499",
+      "desc": "No more interstitial or banner ads, forever. Optional rewarded ads stay available whenever you want a boost."
     }
   ],
   "frenzy": {
@@ -1034,6 +1044,11 @@ export const CONFIG = {
       "id": "feature_frenzy_boost",
       "kind": "feature",
       "ref": "frenzy_boost"
+    },
+    {
+      "id": "feature_remove_ads",
+      "kind": "feature",
+      "ref": "remove_ads"
     },
     {
       "id": "gem_pouch",
