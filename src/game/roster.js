@@ -245,7 +245,7 @@ export const ROSTER = [
     "ancient"
   ],
   [
-    "Final Dragon Boss",
+    "Dragon Lord",
     "dragon",
     "final"
   ],
