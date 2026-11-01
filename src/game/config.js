@@ -8,29 +8,29 @@ export const CONFIG = {
   },
   "capPerLevel": 3,
   "levelUp": {
-    "base": 60,
-    "growth": 1.40,
-    "rampStart": 4,
-    "midGrowth": 1.55,
+    "base": 100,
+    "growth": 1.8612,
+    "rampStart": 5,
+    "midGrowth": 1.45,
     "midStart": 20,
     "lateGrowth": 1.16,
     "grindStart": 40,
-    "endGrowth": 1.10
+    "endGrowth": 1.08
   },
   "levelCap": 50,
   "attrs": {
-    "power": { "name": "Power", "baseCost": 200, "growth": 1.19, "maxLevel": 50 },
-    "speed": { "name": "Speed", "baseCost": 220, "growth": 1.24, "maxLevel": 40 },
-    "critChance": { "name": "Crit Chance", "baseCost": 260, "growth": 1.27, "maxLevel": 35 },
-    "critDamage": { "name": "Crit Damage", "baseCost": 220, "growth": 1.24, "maxLevel": 40 },
-    "defense": { "name": "Defense", "baseCost": 220, "growth": 1.24, "maxLevel": 40 },
-    "stun": { "name": "Stun", "baseCost": 300, "growth": 1.31, "maxLevel": 30 },
-    "combo": { "name": "Combo", "baseCost": 220, "growth": 1.24, "maxLevel": 40 },
-    "coinMult": { "name": "Coin Mult.", "baseCost": 220, "growth": 1.24, "maxLevel": 40 },
-    "accuracy": { "name": "Accuracy", "baseCost": 800, "growth": 1.45, "maxLevel": 14 },
-    "bossDamage": { "name": "Boss Hunter", "baseCost": 220, "growth": 1.24, "maxLevel": 40 },
-    "vampirism": { "name": "Life Leech", "baseCost": 260, "growth": 1.27, "maxLevel": 35 },
-    "luck": { "name": "Fortune Luck", "baseCost": 300, "growth": 1.31, "maxLevel": 30 }
+    "power": { "name": "Power", "baseCost": 60, "growth": 1.55, "lateGrowth": 1.16, "maxLevel": 50 },
+    "speed": { "name": "Speed", "baseCost": 70, "growth": 1.55, "lateGrowth": 1.21, "maxLevel": 40 },
+    "critChance": { "name": "Crit Chance", "baseCost": 90, "growth": 1.58, "lateGrowth": 1.24, "maxLevel": 35 },
+    "critDamage": { "name": "Crit Damage", "baseCost": 70, "growth": 1.55, "lateGrowth": 1.21, "maxLevel": 40 },
+    "defense": { "name": "Defense", "baseCost": 70, "growth": 1.55, "lateGrowth": 1.21, "maxLevel": 40 },
+    "stun": { "name": "Stun", "baseCost": 110, "growth": 1.58, "lateGrowth": 1.29, "maxLevel": 30 },
+    "combo": { "name": "Combo", "baseCost": 70, "growth": 1.55, "lateGrowth": 1.21, "maxLevel": 40 },
+    "coinMult": { "name": "Coin Mult.", "baseCost": 70, "growth": 1.55, "lateGrowth": 1.21, "maxLevel": 40 },
+    "accuracy": { "name": "Accuracy", "baseCost": 200, "growth": 1.8, "lateGrowth": 1.6, "maxLevel": 14 },
+    "bossDamage": { "name": "Boss Hunter", "baseCost": 70, "growth": 1.55, "lateGrowth": 1.21, "maxLevel": 40 },
+    "vampirism": { "name": "Life Leech", "baseCost": 90, "growth": 1.58, "lateGrowth": 1.24, "maxLevel": 35 },
+    "luck": { "name": "Fortune Luck", "baseCost": 110, "growth": 1.58, "lateGrowth": 1.29, "maxLevel": 30 }
   },
   "attrOrder": [
     "power",
@@ -1204,6 +1204,12 @@ export function calcAttrCost(key, currentLevel) {
   const def = CONFIG.attrs[key];
   if (!def) return 999999;
   const lvl = currentLevel != null ? currentLevel : 0;
+  // Gentle growth for the first 7 levels, then the steeper lateGrowth takes over
+  // (short-level attributes like Accuracy carry a much hotter lateGrowth).
+  const KINK = 7;
+  if (def.lateGrowth && lvl > KINK) {
+    return Math.round(def.baseCost * Math.pow(def.growth, KINK) * Math.pow(def.lateGrowth, lvl - KINK));
+  }
   return Math.round(def.baseCost * Math.pow(def.growth, lvl));
 }
 
