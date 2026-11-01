@@ -80,7 +80,7 @@ export default function App() {
             </div>
 
             <div className="booster-slot">
-              <button className="booster-circle-btn dmg" id="boostDmgBtn" type="button" aria-label="Watch Ad for 10 min 2x Damage">
+              <button className="booster-circle-btn dmg" id="boostDmgBtn" type="button" aria-label="Watch Ad for 10 min +30% Damage">
                 <span className="b-ring-svg-wrap">
                   <svg viewBox="0 0 54 54" className="b-ring-svg">
                     <circle className="b-ring-bg" cx="27" cy="27" r="23" />
@@ -88,10 +88,10 @@ export default function App() {
                   </svg>
                 </span>
                 <span className="b-ico">💥</span>
-                <span className="b-mult">2x</span>
+                <span className="b-mult">+30%</span>
                 <span className="b-ad-badge">AD</span>
               </button>
-              <div className="b-name">2x DAMAGE</div>
+              <div className="b-name">+30% DAMAGE</div>
               <div className="b-timer" id="boostDmgTimer">WATCH AD</div>
             </div>
           </div>
@@ -565,9 +565,9 @@ export default function App() {
           </div>
           <div id="endBossDmgAdWrap" className="end-boss-ad-wrap" style={{'display': 'none'}}>
             <div className="eba-title">💥 BOSS TOUGH TO BEAT?</div>
-            <div className="eba-sub">Power up your hands with 2× DAMAGE for 10 minutes!</div>
+            <div className="eba-sub">Power up your hands with +30% DAMAGE for 10 minutes!</div>
             <button className="end-boss-dmg-btn" id="endBossDmgAdBtn" type="button">
-              ⚡ WATCH AD — 2× DAMAGE (10m)
+              ⚡ WATCH AD — +30% DAMAGE (10m)
             </button>
           </div>
           <div className="end-btns">
