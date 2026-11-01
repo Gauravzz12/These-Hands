@@ -1635,6 +1635,9 @@ background: conic-gradient(#ff7a1e calc(var(--p,0)*1%), rgba(255,233,189,.18) 0)
 @keyframes frenzyPulse { from { transform: scale(1); } to { transform: scale(1.13); } }
 #specScroll { overflow-y: auto; padding: 12px; flex: 1; min-height: 0; }
 .spec-ico.lg { font-size: 13px; padding: 7px 8px; border-radius: 8px; color: #fff; font-family: "Bungee", "Nunito", sans-serif; flex: none; }
+.rail-circle .rc-ico .rc-img { width: 34px; height: 34px; border-radius: 50%; object-fit: cover; display: block; }
+.spec-ico.lg.has-img { padding: 4px; }
+.spec-ico.lg .spec-img { width: 28px; height: 28px; object-fit: contain; display: block; }
 .spec-row {
 display: flex; align-items: center; gap: 10px; padding: 10px;
 background: var(--chrome); border: 2px solid var(--chrome-edge); border-radius: 13px; margin-bottom: 8px;
