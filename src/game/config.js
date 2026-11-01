@@ -11,26 +11,26 @@ export const CONFIG = {
     "base": 100,
     "growth": 1.8612,
     "rampStart": 5,
-    "midGrowth": 1.45,
+    "midGrowth": 1.55,
     "midStart": 20,
-    "lateGrowth": 1.16,
+    "lateGrowth": 1.28,
     "grindStart": 40,
-    "endGrowth": 1.08
+    "endGrowth": 1.14
   },
   "levelCap": 50,
   "attrs": {
-    "power": { "name": "Power", "baseCost": 60, "growth": 1.55, "lateGrowth": 1.16, "maxLevel": 50 },
-    "speed": { "name": "Speed", "baseCost": 70, "growth": 1.55, "lateGrowth": 1.21, "maxLevel": 40 },
-    "critChance": { "name": "Crit Chance", "baseCost": 90, "growth": 1.58, "lateGrowth": 1.24, "maxLevel": 35 },
-    "critDamage": { "name": "Crit Damage", "baseCost": 70, "growth": 1.55, "lateGrowth": 1.21, "maxLevel": 40 },
-    "defense": { "name": "Defense", "baseCost": 70, "growth": 1.55, "lateGrowth": 1.21, "maxLevel": 40 },
-    "stun": { "name": "Stun", "baseCost": 110, "growth": 1.58, "lateGrowth": 1.29, "maxLevel": 30 },
-    "combo": { "name": "Combo", "baseCost": 70, "growth": 1.55, "lateGrowth": 1.21, "maxLevel": 40 },
-    "coinMult": { "name": "Coin Mult.", "baseCost": 70, "growth": 1.55, "lateGrowth": 1.21, "maxLevel": 40 },
-    "accuracy": { "name": "Accuracy", "baseCost": 200, "growth": 1.8, "lateGrowth": 1.6, "maxLevel": 14 },
-    "bossDamage": { "name": "Boss Hunter", "baseCost": 70, "growth": 1.55, "lateGrowth": 1.21, "maxLevel": 40 },
-    "vampirism": { "name": "Life Leech", "baseCost": 90, "growth": 1.58, "lateGrowth": 1.24, "maxLevel": 35 },
-    "luck": { "name": "Fortune Luck", "baseCost": 110, "growth": 1.58, "lateGrowth": 1.29, "maxLevel": 30 }
+    "power": { "name": "Power", "baseCost": 60, "growth": 1.55, "lateGrowth": 1.3, "maxLevel": 50 },
+    "speed": { "name": "Speed", "baseCost": 70, "growth": 1.55, "lateGrowth": 1.38, "maxLevel": 40 },
+    "critChance": { "name": "Crit Chance", "baseCost": 90, "growth": 1.58, "lateGrowth": 1.42, "maxLevel": 35 },
+    "critDamage": { "name": "Crit Damage", "baseCost": 70, "growth": 1.55, "lateGrowth": 1.38, "maxLevel": 40 },
+    "defense": { "name": "Defense", "baseCost": 70, "growth": 1.55, "lateGrowth": 1.38, "maxLevel": 40 },
+    "stun": { "name": "Stun", "baseCost": 110, "growth": 1.58, "lateGrowth": 1.52, "maxLevel": 30 },
+    "combo": { "name": "Combo", "baseCost": 70, "growth": 1.55, "lateGrowth": 1.38, "maxLevel": 40 },
+    "coinMult": { "name": "Coin Mult.", "baseCost": 70, "growth": 1.55, "lateGrowth": 1.38, "maxLevel": 40 },
+    "accuracy": { "name": "Accuracy", "baseCost": 200, "growth": 1.8, "lateGrowth": 2.6, "maxLevel": 14 },
+    "bossDamage": { "name": "Boss Hunter", "baseCost": 70, "growth": 1.55, "lateGrowth": 1.38, "maxLevel": 40 },
+    "vampirism": { "name": "Life Leech", "baseCost": 90, "growth": 1.58, "lateGrowth": 1.42, "maxLevel": 35 },
+    "luck": { "name": "Fortune Luck", "baseCost": 110, "growth": 1.58, "lateGrowth": 1.52, "maxLevel": 30 }
   },
   "attrOrder": [
     "power",
@@ -86,14 +86,18 @@ export const CONFIG = {
       "base0": 65,
       "early": [65, 95, 140, 210, 350, 520, 780, 1150, 1700, 3200],
       "base10": 4200,
-      "growth": 1.140,
+      "growth": 1.35941,
+      "tailStart": 49,
+      "tailGrowth": 1.10,
       "bossMult": 1.50,
       "eliteMult": 1.22
     },
     "damage": {
       "earlyDmg": [6, 9, 12, 16, 22, 28, 35, 42, 50, 68],
       "base10": 42,
-      "growth": 1.026,
+      "growth": 1.07,
+      "tailStart": 49,
+      "tailGrowth": 1.03,
       "bossMult": 1.32,
       "eliteMult": 1.15
     },
@@ -1231,7 +1235,10 @@ export function calcEnemyHp(i, isBoss = false, isElite = false) {
     return h;
   }
   const step = i - 10;
-  let h = cfg.base10 * Math.pow(cfg.growth, step);
+  const tailStart = cfg.tailStart != null ? cfg.tailStart : Infinity;
+  let h;
+  if (i <= tailStart) h = cfg.base10 * Math.pow(cfg.growth, step);
+  else h = cfg.base10 * Math.pow(cfg.growth, tailStart - 10) * Math.pow(cfg.tailGrowth || 1.10, i - tailStart);
   if (isBoss) h *= cfg.bossMult;
   else if (isElite) h *= cfg.eliteMult;
   return Math.round(h);
@@ -1241,7 +1248,10 @@ export function calcEnemyDamage(i, isBoss = false, isElite = false) {
   const cfg = CONFIG.enemyProgression.damage;
   if (i < 10) return cfg.earlyDmg[i];
   const step = i - 10;
-  let d = cfg.base10 * Math.pow(cfg.growth, step);
+  const tailStart = cfg.tailStart != null ? cfg.tailStart : Infinity;
+  let d;
+  if (i <= tailStart) d = cfg.base10 * Math.pow(cfg.growth, step);
+  else d = cfg.base10 * Math.pow(cfg.growth, tailStart - 10) * Math.pow(cfg.tailGrowth || 1.03, i - tailStart);
   if (isBoss) d *= cfg.bossMult;
   else if (isElite) d *= cfg.eliteMult;
   return Math.round(d);
