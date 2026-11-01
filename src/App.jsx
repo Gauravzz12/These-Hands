@@ -589,7 +589,7 @@ export default function App() {
         </div>
       </div>
 
-      <div id="startMenu" className="open" role="dialog" aria-label="Start menu">
+      <div id="startMenu" className="open plain-menu" role="dialog" aria-label="Start menu">
         <div className="menu-top-bar">
           <span className="menu-tag">★ ARCADE SLAPPER ★</span>
           <button id="menuMusicBtn" aria-label="Toggle music" aria-pressed="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l6 5V4L8 9H4z" fill="currentColor"/><path className="mwave" d="M16.5 8.5a5 5 0 0 1 0 7" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/><path className="mwave" d="M19 6a8.5 8.5 0 0 1 0 12" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/></svg></button>
@@ -597,14 +597,6 @@ export default function App() {
         <div className="menu-header">
           <div className="menu-kicker">THE IDLE BRAWLER</div>
           <img className="menu-logo-img" src="/logo.png" alt="Idle Slapper" />
-        </div>
-        <div className="menu-stage trio" aria-hidden="true">
-          <div className="menu-trio">
-            <img className="trio-e trio-1" src="/enemy-sprites-v2/poses/05-slime-blob-idle.webp" alt="" />
-            <img className="trio-e trio-2" src="/enemy-sprites-v2/poses/06-sassy-goblin-sprout-idle.webp" alt="" />
-            <img className="trio-e trio-3" src="/enemy-sprites-v2/poses/10-mischievous-monkey-idle.webp" alt="" />
-            <div className="trio-bench"></div>
-          </div>
         </div>
         <div className="menu-actions">
           <button id="playBtn">PLAY</button>
