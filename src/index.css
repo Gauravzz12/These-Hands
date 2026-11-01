@@ -1495,7 +1495,7 @@ animation: hubFloat 3.1s ease-in-out infinite;
 }
 .hub-hand-wrap img { width: 100%; display: block; }
 .hub-hand-wrap.left { left: 1.5%; bottom: 0%; animation-delay: -1.4s; }
-.hub-hand-wrap.left img { transform: scaleX(-1); }
+/* hub hands: handedness is set per-skin in applySkinVisuals via the CSS `scale` property (the float animation overrides `transform`, so a transform mirror here never applied) */
 .hub-hand-wrap.right { right: 1.5%; bottom: 0%; }
 @keyframes hubFloat {
 0%, 100% { transform: translateY(0) rotate(-1.2deg); }
@@ -4368,17 +4368,8 @@ margin-top: 7px;
 @media (prefers-reduced-motion: reduce){#menuHandL{animation:none}}
 
 /* Round 17 — Menu F: trio poster title stage */
-.menu-stage.trio { background: #f6e7c6; }
-.menu-trio { position: absolute; inset: 0; }
-.trio-bench { position: absolute; left: 6%; right: 6%; bottom: 16%; height: 15px; background: #a06a35; border: 2px solid #7d4f26; border-radius: 6px; }
-.trio-bench::before, .trio-bench::after { content: ""; position: absolute; top: 15px; width: 12px; height: 14px; background: #7d4f26; border-radius: 0 0 4px 4px; }
-.trio-bench::before { left: 8%; }
-.trio-bench::after { right: 8%; }
-.trio-e { position: absolute; bottom: calc(16% + 11px); height: 46%; filter: drop-shadow(0 5px 3px rgba(90,55,10,.28)); animation: trioBob 2.6s ease-in-out infinite; }
-.trio-1 { left: 8%; }
-.trio-2 { left: 50%; transform: translateX(-50%); height: 52%; animation-delay: .45s; }
-.trio-3 { right: 8%; animation-delay: .95s; }
-@keyframes trioBob { 0%, 100% { margin-bottom: 0; } 50% { margin-bottom: 6px; } }
+#startMenu.plain-menu { background: #82b4ea !important; }
+#startMenu.plain-menu .menu-actions { margin-top: 38px; }
 
 .ad-banner {
   position: fixed;
