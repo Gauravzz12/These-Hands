@@ -1341,7 +1341,7 @@ export const V2_CONFIGS = [
   {
     "idx": 49,
     "id": "50-final-dragon-boss",
-    "name": "Final Dragon Boss",
+    "name": "Dragon Lord",
     "refH": 900,
     "cheekX": 0.5,
     "cheekY": 0.36,
