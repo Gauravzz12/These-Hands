@@ -11,11 +11,11 @@ export const CONFIG = {
     "base": 100,
     "growth": 1.8612,
     "rampStart": 5,
-    "midGrowth": 1.55,
+    "midGrowth": 1.68,
     "midStart": 20,
-    "lateGrowth": 1.28,
+    "lateGrowth": 1.35,
     "grindStart": 40,
-    "endGrowth": 1.14
+    "endGrowth": 1.18
   },
   "levelCap": 50,
   "attrs": {
@@ -94,8 +94,8 @@ export const CONFIG = {
     },
     "damage": {
       "earlyDmg": [6, 9, 12, 16, 22, 28, 35, 42, 50, 68],
-      "base10": 42,
-      "growth": 1.07,
+      "base10": 50,
+      "growth": 1.10,
       "tailStart": 49,
       "tailGrowth": 1.03,
       "bossMult": 1.32,
@@ -211,7 +211,7 @@ export const CONFIG = {
       "id": "strongerHands",
       "name": "Stronger Hands",
       "tier": 1,
-      "cost": 80,
+      "cost": 1000,
       "prereq": "basic",
       "fx": "+20% damage on every slap."
     },
@@ -769,6 +769,7 @@ export const CONFIG = {
       "id": "doubleSlap",
       "name": "Double Slap",
       "boss": 9,
+      "minLevel": 12,
       "mult": 7,
       "multMax": 15,
       "cd": 25,

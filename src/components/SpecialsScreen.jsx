@@ -3,7 +3,7 @@ import { CONFIG, ALL_ENEMIES } from '../game/config.js';
 import { HomeIcon, CoinIcon } from './Icons.jsx';
 
 const SPECIAL_DEFS = [
-  { id: 'doubleSlap',  bossId: 9,  name: 'Double Slap',     emoji: '👐', desc: 'Both hands at once — doubles damage for 3s.', baseCd: 25 },
+  { id: 'doubleSlap',  bossId: 9,  minLevel: 12,  name: 'Double Slap',     emoji: '👐', desc: 'Both hands at once — doubles damage for 3s.', baseCd: 25 },
   { id: 'meteor',      bossId: 29, name: 'Meteor Strike',    emoji: '☄️', desc: 'A meteor crashes down — 800% damage to the enemy.', baseCd: 45 },
   { id: 'orbitalLaser',bossId: 49, name: 'Orbital Laser',   emoji: '🔦', desc: 'Orbital beam fires — 1200% damage over 4s.', baseCd: 60 },
   { id: 'pharaohCurse',bossId: 69, name: "Pharaoh's Curse",  emoji: '𓂀', desc: 'Ancient curse — 600% damage + slows enemy 40% for 8s.', baseCd: 50 },
@@ -39,6 +39,8 @@ export default function SpecialsScreen() {
       <div className="scroll-content">
         {SPECIAL_DEFS.map(sp => {
           const bossDefeated = save.defeatedEnemies[sp.bossId];
+          const levelReqMet = !sp.minLevel || save.playerLevel >= sp.minLevel;
+          const unlocked = bossDefeated && levelReqMet;
           const owned = save.specials[sp.id];
           const level = owned?.level || 0;
           const maxed = level >= 5;
@@ -47,7 +49,7 @@ export default function SpecialsScreen() {
           const dmgBonus = level > 0 ? `+${(level * 25)}% effect · CD ×${(Math.pow(0.96, level)).toFixed(2)}` : '';
 
           return (
-            <div key={sp.id} className={`spec-row ${!bossDefeated ? 'locked' : ''}`} style={{ marginBottom:8 }}>
+            <div key={sp.id} className={`spec-row ${!unlocked ? 'locked' : ''}`} style={{ marginBottom:8 }}>
               <div style={{ fontSize: 30, flex:'none', width:44, textAlign:'center' }}>{sp.emoji}</div>
               <div className="spec-main">
                 <div className="spec-name">{sp.name}</div>
@@ -62,14 +64,14 @@ export default function SpecialsScreen() {
                     </div>
                   </>
                 )}
-                {!bossDefeated && (
+                {!unlocked && (
                   <div style={{ fontSize:11, fontWeight:800, color:'var(--ink-soft)', marginTop:3 }}>
-                    Defeat Boss #{sp.bossId + 1} to unlock
+                    {!bossDefeated ? `Defeat Boss #${sp.bossId + 1} to unlock` : `Reach level ${sp.minLevel} to unlock`}
                   </div>
                 )}
               </div>
               <div className="spec-upg" style={{ flex:'none' }}>
-                {!bossDefeated ? (
+                {!unlocked ? (
                   <span style={{ fontSize:10, fontWeight:900, color:'var(--ink-soft)', letterSpacing:'.07em' }}>🔒</span>
                 ) : !owned ? (
                   <span style={{ fontSize:11, fontWeight:900, color:'#2e7d32' }}>✓ UNLOCKED</span>
