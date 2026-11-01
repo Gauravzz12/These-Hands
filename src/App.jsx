@@ -589,7 +589,7 @@ export default function App() {
         </div>
       </div>
 
-      <div id="startMenu" className="open" role="dialog" aria-label="Start menu">
+      <div id="startMenu" className="open hero-menu" role="dialog" aria-label="Start menu">
         <div className="menu-top-bar">
           <span className="menu-tag">★ ARCADE SLAPPER ★</span>
           <button id="menuMusicBtn" aria-label="Toggle music" aria-pressed="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l6 5V4L8 9H4z" fill="currentColor"/><path className="mwave" d="M16.5 8.5a5 5 0 0 1 0 7" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/><path className="mwave" d="M19 6a8.5 8.5 0 0 1 0 12" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/></svg></button>
@@ -598,12 +598,14 @@ export default function App() {
           <div className="menu-kicker">THE IDLE BRAWLER</div>
           <img className="menu-logo-img" src="/logo.png" alt="Idle Slapper" />
         </div>
-        <div className="menu-stage trio" aria-hidden="true">
-          <div className="menu-trio">
-            <img className="trio-e trio-1" src="/enemy-sprites-v2/poses/05-slime-blob-idle.webp" alt="" />
-            <img className="trio-e trio-2" src="/enemy-sprites-v2/poses/06-sassy-goblin-sprout-idle.webp" alt="" />
-            <img className="trio-e trio-3" src="/enemy-sprites-v2/poses/10-mischievous-monkey-idle.webp" alt="" />
-            <div className="trio-bench"></div>
+        <div className="menu-stage hero" aria-hidden="true">
+          <div className="hero-hand-wrap">
+            <img id="menuHand" className="hero-hand" src="" alt="" />
+            <svg className="hero-crown" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 18h18l-1.5-9L14 13l-2-6-2 6-5.5-4L3 18zm0 2.2h18V22H3v-1.8z" fill="#f2b01e" stroke="#7a4a12" strokeWidth="1"/></svg>
+            <span className="hero-spark s1">✦</span>
+            <span className="hero-spark s2">✦</span>
+            <span className="hero-spark s3">✦</span>
+            <span className="hero-spark s4">✦</span>
           </div>
         </div>
         <div className="menu-actions">
