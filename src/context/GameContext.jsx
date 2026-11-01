@@ -121,10 +121,6 @@ function reducer(state, action) {
     case 'SET_MUSIC': return { ...state, save: { ...s, music: action.value } };
     case 'SET_SFX':   return { ...state, save: { ...s, sfx: action.value } };
 
-    case 'TOGGLE_TEST_MODE': return { ...state, testMode: !state.testMode };
-    case 'SET_TEST_MODE':    return { ...state, testMode: !!action.value };
-    case 'UNLOCK_ALL_ENEMIES': return { ...state, save: { ...s, currentEnemyId: ALL_ENEMIES.length - 1 } };
-
     case 'UNLOCK_OFFLINE': {
       if (s.gems < CONFIG.offline.price) return state;
       return { ...state, save: { ...s, gems: s.gems - CONFIG.offline.price, offlineEarningsUnlocked: true } };
@@ -238,7 +234,6 @@ export function GameProvider({ children }) {
     offlineEarnings: offline,
     toastAch: null,
     importError: null,
-    testMode: false,
   });
 
   const saveRef = useRef(state.save);

@@ -2,17 +2,16 @@ import { Capacitor } from '@capacitor/core';
 import { App } from '@capacitor/app';
 import { StatusBar, Style } from '@capacitor/status-bar';
 import { SplashScreen } from '@capacitor/splash-screen';
-import { AdMob, RewardAdPluginEvents } from '@capacitor-community/admob';
+import { AdMob, RewardAdPluginEvents, InterstitialAdPluginEvents } from '@capacitor-community/admob';
 import { Purchases } from '@revenuecat/purchases-capacitor';
 
 // Google AdMob Rewarded Ad Unit ID
 const REWARDED_AD_UNIT_ID = 'ca-app-pub-4838625298188198/2176399244';
-// Official Google AdMob Test Rewarded Ad Unit ID (ensures ad playback during testing / account verification)
+// Official Google AdMob Test Rewarded Ad Unit ID (fallback if live unit unverified)
 const TEST_REWARDED_AD_UNIT_ID = 'ca-app-pub-3940256099942544/5224354917';
 
 // Google AdMob Interstitial + Banner Ad Unit IDs
-// TODO(wire): replace the empty strings with the real unit IDs from the AdMob console.
-// Until then the official Google TEST units are used so the flow can be verified in dev builds.
+// Live unit IDs from AdMob console (can be configured here):
 const INTERSTITIAL_AD_UNIT_ID = '';
 const TEST_INTERSTITIAL_AD_UNIT_ID = 'ca-app-pub-3940256099942544/1033173712';
 const BANNER_AD_UNIT_ID = '';
@@ -23,6 +22,8 @@ export const NativeBridge = {
   admobInitialized: false,
   purchasesInitialized: false,
   rewardedPrepared: false,
+  interstitialPrepared: false,
+  bannerVisible: false,
   activeRewardCallback: null,
 
   async init() {
@@ -80,11 +81,10 @@ export const NativeBridge = {
         App.exitApp();
       });
 
-      // 3. Initialize AdMob
+      // 3. Initialize AdMob (Production Mode - test mode disabled)
       await AdMob.initialize({
         requestTrackingAuthorization: true,
-        testingDevices: ['EMULATOR'],
-        initializeForTesting: true,
+        initializeForTesting: false,
       });
       this.admobInitialized = true;
 
@@ -98,16 +98,32 @@ export const NativeBridge = {
       });
 
       AdMob.addListener(RewardAdPluginEvents.Dismissed, () => {
-        this.prepareRewardedAd(); // Pre-load next ad
+        this.rewardedPrepared = false;
+        this.prepareRewardedAd(); // Pre-load next rewarded ad
       });
 
       AdMob.addListener(RewardAdPluginEvents.FailedToLoad, (err) => {
-        console.warn('AdMob failed to load:', err);
+        console.warn('AdMob rewarded failed to load:', err);
         this.rewardedPrepared = false;
       });
 
-      await this.prepareRewardedAd();
-      console.log('Native AdMob & Back Button bridge initialized successfully.');
+      // Setup Interstitial Ad listeners
+      AdMob.addListener(InterstitialAdPluginEvents.Dismissed, () => {
+        this.interstitialPrepared = false;
+        this.prepareInterstitialAd(); // Pre-load next interstitial
+      });
+
+      AdMob.addListener(InterstitialAdPluginEvents.FailedToLoad, (err) => {
+        console.warn('AdMob interstitial failed to load:', err);
+        this.interstitialPrepared = false;
+      });
+
+      // Pre-load ads in background
+      await Promise.all([
+        this.prepareRewardedAd().catch(() => {}),
+        this.prepareInterstitialAd().catch(() => {})
+      ]);
+      console.log('Native AdMob initialized in Production Mode.');
     } catch (err) {
       console.warn('NativeBridge initialization error:', err);
     }
@@ -123,7 +139,7 @@ export const NativeBridge = {
       this.rewardedPrepared = true;
       console.log('AdMob: Live rewarded ad prepared successfully.');
     } catch (e) {
-      console.warn('AdMob: Live unit not filled (account pending verification or emulator test), falling back to test unit:', e);
+      console.warn('AdMob: Live rewarded unit not filled, falling back to test unit:', e);
       try {
         await AdMob.prepareRewardVideoAd({
           adId: TEST_REWARDED_AD_UNIT_ID,
@@ -146,11 +162,11 @@ export const NativeBridge = {
     try {
       this.activeRewardCallback = onComplete;
       if (!this.rewardedPrepared) {
-        console.log('AdMob: Ad not yet prepared, attempting prepare now...');
+        console.log('AdMob: Rewarded ad not yet prepared, attempting prepare now...');
         await this.prepareRewardedAd();
       }
       if (!this.rewardedPrepared) {
-        console.warn('AdMob: Ad could not be prepared.');
+        console.warn('AdMob: Rewarded ad could not be prepared.');
         return false;
       }
       await AdMob.showRewardVideoAd();
@@ -161,17 +177,36 @@ export const NativeBridge = {
     }
   },
 
-  // Interstitial: game logic (frequency caps, win counter, remove-ads) lives in the
-  // engine's Ads manager — this only prepares/shows. No-op on web.
-  async showInterstitial() {
-    if (!this.isNative) {
-      console.log('[Ads] Interstitial requested (web mode — no-op).');
-      return false;
-    }
+  // Interstitial: Pre-caches next interstitial for instant playback on every 4th win
+  async prepareInterstitialAd() {
+    if (!this.isNative || !this.admobInitialized) return;
     try {
       const adId = INTERSTITIAL_AD_UNIT_ID || TEST_INTERSTITIAL_AD_UNIT_ID;
       await AdMob.prepareInterstitial({ adId });
+      this.interstitialPrepared = true;
+      console.log('AdMob: Interstitial ad prepared successfully.');
+    } catch (err) {
+      console.warn('AdMob: Failed to prepare interstitial ad:', err);
+      this.interstitialPrepared = false;
+    }
+  },
+
+  async showInterstitial() {
+    if (!this.isNative) {
+      console.log('[Ads] Interstitial requested (web mode — simulated).');
+      return false;
+    }
+    try {
+      if (!this.interstitialPrepared) {
+        console.log('AdMob: Interstitial not yet prepared, preparing now...');
+        await this.prepareInterstitialAd();
+      }
+      if (!this.interstitialPrepared) {
+        console.warn('AdMob: Interstitial could not be prepared.');
+        return false;
+      }
       await AdMob.showInterstitial();
+      this.interstitialPrepared = false;
       return true;
     } catch (err) {
       console.warn('Native AdMob interstitial error:', err);
@@ -179,12 +214,14 @@ export const NativeBridge = {
     }
   },
 
-  // Banner: shown only on home/shop by the engine's Ads manager. No-op on web.
+  // Banner: shown on Home, Stages, and Shop screens
   async showBanner() {
     if (!this.isNative) return false;
+    if (this.bannerVisible) return true;
     try {
       const adId = BANNER_AD_UNIT_ID || TEST_BANNER_AD_UNIT_ID;
       await AdMob.showBanner({ adId, adSize: 'ADAPTIVE_BANNER', position: 'BOTTOM_CENTER', margin: 60 });
+      this.bannerVisible = true;
       return true;
     } catch (err) {
       console.warn('Native AdMob banner error:', err);
@@ -194,8 +231,10 @@ export const NativeBridge = {
 
   async hideBanner() {
     if (!this.isNative) return false;
+    if (!this.bannerVisible) return true;
     try {
       await AdMob.hideBanner();
+      this.bannerVisible = false;
       return true;
     } catch (err) {
       return false;
@@ -241,4 +280,3 @@ export const NativeBridge = {
     }
   }
 };
-

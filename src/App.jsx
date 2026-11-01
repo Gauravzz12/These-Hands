@@ -363,8 +363,7 @@ export default function App() {
             <div className="sel-title">CHOOSE YOUR VICTIM</div>
             <div className="sel-sub" id="selProgress"></div>
           </div>
-          <button className="set-toggle off mini test-mode-btn" id="levelsTestModeBtn" title="Toggle Test Mode to unlock all enemies" style={{'marginLeft': 'auto', 'fontSize': '11px', 'padding': '6px 10px'}}>TEST MODE</button>
-        </div>
+                  </div>
         <div id="selList"></div>
       </section>
 
@@ -493,7 +492,7 @@ export default function App() {
           <div id="shopFooter">
             <button className="skin-btn restore-btn" id="restoreBtn">RESTORE PURCHASES</button>
             <div className="pack-note">Re-applies any one-time bundle, VIP pass, or permanent feature previously acquired.</div>
-            <div className="shop-sandbox-tag">🛡️ TEST STORE · NO REAL PAYMENT REQUIRED</div>
+            <div className="shop-sandbox-tag">🛡️ SECURE BAZAAR & VAULT</div>
           </div>
         </div>
         <div id="shopToast" role="status"></div>
@@ -532,15 +531,7 @@ export default function App() {
             <div className="set-main"><div className="set-name">GUIDED TOUR</div><div className="set-desc">Replay the first-loss walkthrough: attributes, levels and the skill tree, spotlighted step by step.</div></div>
             <button className="set-toggle" id="tutReplayBtn">START</button>
           </div>
-          <div className="set-row">
-            <div className="set-main"><div className="set-name">TEST MODE</div><div className="set-desc">Instantly unlocks all 50 enemies for testing and fighting. Toggle on/off anytime.</div></div>
-            <button className="set-toggle off" id="setTestModeBtn" aria-pressed="false">OFF</button>
-          </div>
-          <div className="set-row">
-            <div className="set-main"><div className="set-name">UNLOCK ALL ENEMIES</div><div className="set-desc">Permanently unlocks all 50 enemies in your save data.</div></div>
-            <button className="set-toggle" id="unlockAllBtn" style={{'background': '#4a3b2c', 'color': '#f2b01e'}}>UNLOCK ALL</button>
-          </div>
-          <div className="set-row danger">
+                    <div className="set-row danger">
             <div className="set-main"><div className="set-name">RESET SAVE</div><div className="set-desc">Wipe coins, gems, progress, skills and skins — everything. Can't be undone.</div></div>
             <button className="set-toggle danger-btn" id="setResetBtn">RESET SAVE</button>
           </div>
@@ -689,7 +680,10 @@ export default function App() {
         <button id="hangDismiss" type="button" aria-label="Dismiss">✕</button>
       </div>
 
-      <div id="adBanner" className="ad-banner" style={{display: 'none'}} aria-hidden="true"><span>AD</span></div>
+      <div id="adBanner" className="ad-banner" style={{display: 'none'}} aria-hidden="true">
+        <span className="ad-pill">AD</span>
+        <span className="ad-text">SPONSORED ARCADE PARTNER</span>
+      </div>
 
       <nav id="bottomNav" aria-label="Main Navigation">
         <button className="bnav-btn active" data-tab="home" data-goto="home" aria-label="Home">

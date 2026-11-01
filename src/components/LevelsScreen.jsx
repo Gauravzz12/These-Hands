@@ -28,22 +28,16 @@ export default function LevelsScreen() {
         <div>
           <div className="sel-title">CHOOSE YOUR VICTIM</div>
           <div className="sel-sub">
-            {state.testMode ? 100 : save.currentEnemyId + 1} / 50 UNLOCKED {state.testMode ? '· ⚡ TEST MODE' : ''}
+            {save.currentEnemyId + 1} / 50 UNLOCKED
           </div>
         </div>
-        <button
-          className={`set-toggle mini ${!state.testMode ? 'off' : ''}`}
-          style={{ marginLeft: 'auto', fontSize: 11, padding: '5px 10px', background: state.testMode ? 'var(--gold)' : '', color: state.testMode ? '#2b1c10' : '' }}
-          onClick={() => dispatch({ type: 'TOGGLE_TEST_MODE' })}
-        >
-          {state.testMode ? 'TEST: ON' : 'TEST MODE'}
-        </button>
+        
       </div>
 
       <div className="scroll-content" style={{ display:'flex', flexDirection:'column', gap:14 }}>
         {ENEMY_GROUPS.map((group, gi) => {
           const groupStart = gi * 5;
-          const groupUnlocked = state.testMode || save.currentEnemyId >= groupStart;
+          const groupUnlocked = save.currentEnemyId >= groupStart;
           if (!groupUnlocked) return null;
 
           return (
@@ -61,7 +55,7 @@ export default function LevelsScreen() {
                 {group.enemies.map((enemy, i) => {
                   const done = save.defeatedEnemies[enemy.id];
                   const isCur = enemy.id === save.currentEnemyId;
-                  const unlocked = state.testMode || enemy.id <= save.currentEnemyId;
+                  const unlocked = enemy.id <= save.currentEnemyId;
                   return (
                     <div key={i} style={{ display:'flex', flex:1, alignItems:'center' }}>
                       <div style={{
@@ -80,12 +74,12 @@ export default function LevelsScreen() {
 
               <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill, minmax(102px, 1fr))', gap:8 }}>
                 {group.enemies.map(enemy => {
-                  const unlocked = state.testMode || enemy.id <= save.currentEnemyId;
+                  const unlocked = enemy.id <= save.currentEnemyId;
                   const done = save.defeatedEnemies[enemy.id];
                   const isCurrent = enemy.id === save.currentEnemyId;
                   const hardDone = save.hardDefeatedEnemies[enemy.id];
                   const groupCleared = group.enemies.every(e => save.defeatedEnemies[e.id]);
-                  const hardAvail = (state.testMode || groupCleared) && done;
+                  const hardAvail = (groupCleared) && done;
                   const hp = computeEnemyHp(enemy.id);
 
                   let stateLabel = 'LOCKED';

@@ -4379,13 +4379,29 @@ margin-top: 7px;
   width: 100%;
   max-width: 520px;
   height: 50px;
-  background: #efe6d0;
-  border-top: 2px dashed #b09b6d;
-  color: #8a7648;
+  background: linear-gradient(180deg, #24160e 0%, #150d08 100%);
+  border-top: 2px solid #eab308;
+  color: #d8c49a;
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 10px;
   font-size: 11px;
-  letter-spacing: 3px;
+  letter-spacing: 2px;
+  font-family: 'Bungee', 'Nunito', sans-serif;
   z-index: 40;
+  box-shadow: 0 -3px 12px rgba(0,0,0,0.5);
+}
+.ad-banner .ad-pill {
+  background: #eab308;
+  color: #1a0f08;
+  font-size: 9px;
+  font-weight: 900;
+  padding: 2px 6px;
+  border-radius: 4px;
+  letter-spacing: 1px;
+}
+.ad-banner .ad-text {
+  font-size: 11px;
+  color: #fde047;
 }
