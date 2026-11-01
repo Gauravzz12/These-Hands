@@ -769,8 +769,7 @@ export const CONFIG = {
     {
       "id": "doubleSlap",
       "name": "Double Slap",
-      "boss": 9,
-      "minLevel": 12,
+      "boss": 29,
       "mult": 7,
       "multMax": 15,
       "cd": 25,
