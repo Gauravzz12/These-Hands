@@ -1699,13 +1699,17 @@ export const V2_CONFIGS = [
 ];
 
 const SPRITE_CACHE = {};
+let _prevKeep = new Set();
 
 function buildSilhouetteCanvas(sourceCanvas) {
+  // Half resolution: the silhouette is a split-second white hit-flash drawn
+  // scaled to the pose box, so half res is visually identical and halves
+  // the per-pose memory (every pose keeps one of these next to its sprite).
   const c = document.createElement('canvas');
-  c.width = sourceCanvas.width;
-  c.height = sourceCanvas.height;
+  c.width = Math.max(1, Math.round(sourceCanvas.width / 2));
+  c.height = Math.max(1, Math.round(sourceCanvas.height / 2));
   const ctx = c.getContext('2d');
-  ctx.drawImage(sourceCanvas, 0, 0);
+  ctx.drawImage(sourceCanvas, 0, 0, c.width, c.height);
   ctx.globalCompositeOperation = 'source-in';
   ctx.fillStyle = '#ffffff';
   ctx.fillRect(0, 0, c.width, c.height);
@@ -1807,6 +1811,20 @@ export function preloadV2Sprites(targetIndex = 0) {
       getV2Sprite(idx);
     }
   }
+  // Evict decoded sprite canvases outside the keep window. The window is
+  // the union of this call's and the previous call's neighbourhoods,
+  // because spawn fires preload(current) + preload(current + 1) back to
+  // back and one call's window must not evict the other's. Without this
+  // the cache grows ~8-16 MB per enemy visited and never shrinks - the
+  // main low-end RAM/lag driver. Evicted enemies simply re-decode on
+  // demand via getV2Sprite; poses mid-load write into orphaned objects
+  // and are garbage-collected harmlessly.
+  const mine = new Set([0, current - 1, current, current + 1]);
+  for (const key of Object.keys(SPRITE_CACHE)) {
+    const idx = +key;
+    if (!mine.has(idx) && !_prevKeep.has(idx)) delete SPRITE_CACHE[key];
+  }
+  _prevKeep = mine;
 }
 
 
@@ -1856,8 +1874,9 @@ export function getV2Sprite(index) {
   // Initialize poses
   for (const [pName, pDef] of Object.entries(cfg.poses)) {
     const fallbackCanvas = document.createElement('canvas');
-    fallbackCanvas.width = pDef.w;
-    fallbackCanvas.height = pDef.h;
+    const _fs = Math.min(1, 500 / Math.max(pDef.w, pDef.h));
+    fallbackCanvas.width = Math.max(1, Math.round(pDef.w * _fs));
+    fallbackCanvas.height = Math.max(1, Math.round(pDef.h * _fs));
 
     const poseObj = {
       name: pName,
