@@ -593,7 +593,7 @@ export default function App() {
         </div>
         <div className="menu-header">
           <div className="menu-kicker">STEP INTO THE ARENA</div>
-          <img className="menu-logo-img" src="/logo.png" alt="These Hands" />
+          <img className="menu-logo-img" src="/logo.webp" alt="These Hands" />
         </div>
         <div className="menu-stage" id="menuStage" aria-hidden="true">
           <div className="menu-stage-badge" id="menuStageBadge">STAGE 1 • TRAINING DUMMY</div>
