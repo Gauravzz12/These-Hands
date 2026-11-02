@@ -80,7 +80,7 @@ export default function App() {
             </div>
 
             <div className="booster-slot">
-              <button className="booster-circle-btn dmg" id="boostDmgBtn" type="button" aria-label="Watch Ad for 10 min +30% Damage">
+              <button className="booster-circle-btn dmg" id="boostDmgBtn" type="button" aria-label="Watch Ad for 10 min 2X Damage">
                 <span className="b-ring-svg-wrap">
                   <svg viewBox="0 0 54 54" className="b-ring-svg">
                     <circle className="b-ring-bg" cx="27" cy="27" r="23" />
@@ -88,10 +88,10 @@ export default function App() {
                   </svg>
                 </span>
                 <span className="b-ico">💥</span>
-                <span className="b-mult">+30%</span>
+                <span className="b-mult">2X</span>
                 <span className="b-ad-badge">AD</span>
               </button>
-              <div className="b-name">+30% DAMAGE</div>
+              <div className="b-name">2X DAMAGE</div>
               <div className="b-timer" id="boostDmgTimer">WATCH AD</div>
             </div>
           </div>
@@ -565,9 +565,9 @@ export default function App() {
           </div>
           <div id="endBossDmgAdWrap" className="end-boss-ad-wrap" style={{'display': 'none'}}>
             <div className="eba-title">💥 BOSS TOUGH TO BEAT?</div>
-            <div className="eba-sub">Power up your hands with +30% DAMAGE for 10 minutes!</div>
+            <div className="eba-sub">Power up your hands with 2X DAMAGE for 10 minutes!</div>
             <button className="end-boss-dmg-btn" id="endBossDmgAdBtn" type="button">
-              ⚡ WATCH AD — +30% DAMAGE (10m)
+              ⚡ WATCH AD — 2X DAMAGE (10m)
             </button>
           </div>
           <div className="end-btns">
@@ -580,18 +580,41 @@ export default function App() {
         </div>
       </div>
 
-      <div id="startMenu" className="open plain-menu" role="dialog" aria-label="Start menu">
+      <div id="startMenu" className="open" role="dialog" aria-label="Start menu">
         <div className="menu-top-bar">
-          <span className="menu-tag">★ ARCADE SLAPPER ★</span>
-          <button id="menuMusicBtn" aria-label="Toggle music" aria-pressed="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l6 5V4L8 9H4z" fill="currentColor"/><path className="mwave" d="M16.5 8.5a5 5 0 0 1 0 7" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/><path className="mwave" d="M19 6a8.5 8.5 0 0 1 0 12" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/></svg></button>
+          <span className="menu-tag">★ ARCADE BRAWLER ★</span>
+          <button id="menuMusicBtn" aria-label="Toggle music" aria-pressed="true">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M4 9v6h4l6 5V4L8 9H4z" fill="currentColor"/>
+              <path className="mwave" d="M16.5 8.5a5 5 0 0 1 0 7" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+              <path className="mwave" d="M19 6a8.5 8.5 0 0 1 0 12" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+            </svg>
+          </button>
         </div>
         <div className="menu-header">
-          <div className="menu-kicker">THE IDLE BRAWLER</div>
-          <img className="menu-logo-img" src="/logo.png" alt="Idle Slapper" />
+          <div className="menu-kicker">STEP INTO THE ARENA</div>
+          <img className="menu-logo-img" src="/logo.png" alt="These Hands" />
+        </div>
+        <div className="menu-stage" id="menuStage" aria-hidden="true">
+          <div className="menu-stage-badge" id="menuStageBadge">STAGE 1 • TRAINING DUMMY</div>
+          <div className="ring-floor"></div>
+          <div className="ring-rug"></div>
+          <img id="menuEnemy" className="menu-enemy-img" src="/enemy-sprites-v2/poses/01-training-dummy-idle.webp" alt="Opponent" />
+          <div id="menuHand" className="menu-hand-wrap">
+            <img src="/hand-art/hand-default.webp" alt="" onError={(e) => { e.currentTarget.style.display='none'; }} />
+          </div>
+        </div>
+        <div className="menu-summary">
+          <div className="ms"><span className="ms-ico">⚡</span><span id="menuStatWins">0 KOs</span></div>
+          <div className="ms"><span className="ms-ico">💥</span><span id="menuStatCombo">0 Combo</span></div>
+          <div className="ms"><span className="ms-ico">💰</span><span id="menuStatCoins">0 Coins</span></div>
         </div>
         <div className="menu-actions">
-          <button id="playBtn">PLAY</button>
-          <div className="menu-hint">TAP ANYWHERE TO FIGHT</div>
+          <button id="playBtn" className="play-btn-arcade">
+            <span className="pb-icon">🥊</span>
+            <span className="pb-text">TAP TO FIGHT</span>
+          </button>
+          <div className="menu-hint">⚡ TOUCH ANYWHERE TO ENTER THE RING ⚡</div>
         </div>
       </div>
 

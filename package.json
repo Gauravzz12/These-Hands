@@ -10,6 +10,8 @@
     "preview": "vite preview",
     "cap:sync": "vite build && cap sync android",
     "cap:open": "cap open android",
+    "build:apk": "npm run cap:sync && cd android && gradlew assembleDebug",
+    "run:android": "npm run cap:sync && cap run android",
     "build:bundle": "npm run cap:sync && cd android && gradlew bundleRelease"
   },
   "dependencies": {

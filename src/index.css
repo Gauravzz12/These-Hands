@@ -4371,9 +4371,6 @@ margin-top: 7px;
 @media (prefers-reduced-motion: reduce){#menuHandL{animation:none}}
 
 /* Round 17 — Menu F: trio poster title stage */
-#startMenu.plain-menu { background: #82b4ea !important; }
-#startMenu.plain-menu .menu-actions { margin-top: 38px; }
-
 .ad-banner {
   position: fixed;
   bottom: 60px;
@@ -4407,4 +4404,120 @@ margin-top: 7px;
 .ad-banner .ad-text {
   font-size: 11px;
   color: #fde047;
+}
+
+/* Upgraded Arcade Start Screen Styles */
+#startMenu {
+  background: radial-gradient(circle at 50% 25%, #fffdf7 0%, #f7ecd5 40%, #ebd4aa 100%) !important;
+  justify-content: space-between !important;
+}
+.menu-stage {
+  position: relative;
+  width: 100%;
+  max-width: 430px;
+  flex: 1 1 auto;
+  height: clamp(240px, 38dvh, 380px);
+  min-height: 230px;
+  margin: 6px 0;
+  border: 3px solid #b97e08;
+  border-radius: 18px;
+  background: #a8c6d8 url('/stage-bg/g0.webp') center / cover no-repeat;
+  box-shadow: inset 0 0 20px rgba(0,0,0,0.4), 0 8px 24px rgba(43,28,16,0.22);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.ring-floor {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 28%;
+  background: linear-gradient(180deg, #6d421e 0%, #4a2b13 100%);
+  border-top: 2px solid #925828;
+}
+.ring-rug {
+  position: absolute;
+  left: 50%;
+  bottom: calc(14% - 15px);
+  transform: translateX(-50%);
+  width: 72%;
+  height: 30px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at center, #d63c30 0%, #8b1e15 100%);
+  border: 2px solid #ffaa44;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+}
+.menu-enemy-img {
+  position: absolute;
+  left: 0; right: 0;
+  margin: 0 auto;
+  bottom: calc(24% - 4px);
+  width: 64%;
+  height: 68%;
+  object-fit: contain;
+  object-position: bottom center;
+  image-rendering: pixelated;
+  filter: drop-shadow(0 10px 8px rgba(0,0,0,0.45));
+  animation: menuEnemyBob 2.2s ease-in-out infinite;
+}
+@keyframes menuEnemyBob {
+  0%, 100% { transform: translateY(0) scale(1, 1); }
+  50% { transform: translateY(-8px) scale(1.02, 0.98); }
+}
+.menu-hand-wrap {
+  position: absolute;
+  left: 4%;
+  bottom: 8%;
+  width: 32%;
+  height: auto;
+  transform-origin: 80% 90%;
+  animation: menuHandSlap 2.2s ease-in-out infinite;
+  filter: drop-shadow(0 8px 6px rgba(0,0,0,0.35));
+}
+.menu-hand-wrap img {
+  width: 100%;
+  display: block;
+}
+@keyframes menuHandSlap {
+  0%, 100% { transform: translate(0, 0) rotate(-8deg); }
+  45% { transform: translate(-10px, 4px) rotate(-14deg); }
+  60% { transform: translate(24px, -12px) rotate(14deg); }
+  72% { transform: translate(16px, -8px) rotate(8deg); }
+}
+.play-btn-arcade {
+  width: 100%;
+  max-width: 430px;
+  height: 64px;
+  border-radius: 20px !important;
+  font-family: "Bungee", sans-serif;
+  font-size: 24px !important;
+  letter-spacing: 0.05em;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  background: linear-gradient(180deg, #ffe066 0%, #f59e0b 50%, #d97706 100%) !important;
+  color: #1f140a !important;
+  border: 3px solid #7a4d00 !important;
+  box-shadow: inset 0 2px 0 #ffeaa6, inset 0 -4px 0 rgba(43,28,16,0.3), 0 6px 0 #7a4d00, 0 10px 22px rgba(245,158,11,0.45) !important;
+  cursor: pointer;
+  animation: playArcadePulse 2s ease-in-out infinite;
+  transition: transform 0.08s ease, box-shadow 0.08s ease;
+}
+.play-btn-arcade:active {
+  transform: translateY(4px) !important;
+  box-shadow: inset 0 2px 0 #ffeaa6, 0 2px 0 #7a4d00 !important;
+  animation: none !important;
+}
+@keyframes playArcadePulse {
+  0%, 100% { transform: scale(1); filter: brightness(1); }
+  50% { transform: scale(1.025); filter: brightness(1.08); box-shadow: inset 0 2px 0 #ffeaa6, inset 0 -4px 0 rgba(43,28,16,0.3), 0 7px 0 #7a4d00, 0 14px 28px rgba(245,158,11,0.6) !important; }
+}
+.menu-hint {
+  font-family: "Bungee", sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: #b45309;
+  text-shadow: 0 1px 0 rgba(255,255,255,0.7);
+  margin-top: 4px;
 }

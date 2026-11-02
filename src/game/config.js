@@ -228,7 +228,7 @@ export const CONFIG = {
       "id": "secondHand",
       "name": "Second Hand",
       "tier": 1,
-      "cost": 350,
+      "cost": 5000,
       "prereq": "basic",
       "reqBoss": 9,
       "fx": "Alternates L / R hands, doubling your cycle rate."
@@ -237,7 +237,7 @@ export const CONFIG = {
       "id": "onTarget",
       "name": "On Target",
       "tier": 2,
-      "cost": 1200,
+      "cost": 6500,
       "prereq": "secondHand",
       "fx": "Combo stacks survive switching enemies (resets on loss)."
     },
@@ -245,7 +245,7 @@ export const CONFIG = {
       "id": "quickReflexes",
       "name": "Quick Reflexes",
       "tier": 2,
-      "cost": 1800,
+      "cost": 8500,
       "prereq": "secondHand",
       "fx": "+10% attack speed."
     },
@@ -253,7 +253,7 @@ export const CONFIG = {
       "id": "criticalSlaps",
       "name": "Critical Slaps",
       "tier": 2,
-      "cost": 2500,
+      "cost": 3500,
       "prereq": "strongerHands",
       "fx": "+5% crit chance."
     },
@@ -261,7 +261,7 @@ export const CONFIG = {
       "id": "thunderclap",
       "name": "Thunderclap",
       "tier": 2,
-      "cost": 3500,
+      "cost": 5500,
       "prereq": "staminaTraining",
       "reqBoss": 4,
       "fx": "Every 8th slap summons a devastating THUNDERCLAP dealing 4× damage and dazing the enemy for 1s!"
@@ -270,7 +270,7 @@ export const CONFIG = {
       "id": "heavySlap",
       "name": "Heavy Slap",
       "tier": 2,
-      "cost": 4500,
+      "cost": 6000,
       "prereq": "strongerHands",
       "fx": "12% chance a slap lands HEAVY for 3x damage."
     },
@@ -278,7 +278,7 @@ export const CONFIG = {
       "id": "precisionInstinct",
       "name": "Precision Instinct",
       "tier": 2,
-      "cost": 2800,
+      "cost": 4500,
       "prereq": "strongerHands",
       "fx": "Unlocks PRECISION strikes: a gold weak spot flashes on the enemy mid-fight — tap it for a devastating 8.5x critical strike! Fortune Luck makes it appear more often. Max 3 per fight (+1 per 5 Luck, max 6)."
     },
@@ -778,9 +778,18 @@ export const CONFIG = {
       "desc": "Both hands slam together for one crushing hit."
     },
     {
+      "id": "barrier",
+      "name": "Aegis Barrier",
+      "boss": 29,
+      "cd": 28,
+      "cdMax": 18,
+      "kind": "barrier",
+      "desc": "Summons a protective Aegis Barrier that negates up to 80% incoming damage."
+    },
+    {
       "id": "meteor",
       "name": "Meteor Strike",
-      "boss": 29,
+      "boss": 39,
       "mult": 16,
       "multMax": 28,
       "cd": 35,
@@ -935,7 +944,7 @@ export const CONFIG = {
       "coins": 1000000,
       "gems": 1600,
       "tagline": "Gamma Breaker Set",
-      "desc": "Smash obstacles with Hulk (+20% Damage & screen-shaking Thunderclap) alongside a colossal treasury."
+      "desc": "Smash obstacles with Hulk (+20% Damage & screen-shaking Gamma Punch) alongside a colossal treasury."
     },
     {
       "id": "cosmic",
