@@ -64,7 +64,7 @@ export const CONFIG = {
     "luckDmgMult": 1.5,
       "strikeCoinMult": 0.3,
       "killBountyMult": 1.5,
-      "slapBaseFrac": 0.08,
+      "slapBaseFrac": 0.02,
       "slapDmgBonusScale": 5,
       "slapDmgBonusCap": 1,
       "slapFightCapFrac": 0.30,
