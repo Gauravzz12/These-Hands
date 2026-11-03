@@ -88,7 +88,7 @@ export const CONFIG = {
   "enemyProgression": {
     "hp": {
       "base0": 65,
-      "early": [65, 95, 140, 210, 350, 520, 780, 1150, 1700, 3200],
+      "early": [65, 95, 140, 210, 350, 520, 780, 1300, 1950, 3500],
       "base10": 4200,
       "growth": 1.35941,
       "tailStart": 49,
@@ -97,7 +97,7 @@ export const CONFIG = {
       "eliteMult": 1.22
     },
     "damage": {
-      "earlyDmg": [6, 9, 12, 16, 22, 28, 35, 42, 50, 68],
+      "earlyDmg": [8, 13, 13, 18, 20, 30, 38, 50, 58, 76],
       "base10": 50,
       "growth": 1.10,
       "tailStart": 49,
@@ -108,7 +108,7 @@ export const CONFIG = {
     "interval": {
       "base": 2.8,
       "decay": 0.992,
-      "floor": 1.70,
+      "floor": 1.60,
       "bossMult": 0.95,
       "bossFloor": 1.60,
       "miniBossMult": 0.96
@@ -231,7 +231,7 @@ export const CONFIG = {
       "id": "secondHand",
       "name": "Second Hand",
       "tier": 1,
-      "cost": 5000,
+      "cost": 8000,
       "prereq": "basic",
       "reqBoss": 9,
       "fx": "Alternates L / R hands, doubling your cycle rate."
@@ -256,7 +256,7 @@ export const CONFIG = {
       "id": "criticalSlaps",
       "name": "Critical Slaps",
       "tier": 2,
-      "cost": 3500,
+      "cost": 5000,
       "prereq": "strongerHands",
       "fx": "+5% crit chance."
     },
@@ -264,7 +264,7 @@ export const CONFIG = {
       "id": "thunderclap",
       "name": "Seismic Slam",
       "tier": 2,
-      "cost": 5500,
+      "cost": 6500,
       "prereq": "staminaTraining",
       "reqBoss": 4,
       "fx": "Every 8th slap lands a devastating SEISMIC SLAM dealing 4x damage and dazing the enemy for 1s!"
@@ -273,7 +273,7 @@ export const CONFIG = {
       "id": "heavySlap",
       "name": "Heavy Slap",
       "tier": 2,
-      "cost": 6000,
+      "cost": 7500,
       "prereq": "strongerHands",
       "fx": "12% chance a slap lands HEAVY for 3x damage."
     },
@@ -281,7 +281,7 @@ export const CONFIG = {
       "id": "precisionInstinct",
       "name": "Precision Instinct",
       "tier": 2,
-      "cost": 4500,
+      "cost": 5000,
       "prereq": "strongerHands",
       "fx": "Unlocks PRECISION strikes: a gold weak spot flashes on the enemy mid-fight — tap it for a devastating 8.5x critical strike! Fortune Luck makes it appear more often. Max 3 per fight (+1 per 5 Luck, max 6)."
     },
@@ -330,7 +330,7 @@ export const CONFIG = {
       "id": "echoStrike",
       "name": "Acoustic Echo",
       "tier": 4,
-      "cost": 200000,
+      "cost": 300000,
       "prereq": "comboMastery",
       "fx": "Critical slaps have a 25% chance to echo for 160% bonus damage."
     },
