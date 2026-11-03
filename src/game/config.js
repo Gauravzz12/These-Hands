@@ -68,6 +68,8 @@ export const CONFIG = {
       "slapDmgBonusScale": 5,
       "slapDmgBonusCap": 1,
       "slapFightCapFrac": 0.30,
+      "slapEarlyMult": 3,
+      "slapEarlyCapFrac": 1.5,
     "luckCoinMult": 3,
     "vampPerLevel": 0.334,
     "speedCostLateMult": 3,
