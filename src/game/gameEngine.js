@@ -1482,6 +1482,15 @@ if(FM2&&FM2.type==="gauntlet"){
     chooseBtnEl.textContent="CHOOSE ENEMY";
     chooseBtnEl.style.display="";
   }
+  // AUTO mode: after a win, auto-press NEXT once the victory overlay has
+  // been seen briefly. Only when NEXT is actually offered (never on a
+  // loss, a trio gate, or mode overlays that hide it); the callback
+  // re-checks everything because boss-rush/endless overlays adjust the
+  // buttons after this function returns, and hideEndOverlay clears the
+  // timer if the player navigates first.
+  if(win&&G.autoAdvance&&nextBtnEl.style.display!=="none"){
+    autoAdvanceTimer=setTimeout(()=>{autoAdvanceTimer=null;if(G.over==="victory"&&G.autoAdvance&&nextBtnEl.style.display!=="none")nextBtnEl.click();},1400);
+  }
 }
 const FM3=G.fightMode;if(FM3&&FM3.type==="bossrush"){nextBtnEl.style.display="none";if(win){endHeadEl.textContent="\uD83D\uDC51 BOSS RUSH CLEARED!";const v3=G.lastVictory||{};endSubEl.textContent="All "+FM3.queue.length+" bosses down back-to-back! Earned "+fmtNum((FM3.earned||0)+(v3.rushBonus||0))+" coins this run.";if(v3.rushBonus){endUnlockEl.innerHTML="RUSH BONUS \u2014 +"+fmtNum(v3.rushBonus)+" COINS!"+(v3.rushGem?"<br>COMPLETION \u2014 +"+v3.rushGem+" GEMS!":"");endUnlockEl.classList.add("show")}}else{endHeadEl.textContent="\uD83D\uDC51 BOSS RUSH ENDED";endSubEl.textContent="You fell on boss "+(FM3.step+1)+" of "+FM3.queue.length+". Strike coins and boss bonuses are kept \u2014 upgrade and run it again."}}if(FM3&&FM3.type==="endless"){nextBtnEl.style.display="none";endHeadEl.textContent="\uD83C\uDF0A SURVIVAL ENDED \u2014 WAVE "+(FM3.wave||1);endSubEl.textContent="You cleared "+((FM3.wave||1)-1)+" waves and earned "+fmtNum((FM3.earned||0)+(G.fightHitCoins||0))+" coins this run. Best: WAVE "+(G.endlessBest||0)+"."}
   const vNorm=G.lastVictory;
