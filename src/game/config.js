@@ -1,7 +1,7 @@
 // These Hands — Authentic Game Configuration
 export const CONFIG = {
   "playerBase": {
-    "damage": 5,
+    "damage": 7,
     "attackInterval": 1.5,
     "critChance": 0.1,
     "critMult": 2
@@ -19,18 +19,18 @@ export const CONFIG = {
   },
   "levelCap": 50,
   "attrs": {
-    "power": { "name": "Power", "baseCost": 60, "growth": 1.55, "lateGrowth": 1.3, "maxLevel": 50 },
-    "speed": { "name": "Speed", "baseCost": 70, "growth": 1.55, "lateGrowth": 1.38, "maxLevel": 40 },
-    "critChance": { "name": "Crit Chance", "baseCost": 90, "growth": 1.58, "lateGrowth": 1.42, "maxLevel": 35 },
-    "critDamage": { "name": "Crit Damage", "baseCost": 70, "growth": 1.55, "lateGrowth": 1.38, "maxLevel": 40 },
-    "defense": { "name": "Defense", "baseCost": 70, "growth": 1.55, "lateGrowth": 1.38, "maxLevel": 40 },
-    "stun": { "name": "Stun", "baseCost": 110, "growth": 1.58, "lateGrowth": 1.52, "maxLevel": 30 },
-    "combo": { "name": "Combo", "baseCost": 70, "growth": 1.55, "lateGrowth": 1.38, "maxLevel": 40 },
-    "coinMult": { "name": "Coin Mult.", "baseCost": 70, "growth": 1.55, "lateGrowth": 1.38, "maxLevel": 40 },
-    "accuracy": { "name": "Accuracy", "baseCost": 200, "growth": 1.8, "lateGrowth": 2.6, "maxLevel": 14 },
-    "bossDamage": { "name": "Boss Hunter", "baseCost": 70, "growth": 1.55, "lateGrowth": 1.38, "maxLevel": 40 },
-    "vampirism": { "name": "Life Leech", "baseCost": 90, "growth": 1.58, "lateGrowth": 1.42, "maxLevel": 35 },
-    "luck": { "name": "Fortune Luck", "baseCost": 110, "growth": 1.58, "lateGrowth": 1.52, "maxLevel": 30 }
+    "power": { "name": "Power", "baseCost": 60, "growth": 1.16, "lateGrowth": 1.37, "maxLevel": 50 },
+    "speed": { "name": "Speed", "baseCost": 70, "growth": 1.16, "lateGrowth": 1.48, "maxLevel": 40 },
+    "critChance": { "name": "Crit Chance", "baseCost": 90, "growth": 1.18, "lateGrowth": 1.55, "maxLevel": 35 },
+    "critDamage": { "name": "Crit Damage", "baseCost": 70, "growth": 1.16, "lateGrowth": 1.48, "maxLevel": 40 },
+    "defense": { "name": "Defense", "baseCost": 70, "growth": 1.16, "lateGrowth": 1.48, "maxLevel": 40 },
+    "stun": { "name": "Stun", "baseCost": 110, "growth": 1.2, "lateGrowth": 1.66, "maxLevel": 30 },
+    "combo": { "name": "Combo", "baseCost": 70, "growth": 1.16, "lateGrowth": 1.48, "maxLevel": 40 },
+    "coinMult": { "name": "Coin Mult.", "baseCost": 70, "growth": 1.16, "lateGrowth": 1.48, "maxLevel": 40 },
+    "accuracy": { "name": "Accuracy", "baseCost": 200, "growth": 1.3, "lateGrowth": 3.9, "maxLevel": 14 },
+    "bossDamage": { "name": "Boss Hunter", "baseCost": 70, "growth": 1.16, "lateGrowth": 1.48, "maxLevel": 40 },
+    "vampirism": { "name": "Life Leech", "baseCost": 90, "growth": 1.18, "lateGrowth": 1.55, "maxLevel": 35 },
+    "luck": { "name": "Fortune Luck", "baseCost": 110, "growth": 1.2, "lateGrowth": 1.66, "maxLevel": 30 }
   },
   "attrOrder": [
     "power",
@@ -70,6 +70,7 @@ export const CONFIG = {
       "slapFightCapFrac": 0.30,
       "slapEarlyMult": 3,
       "slapEarlyCapFrac": 1.5,
+      "slapCritPayFrac": 0.5,
     "luckCoinMult": 3,
     "vampPerLevel": 0.334,
     "speedCostLateMult": 3,
@@ -261,12 +262,12 @@ export const CONFIG = {
     },
     {
       "id": "thunderclap",
-      "name": "Thunderclap",
+      "name": "Seismic Slam",
       "tier": 2,
       "cost": 5500,
       "prereq": "staminaTraining",
       "reqBoss": 4,
-      "fx": "Every 8th slap summons a devastating THUNDERCLAP dealing 4× damage and dazing the enemy for 1s!"
+      "fx": "Every 8th slap lands a devastating SEISMIC SLAM dealing 4x damage and dazing the enemy for 1s!"
     },
     {
       "id": "heavySlap",
@@ -331,7 +332,7 @@ export const CONFIG = {
       "tier": 4,
       "cost": 200000,
       "prereq": "comboMastery",
-      "fx": "Critical slaps have a 25% chance to echo for 40% bonus damage."
+      "fx": "Critical slaps have a 25% chance to echo for 160% bonus damage."
     },
     {
       "id": "dualHand",
@@ -441,7 +442,7 @@ export const CONFIG = {
     "shieldAmt": 30,
     "shieldMax": 90,
     "echoChance": 0.25,
-    "echoMult": 0.4,
+    "echoMult": 1.6,
     "titanMult": 1.35
   },
   "levelAbilities": [
@@ -733,8 +734,8 @@ export const CONFIG = {
         "label": "+20% DAMAGE"
       },
       "power": {
-        "name": "THUNDERCLAP",
-        "desc": "every 10th slap deals 10x damage with a screen-shaking clap"
+        "name": "GAMMA PUNCH",
+        "desc": "every 10th slap deals 6x damage with a screen-shaking gamma clap"
       },
       "price": {
         "cur": "gems",
