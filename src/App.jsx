@@ -254,6 +254,7 @@ export default function App() {
       <div id="playerBar" aria-label="Your health">
         <svg className="heart-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21C6 16.5 2.5 12.8 2.5 8.9 2.5 5.9 4.9 3.5 7.9 3.5c1.7 0 3.2.8 4.1 2.1.9-1.3 2.4-2.1 4.1-2.1 3 0 5.4 2.4 5.4 5.4 0 3.9-3.5 7.6-9.5 12.1z" fill="#d63c30" stroke="#8f1f16" strokeWidth="1.4"/></svg>
         <div id="playerTrack"><div id="playerFill"></div><span id="playerText"></span></div>
+        <span id="precTag" className="prec-tag" style={{'display': 'none'}}></span>
         <span id="swTag" className="sw-tag" style={{'display': 'none'}}></span>
       </div>
 

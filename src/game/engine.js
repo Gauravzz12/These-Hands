@@ -40,6 +40,7 @@ export function createInitialSave() {
     adCoinBoostUntil: 0,
     adDmgBoostUntil: 0,
     specials: {},
+    dragonMastery: 0,
     music: true,
     sfx: true,
   };
@@ -75,8 +76,8 @@ export function attrCost(key, currentLevel) {
   return calcAttrCost(key, currentLevel);
 }
 
-export function attrCap(playerLevel) {
-  return calcAttrCap(playerLevel);
+export function attrCap(playerLevel, dragonMastery = 0) {
+  return calcAttrCap(playerLevel, dragonMastery);
 }
 
 export function levelUpCost(currentLevel) {
@@ -103,6 +104,7 @@ export function computePlayerStats(save) {
   if (ab >= 2) dmg *= afxMap.ironPalm;
   if (ab >= 20) dmg *= afxMap.godhandDmg || 1.15;
   if (ab > 20) dmg *= 1 + (afxMap.masteryPer || 0.02) * (ab - 20);
+  if (save.dragonMastery) dmg *= 1 + save.dragonMastery * 0.05;
   dmg *= adDmgMult;
 
   // Attack interval (lower = faster)
@@ -148,6 +150,7 @@ export function computePlayerStats(save) {
   let maxHp = CONFIG.playerHp.base + (ab - 1) * CONFIG.playerHp.perLevel;
   if (s.staminaTraining) maxHp += sfx.staminaHp;
   if (s.unstoppable) maxHp += sfx.unstoppableHp;
+  if (save.dragonMastery) maxHp = Math.round(maxHp * (1 + save.dragonMastery * 0.05));
 
   // Theoretical DPS with heavy hits, combos, and crits
   const pH = s.heavySlap ? sfx.heavyChance : 0;
