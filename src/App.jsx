@@ -272,7 +272,17 @@ export default function App() {
         <span id="atkTime">4.2s</span>
       </div>
 
-      <button className="battle-upgrade-btn" data-goto="attrs" type="button">⚡ UPGRADES — LEVEL UP & ATTRIBUTES →</button>
+      <section id="attrPanel" aria-label="Attributes">
+        <div className="attr-head">
+          <button id="attrToggle" aria-expanded="false" aria-controls="attrList">
+            <span>ATTRIBUTES</span>
+            <span className="cap" id="capNote"></span>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+          </button>
+          <button id="levelUpBtn"></button>
+        </div>
+        <div id="attrList"></div>
+      </section>
 
       <footer id="controls">
         <button className="ctl-btn" id="pauseBtn" aria-label="Pause fight">
@@ -371,7 +381,7 @@ export default function App() {
           <button className="home-btn" data-goto="home" aria-label="Back to home"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 2.5 11h2.7v9h5.3v-6h3v6h5.3v-9h2.7L12 3z" fill="currentColor"/></svg></button>
           <div>
             <div className="sel-title">WORLDS</div>
-            <div className="sel-sub">A SEALED GATE · BEYOND THE DRAGON LORD</div>
+            <div className="sel-sub">BEYOND THE DRAGON LORD</div>
             <div className="pill" id="worldsEmbers" style={{'marginTop': '6px', 'display': 'inline-block'}}>🔥 0 EMBERS</div>
           </div>
         </div>
