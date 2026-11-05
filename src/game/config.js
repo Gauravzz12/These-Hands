@@ -628,11 +628,36 @@ export const CONFIG = {
       "kind": "burn",
       "dur": 6, "mult": 8.0, "blurb": "Caldera blaze burns you fiercely over 6s!",
       "desc": "Fiery dragon breath scorching everything"
+    },
+    "202": {
+      "name": "STAMPEDE CHARGE",
+      "kind": "heavy",
+      "mult": 1.6, "stun": 0.8, "blurb": "Buffalo charge dealing 1.6× damage and a 0.8s stagger!",
+      "desc": "The Buffalo King lowers his horns and charges"
+    },
+    "205": {
+      "name": "CHANDRAHASA STRIKE",
+      "kind": "heavy",
+      "mult": 2.0, "stun": 1.0, "blurb": "The moon-blade's gift — 2× damage and a 1s stagger!",
+      "desc": "Ten heads howl as the crescent strike falls"
+    },
+    "212": {
+      "name": "ECLIPSE GUARD",
+      "kind": "shield",
+      "hits": 5, "blurb": "Raises a shadow shield — absorbs 5 slaps at 50% damage!",
+      "desc": "The eclipse hardens into a wall of night"
+    },
+    "215": {
+      "name": "COUNTER SLAP",
+      "kind": "heavy",
+      "mult": 2.2, "stun": 1.6, "blurb": "Your own perfected slap, returned — 2.2× damage and a 1.6s stagger!",
+      "desc": "The shadow slaps back with your own technique"
     }
   },
   "healBosses": {
     "39": {"name": "ETERNAL RENEWAL", "pct": 0.25, "every": 5, "max": 4, "blurb": "The tomb restores him — heals 25% of his HP, up to 4 times per fight."},
-    "49": {"name": "DRAGON RENEWAL", "pct": 0.20, "every": 6, "max": 4, "blurb": "Ancient blood knits shut — heals 20% of his HP, up to 4 times per fight."}
+    "49": {"name": "DRAGON RENEWAL", "pct": 0.20, "every": 6, "max": 4, "blurb": "Ancient blood knits shut — heals 20% of his HP, up to 4 times per fight."},
+    "205": {"name": "AMRITA OF THE NAVEL", "pct": 0.15, "every": 9999, "max": 1, "blurb": "The nectar of immortality — heals 15% of his HP, once per fight."}
   },
   "gauntlet": {"bonusMult": 4.5, "gemFirst": 1},
   "ads": {"interstitialEveryWins": 4, "interstitialMinGapSec": 180},
