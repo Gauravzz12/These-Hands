@@ -166,8 +166,8 @@ export const V2_CONFIGS = [
         "h": 900
       },
       "attack": {
-        "src": "/enemy-sprites-v2/poses/05-grumpy-teddy-attack.webp",
-        "w": 858,
+        "src": "/enemy-sprites-v2/poses/05-grumpy-teddy-idle.webp",
+        "w": 523,
         "h": 900
       },
       "dizzy": {
