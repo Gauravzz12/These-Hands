@@ -20,7 +20,7 @@ export const ROSTER = [
     "cardboard"
   ],
   [
-    "Slime Blob",
+    "Grumpy Teddy",
     "slime",
     "base"
   ],

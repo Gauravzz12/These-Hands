@@ -11,26 +11,26 @@ export const CONFIG = {
     "base": 100,
     "growth": 1.8612,
     "rampStart": 5,
-    "midGrowth": 1.68,
+    "midGrowth": 1.55,
     "midStart": 20,
-    "lateGrowth": 1.35,
+    "lateGrowth": 1.30,
     "grindStart": 40,
-    "endGrowth": 1.18
+    "endGrowth": 1.30
   },
   "levelCap": 50,
   "attrs": {
-    "power": { "name": "Power", "baseCost": 60, "growth": 1.16, "lateGrowth": 1.37, "maxLevel": 50 },
-    "speed": { "name": "Speed", "baseCost": 70, "growth": 1.16, "lateGrowth": 1.48, "maxLevel": 40 },
-    "critChance": { "name": "Crit Chance", "baseCost": 90, "growth": 1.18, "lateGrowth": 1.55, "maxLevel": 35 },
-    "critDamage": { "name": "Crit Damage", "baseCost": 70, "growth": 1.16, "lateGrowth": 1.48, "maxLevel": 40 },
-    "defense": { "name": "Defense", "baseCost": 70, "growth": 1.16, "lateGrowth": 1.48, "maxLevel": 40 },
-    "stun": { "name": "Stun", "baseCost": 110, "growth": 1.2, "lateGrowth": 1.66, "maxLevel": 30 },
-    "combo": { "name": "Combo", "baseCost": 70, "growth": 1.16, "lateGrowth": 1.48, "maxLevel": 40 },
-    "coinMult": { "name": "Coin Mult.", "baseCost": 70, "growth": 1.16, "lateGrowth": 1.48, "maxLevel": 40 },
+    "power": { "name": "Power", "baseCost": 60, "growth": 1.16, "lateGrowth": 1.40, "maxLevel": 50 },
+    "speed": { "name": "Speed", "baseCost": 70, "growth": 1.16, "lateGrowth": 1.51, "maxLevel": 40 },
+    "critChance": { "name": "Crit Chance", "baseCost": 90, "growth": 1.18, "lateGrowth": 1.58, "maxLevel": 35 },
+    "critDamage": { "name": "Crit Damage", "baseCost": 70, "growth": 1.16, "lateGrowth": 1.51, "maxLevel": 40 },
+    "defense": { "name": "Defense", "baseCost": 70, "growth": 1.16, "lateGrowth": 1.51, "maxLevel": 40 },
+    "stun": { "name": "Stun", "baseCost": 110, "growth": 1.2, "lateGrowth": 1.69, "maxLevel": 30 },
+    "combo": { "name": "Combo", "baseCost": 70, "growth": 1.16, "lateGrowth": 1.51, "maxLevel": 40 },
+    "coinMult": { "name": "Coin Mult.", "baseCost": 70, "growth": 1.16, "lateGrowth": 1.51, "maxLevel": 40 },
     "accuracy": { "name": "Accuracy", "baseCost": 200, "growth": 1.3, "lateGrowth": 3.9, "maxLevel": 14 },
-    "bossDamage": { "name": "Boss Hunter", "baseCost": 70, "growth": 1.16, "lateGrowth": 1.48, "maxLevel": 40 },
-    "vampirism": { "name": "Life Leech", "baseCost": 90, "growth": 1.18, "lateGrowth": 1.55, "maxLevel": 35 },
-    "luck": { "name": "Fortune Luck", "baseCost": 110, "growth": 1.2, "lateGrowth": 1.66, "maxLevel": 30 }
+    "bossDamage": { "name": "Boss Hunter", "baseCost": 70, "growth": 1.16, "lateGrowth": 1.51, "maxLevel": 40 },
+    "vampirism": { "name": "Life Leech", "baseCost": 90, "growth": 1.18, "lateGrowth": 1.58, "maxLevel": 35 },
+    "luck": { "name": "Fortune Luck", "baseCost": 110, "growth": 1.2, "lateGrowth": 1.69, "maxLevel": 30 }
   },
   "attrOrder": [
     "power",
@@ -759,7 +759,7 @@ export const CONFIG = {
       },
       "power": {
         "name": "TIME STOP",
-        "desc": "every 10th slap stops time for 5s: +50% damage and your slaps fly faster"
+        "desc": "every 10th slap STOP TIME for 5s: the enemy is frozen solid while you deal 2x damage and slap 30% faster. Ends the moment the fight ends"
       },
       "price": {
         "cur": "gems",
@@ -959,7 +959,7 @@ export const CONFIG = {
       "coins": 10000000,
       "gems": 3000,
       "tagline": "Omnipotent Snap Set",
-      "desc": "Wield the Mythic Infinity Gauntlet (all 6 stones, Time Stop frenzy) with ultimate coin and gem fortune!"
+      "desc": "Wield the Mythic Infinity Gauntlet (all 6 stones, true Time Stop) with ultimate coin and gem fortune!"
     }
   ],
   "features": [
@@ -1003,6 +1003,11 @@ export const CONFIG = {
     "cadence": 25,
     "duration": 10,
     "dmgMult": 1.5,
+    "speedMult": 1.3
+  },
+  "timeStop": {
+    "duration": 5,
+    "dmgMult": 2.0,
     "speedMult": 1.3
   },
   "daily": {
