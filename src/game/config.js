@@ -68,6 +68,8 @@ export const CONFIG = {
       "slapDmgBonusScale": 5,
       "slapDmgBonusCap": 1,
       "slapFightCapFrac": 0.30,
+    "slapTaperFrac": 0.2,
+    "stunCooldownSec": 4,
       "slapEarlyMult": 3,
       "slapEarlyCapFrac": 1.5,
       "slapCritPayFrac": 0.5,
