@@ -67,6 +67,8 @@ export function worldEnemyDef(w, s) {
     hp: e.hp,
     coinRate: RATE,
     bounty: Math.round(e.hp * RATE),
+    embersFirst: s === 5 ? 10 : s === 2 ? 3 : 1,
+    embersRepeat: s === 5 ? 5 : s === 2 ? 2 : 1,
     atkInterval: e.atkInterval,
     atkDmg: e.atkDmg,
     bossAnim: null,

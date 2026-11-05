@@ -382,6 +382,7 @@ export default function App() {
           <div>
             <div className="sel-title">WORLDS</div>
             <div className="sel-sub">BEYOND THE DRAGON LORD</div>
+            <div className="pill" id="worldsEmbers" style={{'marginTop': '6px', 'display': 'inline-block'}}>🔥 0 EMBERS</div>
           </div>
         </div>
         <div id="worldsList"></div>
