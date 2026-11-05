@@ -552,6 +552,21 @@ export default function App() {
             <div className="set-main"><div className="set-name">GUIDED TOUR</div><div className="set-desc">Replay the first-loss walkthrough: attributes, levels and the skill tree, spotlighted step by step.</div></div>
             <button className="set-toggle" id="tutReplayBtn">START</button>
           </div>
+          <div className="set-row">
+            <div className="set-main"><div className="set-name">🐞 DEBUG MODE</div><div className="set-desc">Playtest tools — unlocks, grants and boss shortcuts. Grants save like normal progress; god mode lasts one session only.</div></div>
+            <button className="set-toggle" id="dbgToggleBtn" aria-pressed="false">OFF</button>
+          </div>
+          <div id="debugPanel" style={{'display': 'none'}}>
+            <div className="set-row"><div className="set-main"><div className="set-name">GOD MODE</div><div className="set-desc">You take no damage in fights.</div></div><button className="set-toggle" id="dbgGodBtn" aria-pressed="false">OFF</button></div>
+            <div className="set-row"><div className="set-main"><div className="set-name">TEST UNLOCK</div><div className="set-desc">Every enemy, stage and world slot becomes fightable.</div></div><button className="set-toggle" id="dbgTestBtn" aria-pressed="false">OFF</button></div>
+            <div className="set-row"><div className="set-main"><div className="set-name">+1 BILLION COINS</div><div className="set-desc">Grant coins for shop and upgrade testing.</div></div><button className="set-toggle" id="dbgCoinsBtn">GRANT</button></div>
+            <div className="set-row"><div className="set-main"><div className="set-name">+1,000 GEMS</div><div className="set-desc">Grant gems for skin and vault testing.</div></div><button className="set-toggle" id="dbgGemsBtn">GRANT</button></div>
+            <div className="set-row"><div className="set-main"><div className="set-name">+100 SOUL EMBERS</div><div className="set-desc">Grant embers for World Arts testing.</div></div><button className="set-toggle" id="dbgEmbersBtn">GRANT</button></div>
+            <div className="set-row"><div className="set-main"><div className="set-name">MAX BUILD</div><div className="set-desc">Level 50, maxed attributes, all skills, specials Lv5, all arts, all relics ★3, Dragon Mastery 10.</div></div><button className="set-toggle" id="dbgMaxBtn">APPLY</button></div>
+            <div className="set-row"><div className="set-main"><div className="set-name">FIGHT — DRAGON LORD</div><div className="set-desc">Jump straight into the final boss fight.</div></div><button className="set-toggle" id="dbgFight49Btn">FIGHT</button></div>
+            <div className="set-row"><div className="set-main"><div className="set-name">FIGHT — RAVANA</div><div className="set-desc">Jump straight into the Asura Realm final boss.</div></div><button className="set-toggle" id="dbgFightW05Btn">FIGHT</button></div>
+            <div className="set-row"><div className="set-main"><div className="set-name">FIGHT — DARK SLAPPER</div><div className="set-desc">Jump straight into the Shadow Verse final boss.</div></div><button className="set-toggle" id="dbgFightW15Btn">FIGHT</button></div>
+          </div>
                     <div className="set-row danger">
             <div className="set-main"><div className="set-name">RESET SAVE</div><div className="set-desc">Wipe coins, gems, progress, skills and skins — everything. Can't be undone.</div></div>
             <button className="set-toggle danger-btn" id="setResetBtn">RESET SAVE</button>
