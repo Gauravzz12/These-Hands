@@ -19,8 +19,8 @@
     "semantic_hash": ""
   },
   "android/app/capacitor.build.gradle": {
-    "mtime": 1793903155.7094605,
-    "seen": 1793903455.9205635,
+    "mtime": 1793904534.466975,
+    "seen": 1793904562.4022532,
     "ast_hash": "ab2c953c47a743ed4496c3b72aa299a2",
     "semantic_hash": "ab2c953c47a743ed4496c3b72aa299a2"
   },
@@ -49,8 +49,8 @@
     "semantic_hash": "682315a426653617c6a74fc12bef55b6"
   },
   "android/capacitor.settings.gradle": {
-    "mtime": 1793903155.7084594,
-    "seen": 1793903455.9205635,
+    "mtime": 1793904534.4659784,
+    "seen": 1793904562.4022532,
     "ast_hash": "514d591b4c0254b390142858be5981e4",
     "semantic_hash": "514d591b4c0254b390142858be5981e4"
   },
@@ -235,9 +235,9 @@
     "semantic_hash": ""
   },
   "src/game/config.js": {
-    "mtime": 1793903358.2388859,
-    "seen": 1793903455.9215612,
-    "ast_hash": "b7bc6944ff8b0ad462ac2070630dabf0",
+    "mtime": 1793904337.3568518,
+    "seen": 1793904562.4032488,
+    "ast_hash": "d3da0bdfd9208d91d92aaa71cbd64377",
     "semantic_hash": ""
   },
   "src/game/enemies.js": {
@@ -259,9 +259,9 @@
     "semantic_hash": ""
   },
   "src/game/gameEngine.js": {
-    "mtime": 1793903420.29303,
-    "seen": 1793903455.9215612,
-    "ast_hash": "b8ed0e2fd9e470bb5c5642a903d4fe15",
+    "mtime": 1793904517.8006597,
+    "seen": 1793904562.4032488,
+    "ast_hash": "51ec283a8fb09116eb9b35e677568283",
     "semantic_hash": ""
   },
   "src/game/proceduralEnemies.js": {

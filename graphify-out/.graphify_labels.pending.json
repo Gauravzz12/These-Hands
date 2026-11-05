@@ -12,7 +12,7 @@
   "10": "claimChest",
   "11": "renderWorlds",
   "12": "dependencies",
-  "13": "applySkinVisuals",
+  "13": "doReset",
   "14": "nativeBridge.js",
   "15": "ExampleInstrumentedTest.java",
   "16": "MainActivity.java",
@@ -28,5 +28,8 @@
   "26": "capacitor.settings.gradle",
   "27": "settings.gradle",
   "28": "variables.gradle",
-  "30": "switchTab"
+  "29": "generate_android_icons.cjs",
+  "30": "switchTab",
+  "31": "renderSettings",
+  "32": "atkRefDps"
 }
