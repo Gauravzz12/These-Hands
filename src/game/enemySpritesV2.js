@@ -30,8 +30,8 @@ export const V2_CONFIGS = [
       },
       "dizzy": {
         "src": "/enemy-sprites-v2/poses/01-training-dummy-dizzy.webp",
-        "w": 698,
-        "h": 870
+        "w": 728,
+        "h": 907
       }
     },
     "thumb": "/enemy-sprites-v2/thumbs/01-training-dummy-thumb.webp"
@@ -68,8 +68,8 @@ export const V2_CONFIGS = [
       },
       "attack": {
         "src": "/enemy-sprites-v2/poses/02-rubber-duck-attack-water.webp",
-        "w": 1530,
-        "h": 1420
+        "w": 868,
+        "h": 805
       },
       "dizzy": {
         "src": "/enemy-sprites-v2/poses/02-rubber-duck-dizzy.webp",
@@ -101,8 +101,8 @@ export const V2_CONFIGS = [
       },
       "attack": {
         "src": "/enemy-sprites-v2/poses/03-rubber-chicken-attack-egg.webp",
-        "w": 1111,
-        "h": 1535
+        "w": 750,
+        "h": 1036
       },
       "dizzy": {
         "src": "/enemy-sprites-v2/poses/03-rubber-chicken-dizzy.webp",
@@ -134,8 +134,8 @@ export const V2_CONFIGS = [
       },
       "attack": {
         "src": "/enemy-sprites-v2/poses/04-cardboard-knight-attack.webp",
-        "w": 745,
-        "h": 869
+        "w": 777,
+        "h": 905
       },
       "dizzy": {
         "src": "/enemy-sprites-v2/poses/04-cardboard-knight-dizzy.webp",
@@ -172,8 +172,8 @@ export const V2_CONFIGS = [
       },
       "dizzy": {
         "src": "/enemy-sprites-v2/poses/05-grumpy-teddy-dizzy.webp",
-        "w": 563,
-        "h": 620
+        "w": 813,
+        "h": 900
       }
     },
     "thumb": "/enemy-sprites-v2/thumbs/05-grumpy-teddy-thumb.webp"
@@ -200,13 +200,13 @@ export const V2_CONFIGS = [
       },
       "attack": {
         "src": "/enemy-sprites-v2/poses/06-sassy-goblin-sprout-attack-slingshot.webp",
-        "w": 1547,
-        "h": 1548
+        "w": 1007,
+        "h": 1007
       },
       "dizzy": {
         "src": "/enemy-sprites-v2/poses/06-sassy-goblin-sprout-dizzy.webp",
-        "w": 905,
-        "h": 775
+        "w": 1157,
+        "h": 990
       }
     },
     "thumb": "/enemy-sprites-v2/thumbs/06-sassy-goblin-sprout-thumb.webp"
@@ -233,13 +233,13 @@ export const V2_CONFIGS = [
       },
       "attack": {
         "src": "/enemy-sprites-v2/poses/07-mime-attack-rope.webp",
-        "w": 1256,
-        "h": 1556
+        "w": 819,
+        "h": 1014
       },
       "dizzy": {
         "src": "/enemy-sprites-v2/poses/07-mime-dizzy.webp",
-        "w": 584,
-        "h": 904
+        "w": 570,
+        "h": 883
       }
     },
     "thumb": "/enemy-sprites-v2/thumbs/07-mime-thumb.webp"
@@ -266,13 +266,13 @@ export const V2_CONFIGS = [
       },
       "attack": {
         "src": "/enemy-sprites-v2/poses/08-cocky-goose-attack-honk.webp",
-        "w": 1209,
-        "h": 725
+        "w": 1632,
+        "h": 977
       },
       "dizzy": {
         "src": "/enemy-sprites-v2/poses/08-cocky-goose-dizzy.webp",
-        "w": 765,
-        "h": 882
+        "w": 826,
+        "h": 952
       }
     },
     "thumb": "/enemy-sprites-v2/thumbs/08-cocky-goose-thumb.webp"
@@ -304,8 +304,8 @@ export const V2_CONFIGS = [
       },
       "dizzy": {
         "src": "/enemy-sprites-v2/poses/09-trash-panda-dizzy.webp",
-        "w": 858,
-        "h": 724
+        "w": 1049,
+        "h": 885
       }
     },
     "thumb": "/enemy-sprites-v2/thumbs/09-trash-panda-thumb.webp"
@@ -341,8 +341,8 @@ export const V2_CONFIGS = [
     },
     "attack": {
       "src": "/enemy-sprites-v2/poses/10-mischievous-monkey-attack.webp",
-      "w": 965,
-      "h": 908,
+      "w": 984,
+      "h": 925,
       "gCx": 0.636,
       "gFull": 1
     },
@@ -355,29 +355,29 @@ export const V2_CONFIGS = [
     },
     "bananaSling": {
       "src": "/enemy-sprites-v2/poses/10-monkey-extras-banana-sling.webp",
-      "w": 908,
-      "h": 908,
+      "w": 891,
+      "h": 925,
       "gCx": 0.398,
       "gFull": 1
     },
     "spPose": {
       "src": "/enemy-sprites-v2/poses/10-monkey-extras-banana-sling.webp",
-      "w": 908,
-      "h": 908,
+      "w": 891,
+      "h": 925,
       "gCx": 0.398,
       "gFull": 1
     },
     "atkWindup": {
       "src": "/enemy-sprites-v2/poses/10-monkey-anim-atk-windup.webp",
-      "w": 914,
-      "h": 908,
+      "w": 932,
+      "h": 925,
       "gCx": 0.512,
       "gFull": 1
     },
     "atkFollow": {
       "src": "/enemy-sprites-v2/poses/10-monkey-anim-atk-follow.webp",
-      "w": 1012,
-      "h": 908,
+      "w": 1032,
+      "h": 925,
       "gCx": 0.503,
       "gFull": 1
     }
@@ -410,8 +410,8 @@ export const V2_CONFIGS = [
     },
     "dizzy": {
       "src": "/enemy-sprites-v2/poses/11-bodybuilder-dizzy.webp",
-      "w": 234,
-      "h": 539
+      "w": 245,
+      "h": 573
     },
     "idle": {
       "src": "/enemy-sprites-v2/poses/11-bodybuilder-idle.webp",
@@ -420,8 +420,8 @@ export const V2_CONFIGS = [
     },
     "attack": {
       "src": "/enemy-sprites-v2/poses/11-bodybuilder-attack2.webp",
-      "w": 433,
-      "h": 544
+      "w": 463,
+      "h": 582
     }
   },
   "thumb": "/enemy-sprites-v2/thumbs/11-bodybuilder-thumb.webp"
@@ -448,13 +448,13 @@ export const V2_CONFIGS = [
     },
     "attack": {
       "src": "/enemy-sprites-v2/poses/12-luchador-attack.webp",
-      "w": 620,
-      "h": 773
+      "w": 736,
+      "h": 917
     },
     "dizzy": {
       "src": "/enemy-sprites-v2/poses/12-luchador-dizzy.webp",
-      "w": 650,
-      "h": 834
+      "w": 825,
+      "h": 966
     }
   },
   "thumb": "/enemy-sprites-v2/thumbs/12-luchador-thumb.webp"
@@ -484,8 +484,8 @@ export const V2_CONFIGS = [
         "h": 940
       },      "dizzy": {
         "src": "/enemy-sprites-v2/poses/13-kickboxer-dizzy.webp",
-        "w": 780,
-        "h": 880
+        "w": 598,
+        "h": 959
       }
     },
     "thumb": "/enemy-sprites-v2/thumbs/13-kickboxer-thumb.webp"
@@ -516,8 +516,8 @@ export const V2_CONFIGS = [
     },
     "dizzy": {
       "src": "/enemy-sprites-v2/poses/14-adult-boxer-dizzy.webp",
-      "w": 269,
-      "h": 653
+      "w": 251,
+      "h": 619
     },
     "idle": {
       "src": "/enemy-sprites-v2/poses/14-adult-boxer-idle.webp",
@@ -526,8 +526,8 @@ export const V2_CONFIGS = [
     },
     "attack": {
       "src": "/enemy-sprites-v2/poses/14-adult-boxer-attack2.webp",
-      "w": 343,
-      "h": 562
+      "w": 382,
+      "h": 627
     }
   },
   "thumb": "/enemy-sprites-v2/thumbs/14-adult-boxer-thumb.webp"
@@ -553,12 +553,12 @@ export const V2_CONFIGS = [
         "h": 900
       },      "attack": {
         "src": "/enemy-sprites-v2/poses/15-sumo-attack.webp",
-        "w": 1206,
-        "h": 870
+        "w": 1250,
+        "h": 905
       },      "dizzy": {
         "src": "/enemy-sprites-v2/poses/15-sumo-dizzy.webp",
-        "w": 888,
-        "h": 808
+        "w": 1086,
+        "h": 988
       }
     },
     "thumb": "/enemy-sprites-v2/thumbs/15-sumo-champion-thumb.webp"
@@ -574,8 +574,8 @@ export const V2_CONFIGS = [
     "poses": {
       "idle": {"src": "/enemy-sprites-v2/poses/16-castle-guard-idle.webp", "w": 530, "h": 900},
       "attack1": {"src": "/enemy-sprites-v2/poses/16-castle-guard-attack.webp", "w": 520, "h": 900},
-      "attack": {"src": "/enemy-sprites-v2/poses/16-castle-guard-attack.webp", "w": 520, "h": 900},
-      "dizzy": {"src": "/enemy-sprites-v2/poses/16-castle-guard-dizzy.webp", "w": 528, "h": 900}
+      "attack": {"src": "/enemy-sprites-v2/poses/16-castle-guard-attack.webp", "w": 530, "h": 917},
+      "dizzy": {"src": "/enemy-sprites-v2/poses/16-castle-guard-dizzy.webp", "w": 554, "h": 943}
     },
     "thumb": "/enemy-sprites-v2/thumbs/16-castle-guard-thumb.webp"
   },
@@ -594,7 +594,7 @@ export const V2_CONFIGS = [
         "w": 266,
         "h": 421
       },
-      "dizzy": {"src": "/enemy-sprites-v2/poses/17-royal-executioner-dizzy.webp", "w": 911, "h": 586},
+      "dizzy": {"src": "/enemy-sprites-v2/poses/17-royal-executioner-dizzy.webp", "w": 1400, "h": 900},
       "idle": {"src": "/enemy-sprites-v2/poses/17-royal-executioner-idle.webp", "w": 778, "h": 900},
       "attack": {"src": "/enemy-sprites-v2/poses/17-royal-executioner-attack.webp", "w": 991, "h": 906}
     },
@@ -621,13 +621,13 @@ export const V2_CONFIGS = [
     },
     "attack": {
       "src": "/enemy-sprites-v2/poses/18-knight-attack.webp",
-      "w": 1001,
-      "h": 853
+      "w": 1077,
+      "h": 917
     },
     "dizzy": {
       "src": "/enemy-sprites-v2/poses/18-knight-dizzy.webp",
-      "w": 821,
-      "h": 755
+      "w": 979,
+      "h": 900
     }
   },
   "thumb": "/enemy-sprites-v2/thumbs/18-knight-thumb.webp"
@@ -659,13 +659,13 @@ export const V2_CONFIGS = [
     },
     "attack": {
       "src": "/enemy-sprites-v2/poses/19-barbarian-attack.webp",
-      "w": 583,
-      "h": 830
+      "w": 645,
+      "h": 917
     },
     "dizzy": {
       "src": "/enemy-sprites-v2/poses/19-barbarian-dizzy.webp",
-      "w": 953,
-      "h": 717
+      "w": 1197,
+      "h": 900
     }
   },
   "thumb": "/enemy-sprites-v2/thumbs/19-barbarian-thumb.webp"
@@ -703,22 +703,22 @@ export const V2_CONFIGS = [
     },
     "dizzy": {
       "src": "/enemy-sprites-v2/poses/19-dark-knight-dizzy.webp",
-      "w": 574,
-      "h": 749,
+      "w": 690,
+      "h": 900,
       "gCx": 0.514,
       "gFull": 1
     },
     "atkWindup": {
       "src": "/enemy-sprites-v2/poses/19-dark-knight-anim-atk-windup.webp",
-      "w": 499,
-      "h": 900,
+      "w": 509,
+      "h": 917,
       "gCx": 0.531,
       "gFull": 1
     },
     "atkFollow": {
       "src": "/enemy-sprites-v2/poses/19-dark-knight-anim-atk-follow.webp",
-      "w": 499,
-      "h": 900,
+      "w": 509,
+      "h": 917,
       "gCx": 0.501,
       "gFull": 1
     },
@@ -748,7 +748,7 @@ export const V2_CONFIGS = [
       "idle": { "src": "/enemy-sprites-v2/poses/21-skeleton-warrior-idle.webp", "w": 577, "h": 900 },
       "attack1": { "src": "/enemy-sprites-v2/poses/21-skeleton-warrior-attack.webp", "w": 584, "h": 935 },
       "attack2": { "src": "/enemy-sprites-v2/poses/21-skeleton-warrior-attack.webp", "w": 584, "h": 935 },
-      "dizzy": { "src": "/enemy-sprites-v2/poses/21-skeleton-warrior-dizzy.webp", "w": 529, "h": 831 }
+      "dizzy": { "src": "/enemy-sprites-v2/poses/21-skeleton-warrior-dizzy.webp", "w": 573, "h": 900 }
     }
   },
   {
@@ -768,7 +768,7 @@ export const V2_CONFIGS = [
       "idle": { "src": "/enemy-sprites-v2/poses/22-zombie-idle.webp", "w": 557, "h": 900 },
       "attack1": { "src": "/enemy-sprites-v2/poses/22-zombie-attack.webp", "w": 836, "h": 811 },
       "attack2": { "src": "/enemy-sprites-v2/poses/22-zombie-attack.webp", "w": 836, "h": 811 },
-      "dizzy": { "src": "/enemy-sprites-v2/poses/22-zombie-dizzy.webp", "w": 604, "h": 763 }
+      "dizzy": { "src": "/enemy-sprites-v2/poses/22-zombie-dizzy.webp", "w": 713, "h": 900 }
     }
   },
   {
@@ -784,7 +784,7 @@ export const V2_CONFIGS = [
       "idle": { "src": "/enemy-sprites-v2/poses/23-armored-skeleton-idle.webp", "w": 657, "h": 900 },
       "attack1": { "src": "/enemy-sprites-v2/poses/23-armored-skeleton-attack.webp", "w": 878, "h": 843 },
       "attack2": { "src": "/enemy-sprites-v2/poses/23-armored-skeleton-attack.webp", "w": 878, "h": 843 },
-      "dizzy": { "src": "/enemy-sprites-v2/poses/23-armored-skeleton-dizzy.webp", "w": 852, "h": 596 }
+      "dizzy": { "src": "/enemy-sprites-v2/poses/23-armored-skeleton-dizzy.webp", "w": 1378, "h": 963 }
     }
   },
   {
@@ -804,7 +804,7 @@ export const V2_CONFIGS = [
       "idle": { "src": "/enemy-sprites-v2/poses/24-scarab-swarm-idle.webp", "w": 606, "h": 900 },
       "attack1": { "src": "/enemy-sprites-v2/poses/24-scarab-swarm-attack.webp", "w": 1379, "h": 843 },
       "attack2": { "src": "/enemy-sprites-v2/poses/24-scarab-swarm-attack.webp", "w": 1379, "h": 843 },
-      "dizzy": { "src": "/enemy-sprites-v2/poses/24-scarab-swarm-dizzy.webp", "w": 831, "h": 689 }
+      "dizzy": { "src": "/enemy-sprites-v2/poses/24-scarab-swarm-dizzy.webp", "w": 1332, "h": 937 }
     }
   },
   {
@@ -820,7 +820,7 @@ export const V2_CONFIGS = [
       "idle": { "src": "/enemy-sprites-v2/poses/25-mummy-guard-idle.webp", "w": 470, "h": 926 },
       "attack1": { "src": "/enemy-sprites-v2/poses/25-mummy-guard-attack.webp", "w": 747, "h": 910 },
       "attack2": { "src": "/enemy-sprites-v2/poses/25-mummy-guard-attack.webp", "w": 747, "h": 910 },
-      "dizzy": { "src": "/enemy-sprites-v2/poses/25-mummy-guard-dizzy.webp", "w": 609, "h": 844 }
+      "dizzy": { "src": "/enemy-sprites-v2/poses/25-mummy-guard-dizzy.webp", "w": 668, "h": 926 }
     }
   },
 {
@@ -850,13 +850,13 @@ export const V2_CONFIGS = [
     },
     "attack": {
       "src": "/enemy-sprites-v2/poses/31-werewolf-attack.webp",
-      "w": 996,
-      "h": 866
+      "w": 1056,
+      "h": 917
     },
     "dizzy": {
       "src": "/enemy-sprites-v2/poses/31-werewolf-dizzy.webp",
-      "w": 847,
-      "h": 712
+      "w": 1071,
+      "h": 900
     }
   },
   "thumb": "/enemy-sprites-v2/thumbs/31-werewolf-thumb.webp"
@@ -889,12 +889,12 @@ export const V2_CONFIGS = [
     "attack": {
       "src": "/enemy-sprites-v2/poses/32-giant-spider-attack.webp",
       "w": 1103,
-      "h": 1024
+      "h": 1023
     },
     "dizzy": {
       "src": "/enemy-sprites-v2/poses/32-giant-spider-dizzy.webp",
-      "w": 962,
-      "h": 813
+      "w": 1065,
+      "h": 900
     }
   },
   "thumb": "/enemy-sprites-v2/thumbs/32-giant-spider-thumb.webp"
@@ -931,8 +931,8 @@ export const V2_CONFIGS = [
     },
     "dizzy": {
       "src": "/enemy-sprites-v2/poses/33-orc-warrior-dizzy.webp",
-      "w": 999,
-      "h": 692
+      "w": 1300,
+      "h": 900
     }
   },
   "thumb": "/enemy-sprites-v2/thumbs/33-orc-warrior-thumb.webp"
@@ -958,13 +958,13 @@ export const V2_CONFIGS = [
     },
     "attack": {
       "src": "/enemy-sprites-v2/poses/34-bog-witch-attack.webp",
-      "w": 950,
-      "h": 887
+      "w": 1001,
+      "h": 934
     },
     "dizzy": {
       "src": "/enemy-sprites-v2/poses/34-bog-witch-dizzy.webp",
-      "w": 883,
-      "h": 831
+      "w": 956,
+      "h": 900
     }
   },
   "thumb": "/enemy-sprites-v2/thumbs/34-bog-witch-thumb.webp"
@@ -996,13 +996,13 @@ export const V2_CONFIGS = [
     },
     "attack": {
       "src": "/enemy-sprites-v2/poses/35-shadow-beast-attack.webp",
-      "w": 1436,
-      "h": 1060
+      "w": 1402,
+      "h": 1034
     },
     "dizzy": {
       "src": "/enemy-sprites-v2/poses/35-shadow-beast-dizzy.webp",
-      "w": 1228,
-      "h": 675
+      "w": 1638,
+      "h": 900
     }
   },
   "thumb": "/enemy-sprites-v2/thumbs/35-shadow-beast-thumb.webp"
@@ -1034,13 +1034,13 @@ export const V2_CONFIGS = [
       },
       "attack": {
         "src": "/enemy-sprites-v2/poses/36-giant-serpent-attack.webp",
-        "w": 962,
-        "h": 800
+        "w": 1104,
+        "h": 917
       },
       "dizzy": {
         "src": "/enemy-sprites-v2/poses/36-giant-serpent-dizzy.webp",
-        "w": 941,
-        "h": 583
+        "w": 1454,
+        "h": 900
       }
     },
     "thumb": "/enemy-sprites-v2/thumbs/36-giant-serpent-thumb.webp"
@@ -1072,13 +1072,13 @@ export const V2_CONFIGS = [
       },
       "attack": {
         "src": "/enemy-sprites-v2/poses/37-anubis-warrior-attack.webp",
-        "w": 1045,
-        "h": 1080
+        "w": 1001,
+        "h": 1034
       },
       "dizzy": {
         "src": "/enemy-sprites-v2/poses/37-anubis-warrior-dizzy.webp",
-        "w": 811,
-        "h": 746
+        "w": 979,
+        "h": 900
       }
     },
     "thumb": "/enemy-sprites-v2/thumbs/37-anubis-warrior-thumb.webp"
@@ -1104,13 +1104,13 @@ export const V2_CONFIGS = [
       },
       "attack": {
         "src": "/enemy-sprites-v2/poses/38-sphinx-riddler-attack.webp",
-        "w": 801,
-        "h": 878
+        "w": 838,
+        "h": 917
       },
       "dizzy": {
         "src": "/enemy-sprites-v2/poses/38-sphinx-riddler-dizzy.webp",
-        "w": 752,
-        "h": 821
+        "w": 824,
+        "h": 900
       }
     },
     "thumb": "/enemy-sprites-v2/thumbs/38-sphinx-riddler-thumb.webp"
@@ -1127,7 +1127,7 @@ export const V2_CONFIGS = [
       "idle": {"src": "/enemy-sprites-v2/poses/39-giant-scorpion-idle.webp", "w": 909, "h": 900},
       "attack1": {"src": "/enemy-sprites-v2/poses/39-giant-scorpion-attack.webp", "w": 1037, "h": 1000},
       "attack": {"src": "/enemy-sprites-v2/poses/39-giant-scorpion-attack.webp", "w": 1037, "h": 1000},
-      "dizzy": {"src": "/enemy-sprites-v2/poses/39-giant-scorpion-dizzy.webp", "w": 991, "h": 730}
+      "dizzy": {"src": "/enemy-sprites-v2/poses/39-giant-scorpion-dizzy.webp", "w": 1222, "h": 900}
     },
     "thumb": "/enemy-sprites-v2/thumbs/39-giant-scorpion-thumb.webp"
   },
@@ -1169,22 +1169,22 @@ export const V2_CONFIGS = [
       },
       "dizzy": {
         "src": "/enemy-sprites-v2/poses/40-pharaoh-revenant-dizzy.webp",
-        "w": 953,
-        "h": 710,
+        "w": 1208,
+        "h": 900,
         "gCx": 0.486,
         "gFull": 1
       },
       "atkWindup": {
         "src": "/enemy-sprites-v2/poses/40-pharaoh-revenant-anim-atk-windup.webp",
-        "w": 771,
-        "h": 900,
+        "w": 784,
+        "h": 917,
         "gCx": 0.515,
         "gFull": 1
       },
       "atkFollow": {
         "src": "/enemy-sprites-v2/poses/40-pharaoh-revenant-anim-atk-follow.webp",
-        "w": 790,
-        "h": 900,
+        "w": 832,
+        "h": 917,
         "gCx": 0.534,
         "gFull": 1
       },
@@ -1223,13 +1223,13 @@ export const V2_CONFIGS = [
       },
       "attack": {
         "src": "/enemy-sprites-v2/poses/46-elder-dragon-attack.webp",
-        "w": 788,
-        "h": 900
+        "w": 796,
+        "h": 917
       },
       "dizzy": {
         "src": "/enemy-sprites-v2/poses/46-elder-dragon-dizzy.webp",
-        "w": 934,
-        "h": 758
+        "w": 1237,
+        "h": 956
       }
     },
     "thumb": "/enemy-sprites-v2/thumbs/46-elder-dragon-thumb.webp"
@@ -1264,8 +1264,8 @@ export const V2_CONFIGS = [
       },
       "dizzy": {
         "src": "/enemy-sprites-v2/poses/47-dragon-champion-dizzy.webp",
-        "w": 936,
-        "h": 793
+        "w": 1062,
+        "h": 900
       }
     },
     "thumb": "/enemy-sprites-v2/thumbs/47-dragon-champion-thumb.webp"
@@ -1291,8 +1291,8 @@ export const V2_CONFIGS = [
       },
       "attack": {
         "src": "/enemy-sprites-v2/poses/48-crystal-dragon-attack.webp",
-        "w": 672,
-        "h": 900
+        "w": 685,
+        "h": 917
       },
       "dizzy": {
         "src": "/enemy-sprites-v2/poses/48-crystal-dragon-dizzy.webp",
@@ -1327,13 +1327,13 @@ export const V2_CONFIGS = [
       },
       "attack": {
         "src": "/enemy-sprites-v2/poses/49-ancient-dragon-attack.webp",
-        "w": 737,
-        "h": 746
+        "w": 907,
+        "h": 917
       },
       "dizzy": {
         "src": "/enemy-sprites-v2/poses/49-ancient-dragon-dizzy.webp",
-        "w": 954,
-        "h": 680
+        "w": 1263,
+        "h": 900
       }
     },
     "thumb": "/enemy-sprites-v2/thumbs/49-ancient-dragon-thumb.webp"
@@ -1376,8 +1376,8 @@ export const V2_CONFIGS = [
       },
       "dizzy": {
         "src": "/enemy-sprites-v2/poses/50-final-dragon-boss-dizzy.webp",
-        "w": 1174,
-        "h": 830,
+        "w": 1620,
+        "h": 900,
         "gCx": 0.489,
         "gFull": 1
       },
@@ -1390,8 +1390,8 @@ export const V2_CONFIGS = [
     },
       "atkWindup": {
         "src": "/enemy-sprites-v2/poses/50-final-dragon-anim-atk-windup.webp",
-        "w": 965,
-        "h": 900,
+        "w": 962,
+        "h": 917,
         "gCx": 0.571,
         "gFull": 1
       },
@@ -1416,8 +1416,8 @@ export const V2_CONFIGS = [
     "poses": {
       "idle": { "src": "/enemy-sprites-v2/poses/41-troll-idle.webp", "w": 867, "h": 900 },
       "attack1": { "src": "/enemy-sprites-v2/poses/41-troll-attack.webp", "w": 1020, "h": 1333 },
-      "attack": { "src": "/enemy-sprites-v2/poses/41-troll-attack.webp", "w": 1020, "h": 1333 },
-      "dizzy": { "src": "/enemy-sprites-v2/poses/41-troll-dizzy.webp", "w": 932, "h": 965 }
+      "attack": { "src": "/enemy-sprites-v2/poses/41-troll-attack.webp", "w": 792, "h": 1034 },
+      "dizzy": { "src": "/enemy-sprites-v2/poses/41-troll-dizzy.webp", "w": 1014, "h": 1049 }
     },
     "thumb": "/enemy-sprites-v2/thumbs/41-troll-thumb.webp"
   },
@@ -1433,7 +1433,7 @@ export const V2_CONFIGS = [
       "idle": { "src": "/enemy-sprites-v2/poses/42-ogre-idle.webp", "w": 884, "h": 900 },
       "attack1": { "src": "/enemy-sprites-v2/poses/42-ogre-attack.webp", "w": 881, "h": 930 },
       "attack": { "src": "/enemy-sprites-v2/poses/42-ogre-attack.webp", "w": 881, "h": 930 },
-      "dizzy": { "src": "/enemy-sprites-v2/poses/42-ogre-dizzy.webp", "w": 1092, "h": 669 }
+      "dizzy": { "src": "/enemy-sprites-v2/poses/42-ogre-dizzy.webp", "w": 1497, "h": 916 }
     },
     "thumb": "/enemy-sprites-v2/thumbs/42-ogre-thumb.webp"
   },
@@ -1448,7 +1448,7 @@ export const V2_CONFIGS = [
     "poses": {
       "idle": { "src": "/enemy-sprites-v2/poses/43-minotaur-idle.webp", "w": 680, "h": 900 },
       "attack1": { "src": "/enemy-sprites-v2/poses/43-minotaur-attack.webp", "w": 982, "h": 859 },
-      "attack": { "src": "/enemy-sprites-v2/poses/43-minotaur-attack.webp", "w": 982, "h": 859 },
+      "attack": { "src": "/enemy-sprites-v2/poses/43-minotaur-attack.webp", "w": 1050, "h": 917 },
       "dizzy": { "src": "/enemy-sprites-v2/poses/43-minotaur-dizzy.webp", "w": 889, "h": 905 }
     },
     "thumb": "/enemy-sprites-v2/thumbs/43-minotaur-thumb.webp"
@@ -1465,7 +1465,7 @@ export const V2_CONFIGS = [
       "idle": {"src": "/enemy-sprites-v2/poses/44-cyclops-idle.webp", "w": 806, "h": 900},
       "attack1": {"src": "/enemy-sprites-v2/poses/44-cyclops-attack.webp", "w": 914, "h": 1000},
       "attack": {"src": "/enemy-sprites-v2/poses/44-cyclops-attack.webp", "w": 914, "h": 1000},
-      "dizzy": {"src": "/enemy-sprites-v2/poses/44-cyclops-dizzy.webp", "w": 951, "h": 790}
+      "dizzy": {"src": "/enemy-sprites-v2/poses/44-cyclops-dizzy.webp", "w": 1230, "h": 1021}
     },
     "thumb": "/enemy-sprites-v2/thumbs/44-cyclops-thumb.webp"
   },
@@ -1479,7 +1479,7 @@ export const V2_CONFIGS = [
     "colors": ["#000000", "#64748b", "#38bdf8", "#65a30d", "#0f172a"],
     "poses": {
       "idle": {"src": "/enemy-sprites-v2/poses/20-stone-golem-idle.webp", "w": 1008, "h": 900},
-      "attack": {"src": "/enemy-sprites-v2/poses/20-stone-golem-attack.webp", "w": 1094, "h": 948},
+      "attack": {"src": "/enemy-sprites-v2/poses/20-stone-golem-attack.webp", "w": 1094, "h": 947},
       "attack1": {"src": "/enemy-sprites-v2/poses/20-stone-golem-attack.webp", "w": 1094, "h": 948},
       "attack2": {"src": "/enemy-sprites-v2/poses/20-stone-golem-attack.webp", "w": 1094, "h": 948},
       "dizzy": {"src": "/enemy-sprites-v2/poses/20-stone-golem-dizzy.webp", "w": 1052, "h": 896},
@@ -1518,8 +1518,8 @@ export const V2_CONFIGS = [
     },
     "dizzy": {
       "src": "/enemy-sprites-v2/poses/26-ninja-recruit-dizzy.webp",
-      "w": 728,
-      "h": 949
+      "w": 747,
+      "h": 973
     }
   },
   "thumb": "/enemy-sprites-v2/thumbs/26-ninja-recruit-thumb.webp"
@@ -1551,8 +1551,8 @@ export const V2_CONFIGS = [
     },
     "dizzy": {
       "src": "/enemy-sprites-v2/poses/27-shuriken-master-dizzy.webp",
-      "w": 697,
-      "h": 728
+      "w": 943,
+      "h": 1000
     }
   },
   "thumb": "/enemy-sprites-v2/thumbs/27-shuriken-master-thumb.webp"
@@ -1584,8 +1584,8 @@ export const V2_CONFIGS = [
     },
     "dizzy": {
       "src": "/enemy-sprites-v2/poses/28-samurai-duelist-dizzy.webp",
-      "w": 845,
-      "h": 699
+      "w": 1089,
+      "h": 900
     }
   },
   "thumb": "/enemy-sprites-v2/thumbs/28-samurai-duelist-thumb.webp"
@@ -1612,13 +1612,13 @@ export const V2_CONFIGS = [
     },
     "attack": {
       "src": "/enemy-sprites-v2/poses/29-shadow-assassin-attack.webp",
-      "w": 756,
-      "h": 950
+      "w": 924,
+      "h": 954
     },
     "dizzy": {
       "src": "/enemy-sprites-v2/poses/29-shadow-assassin-dizzy.webp",
-      "w": 744,
-      "h": 879
+      "w": 849,
+      "h": 1002
     }
   },
   "thumb": "/enemy-sprites-v2/thumbs/29-shadow-assassin-thumb.webp"
@@ -1647,8 +1647,8 @@ export const V2_CONFIGS = [
     },
     "attack": {
       "src": "/enemy-sprites-v2/poses/30-shogun-warlord-attack.webp",
-      "w": 482,
-      "h": 900,
+      "w": 494,
+      "h": 921,
       "gCx": 0.502,
       "gFull": 1
     ,
@@ -1657,8 +1657,8 @@ export const V2_CONFIGS = [
     },
     "dizzy": {
       "src": "/enemy-sprites-v2/poses/30-shogun-warlord-dizzy.webp",
-      "w": 608,
-      "h": 654,
+      "w": 859,
+      "h": 923,
       "gCx": 0.545,
       "gFull": 1
     },
@@ -1674,8 +1674,8 @@ export const V2_CONFIGS = [
     },
     "atkWindup": {
       "src": "/enemy-sprites-v2/poses/30-shogun-warlord-anim-atk-windup.webp",
-      "w": 489,
-      "h": 900,
+      "w": 488,
+      "h": 917,
       "gCx": 0.526,
       "gFull": 1
     ,
@@ -1684,8 +1684,8 @@ export const V2_CONFIGS = [
     },
     "atkFollow": {
       "src": "/enemy-sprites-v2/poses/30-shogun-warlord-anim-atk-follow.webp",
-      "w": 489,
-      "h": 900,
+      "w": 470,
+      "h": 917,
       "gCx": 0.488,
       "gFull": 1
     ,
@@ -1716,13 +1716,13 @@ export const V2_CONFIGS = [
     },
     "attack": {
       "src": "/enemy-sprites-v2/poses/w1-01-asura-footman-attack.webp",
-      "w": 409,
-      "h": 900
+      "w": 415,
+      "h": 915
     },
     "dizzy": {
       "src": "/enemy-sprites-v2/poses/w1-01-asura-footman-dizzy.webp",
-      "w": 435,
-      "h": 620
+      "w": 407,
+      "h": 913
     }
   },
   "thumb": "/enemy-sprites-v2/thumbs/w1-01-asura-footman-thumb.webp"
@@ -1748,13 +1748,13 @@ export const V2_CONFIGS = [
     },
     "attack": {
       "src": "/enemy-sprites-v2/poses/w1-02-rakshasa-huntress-attack.webp",
-      "w": 384,
-      "h": 900
+      "w": 391,
+      "h": 915
     },
     "dizzy": {
       "src": "/enemy-sprites-v2/poses/w1-02-rakshasa-huntress-dizzy.webp",
-      "w": 370,
-      "h": 620
+      "w": 315,
+      "h": 900
     }
   },
   "thumb": "/enemy-sprites-v2/thumbs/w1-02-rakshasa-huntress-thumb.webp"
@@ -1780,12 +1780,12 @@ export const V2_CONFIGS = [
     },
     "attack": {
       "src": "/enemy-sprites-v2/poses/w1-03-garuda-attack.webp",
-      "w": 450,
-      "h": 900
+      "w": 504,
+      "h": 1007
     },
     "dizzy": {
       "src": "/enemy-sprites-v2/poses/w1-03-garuda-dizzy.webp",
-      "w": 800,
+      "w": 627,
       "h": 900
     }
   },
@@ -1812,13 +1812,13 @@ export const V2_CONFIGS = [
     },
     "attack": {
       "src": "/enemy-sprites-v2/poses/w1-04-mahishasura-attack.webp",
-      "w": 577,
-      "h": 900
+      "w": 590,
+      "h": 915
     },
     "dizzy": {
       "src": "/enemy-sprites-v2/poses/w1-04-mahishasura-dizzy.webp",
-      "w": 441,
-      "h": 620
+      "w": 426,
+      "h": 900
     }
   },
   "thumb": "/enemy-sprites-v2/thumbs/w1-04-mahishasura-thumb.webp"
@@ -1849,8 +1849,8 @@ export const V2_CONFIGS = [
     },
     "dizzy": {
       "src": "/enemy-sprites-v2/poses/w1-05-vetala-warlock-dizzy.webp",
-      "w": 430,
-      "h": 620
+      "w": 449,
+      "h": 940
     }
   },
   "thumb": "/enemy-sprites-v2/thumbs/w1-05-vetala-warlock-thumb.webp"
@@ -1881,8 +1881,8 @@ export const V2_CONFIGS = [
     },
     "dizzy": {
       "src": "/enemy-sprites-v2/poses/w1-06-ravana-dizzy.webp",
-      "w": 357,
-      "h": 620
+      "w": 481,
+      "h": 900
     },
     "spPose": {
       "src": "/enemy-sprites-v2/poses/w1-06-ravana-sppose.webp",
@@ -1918,8 +1918,8 @@ export const V2_CONFIGS = [
     },
     "dizzy": {
       "src": "/enemy-sprites-v2/poses/w2-01-shade-dummy-dizzy.webp",
-      "w": 420,
-      "h": 620
+      "w": 637,
+      "h": 940
     }
   },
   "thumb": "/enemy-sprites-v2/thumbs/w2-01-shade-dummy-thumb.webp"
@@ -1945,13 +1945,13 @@ export const V2_CONFIGS = [
     },
     "attack": {
       "src": "/enemy-sprites-v2/poses/w2-02-umbral-mime-attack.webp",
-      "w": 342,
-      "h": 900
+      "w": 349,
+      "h": 915
     },
     "dizzy": {
       "src": "/enemy-sprites-v2/poses/w2-02-umbral-mime-dizzy.webp",
-      "w": 366,
-      "h": 620
+      "w": 311,
+      "h": 936
     }
   },
   "thumb": "/enemy-sprites-v2/thumbs/w2-02-umbral-mime-thumb.webp"
@@ -1977,13 +1977,13 @@ export const V2_CONFIGS = [
     },
     "attack": {
       "src": "/enemy-sprites-v2/poses/w2-03-forgotten-knight-attack.webp",
-      "w": 524,
-      "h": 900
+      "w": 538,
+      "h": 928
     },
     "dizzy": {
       "src": "/enemy-sprites-v2/poses/w2-03-forgotten-knight-dizzy.webp",
-      "w": 680,
-      "h": 620
+      "w": 548,
+      "h": 900
     }
   },
   "thumb": "/enemy-sprites-v2/thumbs/w2-03-forgotten-knight-thumb.webp"
@@ -2014,8 +2014,8 @@ export const V2_CONFIGS = [
     },
     "dizzy": {
       "src": "/enemy-sprites-v2/poses/w2-04-gloom-serpent-dizzy.webp",
-      "w": 365,
-      "h": 620
+      "w": 539,
+      "h": 916
     }
   },
   "thumb": "/enemy-sprites-v2/thumbs/w2-04-gloom-serpent-thumb.webp"
@@ -2046,8 +2046,8 @@ export const V2_CONFIGS = [
     },
     "dizzy": {
       "src": "/enemy-sprites-v2/poses/w2-05-hollow-monk-dizzy.webp",
-      "w": 401,
-      "h": 620
+      "w": 467,
+      "h": 939
     }
   },
   "thumb": "/enemy-sprites-v2/thumbs/w2-05-hollow-monk-thumb.webp"
@@ -2078,12 +2078,12 @@ export const V2_CONFIGS = [
     },
     "dizzy": {
       "src": "/enemy-sprites-v2/poses/w2-06-dark-slapper-dizzy.webp",
-      "w": 470,
-      "h": 620
+      "w": 520,
+      "h": 909
     },
     "spPose": {
       "src": "/enemy-sprites-v2/poses/w2-06-dark-slapper-sppose.webp",
-      "w": 512,
+      "w": 500,
       "h": 900
     }
   },
