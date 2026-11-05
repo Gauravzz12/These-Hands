@@ -628,13 +628,62 @@ export const CONFIG = {
       "kind": "burn",
       "dur": 6, "mult": 8.0, "blurb": "Caldera blaze burns you fiercely over 6s!",
       "desc": "Fiery dragon breath scorching everything"
+    },
+    "202": {
+      "name": "STAMPEDE CHARGE",
+      "kind": "heavy",
+      "mult": 1.6, "stun": 0.8, "blurb": "Buffalo charge dealing 1.6× damage and a 0.8s stagger!",
+      "desc": "The Buffalo King lowers his horns and charges"
+    },
+    "205": {
+      "name": "CHANDRAHASA STRIKE",
+      "kind": "heavy",
+      "mult": 2.0, "stun": 1.0, "blurb": "The moon-blade's gift — 2× damage and a 1s stagger!",
+      "desc": "Ten heads howl as the crescent strike falls"
+    },
+    "212": {
+      "name": "ECLIPSE GUARD",
+      "kind": "shield",
+      "hits": 5, "blurb": "Raises a shadow shield — absorbs 5 slaps at 50% damage!",
+      "desc": "The eclipse hardens into a wall of night"
+    },
+    "215": {
+      "name": "COUNTER SLAP",
+      "kind": "heavy",
+      "mult": 2.2, "stun": 1.6, "blurb": "Your own perfected slap, returned — 2.2× damage and a 1.6s stagger!",
+      "desc": "The shadow slaps back with your own technique"
     }
   },
   "healBosses": {
     "39": {"name": "ETERNAL RENEWAL", "pct": 0.25, "every": 5, "max": 4, "blurb": "The tomb restores him — heals 25% of his HP, up to 4 times per fight."},
-    "49": {"name": "DRAGON RENEWAL", "pct": 0.20, "every": 6, "max": 4, "blurb": "Ancient blood knits shut — heals 20% of his HP, up to 4 times per fight."}
+    "49": {"name": "DRAGON RENEWAL", "pct": 0.20, "every": 6, "max": 4, "blurb": "Ancient blood knits shut — heals 20% of his HP, up to 4 times per fight."},
+    "205": {"name": "AMRITA OF THE NAVEL", "pct": 0.15, "every": 9999, "max": 1, "blurb": "The nectar of immortality — heals 15% of his HP, once per fight."}
   },
   "gauntlet": {"bonusMult": 4.5, "gemFirst": 1},
+  "worldArts": [
+    {"id": "echoPalm", "icon": "🔁", "name": "Echo Palm", "cost": 10, "desc": "Every 8th slap echoes — a phantom slap lands at 60% damage."},
+    {"id": "frenzyHeart", "icon": "💓", "name": "Frenzy Heart", "cost": 8, "desc": "Your frenzy meter fills 30% faster."},
+    {"id": "phoenixHeart", "icon": "🕊️", "name": "Phoenix Heart", "cost": 20, "desc": "Once per fight, a fatal blow leaves you standing at 25% HP."},
+    {"id": "timeWeaver", "icon": "🌀", "name": "Time Weaver", "cost": 12, "desc": "Time Stop lasts 40% longer."},
+    {"id": "giantsGrip", "icon": "✊", "name": "Giant's Grip", "cost": 8, "desc": "+1 max precision crits per fight (weak-spot cap)."},
+    {"id": "eagleEye", "icon": "👁️", "name": "Eagle Eye", "cost": 6, "desc": "Weak spots stay open 0.6s longer."},
+    {"id": "greedMantra", "icon": "🪙", "name": "Greed Mantra", "cost": 8, "desc": "+25% coins from world fights."},
+    {"id": "bossHunter", "icon": "🏹", "name": "Boss Hunter", "cost": 12, "desc": "+15% damage against bosses."}
+  ],
+  "relics": [
+    {"id": "warBell", "icon": "🔔", "name": "Bronze War Bell", "srcW": 0, "srcS": 0, "vals": [0.10, 0.20, 0.30], "fmt": "pct", "desc": "+{v} coins in world fights"},
+    {"id": "rakshasaFang", "icon": "🗡️", "name": "Rakshasa Fang", "srcW": 0, "srcS": 1, "vals": [0.08, 0.16, 0.24], "fmt": "pct", "desc": "+{v} crit damage"},
+    {"id": "stampedeHorn", "icon": "📯", "name": "Horn of the Stampede", "srcW": 0, "srcS": 2, "vals": [0.10, 0.20, 0.30], "fmt": "pct", "desc": "+{v} damage in world fights"},
+    {"id": "graveChill", "icon": "❄️", "name": "Grave Chill Shroud", "srcW": 0, "srcS": 3, "vals": [0.04, 0.08, 0.12], "fmt": "pct", "desc": "Enemies attack {v} slower"},
+    {"id": "skullWhispers", "icon": "💀", "name": "Skull of Whispers", "srcW": 0, "srcS": 4, "vals": [0.10, 0.20, 0.30], "fmt": "pct", "desc": "Weak spots appear {v} sooner"},
+    {"id": "tenKingsCrown", "icon": "👑", "name": "Crown of Ten Kings", "srcW": 0, "srcS": 5, "vals": [0.15, 0.25, 0.40], "fmt": "pct", "desc": "+{v} damage vs world final bosses"},
+    {"id": "firstFoeSplinter", "icon": "🪵", "name": "Splinter of the First Foe", "srcW": 1, "srcS": 0, "vals": [0.08, 0.16, 0.24], "fmt": "pct", "desc": "+{v} damage vs non-bosses"},
+    {"id": "silentGlove", "icon": "🧤", "name": "Silent Glove", "srcW": 1, "srcS": 1, "vals": [0.04, 0.07, 0.10], "fmt": "pct", "desc": "+{v} slap speed"},
+    {"id": "eclipseSigil", "icon": "🌘", "name": "Eclipse Sigil", "srcW": 1, "srcS": 2, "vals": [0.15, 0.30, 0.45], "fmt": "pct", "desc": "Boss specials charge {v} slower"},
+    {"id": "venomfangCoil", "icon": "🐍", "name": "Venomfang Coil", "srcW": 1, "srcS": 3, "vals": [0.10, 0.20, 0.30], "fmt": "pct", "desc": "+{v} damage vs stunned enemies"},
+    {"id": "beadsVoid", "icon": "📿", "name": "Beads of the Void", "srcW": 1, "srcS": 4, "vals": [0.20, 0.40, 0.60], "fmt": "pct", "desc": "+{v} Soul Embers earned"},
+    {"id": "mirrorPalm", "icon": "🪞", "name": "Mirror Palm", "srcW": 1, "srcS": 5, "vals": [9, 8, 7], "fmt": "count", "desc": "Skin power triggers every {v} slaps"}
+  ],
   "ads": {"interstitialEveryWins": 4, "interstitialMinGapSec": 180},
   "weakSpot": {"mult": 8.5, "dur": 1.5, "durHard": 1.2, "firstAt": 2.2, "everyMin": 5, "everyMax": 8, "frenzyGain": 12, "capBase": 3, "capPerLuck": 5, "capMax": 6, "luckScale": 0.06},
   "gems": {
