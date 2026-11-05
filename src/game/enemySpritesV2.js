@@ -348,30 +348,30 @@ export const V2_CONFIGS = [
     },
     "dizzy": {
       "src": "/enemy-sprites-v2/poses/10-mischievous-monkey-dizzy.webp",
-      "w": 1039,
+      "w": 948,
       "h": 908,
-      "gCx": 0.448,
+      "gCx": 0.501,
       "gFull": 1
     },
     "bananaSling": {
-      "src": "/enemy-sprites-v2/poses/10-monkey-extras-banana-sling.webp",
-      "w": 891,
-      "h": 925,
-      "gCx": 0.398,
+      "src": "/enemy-sprites-v2/poses/10-monkey-extras-banana-throw.webp",
+      "w": 911,
+      "h": 908,
+      "gCx": 0.524,
       "gFull": 1
     },
     "spPose": {
-      "src": "/enemy-sprites-v2/poses/10-monkey-extras-banana-sling.webp",
-      "w": 891,
-      "h": 925,
-      "gCx": 0.398,
+      "src": "/enemy-sprites-v2/poses/10-monkey-extras-banana-throw.webp",
+      "w": 911,
+      "h": 908,
+      "gCx": 0.524,
       "gFull": 1
     },
     "atkWindup": {
       "src": "/enemy-sprites-v2/poses/10-monkey-anim-atk-windup.webp",
-      "w": 932,
-      "h": 925,
-      "gCx": 0.512,
+      "w": 1009,
+      "h": 908,
+      "gCx": 0.5,
       "gFull": 1
     },
     "atkFollow": {
@@ -1761,35 +1761,40 @@ export const V2_CONFIGS = [
 },
 {
   "idx": 202,
-  "id": "w1-03-garuda",
-  "name": "Garuda",
+  "id": "w1-03-kumbhakaran",
+  "name": "Kumbhakaran",
   "refH": 900,
-  "cheekX": 0.5,
-  "cheekY": 0.3,
+  "cheekX": 0.42,
+  "cheekY": 0.15,
   "colors": [
+    "#8a5a3b",
     "#c9962e",
-    "#f2c063",
-    "#8a5a1d",
-    "#d94f30"
+    "#2a1a12",
+    "#c22e2e"
   ],
   "poses": {
     "idle": {
-      "src": "/enemy-sprites-v2/poses/w1-03-garuda-idle.webp",
-      "w": 628,
+      "src": "/enemy-sprites-v2/poses/w1-03-kumbhakaran-idle.webp",
+      "w": 501,
       "h": 900
     },
     "attack": {
-      "src": "/enemy-sprites-v2/poses/w1-03-garuda-attack.webp",
-      "w": 504,
-      "h": 1007
+      "src": "/enemy-sprites-v2/poses/w1-03-kumbhakaran-attack.webp",
+      "w": 491,
+      "h": 900
     },
     "dizzy": {
-      "src": "/enemy-sprites-v2/poses/w1-03-garuda-dizzy.webp",
-      "w": 627,
+      "src": "/enemy-sprites-v2/poses/w1-03-kumbhakaran-dizzy.webp",
+      "w": 466,
+      "h": 900
+    },
+    "spPose": {
+      "src": "/enemy-sprites-v2/poses/w1-03-kumbhakaran-sppose.webp",
+      "w": 480,
       "h": 900
     }
   },
-  "thumb": "/enemy-sprites-v2/thumbs/w1-03-garuda-thumb.webp"
+  "thumb": "/enemy-sprites-v2/thumbs/w1-03-kumbhakaran-thumb.webp"
 },
 {
   "idx": 203,

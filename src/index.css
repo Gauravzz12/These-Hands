@@ -4566,3 +4566,28 @@ margin-top: 7px;
 .world-prog { display: inline-block; margin-top: 7px; font-size: 10.5px; font-weight: 900; letter-spacing: .08em; background: rgba(0,0,0,.55); padding: 3px 8px; border-radius: 999px; }
 .world-cards { margin-top: 10px; }
 .world-portal { margin: 10px 0 4px; width: 100%; }
+
+/* ===== Round 41: Worlds gate, special hub card, battle upgrade jump, arts polish ===== */
+.world-gate{background:#170a2e;border:2px solid #ffcf3f;border-radius:18px;padding:26px 18px 20px;text-align:center;margin:4px 0 14px;box-shadow:0 6px 0 rgba(0,0,0,.35)}
+.wg-tag{color:#b48ce0;font-weight:800;letter-spacing:.28em;font-size:11px}
+.wg-banner{margin:14px 0 6px}
+.wg-banner-l1{font-family:Bungee,Nunito,sans-serif;color:#fff;font-size:clamp(21px,6.4vw,34px);letter-spacing:.08em;line-height:1.12;text-shadow:0 3px 0 rgba(0,0,0,.45)}
+.wg-banner-l2{font-family:Bungee,Nunito,sans-serif;color:#ffcf3f;font-size:clamp(30px,9.6vw,52px);letter-spacing:.1em;line-height:1.1;text-shadow:0 4px 0 rgba(0,0,0,.5);animation:wgPulse 2.6s ease-in-out infinite}
+@keyframes wgPulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.035);opacity:.92}}
+.wg-seal{display:inline-block;margin-top:12px;padding:8px 14px;border-radius:999px;font-weight:800;font-size:12.5px;letter-spacing:.04em;border:2px solid}
+.wg-seal.shut{color:#ffb1a8;border-color:#a03a30;background:rgba(160,58,48,.16)}
+.wg-seal.open{color:#ffe98a;border-color:#ffcf3f;background:rgba(255,207,63,.13)}
+.wg-prog{margin-top:10px;color:#d9c8f5;font-weight:700;font-size:12.5px;letter-spacing:.14em}
+.wg-awaits{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:18px 0 6px;text-align:left}
+.wg-aw{background:rgba(255,255,255,.05);border:1.5px solid rgba(255,207,63,.35);border-radius:12px;padding:10px 12px}
+.wg-aw span{font-size:19px}
+.wg-aw b{display:block;color:#fff;font-size:12.5px;letter-spacing:.05em;margin-top:2px}
+.wg-aw i{display:block;color:#bdb0d9;font-style:normal;font-size:11.5px;margin-top:1px}
+.wg-note{color:#9d8fc0;font-size:12px;margin-top:10px}
+.hub-card.worlds-card{border:2px solid #ffcf3f;background:#22123f}
+.hub-card.worlds-card .hc-title{color:#ffe98a}
+.hc-tag{display:inline-block;color:#170a2e;background:#ffcf3f;border-radius:6px;font-size:9.5px;font-weight:900;letter-spacing:.12em;padding:2px 6px;margin-bottom:3px}
+.battle-upgrade-btn{display:block;width:100%;margin:10px 0;padding:13px 10px;border-radius:12px;border:2px solid #ffcf3f;background:#2b1c10;color:#ffcf3f;font-family:Bungee,Nunito,sans-serif;font-size:14px;letter-spacing:.05em;cursor:pointer;box-shadow:0 4px 0 rgba(0,0,0,.3)}
+.battle-upgrade-btn:active{transform:translateY(2px);box-shadow:0 2px 0 rgba(0,0,0,.3)}
+.arts-owned{float:right;color:#ffcf3f;font-size:12px;letter-spacing:.06em}
+.arts-sub{color:#8d81ad;font-size:12px;padding:2px 14px 10px}
