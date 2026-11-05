@@ -165,6 +165,14 @@ export default function App() {
               </span>
             </button>
 
+            <button className="hub-card" id="hubWorldsCard" type="button">
+              <span className="hc-ico purple"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm4.9 4.1a8 8 0 0 1 1 3.4h-3.1a13.6 13.6 0 0 0-1.3-3.9c.5-.3 1.1-.5 1.7-.7.6.3 1.2.7 1.7 1.2zM12 4.1c.7 1 1.3 2.4 1.6 4h-3.2c.3-1.6.9-3 1.6-4zM7.1 6.1c.5-.5 1.1-.9 1.7-1.2.6.2 1.2.4 1.7.7A13.6 13.6 0 0 0 9.2 9.5H6.1a8 8 0 0 1 1-3.4zM4.3 11.5h4.5c0 1.7.2 3.3.7 4.7a8.1 8.1 0 0 1-5.2-4.7zm0 2h5.2a8.1 8.1 0 0 1-2.4 3.4 10.6 10.6 0 0 1-.8-3.4H4.3zm7.7 6.4c-.7-1-1.3-2.4-1.6-4h3.2c-.3 1.6-.9 3-1.6 4zm-1.9-6.4h3.8c-.1 1.4-.3 2.6-.6 3.6h-2.6c-.3-1-.5-2.2-.6-3.6zm1.9-1.9h-3.8c.1-1.4.3-2.6.6-3.6h2.6c.3 1 .5 2.2.6 3.6zm4.9 5.3a8.1 8.1 0 0 1-2.4-3.4h5.2a8.1 8.1 0 0 1-2.8 3.4zm.9-3.4a10.6 10.6 0 0 1-.8 3.4h-2c.5-1.4.7-3 .7-4.7h4.5a8 8 0 0 1-2.4 2.1z" fill="currentColor" transform="scale(0.92) translate(1,1)"/></svg></span>
+              <span className="hc-main">
+                <span className="hc-title">WORLDS</span>
+                <span className="hc-sub" id="hubWorldsSub">DEFEAT THE DRAGON LORD TO OPEN</span>
+              </span>
+            </button>
+
             <button className="hub-card" data-goto="shop" type="button">
               <span className="hc-ico green"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M4 7 5.6 3h12.8L20 7H4zm0 2v10a1.5 1.5 0 0 0 1.5 1.5h13A1.5 1.5 0 0 0 20 19V9h-5.5a2.75 2.75 0 0 1-5 0H4zm5.5 2.2a.8.8 0 0 1 1.5 0V13H9.5v-1.8z" fill="currentColor"/></svg></span>
               <span className="hc-main">
@@ -366,6 +374,17 @@ export default function App() {
           </div>
                   </div>
         <div id="selList"></div>
+      </section>
+
+      <section id="pageWorlds" className="page" aria-label="Worlds">
+        <div className="sel-head">
+          <button className="home-btn" data-goto="home" aria-label="Back to home"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 2.5 11h2.7v9h5.3v-6h3v6h5.3v-9h2.7L12 3z" fill="currentColor"/></svg></button>
+          <div>
+            <div className="sel-title">WORLDS</div>
+            <div className="sel-sub">BEYOND THE DRAGON LORD</div>
+          </div>
+        </div>
+        <div id="worldsList"></div>
       </section>
 
       <section id="pageSkills" className="page" aria-label="Skill tree">
