@@ -444,6 +444,7 @@ export const CONFIG = {
     "retaliationMult": 3.0,
     "parryChance": 0.15,
     "parryDeflect": 0.5,
+    "deflectDur": 0.425,
     "dizzyMult": 1.35,
     "clutchHpFrac": 0.35,
     "clutchSpeed": 0.8,
