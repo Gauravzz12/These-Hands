@@ -147,36 +147,36 @@ export const V2_CONFIGS = [
   },
   {
     "idx": 4,
-    "id": "05-slime-blob",
-    "name": "Slime Blob",
+    "id": "05-grumpy-teddy",
+    "name": "Grumpy Teddy",
     "refH": 900,
     "cheekX": 0.24,
-    "cheekY": 0.45,
+    "cheekY": 0.36,
     "colors": [
-      "#62ff00",
-      "#38b000",
-      "#9ef01a",
-      "#ccff33",
-      "#007200"
+      "#d98e3b",
+      "#a8641f",
+      "#f2c879",
+      "#f7e3b0",
+      "#5f3d20"
     ],
     "poses": {
       "idle": {
-        "src": "/enemy-sprites-v2/poses/05-slime-blob-idle.webp",
-        "w": 601,
-        "h": 908
+        "src": "/enemy-sprites-v2/poses/05-grumpy-teddy-idle.webp",
+        "w": 523,
+        "h": 900
       },
       "attack": {
-        "src": "/enemy-sprites-v2/poses/05-slime-blob-attack-2.webp",
-        "w": 593,
-        "h": 891
+        "src": "/enemy-sprites-v2/poses/05-grumpy-teddy-attack.webp",
+        "w": 858,
+        "h": 900
       },
       "dizzy": {
-        "src": "/enemy-sprites-v2/poses/05-slime-blob-dizzy.webp",
-        "w": 752,
-        "h": 606
+        "src": "/enemy-sprites-v2/poses/05-grumpy-teddy-dizzy.webp",
+        "w": 563,
+        "h": 620
       }
     },
-    "thumb": "/enemy-sprites-v2/thumbs/05-slime-blob-thumb.webp"
+    "thumb": "/enemy-sprites-v2/thumbs/05-grumpy-teddy-thumb.webp"
   },
   {
     "idx": 5,
