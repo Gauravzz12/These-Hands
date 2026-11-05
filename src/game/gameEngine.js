@@ -609,6 +609,14 @@ function renderShop(){
   renderShopCoinPacks();
 }
 
+function storePriceOf(prodId, defaultPrice) {
+  if (typeof window !== "undefined" && window.__nativeBridge && window.__nativeBridge.productsMap) {
+    const sp = window.__nativeBridge.productsMap[prodId];
+    if (sp && sp.priceString) return sp.priceString;
+  }
+  return defaultPrice;
+}
+
 function renderShopPromo(){
   const promoEl = $("shopPromo");
   if (!promoEl) return;
@@ -623,6 +631,7 @@ function renderShopPromo(){
     return;
   }
   const sk = skinDef(unownedBundle.skin);
+  const price = storePriceOf("bundle_" + unownedBundle.id, unownedBundle.price);
   promoEl.innerHTML = '<div class="shop-promo-card">' +
     '<div class="promo-badge">⚡ LIMITED SPOTLIGHT DEAL · 70% OFF</div>' +
     '<div class="promo-body">' +
@@ -635,19 +644,20 @@ function renderShopPromo(){
           '<span class="promo-pill">' + GEM_SVG_SM + ' ' + fmtNum(unownedBundle.gems) + '</span>' +
         '</div>' +
       '</div>' +
-      '<button class="skin-btn promo-btn" data-promo-buy="' + unownedBundle.id + '">GET · ' + unownedBundle.price + '</button>' +
+      '<button class="skin-btn promo-btn" data-promo-buy="' + unownedBundle.id + '">GET · ' + price + '</button>' +
     '</div>' +
   '</div>';
   const pbtn = promoEl.querySelector("[data-promo-buy]");
-  if (pbtn) pbtn.addEventListener("click", () => openMockCheckout({ kind: "bundle", bundle: unownedBundle }));
+  if (pbtn) pbtn.addEventListener("click", () => startStorePurchase({ kind: "bundle", bundle: unownedBundle }));
 }
 
 function renderShopGemVault(){
   const vaultEl = $("shopGemVault");
   if (!vaultEl) return;
-  let html = '<div class="shop-sec-head"><div class="ssh-title">💎 GEM VAULT · MOCK STORE</div><div class="ssh-sub">DIRECT GEM ACQUISITION · JUMPSTART UPGRADES</div></div><div class="shop-grid">';
+  let html = '<div class="shop-sec-head"><div class="ssh-title">💎 GEM VAULT</div><div class="ssh-sub">OFFICIAL GOOGLE PLAY STORE · DIRECT GEM ACQUISITION</div></div><div class="shop-grid">';
   for (const pk of (CONFIG.gemPacks || [])) {
     const totalGems = pk.gems + (pk.bonusGems || 0);
+    const price = storePriceOf("gem_" + pk.id, pk.price);
     html += '<div class="skin-card gem-card">' +
       '<span class="shop-card-badge ' + (pk.tag === "BEST VALUE" ? "badge-best" : (pk.tag === "POPULAR" ? "badge-popular" : "badge-bonus")) + '">' + pk.tag + '</span>' +
       '<div class="gem-art-wrap">' +
@@ -657,7 +667,7 @@ function renderShopGemVault(){
       (pk.bonusGems > 0 ? '<div class="gem-bonus-pill">+' + fmtNum(pk.bonusGems) + ' BONUS FREE</div>' : '<div class="gem-bonus-spacer"></div>') +
       '<div class="gem-pack-name">' + pk.name + '</div>' +
       '<div class="skin-desc">' + pk.desc + '</div>' +
-      '<button class="skin-btn gem-btn" data-buy-gem="' + pk.id + '">BUY · ' + pk.price + '</button>' +
+      '<button class="skin-btn gem-btn" data-buy-gem="' + pk.id + '">BUY · ' + price + '</button>' +
     '</div>';
   }
   html += '</div>';
@@ -666,7 +676,7 @@ function renderShopGemVault(){
   for (let i = 0; i < gbtns.length; i++) {
     const gid = gbtns[i].getAttribute("data-buy-gem");
     const pk = (CONFIG.gemPacks || []).find(x => x.id === gid);
-    if (pk) gbtns[i].addEventListener("click", () => openMockCheckout({ kind: "gem", pack: pk }));
+    if (pk) gbtns[i].addEventListener("click", () => startStorePurchase({ kind: "gem", pack: pk }));
   }
 }
 
@@ -677,6 +687,7 @@ function renderShopBundles(){
   for (const bd of CONFIG.bundles) {
     const owned = G.bundlesOwned.indexOf(bd.id) >= 0;
     const sk = skinDef(bd.skin), skinOwned = G.ownedSkins.indexOf(bd.skin) >= 0;
+    const price = storePriceOf("bundle_" + bd.id, bd.price);
     html += '<div class="skin-card bundle-card' + (owned ? ' equipped' : '') + '">' +
       '<span class="shop-card-badge badge-bundle">' + (bd.badge || "SPECIAL") + '</span>' +
       '<div class="skin-preview preview-' + bd.skin + '"><img src="' + skinUrl(bd.skin) + '" alt="' + sk.name + ' hand skin"></div>' +
@@ -694,7 +705,7 @@ function renderShopBundles(){
         '<div class="bundle-power">⚡ ' + (sk.power ? sk.power.name + ': ' + sk.power.desc : sk.desc) + '</div>' +
         (skinOwned && !owned ? '<div class="bundle-note">Skin already owned — you will receive the coins + gems!</div>' : '') +
       '</div>' +
-      (owned ? '<button class="skin-btn equipped" disabled>OWNED</button>' : '<button class="skin-btn bundle-buy-btn" data-bundle="' + bd.id + '">BUY · ' + bd.price + '</button>') +
+      (owned ? '<button class="skin-btn equipped" disabled>OWNED</button>' : '<button class="skin-btn bundle-buy-btn" data-bundle="' + bd.id + '">BUY · ' + price + '</button>') +
     '</div>';
   }
   html += '</div>';
@@ -703,7 +714,7 @@ function renderShopBundles(){
   for (let i = 0; i < bbtns.length; i++) {
     const bid = bbtns[i].getAttribute("data-bundle");
     const bd = CONFIG.bundles.find(x => x.id === bid);
-    if (bd) bbtns[i].addEventListener("click", () => openMockCheckout({ kind: "bundle", bundle: bd }));
+    if (bd) bbtns[i].addEventListener("click", () => startStorePurchase({ kind: "bundle", bundle: bd }));
   }
 }
 
@@ -726,35 +737,38 @@ function renderShopFeatures(){
 
   // 2. VIP Pass
   const vipOwned = G.vipUnlocked;
+  const vipPrice = storePriceOf("feature_vip", "₹199");
   html += '<div class="feature-card vip-feature' + (vipOwned ? ' equipped' : '') + '">' +
     '<div class="feature-ico-box gold-box">👑</div>' +
     '<div class="feature-main">' +
       '<div class="feature-title-row"><span class="skin-name">GOLDEN SLAPPER VIP PASS</span><span class="shop-card-badge badge-best">LIFETIME VIP</span></div>' +
       '<div class="skin-desc">Permanent +25% bonus coins from all enemy knockouts, prestige gold glow on your battle hand, and golden player crown!</div>' +
     '</div>' +
-    (vipOwned ? '<button class="skin-btn equipped" disabled>OWNED</button>' : '<button class="skin-btn" id="buyVipBtn">BUY · ₹199</button>') +
+    (vipOwned ? '<button class="skin-btn equipped" disabled>OWNED</button>' : '<button class="skin-btn" id="buyVipBtn">BUY · ' + vipPrice + '</button>') +
   '</div>';
 
   // 3. Frenzy Booster
   const fzOwned = G.frenzyBoostUnlocked;
+  const frenzyPrice = storePriceOf("feature_frenzy_boost", "₹99");
   html += '<div class="feature-card' + (fzOwned ? ' equipped' : '') + '">' +
     '<div class="feature-ico-box fire-box">🔥</div>' +
     '<div class="feature-main">' +
       '<div class="feature-title-row"><span class="skin-name">FRENZY OVERCHARGE BOOSTER</span><span class="shop-card-badge badge-hot">TURBO BOOST</span></div>' +
       '<div class="skin-desc">Frenzy meter charges 25% faster on all slaps, and frenzy duration extends to 13 seconds (normally 10s)!</div>' +
     '</div>' +
-    (fzOwned ? '<button class="skin-btn equipped" disabled>OWNED</button>' : '<button class="skin-btn" id="buyFrenzyBoostBtn">BUY · ₹99</button>') +
+    (fzOwned ? '<button class="skin-btn equipped" disabled>OWNED</button>' : '<button class="skin-btn" id="buyFrenzyBoostBtn">BUY · ' + frenzyPrice + '</button>') +
   '</div>';
 
   // 4. Remove Ads
   const raOwned = G.adsRemoved;
+  const noAdsPrice = storePriceOf("feature_remove_ads", "₹199");
   html += '<div class="feature-card' + (raOwned ? ' equipped' : '') + '">' +
     '<div class="feature-ico-box">🚫</div>' +
     '<div class="feature-main">' +
       '<div class="feature-title-row"><span class="skin-name">REMOVE ADS</span><span class="shop-card-badge badge-hot">NO ADS</span></div>' +
       '<div class="skin-desc">No more interstitial or banner ads, forever. Optional rewarded ads stay available whenever you want a boost.</div>' +
     '</div>' +
-    (raOwned ? '<button class="skin-btn equipped" disabled>OWNED</button>' : '<button class="skin-btn" id="buyRemoveAdsBtn">BUY · ₹199</button>') +
+    (raOwned ? '<button class="skin-btn equipped" disabled>OWNED</button>' : '<button class="skin-btn" id="buyRemoveAdsBtn">BUY · ' + noAdsPrice + '</button>') +
   '</div>';
 
   html += '</div>';
@@ -763,27 +777,27 @@ function renderShopFeatures(){
   const ob = $("buyOfflineBtn");
   if (ob) ob.addEventListener("click", buyOffline);
   const vb = $("buyVipBtn");
-  if (vb) vb.addEventListener("click", () => openMockCheckout({
+  if (vb) vb.addEventListener("click", () => startStorePurchase({
     kind: "feature",
     id: "vip",
     name: "Golden Slapper VIP Pass",
-    price: "₹199",
+    price: vipPrice,
     desc: "Permanent +25% bonus coins from all enemy defeats forever + Golden Crown."
   }));
   const rb = $("buyRemoveAdsBtn");
-  if (rb) rb.addEventListener("click", () => openMockCheckout({
+  if (rb) rb.addEventListener("click", () => startStorePurchase({
     kind: "feature",
     id: "remove_ads",
     name: "Remove Ads",
-    price: "₹199",
+    price: noAdsPrice,
     desc: "No interstitial or banner ads, forever. Rewarded ads stay optional."
   }));
   const fb = $("buyFrenzyBoostBtn");
-  if (fb) fb.addEventListener("click", () => openMockCheckout({
+  if (fb) fb.addEventListener("click", () => startStorePurchase({
     kind: "feature",
     id: "frenzy_boost",
     name: "Frenzy Overcharge Booster",
-    price: "₹99",
+    price: frenzyPrice,
     desc: "25% faster frenzy meter charge + extended 13s duration."
   }));
 }
@@ -935,120 +949,230 @@ function renderShopExtras(){
   renderShopCoinPacks();
 }
 
-let mockCheckoutItem = null;
-function openMockCheckout(item){
+let storeCheckoutItem = null;
+
+async function startStorePurchase(item) {
   if (!item) return;
+
+  let productId = "";
+  if (item.kind === "bundle") {
+    productId = "bundle_" + (item.bundle ? item.bundle.id : item.id);
+  } else if (item.kind === "gem") {
+    productId = "gem_" + (item.pack ? item.pack.id : item.id);
+  } else if (item.kind === "feature") {
+    productId = "feature_" + (item.data ? item.data.id : item.id);
+  } else if (item.productId) {
+    productId = item.productId;
+  }
+
+  // If already owned non-repeatable item, notify and return
+  if (item.kind === "bundle") {
+    const bid = item.bundle ? item.bundle.id : item.id;
+    if (G.bundlesOwned.indexOf(bid) >= 0) {
+      showShopToast("You already own this bundle!");
+      return;
+    }
+  } else if (item.kind === "feature") {
+    const fid = item.data ? item.data.id : item.id;
+    if (fid === "vip" && G.vipUnlocked) { showShopToast("VIP Pass is already active!"); return; }
+    if (fid === "remove_ads" && G.adsRemoved) { showShopToast("Ads are already removed!"); return; }
+    if (fid === "frenzy_boost" && G.frenzyBoostUnlocked) { showShopToast("Frenzy Booster is already active!"); return; }
+  }
+
+  const bridge = window.__nativeBridge;
+  const isNative = bridge && bridge.isNative && bridge.purchasesInitialized;
+
+  if (isNative) {
+    showShopToast("Connecting to Google Play Store...");
+    Sound.unlock();
+    try {
+      const res = await bridge.purchaseGooglePlayProduct(productId);
+      if (res.cancelled) {
+        showShopToast("Purchase cancelled.");
+        return;
+      }
+      if (!res.success) {
+        const errMsg = res.error?.message || "Google Play transaction failed";
+        console.warn("Purchase failed:", res.error);
+        showShopToast("Purchase failed: " + errMsg);
+        return;
+      }
+      grantStorePurchaseReward(item, res.transaction?.transactionIdentifier || res.customerInfo?.originalAppUserId);
+    } catch (err) {
+      console.error("RevenueCat purchase error:", err);
+      showShopToast("Payment error: " + (err.message || "Could not complete"));
+    }
+  } else {
+    // Web / browser mode (development or desktop browser)
+    openStoreCheckoutModal(item);
+  }
+}
+
+function openStoreCheckoutModal(item) {
+  if (!item) return;
+  const modal = $("mockCheckout") || $("storeCheckout");
+  if (!modal) return;
+  storeCheckoutItem = item;
+
+  let title = "";
+  let priceStr = "";
+  let linesHtml = "";
+
   if (item.kind === "bundle") {
     const bd = item.bundle || CONFIG.bundles.find(x => x.id === item.id);
     if (!bd || G.bundlesOwned.indexOf(bd.id) >= 0) return;
-    mockCheckoutItem = { kind: "bundle", data: bd };
+    title = bd.name.toUpperCase();
+    priceStr = storePriceOf("bundle_" + bd.id, bd.price);
     const sk = skinDef(bd.skin), skinOwned = G.ownedSkins.indexOf(bd.skin) >= 0;
-    $("mockItemName").textContent = bd.name.toUpperCase();
-    $("mockLines").innerHTML = '<div class="mock-line"><img src="' + skinUrl(bd.skin) + '" alt="">' + sk.name + ' hand skin<span class="ml-amt">' + (skinOwned ? 'OWNED' : 'INCLUDED') + '</span></div>' +
+    linesHtml = '<div class="mock-line"><img src="' + skinUrl(bd.skin) + '" alt="">' + sk.name + ' hand skin<span class="ml-amt">' + (skinOwned ? 'OWNED' : 'INCLUDED') + '</span></div>' +
       '<div class="mock-line">' + COIN_SVG + ' Coins<span class="ml-amt">+' + fmtNum(bd.coins) + '</span></div>' +
       '<div class="mock-line">' + GEM_SVG + ' Gems<span class="ml-amt">+' + fmtNum(bd.gems) + '</span></div>' +
       '<div class="mock-line-power">⚡ ' + (sk.power ? sk.power.name + ': ' + sk.power.desc : sk.desc) + '</div>';
-    $("mockTotal").textContent = "TOTAL · " + bd.price + " (SANDBOX TEST)";
   } else if (item.kind === "gem") {
     const pk = item.pack || (CONFIG.gemPacks || []).find(x => x.id === item.id);
     if (!pk) return;
-    mockCheckoutItem = { kind: "gem", data: pk };
+    title = pk.name.toUpperCase();
+    priceStr = storePriceOf("gem_" + pk.id, pk.price);
     const total = pk.gems + (pk.bonusGems || 0);
-    $("mockItemName").textContent = pk.name.toUpperCase();
-    $("mockLines").innerHTML = '<div class="mock-line">' + GEM_SVG + ' Base Diamonds<span class="ml-amt">' + fmtNum(pk.gems) + '</span></div>' +
+    linesHtml = '<div class="mock-line">' + GEM_SVG + ' Base Diamonds<span class="ml-amt">' + fmtNum(pk.gems) + '</span></div>' +
       (pk.bonusGems > 0 ? '<div class="mock-line bonus-line">💎 Free Bonus Gems<span class="ml-amt">+' + fmtNum(pk.bonusGems) + '</span></div>' : '') +
       '<div class="mock-line total-gem-line"><span>💎 Total Granted</span><span class="ml-amt">+' + fmtNum(total) + ' GEMS</span></div>';
-    $("mockTotal").textContent = "TOTAL · " + pk.price + " (SANDBOX TEST)";
   } else if (item.kind === "feature") {
-    const ft = item;
+    const ft = item.data || item;
     if (ft.id === "vip" && G.vipUnlocked) return;
     if (ft.id === "frenzy_boost" && G.frenzyBoostUnlocked) return;
     if (ft.id === "remove_ads" && G.adsRemoved) return;
-    mockCheckoutItem = { kind: "feature", data: ft };
-    $("mockItemName").textContent = ft.name.toUpperCase();
-    $("mockLines").innerHTML = '<div class="mock-line">⭐ Lifetime Upgrade<span class="ml-amt">PERMANENT</span></div>' +
+    title = ft.name.toUpperCase();
+    priceStr = storePriceOf("feature_" + ft.id, ft.price);
+    linesHtml = '<div class="mock-line">⭐ Lifetime Upgrade<span class="ml-amt">PERMANENT</span></div>' +
       '<div class="mock-line-power">' + ft.desc + '</div>';
-    $("mockTotal").textContent = "TOTAL · " + ft.price + " (SANDBOX TEST)";
   }
-  $("mockConfirm").disabled = false;
-  $("mockCheckout").classList.add("open");
+
+  const nameEl = $("mockItemName");
+  if (nameEl) nameEl.textContent = title;
+  const linesEl = $("mockLines");
+  if (linesEl) linesEl.innerHTML = linesHtml;
+  const totalEl = $("mockTotal");
+  if (totalEl) totalEl.textContent = "TOTAL · " + priceStr;
+  const noteEl = $("mockNote");
+  if (noteEl) noteEl.textContent = "Official Google Play & RevenueCat billing. Fast and secure checkout.";
+  const confirmBtn = $("mockConfirm");
+  if (confirmBtn) confirmBtn.disabled = false;
+  modal.classList.add("open");
   Sound.unlock();
 }
 
-function closeMockCheckout(){
-  mockCheckoutItem = null;
-  $("mockCheckout").classList.remove("open");
+function closeStoreCheckoutModal() {
+  storeCheckoutItem = null;
+  const modal = $("mockCheckout") || $("storeCheckout");
+  if (modal) modal.classList.remove("open");
 }
 
-function confirmMockPurchase(){
-  if (!mockCheckoutItem) {
-    closeMockCheckout();
+function confirmStoreCheckoutModal() {
+  if (!storeCheckoutItem) {
+    closeStoreCheckoutModal();
     return;
   }
-  $("mockConfirm").disabled = true;
-  const item = mockCheckoutItem;
+  const item = storeCheckoutItem;
+  closeStoreCheckoutModal();
+  grantStorePurchaseReward(item);
+}
+
+function grantStorePurchaseReward(item, txId) {
+  let rewardSummary = "";
 
   if (item.kind === "bundle") {
-    const bd = item.data;
-    if (G.bundlesOwned.indexOf(bd.id) >= 0) { closeMockCheckout(); return; }
-    const tx = StoreProvider.purchase("bundle_" + bd.id);
-    if (!tx.granted) { closeMockCheckout(); showShopToast("Already purchased — nothing charged."); return; }
+    const bd = item.bundle || CONFIG.bundles.find(x => x.id === item.id);
+    if (!bd) return;
+    if (G.bundlesOwned.indexOf(bd.id) < 0) G.bundlesOwned.push(bd.id);
     if (G.ownedSkins.indexOf(bd.skin) < 0) G.ownedSkins.push(bd.skin);
     const colNewB = checkCollectionReward();
     creditCoinsQuiet(bd.coins);
     grantGems(bd.gems);
-    G.bundlesOwned.push(bd.id);
     Sound.levelup();
-    closeMockCheckout();
-    showShopToast(bd.name + " unlocked! +" + fmtNum(bd.coins) + " coins & +" + fmtNum(bd.gems) + " gems!" + (colNewB ? " FULL COLLECTION +" + CONFIG.collection.gems + " gems!" : ""));
+    rewardSummary = bd.name + " unlocked! +" + fmtNum(bd.coins) + " coins & +" + fmtNum(bd.gems) + " gems!" +
+      (colNewB ? " FULL COLLECTION +" + CONFIG.collection.gems + " gems!" : "");
   } else if (item.kind === "gem") {
-    const pk = item.data;
+    const pk = item.pack || (CONFIG.gemPacks || []).find(x => x.id === item.id);
+    if (!pk) return;
     const totalGems = pk.gems + (pk.bonusGems || 0);
-    StoreProvider.purchase("gem_" + pk.id, true);
     grantGems(totalGems);
     Sound.levelup();
-    closeMockCheckout();
-    showShopToast("💎 +" + fmtNum(totalGems) + " Gems added to your Vault!");
+    rewardSummary = "💎 +" + fmtNum(totalGems) + " Gems added to your Vault!";
   } else if (item.kind === "feature") {
-    const ft = item.data;
-    const tx = StoreProvider.purchase("feature_" + ft.id);
-    if (!tx.granted) { closeMockCheckout(); showShopToast("Already unlocked."); return; }
+    const ft = item.data || item;
     if (ft.id === "vip") G.vipUnlocked = true;
     if (ft.id === "remove_ads") { G.adsRemoved = true; Ads.refreshBanner(); }
     if (ft.id === "frenzy_boost") G.frenzyBoostUnlocked = true;
     Sound.levelup();
-    closeMockCheckout();
-    showShopToast("⭐ " + ft.name + " activated permanently!");
+    rewardSummary = "⭐ " + ft.name + " activated permanently!";
   }
 
+  // Record transaction in ledger
+  const productId = item.productId || (item.kind + "_" + (item.bundle?.id || item.pack?.id || item.data?.id || item.id));
+  G.purchases.push({
+    productId,
+    txId: txId || ("rc-" + Date.now().toString(36) + "-" + Math.floor(Math.random() * 1e6).toString(36)),
+    ts: Date.now()
+  });
+
+  if (rewardSummary) showShopToast(rewardSummary);
   renderShop();
   Save.store();
 }
 
-$("mockCancel").addEventListener("click", () => { Sound.unlock(); closeMockCheckout(); });
-$("mockConfirm").addEventListener("click", confirmMockPurchase);
+// Backward compatibility aliases
+function openMockCheckout(item) { startStorePurchase(item); }
+function closeMockCheckout() { closeStoreCheckoutModal(); }
+function confirmMockPurchase() { confirmStoreCheckoutModal(); }
+
+const cancelBtnEl = $("mockCancel");
+if (cancelBtnEl) cancelBtnEl.addEventListener("click", () => { Sound.unlock(); closeStoreCheckoutModal(); });
+const confirmBtnEl = $("mockConfirm");
+if (confirmBtnEl) confirmBtnEl.addEventListener("click", confirmStoreCheckoutModal);
 
 const StoreProvider = {
-  id: "mock",
+  id: "revenuecat",
   listProducts(){ return CONFIG.products.slice(); },
   ledgerTx(productId){ return G.purchases.find(p => p.productId === productId) || null; },
-  purchase(productId, repeatable = false){
-    if (!repeatable) {
-      const prev = this.ledgerTx(productId);
-      if (prev) return { txId: prev.txId, productId, state: "purchased", granted: false, ts: prev.ts };
-    }
-    const tx = {
-      txId: "mock-" + productId + "-" + Date.now().toString(36) + "-" + Math.floor(Math.random() * 1e6).toString(36),
-      productId,
-      state: "purchased",
-      granted: true,
-      ts: Date.now()
-    };
-    G.purchases.push({ productId, txId: tx.txId, ts: tx.ts });
-    return tx;
+  async purchase(item){
+    return await startStorePurchase(item);
   },
-  restorePurchases(){
+  async restorePurchases(){
+    const bridge = window.__nativeBridge;
     let restored = 0;
+    if (bridge && bridge.isNative && bridge.purchasesInitialized) {
+      try {
+        const res = await bridge.restorePurchases();
+        if (res && res.success && res.customerInfo) {
+          const info = res.customerInfo;
+          const allPurchased = info.allPurchasedProductIdentifiers || [];
+          const entitlements = info.entitlements ? Object.keys(info.entitlements.active || {}) : [];
+
+          for (const prod of CONFIG.products) {
+            const isPurchased = allPurchased.includes(prod.id) || entitlements.includes(prod.id) || entitlements.includes(prod.ref);
+            if (!isPurchased) continue;
+
+            if (prod.kind === "bundle") {
+              if (G.bundlesOwned.indexOf(prod.ref) < 0) {
+                G.bundlesOwned.push(prod.ref);
+                restored++;
+              }
+              const bd = CONFIG.bundles.find(b => b.id === prod.ref);
+              if (bd && G.ownedSkins.indexOf(bd.skin) < 0) G.ownedSkins.push(bd.skin);
+            } else if (prod.kind === "feature") {
+              if (prod.ref === "vip" && !G.vipUnlocked) { G.vipUnlocked = true; restored++; }
+              if (prod.ref === "remove_ads" && !G.adsRemoved) { G.adsRemoved = true; Ads.refreshBanner(); restored++; }
+              if (prod.ref === "frenzy_boost" && !G.frenzyBoostUnlocked) { G.frenzyBoostUnlocked = true; restored++; }
+            }
+          }
+        }
+      } catch (err) {
+        console.warn("Native restore purchases error:", err);
+      }
+    }
+
+    // Also check local recorded purchases
     for (const prod of CONFIG.products) {
       if (!this.ledgerTx(prod.id)) continue;
       if (prod.kind === "bundle") {
@@ -1070,16 +1194,20 @@ const StoreProvider = {
   }
 };
 
-$("restoreBtn").addEventListener("click", () => {
-  Sound.unlock();
-  const n = StoreProvider.restorePurchases();
-  if (n > 0) {
-    applySkinVisuals();
-    renderShop();
-    Save.store();
-  }
-  showShopToast(n > 0 ? "Purchases restored — " + n + " re-applied." : "All recorded purchases are already applied.");
-});
+const restoreBtnEl = $("restoreBtn");
+if (restoreBtnEl) {
+  restoreBtnEl.addEventListener("click", async () => {
+    Sound.unlock();
+    showShopToast("Checking Google Play for previous purchases...");
+    const n = await StoreProvider.restorePurchases();
+    if (n > 0) {
+      applySkinVisuals();
+      renderShop();
+      Save.store();
+    }
+    showShopToast(n > 0 ? "Purchases restored — " + n + " items re-applied!" : "All your purchases are up to date.");
+  });
+}
 
 const AD_SPONSORS = [
   { icon: "🥊", title: "Slap Master 3D", tag: "Maximum slaps. Zero cooldown. Play free now!" },
@@ -2625,7 +2753,7 @@ G.ownedSkins=Array.isArray(saved.ownedSkins)?saved.ownedSkins.filter((id,ix)=>CO
   }
   if(G.pendingOffline)Save.store();
 }Sound.muted=!G.settings.sfx;syncSfxBtn();ensureDaily();$("aboutVersion").textContent="Version "+CONFIG.appVersion;updateFrenzyBar();{let migCoins=0,migGroups=0;for(let g=0;g<GROUPS.length;g++)if(groupComplete(g)&&G.groupRewards.indexOf(g)<0){const c=grantGroupReward(g);if(c>0){migCoins+=c;migGroups++}}G.pendingGroupToast=null;const migCol=checkCollectionReward();if(migGroups>0||migCol){window.__migNotice="Welcome back — "+(migGroups>0?migGroups+" group reward"+(migGroups>1?"s":"")+" earned earlier, paid out now: +"+fmtNum(migCoins)+" coins. ":"")+(migCol?"FULL COLLECTION bonus: +"+CONFIG.collection.gems+" gems!":"");Save.store()}}if(G.skinRefund){const sn2=$("skinNotice");if(sn2){sn2.querySelector(".sn-msg").textContent="Skin retired — refunded "+[G.skinRefund.coins?fmtNum(G.skinRefund.coins)+" coins":null,G.skinRefund.gems?G.skinRefund.gems+" gems":null].filter(Boolean).join(" + ")+". Equipped hand reset to Classic.";sn2.style.display="";Save.store()}}if(window.__migNotice){const sn3=$("skinNotice");if(sn3&&sn3.style.display==="none"){sn3.querySelector(".sn-msg").textContent=window.__migNotice;sn3.style.display=""}}
-if(window.__skinEvolve){const sn4=$("skinNotice");if(sn4){const parts=window.__skinEvolve.map((id)=>"Your "+id.toUpperCase()+" hand evolved into SPIDER-MAN");if(sn4.style.display==="none"){sn4.querySelector(".sn-msg").textContent=parts.join(" · ")+" — new look, new powers.";sn4.style.display=""}Save.store()}}if(Save.corrupted)$("saveNotice").style.display="";window.__th={Ads,hardUnlocked,G,CONFIG,ENEMIES,stats,parryState:()=>parryFx,tryStunEnemy,trySpecialStun,slapCoinTaper,DamageCalculator,castSpecial,activateFrenzy,specUpgCost,SP,Save,switchTab,PFX,startBossRush,startEndless,startGauntlet,tickWeakSpot,precisionSlap,hurtPlayer,skillDef,enemyGeom,renderHub,renderAttrs,renderChest,renderStartShowcase,hasSkill,killEnemy,spawnEnemy,showEndOverlay,hideEndOverlay};requestAnimationFrame(frame);window.__bootSet&&window.__bootSet(80,"Sharpening the slaps…");(function finishBoot(){
+if(window.__skinEvolve){const sn4=$("skinNotice");if(sn4){const parts=window.__skinEvolve.map((id)=>"Your "+id.toUpperCase()+" hand evolved into SPIDER-MAN");if(sn4.style.display==="none"){sn4.querySelector(".sn-msg").textContent=parts.join(" · ")+" — new look, new powers.";sn4.style.display=""}Save.store()}}if(Save.corrupted)$("saveNotice").style.display="";window.__th={Ads,hardUnlocked,G,CONFIG,ENEMIES,stats,parryState:()=>parryFx,tryStunEnemy,trySpecialStun,slapCoinTaper,DamageCalculator,castSpecial,activateFrenzy,specUpgCost,SP,Save,switchTab,PFX,startBossRush,startEndless,startGauntlet,tickWeakSpot,precisionSlap,hurtPlayer,skillDef,enemyGeom,renderHub,renderAttrs,renderChest,renderStartShowcase,hasSkill,killEnemy,spawnEnemy,showEndOverlay,hideEndOverlay,renderShop,StoreProvider,startStorePurchase};requestAnimationFrame(frame);window.__bootSet&&window.__bootSet(80,"Sharpening the slaps…");(function finishBoot(){
   if(typeof initHandCanvases==="function")initHandCanvases();if(typeof initLeftCanvases==="function")initLeftCanvases();
   if(typeof buildSkinArt==="function")buildSkinArt();
   if(typeof updateAutoAdvanceBtn==="function")updateAutoAdvanceBtn();

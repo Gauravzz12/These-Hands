@@ -17,6 +17,13 @@ const TEST_INTERSTITIAL_AD_UNIT_ID = 'ca-app-pub-3940256099942544/1033173712';
 const BANNER_AD_UNIT_ID = '';
 const TEST_BANNER_AD_UNIT_ID = 'ca-app-pub-3940256099942544/6300978111';
 
+// RevenueCat Public API Key (Google Play)
+// Configurable via VITE_REVENUECAT_KEY or window.__REVENUECAT_KEY__
+export const REVENUECAT_GOOGLE_API_KEY =
+  (typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.VITE_REVENUECAT_KEY) ||
+  (typeof window !== 'undefined' && window.__REVENUECAT_KEY__) ||
+  'goog_OqXlIqmXJbXkLpYwZkQvWzNfGh';
+
 export const NativeBridge = {
   isNative: Capacitor.isNativePlatform(),
   admobInitialized: false,
@@ -25,6 +32,7 @@ export const NativeBridge = {
   interstitialPrepared: false,
   bannerVisible: false,
   activeRewardCallback: null,
+  productsMap: {},
 
   async init() {
     if (!this.isNative) {
@@ -124,6 +132,11 @@ export const NativeBridge = {
         this.prepareInterstitialAd().catch(() => {})
       ]);
       console.log('Native AdMob initialized in Production Mode.');
+
+      // 4. Initialize RevenueCat (Google Play Billing)
+      await this.initPurchases(REVENUECAT_GOOGLE_API_KEY).catch((e) => {
+        console.warn('RevenueCat init error:', e);
+      });
     } catch (err) {
       console.warn('NativeBridge initialization error:', err);
     }
@@ -243,13 +256,44 @@ export const NativeBridge = {
 
   // RevenueCat / Google Play Billing
   async initPurchases(revenueCatApiKey) {
-    if (!this.isNative || !revenueCatApiKey) return;
+    if (!this.isNative || !revenueCatApiKey) {
+      if (!this.isNative) {
+        console.log('[RevenueCat] Browser mode: native Google Play Billing disabled.');
+      }
+      return;
+    }
     try {
       await Purchases.configure({ apiKey: revenueCatApiKey });
       this.purchasesInitialized = true;
-      console.log('Google Play Purchases bridge initialized via RevenueCat.');
+      console.log('[RevenueCat] Google Play Purchases bridge initialized via RevenueCat.');
+      await this.loadProducts();
     } catch (e) {
-      console.warn('Failed to initialize Google Play Purchases:', e);
+      console.warn('[RevenueCat] Failed to initialize Google Play Purchases:', e);
+    }
+  },
+
+  async loadProducts(productIds) {
+    if (!this.isNative || !this.purchasesInitialized) return {};
+    try {
+      const ids = productIds || [
+        'bundle_starter', 'bundle_weapon_x', 'bundle_inferno', 'bundle_dragon', 'bundle_cosmic',
+        'gem_pouch', 'gem_sack', 'gem_chest', 'gem_vault', 'gem_treasury', 'gem_mountain',
+        'feature_vip', 'feature_remove_ads', 'feature_frenzy_boost'
+      ];
+      const { products } = await Purchases.getProducts({ productIdentifiers: ids });
+      if (products && products.length > 0) {
+        for (const p of products) {
+          this.productsMap[p.identifier] = p;
+        }
+        console.log(`[RevenueCat] Preloaded ${products.length} products from Google Play.`);
+        if (typeof window !== 'undefined' && window.__th && typeof window.__th.renderShop === 'function') {
+          window.__th.renderShop();
+        }
+      }
+      return this.productsMap;
+    } catch (err) {
+      console.warn('[RevenueCat] Failed to load store products:', err);
+      return {};
     }
   },
 
@@ -258,10 +302,26 @@ export const NativeBridge = {
       return { success: false, reason: 'not_native' };
     }
     try {
-      const { customerInfo } = await Purchases.purchaseProduct({ productIdentifier });
-      return { success: true, customerInfo };
+      let product = this.productsMap[productIdentifier];
+      if (!product) {
+        const { products } = await Purchases.getProducts({ productIdentifiers: [productIdentifier] });
+        if (products && products.length > 0) {
+          product = products.find(p => p.identifier === productIdentifier) || products[0];
+          this.productsMap[productIdentifier] = product;
+        }
+      }
+      if (!product) {
+        return { success: false, error: new Error('Product (' + productIdentifier + ') not found in Google Play') };
+      }
+      const purchaseResult = await Purchases.purchaseStoreProduct({ product });
+      return {
+        success: true,
+        customerInfo: purchaseResult.customerInfo,
+        transaction: purchaseResult.transaction,
+        productIdentifier: purchaseResult.productIdentifier || productIdentifier
+      };
     } catch (err) {
-      if (err.userCancelled) {
+      if (err.userCancelled || err.code === 1 || (err.message && err.message.toLowerCase().includes('cancel'))) {
         return { success: false, cancelled: true };
       }
       return { success: false, error: err };
@@ -277,6 +337,17 @@ export const NativeBridge = {
       return { success: true, customerInfo };
     } catch (err) {
       return { success: false, error: err };
+    }
+  },
+
+  async getCustomerInfo() {
+    if (!this.isNative || !this.purchasesInitialized) return null;
+    try {
+      const { customerInfo } = await Purchases.getCustomerInfo();
+      return customerInfo;
+    } catch (err) {
+      console.warn('[RevenueCat] getCustomerInfo error:', err);
+      return null;
     }
   }
 };

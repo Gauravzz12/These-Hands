@@ -505,7 +505,7 @@ export default function App() {
           <div id="shopFooter">
             <button className="skin-btn restore-btn" id="restoreBtn">RESTORE PURCHASES</button>
             <div className="pack-note">Re-applies any one-time bundle, VIP pass, or permanent feature previously acquired.</div>
-            <div className="shop-sandbox-tag">🛡️ SECURE BAZAAR & VAULT</div>
+            <div className="shop-sandbox-tag">🛡️ GOOGLE PLAY & REVENUECAT SECURE</div>
           </div>
         </div>
         <div id="shopToast" role="status"></div>
@@ -685,17 +685,17 @@ export default function App() {
         </div>
       </div>
 
-      <div id="mockCheckout" role="dialog" aria-label="Mock checkout">
+      <div id="mockCheckout" role="dialog" aria-label="Store checkout">
         <div className="mock-card">
-          <div className="mock-badge">🛡️ SANDBOX TEST STORE</div>
+          <div className="mock-badge">🛡️ SECURE CHECKOUT</div>
           <div className="mock-head">CONFIRM ORDER</div>
-          <div className="mock-note">Simulation Mode: No real currency is charged. Try all bundles, gem hoards, and VIP passes freely.</div>
+          <div className="mock-note" id="mockNote">Official Google Play & RevenueCat billing. Fast and secure 1-tap checkout.</div>
           <div className="mock-item" id="mockItemName"></div>
           <div className="mock-lines" id="mockLines"></div>
           <div className="mock-total" id="mockTotal"></div>
           <div className="mock-btns">
             <button className="ctl-btn" id="mockCancel">CANCEL</button>
-            <button className="ctl-btn end-again" id="mockConfirm">CONFIRM PURCHASE</button>
+            <button className="ctl-btn end-again" id="mockConfirm">COMPLETE PURCHASE</button>
           </div>
         </div>
       </div>
