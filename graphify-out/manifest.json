@@ -13,14 +13,14 @@
     "semantic_hash": "5e6e3cea3e89137071c142dd7835b0ef"
   },
   "android/app/build.gradle": {
-    "mtime": 1793367821.465668,
-    "seen": 1793814802.18177,
-    "ast_hash": "537279a1f55997609a9623932612ca6b",
-    "semantic_hash": "537279a1f55997609a9623932612ca6b"
+    "mtime": 1793902634.3893313,
+    "seen": 1793902686.7503102,
+    "ast_hash": "caff8a0909e1a5567ea25011f5395df9",
+    "semantic_hash": ""
   },
   "android/app/capacitor.build.gradle": {
-    "mtime": 1793818217.2686224,
-    "seen": 1793845547.3623104,
+    "mtime": 1793902660.9874313,
+    "seen": 1793902686.7503102,
     "ast_hash": "ab2c953c47a743ed4496c3b72aa299a2",
     "semantic_hash": "ab2c953c47a743ed4496c3b72aa299a2"
   },
@@ -49,8 +49,8 @@
     "semantic_hash": "682315a426653617c6a74fc12bef55b6"
   },
   "android/capacitor.settings.gradle": {
-    "mtime": 1793818217.2676208,
-    "seen": 1793845547.3623104,
+    "mtime": 1793902660.9865022,
+    "seen": 1793902686.7503102,
     "ast_hash": "514d591b4c0254b390142858be5981e4",
     "semantic_hash": "514d591b4c0254b390142858be5981e4"
   },
@@ -73,11 +73,10 @@
     "semantic_hash": "4b3fce8ea2a515a9d2e47e74757172ec"
   },
   "capacitor.config.json": {
-    "mtime": 1793517479.9413366,
-    "seen": 1793814802.1852915,
-    "ast_hash": "19147333fa9286f0d2cf5dbc246f878c",
-    "semantic_hash": "19147333fa9286f0d2cf5dbc246f878c",
-    "ast_empty": true
+    "mtime": 1793902623.921435,
+    "seen": 1793902686.7503102,
+    "ast_hash": "6cdec90b3841dcf296d455ae3dd825e7",
+    "semantic_hash": ""
   },
   "package.json": {
     "mtime": 1793641385.8338213,
@@ -128,9 +127,9 @@
     "semantic_hash": "8bac246e0138c7d2cab584be02430f8e"
   },
   "src/App.jsx": {
-    "mtime": 1793892945.9041188,
-    "seen": 1793893053.5637782,
-    "ast_hash": "5899610494cb8668389ea5b1fde5a345",
+    "mtime": 1793902483.6699834,
+    "seen": 1793902686.7503102,
+    "ast_hash": "6ac3b317681b18276e00b7fa18b496a2",
     "semantic_hash": ""
   },
   "src/components/AchToast.jsx": {
@@ -284,9 +283,9 @@
     "semantic_hash": "8dd5584aa251b2d1cb0d3ad37ba77cc7"
   },
   "src/services/nativeBridge.js": {
-    "mtime": 1793893027.2855234,
-    "seen": 1793893053.5637782,
-    "ast_hash": "92e0ff43d00526f0aa17e737cfeb18a9",
+    "mtime": 1793902610.4307587,
+    "seen": 1793902686.7503102,
+    "ast_hash": "b851e51f7d08363400bdc8707daaad75",
     "semantic_hash": ""
   },
   "sync_engine.cjs": {
@@ -332,9 +331,9 @@
     "semantic_hash": ""
   },
   "privacy.html": {
-    "mtime": 1793357817.3910277,
-    "seen": 1793815820.9632776,
-    "ast_hash": "b13a557925775cb1b5b9a158e8900494",
+    "mtime": 1793902482.5920053,
+    "seen": 1793902686.7503102,
+    "ast_hash": "814ab9fd116c3553d3f3dd4d73974398",
     "semantic_hash": ""
   },
   "public/showcase.html": {
@@ -1844,8 +1843,8 @@
     "semantic_hash": ""
   },
   "public/fx/shockwave.webp": {
-    "mtime": 1793517479.9895277,
-    "seen": 1793815820.9632776,
+    "mtime": 1793902672.0537887,
+    "seen": 1793902686.751309,
     "ast_hash": "9b041fb3d5831f001e11361089acc541",
     "semantic_hash": ""
   },
