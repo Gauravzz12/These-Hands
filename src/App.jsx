@@ -165,10 +165,10 @@ export default function App() {
               </span>
             </button>
 
-            <button className="hub-card" id="hubWorldsCard" type="button">
+            <button className="hub-card worlds-card" id="hubWorldsCard" type="button">
               <span className="hc-ico purple"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm4.9 4.1a8 8 0 0 1 1 3.4h-3.1a13.6 13.6 0 0 0-1.3-3.9c.5-.3 1.1-.5 1.7-.7.6.3 1.2.7 1.7 1.2zM12 4.1c.7 1 1.3 2.4 1.6 4h-3.2c.3-1.6.9-3 1.6-4zM7.1 6.1c.5-.5 1.1-.9 1.7-1.2.6.2 1.2.4 1.7.7A13.6 13.6 0 0 0 9.2 9.5H6.1a8 8 0 0 1 1-3.4zM4.3 11.5h4.5c0 1.7.2 3.3.7 4.7a8.1 8.1 0 0 1-5.2-4.7zm0 2h5.2a8.1 8.1 0 0 1-2.4 3.4 10.6 10.6 0 0 1-.8-3.4H4.3zm7.7 6.4c-.7-1-1.3-2.4-1.6-4h3.2c-.3 1.6-.9 3-1.6 4zm-1.9-6.4h3.8c-.1 1.4-.3 2.6-.6 3.6h-2.6c-.3-1-.5-2.2-.6-3.6zm1.9-1.9h-3.8c.1-1.4.3-2.6.6-3.6h2.6c.3 1 .5 2.2.6 3.6zm4.9 5.3a8.1 8.1 0 0 1-2.4-3.4h5.2a8.1 8.1 0 0 1-2.8 3.4zm.9-3.4a10.6 10.6 0 0 1-.8 3.4h-2c.5-1.4.7-3 .7-4.7h4.5a8 8 0 0 1-2.4 2.1z" fill="currentColor" transform="scale(0.92) translate(1,1)"/></svg></span>
               <span className="hc-main">
-                <span className="hc-title">WORLDS</span>
+                <span className="hc-tag">✦ SPECIAL</span><span className="hc-title">WORLDS</span>
                 <span className="hc-sub" id="hubWorldsSub">DEFEAT THE DRAGON LORD TO OPEN</span>
               </span>
             </button>
@@ -272,17 +272,7 @@ export default function App() {
         <span id="atkTime">4.2s</span>
       </div>
 
-      <section id="attrPanel" aria-label="Attributes">
-        <div className="attr-head">
-          <button id="attrToggle" aria-expanded="false" aria-controls="attrList">
-            <span>ATTRIBUTES</span>
-            <span className="cap" id="capNote"></span>
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
-          </button>
-          <button id="levelUpBtn"></button>
-        </div>
-        <div id="attrList"></div>
-      </section>
+      <button className="battle-upgrade-btn" data-goto="attrs" type="button">⚡ UPGRADES — LEVEL UP & ATTRIBUTES →</button>
 
       <footer id="controls">
         <button className="ctl-btn" id="pauseBtn" aria-label="Pause fight">
@@ -381,7 +371,7 @@ export default function App() {
           <button className="home-btn" data-goto="home" aria-label="Back to home"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 2.5 11h2.7v9h5.3v-6h3v6h5.3v-9h2.7L12 3z" fill="currentColor"/></svg></button>
           <div>
             <div className="sel-title">WORLDS</div>
-            <div className="sel-sub">BEYOND THE DRAGON LORD</div>
+            <div className="sel-sub">A SEALED GATE · BEYOND THE DRAGON LORD</div>
             <div className="pill" id="worldsEmbers" style={{'marginTop': '6px', 'display': 'inline-block'}}>🔥 0 EMBERS</div>
           </div>
         </div>
@@ -400,22 +390,7 @@ export default function App() {
         <div id="skillsScroll">
           <div id="skillTreeWrap"></div>
           <div id="skillDetail"></div>
-          <div id="skillsAbilitiesAccordion" className="perks-accordion">
-            <button type="button" id="skillsAbilitiesToggle" className="perks-toggle" aria-expanded="false" aria-controls="skillsAbilitiesCollapse">
-              <div className="perks-toggle-left">
-                <span className="perks-toggle-title">LEVEL UP SKILLS</span>
-                <span className="perks-toggle-sub" id="skillsAbilitiesToggleSub">LV 2 TO 20+ · UNLOCKED ON LEVEL UP</span>
-              </div>
-              <div className="perks-toggle-right">
-                <span className="perks-toggle-hint" id="skillsAbilitiesToggleHint">SHOW</span>
-                <svg viewBox="0 0 24 24" aria-hidden="true" className="perks-chevron"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
-              </div>
-            </button>
-            <div id="skillsAbilitiesCollapse" className="perks-collapse">
-              <div className="sel-sub" style={{'margin': '4px 2px 8px'}}>Granted automatically as you level up — permanent, no purchase needed.</div>
-              <div id="abilitiesList"></div>
-            </div>
-          </div>
+          
 
           <div id="specialsWrap">
             <div className="aw-sec" style={{'marginTop': '22px'}}>SPECIAL SKILLS</div>
