@@ -23,7 +23,7 @@ const TEST_BANNER_AD_UNIT_ID = 'ca-app-pub-3940256099942544/6300978111';
 export const REVENUECAT_GOOGLE_API_KEY =
   (typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.VITE_REVENUECAT_KEY) ||
   (typeof window !== 'undefined' && window.__REVENUECAT_KEY__) ||
-  'goog_OqXlIqmXJbXkLpYwZkQvWzNfGh';
+  'goog_XVNXRkjWHUFevwPwrsXdRaCjVwj';
 
 export const NativeBridge = {
   isNative: Capacitor.isNativePlatform(),

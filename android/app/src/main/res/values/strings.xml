@@ -2,6 +2,6 @@
 <resources>
     <string name="app_name">Idle Slapper</string>
     <string name="title_activity_main">Idle Slapper</string>
-    <string name="package_name">com.thesehands.game</string>
-    <string name="custom_url_scheme">com.thesehands.game</string>
+    <string name="package_name">com.idleslapper.game</string>
+    <string name="custom_url_scheme">idleslapper</string>
 </resources>

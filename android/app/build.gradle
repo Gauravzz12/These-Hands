@@ -4,7 +4,7 @@ android {
     namespace = "com.thesehands.game"
     compileSdk = rootProject.ext.compileSdkVersion
     defaultConfig {
-        applicationId "com.thesehands.game"
+        applicationId "com.idleslapper.game"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
