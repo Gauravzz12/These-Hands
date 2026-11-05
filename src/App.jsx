@@ -238,6 +238,13 @@ export default function App() {
 
       <div id="stageWrap">
         <canvas id="game"></canvas>
+        <div id="fightLoader" className="fight-loader" role="status" aria-label="Loading next fight">
+          <div className="fl-card">
+            <div className="fl-title">NEXT CHALLENGER</div>
+            <div className="fl-dots"><span></span><span></span><span></span></div>
+            <div className="fl-sub">SHARPENING THE SLAP…</div>
+          </div>
+        </div>
         <div id="comboTag"></div>
         <div id="bossWarn" role="alert"></div>
         <div id="circleRail" aria-label="Battle actions">
