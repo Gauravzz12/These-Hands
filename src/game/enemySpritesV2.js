@@ -1716,7 +1716,7 @@ export const V2_CONFIGS = [
     },
     "attack": {
       "src": "/enemy-sprites-v2/poses/w1-01-asura-footman-attack.webp",
-      "w": 559,
+      "w": 409,
       "h": 900
     },
     "dizzy": {
@@ -1748,7 +1748,7 @@ export const V2_CONFIGS = [
     },
     "attack": {
       "src": "/enemy-sprites-v2/poses/w1-02-rakshasa-huntress-attack.webp",
-      "w": 638,
+      "w": 384,
       "h": 900
     },
     "dizzy": {
@@ -1761,7 +1761,39 @@ export const V2_CONFIGS = [
 },
 {
   "idx": 202,
-  "id": "w1-03-mahishasura",
+  "id": "w1-03-garuda",
+  "name": "Garuda",
+  "refH": 900,
+  "cheekX": 0.5,
+  "cheekY": 0.3,
+  "colors": [
+    "#c9962e",
+    "#f2c063",
+    "#8a5a1d",
+    "#d94f30"
+  ],
+  "poses": {
+    "idle": {
+      "src": "/enemy-sprites-v2/poses/w1-03-garuda-idle.webp",
+      "w": 628,
+      "h": 900
+    },
+    "attack": {
+      "src": "/enemy-sprites-v2/poses/w1-03-garuda-attack.webp",
+      "w": 450,
+      "h": 900
+    },
+    "dizzy": {
+      "src": "/enemy-sprites-v2/poses/w1-03-garuda-dizzy.webp",
+      "w": 800,
+      "h": 900
+    }
+  },
+  "thumb": "/enemy-sprites-v2/thumbs/w1-03-garuda-thumb.webp"
+},
+{
+  "idx": 203,
+  "id": "w1-04-mahishasura",
   "name": "Mahishasura",
   "refH": 900,
   "cheekX": 0.3,
@@ -1774,54 +1806,22 @@ export const V2_CONFIGS = [
   ],
   "poses": {
     "idle": {
-      "src": "/enemy-sprites-v2/poses/w1-03-mahishasura-idle.webp",
+      "src": "/enemy-sprites-v2/poses/w1-04-mahishasura-idle.webp",
       "w": 434,
       "h": 900
     },
     "attack": {
-      "src": "/enemy-sprites-v2/poses/w1-03-mahishasura-attack.webp",
-      "w": 480,
+      "src": "/enemy-sprites-v2/poses/w1-04-mahishasura-attack.webp",
+      "w": 577,
       "h": 900
     },
     "dizzy": {
-      "src": "/enemy-sprites-v2/poses/w1-03-mahishasura-dizzy.webp",
+      "src": "/enemy-sprites-v2/poses/w1-04-mahishasura-dizzy.webp",
       "w": 441,
       "h": 620
     }
   },
-  "thumb": "/enemy-sprites-v2/thumbs/w1-03-mahishasura-thumb.webp"
-},
-{
-  "idx": 203,
-  "id": "w1-04-pishacha-ghoul",
-  "name": "Pishacha Ghoul",
-  "refH": 900,
-  "cheekX": 0.26,
-  "cheekY": 0.34,
-  "colors": [
-    "#a8b39a",
-    "#e8e4c8",
-    "#5c4a72",
-    "#e8d44d"
-  ],
-  "poses": {
-    "idle": {
-      "src": "/enemy-sprites-v2/poses/w1-04-pishacha-ghoul-idle.webp",
-      "w": 438,
-      "h": 900
-    },
-    "attack": {
-      "src": "/enemy-sprites-v2/poses/w1-04-pishacha-ghoul-attack.webp",
-      "w": 484,
-      "h": 900
-    },
-    "dizzy": {
-      "src": "/enemy-sprites-v2/poses/w1-04-pishacha-ghoul-dizzy.webp",
-      "w": 438,
-      "h": 900
-    }
-  },
-  "thumb": "/enemy-sprites-v2/thumbs/w1-04-pishacha-ghoul-thumb.webp"
+  "thumb": "/enemy-sprites-v2/thumbs/w1-04-mahishasura-thumb.webp"
 },
 {
   "idx": 204,
@@ -1844,7 +1844,7 @@ export const V2_CONFIGS = [
     },
     "attack": {
       "src": "/enemy-sprites-v2/poses/w1-05-vetala-warlock-attack.webp",
-      "w": 605,
+      "w": 546,
       "h": 900
     },
     "dizzy": {
@@ -1876,7 +1876,7 @@ export const V2_CONFIGS = [
     },
     "attack": {
       "src": "/enemy-sprites-v2/poses/w1-06-ravana-attack.webp",
-      "w": 516,
+      "w": 482,
       "h": 900
     },
     "dizzy": {
@@ -1886,7 +1886,7 @@ export const V2_CONFIGS = [
     },
     "spPose": {
       "src": "/enemy-sprites-v2/poses/w1-06-ravana-sppose.webp",
-      "w": 441,
+      "w": 482,
       "h": 900
     }
   },
@@ -1913,7 +1913,7 @@ export const V2_CONFIGS = [
     },
     "attack": {
       "src": "/enemy-sprites-v2/poses/w2-01-shade-dummy-attack.webp",
-      "w": 539,
+      "w": 511,
       "h": 900
     },
     "dizzy": {
@@ -1945,7 +1945,7 @@ export const V2_CONFIGS = [
     },
     "attack": {
       "src": "/enemy-sprites-v2/poses/w2-02-umbral-mime-attack.webp",
-      "w": 548,
+      "w": 342,
       "h": 900
     },
     "dizzy": {
@@ -1977,7 +1977,7 @@ export const V2_CONFIGS = [
     },
     "attack": {
       "src": "/enemy-sprites-v2/poses/w2-03-forgotten-knight-attack.webp",
-      "w": 1048,
+      "w": 524,
       "h": 900
     },
     "dizzy": {
@@ -2009,7 +2009,7 @@ export const V2_CONFIGS = [
     },
     "attack": {
       "src": "/enemy-sprites-v2/poses/w2-04-gloom-serpent-attack.webp",
-      "w": 448,
+      "w": 474,
       "h": 900
     },
     "dizzy": {
@@ -2041,7 +2041,7 @@ export const V2_CONFIGS = [
     },
     "attack": {
       "src": "/enemy-sprites-v2/poses/w2-05-hollow-monk-attack.webp",
-      "w": 645,
+      "w": 449,
       "h": 900
     },
     "dizzy": {
@@ -2073,13 +2073,18 @@ export const V2_CONFIGS = [
     },
     "attack": {
       "src": "/enemy-sprites-v2/poses/w2-06-dark-slapper-attack.webp",
-      "w": 730,
+      "w": 518,
       "h": 900
     },
     "dizzy": {
       "src": "/enemy-sprites-v2/poses/w2-06-dark-slapper-dizzy.webp",
       "w": 470,
       "h": 620
+    },
+    "spPose": {
+      "src": "/enemy-sprites-v2/poses/w2-06-dark-slapper-sppose.webp",
+      "w": 512,
+      "h": 900
     }
   },
   "thumb": "/enemy-sprites-v2/thumbs/w2-06-dark-slapper-thumb.webp"

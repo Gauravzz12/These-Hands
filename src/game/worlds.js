@@ -23,8 +23,8 @@ export const WORLDS = [
     enemies: [
       { name: 'Asura Footman',     slug: 'w1-01-asura-footman',     hp: 900000000,  atkDmg: 15000, atkInterval: 2.2, scale: 1.0 },
       { name: 'Rakshasa Huntress', slug: 'w1-02-rakshasa-huntress', hp: 1300000000, atkDmg: 17000, atkInterval: 2.0, scale: 1.0 },
-      { name: 'Mahishasura',       slug: 'w1-03-mahishasura',       hp: 2600000000, atkDmg: 24000, atkInterval: 2.1, scale: 1.3,  role: 'MINI BOSS', title: 'The Buffalo Demon King' },
-      { name: 'Pishacha Ghoul',    slug: 'w1-04-pishacha-ghoul',    hp: 1900000000, atkDmg: 20000, atkInterval: 1.9, scale: 1.05 },
+      { name: 'Garuda',            slug: 'w1-03-garuda',            hp: 2600000000, atkDmg: 24000, atkInterval: 2.1, scale: 1.2,  role: 'MINI BOSS', title: 'The Divine Tempest' },
+      { name: 'Mahishasura',       slug: 'w1-04-mahishasura',       hp: 1900000000, atkDmg: 20000, atkInterval: 1.9, scale: 1.3 },
       { name: 'Vetala Warlock',    slug: 'w1-05-vetala-warlock',    hp: 2400000000, atkDmg: 22000, atkInterval: 2.0, scale: 1.1 },
       { name: 'Ravana',            slug: 'w1-06-ravana',            hp: 4300000000, atkDmg: 34000, atkInterval: 1.9, scale: 1.45, role: 'WORLD BOSS', title: 'The Ten-Headed King' },
     ],
