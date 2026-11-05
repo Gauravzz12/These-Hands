@@ -128,8 +128,8 @@
     "semantic_hash": "8bac246e0138c7d2cab584be02430f8e"
   },
   "src/App.jsx": {
-    "mtime": 1793891520.528833,
-    "seen": 1793891863.584304,
+    "mtime": 1793892945.9041188,
+    "seen": 1793893053.5637782,
     "ast_hash": "5899610494cb8668389ea5b1fde5a345",
     "semantic_hash": ""
   },
@@ -260,8 +260,8 @@
     "semantic_hash": ""
   },
   "src/game/gameEngine.js": {
-    "mtime": 1793891796.9700098,
-    "seen": 1793891863.5853148,
+    "mtime": 1793892947.0921583,
+    "seen": 1793893053.5637782,
     "ast_hash": "fda970d1b6408493dbe00d2c7c9e235e",
     "semantic_hash": ""
   },
@@ -284,9 +284,9 @@
     "semantic_hash": "8dd5584aa251b2d1cb0d3ad37ba77cc7"
   },
   "src/services/nativeBridge.js": {
-    "mtime": 1793891491.105032,
-    "seen": 1793891863.5853148,
-    "ast_hash": "e9136e8cf69a1c0856238048610b83eb",
+    "mtime": 1793893027.2855234,
+    "seen": 1793893053.5637782,
+    "ast_hash": "92e0ff43d00526f0aa17e737cfeb18a9",
     "semantic_hash": ""
   },
   "sync_engine.cjs": {

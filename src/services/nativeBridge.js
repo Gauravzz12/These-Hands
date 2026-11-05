@@ -4,6 +4,7 @@ import { StatusBar, Style } from '@capacitor/status-bar';
 import { SplashScreen } from '@capacitor/splash-screen';
 import { AdMob, RewardAdPluginEvents, InterstitialAdPluginEvents } from '@capacitor-community/admob';
 import { Purchases } from '@revenuecat/purchases-capacitor';
+import { CONFIG } from '../game/config.js';
 
 // Google AdMob Rewarded Ad Unit ID
 const REWARDED_AD_UNIT_ID = 'ca-app-pub-4838625298188198/2176399244';
@@ -275,11 +276,11 @@ export const NativeBridge = {
   async loadProducts(productIds) {
     if (!this.isNative || !this.purchasesInitialized) return {};
     try {
-      const ids = productIds || [
-        'bundle_starter', 'bundle_weapon_x', 'bundle_inferno', 'bundle_dragon', 'bundle_cosmic',
+      const ids = productIds || (CONFIG && CONFIG.products ? CONFIG.products.map(p => p.id) : [
+        'bundle_starter', 'bundle_weapon_x', 'bundle_inferno', 'bundle_dragon', 'bundle_steel', 'bundle_cosmic',
         'gem_pouch', 'gem_sack', 'gem_chest', 'gem_vault', 'gem_treasury', 'gem_mountain',
-        'feature_vip', 'feature_remove_ads', 'feature_frenzy_boost'
-      ];
+        'feature_offline', 'feature_vip', 'feature_remove_ads', 'feature_frenzy_boost'
+      ]);
       const { products } = await Purchases.getProducts({ productIdentifiers: ids });
       if (products && products.length > 0) {
         for (const p of products) {
