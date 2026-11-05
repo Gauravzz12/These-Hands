@@ -630,10 +630,10 @@ export const CONFIG = {
       "desc": "Fiery dragon breath scorching everything"
     },
     "202": {
-      "name": "STAMPEDE CHARGE",
+      "name": "TEMPEST BARRAGE",
       "kind": "heavy",
-      "mult": 1.6, "stun": 0.8, "blurb": "Buffalo charge dealing 1.6× damage and a 0.8s stagger!",
-      "desc": "The Buffalo King lowers his horns and charges"
+      "mult": 1.6, "stun": 0.8, "blurb": "A storm of razor feathers dealing 1.6× damage and a 0.8s stagger!",
+      "desc": "Garuda beats his wings and the sky itself attacks"
     },
     "205": {
       "name": "CHANDRAHASA STRIKE",
@@ -673,8 +673,8 @@ export const CONFIG = {
   "relics": [
     {"id": "warBell", "icon": "🔔", "name": "Bronze War Bell", "srcW": 0, "srcS": 0, "vals": [0.10, 0.20, 0.30], "fmt": "pct", "desc": "+{v} coins in world fights"},
     {"id": "rakshasaFang", "icon": "🗡️", "name": "Rakshasa Fang", "srcW": 0, "srcS": 1, "vals": [0.08, 0.16, 0.24], "fmt": "pct", "desc": "+{v} crit damage"},
-    {"id": "stampedeHorn", "icon": "📯", "name": "Horn of the Stampede", "srcW": 0, "srcS": 2, "vals": [0.10, 0.20, 0.30], "fmt": "pct", "desc": "+{v} damage in world fights"},
-    {"id": "graveChill", "icon": "❄️", "name": "Grave Chill Shroud", "srcW": 0, "srcS": 3, "vals": [0.04, 0.08, 0.12], "fmt": "pct", "desc": "Enemies attack {v} slower"},
+    {"id": "stampedeHorn", "icon": "📯", "name": "Horn of the Stampede", "srcW": 0, "srcS": 3, "vals": [0.10, 0.20, 0.30], "fmt": "pct", "desc": "+{v} damage in world fights"},
+    {"id": "graveChill", "icon": "🌪️", "name": "Tempest Shroud", "srcW": 0, "srcS": 2, "vals": [0.04, 0.08, 0.12], "fmt": "pct", "desc": "Enemies attack {v} slower"},
     {"id": "skullWhispers", "icon": "💀", "name": "Skull of Whispers", "srcW": 0, "srcS": 4, "vals": [0.10, 0.20, 0.30], "fmt": "pct", "desc": "Weak spots appear {v} sooner"},
     {"id": "tenKingsCrown", "icon": "👑", "name": "Crown of Ten Kings", "srcW": 0, "srcS": 5, "vals": [0.15, 0.25, 0.40], "fmt": "pct", "desc": "+{v} damage vs world final bosses"},
     {"id": "firstFoeSplinter", "icon": "🪵", "name": "Splinter of the First Foe", "srcW": 1, "srcS": 0, "vals": [0.08, 0.16, 0.24], "fmt": "pct", "desc": "+{v} damage vs non-bosses"},
