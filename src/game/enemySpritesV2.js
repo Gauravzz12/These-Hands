@@ -1694,8 +1694,396 @@ export const V2_CONFIGS = [
     },
   },
   "thumb": "/enemy-sprites-v2/thumbs/30-shogun-warlord-thumb.webp"
+},
+{
+  "idx": 200,
+  "id": "w1-01-asura-footman",
+  "name": "Asura Footman",
+  "refH": 900,
+  "cheekX": 0.22,
+  "cheekY": 0.5,
+  "colors": [
+    "#c33d21",
+    "#e8a33d",
+    "#7a1f10",
+    "#f2c063"
+  ],
+  "poses": {
+    "idle": {
+      "src": "/enemy-sprites-v2/poses/w1-01-asura-footman-idle.webp",
+      "w": 424,
+      "h": 900
+    },
+    "attack": {
+      "src": "/enemy-sprites-v2/poses/w1-01-asura-footman-attack.webp",
+      "w": 559,
+      "h": 900
+    },
+    "dizzy": {
+      "src": "/enemy-sprites-v2/poses/w1-01-asura-footman-dizzy.webp",
+      "w": 435,
+      "h": 620
+    }
+  },
+  "thumb": "/enemy-sprites-v2/thumbs/w1-01-asura-footman-thumb.webp"
+},
+{
+  "idx": 201,
+  "id": "w1-02-rakshasa-huntress",
+  "name": "Rakshasa Huntress",
+  "refH": 900,
+  "cheekX": 0.24,
+  "cheekY": 0.48,
+  "colors": [
+    "#5a6b80",
+    "#c22e3a",
+    "#e8b23d",
+    "#1c2430"
+  ],
+  "poses": {
+    "idle": {
+      "src": "/enemy-sprites-v2/poses/w1-02-rakshasa-huntress-idle.webp",
+      "w": 352,
+      "h": 900
+    },
+    "attack": {
+      "src": "/enemy-sprites-v2/poses/w1-02-rakshasa-huntress-attack.webp",
+      "w": 638,
+      "h": 900
+    },
+    "dizzy": {
+      "src": "/enemy-sprites-v2/poses/w1-02-rakshasa-huntress-dizzy.webp",
+      "w": 370,
+      "h": 620
+    }
+  },
+  "thumb": "/enemy-sprites-v2/thumbs/w1-02-rakshasa-huntress-thumb.webp"
+},
+{
+  "idx": 202,
+  "id": "w1-03-mahishasura",
+  "name": "Mahishasura",
+  "refH": 900,
+  "cheekX": 0.3,
+  "cheekY": 0.38,
+  "colors": [
+    "#23202c",
+    "#d9a441",
+    "#b03a2e",
+    "#3f6fb5"
+  ],
+  "poses": {
+    "idle": {
+      "src": "/enemy-sprites-v2/poses/w1-03-mahishasura-idle.webp",
+      "w": 434,
+      "h": 900
+    },
+    "attack": {
+      "src": "/enemy-sprites-v2/poses/w1-03-mahishasura-attack.webp",
+      "w": 480,
+      "h": 900
+    },
+    "dizzy": {
+      "src": "/enemy-sprites-v2/poses/w1-03-mahishasura-dizzy.webp",
+      "w": 441,
+      "h": 620
+    }
+  },
+  "thumb": "/enemy-sprites-v2/thumbs/w1-03-mahishasura-thumb.webp"
+},
+{
+  "idx": 203,
+  "id": "w1-04-pishacha-ghoul",
+  "name": "Pishacha Ghoul",
+  "refH": 900,
+  "cheekX": 0.26,
+  "cheekY": 0.34,
+  "colors": [
+    "#a8b39a",
+    "#e8e4c8",
+    "#5c4a72",
+    "#e8d44d"
+  ],
+  "poses": {
+    "idle": {
+      "src": "/enemy-sprites-v2/poses/w1-04-pishacha-ghoul-idle.webp",
+      "w": 438,
+      "h": 900
+    },
+    "attack": {
+      "src": "/enemy-sprites-v2/poses/w1-04-pishacha-ghoul-attack.webp",
+      "w": 484,
+      "h": 900
+    },
+    "dizzy": {
+      "src": "/enemy-sprites-v2/poses/w1-04-pishacha-ghoul-dizzy.webp",
+      "w": 438,
+      "h": 900
+    }
+  },
+  "thumb": "/enemy-sprites-v2/thumbs/w1-04-pishacha-ghoul-thumb.webp"
+},
+{
+  "idx": 204,
+  "id": "w1-05-vetala-warlock",
+  "name": "Vetala Warlock",
+  "refH": 900,
+  "cheekX": 0.26,
+  "cheekY": 0.4,
+  "colors": [
+    "#8a8d90",
+    "#3a2b52",
+    "#4de06a",
+    "#d9c9a8"
+  ],
+  "poses": {
+    "idle": {
+      "src": "/enemy-sprites-v2/poses/w1-05-vetala-warlock-idle.webp",
+      "w": 551,
+      "h": 900
+    },
+    "attack": {
+      "src": "/enemy-sprites-v2/poses/w1-05-vetala-warlock-attack.webp",
+      "w": 605,
+      "h": 900
+    },
+    "dizzy": {
+      "src": "/enemy-sprites-v2/poses/w1-05-vetala-warlock-dizzy.webp",
+      "w": 430,
+      "h": 620
+    }
+  },
+  "thumb": "/enemy-sprites-v2/thumbs/w1-05-vetala-warlock-thumb.webp"
+},
+{
+  "idx": 205,
+  "id": "w1-06-ravana",
+  "name": "Ravana",
+  "refH": 900,
+  "cheekX": 0.2,
+  "cheekY": 0.34,
+  "colors": [
+    "#b03024",
+    "#e8a33d",
+    "#1e1a1e",
+    "#f2d060"
+  ],
+  "poses": {
+    "idle": {
+      "src": "/enemy-sprites-v2/poses/w1-06-ravana-idle.webp",
+      "w": 485,
+      "h": 900
+    },
+    "attack": {
+      "src": "/enemy-sprites-v2/poses/w1-06-ravana-attack.webp",
+      "w": 516,
+      "h": 900
+    },
+    "dizzy": {
+      "src": "/enemy-sprites-v2/poses/w1-06-ravana-dizzy.webp",
+      "w": 357,
+      "h": 620
+    },
+    "spPose": {
+      "src": "/enemy-sprites-v2/poses/w1-06-ravana-sppose.webp",
+      "w": 441,
+      "h": 900
+    }
+  },
+  "thumb": "/enemy-sprites-v2/thumbs/w1-06-ravana-thumb.webp"
+},
+{
+  "idx": 210,
+  "id": "w2-01-shade-dummy",
+  "name": "Shade of the Dummy",
+  "refH": 900,
+  "cheekX": 0.24,
+  "cheekY": 0.45,
+  "colors": [
+    "#2a2430",
+    "#8a5ae0",
+    "#4a3a5e",
+    "#c9a8ff"
+  ],
+  "poses": {
+    "idle": {
+      "src": "/enemy-sprites-v2/poses/w2-01-shade-dummy-idle.webp",
+      "w": 492,
+      "h": 900
+    },
+    "attack": {
+      "src": "/enemy-sprites-v2/poses/w2-01-shade-dummy-attack.webp",
+      "w": 539,
+      "h": 900
+    },
+    "dizzy": {
+      "src": "/enemy-sprites-v2/poses/w2-01-shade-dummy-dizzy.webp",
+      "w": 420,
+      "h": 620
+    }
+  },
+  "thumb": "/enemy-sprites-v2/thumbs/w2-01-shade-dummy-thumb.webp"
+},
+{
+  "idx": 211,
+  "id": "w2-02-umbral-mime",
+  "name": "Umbral Mime",
+  "refH": 900,
+  "cheekX": 0.26,
+  "cheekY": 0.3,
+  "colors": [
+    "#17141c",
+    "#cfd2d8",
+    "#8a5ae0",
+    "#3a3444"
+  ],
+  "poses": {
+    "idle": {
+      "src": "/enemy-sprites-v2/poses/w2-02-umbral-mime-idle.webp",
+      "w": 338,
+      "h": 900
+    },
+    "attack": {
+      "src": "/enemy-sprites-v2/poses/w2-02-umbral-mime-attack.webp",
+      "w": 548,
+      "h": 900
+    },
+    "dizzy": {
+      "src": "/enemy-sprites-v2/poses/w2-02-umbral-mime-dizzy.webp",
+      "w": 366,
+      "h": 620
+    }
+  },
+  "thumb": "/enemy-sprites-v2/thumbs/w2-02-umbral-mime-thumb.webp"
+},
+{
+  "idx": 212,
+  "id": "w2-03-forgotten-knight",
+  "name": "The Forgotten Knight",
+  "refH": 900,
+  "cheekX": 0.28,
+  "cheekY": 0.34,
+  "colors": [
+    "#1d1a24",
+    "#8a5ae0",
+    "#5e546e",
+    "#b48ce0"
+  ],
+  "poses": {
+    "idle": {
+      "src": "/enemy-sprites-v2/poses/w2-03-forgotten-knight-idle.webp",
+      "w": 556,
+      "h": 900
+    },
+    "attack": {
+      "src": "/enemy-sprites-v2/poses/w2-03-forgotten-knight-attack.webp",
+      "w": 1048,
+      "h": 900
+    },
+    "dizzy": {
+      "src": "/enemy-sprites-v2/poses/w2-03-forgotten-knight-dizzy.webp",
+      "w": 680,
+      "h": 620
+    }
+  },
+  "thumb": "/enemy-sprites-v2/thumbs/w2-03-forgotten-knight-thumb.webp"
+},
+{
+  "idx": 213,
+  "id": "w2-04-gloom-serpent",
+  "name": "Gloom Serpent",
+  "refH": 900,
+  "cheekX": 0.26,
+  "cheekY": 0.3,
+  "colors": [
+    "#241f2e",
+    "#9a6ae0",
+    "#4a3a5e",
+    "#d8c8ff"
+  ],
+  "poses": {
+    "idle": {
+      "src": "/enemy-sprites-v2/poses/w2-04-gloom-serpent-idle.webp",
+      "w": 464,
+      "h": 900
+    },
+    "attack": {
+      "src": "/enemy-sprites-v2/poses/w2-04-gloom-serpent-attack.webp",
+      "w": 448,
+      "h": 900
+    },
+    "dizzy": {
+      "src": "/enemy-sprites-v2/poses/w2-04-gloom-serpent-dizzy.webp",
+      "w": 365,
+      "h": 620
+    }
+  },
+  "thumb": "/enemy-sprites-v2/thumbs/w2-04-gloom-serpent-thumb.webp"
+},
+{
+  "idx": 214,
+  "id": "w2-05-hollow-monk",
+  "name": "The Hollow Monk",
+  "refH": 900,
+  "cheekX": 0.26,
+  "cheekY": 0.32,
+  "colors": [
+    "#201c2a",
+    "#a87ae8",
+    "#574a6e",
+    "#e2d6ff"
+  ],
+  "poses": {
+    "idle": {
+      "src": "/enemy-sprites-v2/poses/w2-05-hollow-monk-idle.webp",
+      "w": 449,
+      "h": 900
+    },
+    "attack": {
+      "src": "/enemy-sprites-v2/poses/w2-05-hollow-monk-attack.webp",
+      "w": 645,
+      "h": 900
+    },
+    "dizzy": {
+      "src": "/enemy-sprites-v2/poses/w2-05-hollow-monk-dizzy.webp",
+      "w": 401,
+      "h": 620
+    }
+  },
+  "thumb": "/enemy-sprites-v2/thumbs/w2-05-hollow-monk-thumb.webp"
+},
+{
+  "idx": 215,
+  "id": "w2-06-dark-slapper",
+  "name": "The Dark Slapper",
+  "refH": 900,
+  "cheekX": 0.24,
+  "cheekY": 0.42,
+  "colors": [
+    "#14101c",
+    "#9a5ae0",
+    "#3a2c52",
+    "#c9a8ff"
+  ],
+  "poses": {
+    "idle": {
+      "src": "/enemy-sprites-v2/poses/w2-06-dark-slapper-idle.webp",
+      "w": 512,
+      "h": 900
+    },
+    "attack": {
+      "src": "/enemy-sprites-v2/poses/w2-06-dark-slapper-attack.webp",
+      "w": 730,
+      "h": 900
+    },
+    "dizzy": {
+      "src": "/enemy-sprites-v2/poses/w2-06-dark-slapper-dizzy.webp",
+      "w": 470,
+      "h": 620
+    }
+  },
+  "thumb": "/enemy-sprites-v2/thumbs/w2-06-dark-slapper-thumb.webp"
 }
-
 ];
 
 const SPRITE_CACHE = {};
@@ -1800,7 +2188,7 @@ function loadPoseImage(poseDef) {
 }
 
 export function isV2Enemy(index) {
-  return typeof index === 'number' && index >= 0 && index <= 49;
+  return typeof index === 'number' && ((index >= 0 && index <= 49) || (index >= 200 && index <= 205) || (index >= 210 && index <= 215));
 }
 
 export function preloadV2Sprites(targetIndex = 0) {
