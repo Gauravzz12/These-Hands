@@ -34,7 +34,7 @@ const HELP_CARDS = [
     title: 'EVERY DAY COUNTS',
     body: (
       <>
-        Defeat the <b>Slime Blob (#5)</b> to unlock the <b>daily streak chest</b> — pays coins daily and gems on day 7. Defeat the <b>Mischievous Monkey (#10)</b> to unlock <b>daily quests</b>. Check <b>Awards</b> for achievements that pay gems, and spend gems in the <b>Shop</b> on hand skins and coin packs.
+        Defeat the <b>Grumpy Teddy (#5)</b> to unlock the <b>daily streak chest</b> — pays coins daily and gems on day 7. Defeat the <b>Mischievous Monkey (#10)</b> to unlock <b>daily quests</b>. Check <b>Awards</b> for achievements that pay gems, and spend gems in the <b>Shop</b> on hand skins and coin packs.
       </>
     ),
   },
