@@ -8,7 +8,7 @@ export const CONFIG = {
   },
   "capPerLevel": 3,
   "levelUp": {
-    "base": 100,
+    "base": 300,
     "growth": 1.8612,
     "rampStart": 5,
     "midGrowth": 1.55,
@@ -286,6 +286,14 @@ export const CONFIG = {
       "cost": 800000,
       "prereq": "strongerHands",
       "fx": "Unlocks PRECISION strikes: a gold weak spot flashes on the enemy mid-fight — tap it for a devastating 8.5x critical strike! Fortune Luck makes it appear more often. Max 3 per fight (+1 per 5 Luck, max 6)."
+    },
+    {
+      "id": "deflect",
+      "name": "Deflect",
+      "tier": 2,
+      "cost": 150000,
+      "prereq": "basic",
+      "fx": "Boss normal attacks spawn a parry ring at a random spot — tap it exactly as the ring closes into the gold circle to deflect the blow completely. Random spot every time; boss specials cannot be deflected."
     },
     {
       "id": "comboMastery",
@@ -663,14 +671,14 @@ export const CONFIG = {
   },
   "gauntlet": {"bonusMult": 4.5, "gemFirst": 1},
   "worldArts": [
-    {"id": "echoPalm", "icon": "🔁", "name": "Echo Palm", "cost": 10, "desc": "Every 8th slap echoes — a phantom slap lands at 60% damage."},
-    {"id": "frenzyHeart", "icon": "💓", "name": "Frenzy Heart", "cost": 8, "desc": "Your frenzy meter fills 30% faster."},
-    {"id": "phoenixHeart", "icon": "🕊️", "name": "Phoenix Heart", "cost": 20, "desc": "Once per fight, a fatal blow leaves you standing at 25% HP."},
-    {"id": "timeWeaver", "icon": "🌀", "name": "Time Weaver", "cost": 12, "desc": "Time Stop lasts 40% longer."},
-    {"id": "giantsGrip", "icon": "✊", "name": "Giant's Grip", "cost": 8, "desc": "+1 max precision crits per fight (weak-spot cap)."},
-    {"id": "eagleEye", "icon": "👁️", "name": "Eagle Eye", "cost": 6, "desc": "Weak spots stay open 0.6s longer."},
-    {"id": "greedMantra", "icon": "🪙", "name": "Greed Mantra", "cost": 8, "desc": "+25% coins from world fights."},
-    {"id": "bossHunter", "icon": "🏹", "name": "Boss Hunter", "cost": 12, "desc": "+15% damage against bosses."}
+    {"id": "echoPalm", "icon": "🔁", "name": "Echo Palm", "cost": 20, "desc": "Every 8th slap echoes — a phantom slap lands at 60% damage."},
+    {"id": "frenzyHeart", "icon": "💓", "name": "Frenzy Heart", "cost": 15, "desc": "Your frenzy meter fills 30% faster."},
+    {"id": "phoenixHeart", "icon": "🕊️", "name": "Phoenix Heart", "cost": 35, "desc": "Once per fight, a fatal blow leaves you standing at 25% HP."},
+    {"id": "timeWeaver", "icon": "🌀", "name": "Time Weaver", "cost": 25, "desc": "Time Stop lasts 40% longer."},
+    {"id": "giantsGrip", "icon": "✊", "name": "Giant's Grip", "cost": 15, "desc": "+1 max precision crits per fight (weak-spot cap)."},
+    {"id": "eagleEye", "icon": "👁️", "name": "Eagle Eye", "cost": 12, "desc": "Weak spots stay open 0.6s longer."},
+    {"id": "greedMantra", "icon": "🪙", "name": "Greed Mantra", "cost": 18, "desc": "+25% coins from world fights."},
+    {"id": "bossHunter", "icon": "🏹", "name": "Boss Hunter", "cost": 25, "desc": "+15% damage against bosses."}
   ],
   "relics": [
     {"id": "warBell", "icon": "🔔", "name": "Bronze War Bell", "srcW": 0, "srcS": 0, "vals": [0.10, 0.20, 0.30], "fmt": "pct", "desc": "+{v} coins in world fights"},
@@ -1279,14 +1287,25 @@ export function calcLevelUpCost(currentLevel) {
 export function calcAttrCost(key, currentLevel) {
   const def = CONFIG.attrs[key];
   if (!def) return 999999;
+  const N = def.maxLevel || 1;
   const lvl = currentLevel != null ? currentLevel : 0;
-  // Gentle growth for the first 7 levels, then the steeper lateGrowth takes over
-  // (short-level attributes like Accuracy carry a much hotter lateGrowth).
-  const KINK = 7;
-  if (def.lateGrowth && lvl > KINK) {
-    return Math.round(def.baseCost * Math.pow(def.growth, KINK) * Math.pow(def.lateGrowth, lvl - KINK));
+  if (lvl >= N) return Infinity;
+  // Band pricing (same magnitudes for every attribute, by fraction of its cap):
+  // first 10% of levels 1K->10K, next 30% 10K->100K, next 40% 100K->900K,
+  // last 20% 1M->25M (the tail keeps compounding). Geometric inside each band.
+  const BANDS = [[0.10, 1000, 10000], [0.40, 10000, 100000], [0.80, 100000, 900000], [1.00, 1000000, 25000000]];
+  const i = lvl + 1;
+  let prev = 0;
+  for (let b = 0; b < BANDS.length; b++) {
+    const end = b === BANDS.length - 1 ? N : Math.max(prev + 1, Math.round(BANDS[b][0] * N));
+    if (i <= end) {
+      const span = Math.max(1, end - prev - 1);
+      const t = Math.min(1, (i - prev - 1) / span);
+      return Math.round(BANDS[b][1] * Math.pow(BANDS[b][2] / BANDS[b][1], t));
+    }
+    prev = end;
   }
-  return Math.round(def.baseCost * Math.pow(def.growth, lvl));
+  return 25000000;
 }
 
 export function calcAttrCap(playerLevel, dragonMastery = 0) {
