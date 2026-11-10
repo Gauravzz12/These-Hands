@@ -100,8 +100,8 @@ export const CONFIG = {
       "early": [65, 95, 140, 210, 360, 420, 580, 780, 1050, 2500],
       "base10": 4000,
       "growth": 1.30,
-      "tailStart": 49,
-      "tailGrowth": 1.10,
+      "tailStart": 30,
+      "tailGrowth": 1.325,
       "bossMult": 2.50,
       "eliteMult": 1.40
     },
@@ -109,8 +109,8 @@ export const CONFIG = {
       "earlyDmg": [8, 12, 15, 20, 26, 24, 28, 34, 40, 48],
       "base10": 100,
       "growth": 1.12,
-      "tailStart": 49,
-      "tailGrowth": 1.04,
+      "tailStart": 30,
+      "tailGrowth": 1.14,
       "bossMult": 1.80,
       "eliteMult": 1.30
     },
@@ -308,7 +308,7 @@ export const CONFIG = {
       "id": "comboMastery",
       "name": "Combo Mastery",
       "tier": 3,
-      "cost": 1200000,
+      "cost": 1000000,
       "prereq": "onTarget",
       "fx": "Combo cap +5 stacks and +0.5% damage per stack."
     },
@@ -316,7 +316,7 @@ export const CONFIG = {
       "id": "dizzyPunisher",
       "name": "Opportunist",
       "tier": 3,
-      "cost": 2500000,
+      "cost": 2000000,
       "prereq": "quickReflexes",
       "fx": "Slaps deal +35% damage to Stunned enemies."
     },
@@ -324,7 +324,7 @@ export const CONFIG = {
       "id": "clutchSurge",
       "name": "Adrenaline Rush",
       "tier": 3,
-      "cost": 5000000,
+      "cost": 4000000,
       "prereq": "thunderclap",
       "fx": "Below 35% HP: gain +20% attack speed and +25% damage."
     },
@@ -332,7 +332,7 @@ export const CONFIG = {
       "id": "coinMagnet",
       "name": "Coin Magnet",
       "tier": 3,
-      "cost": 8000000,
+      "cost": 6500000,
       "prereq": "criticalSlaps",
       "fx": "+20% coins from every KO."
     },
@@ -340,7 +340,7 @@ export const CONFIG = {
       "id": "bossHunter",
       "name": "Boss Hunter",
       "tier": 3,
-      "cost": 15000000,
+      "cost": 12000000,
       "prereq": "heavySlap",
       "reqBoss": 19,
       "fx": "+25% damage vs group elites and bosses."
@@ -349,7 +349,7 @@ export const CONFIG = {
       "id": "echoStrike",
       "name": "Acoustic Echo",
       "tier": 4,
-      "cost": 25000000,
+      "cost": 19000000,
       "prereq": "comboMastery",
       "fx": "Critical slaps have a 25% chance to echo for 160% bonus damage."
     },
@@ -357,7 +357,7 @@ export const CONFIG = {
       "id": "dualHand",
       "name": "Dual-Hand Technique",
       "tier": 4,
-      "cost": 40000000,
+      "cost": 30000000,
       "prereq": "dizzyPunisher",
       "fx": "+15% attack speed — both hands blur."
     },
@@ -365,7 +365,7 @@ export const CONFIG = {
       "id": "unstoppable",
       "name": "Unstoppable Hands",
       "tier": 4,
-      "cost": 60000000,
+      "cost": 45000000,
       "prereq": "clutchSurge",
       "fx": "+100 max HP and regenerate 2 HP/s during fights."
     },
@@ -373,7 +373,7 @@ export const CONFIG = {
       "id": "kineticShield",
       "name": "Kinetic Barrier",
       "tier": 4,
-      "cost": 90000000,
+      "cost": 68000000,
       "prereq": "clutchSurge",
       "reqBoss": 29,
       "fx": "Every 20 slaps builds a shield absorbing 30 enemy damage (max 90)."
@@ -382,7 +382,7 @@ export const CONFIG = {
       "id": "goldenTouch",
       "name": "Treasure Hunter",
       "tier": 4,
-      "cost": 120000000,
+      "cost": 90000000,
       "prereq": "coinMagnet",
       "fx": "Elites and Bosses drop +50% bonus coins, and defeat grants +1 extra Gem."
     },
@@ -390,7 +390,7 @@ export const CONFIG = {
       "id": "frenzy",
       "name": "Frenzy",
       "tier": 4,
-      "cost": 180000000,
+      "cost": 135000000,
       "prereq": "bossHunter",
       "fx": "Slaps charge FRENZY: 10s of +50% damage and +30% speed."
     },
@@ -398,7 +398,7 @@ export const CONFIG = {
       "id": "titanSlayer",
       "name": "Colossus Bane",
       "tier": 4,
-      "cost": 240000000,
+      "cost": 180000000,
       "prereq": "bossHunter",
       "reqBoss": 39,
       "fx": "+35% damage vs Giant, Titan, and Dragon enemies."
@@ -407,7 +407,7 @@ export const CONFIG = {
       "id": "rapidBarrage",
       "name": "Rapid Barrage",
       "tier": 5,
-      "cost": 350000000,
+      "cost": 245000000,
       "prereq": "dualHand",
       "fx": "Every 10th slap unleashes a barrage: 3 extra hits at 50% damage."
     },
@@ -415,7 +415,7 @@ export const CONFIG = {
       "id": "aegisBulwark",
       "name": "Aegis Retaliation",
       "tier": 5,
-      "cost": 480000000,
+      "cost": 335000000,
       "prereq": "kineticShield",
       "fx": "When Defense or Barrier mitigates damage, 50% of the blocked damage is reflected back."
     },
@@ -423,7 +423,7 @@ export const CONFIG = {
       "id": "ultimateSlap",
       "name": "Ultimate Slap",
       "tier": 5,
-      "cost": 700000000,
+      "cost": 490000000,
       "prereq": "titanSlayer",
       "reqBoss": 39,
       "fx": "Every 15s of combat, your next slap is an ULTIMATE: 10x damage."
