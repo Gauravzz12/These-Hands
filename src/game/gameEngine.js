@@ -611,7 +611,11 @@ function renderShop(){
 
 function storePriceOf(prodId, defaultPrice) {
   if (typeof window !== "undefined" && window.__nativeBridge && window.__nativeBridge.productsMap) {
-    const sp = window.__nativeBridge.productsMap[prodId];
+    const cleanId = String(prodId || "")
+      .replace(/^gem_gem_/, "gem_")
+      .replace(/^bundle_bundle_/, "bundle_")
+      .replace(/^feature_feature_/, "feature_");
+    const sp = window.__nativeBridge.productsMap[cleanId] || window.__nativeBridge.productsMap[prodId];
     if (sp && sp.priceString) return sp.priceString;
   }
   return defaultPrice;
@@ -657,7 +661,8 @@ function renderShopGemVault(){
   let html = '<div class="shop-sec-head"><div class="ssh-title">💎 GEM VAULT</div><div class="ssh-sub">OFFICIAL GOOGLE PLAY STORE · DIRECT GEM ACQUISITION</div></div><div class="shop-grid">';
   for (const pk of (CONFIG.gemPacks || [])) {
     const totalGems = pk.gems + (pk.bonusGems || 0);
-    const price = storePriceOf("gem_" + pk.id, pk.price);
+    const prodId = pk.id.startsWith("gem_") ? pk.id : "gem_" + pk.id;
+    const price = storePriceOf(prodId, pk.price);
     html += '<div class="skin-card gem-card">' +
       '<span class="shop-card-badge ' + (pk.tag === "BEST VALUE" ? "badge-best" : (pk.tag === "POPULAR" ? "badge-popular" : "badge-bonus")) + '">' + pk.tag + '</span>' +
       '<div class="gem-art-wrap">' +
@@ -955,15 +960,25 @@ async function startStorePurchase(item) {
   if (!item) return;
 
   let productId = "";
-  if (item.kind === "bundle") {
-    productId = "bundle_" + (item.bundle ? item.bundle.id : item.id);
-  } else if (item.kind === "gem") {
-    productId = "gem_" + (item.pack ? item.pack.id : item.id);
-  } else if (item.kind === "feature") {
-    productId = "feature_" + (item.data ? item.data.id : item.id);
-  } else if (item.productId) {
+  if (item.productId) {
     productId = item.productId;
+  } else if (item.kind === "bundle") {
+    const rawId = item.bundle ? item.bundle.id : item.id;
+    productId = rawId.startsWith("bundle_") ? rawId : "bundle_" + rawId;
+  } else if (item.kind === "gem") {
+    const rawId = item.pack ? item.pack.id : item.id;
+    productId = rawId.startsWith("gem_") ? rawId : "gem_" + rawId;
+  } else if (item.kind === "feature") {
+    const rawId = item.data ? item.data.id : item.id;
+    productId = rawId.startsWith("feature_") ? rawId : "feature_" + rawId;
+  } else if (item.id) {
+    productId = item.id;
   }
+  // Sanitize duplicate prefixes just in case
+  productId = String(productId)
+    .replace(/^gem_gem_/, "gem_")
+    .replace(/^bundle_bundle_/, "bundle_")
+    .replace(/^feature_feature_/, "feature_");
 
   // If already owned non-repeatable item, notify and return
   if (item.kind === "bundle") {
@@ -1022,7 +1037,8 @@ function openStoreCheckoutModal(item) {
     const bd = item.bundle || CONFIG.bundles.find(x => x.id === item.id);
     if (!bd || G.bundlesOwned.indexOf(bd.id) >= 0) return;
     title = bd.name.toUpperCase();
-    priceStr = storePriceOf("bundle_" + bd.id, bd.price);
+    const bid = bd.id.startsWith("bundle_") ? bd.id : "bundle_" + bd.id;
+    priceStr = storePriceOf(bid, bd.price);
     const sk = skinDef(bd.skin), skinOwned = G.ownedSkins.indexOf(bd.skin) >= 0;
     linesHtml = '<div class="mock-line"><img src="' + skinUrl(bd.skin) + '" alt="">' + sk.name + ' hand skin<span class="ml-amt">' + (skinOwned ? 'OWNED' : 'INCLUDED') + '</span></div>' +
       '<div class="mock-line">' + COIN_SVG + ' Coins<span class="ml-amt">+' + fmtNum(bd.coins) + '</span></div>' +
@@ -1032,18 +1048,21 @@ function openStoreCheckoutModal(item) {
     const pk = item.pack || (CONFIG.gemPacks || []).find(x => x.id === item.id);
     if (!pk) return;
     title = pk.name.toUpperCase();
-    priceStr = storePriceOf("gem_" + pk.id, pk.price);
+    const gid = pk.id.startsWith("gem_") ? pk.id : "gem_" + pk.id;
+    priceStr = storePriceOf(gid, pk.price);
     const total = pk.gems + (pk.bonusGems || 0);
     linesHtml = '<div class="mock-line">' + GEM_SVG + ' Base Diamonds<span class="ml-amt">' + fmtNum(pk.gems) + '</span></div>' +
       (pk.bonusGems > 0 ? '<div class="mock-line bonus-line">💎 Free Bonus Gems<span class="ml-amt">+' + fmtNum(pk.bonusGems) + '</span></div>' : '') +
       '<div class="mock-line total-gem-line"><span>💎 Total Granted</span><span class="ml-amt">+' + fmtNum(total) + ' GEMS</span></div>';
   } else if (item.kind === "feature") {
     const ft = item.data || item;
-    if (ft.id === "vip" && G.vipUnlocked) return;
-    if (ft.id === "frenzy_boost" && G.frenzyBoostUnlocked) return;
-    if (ft.id === "remove_ads" && G.adsRemoved) return;
+    const rawFid = (ft.id || "").replace(/^feature_/, "");
+    if (rawFid === "vip" && G.vipUnlocked) return;
+    if (rawFid === "frenzy_boost" && G.frenzyBoostUnlocked) return;
+    if (rawFid === "remove_ads" && G.adsRemoved) return;
     title = ft.name.toUpperCase();
-    priceStr = storePriceOf("feature_" + ft.id, ft.price);
+    const fid = ft.id.startsWith("feature_") ? ft.id : "feature_" + ft.id;
+    priceStr = storePriceOf(fid, ft.price);
     linesHtml = '<div class="mock-line">⭐ Lifetime Upgrade<span class="ml-amt">PERMANENT</span></div>' +
       '<div class="mock-line-power">' + ft.desc + '</div>';
   }
@@ -1101,15 +1120,20 @@ function grantStorePurchaseReward(item, txId) {
     rewardSummary = "💎 +" + fmtNum(totalGems) + " Gems added to your Vault!";
   } else if (item.kind === "feature") {
     const ft = item.data || item;
-    if (ft.id === "vip") G.vipUnlocked = true;
-    if (ft.id === "remove_ads") { G.adsRemoved = true; Ads.refreshBanner(); }
-    if (ft.id === "frenzy_boost") G.frenzyBoostUnlocked = true;
+    const rawFid = (ft.id || "").replace(/^feature_/, "");
+    if (rawFid === "vip") G.vipUnlocked = true;
+    if (rawFid === "remove_ads") { G.adsRemoved = true; Ads.refreshBanner(); }
+    if (rawFid === "frenzy_boost") G.frenzyBoostUnlocked = true;
     Sound.levelup();
-    rewardSummary = "⭐ " + ft.name + " activated permanently!";
+    rewardSummary = "⭐ " + (ft.name || "Perk") + " activated permanently!";
   }
 
   // Record transaction in ledger
-  const productId = item.productId || (item.kind + "_" + (item.bundle?.id || item.pack?.id || item.data?.id || item.id));
+  let productId = item.productId || (item.kind + "_" + (item.bundle?.id || item.pack?.id || item.data?.id || item.id));
+  productId = String(productId)
+    .replace(/^gem_gem_/, "gem_")
+    .replace(/^bundle_bundle_/, "bundle_")
+    .replace(/^feature_feature_/, "feature_");
   G.purchases.push({
     productId,
     txId: txId || ("rc-" + Date.now().toString(36) + "-" + Math.floor(Math.random() * 1e6).toString(36)),

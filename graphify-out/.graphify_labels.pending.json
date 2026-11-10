@@ -4,12 +4,13 @@
   "2": "initGameEngine",
   "3": "config.js",
   "4": "ref_fs",
-  "5": "renderAttrs",
+  "5": "applyHit",
   "6": "fmtNum",
   "7": "claimChest",
-  "8": "dailyAdd",
+  "8": "renderWorlds",
   "9": "MathPixelCanvas",
   "10": "atkRefDps",
+  "11": "tickBossSpecial",
   "12": "dependencies",
   "13": "renderSkills",
   "14": "nativeBridge.js",
@@ -17,7 +18,6 @@
   "16": "MainActivity.java",
   "17": "castSpecial",
   "18": "GameAudio",
-  "19": ".unlock",
   "20": ".oxlintrc.json",
   "21": "gradlew",
   "22": "scripts",
@@ -28,7 +28,6 @@
   "27": "settings.gradle",
   "28": "variables.gradle",
   "29": "generate_android_icons.cjs",
-  "31": "applyHit",
-  "33": "wireSelectCards",
-  "34": "switchTab"
+  "31": "update",
+  "33": "switchTab"
 }

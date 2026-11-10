@@ -3,7 +3,7 @@ import { App } from '@capacitor/app';
 import { StatusBar, Style } from '@capacitor/status-bar';
 import { SplashScreen } from '@capacitor/splash-screen';
 import { AdMob, RewardAdPluginEvents, InterstitialAdPluginEvents } from '@capacitor-community/admob';
-import { Purchases } from '@revenuecat/purchases-capacitor';
+import { Purchases, PRODUCT_CATEGORY, LOG_LEVEL } from '@revenuecat/purchases-capacitor';
 import { CONFIG } from '../game/config.js';
 
 // Google AdMob Rewarded Ad Unit ID
@@ -264,9 +264,14 @@ export const NativeBridge = {
       return;
     }
     try {
+      try {
+        await Purchases.setLogLevel({ level: LOG_LEVEL.DEBUG });
+      } catch (logErr) {
+        console.warn('[RevenueCat] Could not set log level:', logErr);
+      }
       await Purchases.configure({ apiKey: revenueCatApiKey });
       this.purchasesInitialized = true;
-      console.log('[RevenueCat] Google Play Purchases bridge initialized via RevenueCat.');
+      console.log('[RevenueCat] Google Play Purchases bridge initialized via RevenueCat with DEBUG logging.');
       await this.loadProducts();
     } catch (e) {
       console.warn('[RevenueCat] Failed to initialize Google Play Purchases:', e);
@@ -281,16 +286,43 @@ export const NativeBridge = {
         'gem_pouch', 'gem_sack', 'gem_chest', 'gem_vault', 'gem_treasury', 'gem_mountain',
         'feature_offline', 'feature_vip', 'feature_remove_ads', 'feature_frenzy_boost'
       ]);
-      const { products } = await Purchases.getProducts({ productIdentifiers: ids });
-      if (products && products.length > 0) {
-        for (const p of products) {
-          this.productsMap[p.identifier] = p;
+
+      // 1. Fetch In-App Products (NON_SUBSCRIPTION is required for Android Google Play one-time purchases)
+      try {
+        const { products } = await Purchases.getProducts({
+          productIdentifiers: ids,
+          type: PRODUCT_CATEGORY.NON_SUBSCRIPTION
+        });
+        if (products && products.length > 0) {
+          for (const p of products) {
+            this.productsMap[p.identifier] = p;
+          }
+          console.log(`[RevenueCat] Preloaded ${products.length} non-subscription products from Google Play:`, products.map(p => p.identifier));
         }
-        console.log(`[RevenueCat] Preloaded ${products.length} products from Google Play.`);
-        if (typeof window !== 'undefined' && window.__th && typeof window.__th.renderShop === 'function') {
-          window.__th.renderShop();
-        }
+      } catch (errNonSub) {
+        console.warn('[RevenueCat] getProducts(NON_SUBSCRIPTION) error:', errNonSub);
       }
+
+      // 2. Fetch Offerings as fallback / supplement
+      try {
+        const offerings = await Purchases.getOfferings();
+        if (offerings && offerings.current && offerings.current.availablePackages) {
+          for (const pkg of offerings.current.availablePackages) {
+            if (pkg.product) {
+              this.productsMap[pkg.product.identifier] = pkg.product;
+              this.productsMap[pkg.identifier] = pkg.product;
+            }
+          }
+          console.log(`[RevenueCat] Offerings loaded. Total products mapped: ${Object.keys(this.productsMap).length}`);
+        }
+      } catch (offErr) {
+        console.warn('[RevenueCat] getOfferings fallback error:', offErr);
+      }
+
+      if (typeof window !== 'undefined' && window.__th && typeof window.__th.renderShop === 'function') {
+        window.__th.renderShop();
+      }
+
       return this.productsMap;
     } catch (err) {
       console.warn('[RevenueCat] Failed to load store products:', err);
@@ -303,28 +335,73 @@ export const NativeBridge = {
       return { success: false, reason: 'not_native' };
     }
     try {
-      let product = this.productsMap[productIdentifier];
+      // Normalize productId (e.g. handle duplicate prefixes like gem_gem_pouch -> gem_pouch)
+      const cleanId = productIdentifier.replace(/^gem_gem_/, 'gem_')
+                                       .replace(/^bundle_bundle_/, 'bundle_')
+                                       .replace(/^feature_feature_/, 'feature_');
+
+      let product = this.productsMap[cleanId] || this.productsMap[productIdentifier];
+
+      // If not yet cached, attempt to fetch directly with NON_SUBSCRIPTION type
       if (!product) {
-        const { products } = await Purchases.getProducts({ productIdentifiers: [productIdentifier] });
-        if (products && products.length > 0) {
-          product = products.find(p => p.identifier === productIdentifier) || products[0];
-          this.productsMap[productIdentifier] = product;
+        console.log(`[RevenueCat] Product ${cleanId} not cached, fetching from Google Play...`);
+        try {
+          const { products } = await Purchases.getProducts({
+            productIdentifiers: [cleanId, productIdentifier],
+            type: PRODUCT_CATEGORY.NON_SUBSCRIPTION
+          });
+          if (products && products.length > 0) {
+            product = products.find(p => p.identifier === cleanId || p.identifier === productIdentifier) || products[0];
+            this.productsMap[cleanId] = product;
+            this.productsMap[productIdentifier] = product;
+          }
+        } catch (fetchErr) {
+          console.warn(`[RevenueCat] Failed fetching product ${cleanId}:`, fetchErr);
         }
       }
+
+      // Check offerings fallback if product still not directly found
       if (!product) {
-        return { success: false, error: new Error('Product (' + productIdentifier + ') not found in Google Play') };
+        try {
+          const offerings = await Purchases.getOfferings();
+          if (offerings && offerings.current && offerings.current.availablePackages) {
+            const pkg = offerings.current.availablePackages.find(p =>
+              p.product?.identifier === cleanId || p.product?.identifier === productIdentifier || p.identifier === cleanId
+            );
+            if (pkg) {
+              console.log(`[RevenueCat] Purchasing via Offerings package: ${pkg.identifier}`);
+              const purchaseResult = await Purchases.purchasePackage({ aPackage: pkg });
+              return {
+                success: true,
+                customerInfo: purchaseResult.customerInfo,
+                transaction: purchaseResult.transaction,
+                productIdentifier: cleanId
+              };
+            }
+          }
+        } catch (offErr) {
+          console.warn('[RevenueCat] Offerings purchase fallback check failed:', offErr);
+        }
       }
+
+      if (!product) {
+        console.error(`[RevenueCat] Product (${cleanId}) could not be resolved from Google Play.`);
+        return { success: false, error: new Error('Product (' + cleanId + ') not found in Google Play') };
+      }
+
+      console.log(`[RevenueCat] Launching purchaseStoreProduct for: ${product.identifier}`);
       const purchaseResult = await Purchases.purchaseStoreProduct({ product });
       return {
         success: true,
         customerInfo: purchaseResult.customerInfo,
         transaction: purchaseResult.transaction,
-        productIdentifier: purchaseResult.productIdentifier || productIdentifier
+        productIdentifier: purchaseResult.productIdentifier || product.identifier || cleanId
       };
     } catch (err) {
       if (err.userCancelled || err.code === 1 || (err.message && err.message.toLowerCase().includes('cancel'))) {
         return { success: false, cancelled: true };
       }
+      console.error('[RevenueCat] Purchase execution error:', err);
       return { success: false, error: err };
     }
   },
