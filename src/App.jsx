@@ -471,7 +471,7 @@ export default function App() {
           <div className="help-card"><div className="help-h">3 · CLIMB THE ROSTER</div><p>Beat an enemy to unlock the next — 50 of them, in 10 groups, with a boss every 10th. Clearing an odd-numbered group (1, 3, 5, …) opens its <b>TRIO GAUNTLET</b> — the group's 3 toughest back-to-back, your HP carrying over — and beating it is <b>required</b> to unlock the next group. Even-numbered groups end in a boss instead — no trio needed there. Bosses enrage under 30% HP. Beaten enemies can be re-fought any time for coins, and every defeated enemy unlocks a <b>HARD</b> rematch on the Levels screen (red button): far tougher, pays 2.5× coins and a one-time gem.</p></div>
           <div className="help-card"><div className="help-h">4 · EVERY DAY COUNTS</div><p>Defeat the <b>Grumpy Teddy (#5)</b> to unlock the <b>daily chest</b> — a 7-day login streak that pays coins every day and gems on day 7, with amounts that grow with your progress. Defeat the <b>Mischievous Monkey (#10)</b> to unlock <b>daily quests</b>. Check <b>Awards</b> for lifetime stats and achievements (every achievement pays gems), and spend gems in the <b>Shop</b> on hand skins, coin packs and the Offline Earnings unlock.</p></div>
           <div className="help-card"><div className="help-h">5 · WATCH THE COUNTDOWN</div><p>Enemies hit back on the timer under their HP bar. Your HP refills every fight, and levelling up is also defence. If you're walled, the answer is almost always: farm the best enemy you can beat, buy what's cheapest for damage, and come back.</p></div>
-          <div className="help-card"><div className="help-h">6 · SPECIAL SKILLS</div><p>Bosses drop <b>special skills</b>: the Mischievous Monkey (#10) grants <b>Double Slap</b> — both hands at once — and Shogun (#30) grants <b>Meteor Strike</b>. Fire them from the specials rail in battle, and upgrade them to Lv5 inside the <b>Skills</b> tab. Equipped hand skins also grant small bonuses — check the Shop cards.</p></div>
+          <div className="help-card"><div className="help-h">6 · SPECIAL SKILLS</div><p>Bosses drop <b>special skills</b>: the Mischievous Monkey (#10) grants <b>Double Slap</b> — both hands at once — and Shogun (#30) grants <b>Uppercut Punch</b>. Fire them from the specials rail in battle, and upgrade them to Lv5 inside the <b>Skills</b> tab. Equipped hand skins also grant small bonuses — check the Shop cards.</p></div>
         </div>
       </section>
 
@@ -584,6 +584,7 @@ export default function App() {
           <div className="end-unlock" id="endUnlock"></div>
           <div className="end-stats" id="endStats"></div>
           <div className="end-tip" id="endTip"></div>
+          <div id="endHardHint" className="end-hard-hint" style={{'display': 'none'}}></div>
           <div id="endAdDoubleWrap" className="end-ad-double-wrap">
             <button className="end-ad-double-btn" id="endAdDoubleBtn" type="button">
               <span className="ead-icon">🎬</span>

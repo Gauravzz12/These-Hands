@@ -8,29 +8,32 @@ export const CONFIG = {
   },
   "capPerLevel": 3,
   "levelUp": {
-    "base": 300,
-    "growth": 1.8612,
-    "rampStart": 5,
-    "midGrowth": 1.55,
-    "midStart": 20,
-    "lateGrowth": 1.30,
-    "grindStart": 40,
-    "endGrowth": 1.30
+    "base": 60,
+    "growth": 1.85,
+    "rampStart": 9,
+    "midGrowth": 1.48,
+    "midStart": 25,
+    "lateGrowth": 1.28,
+    "grindStart": 45,
+    "endGrowth": 1.22,
+    "worldStart": 50,
+    "worldGrowth": 1.18,
+    "worldCap": 80
   },
-  "levelCap": 50,
+  "levelCap": 80,
   "attrs": {
-    "power": { "name": "Power", "baseCost": 60, "growth": 1.16, "lateGrowth": 1.40, "maxLevel": 50 },
-    "speed": { "name": "Speed", "baseCost": 70, "growth": 1.16, "lateGrowth": 1.51, "maxLevel": 40 },
-    "critChance": { "name": "Crit Chance", "baseCost": 90, "growth": 1.18, "lateGrowth": 1.58, "maxLevel": 35 },
-    "critDamage": { "name": "Crit Damage", "baseCost": 70, "growth": 1.16, "lateGrowth": 1.51, "maxLevel": 40 },
-    "defense": { "name": "Defense", "baseCost": 70, "growth": 1.16, "lateGrowth": 1.51, "maxLevel": 40 },
-    "stun": { "name": "Stun", "baseCost": 110, "growth": 1.2, "lateGrowth": 1.69, "maxLevel": 30 },
-    "combo": { "name": "Combo", "baseCost": 70, "growth": 1.16, "lateGrowth": 1.51, "maxLevel": 40 },
-    "coinMult": { "name": "Coin Mult.", "baseCost": 70, "growth": 1.16, "lateGrowth": 1.51, "maxLevel": 40 },
-    "accuracy": { "name": "Accuracy", "baseCost": 200, "growth": 1.3, "lateGrowth": 3.9, "maxLevel": 14 },
-    "bossDamage": { "name": "Boss Hunter", "baseCost": 70, "growth": 1.16, "lateGrowth": 1.51, "maxLevel": 40 },
-    "vampirism": { "name": "Life Leech", "baseCost": 90, "growth": 1.18, "lateGrowth": 1.58, "maxLevel": 35 },
-    "luck": { "name": "Fortune Luck", "baseCost": 110, "growth": 1.2, "lateGrowth": 1.69, "maxLevel": 30 }
+    "power": { "name": "Power", "baseCost": 35, "maxCost": 25000000, "growth": 1.16, "lateGrowth": 1.40, "maxLevel": 80 },
+    "speed": { "name": "Speed", "baseCost": 70, "maxCost": 38000000, "growth": 1.16, "lateGrowth": 1.51, "maxLevel": 40 },
+    "critChance": { "name": "Crit Chance", "baseCost": 65, "maxCost": 35000000, "growth": 1.18, "lateGrowth": 1.58, "maxLevel": 55 },
+    "critDamage": { "name": "Crit Damage", "baseCost": 55, "maxCost": 32000000, "growth": 1.16, "lateGrowth": 1.51, "maxLevel": 65 },
+    "defense": { "name": "Defense", "baseCost": 140, "maxCost": 55000000, "growth": 1.16, "lateGrowth": 1.51, "maxLevel": 40 },
+    "stun": { "name": "Stun", "baseCost": 85, "maxCost": 40000000, "growth": 1.2, "lateGrowth": 1.69, "maxLevel": 50 },
+    "combo": { "name": "Combo", "baseCost": 45, "maxCost": 28000000, "growth": 1.16, "lateGrowth": 1.51, "maxLevel": 65 },
+    "coinMult": { "name": "Coin Mult.", "baseCost": 45, "maxCost": 30000000, "growth": 1.16, "lateGrowth": 1.51, "maxLevel": 65 },
+    "accuracy": { "name": "Accuracy", "baseCost": 55, "maxCost": 12000000, "growth": 1.3, "lateGrowth": 3.9, "maxLevel": 14 },
+    "bossDamage": { "name": "Boss Hunter", "baseCost": 140, "maxCost": 55000000, "growth": 1.16, "lateGrowth": 1.51, "maxLevel": 40 },
+    "vampirism": { "name": "Life Leech", "baseCost": 250, "maxCost": 95000000, "growth": 1.18, "lateGrowth": 1.58, "maxLevel": 40 },
+    "luck": { "name": "Fortune Luck", "baseCost": 90, "maxCost": 42000000, "growth": 1.2, "lateGrowth": 1.69, "maxLevel": 50 }
   },
   "attrOrder": [
     "power",
@@ -48,83 +51,88 @@ export const CONFIG = {
   ],
   "fx": {
     "skillCostMult": 1.0,
-    "speedPerLevel": 0.9813,
-    "speedFloor": 0.7,
+    "speedPerLevel": 0.98114,
+    "speedFloor": 0.70,
     "critChancePerLevel": 0.01,
-    "critDamagePerLevel": 0.08,
-    "comboPerStackPerLevel": 0.008,
+    "critChanceCap": 0.75,
+    "critDamagePerLevel": 0.10,
+    "comboPerStackPerLevel": 0.01,
     "comboBaseStacks": 4,
-    "coinPerLevel": 0.04,
+    "coinPerLevel": 0.05,
     "accuracyBase": 0.85,
     "accuracyPerLevel": 0.01,
     "powerGrowth": 1.155,
     "accuracyCap": 0.99,
-    "bossDmgPerLevel": 0.008,
-    "luckPerLevel": 0.00333,
+    "bossDmgPerLevel": 0.005,
+    "bossDmgCap": 0.20,
+    "luckPerLevel": 0.005,
+    "luckChanceCap": 0.25,
     "luckDmgMult": 1.5,
-      "strikeCoinMult": 0.3,
-      "killBountyMult": 1.5,
-      "slapBaseFrac": 0.02,
-      "slapDmgBonusScale": 5,
-      "slapDmgBonusCap": 1,
-      "slapFightCapFrac": 0.30,
-    "slapTaperFrac": 0.2,
+    "strikeCoinMult": 0.32,
+    "killBountyMult": 1.65,
+    "critCoinMult": 0.50,
+    "slapBaseFrac": 0.04,
+    "slapDmgBonusScale": 5,
+    "slapDmgBonusCap": 1,
+    "slapFightCapFrac": 0.70,
+    "slapTaperFrac": 0.25,
     "stunCooldownSec": 4,
-      "slapEarlyMult": 3,
-      "slapEarlyCapFrac": 1.5,
-      "slapCritPayFrac": 0.5,
+    "slapEarlyMult": 3,
+    "slapEarlyCapFrac": 1.5,
+    "slapCritPayFrac": 0.5,
     "luckCoinMult": 3,
-    "vampPerLevel": 0.334,
+    "vampPerLevel": 1.0,
     "speedCostLateMult": 3,
     "speedCostLatePow": 6,
     "specialPerLevel": 0.005,
     "stunChanceBase": 0.05,
-    "stunChancePerLevel": 0.00556,
-    "stunChanceCap": 0.15,
+    "stunChancePerLevel": 0.005,
+    "stunChanceCap": 0.25,
     "stunDurBase": 0.5,
     "stunDurPerLevel": 0.02,
     "stunDurCap": 1.4,
     "defensePerLevel": 0.01,
-    "defenseCap": 0.50
+    "defenseCap": 0.40
   },
   "enemyProgression": {
     "hp": {
       "base0": 65,
-      "early": [65, 95, 140, 210, 350, 520, 780, 1300, 1950, 3500],
-      "base10": 4600,
-      "growth": 1.365,
+      "early": [65, 95, 140, 210, 360, 420, 580, 780, 1050, 2500],
+      "base10": 4000,
+      "growth": 1.30,
       "tailStart": 49,
       "tailGrowth": 1.10,
       "bossMult": 2.50,
       "eliteMult": 1.40
     },
     "damage": {
-      "earlyDmg": [8, 13, 13, 18, 20, 30, 38, 50, 58, 76],
-      "base10": 95,
-      "growth": 1.135,
+      "earlyDmg": [8, 12, 15, 20, 26, 24, 28, 34, 40, 48],
+      "base10": 100,
+      "growth": 1.12,
       "tailStart": 49,
       "tailGrowth": 1.04,
-      "bossMult": 1.65,
-      "eliteMult": 1.25
+      "bossMult": 1.80,
+      "eliteMult": 1.30
     },
     "interval": {
-      "base": 2.8,
-      "decay": 0.992,
-      "floor": 1.60,
+      "early": [2.40, 2.35, 2.30, 2.25, 2.05, 2.20, 2.15, 2.10, 2.05, 1.95],
+      "base": 2.4,
+      "decay": 0.988,
+      "floor": 1.40,
       "bossMult": 0.95,
-      "bossFloor": 1.60,
-      "miniBossMult": 0.96
+      "bossFloor": 1.40,
+      "miniBossMult": 0.95
     },
     "bounty": {
-      "earlyRate": 0.45,
-      "baseRate": 0.45,
-      "rateDecay": 0.992,
-      "minRate": 0.28,
-      "minBounty": 25,
-      "scale": 0.35,
-      "bossBonusMult": 1.50,
-      "normalKillBonusMult": 0.25,
-      "hardKillBonusMult": 1.0
+      "earlyRate": 0.50,
+      "baseRate": 0.50,
+      "rateDecay": 0.994,
+      "minRate": 0.33,
+      "minBounty": 30,
+      "scale": 0.40,
+      "bossBonusMult": 1.75,
+      "normalKillBonusMult": 0.30,
+      "hardKillBonusMult": 1.25
     }
   },
   "enemyScale": {
@@ -159,11 +167,12 @@ export const CONFIG = {
     ]
   },
   "hard": {
-    "hpMult": 4.5,
-    "atkMult": 1.45,
-    "intervalMult": 0.90,
-    "coinMult": 4.0,
-    "gemReward": 3
+    "hpMult": 4.0,
+    "atkMult": 1.35,
+    "intervalMult": 0.88,
+    "coinMult": 5.5,
+    "gemReward": 5,
+    "emberBonus": 1.5
   },
   "playerHp": {
     "base": 100,
@@ -217,7 +226,7 @@ export const CONFIG = {
       "id": "strongerHands",
       "name": "Stronger Hands",
       "tier": 1,
-      "cost": 5000,
+      "cost": 1200,
       "prereq": "basic",
       "fx": "+20% damage on every slap."
     },
@@ -225,7 +234,7 @@ export const CONFIG = {
       "id": "staminaTraining",
       "name": "Stamina Training",
       "tier": 1,
-      "cost": 1500,
+      "cost": 350,
       "prereq": "basic",
       "fx": "+50 max HP."
     },
@@ -233,7 +242,7 @@ export const CONFIG = {
       "id": "secondHand",
       "name": "Second Hand",
       "tier": 1,
-      "cost": 25000,
+      "cost": 10000,
       "prereq": "basic",
       "reqBoss": 9,
       "fx": "Alternates L / R hands, doubling your cycle rate."
@@ -242,7 +251,7 @@ export const CONFIG = {
       "id": "onTarget",
       "name": "On Target",
       "tier": 2,
-      "cost": 50000,
+      "cost": 40000,
       "prereq": "secondHand",
       "fx": "Combo stacks survive switching enemies (resets on loss)."
     },
@@ -250,7 +259,7 @@ export const CONFIG = {
       "id": "quickReflexes",
       "name": "Quick Reflexes",
       "tier": 2,
-      "cost": 85000,
+      "cost": 70000,
       "prereq": "secondHand",
       "fx": "+10% attack speed."
     },
@@ -258,7 +267,7 @@ export const CONFIG = {
       "id": "criticalSlaps",
       "name": "Critical Slaps",
       "tier": 2,
-      "cost": 150000,
+      "cost": 120000,
       "prereq": "strongerHands",
       "fx": "+5% crit chance."
     },
@@ -266,7 +275,7 @@ export const CONFIG = {
       "id": "thunderclap",
       "name": "Seismic Slam",
       "tier": 2,
-      "cost": 300000,
+      "cost": 250000,
       "prereq": "staminaTraining",
       "reqBoss": 4,
       "fx": "Every 8th slap lands a devastating SEISMIC SLAM dealing 4x damage and dazing the enemy for 1s!"
@@ -275,7 +284,7 @@ export const CONFIG = {
       "id": "heavySlap",
       "name": "Heavy Slap",
       "tier": 2,
-      "cost": 500000,
+      "cost": 400000,
       "prereq": "strongerHands",
       "fx": "12% chance a slap lands HEAVY for 3x damage."
     },
@@ -283,7 +292,7 @@ export const CONFIG = {
       "id": "precisionInstinct",
       "name": "Precision Instinct",
       "tier": 2,
-      "cost": 800000,
+      "cost": 650000,
       "prereq": "strongerHands",
       "fx": "Unlocks PRECISION strikes: a gold weak spot flashes on the enemy mid-fight — tap it for a devastating 8.5x critical strike! Fortune Luck makes it appear more often. Max 3 per fight (+1 per 5 Luck, max 6)."
     },
@@ -291,7 +300,7 @@ export const CONFIG = {
       "id": "deflect",
       "name": "Deflect",
       "tier": 2,
-      "cost": 150000,
+      "cost": 100000,
       "prereq": "basic",
       "fx": "Boss normal attacks spawn a parry ring at a random spot — tap it exactly as the ring closes into the gold circle to deflect the blow completely. Random spot every time; boss specials cannot be deflected."
     },
@@ -299,7 +308,7 @@ export const CONFIG = {
       "id": "comboMastery",
       "name": "Combo Mastery",
       "tier": 3,
-      "cost": 1500000,
+      "cost": 1200000,
       "prereq": "onTarget",
       "fx": "Combo cap +5 stacks and +0.5% damage per stack."
     },
@@ -307,7 +316,7 @@ export const CONFIG = {
       "id": "dizzyPunisher",
       "name": "Opportunist",
       "tier": 3,
-      "cost": 3000000,
+      "cost": 2500000,
       "prereq": "quickReflexes",
       "fx": "Slaps deal +35% damage to Stunned enemies."
     },
@@ -315,7 +324,7 @@ export const CONFIG = {
       "id": "clutchSurge",
       "name": "Adrenaline Rush",
       "tier": 3,
-      "cost": 6000000,
+      "cost": 5000000,
       "prereq": "thunderclap",
       "fx": "Below 35% HP: gain +20% attack speed and +25% damage."
     },
@@ -323,7 +332,7 @@ export const CONFIG = {
       "id": "coinMagnet",
       "name": "Coin Magnet",
       "tier": 3,
-      "cost": 10000000,
+      "cost": 8000000,
       "prereq": "criticalSlaps",
       "fx": "+20% coins from every KO."
     },
@@ -331,7 +340,7 @@ export const CONFIG = {
       "id": "bossHunter",
       "name": "Boss Hunter",
       "tier": 3,
-      "cost": 18000000,
+      "cost": 15000000,
       "prereq": "heavySlap",
       "reqBoss": 19,
       "fx": "+25% damage vs group elites and bosses."
@@ -340,7 +349,7 @@ export const CONFIG = {
       "id": "echoStrike",
       "name": "Acoustic Echo",
       "tier": 4,
-      "cost": 30000000,
+      "cost": 25000000,
       "prereq": "comboMastery",
       "fx": "Critical slaps have a 25% chance to echo for 160% bonus damage."
     },
@@ -348,7 +357,7 @@ export const CONFIG = {
       "id": "dualHand",
       "name": "Dual-Hand Technique",
       "tier": 4,
-      "cost": 50000000,
+      "cost": 40000000,
       "prereq": "dizzyPunisher",
       "fx": "+15% attack speed — both hands blur."
     },
@@ -356,7 +365,7 @@ export const CONFIG = {
       "id": "unstoppable",
       "name": "Unstoppable Hands",
       "tier": 4,
-      "cost": 75000000,
+      "cost": 60000000,
       "prereq": "clutchSurge",
       "fx": "+100 max HP and regenerate 2 HP/s during fights."
     },
@@ -364,7 +373,7 @@ export const CONFIG = {
       "id": "kineticShield",
       "name": "Kinetic Barrier",
       "tier": 4,
-      "cost": 110000000,
+      "cost": 90000000,
       "prereq": "clutchSurge",
       "reqBoss": 29,
       "fx": "Every 20 slaps builds a shield absorbing 30 enemy damage (max 90)."
@@ -373,7 +382,7 @@ export const CONFIG = {
       "id": "goldenTouch",
       "name": "Treasure Hunter",
       "tier": 4,
-      "cost": 160000000,
+      "cost": 120000000,
       "prereq": "coinMagnet",
       "fx": "Elites and Bosses drop +50% bonus coins, and defeat grants +1 extra Gem."
     },
@@ -381,7 +390,7 @@ export const CONFIG = {
       "id": "frenzy",
       "name": "Frenzy",
       "tier": 4,
-      "cost": 220000000,
+      "cost": 180000000,
       "prereq": "bossHunter",
       "fx": "Slaps charge FRENZY: 10s of +50% damage and +30% speed."
     },
@@ -389,7 +398,7 @@ export const CONFIG = {
       "id": "titanSlayer",
       "name": "Colossus Bane",
       "tier": 4,
-      "cost": 300000000,
+      "cost": 240000000,
       "prereq": "bossHunter",
       "reqBoss": 39,
       "fx": "+35% damage vs Giant, Titan, and Dragon enemies."
@@ -398,7 +407,7 @@ export const CONFIG = {
       "id": "rapidBarrage",
       "name": "Rapid Barrage",
       "tier": 5,
-      "cost": 420000000,
+      "cost": 350000000,
       "prereq": "dualHand",
       "fx": "Every 10th slap unleashes a barrage: 3 extra hits at 50% damage."
     },
@@ -406,7 +415,7 @@ export const CONFIG = {
       "id": "aegisBulwark",
       "name": "Aegis Retaliation",
       "tier": 5,
-      "cost": 600000000,
+      "cost": 480000000,
       "prereq": "kineticShield",
       "fx": "When Defense or Barrier mitigates damage, 50% of the blocked damage is reflected back."
     },
@@ -414,7 +423,7 @@ export const CONFIG = {
       "id": "ultimateSlap",
       "name": "Ultimate Slap",
       "tier": 5,
-      "cost": 850000000,
+      "cost": 700000000,
       "prereq": "titanSlayer",
       "reqBoss": 39,
       "fx": "Every 15s of combat, your next slap is an ULTIMATE: 10x damage."
@@ -850,16 +859,16 @@ export const CONFIG = {
       "desc": "Summons a protective Aegis Barrier that negates up to 80% incoming damage."
     },
     {
-      "id": "meteor",
-      "name": "Meteor Strike",
+      "id": "uppercut",
+      "name": "Uppercut Punch",
       "boss": 39,
-      "mult": 16,
-      "multMax": 28,
-      "cd": 35,
-      "cdMax": 23,
+      "mult": 18,
+      "multMax": 32,
+      "cd": 32,
+      "cdMax": 20,
       "kind": "instant",
-      "stun": 2.5,
-      "desc": "A meteor crashes down — huge damage, and the enemy's attack is stunned."
+      "stun": 3.0,
+      "desc": "A ferocious rising uppercut that deals massive damage and knocks the enemy dizzy!"
     }
   ],
   "coinPacks": [
@@ -1263,26 +1272,33 @@ export const GROUPS = [
 // Centralized formula calculators driven entirely by CONFIG
 export function calcLevelUpCost(currentLevel) {
   const lv = currentLevel != null ? currentLevel : 1;
-  if (CONFIG.levelCap && lv >= CONFIG.levelCap) return Infinity;
   const c = CONFIG.levelUp;
+  const cap = c.worldCap || CONFIG.levelCap || 80;
+  if (lv >= cap) return Infinity;
   const base = c.base || 60;
   if (lv === 1) return base;
-  if (lv <= (c.rampStart || 10)) return Math.round(base * Math.pow(c.growth || 1.38, lv - 1));
-  const costRamp = Math.round(base * Math.pow(c.growth || 1.38, (c.rampStart || 10) - 1));
-  const midStart = c.midStart || 30;
+  if (lv <= (c.rampStart || 9)) return Math.round(base * Math.pow(c.growth || 1.85, lv - 1));
+  const costRamp = Math.round(base * Math.pow(c.growth || 1.85, (c.rampStart || 9) - 1));
+  const midStart = c.midStart || 25;
   if (lv <= midStart) {
-    const extra = lv - (c.rampStart || 10);
-    return Math.round(costRamp * Math.pow(c.midGrowth || 1.24, extra));
+    const extra = lv - (c.rampStart || 9);
+    return Math.round(costRamp * Math.pow(c.midGrowth || 1.48, extra));
   }
-  const costMid = Math.round(costRamp * Math.pow(c.midGrowth || 1.24, midStart - (c.rampStart || 10)));
-  const grindStart = c.grindStart || 40;
+  const costMid = Math.round(costRamp * Math.pow(c.midGrowth || 1.48, midStart - (c.rampStart || 9)));
+  const grindStart = c.grindStart || 45;
   if (lv <= grindStart) {
     const extra = lv - midStart;
-    return Math.round(costMid * Math.pow(c.lateGrowth || 1.22, extra));
+    return Math.round(costMid * Math.pow(c.lateGrowth || 1.28, extra));
   }
-  const costGrind = Math.round(costMid * Math.pow(c.lateGrowth || 1.22, grindStart - midStart));
-  const extra = lv - grindStart;
-  return Math.round(costGrind * Math.pow(c.endGrowth || 1.20, extra));
+  const costGrind = Math.round(costMid * Math.pow(c.lateGrowth || 1.28, grindStart - midStart));
+  const worldStart = c.worldStart || 50;
+  if (lv <= worldStart) {
+    const extra = lv - grindStart;
+    return Math.round(costGrind * Math.pow(c.endGrowth || 1.22, extra));
+  }
+  const costWorld = Math.round(costGrind * Math.pow(c.endGrowth || 1.22, worldStart - grindStart));
+  const extraWorld = lv - worldStart;
+  return Math.round(costWorld * Math.pow(c.worldGrowth || 1.18, extraWorld));
 }
 
 export function calcAttrCost(key, currentLevel) {
@@ -1291,22 +1307,21 @@ export function calcAttrCost(key, currentLevel) {
   const N = def.maxLevel || 1;
   const lvl = currentLevel != null ? currentLevel : 0;
   if (lvl >= N) return Infinity;
-  // Band pricing (same magnitudes for every attribute, by fraction of its cap):
-  // first 10% of levels 1K->10K, next 30% 10K->100K, next 40% 100K->900K,
-  // last 20% 1M->25M (the tail keeps compounding). Geometric inside each band.
-  const BANDS = [[0.10, 1000, 10000], [0.40, 10000, 100000], [0.80, 100000, 900000], [1.00, 1000000, 25000000]];
-  const i = lvl + 1;
-  let prev = 0;
-  for (let b = 0; b < BANDS.length; b++) {
-    const end = b === BANDS.length - 1 ? N : Math.max(prev + 1, Math.round(BANDS[b][0] * N));
-    if (i <= end) {
-      const span = Math.max(1, end - prev - 1);
-      const t = Math.min(1, (i - prev - 1) / span);
-      return Math.round(BANDS[b][1] * Math.pow(BANDS[b][2] / BANDS[b][1], t));
-    }
-    prev = end;
+  const base = def.baseCost || 40;
+
+  // Early curve (levels 0-9, up to Monkey Boss):
+  // Smooth, accessible progression scaling from baseCost (40-75) up to ~3,000-5,000 coins
+  if (lvl < 10) {
+    return Math.round(base * Math.pow(1.62, lvl));
   }
-  return 25000000;
+
+  // Beyond Level 10 (post-Monkey Boss to Endgame):
+  // Progressive geometric scale from the Level 10 cost up to 35,000,000 at maxLevel N
+  const cost10 = Math.round(base * Math.pow(1.62, 9));
+  const remainingLevels = Math.max(1, N - 10);
+  const progress = (lvl - 9) / remainingLevels;
+  const maxCost = def.maxCost || 35000000;
+  return Math.round(cost10 * Math.pow(maxCost / cost10, Math.min(1, progress)));
 }
 
 export function calcAttrCap(playerLevel, dragonMastery = 0) {
@@ -1348,6 +1363,7 @@ export function calcEnemyDamage(i, isBoss = false, isElite = false) {
 
 export function calcEnemyInterval(i, isBoss = false, isMiniBoss = false) {
   const cfg = CONFIG.enemyProgression.interval;
+  if (i < 10 && cfg.early && cfg.early[i] != null) return cfg.early[i];
   let interval = Math.max(cfg.floor, cfg.base * Math.pow(cfg.decay, i));
   if (isBoss) interval = Math.max(cfg.bossFloor, interval * cfg.bossMult);
   else if (isMiniBoss) interval = Math.max(cfg.floor, interval * (cfg.miniBossMult || 0.95));

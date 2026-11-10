@@ -52,7 +52,7 @@ const HELP_CARDS = [
     title: 'SPECIAL SKILLS & SKINS',
     body: (
       <>
-        Bosses drop <b>special skills</b>: Double Slap (#10), Meteor (#30), Orbital Laser (#50), Pharaoh's Curse (#70), and <b>Zeus's Wrath (#90)</b>. Fire them in battle from the action rail and upgrade them up to Lv5 on the Specials screen. Equipped hand skins also grant passive perks!
+        Bosses drop <b>special skills</b>: Double Slap (#10), Uppercut Punch (#30), Orbital Laser (#50), Pharaoh's Curse (#70), and <b>Zeus's Wrath (#90)</b>. Fire them in battle from the action rail and upgrade them up to Lv5 on the Specials screen. Equipped hand skins also grant passive perks!
       </>
     ),
   },

@@ -4,7 +4,7 @@ import { HomeIcon, CoinIcon } from './Icons.jsx';
 
 const SPECIAL_DEFS = [
   { id: 'doubleSlap',  bossId: 9,  minLevel: 12,  name: 'Double Slap',     emoji: '👐', desc: 'Both hands at once — doubles damage for 3s.', baseCd: 25 },
-  { id: 'meteor',      bossId: 29, name: 'Meteor Strike',    emoji: '☄️', desc: 'A meteor crashes down — 800% damage to the enemy.', baseCd: 45 },
+  { id: 'uppercut',    bossId: 29, name: 'Uppercut Punch',    emoji: '🥊', desc: 'Ferocious rising punch — massive damage & knocks enemy dizzy.', baseCd: 32 },
   { id: 'orbitalLaser',bossId: 49, name: 'Orbital Laser',   emoji: '🔦', desc: 'Orbital beam fires — 1200% damage over 4s.', baseCd: 60 },
   { id: 'pharaohCurse',bossId: 69, name: "Pharaoh's Curse",  emoji: '𓂀', desc: 'Ancient curse — 600% damage + slows enemy 40% for 8s.', baseCd: 50 },
   { id: 'zeusWrath',   bossId: 89, name: "Zeus's Wrath",     emoji: '⚡', desc: 'Divine thunder — 2000% damage and stuns for 2s.', baseCd: 90 },
@@ -41,7 +41,7 @@ export default function SpecialsScreen() {
           const bossDefeated = save.defeatedEnemies[sp.bossId];
           const levelReqMet = !sp.minLevel || save.playerLevel >= sp.minLevel;
           const unlocked = bossDefeated && levelReqMet;
-          const owned = save.specials[sp.id];
+          const owned = save.specials[sp.id] || (sp.id === 'uppercut' ? save.specials.meteor : null);
           const level = owned?.level || 0;
           const maxed = level >= 5;
           const cost  = owned ? upgradeCost(level) : null;

@@ -1,0 +1,1443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>These Hands — Sprite Inspector & Issue Audit</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0b0f19;
+      --card-bg: rgba(20, 26, 43, 0.94);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --card-border-hover: rgba(255, 255, 255, 0.18);
+      --gold: #f59e0b;
+      --gold-glow: rgba(245, 158, 11, 0.35);
+      --red: #ef4444;
+      --green: #22c55e;
+      --purple: #a855f7;
+      --blue: #38bdf8;
+      --text: #f8fafc;
+      --text-sub: #94a3b8;
+      --text-dim: #64748b;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Nunito', system-ui, -apple-system, sans-serif;
+      padding: 24px 28px 80px;
+      min-height: 100vh;
+      background-image: 
+        radial-gradient(circle at 12% 15%, rgba(56, 189, 248, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 88% 85%, rgba(168, 85, 247, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 50% 50%, rgba(245, 158, 11, 0.03) 0%, transparent 60%);
+    }
+
+    header {
+      max-width: 1600px;
+      margin: 0 auto 24px;
+    }
+
+    .top-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+      border-bottom: 1px solid var(--card-border);
+      padding-bottom: 20px;
+      margin-bottom: 20px;
+    }
+
+    .logo-group h1 {
+      font-family: 'Bungee', cursive, sans-serif;
+      font-size: 2rem;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      letter-spacing: 1px;
+    }
+
+    .logo-group h1 span { color: var(--gold); }
+    .logo-group .tagline {
+      color: var(--text-sub);
+      font-size: 0.95rem;
+      font-weight: 700;
+      margin-top: 4px;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      background: #1e293b;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #fff;
+      padding: 9px 18px;
+      border-radius: 999px;
+      font-family: inherit;
+      font-size: 0.88rem;
+      font-weight: 800;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.18s ease;
+      text-decoration: none;
+      user-select: none;
+    }
+
+    .btn:hover {
+      background: #334155;
+      border-color: rgba(255, 255, 255, 0.25);
+      transform: translateY(-1px);
+    }
+
+    .btn.btn-gold {
+      background: linear-gradient(135deg, #f59e0b, #d97706);
+      color: #0b0f19;
+      border-color: #f59e0b;
+    }
+    .btn.btn-gold:hover {
+      box-shadow: 0 0 16px var(--gold-glow);
+    }
+
+    .btn.btn-danger {
+      background: rgba(239, 68, 68, 0.15);
+      border-color: rgba(239, 68, 68, 0.4);
+      color: #fca5a5;
+    }
+    .btn.btn-danger:hover {
+      background: rgba(239, 68, 68, 0.3);
+      color: #fff;
+    }
+
+    /* Controls Panel */
+    .controls-panel {
+      background: rgba(15, 23, 42, 0.82);
+      border: 1px solid var(--card-border);
+      border-radius: 18px;
+      padding: 16px 20px;
+      margin-bottom: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
+      backdrop-filter: blur(8px);
+    }
+
+    .ctrl-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .filters-wrap {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .filter-pill {
+      background: #1e293b;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--text-sub);
+      padding: 7px 14px;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 800;
+      cursor: pointer;
+      transition: all 0.16s ease;
+      user-select: none;
+    }
+
+    .filter-pill:hover {
+      color: #fff;
+      border-color: rgba(255, 255, 255, 0.22);
+    }
+
+    .filter-pill.active {
+      background: #38bdf8;
+      border-color: #38bdf8;
+      color: #0b0f19;
+      box-shadow: 0 0 14px rgba(56, 189, 248, 0.4);
+    }
+
+    .filter-pill.flagged-pill.active {
+      background: var(--red);
+      border-color: var(--red);
+      color: #fff;
+      box-shadow: 0 0 14px rgba(239, 68, 68, 0.4);
+    }
+
+    .search-input {
+      background: #0b0f19;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 999px;
+      padding: 8px 18px;
+      color: #fff;
+      font-family: inherit;
+      font-size: 0.88rem;
+      font-weight: 700;
+      outline: none;
+      min-width: 250px;
+      transition: border-color 0.16s ease;
+    }
+
+    .search-input:focus {
+      border-color: var(--gold);
+    }
+
+    .tool-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .tool-label {
+      font-size: 0.82rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-dim);
+    }
+
+    .segmented {
+      display: inline-flex;
+      background: #0b0f19;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 999px;
+      padding: 3px;
+    }
+
+    .segmented button {
+      background: transparent;
+      border: none;
+      color: var(--text-sub);
+      font-family: inherit;
+      font-size: 0.8rem;
+      font-weight: 800;
+      padding: 6px 14px;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: all 0.16s ease;
+    }
+
+    .segmented button.active {
+      background: var(--gold);
+      color: #0b0f19;
+      box-shadow: 0 0 10px var(--gold-glow);
+    }
+
+    .toggle-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: #1e293b;
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      padding: 6px 13px;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 800;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .toggle-chip input[type="checkbox"] {
+      accent-color: var(--gold);
+      width: 15px;
+      height: 15px;
+      cursor: pointer;
+    }
+
+    /* Grid Layout */
+    .grid {
+      max-width: 1600px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+      gap: 22px;
+    }
+
+    /* Enemy Card */
+    .enemy-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 18px 20px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+      position: relative;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .enemy-card:hover {
+      border-color: var(--card-border-hover);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.45);
+    }
+
+    .enemy-card.is-flagged {
+      border-color: rgba(239, 68, 68, 0.65);
+      box-shadow: 0 0 20px rgba(239, 68, 68, 0.22);
+    }
+
+    .enemy-card.boss-card {
+      border-color: rgba(245, 158, 11, 0.3);
+    }
+
+    .enemy-card.world-card {
+      border-color: rgba(168, 85, 247, 0.3);
+    }
+
+    /* Card Top */
+    .card-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .enemy-id-badge {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .idx-pill {
+      background: #0b0f19;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: var(--gold);
+      font-family: 'Bungee', cursive, monospace;
+      font-size: 0.95rem;
+      padding: 4px 10px;
+      border-radius: 8px;
+      letter-spacing: 0.5px;
+    }
+
+    .enemy-title h3 {
+      font-size: 1.15rem;
+      font-weight: 900;
+      color: #fff;
+      line-height: 1.2;
+    }
+
+    .enemy-meta-line {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 3px;
+      font-size: 0.78rem;
+      font-weight: 800;
+      color: var(--text-sub);
+    }
+
+    .role-badge {
+      padding: 2px 7px;
+      border-radius: 6px;
+      font-size: 0.72rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .role-Regular { background: rgba(100, 116, 139, 0.2); color: #cbd5e1; }
+    .role-Elite { background: rgba(56, 189, 248, 0.2); color: #38bdf8; }
+    .role-Boss { background: rgba(245, 158, 11, 0.2); color: #f59e0b; }
+    .role-Final-Boss { background: rgba(239, 68, 68, 0.25); color: #f87171; }
+    .role-WORLD-BOSS { background: rgba(168, 85, 247, 0.25); color: #c084fc; }
+    .role-MINI-BOSS { background: rgba(234, 179, 8, 0.25); color: #fde047; }
+    .role-World-Foe { background: rgba(147, 51, 234, 0.2); color: #d8b4fe; }
+
+    .flag-btn {
+      background: #1e293b;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: var(--text-sub);
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 800;
+      cursor: pointer;
+      transition: all 0.16s ease;
+      white-space: nowrap;
+    }
+
+    .flag-btn:hover {
+      background: #334155;
+      color: #fff;
+    }
+
+    .flag-btn.flagged {
+      background: rgba(239, 68, 68, 0.2);
+      border-color: rgba(239, 68, 68, 0.6);
+      color: #f87171;
+    }
+
+    /* Card Main View Row */
+    .view-row {
+      display: flex;
+      gap: 16px;
+      align-items: stretch;
+    }
+
+    .canvas-container {
+      position: relative;
+      background: radial-gradient(circle at 50% 50%, #172033 0%, #0c1220 100%);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+      overflow: hidden;
+      width: 200px;
+      height: 270px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: crosshair;
+    }
+
+    .canvas-container canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    .canvas-overlay-tag {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(4px);
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-size: 0.72rem;
+      font-weight: 800;
+      color: #cbd5e1;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      pointer-events: none;
+    }
+
+    .reticle-hint {
+      position: absolute;
+      bottom: 6px;
+      left: 0;
+      right: 0;
+      text-align: center;
+      font-size: 0.68rem;
+      color: rgba(255,255,255,0.4);
+      pointer-events: none;
+    }
+
+    /* Card Right Info */
+    .card-right {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      min-width: 0;
+    }
+
+    .pose-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+    }
+
+    .pose-tab {
+      background: #111827;
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      color: var(--text-sub);
+      padding: 4px 9px;
+      border-radius: 7px;
+      font-size: 0.74rem;
+      font-weight: 800;
+      cursor: pointer;
+      transition: all 0.14s ease;
+      text-transform: capitalize;
+    }
+
+    .pose-tab:hover {
+      background: #1f2937;
+      color: #fff;
+    }
+
+    .pose-tab.active {
+      background: #38bdf8;
+      border-color: #38bdf8;
+      color: #0b0f19;
+      font-weight: 900;
+    }
+
+    .info-metrics {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      background: rgba(11, 15, 25, 0.6);
+      border-radius: 10px;
+      padding: 8px 10px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      font-size: 0.78rem;
+    }
+
+    .metric-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .metric-lbl {
+      color: var(--text-dim);
+      font-weight: 700;
+    }
+
+    .metric-val {
+      color: var(--text);
+      font-weight: 800;
+      font-family: monospace;
+    }
+
+    .color-swatches {
+      display: flex;
+      gap: 4px;
+      align-items: center;
+    }
+
+    .swatch {
+      width: 14px;
+      height: 14px;
+      border-radius: 4px;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+    }
+
+    /* Cheek Editor */
+    .cheek-editor {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      background: rgba(11, 15, 25, 0.6);
+      border-radius: 10px;
+      padding: 8px 10px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .cheek-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.76rem;
+    }
+
+    .coord-inputs {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+    }
+
+    .coord-inputs input {
+      width: 60px;
+      background: #0b0f19;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 6px;
+      padding: 3px 6px;
+      color: #fff;
+      font-family: monospace;
+      font-size: 0.8rem;
+      font-weight: 800;
+      text-align: center;
+      outline: none;
+    }
+
+    .coord-inputs input:focus {
+      border-color: var(--gold);
+    }
+
+    .btn-copy-coords {
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--text-sub);
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-size: 0.72rem;
+      font-weight: 800;
+      cursor: pointer;
+      transition: all 0.14s ease;
+    }
+
+    .btn-copy-coords:hover {
+      background: #1e293b;
+      color: #fff;
+    }
+
+    /* Audit Issues Section */
+    .audit-section {
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      padding-top: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .audit-title {
+      font-size: 0.78rem;
+      font-weight: 800;
+      color: var(--text-sub);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .issues-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .issue-label {
+      background: #111827;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 4px 8px;
+      border-radius: 6px;
+      font-size: 0.74rem;
+      font-weight: 700;
+      color: var(--text-sub);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      user-select: none;
+      transition: all 0.14s ease;
+    }
+
+    .issue-label:has(input:checked) {
+      background: rgba(239, 68, 68, 0.15);
+      border-color: rgba(239, 68, 68, 0.45);
+      color: #fca5a5;
+    }
+
+    .issue-label input[type="checkbox"] {
+      accent-color: var(--red);
+      cursor: pointer;
+    }
+
+    .notes-input {
+      background: #0b0f19;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      padding: 8px 10px;
+      color: #fff;
+      font-family: inherit;
+      font-size: 0.8rem;
+      font-weight: 600;
+      outline: none;
+      resize: vertical;
+      min-height: 54px;
+      transition: border-color 0.16s ease;
+    }
+
+    .notes-input:focus {
+      border-color: var(--gold);
+    }
+
+    /* Modal */
+    .modal-backdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(6px);
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      padding: 20px;
+    }
+    .modal-backdrop.open { display: flex; }
+
+    .modal-box {
+      background: #111827;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 20px;
+      width: 100%;
+      max-width: 740px;
+      max-height: 85vh;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.8);
+      overflow: hidden;
+    }
+
+    .modal-head {
+      padding: 18px 24px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .modal-head h3 { font-family: 'Bungee', cursive, sans-serif; font-size: 1.2rem; color: #fff; }
+
+    .modal-body {
+      padding: 20px 24px;
+      overflow-y: auto;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .modal-body textarea {
+      width: 100%;
+      height: 380px;
+      background: #0b0f19;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 10px;
+      padding: 12px;
+      color: #cbd5e1;
+      font-family: monospace;
+      font-size: 0.85rem;
+      resize: none;
+      outline: none;
+    }
+
+    .modal-foot {
+      padding: 14px 24px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="top-bar">
+      <div class="logo-group">
+        <h1><span>THESE HANDS</span> SPRITE INSPECTOR</h1>
+        <div class="tagline">Comprehensive visual audit tool for all 62 character & enemy sprites across Stages 1–10, Asura Realm & Shadow Verse.</div>
+      </div>
+      <div class="header-actions">
+        <button class="btn btn-gold" id="btnCopyReport">📋 Copy Fix Report</button>
+        <button class="btn" id="btnExportJson">💾 Export JSON</button>
+        <button class="btn" id="btnImportJson">📥 Import JSON</button>
+        <button class="btn btn-danger" id="btnClearAudit">Reset Flags</button>
+      </div>
+    </div>
+
+    <!-- Filter & Tool Bar -->
+    <div class="controls-panel">
+      <div class="ctrl-row">
+        <div class="filters-wrap" id="filtersWrap">
+          <button class="filter-pill active" data-filter="all">All Foes (62)</button>
+          <button class="filter-pill" data-filter="g1-2">Pre-Monkey (0–9)</button>
+          <button class="filter-pill" data-filter="g3-4">Gym & Castle (10–19)</button>
+          <button class="filter-pill" data-filter="g5-6">Graveyard & Dojo (20–29)</button>
+          <button class="filter-pill" data-filter="g7-8">Dark Woods & Tomb (30–39)</button>
+          <button class="filter-pill" data-filter="g9-10">Mountain & Dragon (40–49)</button>
+          <button class="filter-pill" data-filter="w1">Asura Realm (200–205)</button>
+          <button class="filter-pill" data-filter="w2">Shadow Verse (210–215)</button>
+          <button class="filter-pill" data-filter="bosses">Bosses & Elites</button>
+          <button class="filter-pill flagged-pill" data-filter="flagged" id="flaggedFilterBtn">⚠️ Flagged for Fix (0)</button>
+        </div>
+        <input type="text" class="search-input" id="searchInput" placeholder="🔍 Search name, group or #idx..." />
+      </div>
+
+      <div class="ctrl-row">
+        <div class="tool-group">
+          <span class="tool-label">Global Pose:</span>
+          <div class="segmented" id="globalPoseSegment">
+            <button class="active" data-pose="idle">Idle</button>
+            <button data-pose="attack">Attack</button>
+            <button data-pose="dizzy">Dizzy</button>
+            <button data-pose="spPose">Special Pose</button>
+          </div>
+        </div>
+
+        <div class="tool-group">
+          <label class="toggle-chip">
+            <input type="checkbox" id="chkAnimate" checked />
+            <span>Live Animation</span>
+          </label>
+          <label class="toggle-chip">
+            <input type="checkbox" id="chkReticle" checked />
+            <span>Cheek Hit Reticle</span>
+          </label>
+          <label class="toggle-chip">
+            <input type="checkbox" id="chkShadow" checked />
+            <span>Ground Shadow</span>
+          </label>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Grid of Enemies -->
+  <main class="grid" id="enemyGrid"></main>
+
+  <!-- Export/Import Modal -->
+  <div class="modal-backdrop" id="reportModal">
+    <div class="modal-box">
+      <div class="modal-head">
+        <h3 id="modalTitle">Audit Report</h3>
+        <button class="btn" id="btnCloseModal">✕ Close</button>
+      </div>
+      <div class="modal-body">
+        <textarea id="modalText" readonly></textarea>
+      </div>
+      <div class="modal-foot">
+        <button class="btn btn-gold" id="btnCopyModalText">Copy to Clipboard</button>
+      </div>
+    </div>
+  </div>
+
+  <input type="file" id="jsonFileInput" accept=".json" style="display:none;" />
+
+  <script>
+    // Embedded Data for all 62 characters & enemies
+    const ENEMIES_DATA = [{"idx":0,"id":"01-training-dummy","name":"Training Dummy","groupName":"Cozy Corner","role":"Regular","hp":65,"dmg":8,"refH":909,"cheekX":0.22,"cheekY":0.55,"colors":["#e0b060","#c07030","#b07050","#e02020","#804030"],"thumb":"/enemy-sprites-v2/thumbs/01-training-dummy-thumb.webp","poses":{"idle":{"src":"/enemy-sprites-v2/poses/01-training-dummy-idle.webp","w":546,"h":907},"attack":{"src":"/enemy-sprites-v2/poses/01-training-dummy-attack.webp","w":884,"h":909},"dizzy":{"src":"/enemy-sprites-v2/poses/01-training-dummy-dizzy.webp","w":728,"h":907}}},{"idx":1,"id":"02-rubber-duck","name":"Rubber Duck","groupName":"Cozy Corner","role":"Regular","hp":95,"dmg":12,"refH":764,"cheekX":0.2,"cheekY":0.48,"colors":["#f0b000","#00e000","#d05000","#e0aa2e","#ffcf3f"],"thumb":"/enemy-sprites-v2/thumbs/02-rubber-duck-thumb.webp","poses":{"idle":{"src":"/enemy-sprites-v2/poses/02-rubber-duck-idle.webp","w":593,"h":701},"attack1":{"src":"/enemy-sprites-v2/poses/02-rubber-duck-attack-water.webp","w":1086,"h":623},"attack2":{"src":"/enemy-sprites-v2/poses/02-rubber-duck-attack-water.webp","w":1530,"h":1420},"attack":{"src":"/enemy-sprites-v2/poses/02-rubber-duck-attack-water.webp","w":868,"h":805},"dizzy":{"src":"/enemy-sprites-v2/poses/02-rubber-duck-dizzy.webp","w":626,"h":764}}},{"idx":2,"id":"03-rubber-chicken","name":"Rubber Chicken","groupName":"Cozy Corner","role":"Regular","hp":140,"dmg":15,"refH":902,"cheekX":0.2,"cheekY":0.6,"colors":["#f0b000","#f02010","#f05000","#d63c30","#ecc967"],"thumb":"/enemy-sprites-v2/thumbs/03-rubber-chicken-thumb.webp","poses":{"idle":{"src":"/enemy-sprites-v2/poses/03-rubber-chicken-idle.webp","w":507,"h":902},"attack":{"src":"/enemy-sprites-v2/poses/03-rubber-chicken-attack-egg.webp","w":750,"h":1036},"dizzy":{"src":"/enemy-sprites-v2/poses/03-rubber-chicken-dizzy.webp","w":493,"h":902}}},{"idx":3,"id":"04-cardboard-knight","name":"Cardboard Knight","groupName":"Cozy Corner","role":"Regular","hp":210,"dmg":20,"refH":888,"cheekX":0.25,"cheekY":0.52,"colors":["#a07050","#b08060","#b09060","#d63c30","#704030"],"thumb":"/enemy-sprites-v2/thumbs/04-cardboard-knight-thumb.webp","poses":{"idle":{"src":"/enemy-sprites-v2/poses/04-cardboard-knight-idle.webp","w":796,"h":888},"attack":{"src":"/enemy-sprites-v2/poses/04-cardboard-knight-attack.webp","w":777,"h":905},"dizzy":{"src":"/enemy-sprites-v2/poses/04-cardboard-knight-dizzy.webp","w":813,"h":871}}},{"idx":4,"id":"05-grumpy-teddy","name":"Grumpy Teddy","groupName":"Cozy Corner","role":"Elite","hp":360,"dmg":26,"refH":900,"cheekX":0.24,"cheekY":0.36,"colors":["#d98e3b","#a8641f","#f2c879","#f7e3b0","#5f3d20"],"thumb":"/enemy-sprites-v2/thumbs/05-grumpy-teddy-thumb.webp","poses":{"idle":{"src":"/enemy-sprites-v2/poses/05-grumpy-teddy-idle.webp","w":523,"h":900},"attack":{"src":"/enemy-sprites-v2/poses/05-grumpy-teddy-attack.webp","w":514,"h":900},"dizzy":{"src":"/enemy-sprites-v2/poses/05-grumpy-teddy-dizzy.webp","w":813,"h":900}}},{"idx":5,"id":"06-sassy-goblin-sprout","name":"Sassy Goblin Sprout","groupName":"Backyard Bunch","role":"Regular","hp":420,"dmg":24,"refH":877,"cheekX":0.22,"cheekY":0.48,"colors":["#90e030","#30b030","#a0e030","#b07040","#70c020"],"thumb":"/enemy-sprites-v2/thumbs/06-sassy-goblin-sprout-thumb.webp","poses":{"idle":{"src":"/enemy-sprites-v2/poses/06-sassy-goblin-sprout-idle.webp","w":902,"h":877},"attack":{"src":"/enemy-sprites-v2/poses/06-sassy-goblin-sprout-attack-slingshot.webp","w":1007,"h":1007},"dizzy":{"src":"/enemy-sprites-v2/poses/06-sassy-goblin-sprout-dizzy.webp","w":1157,"h":990}}},{"idx":6,"id":"07-mime","name":"Mime","groupName":"Backyard Bunch","role":"Regular","hp":580,"dmg":28,"refH":904,"cheekX":0.2,"cheekY":0.58,"colors":["#f4efe6","#303030","#d63c30","#26232b","#b0c0c0"],"thumb":"/enemy-sprites-v2/thumbs/07-mime-thumb.webp","poses":{"idle":{"src":"/enemy-sprites-v2/poses/07-mime-idle.webp","w":458,"h":883},"attack":{"src":"/enemy-sprites-v2/poses/07-mime-attack-rope.webp","w":819,"h":1014},"dizzy":{"src":"/enemy-sprites-v2/poses/07-mime-dizzy.webp","w":570,"h":883}}},{"idx":7,"id":"08-cocky-goose","name":"Cocky Goose","groupName":"Backyard Bunch","role":"Regular","hp":780,"dmg":34,"refH":902,"cheekX":0.2,"cheekY":0.55,"colors":["#f2f0ea","#d0d0e0","#ef7d1a","#e06010","#501000"],"thumb":"/enemy-sprites-v2/thumbs/08-cocky-goose-thumb.webp","poses":{"idle":{"src":"/enemy-sprites-v2/poses/08-cocky-goose-idle.webp","w":544,"h":902},"attack":{"src":"/enemy-sprites-v2/poses/08-cocky-goose-attack-honk.webp","w":1632,"h":977},"dizzy":{"src":"/enemy-sprites-v2/poses/08-cocky-goose-dizzy.webp","w":826,"h":952}}},{"idx":8,"id":"09-trash-panda","name":"Trash Panda","groupName":"Backyard Bunch","role":"Regular","hp":1050,"dmg":40,"refH":908,"cheekX":0.24,"cheekY":0.5,"colors":["#9aa0a3","#4c5054","#a0a0b0","#7d8894","#00e040"],"thumb":"/enemy-sprites-v2/thumbs/09-trash-panda-thumb.webp","poses":{"idle":{"src":"/enemy-sprites-v2/poses/09-trash-panda-idle.webp","w":693,"h":885},"attack":{"src":"/enemy-sprites-v2/poses/09-trash-panda-attack.webp","w":963,"h":908},"dizzy":{"src":"/enemy-sprites-v2/poses/09-trash-panda-dizzy.webp","w":1049,"h":885}}},{"idx":9,"id":"10-mischievous-monkey","name":"Mischievous Monkey","groupName":"Backyard Bunch","role":"Boss","hp":2500,"dmg":48,"refH":908,"cheekX":0.22,"cheekY":0.5,"colors":["#a05010","#00c070","#602010","#eecfa5","#ffd23e"],"thumb":"/enemy-sprites-v2/thumbs/10-mischievous-monkey-thumb.webp","poses":{"idle":{"src":"/enemy-sprites-v2/poses/10-mischievous-monkey-idle.webp","w":908,"h":908,"gCx":0.488,"gFull":1},"attack1":{"src":"/enemy-sprites-v2/poses/10-mischievous-monkey-attack.webp","w":965,"h":908,"gCx":0.636,"gFull":1},"attack":{"src":"/enemy-sprites-v2/poses/10-mischievous-monkey-attack.webp","w":984,"h":925,"gCx":0.636,"gFull":1},"dizzy":{"src":"/enemy-sprites-v2/poses/10-mischievous-monkey-dizzy.webp","w":948,"h":908,"gCx":0.501,"gFull":1},"bananaSling":{"src":"/enemy-sprites-v2/poses/10-monkey-extras-banana-throw.webp","w":911,"h":908,"gCx":0.524,"gFull":1},"spPose":{"src":"/enemy-sprites-v2/poses/10-monkey-extras-banana-throw.webp","w":911,"h":908,"gCx":0.524,"gFull":1},"atkWindup":{"src":"/enemy-sprites-v2/poses/10-monkey-anim-atk-windup.webp","w":1009,"h":908,"gCx":0.5,"gFull":1},"atkFollow":{"src":"/enemy-sprites-v2/poses/10-monkey-anim-atk-follow.webp","w":1032,"h":925,"gCx":0.503,"gFull":1}}},{"idx":10,"id":"11-bodybuilder","name":"Bodybuilder","groupName":"Fight Club","role":"Regular","hp":4000,"dmg":100,"refH":573,"cheekX":0.22,"cheekY":0.58,"colors":["#e0a370","#dc2626","#b87333","#1e293b"],"thumb":"/enemy-sprites-v2/thumbs/11-bodybuilder-thumb.webp","poses":{"attack1":{"src":"/enemy-sprites-v2/poses/11-bodybuilder-attack1.webp","w":304,"h":596},"attack2":{"src":"/enemy-sprites-v2/poses/11-bodybuilder-attack2.webp","w":433,"h":544},"dizzy":{"src":"/enemy-sprites-v2/poses/11-bodybuilder-dizzy.webp","w":245,"h":573},"idle":{"src":"/enemy-sprites-v2/poses/11-bodybuilder-idle.webp","w":332,"h":573},"attack":{"src":"/enemy-sprites-v2/poses/11-bodybuilder-attack2.webp","w":463,"h":582}}},{"idx":11,"id":"12-luchador","name":"Luchador Wrestler","groupName":"Fight Club","role":"Regular","hp":5200,"dmg":112,"refH":900,"cheekX":0.18,"cheekY":0.55,"colors":["#000000","#efc383","#8e5e40","#1f161a","#b71f21"],"thumb":"/enemy-sprites-v2/thumbs/12-luchador-thumb.webp","poses":{"idle":{"src":"/enemy-sprites-v2/poses/12-luchador-idle.webp","w":536,"h":900},"attack":{"src":"/enemy-sprites-v2/poses/12-luchador-attack.webp","w":736,"h":917},"dizzy":{"src":"/enemy-sprites-v2/poses/12-luchador-dizzy.webp","w":825,"h":966}}},{"idx":12,"id":"13-kickboxer","name":"Kickboxer","groupName":"Fight Club","role":"Regular","hp":6760,"dmg":125,"refH":900,"cheekX":0.18,"cheekY":0.55,"colors":["#c0272d","#e8b23a","#eec39f","#8e2321","#2b2b33"],"thumb":"/enemy-sprites-v2/thumbs/13-kickboxer-thumb.webp","poses":{"idle":{"src":"/enemy-sprites-v2/poses/13-kickboxer-idle.webp","w":518,"h":900},"attack":{"src":"/enemy-sprites-v2/poses/13-kickboxer-attack.webp","w":643,"h":940},"dizzy":{"src":"/enemy-sprites-v2/poses/13-kickboxer-dizzy.webp","w":598,"h":959}}},{"idx":13,"id":"14-adult-boxer","name":"Adult Boxer","groupName":"Fight Club","role":"Regular","hp":8788,"dmg":140,"refH":619,"cheekX":0.22,"cheekY":0.58,"colors":["#c92a2a","#1e293b","#e0a370","#f59e0b"],"thumb":"/enemy-sprites-v2/thumbs/14-adult-boxer-thumb.webp","poses":{"attack1":{"src":"/enemy-sprites-v2/poses/14-adult-boxer-attack1.webp","w":365,"h":610},"attack2":{"src":"/enemy-sprites-v2/poses/14-adult-boxer-attack2.webp","w":343,"h":562},"dizzy":{"src":"/enemy-sprites-v2/poses/14-adult-boxer-dizzy.webp","w":251,"h":619},"idle":{"src":"/enemy-sprites-v2/poses/14-adult-boxer-idle.webp","w":332,"h":619},"attack":{"src":"/enemy-sprites-v2/poses/14-adult-boxer-attack2.webp","w":382,"h":627}}},{"idx":14,"id":"15-sumo-champion","name":"Sumo Champion","groupName":"Fight Club","role":"Elite","hp":15994,"dmg":205,"refH":900,"cheekX":0.18,"cheekY":0.55,"colors":["#000000","#f7cdad","#9c6f5e","#131115","#000203"],"thumb":"/enemy-sprites-v2/thumbs/15-sumo-champion-thumb.webp","poses":{"idle":{"src":"/enemy-sprites-v2/poses/15-sumo-idle.webp","w":957,"h":900},"attack":{"src":"/enemy-sprites-v2/poses/15-sumo-attack.webp","w":1250,"h":905},"dizzy":{"src":"/enemy-sprites-v2/poses/15-sumo-dizzy.webp","w":1086,"h":988}}},{"idx":15,"id":"16-castle-guard","name":"Castle Guard","groupName":"Castle Guard","role":"Regular","hp":14852,"dmg":176,"refH":900,"cheekX":0.5,"cheekY":0.3,"colors":["#2f5d8a","#7a4a21","#8b93a0","#3b2a1a","#101820"],"thumb":"/enemy-sprites-v2/thumbs/16-castle-guard-thumb.webp","poses":{"idle":{"src":"/enemy-sprites-v2/poses/16-castle-guard-idle.webp","w":530,"h":900},"attack1":{"src":"/enemy-sprites-v2/poses/16-castle-guard-attack.webp","w":520,"h":900},"attack":{"src":"/enemy-sprites-v2/poses/16-castle-guard-attack.webp","w":530,"h":917},"dizzy":{"src":"/enemy-sprites-v2/poses/16-castle-guard-dizzy.webp","w":554,"h":943}}},{"idx":16,"id":"17-royal-executioner","name":"Royal Executioner","groupName":"Castle Guard","role":"Regular","hp":19307,"dmg":197,"refH":521,"cheekX":0.2,"cheekY":0.56,"colors":["#000000","#503030","#303030","#101010","#301010"],"thumb":"/enemy-sprites-v2/thumbs/17-royal-executioner-thumb.webp","poses":{"attack1":{"src":"/enemy-sprites-v2/poses/17-royal-executioner-attack.webp","w":991,"h":906},"attack2":{"src":"/enemy-sprites-v2/poses/17-royal-executioner-attack.webp","w":266,"h":421},"dizzy":{"src":"/enemy-sprites-v2/poses/17-royal-executioner-dizzy.webp","w":1400,"h":900},"idle":{"src":"/enemy-sprites-v2/poses/17-royal-executioner-idle.webp","w":778,"h":900},"attack":{"src":"/enemy-sprites-v2/poses/17-royal-executioner-attack.webp","w":991,"h":906}}},{"idx":17,"id":"18-knight","name":"Knight","groupName":"Castle Guard","role":"Regular","hp":25099,"dmg":221,"refH":900,"cheekX":0.5,"cheekY":0.42,"colors":["#000000","#463b45","#aba598","#1e0a0c","#000204"],"thumb":"/enemy-sprites-v2/thumbs/18-knight-thumb.webp","poses":{"idle":{"src":"/enemy-sprites-v2/poses/18-knight-idle.webp","w":564,"h":900},"attack1":{"src":"/enemy-sprites-v2/poses/18-knight-attack.webp","w":1001,"h":853},"attack":{"src":"/enemy-sprites-v2/poses/18-knight-attack.webp","w":1077,"h":917},"dizzy":{"src":"/enemy-sprites-v2/poses/18-knight-dizzy.webp","w":979,"h":900}}},{"idx":18,"id":"19-barbarian","name":"Barbarian","groupName":"Castle Guard","role":"Regular","hp":32629,"dmg":248,"refH":900,"cheekX":0.5,"cheekY":0.38,"colors":["#5f3825","#000000","#b18364","#271510","#000203"],"thumb":"/enemy-sprites-v2/thumbs/19-barbarian-thumb.webp","poses":{"idle":{"src":"/enemy-sprites-v2/poses/19-barbarian-idle.webp","w":717,"h":900},"attack1":{"src":"/enemy-sprites-v2/poses/19-barbarian-attack.webp","w":583,"h":830},"attack":{"src":"/enemy-sprites-v2/poses/19-barbarian-attack.webp","w":645,"h":917},"dizzy":{"src":"/enemy-sprites-v2/poses/19-barbarian-dizzy.webp","w":1197,"h":900}}},{"idx":19,"id":"19-dark-knight","name":"Dark Knight","groupName":"Castle Guard","role":"Boss","hp":106045,"dmg":499,"refH":900,"cheekX":0.5,"cheekY":0.33,"colors":["#000000","#202030","#101020","#303040","#100020"],"thumb":"/enemy-sprites-v2/thumbs/19-dark-knight-thumb.webp","poses":{"idle":{"src":"/enemy-sprites-v2/poses/19-dark-knight-idle.webp","w":499,"h":900,"gCx":0.492,"gFull":1},"attack1":{"src":"/enemy-sprites-v2/poses/19-dark-knight-attack.webp","w":716,"h":940,"gCx":0.537,"gFull":1},"attack":{"src":"/enemy-sprites-v2/poses/19-dark-knight-attack.webp","w":716,"h":940,"gCx":0.537,"gFull":1},"dizzy":{"src":"/enemy-sprites-v2/poses/19-dark-knight-dizzy.webp","w":690,"h":900,"gCx":0.514,"gFull":1},"atkWindup":{"src":"/enemy-sprites-v2/poses/19-dark-knight-anim-atk-windup.webp","w":509,"h":917,"gCx":0.531,"gFull":1},"atkFollow":{"src":"/enemy-sprites-v2/poses/19-dark-knight-anim-atk-follow.webp","w":509,"h":917,"gCx":0.501,"gFull":1},"spPose":{"src":"/enemy-sprites-v2/poses/19-dark-knight-anim-bulwark-windup.webp","w":498,"h":900,"gCx":0.485,"gFull":1}}},{"idx":20,"id":"21-skeleton-warrior","name":"Skeleton Warrior","groupName":"Graveyard Shift","role":"Regular","hp":55143,"dmg":311,"refH":620,"cheekX":0.22,"cheekY":0.52,"colors":["#000000","#b2aea0","#8c8172","#51423a","#ae7652"],"thumb":"/enemy-sprites-v2/thumbs/21-skeleton-warrior-thumb.webp","poses":{"idle":{"src":"/enemy-sprites-v2/poses/21-skeleton-warrior-idle.webp","w":577,"h":900},"attack1":{"src":"/enemy-sprites-v2/poses/21-skeleton-warrior-attack.webp","w":584,"h":935},"attack2":{"src":"/enemy-sprites-v2/poses/21-skeleton-warrior-attack.webp","w":584,"h":935},"dizzy":{"src":"/enemy-sprites-v2/poses/21-skeleton-warrior-dizzy.webp","w":573,"h":900}}},{"idx":21,"id":"22-zombie","name":"Zombie","groupName":"Graveyard Shift","role":"Regular","hp":71686,"dmg":348,"refH":620,"cheekX":0.25,"cheekY":0.54,"colors":["#000000","#744885","#995c41","#99cc70","#5e8652"],"thumb":"/enemy-sprites-v2/thumbs/22-zombie-thumb.webp","poses":{"idle":{"src":"/enemy-sprites-v2/poses/22-zombie-idle.webp","w":557,"h":900},"attack1":{"src":"/enemy-sprites-v2/poses/22-zombie-attack.webp","w":836,"h":811},"attack2":{"src":"/enemy-sprites-v2/poses/22-zombie-attack.webp","w":836,"h":811},"dizzy":{"src":"/enemy-sprites-v2/poses/22-zombie-dizzy.webp","w":713,"h":900}}},{"idx":22,"id":"23-armored-skeleton","name":"Armored Skeleton","groupName":"Graveyard Shift","role":"Regular","hp":93192,"dmg":390,"refH":640,"cheekX":0.22,"cheekY":0.54,"colors":["#000000","#f0f0e0","#100000","#503020","#f0f0f0"],"thumb":"/enemy-sprites-v2/thumbs/23-armored-skeleton-thumb.webp","poses":{"idle":{"src":"/enemy-sprites-v2/poses/23-armored-skeleton-idle.webp","w":657,"h":900},"attack1":{"src":"/enemy-sprites-v2/poses/23-armored-skeleton-attack.webp","w":878,"h":843},"attack2":{"src":"/enemy-sprites-v2/poses/23-armored-skeleton-attack.webp","w":878,"h":843},"dizzy":{"src":"/enemy-sprites-v2/poses/23-armored-skeleton-dizzy.webp","w":1378,"h":963}}},{"idx":23,"id":"24-tomb-ghoul","name":"Scarab Swarm","groupName":"Graveyard Shift","role":"Regular","hp":121150,"dmg":436,"refH":600,"cheekX":0.25,"cheekY":0.54,"colors":["#000000","#da9a01","#7f440e","#a05c07","#2f6f55"],"thumb":"/enemy-sprites-v2/thumbs/24-tomb-ghoul-thumb.webp","poses":{"idle":{"src":"/enemy-sprites-v2/poses/24-scarab-swarm-idle.webp","w":606,"h":900},"attack1":{"src":"/enemy-sprites-v2/poses/24-scarab-swarm-attack.webp","w":1379,"h":843},"attack2":{"src":"/enemy-sprites-v2/poses/24-scarab-swarm-attack.webp","w":1379,"h":843},"dizzy":{"src":"/enemy-sprites-v2/poses/24-scarab-swarm-dizzy.webp","w":1332,"h":937}}},{"idx":24,"id":"25-mummy-guard","name":"Mummy Guard","groupName":"Graveyard Shift","role":"Elite","hp":220493,"dmg":635,"refH":640,"cheekX":0.22,"cheekY":0.55,"colors":["#000000","#f0f0d0","#908060","#d0c090","#f0e0c0"],"thumb":"/enemy-sprites-v2/thumbs/25-mummy-guard-thumb.webp","poses":{"idle":{"src":"/enemy-sprites-v2/poses/25-mummy-guard-idle.webp","w":470,"h":926},"attack1":{"src":"/enemy-sprites-v2/poses/25-mummy-guard-attack.webp","w":747,"h":910},"attack2":{"src":"/enemy-sprites-v2/poses/25-mummy-guard-attack.webp","w":747,"h":910},"dizzy":{"src":"/enemy-sprites-v2/poses/25-mummy-guard-dizzy.webp","w":668,"h":926}}},{"idx":30,"id":"31-werewolf","name":"Werewolf","groupName":"Dark Woods","role":"Regular","hp":760199,"dmg":965,"refH":900,"cheekX":0.5,"cheekY":0.36,"colors":["#000000","#5f4e41","#9c9578","#241a18","#050000"],"thumb":"/enemy-sprites-v2/thumbs/31-werewolf-thumb.webp","poses":{"idle":{"src":"/enemy-sprites-v2/poses/31-werewolf-idle.webp","w":760,"h":900},"attack1":{"src":"/enemy-sprites-v2/poses/31-werewolf-attack.webp","w":996,"h":866},"attack":{"src":"/enemy-sprites-v2/poses/31-werewolf-attack.webp","w":1056,"h":917},"dizzy":{"src":"/enemy-sprites-v2/poses/31-werewolf-dizzy.webp","w":1071,"h":900}}},{"idx":31,"id":"32-giant-spider","name":"Giant Spider","groupName":"Dark Woods","role":"Regular","hp":988258,"dmg":1080,"refH":900,"cheekX":0.5,"cheekY":0.4,"colors":["#000000","#1a121f","#5f5249","#0a060c","#000204"],"thumb":"/enemy-sprites-v2/thumbs/32-giant-spider-thumb.webp","poses":{"idle":{"src":"/enemy-sprites-v2/poses/32-giant-spider-idle.webp","w":1087,"h":900},"attack1":{"src":"/enemy-sprites-v2/poses/32-giant-spider-attack.webp","w":1103,"h":1024},"attack":{"src":"/enemy-sprites-v2/poses/32-giant-spider-attack.webp","w":1103,"h":1023},"dizzy":{"src":"/enemy-sprites-v2/poses/32-giant-spider-dizzy.webp","w":1065,"h":900}}},{"idx":32,"id":"33-orc-warrior","name":"Orc Warrior","groupName":"Dark Woods","role":"Regular","hp":1284736,"dmg":1210,"refH":900,"cheekX":0.5,"cheekY":0.32,"colors":["#000000","#3d2f20","#6a8849","#110b0a","#000402"],"thumb":"/enemy-sprites-v2/thumbs/33-orc-warrior-thumb.webp","poses":{"idle":{"src":"/enemy-sprites-v2/poses/33-orc-warrior-idle.webp","w":750,"h":900},"attack1":{"src":"/enemy-sprites-v2/poses/33-orc-warrior-attack.webp","w":815,"h":964},"attack":{"src":"/enemy-sprites-v2/poses/33-orc-warrior-attack.webp","w":815,"h":964},"dizzy":{"src":"/enemy-sprites-v2/poses/33-orc-warrior-dizzy.webp","w":1300,"h":900}}},{"idx":33,"id":"34-bog-witch","name":"Bog Witch","groupName":"Dark Woods","role":"Regular","hp":1670156,"dmg":1355,"refH":900,"cheekX":0.5,"cheekY":0.3,"colors":["#000000","#604080","#704080","#302040","#b0d070"],"thumb":"/enemy-sprites-v2/thumbs/34-bog-witch-thumb.webp","poses":{"idle":{"src":"/enemy-sprites-v2/poses/34-bog-witch-idle.webp","w":768,"h":900},"attack1":{"src":"/enemy-sprites-v2/poses/34-bog-witch-attack.webp","w":950,"h":887},"attack":{"src":"/enemy-sprites-v2/poses/34-bog-witch-attack.webp","w":1001,"h":934},"dizzy":{"src":"/enemy-sprites-v2/poses/34-bog-witch-dizzy.webp","w":956,"h":900}}},{"idx":34,"id":"35-shadow-beast","name":"Shadow Beast","groupName":"Dark Woods","role":"Elite","hp":3039684,"dmg":1973,"refH":900,"cheekX":0.4,"cheekY":0.42,"colors":["#000000","#321e4c","#6a5a86","#0e051d","#000002"],"thumb":"/enemy-sprites-v2/thumbs/35-shadow-beast-thumb.webp","poses":{"idle":{"src":"/enemy-sprites-v2/poses/35-shadow-beast-idle.webp","w":981,"h":900},"attack1":{"src":"/enemy-sprites-v2/poses/35-shadow-beast-attack.webp","w":1436,"h":1060},"attack":{"src":"/enemy-sprites-v2/poses/35-shadow-beast-attack.webp","w":1402,"h":1034},"dizzy":{"src":"/enemy-sprites-v2/poses/35-shadow-beast-dizzy.webp","w":1638,"h":900}}},{"idx":35,"id":"36-giant-serpent","name":"Giant Serpent","groupName":"Pharaoh's Tomb","role":"Regular","hp":2822564,"dmg":1700,"refH":900,"cheekX":0.5,"cheekY":0.3,"colors":["#000000","#01b051","#2b3920","#a9c55a","#3d8338"],"thumb":"/enemy-sprites-v2/thumbs/36-giant-serpent-thumb.webp","poses":{"idle":{"src":"/enemy-sprites-v2/poses/36-giant-serpent-idle.webp","w":735,"h":900},"attack1":{"src":"/enemy-sprites-v2/poses/36-giant-serpent-attack.webp","w":962,"h":800},"attack":{"src":"/enemy-sprites-v2/poses/36-giant-serpent-attack.webp","w":1104,"h":917},"dizzy":{"src":"/enemy-sprites-v2/poses/36-giant-serpent-dizzy.webp","w":1454,"h":900}}},{"idx":36,"id":"37-anubis-warrior","name":"Anubis Warrior","groupName":"Pharaoh's Tomb","role":"Regular","hp":3669333,"dmg":1904,"refH":900,"cheekX":0.5,"cheekY":0.28,"colors":["#000000","#362e34","#a99064","#120a0c","#000101"],"thumb":"/enemy-sprites-v2/thumbs/37-anubis-warrior-thumb.webp","poses":{"idle":{"src":"/enemy-sprites-v2/poses/37-anubis-warrior-idle.webp","w":492,"h":900},"attack1":{"src":"/enemy-sprites-v2/poses/37-anubis-warrior-attack.webp","w":1045,"h":1080},"attack":{"src":"/enemy-sprites-v2/poses/37-anubis-warrior-attack.webp","w":1001,"h":1034},"dizzy":{"src":"/enemy-sprites-v2/poses/37-anubis-warrior-dizzy.webp","w":979,"h":900}}},{"idx":37,"id":"38-sphinx-riddler","name":"Sphinx Riddler","groupName":"Pharaoh's Tomb","role":"Regular","hp":4770133,"dmg":2132,"refH":900,"cheekX":0.42,"cheekY":0.35,"colors":["#000000","#f0c060","#b07030","#100000","#f0c050"],"thumb":"/enemy-sprites-v2/thumbs/38-sphinx-riddler-thumb.webp","poses":{"idle":{"src":"/enemy-sprites-v2/poses/38-sphinx-riddler-idle.webp","w":690,"h":900},"attack1":{"src":"/enemy-sprites-v2/poses/38-sphinx-riddler-attack.webp","w":801,"h":878},"attack":{"src":"/enemy-sprites-v2/poses/38-sphinx-riddler-attack.webp","w":838,"h":917},"dizzy":{"src":"/enemy-sprites-v2/poses/38-sphinx-riddler-dizzy.webp","w":824,"h":900}}},{"idx":38,"id":"39-giant-scorpion","name":"Giant Scorpion","groupName":"Pharaoh's Tomb","role":"Regular","hp":6201173,"dmg":2388,"refH":900,"cheekX":0.5,"cheekY":0.45,"colors":["#000000","#f05010","#903010","#d05010","#703010"],"thumb":"/enemy-sprites-v2/thumbs/39-giant-scorpion-thumb.webp","poses":{"idle":{"src":"/enemy-sprites-v2/poses/39-giant-scorpion-idle.webp","w":909,"h":900},"attack1":{"src":"/enemy-sprites-v2/poses/39-giant-scorpion-attack.webp","w":1037,"h":1000},"attack":{"src":"/enemy-sprites-v2/poses/39-giant-scorpion-attack.webp","w":1037,"h":1000},"dizzy":{"src":"/enemy-sprites-v2/poses/39-giant-scorpion-dizzy.webp","w":1222,"h":900}}},{"idx":39,"id":"40-pharaoh-revenant","name":"Pharaoh Revenant","groupName":"Pharaoh's Tomb","role":"Boss","hp":20153813,"dmg":4815,"refH":900,"cheekX":0.5,"cheekY":0.3,"colors":["#000000","#524256","#c0a15b","#20172e","#000c1b"],"thumb":"/enemy-sprites-v2/thumbs/40-pharaoh-revenant-thumb.webp","poses":{"idle":{"src":"/enemy-sprites-v2/poses/40-pharaoh-revenant-idle.webp","w":783,"h":900,"gCx":0.487,"gFull":1},"attack1":{"src":"/enemy-sprites-v2/poses/40-pharaoh-revenant-attack.webp","w":954,"h":902,"gCx":0.473,"gFull":1},"attack":{"src":"/enemy-sprites-v2/poses/40-pharaoh-revenant-attack.webp","w":954,"h":902,"gCx":0.473,"gFull":1},"dizzy":{"src":"/enemy-sprites-v2/poses/40-pharaoh-revenant-dizzy.webp","w":1208,"h":900,"gCx":0.486,"gFull":1},"atkWindup":{"src":"/enemy-sprites-v2/poses/40-pharaoh-revenant-anim-atk-windup.webp","w":784,"h":917,"gCx":0.515,"gFull":1},"atkFollow":{"src":"/enemy-sprites-v2/poses/40-pharaoh-revenant-anim-atk-follow.webp","w":832,"h":917,"gCx":0.534,"gFull":1},"spPose":{"src":"/enemy-sprites-v2/poses/40-pharaoh-revenant-anim-curse-release.webp","w":757,"h":900,"gCx":0.517,"gFull":1}}},{"idx":45,"id":"46-elder-dragon","name":"Elder Dragon","groupName":"Dragon Lair","role":"Regular","hp":38911442,"dmg":5280,"refH":900,"cheekX":0.5,"cheekY":0.32,"colors":["#000000","#f8f5e7","#c2bcc0","#e9e9e9","#d8bd72"],"thumb":"/enemy-sprites-v2/thumbs/46-elder-dragon-thumb.webp","poses":{"idle":{"src":"/enemy-sprites-v2/poses/46-elder-dragon-idle.webp","w":838,"h":900},"attack1":{"src":"/enemy-sprites-v2/poses/46-elder-dragon-attack.webp","w":788,"h":900},"attack":{"src":"/enemy-sprites-v2/poses/46-elder-dragon-attack.webp","w":796,"h":917},"dizzy":{"src":"/enemy-sprites-v2/poses/46-elder-dragon-dizzy.webp","w":1237,"h":956}}},{"idx":46,"id":"47-dragon-champion","name":"Dragon Champion","groupName":"Dragon Lair","role":"Regular","hp":50584874,"dmg":5914,"refH":900,"cheekX":0.5,"cheekY":0.3,"colors":["#000000","#9eafc0","#6b0125","#4a5e79","#b01c35"],"thumb":"/enemy-sprites-v2/thumbs/47-dragon-champion-thumb.webp","poses":{"idle":{"src":"/enemy-sprites-v2/poses/47-dragon-champion-idle.webp","w":864,"h":900},"attack1":{"src":"/enemy-sprites-v2/poses/47-dragon-champion-attack.webp","w":942,"h":980},"attack":{"src":"/enemy-sprites-v2/poses/47-dragon-champion-attack.webp","w":942,"h":980},"dizzy":{"src":"/enemy-sprites-v2/poses/47-dragon-champion-dizzy.webp","w":1062,"h":900}}},{"idx":47,"id":"48-crystal-dragon","name":"Crystal Dragon","groupName":"Dragon Lair","role":"Regular","hp":65760336,"dmg":6623,"refH":900,"cheekX":0.5,"cheekY":0.31,"colors":["#7c6cf0","#4a3fb0","#bfeaff","#8f7ff5","#2c2470"],"thumb":"/enemy-sprites-v2/thumbs/48-crystal-dragon-thumb.webp","poses":{"idle":{"src":"/enemy-sprites-v2/poses/48-crystal-dragon-idle.webp","w":656,"h":900},"attack1":{"src":"/enemy-sprites-v2/poses/48-crystal-dragon-attack.webp","w":672,"h":900},"attack":{"src":"/enemy-sprites-v2/poses/48-crystal-dragon-attack.webp","w":685,"h":917},"dizzy":{"src":"/enemy-sprites-v2/poses/48-crystal-dragon-dizzy.webp","w":649,"h":900}}},{"idx":48,"id":"49-ancient-dragon","name":"Ancient Dragon","groupName":"Dragon Lair","role":"Regular","hp":85488437,"dmg":7418,"refH":900,"cheekX":0.5,"cheekY":0.32,"colors":["#000000","#9c9d94","#828b57","#434638","#a1a093"],"thumb":"/enemy-sprites-v2/thumbs/49-ancient-dragon-thumb.webp","poses":{"idle":{"src":"/enemy-sprites-v2/poses/49-ancient-dragon-idle.webp","w":746,"h":900},"attack1":{"src":"/enemy-sprites-v2/poses/49-ancient-dragon-attack.webp","w":737,"h":746},"attack":{"src":"/enemy-sprites-v2/poses/49-ancient-dragon-attack.webp","w":907,"h":917},"dizzy":{"src":"/enemy-sprites-v2/poses/49-ancient-dragon-dizzy.webp","w":1263,"h":900}}},{"idx":49,"id":"50-final-dragon-boss","name":"Dragon Lord","groupName":"Dragon Lair","role":"Final Boss","hp":277837422,"dmg":14955,"refH":900,"cheekX":0.5,"cheekY":0.36,"colors":["#000000","#745763","#2e1c3e","#130520","#000101"],"thumb":"/enemy-sprites-v2/thumbs/50-final-dragon-boss-thumb.webp","poses":{"idle":{"src":"/enemy-sprites-v2/poses/50-final-dragon-boss-idle.webp","w":965,"h":900,"gCx":0.5,"gFull":1},"attack1":{"src":"/enemy-sprites-v2/poses/50-final-dragon-boss-attack.webp","w":1168,"h":1021,"gCx":0.597,"gFull":1},"attack":{"src":"/enemy-sprites-v2/poses/50-final-dragon-boss-attack.webp","w":1168,"h":1021,"gCx":0.597,"gFull":1},"dizzy":{"src":"/enemy-sprites-v2/poses/50-final-dragon-boss-dizzy.webp","w":1620,"h":900,"gCx":0.489,"gFull":1},"spPose":{"src":"/enemy-sprites-v2/poses/50-final-dragon-anim-firebreath.webp","w":965,"h":900,"gCx":0.5,"gFull":1},"atkWindup":{"src":"/enemy-sprites-v2/poses/50-final-dragon-anim-atk-windup.webp","w":962,"h":917,"gCx":0.571,"gFull":1},"atkFollow":{"src":"/enemy-sprites-v2/poses/50-final-dragon-anim-atk-follow.webp","w":1095,"h":1021,"gCx":0.418,"gFull":1}}},{"idx":40,"id":"41-troll","name":"Troll","groupName":"Mountain Stronghold","role":"Regular","hp":10479983,"dmg":2996,"refH":900,"cheekX":0.5,"cheekY":0.3,"colors":["#000000","#5f6c52","#2b2a21","#aab89b","#92a181"],"thumb":"/enemy-sprites-v2/thumbs/41-troll-thumb.webp","poses":{"idle":{"src":"/enemy-sprites-v2/poses/41-troll-idle.webp","w":867,"h":900},"attack1":{"src":"/enemy-sprites-v2/poses/41-troll-attack.webp","w":1020,"h":1333},"attack":{"src":"/enemy-sprites-v2/poses/41-troll-attack.webp","w":792,"h":1034},"dizzy":{"src":"/enemy-sprites-v2/poses/41-troll-dizzy.webp","w":1014,"h":1049}}},{"idx":41,"id":"42-ogre","name":"Ogre","groupName":"Mountain Stronghold","role":"Regular","hp":13623977,"dmg":3356,"refH":900,"cheekX":0.5,"cheekY":0.28,"colors":["#000000","#85a754","#534d2f","#221613","#000315"],"thumb":"/enemy-sprites-v2/thumbs/42-ogre-thumb.webp","poses":{"idle":{"src":"/enemy-sprites-v2/poses/42-ogre-idle.webp","w":884,"h":900},"attack1":{"src":"/enemy-sprites-v2/poses/42-ogre-attack.webp","w":881,"h":930},"attack":{"src":"/enemy-sprites-v2/poses/42-ogre-attack.webp","w":881,"h":930},"dizzy":{"src":"/enemy-sprites-v2/poses/42-ogre-dizzy.webp","w":1497,"h":916}}},{"idx":42,"id":"43-minotaur","name":"Minotaur","groupName":"Mountain Stronghold","role":"Regular","hp":17711171,"dmg":3758,"refH":900,"cheekX":0.5,"cheekY":0.42,"colors":["#000000","#7c3c29","#b38062","#351412","#000101"],"thumb":"/enemy-sprites-v2/thumbs/43-minotaur-thumb.webp","poses":{"idle":{"src":"/enemy-sprites-v2/poses/43-minotaur-idle.webp","w":680,"h":900},"attack1":{"src":"/enemy-sprites-v2/poses/43-minotaur-attack.webp","w":982,"h":859},"attack":{"src":"/enemy-sprites-v2/poses/43-minotaur-attack.webp","w":1050,"h":917},"dizzy":{"src":"/enemy-sprites-v2/poses/43-minotaur-dizzy.webp","w":889,"h":905}}},{"idx":43,"id":"44-cyclops","name":"Cyclops","groupName":"Mountain Stronghold","role":"Regular","hp":23024522,"dmg":4209,"refH":900,"cheekX":0.5,"cheekY":0.4,"colors":["#000000","#d0b050","#703010","#301010","#101010"],"thumb":"/enemy-sprites-v2/thumbs/44-cyclops-thumb.webp","poses":{"idle":{"src":"/enemy-sprites-v2/poses/44-cyclops-idle.webp","w":806,"h":900},"attack1":{"src":"/enemy-sprites-v2/poses/44-cyclops-attack.webp","w":914,"h":1000},"attack":{"src":"/enemy-sprites-v2/poses/44-cyclops-attack.webp","w":914,"h":1000},"dizzy":{"src":"/enemy-sprites-v2/poses/44-cyclops-dizzy.webp","w":1230,"h":1021}}},{"idx":44,"id":"20-stone-golem","name":"Stone Golem","groupName":"Mountain Stronghold","role":"Elite","hp":41904630,"dmg":6129,"refH":900,"cheekX":0.2,"cheekY":0.66,"colors":["#000000","#64748b","#38bdf8","#65a30d","#0f172a"],"thumb":"/enemy-sprites-v2/thumbs/20-stone-golem-thumb.webp","poses":{"idle":{"src":"/enemy-sprites-v2/poses/20-stone-golem-idle.webp","w":1008,"h":900},"attack":{"src":"/enemy-sprites-v2/poses/20-stone-golem-attack.webp","w":1094,"h":947},"attack1":{"src":"/enemy-sprites-v2/poses/20-stone-golem-attack.webp","w":1094,"h":948},"attack2":{"src":"/enemy-sprites-v2/poses/20-stone-golem-attack.webp","w":1094,"h":948},"dizzy":{"src":"/enemy-sprites-v2/poses/20-stone-golem-dizzy.webp","w":1052,"h":896},"roar":{"src":"/enemy-sprites-v2/poses/20-stone-golem-roar.webp","w":1043,"h":960},"enrage":{"src":"/enemy-sprites-v2/poses/20-stone-golem-enrage.webp","w":1010,"h":900},"rockStun":{"src":"/enemy-sprites-v2/poses/20-stone-golem-rockstun.webp","w":1007,"h":1000},"rockStun1":{"src":"/enemy-sprites-v2/poses/20-stone-golem-rockstun.webp","w":1007,"h":1000},"rockStun2":{"src":"/enemy-sprites-v2/poses/20-stone-golem-rockstun.webp","w":1007,"h":1000}}},{"idx":25,"id":"26-ninja-recruit","name":"Ninja Recruit","groupName":"Shadow Dojo","role":"Regular","hp":204744,"dmg":547,"refH":900,"cheekX":0.18,"cheekY":0.55,"colors":["#2a3d66","#d2382c","#f2c894","#1c2742","#e8b088"],"thumb":"/enemy-sprites-v2/thumbs/26-ninja-recruit-thumb.webp","poses":{"idle":{"src":"/enemy-sprites-v2/poses/26-ninja-recruit-idle.webp","w":663,"h":900},"attack":{"src":"/enemy-sprites-v2/poses/26-ninja-recruit-attack.webp","w":893,"h":950},"dizzy":{"src":"/enemy-sprites-v2/poses/26-ninja-recruit-dizzy.webp","w":747,"h":973}}},{"idx":26,"id":"27-shuriken-master","name":"Shuriken Master","groupName":"Shadow Dojo","role":"Regular","hp":266167,"dmg":613,"refH":900,"cheekX":0.18,"cheekY":0.55,"colors":["#4a4f57","#1f8a70","#8a5a2b","#f2c894","#c9ced4"],"thumb":"/enemy-sprites-v2/thumbs/27-shuriken-master-thumb.webp","poses":{"idle":{"src":"/enemy-sprites-v2/poses/27-shuriken-master-idle.webp","w":681,"h":900},"attack":{"src":"/enemy-sprites-v2/poses/27-shuriken-master-attack.webp","w":690,"h":950},"dizzy":{"src":"/enemy-sprites-v2/poses/27-shuriken-master-dizzy.webp","w":943,"h":1000}}},{"idx":27,"id":"28-samurai-duelist","name":"Samurai Duelist","groupName":"Shadow Dojo","role":"Regular","hp":346017,"dmg":687,"refH":900,"cheekX":0.18,"cheekY":0.55,"colors":["#57a8d8","#eef2f4","#20242c","#d2382c","#e0a92e"],"thumb":"/enemy-sprites-v2/thumbs/28-samurai-duelist-thumb.webp","poses":{"idle":{"src":"/enemy-sprites-v2/poses/28-samurai-duelist-idle.webp","w":412,"h":900},"attack":{"src":"/enemy-sprites-v2/poses/28-samurai-duelist-attack.webp","w":984,"h":950},"dizzy":{"src":"/enemy-sprites-v2/poses/28-samurai-duelist-dizzy.webp","w":1089,"h":900}}},{"idx":28,"id":"29-shadow-assassin","name":"Shadow Assassin","groupName":"Shadow Dojo","role":"Regular","hp":449822,"dmg":769,"refH":900,"cheekX":0.18,"cheekY":0.55,"colors":["#6a3fa0","#2c2438","#9a5ae0","#e8b088","#17141f"],"thumb":"/enemy-sprites-v2/thumbs/29-shadow-assassin-thumb.webp","poses":{"idle":{"src":"/enemy-sprites-v2/poses/29-shadow-assassin-idle.webp","w":712,"h":900},"attack":{"src":"/enemy-sprites-v2/poses/29-shadow-assassin-attack.webp","w":924,"h":954},"dizzy":{"src":"/enemy-sprites-v2/poses/29-shadow-assassin-dizzy.webp","w":849,"h":1002}}},{"idx":29,"id":"30-shogun-warlord","name":"Shogun Warlord","groupName":"Shadow Dojo","role":"Boss","hp":1461920,"dmg":1550,"refH":900,"cheekX":0.18,"cheekY":0.55,"colors":["#d9a72e","#23202a","#b03030","#eec39a","#9aa4ae"],"thumb":"/enemy-sprites-v2/thumbs/30-shogun-warlord-thumb.webp","poses":{"idle":{"src":"/enemy-sprites-v2/poses/30-shogun-warlord-idle.webp","w":489,"h":900,"gCx":0.489,"gFull":1},"attack":{"src":"/enemy-sprites-v2/poses/30-shogun-warlord-attack.webp","w":494,"h":921,"gCx":0.502,"gFull":1,"gs":1.5,"gy":0.08},"dizzy":{"src":"/enemy-sprites-v2/poses/30-shogun-warlord-dizzy.webp","w":859,"h":923,"gCx":0.545,"gFull":1},"spPose":{"src":"/enemy-sprites-v2/poses/30-shogun-warlord-anim-special.webp","w":766,"h":900,"gCx":0.5,"gFull":1,"gs":1.5,"gy":0.09},"atkWindup":{"src":"/enemy-sprites-v2/poses/30-shogun-warlord-anim-atk-windup.webp","w":488,"h":917,"gCx":0.526,"gFull":1,"gs":1.35,"gy":0.05},"atkFollow":{"src":"/enemy-sprites-v2/poses/30-shogun-warlord-anim-atk-follow.webp","w":470,"h":917,"gCx":0.488,"gFull":1,"gs":1.5,"gy":0.08}}},{"idx":200,"id":"w1-01-asura-footman","name":"Asura Footman","groupName":"Asura Realm","role":"World Foe","hp":900000000,"dmg":15000,"refH":900,"cheekX":0.22,"cheekY":0.5,"colors":["#c33d21","#e8a33d","#7a1f10","#f2c063"],"thumb":"/enemy-sprites-v2/thumbs/w1-01-asura-footman-thumb.webp","poses":{"idle":{"src":"/enemy-sprites-v2/poses/w1-01-asura-footman-idle.webp","w":424,"h":900},"attack":{"src":"/enemy-sprites-v2/poses/w1-01-asura-footman-attack.webp","w":415,"h":915},"dizzy":{"src":"/enemy-sprites-v2/poses/w1-01-asura-footman-dizzy.webp","w":407,"h":913}}},{"idx":201,"id":"w1-02-rakshasa-huntress","name":"Rakshasa Huntress","groupName":"Asura Realm","role":"World Foe","hp":1300000000,"dmg":17000,"refH":900,"cheekX":0.24,"cheekY":0.48,"colors":["#5a6b80","#c22e3a","#e8b23d","#1c2430"],"thumb":"/enemy-sprites-v2/thumbs/w1-02-rakshasa-huntress-thumb.webp","poses":{"idle":{"src":"/enemy-sprites-v2/poses/w1-02-rakshasa-huntress-idle.webp","w":352,"h":900},"attack":{"src":"/enemy-sprites-v2/poses/w1-02-rakshasa-huntress-attack.webp","w":391,"h":915},"dizzy":{"src":"/enemy-sprites-v2/poses/w1-02-rakshasa-huntress-dizzy.webp","w":315,"h":900}}},{"idx":202,"id":"w1-03-kumbhakaran","name":"Kumbhakaran","groupName":"Asura Realm","role":"MINI BOSS","hp":2600000000,"dmg":24000,"refH":900,"cheekX":0.42,"cheekY":0.15,"colors":["#8a5a3b","#c9962e","#2a1a12","#c22e2e"],"thumb":"/enemy-sprites-v2/thumbs/w1-03-kumbhakaran-thumb.webp","poses":{"idle":{"src":"/enemy-sprites-v2/poses/w1-03-kumbhakaran-idle.webp","w":501,"h":900},"attack":{"src":"/enemy-sprites-v2/poses/w1-03-kumbhakaran-attack.webp","w":491,"h":900},"dizzy":{"src":"/enemy-sprites-v2/poses/w1-03-kumbhakaran-dizzy.webp","w":466,"h":900},"spPose":{"src":"/enemy-sprites-v2/poses/w1-03-kumbhakaran-sppose.webp","w":480,"h":900}}},{"idx":203,"id":"w1-04-mahishasura","name":"Mahishasura","groupName":"Asura Realm","role":"World Foe","hp":1900000000,"dmg":20000,"refH":900,"cheekX":0.3,"cheekY":0.38,"colors":["#23202c","#d9a441","#b03a2e","#3f6fb5"],"thumb":"/enemy-sprites-v2/thumbs/w1-04-mahishasura-thumb.webp","poses":{"idle":{"src":"/enemy-sprites-v2/poses/w1-04-mahishasura-idle.webp","w":434,"h":900},"attack":{"src":"/enemy-sprites-v2/poses/w1-04-mahishasura-attack.webp","w":590,"h":915},"dizzy":{"src":"/enemy-sprites-v2/poses/w1-04-mahishasura-dizzy.webp","w":426,"h":900}}},{"idx":204,"id":"w1-05-vetala-warlock","name":"Vetala Warlock","groupName":"Asura Realm","role":"World Foe","hp":2400000000,"dmg":22000,"refH":900,"cheekX":0.26,"cheekY":0.4,"colors":["#8a8d90","#3a2b52","#4de06a","#d9c9a8"],"thumb":"/enemy-sprites-v2/thumbs/w1-05-vetala-warlock-thumb.webp","poses":{"idle":{"src":"/enemy-sprites-v2/poses/w1-05-vetala-warlock-idle.webp","w":551,"h":900},"attack":{"src":"/enemy-sprites-v2/poses/w1-05-vetala-warlock-attack.webp","w":546,"h":900},"dizzy":{"src":"/enemy-sprites-v2/poses/w1-05-vetala-warlock-dizzy.webp","w":449,"h":940}}},{"idx":205,"id":"w1-06-ravana","name":"Ravana","groupName":"Asura Realm","role":"WORLD BOSS","hp":4300000000,"dmg":34000,"refH":900,"cheekX":0.2,"cheekY":0.34,"colors":["#b03024","#e8a33d","#1e1a1e","#f2d060"],"thumb":"/enemy-sprites-v2/thumbs/w1-06-ravana-thumb.webp","poses":{"idle":{"src":"/enemy-sprites-v2/poses/w1-06-ravana-idle.webp","w":485,"h":900},"attack":{"src":"/enemy-sprites-v2/poses/w1-06-ravana-attack.webp","w":482,"h":900},"dizzy":{"src":"/enemy-sprites-v2/poses/w1-06-ravana-dizzy.webp","w":481,"h":900},"spPose":{"src":"/enemy-sprites-v2/poses/w1-06-ravana-sppose.webp","w":482,"h":900}}},{"idx":210,"id":"w2-01-shade-dummy","name":"Shade of the Dummy","groupName":"Shadow Verse","role":"World Foe","hp":3500000000,"dmg":26000,"refH":900,"cheekX":0.24,"cheekY":0.45,"colors":["#2a2430","#8a5ae0","#4a3a5e","#c9a8ff"],"thumb":"/enemy-sprites-v2/thumbs/w2-01-shade-dummy-thumb.webp","poses":{"idle":{"src":"/enemy-sprites-v2/poses/w2-01-shade-dummy-idle.webp","w":492,"h":900},"attack":{"src":"/enemy-sprites-v2/poses/w2-01-shade-dummy-attack.webp","w":511,"h":900},"dizzy":{"src":"/enemy-sprites-v2/poses/w2-01-shade-dummy-dizzy.webp","w":637,"h":940}}},{"idx":211,"id":"w2-02-umbral-mime","name":"Umbral Mime","groupName":"Shadow Verse","role":"World Foe","hp":4500000000,"dmg":28000,"refH":900,"cheekX":0.26,"cheekY":0.3,"colors":["#17141c","#cfd2d8","#8a5ae0","#3a3444"],"thumb":"/enemy-sprites-v2/thumbs/w2-02-umbral-mime-thumb.webp","poses":{"idle":{"src":"/enemy-sprites-v2/poses/w2-02-umbral-mime-idle.webp","w":338,"h":900},"attack":{"src":"/enemy-sprites-v2/poses/w2-02-umbral-mime-attack.webp","w":349,"h":915},"dizzy":{"src":"/enemy-sprites-v2/poses/w2-02-umbral-mime-dizzy.webp","w":311,"h":936}}},{"idx":212,"id":"w2-03-forgotten-knight","name":"The Forgotten Knight","groupName":"Shadow Verse","role":"MINI BOSS","hp":7500000000,"dmg":36000,"refH":900,"cheekX":0.28,"cheekY":0.34,"colors":["#1d1a24","#8a5ae0","#5e546e","#b48ce0"],"thumb":"/enemy-sprites-v2/thumbs/w2-03-forgotten-knight-thumb.webp","poses":{"idle":{"src":"/enemy-sprites-v2/poses/w2-03-forgotten-knight-idle.webp","w":556,"h":900},"attack":{"src":"/enemy-sprites-v2/poses/w2-03-forgotten-knight-attack.webp","w":538,"h":928},"dizzy":{"src":"/enemy-sprites-v2/poses/w2-03-forgotten-knight-dizzy.webp","w":548,"h":900}}},{"idx":213,"id":"w2-04-gloom-serpent","name":"Gloom Serpent","groupName":"Shadow Verse","role":"World Foe","hp":6000000000,"dmg":32000,"refH":900,"cheekX":0.26,"cheekY":0.3,"colors":["#241f2e","#9a6ae0","#4a3a5e","#d8c8ff"],"thumb":"/enemy-sprites-v2/thumbs/w2-04-gloom-serpent-thumb.webp","poses":{"idle":{"src":"/enemy-sprites-v2/poses/w2-04-gloom-serpent-idle.webp","w":464,"h":900},"attack":{"src":"/enemy-sprites-v2/poses/w2-04-gloom-serpent-attack.webp","w":474,"h":900},"dizzy":{"src":"/enemy-sprites-v2/poses/w2-04-gloom-serpent-dizzy.webp","w":539,"h":916}}},{"idx":214,"id":"w2-05-hollow-monk","name":"The Hollow Monk","groupName":"Shadow Verse","role":"World Foe","hp":7000000000,"dmg":33000,"refH":900,"cheekX":0.26,"cheekY":0.32,"colors":["#201c2a","#a87ae8","#574a6e","#e2d6ff"],"thumb":"/enemy-sprites-v2/thumbs/w2-05-hollow-monk-thumb.webp","poses":{"idle":{"src":"/enemy-sprites-v2/poses/w2-05-hollow-monk-idle.webp","w":449,"h":900},"attack":{"src":"/enemy-sprites-v2/poses/w2-05-hollow-monk-attack.webp","w":449,"h":900},"dizzy":{"src":"/enemy-sprites-v2/poses/w2-05-hollow-monk-dizzy.webp","w":467,"h":939}}},{"idx":215,"id":"w2-06-dark-slapper","name":"The Dark Slapper","groupName":"Shadow Verse","role":"WORLD BOSS","hp":12000000000,"dmg":48000,"refH":900,"cheekX":0.24,"cheekY":0.42,"colors":["#14101c","#9a5ae0","#3a2c52","#c9a8ff"],"thumb":"/enemy-sprites-v2/thumbs/w2-06-dark-slapper-thumb.webp","poses":{"idle":{"src":"/enemy-sprites-v2/poses/w2-06-dark-slapper-idle.webp","w":512,"h":900},"attack":{"src":"/enemy-sprites-v2/poses/w2-06-dark-slapper-attack.webp","w":518,"h":900},"dizzy":{"src":"/enemy-sprites-v2/poses/w2-06-dark-slapper-dizzy.webp","w":520,"h":909},"spPose":{"src":"/enemy-sprites-v2/poses/w2-06-dark-slapper-sppose.webp","w":500,"h":900}}}];
+
+    // Storage Key
+    const STORAGE_KEY = 'these_hands_sprite_audit_v2';
+    let auditState = {
+      flagged: {},
+      issues: {},
+      notes: {},
+      coords: {}
+    };
+
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if (saved) auditState = JSON.parse(saved);
+    } catch(e) {}
+
+    function saveAudit() {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(auditState));
+        updateFlaggedCount();
+      } catch(e) {}
+    }
+
+    function updateFlaggedCount() {
+      const count = Object.values(auditState.flagged).filter(Boolean).length;
+      const btn = document.getElementById('flaggedFilterBtn');
+      if (btn) btn.textContent = '⚠️ Flagged for Fix (' + count + ')';
+    }
+
+    // Resolves image paths seamlessly whether opened via file:/// or http://
+    function getCandidateSources(src) {
+      if (!src) return [];
+      const clean = src.startsWith('/') ? src : '/' + src;
+      if (window.location.protocol === 'file:') {
+        return ['./public' + clean, '.' + clean, clean];
+      }
+      return [clean, './public' + clean, '/public' + clean];
+    }
+
+    const imgCache = {};
+    function getImage(src) {
+      if (!src) return null;
+      if (imgCache[src]) return imgCache[src];
+
+      const img = new Image();
+      const candidates = getCandidateSources(src);
+      let cIdx = 0;
+      img.src = candidates[cIdx];
+      img.onerror = () => {
+        cIdx++;
+        if (cIdx < candidates.length) {
+          img.src = candidates[cIdx];
+        }
+      };
+      imgCache[src] = img;
+      return img;
+    }
+
+    // Audit Issue Types
+    const AUDIT_ISSUES = [
+      { id: 'cheek_misaligned', label: '🎯 Cheek Reticle Off' },
+      { id: 'feet_cutoff', label: '🦶 Feet Cutoff / Floating' },
+      { id: 'scale_off', label: '📏 Scale / Proportion Off' },
+      { id: 'weak_attack', label: '💥 Weak / Missing Attack' },
+      { id: 'flawed_dizzy', label: '💫 Missing / Flawed Dizzy' },
+      { id: 'missing_sppose', label: '👑 Missing Special Pose' },
+      { id: 'pixel_clash', label: '🎨 Art Style / Pixel Clash' },
+      { id: 'contrast_issue', label: '🌓 Low Contrast / Muddy' },
+      { id: 'wrong_facing', label: '👁️ Not Facing Player / Wrong Angle' }
+    ];
+
+    // State
+    let currentFilter = 'all';
+    let searchQuery = '';
+    let globalPose = 'idle';
+    let animateLive = true;
+    let showReticle = true;
+    let showShadow = true;
+    const enemyState = {};
+
+    function initEnemyState() {
+      ENEMIES_DATA.forEach(e => {
+        enemyState[e.idx] = {
+          activePose: 'idle',
+          customCheekX: auditState.coords[e.idx] ? auditState.coords[e.idx].x : e.cheekX,
+          customCheekY: auditState.coords[e.idx] ? auditState.coords[e.idx].y : e.cheekY,
+          // cached bounds for mouse click calibration
+          renderedBounds: null
+        };
+      });
+    }
+
+    function renderGrid() {
+      const grid = document.getElementById('enemyGrid');
+      grid.innerHTML = '';
+
+      const filtered = ENEMIES_DATA.filter(e => {
+        if (searchQuery) {
+          const q = searchQuery.toLowerCase();
+          const match = e.name.toLowerCase().includes(q) ||
+                        e.groupName.toLowerCase().includes(q) ||
+                        String(e.idx).includes(q);
+          if (!match) return false;
+        }
+
+        if (currentFilter === 'all') return true;
+        if (currentFilter === 'flagged') return !!auditState.flagged[e.idx];
+        if (currentFilter === 'bosses') return e.role.includes('Boss') || e.role.includes('Elite');
+        if (currentFilter === 'g1-2') return e.idx >= 0 && e.idx <= 9;
+        if (currentFilter === 'g3-4') return e.idx >= 10 && e.idx <= 19;
+        if (currentFilter === 'g5-6') return e.idx >= 20 && e.idx <= 29;
+        if (currentFilter === 'g7-8') return e.idx >= 30 && e.idx <= 39;
+        if (currentFilter === 'g9-10') return e.idx >= 40 && e.idx <= 49;
+        if (currentFilter === 'w1') return e.idx >= 200 && e.idx <= 205;
+        if (currentFilter === 'w2') return e.idx >= 210 && e.idx <= 215;
+        return true;
+      });
+
+      if (filtered.length === 0) {
+        grid.innerHTML = '<div style="grid-column: 1 / -1; text-align: center; padding: 60px 20px; color: var(--text-sub); font-size: 1.1rem; font-weight: 700;">No enemy sprites match the selected filter or search term.</div>';
+        return;
+      }
+
+      filtered.forEach(e => {
+        const card = document.createElement('div');
+        const isBoss = e.role.includes('Boss') || e.role.includes('Elite');
+        const isWorld = e.idx >= 200;
+        const isFlagged = !!auditState.flagged[e.idx];
+
+        card.className = 'enemy-card' + (isBoss ? ' boss-card' : '') + (isWorld ? ' world-card' : '') + (isFlagged ? ' is-flagged' : '');
+        card.id = 'enemy-card-' + e.idx;
+
+        const roleCls = 'role-' + e.role.replace(/\s+/g, '-');
+        const st = enemyState[e.idx];
+        const poses = Object.keys(e.poses);
+
+        // Preload pose images
+        poses.forEach(p => getImage(e.poses[p].src));
+
+        let poseTabsHtml = '';
+        poses.forEach(p => {
+          const act = (st.activePose === p) ? ' active' : '';
+          poseTabsHtml += '<button class="pose-tab' + act + '" data-idx="' + e.idx + '" data-pose="' + p + '">' + p + '</button>';
+        });
+
+        let swatchesHtml = '';
+        if (e.colors && e.colors.length) {
+          e.colors.forEach(col => {
+            swatchesHtml += '<div class="swatch" style="background:' + col + '" title="' + col + '"></div>';
+          });
+        }
+
+        let issuesHtml = '';
+        const savedIssues = auditState.issues[e.idx] || {};
+        AUDIT_ISSUES.forEach(iss => {
+          const chk = savedIssues[iss.id] ? 'checked' : '';
+          issuesHtml += `
+            <label class="issue-label">
+              <input type="checkbox" data-idx="${e.idx}" data-issue="${iss.id}" ${chk}>
+              <span>${iss.label}</span>
+            </label>
+          `;
+        });
+
+        const savedNote = auditState.notes[e.idx] || '';
+
+        card.innerHTML = `
+          <div class="card-top">
+            <div class="enemy-id-badge">
+              <span class="idx-pill">#${e.idx}</span>
+              <div class="enemy-title">
+                <h3>${e.name}</h3>
+                <div class="enemy-meta-line">
+                  <span class="role-badge ${roleCls}">${e.role}</span>
+                  <span>${e.groupName}</span>
+                </div>
+              </div>
+            </div>
+            <button class="flag-btn ${isFlagged ? 'flagged' : ''}" data-idx="${e.idx}" id="flag-btn-${e.idx}">
+              ${isFlagged ? '⚠️ FLAGGED' : '⚑ FLAG FOR FIX'}
+            </button>
+          </div>
+
+          <div class="view-row">
+            <div class="canvas-container" id="container-${e.idx}" title="Click directly on sprite to position cheek reticle">
+              <canvas id="canvas-${e.idx}" width="200" height="270"></canvas>
+              <div class="canvas-overlay-tag" id="tag-${e.idx}">${st.activePose}</div>
+              <div class="reticle-hint">Click sprite to set cheek</div>
+            </div>
+
+            <div class="card-right">
+              <div class="pose-tabs" id="tabs-${e.idx}">${poseTabsHtml}</div>
+
+              <div class="info-metrics">
+                <div class="metric-row">
+                  <span class="metric-lbl">Pose Size</span>
+                  <span class="metric-val" id="dim-${e.idx}">--</span>
+                </div>
+                <div class="metric-row">
+                  <span class="metric-lbl">refH / Scale</span>
+                  <span class="metric-val">${e.refH}px</span>
+                </div>
+                <div class="metric-row">
+                  <span class="metric-lbl">HP / DMG</span>
+                  <span class="metric-val">${Number(e.hp).toLocaleString()} · ${e.dmg}</span>
+                </div>
+                <div class="metric-row">
+                  <span class="metric-lbl">Palette</span>
+                  <div class="color-swatches">${swatchesHtml}</div>
+                </div>
+              </div>
+
+              <div class="cheek-editor">
+                <div class="cheek-header">
+                  <span class="metric-lbl">🎯 Cheek Reticle:</span>
+                  <button class="btn-copy-coords" data-idx="${e.idx}">Copy</button>
+                </div>
+                <div class="coord-inputs">
+                  <span style="font-size:0.75rem; color:var(--text-dim);">X:</span>
+                  <input type="number" step="0.01" min="0" max="1" id="input-cx-${e.idx}" value="${st.customCheekX}" />
+                  <span style="font-size:0.75rem; color:var(--text-dim); margin-left:4px;">Y:</span>
+                  <input type="number" step="0.01" min="0" max="1" id="input-cy-${e.idx}" value="${st.customCheekY}" />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="audit-section">
+            <div class="audit-title">
+              <span>Fix / Issue Checklist:</span>
+            </div>
+            <div class="issues-chips">
+              ${issuesHtml}
+            </div>
+            <textarea class="notes-input" data-idx="${e.idx}" placeholder="Specific feedback or fix note for this sprite...">${savedNote}</textarea>
+          </div>
+        `;
+
+        grid.appendChild(card);
+      });
+
+      wireCardEvents();
+    }
+
+    function wireCardEvents() {
+      // Flag button
+      document.querySelectorAll('.flag-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const idx = btn.dataset.idx;
+          const isFlagged = !auditState.flagged[idx];
+          auditState.flagged[idx] = isFlagged;
+          btn.classList.toggle('flagged', isFlagged);
+          btn.textContent = isFlagged ? '⚠️ FLAGGED' : '⚑ FLAG FOR FIX';
+          const card = document.getElementById('enemy-card-' + idx);
+          if (card) card.classList.toggle('is-flagged', isFlagged);
+          saveAudit();
+        });
+      });
+
+      // Pose tabs
+      document.querySelectorAll('.pose-tab').forEach(tab => {
+        tab.addEventListener('click', () => {
+          const idx = tab.dataset.idx;
+          const pose = tab.dataset.pose;
+          enemyState[idx].activePose = pose;
+
+          const tabsWrap = document.getElementById('tabs-' + idx);
+          if (tabsWrap) {
+            tabsWrap.querySelectorAll('.pose-tab').forEach(t => t.classList.toggle('active', t.dataset.pose === pose));
+          }
+          const tag = document.getElementById('tag-' + idx);
+          if (tag) tag.textContent = pose;
+        });
+      });
+
+      // Click on canvas to position cheek reticle
+      document.querySelectorAll('.canvas-container').forEach(container => {
+        container.addEventListener('click', (ev) => {
+          const canvas = container.querySelector('canvas');
+          if (!canvas) return;
+          const idx = canvas.id.replace('canvas-', '');
+          const st = enemyState[idx];
+          if (!st || !st.renderedBounds) return;
+
+          const rect = canvas.getBoundingClientRect();
+          const clickX = ev.clientX - rect.left;
+          const clickY = ev.clientY - rect.top;
+
+          const b = st.renderedBounds;
+          const normX = Math.max(0, Math.min(1, (clickX - b.left) / b.width));
+          const normY = Math.max(0, Math.min(1, (clickY - b.top) / b.height));
+
+          st.customCheekX = Math.round(normX * 100) / 100;
+          st.customCheekY = Math.round(normY * 100) / 100;
+
+          const inX = document.getElementById('input-cx-' + idx);
+          const inY = document.getElementById('input-cy-' + idx);
+          if (inX) inX.value = st.customCheekX;
+          if (inY) inY.value = st.customCheekY;
+
+          auditState.coords[idx] = { x: st.customCheekX, y: st.customCheekY };
+          saveAudit();
+        });
+      });
+
+      // Cheek coordinate inputs
+      document.querySelectorAll('.coord-inputs input').forEach(input => {
+        input.addEventListener('input', () => {
+          const id = input.id;
+          const isX = id.includes('-cx-');
+          const idx = id.replace(isX ? 'input-cx-' : 'input-cy-', '');
+          const val = parseFloat(input.value) || 0;
+          if (isX) enemyState[idx].customCheekX = val;
+          else enemyState[idx].customCheekY = val;
+
+          auditState.coords[idx] = {
+            x: enemyState[idx].customCheekX,
+            y: enemyState[idx].customCheekY
+          };
+          saveAudit();
+        });
+      });
+
+      // Copy coordinates button
+      document.querySelectorAll('.btn-copy-coords').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const idx = btn.dataset.idx;
+          const st = enemyState[idx];
+          const text = `cheekX: ${st.customCheekX}, cheekY: ${st.customCheekY}`;
+          navigator.clipboard.writeText(text).then(() => {
+            const original = btn.textContent;
+            btn.textContent = '✓ Copied';
+            setTimeout(() => { btn.textContent = original; }, 1400);
+          });
+        });
+      });
+
+      // Issues checkboxes
+      document.querySelectorAll('.issue-label input[type="checkbox"]').forEach(chk => {
+        chk.addEventListener('change', () => {
+          const idx = chk.dataset.idx;
+          const issue = chk.dataset.issue;
+          if (!auditState.issues[idx]) auditState.issues[idx] = {};
+          auditState.issues[idx][issue] = chk.checked;
+
+          // Auto-flag if any issue is checked
+          const hasAny = Object.values(auditState.issues[idx]).some(Boolean);
+          if (hasAny && !auditState.flagged[idx]) {
+            auditState.flagged[idx] = true;
+            const flagBtn = document.getElementById('flag-btn-' + idx);
+            if (flagBtn) {
+              flagBtn.classList.add('flagged');
+              flagBtn.textContent = '⚠️ FLAGGED';
+            }
+            const card = document.getElementById('enemy-card-' + idx);
+            if (card) card.classList.add('is-flagged');
+          }
+          saveAudit();
+        });
+      });
+
+      // Notes inputs
+      document.querySelectorAll('.notes-input').forEach(textarea => {
+        textarea.addEventListener('input', () => {
+          const idx = textarea.dataset.idx;
+          auditState.notes[idx] = textarea.value.trim();
+          if (auditState.notes[idx] && !auditState.flagged[idx]) {
+            auditState.flagged[idx] = true;
+            const flagBtn = document.getElementById('flag-btn-' + idx);
+            if (flagBtn) {
+              flagBtn.classList.add('flagged');
+              flagBtn.textContent = '⚠️ FLAGGED';
+            }
+            const card = document.getElementById('enemy-card-' + idx);
+            if (card) card.classList.add('is-flagged');
+          }
+          saveAudit();
+        });
+      });
+    }
+
+    // Canvas animation loop
+    function drawCanvases(ts) {
+      const t = ts / 1000;
+
+      ENEMIES_DATA.forEach(e => {
+        const canvas = document.getElementById('canvas-' + e.idx);
+        if (!canvas) return;
+
+        const ctx = canvas.getContext('2d');
+        const W = canvas.width;
+        const H = canvas.height;
+        ctx.clearRect(0, 0, W, H);
+
+        const st = enemyState[e.idx] || { activePose: 'idle', customCheekX: e.cheekX, customCheekY: e.cheekY };
+        const poseObj = e.poses[st.activePose] || e.poses['idle'] || Object.values(e.poses)[0];
+        if (!poseObj) return;
+
+        const img = getImage(poseObj.src);
+
+        // Update dimension text
+        const dimEl = document.getElementById('dim-' + e.idx);
+        if (dimEl) dimEl.textContent = poseObj.w + ' × ' + poseObj.h;
+
+        // Ground baseline
+        const feetY = H * 0.85;
+        const cx = W / 2;
+
+        // Ground shadow & baseline
+        if (showShadow) {
+          ctx.fillStyle = 'rgba(255, 255, 255, 0.05)';
+          ctx.fillRect(0, feetY, W, 1);
+
+          ctx.fillStyle = 'rgba(0, 0, 0, 0.55)';
+          ctx.beginPath();
+          ctx.ellipse(cx, feetY + 4, 56, 8, 0, 0, Math.PI * 2);
+          ctx.fill();
+        }
+
+        // Target render dimensions anchored to feetY
+        const targetH = H * 0.72;
+        const scale = targetH / (e.refH || 900);
+        const dw = poseObj.w * scale;
+        const dh = poseObj.h * scale;
+
+        // Save rendered bounds for click detection
+        st.renderedBounds = {
+          left: cx - dw / 2,
+          top: feetY - dh,
+          width: dw,
+          height: dh
+        };
+
+        ctx.save();
+        ctx.translate(cx, feetY);
+
+        if (animateLive) {
+          if (st.activePose === 'idle') {
+            const breathe = Math.sin(t * 2.8 + e.idx) * 0.016;
+            ctx.scale(1 - breathe * 0.35, 1 + breathe);
+          } else if (st.activePose.includes('attack') || st.activePose === 'attack1') {
+            const lunge = Math.sin(t * 6 + e.idx) * 6;
+            ctx.translate(0, -Math.abs(lunge));
+          } else if (st.activePose === 'dizzy') {
+            ctx.rotate(Math.sin(t * 3.5 + e.idx) * 0.05);
+          }
+        }
+
+        // Draw image
+        if (img && img.complete && img.naturalWidth > 0) {
+          ctx.drawImage(img, -dw / 2, -dh, dw, dh);
+        } else {
+          // Placeholder loading box
+          ctx.fillStyle = 'rgba(255, 255, 255, 0.06)';
+          ctx.fillRect(-dw / 2, -dh, dw, dh);
+          ctx.strokeStyle = 'rgba(255, 255, 255, 0.12)';
+          ctx.strokeRect(-dw / 2, -dh, dw, dh);
+        }
+
+        // Cheek Target Reticle
+        if (showReticle) {
+          const reticleLocalX = -dw / 2 + dw * st.customCheekX;
+          const reticleLocalY = -dh + dh * st.customCheekY;
+
+          ctx.save();
+          ctx.translate(reticleLocalX, reticleLocalY);
+
+          // Reticle outer glow
+          ctx.beginPath();
+          ctx.arc(0, 0, 11, 0, Math.PI * 2);
+          ctx.fillStyle = 'rgba(239, 68, 68, 0.28)';
+          ctx.fill();
+          ctx.strokeStyle = '#ef4444';
+          ctx.lineWidth = 1.8;
+          ctx.stroke();
+
+          // Crosshairs
+          ctx.strokeStyle = '#ffffff';
+          ctx.lineWidth = 1.5;
+          ctx.beginPath();
+          ctx.moveTo(-14, 0); ctx.lineTo(-4, 0);
+          ctx.moveTo(4, 0); ctx.lineTo(14, 0);
+          ctx.moveTo(0, -14); ctx.lineTo(0, -4);
+          ctx.moveTo(0, 4); ctx.lineTo(0, 14);
+          ctx.stroke();
+
+          // Center target dot
+          ctx.fillStyle = '#f59e0b';
+          ctx.beginPath();
+          ctx.arc(0, 0, 2.5, 0, Math.PI * 2);
+          ctx.fill();
+
+          ctx.restore();
+        }
+
+        ctx.restore();
+      });
+
+      requestAnimationFrame(drawCanvases);
+    }
+
+    // Filter toolbar events
+    document.querySelectorAll('.filter-pill').forEach(pill => {
+      pill.addEventListener('click', () => {
+        document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
+        pill.classList.add('active');
+        currentFilter = pill.dataset.filter;
+        renderGrid();
+      });
+    });
+
+    document.getElementById('searchInput').addEventListener('input', (e) => {
+      searchQuery = e.target.value.trim();
+      renderGrid();
+    });
+
+    document.querySelectorAll('#globalPoseSegment button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('#globalPoseSegment button').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        globalPose = btn.dataset.pose;
+
+        ENEMIES_DATA.forEach(e => {
+          if (e.poses[globalPose]) {
+            enemyState[e.idx].activePose = globalPose;
+            const tabsWrap = document.getElementById('tabs-' + e.idx);
+            if (tabsWrap) {
+              tabsWrap.querySelectorAll('.pose-tab').forEach(t => t.classList.toggle('active', t.dataset.pose === globalPose));
+            }
+            const tag = document.getElementById('tag-' + e.idx);
+            if (tag) tag.textContent = globalPose;
+          }
+        });
+      });
+    });
+
+    document.getElementById('chkAnimate').addEventListener('change', (e) => { animateLive = e.target.checked; });
+    document.getElementById('chkReticle').addEventListener('change', (e) => { showReticle = e.target.checked; });
+    document.getElementById('chkShadow').addEventListener('change', (e) => { showShadow = e.target.checked; });
+
+    // Export / Report Tools
+    const modal = document.getElementById('reportModal');
+    const modalText = document.getElementById('modalText');
+    const modalTitle = document.getElementById('modalTitle');
+
+    document.getElementById('btnCloseModal').addEventListener('click', () => { modal.classList.remove('open'); });
+
+    document.getElementById('btnCopyReport').addEventListener('click', () => {
+      const flaggedIndices = Object.keys(auditState.flagged).filter(k => auditState.flagged[k]);
+      if (flaggedIndices.length === 0) {
+        alert('No enemies currently flagged! Click "⚑ FLAG FOR FIX" or check issues on any enemy card to add items to your report.');
+        return;
+      }
+
+      let md = '# These Hands — Sprite Audit & Fix List\n\n';
+      md += `Generated on: ${new Date().toLocaleString()} · Total Flagged: ${flaggedIndices.length}\n\n`;
+
+      flaggedIndices.forEach(idx => {
+        const e = ENEMIES_DATA.find(x => x.idx === Number(idx));
+        if (!e) return;
+        const issuesObj = auditState.issues[idx] || {};
+        const checkedIssues = Object.keys(issuesObj).filter(k => issuesObj[k]).map(id => {
+          const match = AUDIT_ISSUES.find(iss => iss.id === id);
+          return match ? match.label : id;
+        });
+        const note = auditState.notes[idx] || 'None specified';
+        const coords = auditState.coords[idx] || { x: e.cheekX, y: e.cheekY };
+
+        md += `### #${e.idx} ${e.name} (${e.role} · ${e.groupName})\n`;
+        md += `- **Cheek Coordinates**: (X: ${coords.x}, Y: ${coords.y}) [Baseline: ${e.cheekX}, ${e.cheekY}]\n`;
+        md += `- **Identified Issues**: ${checkedIssues.length ? checkedIssues.join(', ') : 'General fix needed'}\n`;
+        md += `- **Notes**: ${note}\n\n`;
+      });
+
+      modalTitle.textContent = '📋 Markdown Fix Report (' + flaggedIndices.length + ' Flagged)';
+      modalText.value = md;
+      modal.classList.add('open');
+    });
+
+    document.getElementById('btnExportJson').addEventListener('click', () => {
+      const jsonStr = JSON.stringify(auditState, null, 2);
+      modalTitle.textContent = '💾 Export Audit Data (JSON)';
+      modalText.value = jsonStr;
+      modal.classList.add('open');
+    });
+
+    document.getElementById('btnCopyModalText').addEventListener('click', () => {
+      modalText.select();
+      navigator.clipboard.writeText(modalText.value).then(() => {
+        alert('Copied to clipboard!');
+      });
+    });
+
+    document.getElementById('btnImportJson').addEventListener('click', () => {
+      document.getElementById('jsonFileInput').click();
+    });
+
+    document.getElementById('jsonFileInput').addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = (evt) => {
+        try {
+          const data = JSON.parse(evt.target.result);
+          auditState = data;
+          saveAudit();
+          initEnemyState();
+          renderGrid();
+          alert('Audit data imported successfully!');
+        } catch(err) {
+          alert('Invalid JSON file format.');
+        }
+      };
+      reader.readAsText(file);
+    });
+
+    document.getElementById('btnClearAudit').addEventListener('click', () => {
+      if (confirm('Are you sure you want to clear all flagged sprites and notes?')) {
+        auditState = { flagged: {}, issues: {}, notes: {}, coords: {} };
+        saveAudit();
+        initEnemyState();
+        renderGrid();
+      }
+    });
+
+    // Initialize
+    initEnemyState();
+    renderGrid();
+    updateFlaggedCount();
+    requestAnimationFrame(drawCanvases);
+  </script>
+</body>
+</html>

@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>These Hands — Attribute Pricing Progression Chart</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root {
+      --bg: #0c0f17;
+      --card-bg: rgba(22, 27, 41, 0.85);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --text: #f0f4fc;
+      --text-muted: #8a99b5;
+      --gold: #f2b01e;
+      --gold-glow: rgba(242, 176, 30, 0.35);
+      --cyan: #00d4ff;
+      --accent: #ff4757;
+      --radius: 14px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      padding: 24px;
+      line-height: 1.5;
+      background-image: 
+        radial-gradient(circle at 10% 20%, rgba(242, 176, 30, 0.04) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(0, 212, 255, 0.05) 0%, transparent 40%);
+    }
+
+    .container {
+      max-width: 1360px;
+      margin: 0 auto;
+    }
+
+    header {
+      margin-bottom: 24px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      border-bottom: 1px solid var(--card-border);
+      padding-bottom: 20px;
+    }
+
+    .title-group h1 {
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: linear-gradient(135deg, #fff 30%, var(--gold) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .title-group p {
+      color: var(--text-muted);
+      font-size: 14px;
+      margin-top: 4px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      background: rgba(242, 176, 30, 0.15);
+      color: var(--gold);
+      border: 1px solid rgba(242, 176, 30, 0.3);
+    }
+
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .metric-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      padding: 16px 20px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    }
+
+    .metric-card .label {
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-muted);
+    }
+
+    .metric-card .value {
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--gold);
+      margin: 4px 0;
+    }
+
+    .metric-card .desc {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .controls-panel {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      padding: 18px 22px;
+      margin-bottom: 24px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .control-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .control-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .btn-group {
+      display: flex;
+      background: rgba(0, 0, 0, 0.35);
+      border-radius: 8px;
+      padding: 3px;
+      border: 1px solid var(--card-border);
+    }
+
+    .btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      padding: 6px 14px;
+      font-size: 12px;
+      font-weight: 600;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .btn:hover {
+      color: #fff;
+    }
+
+    .btn.active {
+      background: var(--gold);
+      color: #111;
+      font-weight: 700;
+      box-shadow: 0 2px 8px var(--gold-glow);
+    }
+
+    .chart-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      padding: 24px;
+      margin-bottom: 24px;
+      position: relative;
+    }
+
+    .chart-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .chart-header h2 {
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .chart-container {
+      position: relative;
+      height: 480px;
+      width: 100%;
+    }
+
+    .attr-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 20px;
+      padding-top: 16px;
+      border-top: 1px solid var(--card-border);
+    }
+
+    .attr-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--text-muted);
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.2s ease;
+    }
+
+    .attr-pill.active {
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+      border-color: currentColor;
+    }
+
+    .attr-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    .calculator-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-bottom: 24px;
+    }
+
+    @media (max-width: 860px) {
+      .calculator-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .calc-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      padding: 22px;
+    }
+
+    .calc-card h3 {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 16px;
+      color: var(--cyan);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .calc-row {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    select, input[type="range"] {
+      width: 100%;
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid var(--card-border);
+      color: #fff;
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-size: 14px;
+      outline: none;
+    }
+
+    .slider-val {
+      font-weight: 700;
+      color: var(--gold);
+      font-size: 16px;
+    }
+
+    .calc-result-box {
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(242, 176, 30, 0.2);
+      border-radius: 10px;
+      padding: 16px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .res-item .res-lbl {
+      font-size: 11px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    .res-item .res-val {
+      font-size: 18px;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    .res-item .res-val.highlight {
+      color: var(--gold);
+    }
+
+    .table-container {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      overflow-x: auto;
+      max-height: 480px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      text-align: left;
+    }
+
+    th {
+      position: sticky;
+      top: 0;
+      background: #121624;
+      padding: 12px 16px;
+      font-weight: 700;
+      color: var(--text-muted);
+      border-bottom: 1px solid var(--card-border);
+      white-space: nowrap;
+    }
+
+    td {
+      padding: 10px 16px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      white-space: nowrap;
+    }
+
+    tr:hover td {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .coin-icon {
+      color: var(--gold);
+      font-weight: 800;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="title-group">
+        <h1>🥊 These Hands — Attribute Pricing Chart</h1>
+        <p>Interactive pricing curves across all 12 attributes from Level 1 to Endgame Level 80</p>
+      </div>
+      <div>
+        <span class="badge">Engine v1.3.1 Active</span>
+      </div>
+    </header>
+
+    <!-- Key Metrics Cards -->
+    <div class="metrics-grid">
+      <div class="metric-card">
+        <div class="label">Starting Cost (Level 1)</div>
+        <div class="value">35 – 250 🪙</div>
+        <div class="desc">Tiered: Power 35, Defense 140, Leech 250</div>
+      </div>
+      <div class="metric-card">
+        <div class="label">Monkey Gate (Level 10)</div>
+        <div class="value">3.0K – 4.6K 🪙</div>
+        <div class="desc">Bounty reward threshold from Monkey Boss</div>
+      </div>
+      <div class="metric-card">
+        <div class="label">Dragon Gate (Level 50)</div>
+        <div class="value">1.1M – 12.8M 🪙</div>
+        <div class="desc">Entrance into World 1 (Asura Realm)</div>
+      </div>
+      <div class="metric-card">
+        <div class="label">Endgame Cap (Level 80)</div>
+        <div class="value">35,000,000 🪙</div>
+        <div class="desc">Sustained by Shadow Verse 4.56B bounties</div>
+      </div>
+    </div>
+
+    <!-- Controls Panel -->
+    <div class="controls-panel">
+      <!-- Scale Toggle -->
+      <div class="control-group">
+        <span class="control-label">Scale Mode:</span>
+        <div class="btn-group">
+          <button class="btn active" id="btnLog" onclick="setScale('logarithmic')">Logarithmic (Recommended)</button>
+          <button class="btn" id="btnLinear" onclick="setScale('linear')">Linear</button>
+        </div>
+      </div>
+
+      <!-- Range Preset -->
+      <div class="control-group">
+        <span class="control-label">Stage Preset:</span>
+        <div class="btn-group">
+          <button class="btn active" id="rngAll" onclick="setRange(0, 80)">All (1–80)</button>
+          <button class="btn" id="rngEarly" onclick="setRange(0, 10)">Pre-Monkey (1–10)</button>
+          <button class="btn" id="rngMid" onclick="setRange(10, 40)">Mid Climb (10–40)</button>
+          <button class="btn" id="rngWorld" onclick="setRange(40, 80)">Worlds (40–80)</button>
+        </div>
+      </div>
+
+      <!-- Cost Display Mode -->
+      <div class="control-group">
+        <span class="control-label">View:</span>
+        <div class="btn-group">
+          <button class="btn active" id="btnPerLvl" onclick="setViewMode('perLevel')">Per Level Cost</button>
+          <button class="btn" id="btnCumul" onclick="setViewMode('cumulative')">Cumulative Total</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Chart Card -->
+    <div class="chart-card">
+      <div class="chart-header">
+        <h2 id="chartTitle">Attribute Cost Progression Curve</h2>
+        <div style="font-size: 13px; color: var(--text-muted);">
+          Click pills below to toggle individual attributes
+        </div>
+      </div>
+
+      <div class="chart-container">
+        <canvas id="attrChart"></canvas>
+      </div>
+
+      <!-- Attribute Toggles -->
+      <div class="attr-pills" id="attrPills"></div>
+    </div>
+
+    <!-- Interactive Inspector Calculator & Milestone Guide -->
+    <div class="calculator-grid">
+      <!-- Inspector Tool -->
+      <div class="calc-card">
+        <h3>🔍 Single Attribute Inspector</h3>
+        <div class="calc-row">
+          <label class="control-label">Select Attribute:</label>
+          <select id="calcAttrSelect" onchange="updateCalculator()"></select>
+        </div>
+        <div class="calc-row">
+          <div style="display: flex; justify-content: space-between;">
+            <label class="control-label">Upgrade Target Level:</label>
+            <span class="slider-val" id="calcLevelVal">Level 5</span>
+          </div>
+          <input type="range" id="calcLevelSlider" min="1" max="80" value="5" oninput="updateCalculator()">
+        </div>
+        <div class="calc-result-box">
+          <div class="res-item">
+            <div class="res-lbl">Upgrade Cost</div>
+            <div class="res-val highlight" id="calcCost">275 🪙</div>
+          </div>
+          <div class="res-item">
+            <div class="res-lbl">Cumulative Spent</div>
+            <div class="res-val" id="calcCumulative">655 🪙</div>
+          </div>
+          <div class="res-item">
+            <div class="res-lbl">Max Stat Cap</div>
+            <div class="res-val" id="calcMaxLvl">80</div>
+          </div>
+          <div class="res-item">
+            <div class="res-lbl">Pacing Benchmark</div>
+            <div class="res-val" style="font-size: 14px;" id="calcBenchmark">Kill 1x Cardboard Knight</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Enemy Bounty vs Cost Benchmarks -->
+      <div class="calc-card">
+        <h3>🎯 Enemy Income vs Attribute Cost Reality</h3>
+        <div style="font-size: 13px; color: var(--text-muted); margin-bottom: 14px;">
+          Comparison between enemy rewards and upgrade costs at each game milestone:
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 10px; font-size: 13px;">
+          <div style="display: flex; justify-content: space-between; padding: 8px 12px; background: rgba(255,255,255,0.03); border-radius: 8px;">
+            <span><b>Enemy 0 (Dummy):</b> ~74 total coins</span>
+            <span style="color: var(--cyan);">Power Lvl 1: <b>40 🪙</b> (1 kill)</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; padding: 8px 12px; background: rgba(255,255,255,0.03); border-radius: 8px;">
+            <span><b>Enemy 4 (Teddy Elite):</b> ~165 total coins</span>
+            <span style="color: var(--cyan);">Power Lvl 4: <b>170 🪙</b> (1 kill)</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; padding: 8px 12px; background: rgba(255,255,255,0.03); border-radius: 8px;">
+            <span><b>Enemy 9 (Monkey Boss):</b> ~2,500 total coins</span>
+            <span style="color: var(--cyan);">Power Lvl 9: <b>1,897 🪙</b> (1 kill)</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; padding: 8px 12px; background: rgba(255,255,255,0.03); border-radius: 8px;">
+            <span><b>Enemy 49 (Dragon Lord):</b> ~550M total coins</span>
+            <span style="color: var(--cyan);">Power Lvl 50: <b>1.12M 🪙</b></span>
+          </div>
+          <div style="display: flex; justify-content: space-between; padding: 8px 12px; background: rgba(255,255,255,0.03); border-radius: 8px;">
+            <span><b>W2 Boss (Dark Slapper):</b> ~4.56B total coins</span>
+            <span style="color: var(--gold);">Power Lvl 80: <b>35M 🪙</b></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Data Table Card -->
+    <div class="chart-card">
+      <div class="chart-header">
+        <h2>📋 Full Attribute Cost Data Table (Levels 1 to 20 Sample)</h2>
+      </div>
+      <div class="table-container">
+        <table id="dataTable">
+          <thead>
+            <tr id="tableHead"></tr>
+          </thead>
+          <tbody id="tableBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Exact game configuration attributes & formula from config.js
+    const ATTRS = {
+      power:      { name: "Power", baseCost: 35, maxCost: 25000000, maxLevel: 80, color: "#ff4757" },
+      speed:      { name: "Speed (Cap 0.70s)", baseCost: 70, maxCost: 38000000, maxLevel: 40, color: "#00d4ff" },
+      critChance: { name: "Crit Chance", baseCost: 65, maxCost: 35000000, maxLevel: 55, color: "#ffa502" },
+      critDamage: { name: "Crit Damage", baseCost: 55, maxCost: 32000000, maxLevel: 65, color: "#eccc68" },
+      defense:    { name: "Defense (Cap 40%)", baseCost: 140, maxCost: 55000000, maxLevel: 40, color: "#2ed573" },
+      stun:       { name: "Stun", baseCost: 85, maxCost: 40000000, maxLevel: 50, color: "#a55eea" },
+      combo:      { name: "Combo", baseCost: 45, maxCost: 28000000, maxLevel: 65, color: "#ff6b81" },
+      coinMult:   { name: "Coin Mult.", baseCost: 45, maxCost: 30000000, maxLevel: 65, color: "#f2b01e" },
+      accuracy:   { name: "Accuracy (Cap 99%)", baseCost: 55, maxCost: 12000000, maxLevel: 14, color: "#1e90ff" },
+      bossDamage: { name: "Boss Hunter (Cap 20%)", baseCost: 140, maxCost: 55000000, maxLevel: 40, color: "#ff7f50" },
+      vampirism:  { name: "Life Leech (Apex)", baseCost: 250, maxCost: 95000000, maxLevel: 40, color: "#ff477e" },
+      luck:       { name: "Fortune Luck", baseCost: 90, maxCost: 42000000, maxLevel: 50, color: "#7bed9f" }
+    };
+
+    const ATTR_ORDER = [
+      "power", "speed", "critChance", "critDamage", "defense", 
+      "stun", "combo", "coinMult", "accuracy", "bossDamage", 
+      "vampirism", "luck"
+    ];
+
+    // Authentic formula from src/game/config.js
+    function calcAttrCost(key, lvl) {
+      const def = ATTRS[key];
+      if (!def) return null;
+      const N = def.maxLevel || 1;
+      if (lvl >= N) return null;
+      const base = def.baseCost || 40;
+
+      if (lvl < 10) {
+        return Math.round(base * Math.pow(1.62, lvl));
+      }
+
+      const cost10 = Math.round(base * Math.pow(1.62, 9));
+      const remainingLevels = Math.max(1, N - 10);
+      const progress = (lvl - 9) / remainingLevels;
+      const maxCost = def.maxCost || 35000000;
+      return Math.round(cost10 * Math.pow(maxCost / cost10, Math.min(1, progress)));
+    }
+
+    // State
+    let currentScale = 'logarithmic';
+    let rangeMin = 0;
+    let rangeMax = 80;
+    let viewMode = 'perLevel'; // 'perLevel' or 'cumulative'
+    const activeAttrs = new Set(ATTR_ORDER);
+
+    let chartInstance = null;
+
+    function fmt(n) {
+      if (n == null) return "—";
+      return n.toLocaleString();
+    }
+
+    function buildChartData() {
+      const labels = [];
+      for (let l = rangeMin; l < rangeMax; l++) {
+        labels.push("L" + (l + 1));
+      }
+
+      const datasets = [];
+
+      for (const key of ATTR_ORDER) {
+        if (!activeAttrs.has(key)) continue;
+        const def = ATTRS[key];
+        const data = [];
+        let cum = 0;
+
+        for (let l = 0; l < def.maxLevel; l++) {
+          const cost = calcAttrCost(key, l);
+          cum += cost;
+          if (l >= rangeMin && l < rangeMax) {
+            data.push(viewMode === 'cumulative' ? cum : cost);
+          }
+        }
+
+        // Fill trailing nulls if maxLevel < rangeMax
+        while (data.length < labels.length) {
+          data.push(null);
+        }
+
+        datasets.push({
+          label: def.name + " (Max " + def.maxLevel + ")",
+          data: data,
+          borderColor: def.color,
+          backgroundColor: def.color + "22",
+          borderWidth: 2.2,
+          pointRadius: rangeMax - rangeMin <= 15 ? 4 : 1,
+          pointHoverRadius: 6,
+          tension: 0.15,
+          spanGaps: false
+        });
+      }
+
+      return { labels, datasets };
+    }
+
+    function initChart() {
+      const ctx = document.getElementById('attrChart').getContext('2d');
+      const chartData = buildChartData();
+
+      chartInstance = new Chart(ctx, {
+        type: 'line',
+        data: chartData,
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          interaction: {
+            mode: 'index',
+            intersect: false
+          },
+          plugins: {
+            legend: {
+              display: false
+            },
+            tooltip: {
+              backgroundColor: 'rgba(12, 15, 23, 0.95)',
+              titleColor: '#f2b01e',
+              titleFont: { weight: 'bold' },
+              borderColor: 'rgba(255, 255, 255, 0.1)',
+              borderWidth: 1,
+              padding: 12,
+              callbacks: {
+                label: function(context) {
+                  const val = context.parsed.y;
+                  return context.dataset.label + ": " + (val ? val.toLocaleString() + " 🪙" : "MAX");
+                }
+              }
+            }
+          },
+          scales: {
+            x: {
+              grid: { color: 'rgba(255, 255, 255, 0.05)' },
+              ticks: { color: '#8a99b5', font: { size: 11 } }
+            },
+            y: {
+              type: currentScale,
+              grid: { color: 'rgba(255, 255, 255, 0.05)' },
+              ticks: {
+                color: '#8a99b5',
+                font: { size: 11 },
+                callback: function(val) {
+                  if (val >= 1e6) return (val / 1e6).toFixed(1) + "M";
+                  if (val >= 1e3) return (val / 1e3).toFixed(0) + "K";
+                  return val;
+                }
+              }
+            }
+          }
+        }
+      });
+    }
+
+    function updateChart() {
+      if (!chartInstance) return;
+      const chartData = buildChartData();
+      chartInstance.data = chartData;
+      chartInstance.options.scales.y.type = currentScale;
+      chartInstance.update();
+      document.getElementById('chartTitle').textContent = 
+        (viewMode === 'cumulative' ? "Cumulative Total Cost" : "Per Level Upgrade Cost") + 
+        " (" + (rangeMin + 1) + "–" + rangeMax + ")";
+    }
+
+    function setScale(scale) {
+      currentScale = scale;
+      document.getElementById('btnLog').classList.toggle('active', scale === 'logarithmic');
+      document.getElementById('btnLinear').classList.toggle('active', scale === 'linear');
+      updateChart();
+    }
+
+    function setRange(min, max) {
+      rangeMin = min;
+      rangeMax = max;
+      document.getElementById('rngAll').classList.toggle('active', min === 0 && max === 80);
+      document.getElementById('rngEarly').classList.toggle('active', min === 0 && max === 10);
+      document.getElementById('rngMid').classList.toggle('active', min === 10 && max === 40);
+      document.getElementById('rngWorld').classList.toggle('active', min === 40 && max === 80);
+      updateChart();
+    }
+
+    function setViewMode(mode) {
+      viewMode = mode;
+      document.getElementById('btnPerLvl').classList.toggle('active', mode === 'perLevel');
+      document.getElementById('btnCumul').classList.toggle('active', mode === 'cumulative');
+      updateChart();
+    }
+
+    function toggleAttr(key) {
+      if (activeAttrs.has(key)) {
+        if (activeAttrs.size > 1) activeAttrs.delete(key);
+      } else {
+        activeAttrs.add(key);
+      }
+      renderPills();
+      updateChart();
+    }
+
+    function renderPills() {
+      const container = document.getElementById('attrPills');
+      container.innerHTML = "";
+      for (const key of ATTR_ORDER) {
+        const def = ATTRS[key];
+        const isActive = activeAttrs.has(key);
+        const pill = document.createElement('div');
+        pill.className = "attr-pill " + (isActive ? "active" : "");
+        pill.style.borderColor = isActive ? def.color : "rgba(255,255,255,0.1)";
+        pill.onclick = () => toggleAttr(key);
+
+        const dot = document.createElement('span');
+        dot.className = "attr-dot";
+        dot.style.background = def.color;
+
+        const text = document.createElement('span');
+        text.textContent = def.name;
+
+        pill.appendChild(dot);
+        pill.appendChild(text);
+        container.appendChild(pill);
+      }
+    }
+
+    function initCalculator() {
+      const select = document.getElementById('calcAttrSelect');
+      select.innerHTML = "";
+      for (const key of ATTR_ORDER) {
+        const opt = document.createElement('option');
+        opt.value = key;
+        opt.textContent = ATTRS[key].name + " (Max " + ATTRS[key].maxLevel + ")";
+        select.appendChild(opt);
+      }
+      updateCalculator();
+    }
+
+    function updateCalculator() {
+      const key = document.getElementById('calcAttrSelect').value;
+      const def = ATTRS[key];
+      const slider = document.getElementById('calcLevelSlider');
+      slider.max = def.maxLevel;
+      if (parseInt(slider.value) > def.maxLevel) slider.value = def.maxLevel;
+
+      const lvl = parseInt(slider.value);
+      document.getElementById('calcLevelVal').textContent = "Level " + lvl;
+      document.getElementById('calcMaxLvl').textContent = def.maxLevel;
+
+      const cost = calcAttrCost(key, lvl - 1);
+      document.getElementById('calcCost').textContent = cost ? cost.toLocaleString() + " 🪙" : "MAX";
+
+      let cum = 0;
+      for (let l = 0; l < lvl; l++) {
+        cum += calcAttrCost(key, l);
+      }
+      document.getElementById('calcCumulative').textContent = cum.toLocaleString() + " 🪙";
+
+      // Pacing benchmarks
+      let bench = "—";
+      if (lvl <= 2) bench = "1x Training Dummy Kill";
+      else if (lvl <= 4) bench = "1-2x Duck / Chicken";
+      else if (lvl <= 6) bench = "1x Teddy Elite Kill";
+      else if (lvl <= 9) bench = "2x Mime / Goose Kills";
+      else if (lvl <= 12) bench = "1x Monkey Boss Bounty";
+      else if (lvl <= 25) bench = "Fight Club / Ninja Master";
+      else if (lvl <= 40) bench = "Pharaoh Boss Hard Runs";
+      else if (lvl <= 50) bench = "Dragon Lord Farming";
+      else bench = "Asura Realm / Shadow Verse";
+      document.getElementById('calcBenchmark').textContent = bench;
+    }
+
+    function populateTable() {
+      const thead = document.getElementById('tableHead');
+      const tbody = document.getElementById('tableBody');
+
+      thead.innerHTML = "<th>Level</th>";
+      for (const key of ATTR_ORDER) {
+        thead.innerHTML += "<th>" + ATTRS[key].name + "</th>";
+      }
+
+      tbody.innerHTML = "";
+      for (let l = 1; l <= 20; l++) {
+        let row = "<tr><td><b>Level " + l + "</b></td>";
+        for (const key of ATTR_ORDER) {
+          const cost = calcAttrCost(key, l - 1);
+          row += "<td>" + (cost ? cost.toLocaleString() + " <span class='coin-icon'>🪙</span>" : "<span style='color:#666'>MAX</span>") + "</td>";
+        }
+        row += "</tr>";
+        tbody.innerHTML += row;
+      }
+    }
+
+    // Startup
+    window.addEventListener('DOMContentLoaded', () => {
+      renderPills();
+      initChart();
+      initCalculator();
+      populateTable();
+    });
+  </script>
+</body>
+</html>
+

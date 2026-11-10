@@ -19,8 +19,8 @@
     "semantic_hash": ""
   },
   "android/app/capacitor.build.gradle": {
-    "mtime": 1793904534.466975,
-    "seen": 1793904562.4022532,
+    "mtime": 1794247004.3345106,
+    "seen": 1794297343.6944642,
     "ast_hash": "ab2c953c47a743ed4496c3b72aa299a2",
     "semantic_hash": "ab2c953c47a743ed4496c3b72aa299a2"
   },
@@ -49,8 +49,8 @@
     "semantic_hash": "682315a426653617c6a74fc12bef55b6"
   },
   "android/capacitor.settings.gradle": {
-    "mtime": 1793904534.4659784,
-    "seen": 1793904562.4022532,
+    "mtime": 1794247004.3345106,
+    "seen": 1794297343.6944642,
     "ast_hash": "514d591b4c0254b390142858be5981e4",
     "semantic_hash": "514d591b4c0254b390142858be5981e4"
   },
@@ -127,9 +127,9 @@
     "semantic_hash": "8bac246e0138c7d2cab584be02430f8e"
   },
   "src/App.jsx": {
-    "mtime": 1793902483.6699834,
-    "seen": 1793902686.7503102,
-    "ast_hash": "6ac3b317681b18276e00b7fa18b496a2",
+    "mtime": 1794303416.2640502,
+    "seen": 1794307445.1609645,
+    "ast_hash": "2712bec2ba89c1e824baed7c310ac392",
     "semantic_hash": ""
   },
   "src/components/AchToast.jsx": {
@@ -157,9 +157,9 @@
     "semantic_hash": "8a09ac91286834cf794b18107cac5250"
   },
   "src/components/HelpScreen.jsx": {
-    "mtime": 1793890878.294172,
-    "seen": 1793891863.584304,
-    "ast_hash": "94dedb1c32d8b87421663d2af967554e",
+    "mtime": 1794303413.5536263,
+    "seen": 1794307445.1609645,
+    "ast_hash": "f6c2d0184209194e9386d7a6bd3dcebd",
     "semantic_hash": ""
   },
   "src/components/HomeScreen.jsx": {
@@ -211,10 +211,10 @@
     "semantic_hash": "e9397cb7b574ef3e94ec4b33c67b083e"
   },
   "src/components/SpecialsScreen.jsx": {
-    "mtime": 1793519346.0740428,
-    "seen": 1793814802.1942914,
-    "ast_hash": "deaf1897cadc9187149741cb1b9342ef",
-    "semantic_hash": "deaf1897cadc9187149741cb1b9342ef"
+    "mtime": 1794303410.9127545,
+    "seen": 1794307445.1609645,
+    "ast_hash": "e13b56b816d8c6773302f5a3cc01b37a",
+    "semantic_hash": ""
   },
   "src/components/StartScreen.jsx": {
     "mtime": 1793291903.3866172,
@@ -235,9 +235,9 @@
     "semantic_hash": ""
   },
   "src/game/config.js": {
-    "mtime": 1793904337.3568518,
-    "seen": 1793904562.4032488,
-    "ast_hash": "d3da0bdfd9208d91d92aaa71cbd64377",
+    "mtime": 1794303421.4971676,
+    "seen": 1794307445.1609645,
+    "ast_hash": "bac1fb05d5e4bc4e9b9a9284185ccfc8",
     "semantic_hash": ""
   },
   "src/game/enemies.js": {
@@ -247,21 +247,21 @@
     "semantic_hash": "776877318cf2e8a7d8ad1848631ff515"
   },
   "src/game/enemySpritesV2.js": {
-    "mtime": 1793890878.3143344,
-    "seen": 1793891863.5853148,
+    "mtime": 1794299430.1716416,
+    "seen": 1794299920.0493393,
     "ast_hash": "af4d22aa8f54ebf13d4d2dd4f61df7e2",
     "semantic_hash": ""
   },
   "src/game/engine.js": {
-    "mtime": 1793817416.0529902,
-    "seen": 1793817658.7821243,
-    "ast_hash": "7a878658c8d518eb411fe284794bd348",
+    "mtime": 1794245261.8824117,
+    "seen": 1794245643.0443842,
+    "ast_hash": "9b843c757d07da9c49adeb2bc51d465e",
     "semantic_hash": ""
   },
   "src/game/gameEngine.js": {
-    "mtime": 1793904517.8006597,
-    "seen": 1793904562.4032488,
-    "ast_hash": "51ec283a8fb09116eb9b35e677568283",
+    "mtime": 1794303423.817915,
+    "seen": 1794307445.1609645,
+    "ast_hash": "ac496f1b8845f4d412688f86e5a61925",
     "semantic_hash": ""
   },
   "src/game/proceduralEnemies.js": {
@@ -655,9 +655,9 @@
     "semantic_hash": ""
   },
   "public/enemy-sprites-v2/poses/10-mischievous-monkey-dizzy.webp": {
-    "mtime": 1793890878.0924807,
-    "seen": 1793891863.5853148,
-    "ast_hash": "f840fae4eef6448b2a14bc0ebbb1bff4",
+    "mtime": 1794306447.169,
+    "seen": 1794307445.161965,
+    "ast_hash": "d2c727d6f1dff1ab2dc16bcb42231ebf",
     "semantic_hash": ""
   },
   "public/enemy-sprites-v2/poses/10-mischievous-monkey-idle.webp": {
@@ -673,9 +673,9 @@
     "semantic_hash": ""
   },
   "public/enemy-sprites-v2/poses/10-monkey-anim-atk-windup.webp": {
-    "mtime": 1793890878.0974813,
-    "seen": 1793891863.5853148,
-    "ast_hash": "92a575be0b4006ad97bcb42e5570bdbb",
+    "mtime": 1794306447.409,
+    "seen": 1794307445.161965,
+    "ast_hash": "7024627bfbecb45381bb12e62f7f2d9e",
     "semantic_hash": ""
   },
   "public/enemy-sprites-v2/poses/11-bodybuilder-attack1.webp": {
@@ -817,9 +817,9 @@
     "semantic_hash": ""
   },
   "public/enemy-sprites-v2/poses/18-knight-attack.webp": {
-    "mtime": 1793890878.1204855,
-    "seen": 1793891863.5853148,
-    "ast_hash": "f283d5ac65fb6d3acc4fbfd2de8e787c",
+    "mtime": 1794306447.875,
+    "seen": 1794307445.161965,
+    "ast_hash": "445f1fb845ce2cb51fc2fd7c28b61928",
     "semantic_hash": ""
   },
   "public/enemy-sprites-v2/poses/18-knight-dizzy.webp": {
@@ -1027,9 +1027,9 @@
     "semantic_hash": ""
   },
   "public/enemy-sprites-v2/poses/26-ninja-recruit-idle.webp": {
-    "mtime": 1793358566.865401,
-    "seen": 1793815820.9632776,
-    "ast_hash": "4d2de7af5dd4844e04613cd2b52de3dd",
+    "mtime": 1794306448.006,
+    "seen": 1794307445.161965,
+    "ast_hash": "3747d660cb0dc490151dfe1a8f25e891",
     "semantic_hash": ""
   },
   "public/enemy-sprites-v2/poses/27-shuriken-master-attack.webp": {
@@ -1117,9 +1117,9 @@
     "semantic_hash": ""
   },
   "public/enemy-sprites-v2/poses/30-shogun-warlord-idle.webp": {
-    "mtime": 1793358567.6268933,
-    "seen": 1793815820.9632776,
-    "ast_hash": "5f389000079b46a3e2ab7e855e577376",
+    "mtime": 1794306448.151,
+    "seen": 1794307445.161965,
+    "ast_hash": "70439d1a7b256fdbf70146ed16566b01",
     "semantic_hash": ""
   },
   "public/enemy-sprites-v2/poses/31-werewolf-attack.webp": {
@@ -1159,9 +1159,9 @@
     "semantic_hash": ""
   },
   "public/enemy-sprites-v2/poses/33-orc-warrior-attack.webp": {
-    "mtime": 1793358568.1146352,
-    "seen": 1793815820.9632776,
-    "ast_hash": "d80b3f5c7c0db86afca2a84b5bda152f",
+    "mtime": 1794306448.307,
+    "seen": 1794307445.161965,
+    "ast_hash": "5d077ae237e7ec4c1681df68ee7d61d7",
     "semantic_hash": ""
   },
   "public/enemy-sprites-v2/poses/33-orc-warrior-dizzy.webp": {
@@ -1207,9 +1207,9 @@
     "semantic_hash": ""
   },
   "public/enemy-sprites-v2/poses/35-shadow-beast-idle.webp": {
-    "mtime": 1793358569.6307878,
-    "seen": 1793815820.9632776,
-    "ast_hash": "5ceda93935118854f69d0e62ec90a370",
+    "mtime": 1794306448.492,
+    "seen": 1794307445.161965,
+    "ast_hash": "205051296fafff5130f73ee7c72cf105",
     "semantic_hash": ""
   },
   "public/enemy-sprites-v2/poses/36-giant-serpent-attack.webp": {
@@ -1794,12 +1794,6 @@
     "ast_hash": "90aa055c3c82486bce67c16526c46279",
     "semantic_hash": ""
   },
-  "public/favicon.svg": {
-    "mtime": 1792867873.3560615,
-    "seen": 1793815820.9632776,
-    "ast_hash": "7e840862161341271697daa99a40d76b",
-    "semantic_hash": ""
-  },
   "public/fx/barrier.webp": {
     "mtime": 1793815416.4269598,
     "seen": 1793815820.9632776,
@@ -1858,12 +1852,6 @@
     "mtime": 1793517479.9928763,
     "seen": 1793815820.9632776,
     "ast_hash": "e2f31df9db7147404d7c71566d113200",
-    "semantic_hash": ""
-  },
-  "public/icons.svg": {
-    "mtime": 1792867873.3785365,
-    "seen": 1793815820.9632776,
-    "ast_hash": "3b4fcfcf393eca4d264dca4a4663bc37",
     "semantic_hash": ""
   },
   "public/logo.webp": {
@@ -1938,24 +1926,6 @@
     "ast_hash": "0159fcaa04924ad33e194fc49726f597",
     "semantic_hash": ""
   },
-  "src/assets/hero.png": {
-    "mtime": 1792867873.3238807,
-    "seen": 1793815820.9632776,
-    "ast_hash": "aead493361b27e7510691c5d7072dfc1",
-    "semantic_hash": ""
-  },
-  "src/assets/react.svg": {
-    "mtime": 1792867873.394268,
-    "seen": 1793815820.9632776,
-    "ast_hash": "f0402b67b6ce880f65666bb49e841696",
-    "semantic_hash": ""
-  },
-  "src/assets/vite.svg": {
-    "mtime": 1792867873.4103518,
-    "seen": 1793815820.9632776,
-    "ast_hash": "9960a24288958394ac50e57ff638b036",
-    "semantic_hash": ""
-  },
   "store-listing/1-boxer.png": {
     "mtime": 1793546587.8976924,
     "seen": 1793815820.9632776,
@@ -1999,9 +1969,9 @@
     "semantic_hash": ""
   },
   "src/game/worlds.js": {
-    "mtime": 1793890878.3213158,
-    "seen": 1793891863.5853148,
-    "ast_hash": "954b48f564648bb1d31ef3233c6be051",
+    "mtime": 1794242448.2312028,
+    "seen": 1794243561.6891515,
+    "ast_hash": "94836f9ded70ed4a4bf222715fc5454a",
     "semantic_hash": ""
   },
   "public/enemy-sprites-v2/poses/05-grumpy-teddy-attack.webp": {
@@ -2023,21 +1993,21 @@
     "semantic_hash": ""
   },
   "public/enemy-sprites-v2/poses/10-monkey-extras-banana-throw.webp": {
-    "mtime": 1793890878.0994833,
-    "seen": 1793891863.5853148,
-    "ast_hash": "3d211e051ec18341ffa67ecf7210172e",
+    "mtime": 1794306447.673,
+    "seen": 1794307445.161965,
+    "ast_hash": "7060f9fc3df83f2568d0d29a329a3c74",
     "semantic_hash": ""
   },
   "public/enemy-sprites-v2/poses/w1-01-asura-footman-attack.webp": {
-    "mtime": 1793890878.21787,
-    "seen": 1793891863.585829,
-    "ast_hash": "b44a1d482d65d61dbdeca3fc716bebcc",
+    "mtime": 1794306448.657,
+    "seen": 1794307445.161965,
+    "ast_hash": "d4e66724cca72b898ab03c62c5de05b4",
     "semantic_hash": ""
   },
   "public/enemy-sprites-v2/poses/w1-01-asura-footman-dizzy.webp": {
-    "mtime": 1793890878.2189016,
-    "seen": 1793891863.585829,
-    "ast_hash": "f2d3759c697be4d1a4bd9f79cdc488be",
+    "mtime": 1794306448.817,
+    "seen": 1794307445.161965,
+    "ast_hash": "77883828570d03988a1791e1af99b073",
     "semantic_hash": ""
   },
   "public/enemy-sprites-v2/poses/w1-01-asura-footman-idle.webp": {
@@ -2047,15 +2017,15 @@
     "semantic_hash": ""
   },
   "public/enemy-sprites-v2/poses/w1-02-rakshasa-huntress-attack.webp": {
-    "mtime": 1793890878.2219057,
-    "seen": 1793891863.585829,
-    "ast_hash": "f4557a90f8922e3f034582d712a74860",
+    "mtime": 1794306448.949,
+    "seen": 1794307445.161965,
+    "ast_hash": "91c7a9b86eba7a216f1d5dce9990ce0b",
     "semantic_hash": ""
   },
   "public/enemy-sprites-v2/poses/w1-02-rakshasa-huntress-dizzy.webp": {
-    "mtime": 1793890878.2229059,
-    "seen": 1793891863.585829,
-    "ast_hash": "604ccee4203388cdad0a6257cf07d009",
+    "mtime": 1794306449.064,
+    "seen": 1794307445.161965,
+    "ast_hash": "3630345c7f493956c317fe7c5944e17f",
     "semantic_hash": ""
   },
   "public/enemy-sprites-v2/poses/w1-02-rakshasa-huntress-idle.webp": {
@@ -2071,15 +2041,15 @@
     "semantic_hash": ""
   },
   "public/enemy-sprites-v2/poses/w1-03-kumbhakaran-dizzy.webp": {
-    "mtime": 1793890878.2269056,
-    "seen": 1793891863.585829,
-    "ast_hash": "be47c87ade06f347e763b72206557e3f",
+    "mtime": 1794306449.229,
+    "seen": 1794307445.161965,
+    "ast_hash": "43817d3ca4bca71a685dbba76b4a91f7",
     "semantic_hash": ""
   },
   "public/enemy-sprites-v2/poses/w1-03-kumbhakaran-idle.webp": {
-    "mtime": 1793890878.228941,
-    "seen": 1793891863.585829,
-    "ast_hash": "1117aabf613deb7e06a4583a38b5e36b",
+    "mtime": 1794306449.395,
+    "seen": 1794307445.161965,
+    "ast_hash": "25f65b7d14c8121c0e0cfde7c1796c61",
     "semantic_hash": ""
   },
   "public/enemy-sprites-v2/poses/w1-03-kumbhakaran-sppose.webp": {
@@ -2095,9 +2065,9 @@
     "semantic_hash": ""
   },
   "public/enemy-sprites-v2/poses/w1-04-mahishasura-dizzy.webp": {
-    "mtime": 1793890878.2339137,
-    "seen": 1793891863.585829,
-    "ast_hash": "ac62e9c20c538003537a7aabb5511d64",
+    "mtime": 1794306449.545,
+    "seen": 1794307445.161965,
+    "ast_hash": "568fcb043711b93b899ef35e12641637",
     "semantic_hash": ""
   },
   "public/enemy-sprites-v2/poses/w1-04-mahishasura-idle.webp": {
@@ -2125,27 +2095,27 @@
     "semantic_hash": ""
   },
   "public/enemy-sprites-v2/poses/w1-06-ravana-attack.webp": {
-    "mtime": 1793890878.2423067,
-    "seen": 1793891863.585829,
-    "ast_hash": "fd050da2b662c24785202e028c6ed570",
+    "mtime": 1794306924.883,
+    "seen": 1794307445.161965,
+    "ast_hash": "359d324c88b6952bfc1d29b6a4314ca3",
     "semantic_hash": ""
   },
   "public/enemy-sprites-v2/poses/w1-06-ravana-dizzy.webp": {
-    "mtime": 1793890878.2433171,
-    "seen": 1793891863.585829,
-    "ast_hash": "082198611c53081025faecfb1454a96d",
+    "mtime": 1794306925.035,
+    "seen": 1794307445.161965,
+    "ast_hash": "188d3785eb9cba36c6b3df1c38fc4e2f",
     "semantic_hash": ""
   },
   "public/enemy-sprites-v2/poses/w1-06-ravana-idle.webp": {
-    "mtime": 1793890878.2453206,
-    "seen": 1793891863.585829,
-    "ast_hash": "ab2790c6093adee11e52da974b26003a",
+    "mtime": 1794306924.662,
+    "seen": 1794307445.161965,
+    "ast_hash": "cd7ae17f4c47f45518d24dd96f635e84",
     "semantic_hash": ""
   },
   "public/enemy-sprites-v2/poses/w1-06-ravana-sppose.webp": {
-    "mtime": 1793890878.2473156,
-    "seen": 1793891863.585829,
-    "ast_hash": "f96ecd7feaad7a6a0a7ff1909c585e4b",
+    "mtime": 1794306925.221,
+    "seen": 1794307445.161965,
+    "ast_hash": "8a7218c483d51d3f97100a348b5054ad",
     "semantic_hash": ""
   },
   "public/enemy-sprites-v2/poses/w2-01-shade-dummy-attack.webp": {
@@ -2239,27 +2209,27 @@
     "semantic_hash": ""
   },
   "public/enemy-sprites-v2/poses/w2-06-dark-slapper-attack.webp": {
-    "mtime": 1793890878.2701683,
-    "seen": 1793891863.585829,
+    "mtime": 1794299430.1376014,
+    "seen": 1794299920.0503383,
     "ast_hash": "e3a1ffd70efc897b51982a3ce710e1e4",
     "semantic_hash": ""
   },
   "public/enemy-sprites-v2/poses/w2-06-dark-slapper-dizzy.webp": {
-    "mtime": 1793890878.271171,
-    "seen": 1793891863.585829,
+    "mtime": 1794299430.139605,
+    "seen": 1794299920.0503383,
     "ast_hash": "f41fde06e059dd5a09bb5a7feed12d63",
     "semantic_hash": ""
   },
   "public/enemy-sprites-v2/poses/w2-06-dark-slapper-idle.webp": {
-    "mtime": 1793890878.2731705,
-    "seen": 1793891863.585829,
+    "mtime": 1794299430.1426227,
+    "seen": 1794299920.0503383,
     "ast_hash": "cf22d0e83cccac943f39b98e33318bc5",
     "semantic_hash": ""
   },
   "public/enemy-sprites-v2/poses/w2-06-dark-slapper-sppose.webp": {
-    "mtime": 1793890878.2741716,
-    "seen": 1793891863.585829,
-    "ast_hash": "3d97e16119cb2783b6ab61dd12392424",
+    "mtime": 1794306449.733,
+    "seen": 1794307445.161965,
+    "ast_hash": "4cafedcb060efc694a0671a0f010ebdc",
     "semantic_hash": ""
   },
   "public/enemy-sprites-v2/thumbs/05-grumpy-teddy-thumb.webp": {
@@ -2299,8 +2269,8 @@
     "semantic_hash": ""
   },
   "public/enemy-sprites-v2/thumbs/w1-06-ravana-thumb.webp": {
-    "mtime": 1793890878.2811723,
-    "seen": 1793891863.585829,
+    "mtime": 1794299430.1479235,
+    "seen": 1794299920.0503383,
     "ast_hash": "181e14765c9dc59c1ff1a48a26db2187",
     "semantic_hash": ""
   },
@@ -2335,8 +2305,8 @@
     "semantic_hash": ""
   },
   "public/enemy-sprites-v2/thumbs/w2-06-dark-slapper-thumb.webp": {
-    "mtime": 1793890878.2861714,
-    "seen": 1793891863.585829,
+    "mtime": 1794299430.1504128,
+    "seen": 1794299920.0503383,
     "ast_hash": "77bfb87cfcfdf33baca66c553220faa6",
     "semantic_hash": ""
   },
@@ -2350,6 +2320,36 @@
     "mtime": 1793890878.290172,
     "seen": 1793891863.585829,
     "ast_hash": "a8c0072502fb1ba67219c81f424d4ed2",
+    "semantic_hash": ""
+  },
+  "attribute-pricing.html": {
+    "mtime": 1794296237.929598,
+    "seen": 1794297343.6958802,
+    "ast_hash": "5928a64996fe6acaa9d81381009208ca",
+    "semantic_hash": ""
+  },
+  "sprite-inspector.html": {
+    "mtime": 1794299824.6349235,
+    "seen": 1794299920.0493393,
+    "ast_hash": "403daa7606b504f4f92a615a49540354",
+    "semantic_hash": ""
+  },
+  "public/sprite-inspector.html": {
+    "mtime": 1794299824.6349235,
+    "seen": 1794299920.0493393,
+    "ast_hash": "403daa7606b504f4f92a615a49540354",
+    "semantic_hash": ""
+  },
+  "public/fx/uppercut-fist.webp": {
+    "mtime": 1794302390.939,
+    "seen": 1794302957.8992362,
+    "ast_hash": "0c290c3c101481f2b5dbb71cb35a9e7b",
+    "semantic_hash": ""
+  },
+  "public/fx/uppercut-thumb.webp": {
+    "mtime": 1794302390.979,
+    "seen": 1794302957.8992362,
+    "ast_hash": "7c75857f53727c454e77e57ad9082a0a",
     "semantic_hash": ""
   },
   "package-lock.json": {

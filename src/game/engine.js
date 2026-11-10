@@ -121,7 +121,7 @@ export function computePlayerStats(save) {
   let critChance = CONFIG.playerBase.critChance + (a.critChance || 0) * fx.critChancePerLevel;
   if (s.criticalSlaps) critChance += sfx.critSlaps;
   if (ab >= 7) critChance += afxMap.critSurge;
-  critChance = Math.min(0.60, critChance);
+  critChance = Math.min(fx.critChanceCap || 0.75, critChance);
 
   let critMult = CONFIG.playerBase.critMult + (a.critDamage || 0) * fx.critDamagePerLevel;
 
@@ -142,7 +142,7 @@ export function computePlayerStats(save) {
   let accuracy = Math.min(fx.accuracyCap, fx.accuracyBase + (a.accuracy || 0) * fx.accuracyPerLevel);
 
   // Boss damage multiplier
-  let bossDmgMult = 1 + (a.bossDamage || 0) * fx.bossDmgPerLevel;
+  let bossDmgMult = 1 + Math.min(fx.bossDmgCap || 0.20, (a.bossDamage || 0) * fx.bossDmgPerLevel);
   if (s.bossHunter) bossDmgMult *= sfx.bossMult;
   if (ab >= 8) bossDmgMult *= afxMap.bossBane;
 

@@ -9,7 +9,8 @@ import { getV2Sprite } from './enemySpritesV2.js';
 
 export const WORLD_IDX_BASE = [200, 210];
 
-const RATE = 0.1727; // Dragon Lord's coin rate (bounty = HP x rate)
+export const WORLD_RATES = [0.28, 0.38]; // W1 (Asura): 28% bounty rate, W2 (Shadow): 38% bounty rate
+const RATE = 0.28;
 
 export const WORLDS = [
   {
@@ -65,10 +66,10 @@ export function worldEnemyDef(w, s) {
     miniBoss: mini,
     worldBoss: boss,
     hp: e.hp,
-    coinRate: RATE,
-    bounty: Math.round(e.hp * RATE),
-    embersFirst: s === 5 ? 10 : s === 2 ? 3 : 1,
-    embersRepeat: s === 5 ? 5 : s === 2 ? 2 : 1,
+    coinRate: WORLD_RATES[w] || 0.28,
+    bounty: Math.round(e.hp * (WORLD_RATES[w] || 0.28)),
+    embersFirst: s === 5 ? 15 : s === 2 ? 5 : 2,
+    embersRepeat: s === 5 ? 8 : s === 2 ? 3 : 1,
     atkInterval: e.atkInterval,
     atkDmg: e.atkDmg,
     bossAnim: null,
