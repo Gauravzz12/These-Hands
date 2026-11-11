@@ -1891,7 +1891,7 @@ export const V2_CONFIGS = [
     },
     "spPose": {
       "src": "/enemy-sprites-v2/poses/w1-06-ravana-sppose.webp",
-      "w": 475,
+      "w": 561,
       "h": 900
     }
   },
@@ -1963,40 +1963,40 @@ export const V2_CONFIGS = [
 },
 {
   "idx": 212,
-  "id": "w2-03-lantern-wraith",
-  "name": "Lantern Wraith",
+  "id": "w2-03-umbral-puppeteer",
+  "name": "Umbral Puppeteer",
   "refH": 900,
-  "cheekX": 0.5,
-  "cheekY": 0.13,
+  "cheekX": 0.48,
+  "cheekY": 0.23,
   "colors": [
     "#1d1a24",
     "#8a5ae0",
-    "#5e546e",
-    "#b48ce0"
+    "#e8e2d4",
+    "#9a6b42"
   ],
   "poses": {
     "idle": {
-      "src": "/enemy-sprites-v2/poses/w2-03-lantern-wraith-idle.webp",
-      "w": 457,
+      "src": "/enemy-sprites-v2/poses/w2-03-umbral-puppeteer-idle.webp",
+      "w": 454,
       "h": 900
     },
     "attack": {
-      "src": "/enemy-sprites-v2/poses/w2-03-lantern-wraith-attack.webp",
-      "w": 508,
-      "h": 928
+      "src": "/enemy-sprites-v2/poses/w2-03-umbral-puppeteer-attack.webp",
+      "w": 483,
+      "h": 886
     },
     "dizzy": {
-      "src": "/enemy-sprites-v2/poses/w2-03-lantern-wraith-dizzy.webp",
-      "w": 439,
-      "h": 900
+      "src": "/enemy-sprites-v2/poses/w2-03-umbral-puppeteer-dizzy.webp",
+      "w": 437,
+      "h": 941
     },
     "spPose": {
-      "src": "/enemy-sprites-v2/poses/w2-03-lantern-wraith-sppose.webp",
-      "w": 463,
-      "h": 900
+      "src": "/enemy-sprites-v2/poses/w2-03-umbral-puppeteer-sppose.webp",
+      "w": 491,
+      "h": 953
     }
   },
-  "thumb": "/enemy-sprites-v2/thumbs/w2-03-lantern-wraith-thumb.webp"
+  "thumb": "/enemy-sprites-v2/thumbs/w2-03-umbral-puppeteer-thumb.webp"
 },
 {
   "idx": 213,

@@ -41,7 +41,7 @@ export const WORLDS = [
     enemies: [
       { name: 'Shade of the Dummy',  slug: 'w2-01-shade-dummy',      hp: 3500000000,  atkDmg: 26000, atkInterval: 2.0, scale: 1.0 },
       { name: 'Umbral Mime',         slug: 'w2-02-umbral-mime',      hp: 4500000000,  atkDmg: 28000, atkInterval: 1.9, scale: 1.0 },
-      { name: 'Lantern Wraith', slug: 'w2-03-lantern-wraith', hp: 7500000000,  atkDmg: 36000, atkInterval: 2.0, scale: 1.25, role: 'MINI BOSS', title: 'Keeper of Stolen Souls' },
+      { name: 'Umbral Puppeteer', slug: 'w2-03-umbral-puppeteer', hp: 7500000000,  atkDmg: 36000, atkInterval: 2.0, scale: 1.25, role: 'MINI BOSS', title: 'Master of Strings' },
       { name: 'Gloom Serpent',       slug: 'w2-04-gloom-serpent',    hp: 6000000000,  atkDmg: 32000, atkInterval: 1.8, scale: 1.2 },
       { name: 'The Hollow Monk',     slug: 'w2-05-hollow-monk',      hp: 7000000000,  atkDmg: 33000, atkInterval: 1.9, scale: 1.1 },
       { name: 'The Dark Slapper',    slug: 'w2-06-dark-slapper',     hp: 12000000000, atkDmg: 48000, atkInterval: 1.8, scale: 1.5,  role: 'WORLD BOSS', title: 'Your Shadow, Perfected' },

@@ -662,10 +662,10 @@ export const CONFIG = {
       "desc": "Ten heads howl as the crescent strike falls"
     },
     "212": {
-      "name": "SOUL AEGIS",
+      "name": "MARIONETTE GRIP",
       "kind": "shield",
-      "hits": 5, "blurb": "Raises a dome of soul-flame — absorbs 5 slaps at 50% damage!",
-      "desc": "The lantern flares into a wall of stolen souls"
+      "hits": 5, "blurb": "Strings weave into a barrier — absorbs 5 slaps at 50% damage!",
+      "desc": "The puppet lunges as a web of strings seals the Puppeteer"
     },
     "215": {
       "name": "COUNTER SLAP",
@@ -699,7 +699,7 @@ export const CONFIG = {
     {"id": "tenKingsCrown", "icon": "👑", "name": "Crown of Ten Kings", "srcW": 0, "srcS": 5, "vals": [0.15, 0.25, 0.40], "fmt": "pct", "desc": "+{v} damage vs world final bosses"},
     {"id": "firstFoeSplinter", "icon": "🪵", "name": "Splinter of the First Foe", "srcW": 1, "srcS": 0, "vals": [0.08, 0.16, 0.24], "fmt": "pct", "desc": "+{v} damage vs non-bosses"},
     {"id": "silentGlove", "icon": "🧤", "name": "Silent Glove", "srcW": 1, "srcS": 1, "vals": [0.04, 0.07, 0.10], "fmt": "pct", "desc": "+{v} slap speed"},
-    {"id": "eclipseSigil", "icon": "🏮", "name": "Soul Lantern", "srcW": 1, "srcS": 2, "vals": [0.15, 0.30, 0.45], "fmt": "pct", "desc": "Boss specials charge {v} slower"},
+    {"id": "eclipseSigil", "icon": "🎭", "name": "Puppet Strings", "srcW": 1, "srcS": 2, "vals": [0.15, 0.30, 0.45], "fmt": "pct", "desc": "Boss specials charge {v} slower"},
     {"id": "venomfangCoil", "icon": "🐍", "name": "Venomfang Coil", "srcW": 1, "srcS": 3, "vals": [0.10, 0.20, 0.30], "fmt": "pct", "desc": "+{v} damage vs stunned enemies"},
     {"id": "beadsVoid", "icon": "📿", "name": "Beads of the Void", "srcW": 1, "srcS": 4, "vals": [0.20, 0.40, 0.60], "fmt": "pct", "desc": "+{v} Soul Embers earned"},
     {"id": "mirrorPalm", "icon": "🪞", "name": "Mirror Palm", "srcW": 1, "srcS": 5, "vals": [9, 8, 7], "fmt": "count", "desc": "Skin power triggers every {v} slaps"}
