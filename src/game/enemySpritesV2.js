@@ -1884,8 +1884,8 @@ export const V2_CONFIGS = [
       "w": 484,
       "h": 900
     },
-    "atkFollow": {
-      "src": "/enemy-sprites-v2/poses/w1-06-ravana-atkfollow.webp",
+    "spFollow": {
+      "src": "/enemy-sprites-v2/poses/w1-06-ravana-spfollow.webp",
       "w": 543,
       "h": 900,
       "gCx": 0.5,
