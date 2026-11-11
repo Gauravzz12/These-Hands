@@ -24,7 +24,7 @@ export const CONFIG = {
   "attrs": {
     "power": { "name": "Power", "baseCost": 35, "maxCost": 25000000, "growth": 1.16, "lateGrowth": 1.40, "maxLevel": 80 },
     "speed": { "name": "Speed", "baseCost": 70, "maxCost": 38000000, "growth": 1.16, "lateGrowth": 1.51, "maxLevel": 40 },
-    "critChance": { "name": "Crit Chance", "baseCost": 65, "maxCost": 35000000, "growth": 1.18, "lateGrowth": 1.58, "maxLevel": 55 },
+    "critChance": { "name": "Crit Chance", "baseCost": 85, "maxCost": 45500000, "growth": 1.18, "lateGrowth": 1.58, "maxLevel": 55 },
     "critDamage": { "name": "Crit Damage", "baseCost": 55, "maxCost": 32000000, "growth": 1.16, "lateGrowth": 1.51, "maxLevel": 65 },
     "defense": { "name": "Defense", "baseCost": 140, "maxCost": 55000000, "growth": 1.16, "lateGrowth": 1.51, "maxLevel": 40 },
     "stun": { "name": "Stun", "baseCost": 85, "maxCost": 40000000, "growth": 1.2, "lateGrowth": 1.69, "maxLevel": 50 },
@@ -103,7 +103,7 @@ export const CONFIG = {
       "tailStart": 30,
       "tailGrowth": 1.325,
       "bossMult": 2.50,
-      "eliteMult": 1.40
+      "eliteMult": 1.55
     },
     "damage": {
       "earlyDmg": [8, 12, 15, 20, 26, 24, 28, 34, 40, 48],
@@ -112,7 +112,7 @@ export const CONFIG = {
       "tailStart": 30,
       "tailGrowth": 1.14,
       "bossMult": 1.80,
-      "eliteMult": 1.30
+      "eliteMult": 1.40
     },
     "interval": {
       "early": [2.40, 2.35, 2.30, 2.25, 2.05, 2.20, 2.15, 2.10, 2.05, 1.95],
