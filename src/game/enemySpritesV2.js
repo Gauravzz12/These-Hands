@@ -1721,7 +1721,7 @@ export const V2_CONFIGS = [
     },
     "dizzy": {
       "src": "/enemy-sprites-v2/poses/w1-01-asura-footman-dizzy.webp",
-      "w": 425,
+      "w": 439,
       "h": 913
     }
   },
@@ -1753,7 +1753,7 @@ export const V2_CONFIGS = [
     },
     "dizzy": {
       "src": "/enemy-sprites-v2/poses/w1-02-rakshasa-huntress-dizzy.webp",
-      "w": 331,
+      "w": 335,
       "h": 900
     }
   },
@@ -1785,7 +1785,7 @@ export const V2_CONFIGS = [
     },
     "dizzy": {
       "src": "/enemy-sprites-v2/poses/w1-03-kumbhakaran-dizzy.webp",
-      "w": 474,
+      "w": 507,
       "h": 900
     },
     "spPose": {
@@ -1822,7 +1822,7 @@ export const V2_CONFIGS = [
     },
     "dizzy": {
       "src": "/enemy-sprites-v2/poses/w1-04-mahishasura-dizzy.webp",
-      "w": 427,
+      "w": 432,
       "h": 900
     }
   },
@@ -1854,7 +1854,7 @@ export const V2_CONFIGS = [
     },
     "dizzy": {
       "src": "/enemy-sprites-v2/poses/w1-05-vetala-warlock-dizzy.webp",
-      "w": 584,
+      "w": 499,
       "h": 940
     }
   },
@@ -1886,7 +1886,7 @@ export const V2_CONFIGS = [
     },
     "dizzy": {
       "src": "/enemy-sprites-v2/poses/w1-06-ravana-dizzy.webp",
-      "w": 480,
+      "w": 466,
       "h": 900
     },
     "spPose": {
@@ -1923,7 +1923,7 @@ export const V2_CONFIGS = [
     },
     "dizzy": {
       "src": "/enemy-sprites-v2/poses/w2-01-shade-dummy-dizzy.webp",
-      "w": 491,
+      "w": 486,
       "h": 940
     }
   },
@@ -1955,7 +1955,7 @@ export const V2_CONFIGS = [
     },
     "dizzy": {
       "src": "/enemy-sprites-v2/poses/w2-02-umbral-mime-dizzy.webp",
-      "w": 253,
+      "w": 342,
       "h": 936
     }
   },
@@ -1987,7 +1987,7 @@ export const V2_CONFIGS = [
     },
     "dizzy": {
       "src": "/enemy-sprites-v2/poses/w2-03-forgotten-knight-dizzy.webp",
-      "w": 547,
+      "w": 543,
       "h": 900
     }
   },
@@ -2014,12 +2014,12 @@ export const V2_CONFIGS = [
     },
     "attack": {
       "src": "/enemy-sprites-v2/poses/w2-04-gloom-serpent-attack.webp",
-      "w": 474,
+      "w": 463,
       "h": 900
     },
     "dizzy": {
       "src": "/enemy-sprites-v2/poses/w2-04-gloom-serpent-dizzy.webp",
-      "w": 474,
+      "w": 446,
       "h": 916
     }
   },
@@ -2051,7 +2051,7 @@ export const V2_CONFIGS = [
     },
     "dizzy": {
       "src": "/enemy-sprites-v2/poses/w2-05-hollow-monk-dizzy.webp",
-      "w": 473,
+      "w": 455,
       "h": 939
     }
   },
@@ -2083,7 +2083,7 @@ export const V2_CONFIGS = [
     },
     "dizzy": {
       "src": "/enemy-sprites-v2/poses/w2-06-dark-slapper-dizzy.webp",
-      "w": 515,
+      "w": 507,
       "h": 909
     },
     "spPose": {
