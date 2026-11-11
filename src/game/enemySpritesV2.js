@@ -1891,7 +1891,7 @@ export const V2_CONFIGS = [
     },
     "spPose": {
       "src": "/enemy-sprites-v2/poses/w1-06-ravana-sppose.webp",
-      "w": 561,
+      "w": 543,
       "h": 900
     }
   },
@@ -1987,8 +1987,8 @@ export const V2_CONFIGS = [
     },
     "dizzy": {
       "src": "/enemy-sprites-v2/poses/w2-03-umbral-puppeteer-dizzy.webp",
-      "w": 437,
-      "h": 941
+      "w": 433,
+      "h": 942
     },
     "spPose": {
       "src": "/enemy-sprites-v2/poses/w2-03-umbral-puppeteer-sppose.webp",
