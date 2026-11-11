@@ -1127,7 +1127,7 @@ export const V2_CONFIGS = [
       "idle": {"src": "/enemy-sprites-v2/poses/39-giant-scorpion-idle.webp", "w": 909, "h": 900},
       "attack1": {"src": "/enemy-sprites-v2/poses/39-giant-scorpion-attack.webp", "w": 1037, "h": 1000},
       "attack": {"src": "/enemy-sprites-v2/poses/39-giant-scorpion-attack.webp", "w": 1037, "h": 1000},
-      "dizzy": {"src": "/enemy-sprites-v2/poses/39-giant-scorpion-dizzy.webp", "w": 1222, "h": 900}
+      "dizzy": {"src": "/enemy-sprites-v2/poses/39-giant-scorpion-dizzy.webp", "w": 920, "h": 900}
     },
     "thumb": "/enemy-sprites-v2/thumbs/39-giant-scorpion-thumb.webp"
   },
@@ -1721,7 +1721,7 @@ export const V2_CONFIGS = [
     },
     "dizzy": {
       "src": "/enemy-sprites-v2/poses/w1-01-asura-footman-dizzy.webp",
-      "w": 407,
+      "w": 439,
       "h": 913
     }
   },
@@ -1753,7 +1753,7 @@ export const V2_CONFIGS = [
     },
     "dizzy": {
       "src": "/enemy-sprites-v2/poses/w1-02-rakshasa-huntress-dizzy.webp",
-      "w": 315,
+      "w": 335,
       "h": 900
     }
   },
@@ -1785,7 +1785,7 @@ export const V2_CONFIGS = [
     },
     "dizzy": {
       "src": "/enemy-sprites-v2/poses/w1-03-kumbhakaran-dizzy.webp",
-      "w": 466,
+      "w": 507,
       "h": 900
     },
     "spPose": {
@@ -1822,7 +1822,7 @@ export const V2_CONFIGS = [
     },
     "dizzy": {
       "src": "/enemy-sprites-v2/poses/w1-04-mahishasura-dizzy.webp",
-      "w": 426,
+      "w": 432,
       "h": 900
     }
   },
@@ -1854,7 +1854,7 @@ export const V2_CONFIGS = [
     },
     "dizzy": {
       "src": "/enemy-sprites-v2/poses/w1-05-vetala-warlock-dizzy.webp",
-      "w": 449,
+      "w": 499,
       "h": 940
     }
   },
@@ -1865,8 +1865,8 @@ export const V2_CONFIGS = [
   "id": "w1-06-ravana",
   "name": "Ravana",
   "refH": 900,
-  "cheekX": 0.2,
-  "cheekY": 0.34,
+  "cheekX": 0.5,
+  "cheekY": 0.21,
   "colors": [
     "#b03024",
     "#e8a33d",
@@ -1876,22 +1876,22 @@ export const V2_CONFIGS = [
   "poses": {
     "idle": {
       "src": "/enemy-sprites-v2/poses/w1-06-ravana-idle.webp",
-      "w": 485,
+      "w": 468,
       "h": 900
     },
     "attack": {
       "src": "/enemy-sprites-v2/poses/w1-06-ravana-attack.webp",
-      "w": 482,
+      "w": 484,
       "h": 900
     },
     "dizzy": {
       "src": "/enemy-sprites-v2/poses/w1-06-ravana-dizzy.webp",
-      "w": 481,
+      "w": 466,
       "h": 900
     },
     "spPose": {
       "src": "/enemy-sprites-v2/poses/w1-06-ravana-sppose.webp",
-      "w": 482,
+      "w": 475,
       "h": 900
     }
   },
@@ -1923,7 +1923,7 @@ export const V2_CONFIGS = [
     },
     "dizzy": {
       "src": "/enemy-sprites-v2/poses/w2-01-shade-dummy-dizzy.webp",
-      "w": 637,
+      "w": 486,
       "h": 940
     }
   },
@@ -1955,7 +1955,7 @@ export const V2_CONFIGS = [
     },
     "dizzy": {
       "src": "/enemy-sprites-v2/poses/w2-02-umbral-mime-dizzy.webp",
-      "w": 311,
+      "w": 342,
       "h": 936
     }
   },
@@ -1963,11 +1963,11 @@ export const V2_CONFIGS = [
 },
 {
   "idx": 212,
-  "id": "w2-03-forgotten-knight",
-  "name": "The Forgotten Knight",
+  "id": "w2-03-lantern-wraith",
+  "name": "Lantern Wraith",
   "refH": 900,
-  "cheekX": 0.28,
-  "cheekY": 0.34,
+  "cheekX": 0.5,
+  "cheekY": 0.13,
   "colors": [
     "#1d1a24",
     "#8a5ae0",
@@ -1976,22 +1976,27 @@ export const V2_CONFIGS = [
   ],
   "poses": {
     "idle": {
-      "src": "/enemy-sprites-v2/poses/w2-03-forgotten-knight-idle.webp",
-      "w": 556,
+      "src": "/enemy-sprites-v2/poses/w2-03-lantern-wraith-idle.webp",
+      "w": 457,
       "h": 900
     },
     "attack": {
-      "src": "/enemy-sprites-v2/poses/w2-03-forgotten-knight-attack.webp",
-      "w": 538,
+      "src": "/enemy-sprites-v2/poses/w2-03-lantern-wraith-attack.webp",
+      "w": 508,
       "h": 928
     },
     "dizzy": {
-      "src": "/enemy-sprites-v2/poses/w2-03-forgotten-knight-dizzy.webp",
-      "w": 548,
+      "src": "/enemy-sprites-v2/poses/w2-03-lantern-wraith-dizzy.webp",
+      "w": 439,
+      "h": 900
+    },
+    "spPose": {
+      "src": "/enemy-sprites-v2/poses/w2-03-lantern-wraith-sppose.webp",
+      "w": 463,
       "h": 900
     }
   },
-  "thumb": "/enemy-sprites-v2/thumbs/w2-03-forgotten-knight-thumb.webp"
+  "thumb": "/enemy-sprites-v2/thumbs/w2-03-lantern-wraith-thumb.webp"
 },
 {
   "idx": 213,
@@ -2014,12 +2019,12 @@ export const V2_CONFIGS = [
     },
     "attack": {
       "src": "/enemy-sprites-v2/poses/w2-04-gloom-serpent-attack.webp",
-      "w": 474,
+      "w": 463,
       "h": 900
     },
     "dizzy": {
       "src": "/enemy-sprites-v2/poses/w2-04-gloom-serpent-dizzy.webp",
-      "w": 539,
+      "w": 446,
       "h": 916
     }
   },
@@ -2041,17 +2046,17 @@ export const V2_CONFIGS = [
   "poses": {
     "idle": {
       "src": "/enemy-sprites-v2/poses/w2-05-hollow-monk-idle.webp",
-      "w": 449,
+      "w": 451,
       "h": 900
     },
     "attack": {
       "src": "/enemy-sprites-v2/poses/w2-05-hollow-monk-attack.webp",
-      "w": 449,
+      "w": 467,
       "h": 900
     },
     "dizzy": {
       "src": "/enemy-sprites-v2/poses/w2-05-hollow-monk-dizzy.webp",
-      "w": 467,
+      "w": 455,
       "h": 939
     }
   },
@@ -2083,7 +2088,7 @@ export const V2_CONFIGS = [
     },
     "dizzy": {
       "src": "/enemy-sprites-v2/poses/w2-06-dark-slapper-dizzy.webp",
-      "w": 520,
+      "w": 507,
       "h": 909
     },
     "spPose": {
