@@ -16,7 +16,7 @@ function fmtCoins(n) {
   return Math.round(n).toString();
 }
 
-function upgradeCost(level) { return Math.floor(500 * Math.pow(2.2, level - 1)); }
+function upgradeCost(level) { return Math.floor(15000 * Math.pow(3.5, level - 1)); }
 
 export default function SpecialsScreen() {
   const { state, dispatch, go } = useGame();

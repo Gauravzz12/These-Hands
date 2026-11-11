@@ -8,32 +8,32 @@ export const CONFIG = {
   },
   "capPerLevel": 3,
   "levelUp": {
-    "base": 60,
-    "growth": 1.85,
+    "base": 180,
+    "growth": 2.15,
     "rampStart": 9,
-    "midGrowth": 1.48,
+    "midGrowth": 1.62,
     "midStart": 25,
-    "lateGrowth": 1.28,
+    "lateGrowth": 1.38,
     "grindStart": 45,
-    "endGrowth": 1.22,
+    "endGrowth": 1.28,
     "worldStart": 50,
-    "worldGrowth": 1.18,
+    "worldGrowth": 1.22,
     "worldCap": 80
   },
   "levelCap": 80,
   "attrs": {
-    "power": { "name": "Power", "baseCost": 35, "maxCost": 25000000, "growth": 1.16, "lateGrowth": 1.40, "maxLevel": 80 },
-    "speed": { "name": "Speed", "baseCost": 70, "maxCost": 38000000, "growth": 1.16, "lateGrowth": 1.51, "maxLevel": 40 },
-    "critChance": { "name": "Crit Chance", "baseCost": 85, "maxCost": 45500000, "growth": 1.18, "lateGrowth": 1.58, "maxLevel": 55 },
-    "critDamage": { "name": "Crit Damage", "baseCost": 55, "maxCost": 32000000, "growth": 1.16, "lateGrowth": 1.51, "maxLevel": 65 },
-    "defense": { "name": "Defense", "baseCost": 140, "maxCost": 55000000, "growth": 1.16, "lateGrowth": 1.51, "maxLevel": 40 },
-    "stun": { "name": "Stun", "baseCost": 85, "maxCost": 40000000, "growth": 1.2, "lateGrowth": 1.69, "maxLevel": 50 },
-    "combo": { "name": "Combo", "baseCost": 45, "maxCost": 28000000, "growth": 1.16, "lateGrowth": 1.51, "maxLevel": 65 },
-    "coinMult": { "name": "Coin Mult.", "baseCost": 45, "maxCost": 30000000, "growth": 1.16, "lateGrowth": 1.51, "maxLevel": 65 },
-    "accuracy": { "name": "Accuracy", "baseCost": 55, "maxCost": 12000000, "growth": 1.3, "lateGrowth": 3.9, "maxLevel": 14 },
-    "bossDamage": { "name": "Boss Hunter", "baseCost": 140, "maxCost": 55000000, "growth": 1.16, "lateGrowth": 1.51, "maxLevel": 40 },
-    "vampirism": { "name": "Life Leech", "baseCost": 250, "maxCost": 95000000, "growth": 1.18, "lateGrowth": 1.58, "maxLevel": 40 },
-    "luck": { "name": "Fortune Luck", "baseCost": 90, "maxCost": 42000000, "growth": 1.2, "lateGrowth": 1.69, "maxLevel": 50 }
+    "power": { "name": "Power", "baseCost": 60, "maxCost": 55000000, "growth": 1.16, "lateGrowth": 1.40, "maxLevel": 80 },
+    "speed": { "name": "Speed", "baseCost": 110, "maxCost": 75000000, "growth": 1.16, "lateGrowth": 1.51, "maxLevel": 40 },
+    "critChance": { "name": "Crit Chance", "baseCost": 130, "maxCost": 85000000, "growth": 1.18, "lateGrowth": 1.58, "maxLevel": 55 },
+    "critDamage": { "name": "Crit Damage", "baseCost": 90, "maxCost": 65000000, "growth": 1.16, "lateGrowth": 1.51, "maxLevel": 65 },
+    "defense": { "name": "Defense", "baseCost": 220, "maxCost": 95000000, "growth": 1.16, "lateGrowth": 1.51, "maxLevel": 40 },
+    "stun": { "name": "Stun", "baseCost": 130, "maxCost": 80000000, "growth": 1.2, "lateGrowth": 1.69, "maxLevel": 50 },
+    "combo": { "name": "Combo", "baseCost": 75, "maxCost": 60000000, "growth": 1.16, "lateGrowth": 1.51, "maxLevel": 65 },
+    "coinMult": { "name": "Coin Mult.", "baseCost": 80, "maxCost": 65000000, "growth": 1.16, "lateGrowth": 1.51, "maxLevel": 65 },
+    "accuracy": { "name": "Accuracy", "baseCost": 95, "maxCost": 30000000, "growth": 1.3, "lateGrowth": 3.9, "maxLevel": 14 },
+    "bossDamage": { "name": "Boss Hunter", "baseCost": 220, "maxCost": 95000000, "growth": 1.16, "lateGrowth": 1.51, "maxLevel": 40 },
+    "vampirism": { "name": "Life Leech", "baseCost": 380, "maxCost": 150000000, "growth": 1.18, "lateGrowth": 1.58, "maxLevel": 40 },
+    "luck": { "name": "Fortune Luck", "baseCost": 140, "maxCost": 85000000, "growth": 1.2, "lateGrowth": 1.69, "maxLevel": 50 }
   },
   "attrOrder": [
     "power",
@@ -71,14 +71,14 @@ export const CONFIG = {
     "strikeCoinMult": 0.32,
     "killBountyMult": 1.65,
     "critCoinMult": 0.50,
-    "slapBaseFrac": 0.04,
+    "slapBaseFrac": 0.10,
     "slapDmgBonusScale": 5,
     "slapDmgBonusCap": 1,
-    "slapFightCapFrac": 0.70,
-    "slapTaperFrac": 0.25,
+    "slapFightCapFrac": 1.35,
+    "slapTaperFrac": 0.35,
     "stunCooldownSec": 4,
-    "slapEarlyMult": 3,
-    "slapEarlyCapFrac": 1.5,
+    "slapEarlyMult": 3.5,
+    "slapEarlyCapFrac": 2.0,
     "slapCritPayFrac": 0.5,
     "luckCoinMult": 3,
     "vampPerLevel": 1.0,
@@ -1307,20 +1307,20 @@ export function calcAttrCost(key, currentLevel) {
   const N = def.maxLevel || 1;
   const lvl = currentLevel != null ? currentLevel : 0;
   if (lvl >= N) return Infinity;
-  const base = def.baseCost || 40;
+  const base = def.baseCost || 60;
 
   // Early curve (levels 0-9, up to Monkey Boss):
-  // Smooth, accessible progression scaling from baseCost (40-75) up to ~3,000-5,000 coins
+  // Steeper progression scaling from baseCost (60-380) up to ~15,000-40,000 coins
   if (lvl < 10) {
-    return Math.round(base * Math.pow(1.62, lvl));
+    return Math.round(base * Math.pow(1.85, lvl));
   }
 
   // Beyond Level 10 (post-Monkey Boss to Endgame):
-  // Progressive geometric scale from the Level 10 cost up to 35,000,000 at maxLevel N
-  const cost10 = Math.round(base * Math.pow(1.62, 9));
+  // Progressive geometric scale from the Level 10 cost up to maxCost at maxLevel N
+  const cost10 = Math.round(base * Math.pow(1.85, 9));
   const remainingLevels = Math.max(1, N - 10);
   const progress = (lvl - 9) / remainingLevels;
-  const maxCost = def.maxCost || 35000000;
+  const maxCost = def.maxCost || 65000000;
   return Math.round(cost10 * Math.pow(maxCost / cost10, Math.min(1, progress)));
 }
 
