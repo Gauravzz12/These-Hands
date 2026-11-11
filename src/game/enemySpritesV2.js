@@ -1865,8 +1865,8 @@ export const V2_CONFIGS = [
   "id": "w1-06-ravana",
   "name": "Ravana",
   "refH": 900,
-  "cheekX": 0.2,
-  "cheekY": 0.34,
+  "cheekX": 0.5,
+  "cheekY": 0.15,
   "colors": [
     "#b03024",
     "#e8a33d",
@@ -1876,22 +1876,22 @@ export const V2_CONFIGS = [
   "poses": {
     "idle": {
       "src": "/enemy-sprites-v2/poses/w1-06-ravana-idle.webp",
-      "w": 471,
+      "w": 469,
       "h": 900
     },
     "attack": {
       "src": "/enemy-sprites-v2/poses/w1-06-ravana-attack.webp",
-      "w": 526,
+      "w": 444,
       "h": 900
     },
     "dizzy": {
       "src": "/enemy-sprites-v2/poses/w1-06-ravana-dizzy.webp",
-      "w": 491,
+      "w": 434,
       "h": 900
     },
     "spPose": {
       "src": "/enemy-sprites-v2/poses/w1-06-ravana-sppose.webp",
-      "w": 460,
+      "w": 459,
       "h": 900
     }
   },
