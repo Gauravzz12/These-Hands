@@ -167,10 +167,10 @@ export const CONFIG = {
     ]
   },
   "hard": {
-    "hpMult": 4.0,
+    "hpMult": 3.0,
     "atkMult": 1.35,
     "intervalMult": 0.88,
-    "coinMult": 5.5,
+    "coinMult": 1.5,
     "gemReward": 5,
     "emberBonus": 1.5
   },

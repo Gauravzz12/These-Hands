@@ -996,8 +996,9 @@ async function startStorePurchase(item) {
 
   const bridge = window.__nativeBridge;
   const isNative = bridge && bridge.isNative && bridge.purchasesInitialized;
+  const hasLivePlayProducts = isNative && bridge.productsMap && Object.keys(bridge.productsMap).length > 0;
 
-  if (isNative) {
+  if (hasLivePlayProducts) {
     showShopToast("Connecting to Google Play Store...");
     Sound.unlock();
     try {
@@ -1010,6 +1011,11 @@ async function startStorePurchase(item) {
         const errMsg = res.error?.message || "Google Play transaction failed";
         console.warn("Purchase failed:", res.error);
         showShopToast("Purchase failed: " + errMsg);
+        if (errMsg.includes("not found")) {
+          setTimeout(() => {
+            openStoreCheckoutModal(item);
+          }, 800);
+        }
         return;
       }
       grantStorePurchaseReward(item, res.transaction?.transactionIdentifier || res.customerInfo?.originalAppUserId);
@@ -1018,7 +1024,7 @@ async function startStorePurchase(item) {
       showShopToast("Payment error: " + (err.message || "Could not complete"));
     }
   } else {
-    // Web / browser mode (development or desktop browser)
+    // If Google Play Console app/products are not yet created or active, use in-game Sandbox checkout
     openStoreCheckoutModal(item);
   }
 }
@@ -1028,6 +1034,9 @@ function openStoreCheckoutModal(item) {
   const modal = $("mockCheckout") || $("storeCheckout");
   if (!modal) return;
   storeCheckoutItem = item;
+  const bridge = window.__nativeBridge;
+  const isNative = bridge && bridge.isNative && bridge.purchasesInitialized;
+  const hasLivePlayProducts = isNative && bridge.productsMap && Object.keys(bridge.productsMap).length > 0;
 
   let title = "";
   let priceStr = "";
@@ -1074,9 +1083,18 @@ function openStoreCheckoutModal(item) {
   const totalEl = $("mockTotal");
   if (totalEl) totalEl.textContent = "TOTAL · " + priceStr;
   const noteEl = $("mockNote");
-  if (noteEl) noteEl.textContent = "Official Google Play & RevenueCat billing. Fast and secure checkout.";
+  if (noteEl) {
+    if (bridge && bridge.isNative && !hasLivePlayProducts) {
+      noteEl.textContent = "🧪 Sandbox Test Mode: Google Play Console app not yet created. Tap to test item unlock!";
+    } else {
+      noteEl.textContent = "Official Google Play & RevenueCat billing. Fast and secure checkout.";
+    }
+  }
   const confirmBtn = $("mockConfirm");
-  if (confirmBtn) confirmBtn.disabled = false;
+  if (confirmBtn) {
+    confirmBtn.disabled = false;
+    confirmBtn.textContent = (bridge && bridge.isNative && !hasLivePlayProducts) ? "TEST UNLOCK ITEM" : "CONFIRM PURCHASE";
+  }
   modal.classList.add("open");
   Sound.unlock();
 }
@@ -1925,7 +1943,7 @@ if(FM2&&FM2.type==="gauntlet"){
       const lossCount=G.lossStreak||0;
       if(!isHard && lossCount>=2){
         if(hardUnlocked(e.idx)){
-          const hBounty=Math.round((e.bounty||0)*(CONFIG.hard&&CONFIG.hard.killBountyMult||1.5)*(CONFIG.fx&&CONFIG.fx.killBountyMult||1.5));
+          const hBounty=Math.round((e.bounty||0)*(CONFIG.hard&&CONFIG.hard.hpMult||3.0)*(CONFIG.hard&&CONFIG.hard.coinMult||1.5)*(CONFIG.fx&&CONFIG.fx.killBountyMult||1.5)*stats().coinMult);
           hmHintEl.innerHTML="💡 <b>Want more coins?</b> Defeat <b>Hard Mode</b> for <b style=\"color:var(--gold);\">+"+fmtNum(hBounty)+" coins</b> on victory (no per-slap drops).";
           hmHintEl.style.display="block";
         }else{

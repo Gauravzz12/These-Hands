@@ -26,7 +26,14 @@ android {
                 def props = new Properties()
                 props.load(new FileInputStream(ksPropsFile))
                 def sf = props['storeFile'] ?: "../release.keystore"
-                storeFile file(sf).isAbsolute() ? file(sf) : rootProject.file(sf)
+                def resolvedFile = file(sf).isAbsolute() ? file(sf) : rootProject.file(sf)
+                if (!resolvedFile.exists()) {
+                    resolvedFile = rootProject.file("../release.keystore")
+                }
+                if (!resolvedFile.exists()) {
+                    resolvedFile = rootProject.file("release.keystore")
+                }
+                storeFile resolvedFile
                 storePassword props['storePassword']
                 keyAlias props['keyAlias'] ?: "TheseHands"
                 keyPassword props['keyPassword'] ?: props['storePassword']

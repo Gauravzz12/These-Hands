@@ -25,6 +25,25 @@ export const REVENUECAT_GOOGLE_API_KEY =
   (typeof window !== 'undefined' && window.__REVENUECAT_KEY__) ||
   'goog_XVNXRkjWHUFevwPwrsXdRaCjVwj';
 
+export function getCandidateIds(id) {
+  if (!id) return [];
+  const clean = String(id)
+    .replace(/^gem_gem_/, 'gem_')
+    .replace(/^bundle_bundle_/, 'bundle_')
+    .replace(/^feature_feature_/, 'feature_');
+  const set = new Set([id, clean]);
+
+  const stripped = clean.replace(/^(gem|bundle|feature)_/, '');
+  set.add(stripped);
+  set.add(`gem_${stripped}`);
+  set.add(`bundle_${stripped}`);
+  set.add(`feature_${stripped}`);
+  set.add(`com.idleslapper.game.${clean}`);
+  set.add(`com.idleslapper.game.${stripped}`);
+
+  return Array.from(set);
+}
+
 export const NativeBridge = {
   isNative: Capacitor.isNativePlatform(),
   admobInitialized: false,
@@ -34,6 +53,7 @@ export const NativeBridge = {
   bannerVisible: false,
   activeRewardCallback: null,
   productsMap: {},
+  packagesMap: {},
 
   async init() {
     if (!this.isNative) {
@@ -278,42 +298,89 @@ export const NativeBridge = {
     }
   },
 
+  mapProductAliases(product, pkg = null) {
+    if (!product || !product.identifier) return;
+    const candidates = getCandidateIds(product.identifier);
+    for (const cand of candidates) {
+      this.productsMap[cand] = product;
+      if (pkg) this.packagesMap[cand] = pkg;
+    }
+    if (pkg && pkg.identifier) {
+      this.packagesMap[pkg.identifier] = pkg;
+      for (const cand of getCandidateIds(pkg.identifier)) {
+        this.packagesMap[cand] = pkg;
+      }
+    }
+  },
+
   async loadProducts(productIds) {
     if (!this.isNative || !this.purchasesInitialized) return {};
     try {
-      const ids = productIds || (CONFIG && CONFIG.products ? CONFIG.products.map(p => p.id) : [
+      const baseIds = productIds || (CONFIG && CONFIG.products ? CONFIG.products.map(p => p.id) : [
         'bundle_starter', 'bundle_weapon_x', 'bundle_inferno', 'bundle_dragon', 'bundle_steel', 'bundle_cosmic',
         'gem_pouch', 'gem_sack', 'gem_chest', 'gem_vault', 'gem_treasury', 'gem_mountain',
         'feature_offline', 'feature_vip', 'feature_remove_ads', 'feature_frenzy_boost'
       ]);
 
+      const allCandidatesSet = new Set();
+      for (const id of baseIds) {
+        for (const cand of getCandidateIds(id)) {
+          allCandidatesSet.add(cand);
+        }
+      }
+      const candidateList = Array.from(allCandidatesSet);
+
       // 1. Fetch In-App Products (NON_SUBSCRIPTION is required for Android Google Play one-time purchases)
       try {
         const { products } = await Purchases.getProducts({
-          productIdentifiers: ids,
+          productIdentifiers: candidateList,
           type: PRODUCT_CATEGORY.NON_SUBSCRIPTION
         });
         if (products && products.length > 0) {
           for (const p of products) {
-            this.productsMap[p.identifier] = p;
+            this.mapProductAliases(p);
           }
-          console.log(`[RevenueCat] Preloaded ${products.length} non-subscription products from Google Play:`, products.map(p => p.identifier));
+          console.log(`[RevenueCat] Preloaded ${products.length} non-subscription products:`, products.map(p => p.identifier));
         }
       } catch (errNonSub) {
         console.warn('[RevenueCat] getProducts(NON_SUBSCRIPTION) error:', errNonSub);
       }
 
-      // 2. Fetch Offerings as fallback / supplement
+      // 2. Fallback: Also try without type filter if 0 products found
+      if (Object.keys(this.productsMap).length === 0) {
+        try {
+          const { products: anyProducts } = await Purchases.getProducts({
+            productIdentifiers: candidateList
+          });
+          if (anyProducts && anyProducts.length > 0) {
+            for (const p of anyProducts) {
+              this.mapProductAliases(p);
+            }
+            console.log(`[RevenueCat] Preloaded ${anyProducts.length} default products:`, anyProducts.map(p => p.identifier));
+          }
+        } catch (errAny) {
+          console.warn('[RevenueCat] getProducts() fallback error:', errAny);
+        }
+      }
+
+      // 3. Fetch Offerings (checks all offerings, not just current)
       try {
         const offerings = await Purchases.getOfferings();
-        if (offerings && offerings.current && offerings.current.availablePackages) {
-          for (const pkg of offerings.current.availablePackages) {
-            if (pkg.product) {
-              this.productsMap[pkg.product.identifier] = pkg.product;
-              this.productsMap[pkg.identifier] = pkg.product;
+        if (offerings) {
+          const offeringList = [
+            ...(offerings.current ? [offerings.current] : []),
+            ...(offerings.all ? Object.values(offerings.all) : [])
+          ];
+          for (const off of offeringList) {
+            if (off && off.availablePackages) {
+              for (const pkg of off.availablePackages) {
+                if (pkg.product) {
+                  this.mapProductAliases(pkg.product, pkg);
+                }
+              }
             }
           }
-          console.log(`[RevenueCat] Offerings loaded. Total products mapped: ${Object.keys(this.productsMap).length}`);
+          console.log(`[RevenueCat] Offerings processed. Total products mapped: ${Object.keys(this.productsMap).length}`);
         }
       } catch (offErr) {
         console.warn('[RevenueCat] getOfferings fallback error:', offErr);
@@ -335,67 +402,106 @@ export const NativeBridge = {
       return { success: false, reason: 'not_native' };
     }
     try {
-      // Normalize productId (e.g. handle duplicate prefixes like gem_gem_pouch -> gem_pouch)
-      const cleanId = productIdentifier.replace(/^gem_gem_/, 'gem_')
-                                       .replace(/^bundle_bundle_/, 'bundle_')
-                                       .replace(/^feature_feature_/, 'feature_');
+      const candidates = getCandidateIds(productIdentifier);
+      let product = null;
+      let packageMatch = null;
 
-      let product = this.productsMap[cleanId] || this.productsMap[productIdentifier];
+      for (const c of candidates) {
+        if (this.productsMap[c]) { product = this.productsMap[c]; break; }
+        if (this.packagesMap[c]) { packageMatch = this.packagesMap[c]; break; }
+      }
 
-      // If not yet cached, attempt to fetch directly with NON_SUBSCRIPTION type
-      if (!product) {
-        console.log(`[RevenueCat] Product ${cleanId} not cached, fetching from Google Play...`);
+      // If not yet cached, fetch candidate list from Google Play
+      if (!product && !packageMatch) {
+        console.log(`[RevenueCat] Querying Google Play for candidates:`, candidates);
         try {
           const { products } = await Purchases.getProducts({
-            productIdentifiers: [cleanId, productIdentifier],
+            productIdentifiers: candidates,
             type: PRODUCT_CATEGORY.NON_SUBSCRIPTION
           });
           if (products && products.length > 0) {
-            product = products.find(p => p.identifier === cleanId || p.identifier === productIdentifier) || products[0];
-            this.productsMap[cleanId] = product;
-            this.productsMap[productIdentifier] = product;
+            for (const p of products) {
+              this.mapProductAliases(p);
+            }
+            product = products[0];
           }
         } catch (fetchErr) {
-          console.warn(`[RevenueCat] Failed fetching product ${cleanId}:`, fetchErr);
+          console.warn(`[RevenueCat] Failed fetching product candidates (NON_SUB):`, fetchErr);
         }
       }
 
-      // Check offerings fallback if product still not directly found
-      if (!product) {
+      // Fallback fetch without type filter if still not found
+      if (!product && !packageMatch) {
+        try {
+          const { products: anyProducts } = await Purchases.getProducts({
+            productIdentifiers: candidates
+          });
+          if (anyProducts && anyProducts.length > 0) {
+            for (const p of anyProducts) {
+              this.mapProductAliases(p);
+            }
+            product = anyProducts[0];
+          }
+        } catch (fetchErrAny) {
+          console.warn(`[RevenueCat] Failed fetching product candidates (fallback):`, fetchErrAny);
+        }
+      }
+
+      // If still not found, check offerings directly
+      if (!product && !packageMatch) {
         try {
           const offerings = await Purchases.getOfferings();
-          if (offerings && offerings.current && offerings.current.availablePackages) {
-            const pkg = offerings.current.availablePackages.find(p =>
-              p.product?.identifier === cleanId || p.product?.identifier === productIdentifier || p.identifier === cleanId
-            );
-            if (pkg) {
-              console.log(`[RevenueCat] Purchasing via Offerings package: ${pkg.identifier}`);
-              const purchaseResult = await Purchases.purchasePackage({ aPackage: pkg });
-              return {
-                success: true,
-                customerInfo: purchaseResult.customerInfo,
-                transaction: purchaseResult.transaction,
-                productIdentifier: cleanId
-              };
+          if (offerings) {
+            const allOffs = [
+              ...(offerings.current ? [offerings.current] : []),
+              ...(offerings.all ? Object.values(offerings.all) : [])
+            ];
+            for (const off of allOffs) {
+              if (off && off.availablePackages) {
+                for (const pkg of off.availablePackages) {
+                  if (candidates.some(c => c === pkg.identifier || c === pkg.product?.identifier)) {
+                    packageMatch = pkg;
+                    break;
+                  }
+                }
+              }
+              if (packageMatch) break;
             }
           }
         } catch (offErr) {
-          console.warn('[RevenueCat] Offerings purchase fallback check failed:', offErr);
+          console.warn('[RevenueCat] Offerings lookup error:', offErr);
         }
       }
 
-      if (!product) {
-        console.error(`[RevenueCat] Product (${cleanId}) could not be resolved from Google Play.`);
-        return { success: false, error: new Error('Product (' + cleanId + ') not found in Google Play') };
+      // If we have an Offerings package, purchase via purchasePackage
+      if (packageMatch) {
+        console.log(`[RevenueCat] Purchasing via Offerings package: ${packageMatch.identifier}`);
+        const purchaseResult = await Purchases.purchasePackage({ aPackage: packageMatch });
+        return {
+          success: true,
+          customerInfo: purchaseResult.customerInfo,
+          transaction: purchaseResult.transaction,
+          productIdentifier: packageMatch.product?.identifier || productIdentifier
+        };
       }
 
-      console.log(`[RevenueCat] Launching purchaseStoreProduct for: ${product.identifier}`);
-      const purchaseResult = await Purchases.purchaseStoreProduct({ product });
+      // If we have a StoreProduct, purchase via purchaseStoreProduct
+      if (product) {
+        console.log(`[RevenueCat] Launching purchaseStoreProduct for: ${product.identifier}`);
+        const purchaseResult = await Purchases.purchaseStoreProduct({ product });
+        return {
+          success: true,
+          customerInfo: purchaseResult.customerInfo,
+          transaction: purchaseResult.transaction,
+          productIdentifier: purchaseResult.productIdentifier || product.identifier || productIdentifier
+        };
+      }
+
+      // If neither was found from Google Play Billing:
+      console.error(`[RevenueCat] None of product candidates (${candidates.join(', ')}) resolved from Google Play.`);
       return {
-        success: true,
-        customerInfo: purchaseResult.customerInfo,
-        transaction: purchaseResult.transaction,
-        productIdentifier: purchaseResult.productIdentifier || product.identifier || cleanId
+        success: false,
+        error: new Error(`Product (${productIdentifier}) not found in Google Play. (Checked aliases: ${candidates.join(', ')})`)
       };
     } catch (err) {
       if (err.userCancelled || err.code === 1 || (err.message && err.message.toLowerCase().includes('cancel'))) {

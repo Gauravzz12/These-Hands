@@ -13,14 +13,14 @@
     "semantic_hash": "5e6e3cea3e89137071c142dd7835b0ef"
   },
   "android/app/build.gradle": {
-    "mtime": 1793902731.3718078,
-    "seen": 1793903145.3401334,
-    "ast_hash": "caff8a0909e1a5567ea25011f5395df9",
+    "mtime": 1794313464.1549828,
+    "seen": 1794397561.657687,
+    "ast_hash": "6bf3d666ef4f8bcc050f00251f7f10d7",
     "semantic_hash": ""
   },
   "android/app/capacitor.build.gradle": {
-    "mtime": 1794309244.2977903,
-    "seen": 1794309282.358676,
+    "mtime": 1794319825.0288787,
+    "seen": 1794397561.657687,
     "ast_hash": "ab2c953c47a743ed4496c3b72aa299a2",
     "semantic_hash": "ab2c953c47a743ed4496c3b72aa299a2"
   },
@@ -49,8 +49,8 @@
     "semantic_hash": "682315a426653617c6a74fc12bef55b6"
   },
   "android/capacitor.settings.gradle": {
-    "mtime": 1794309244.2967925,
-    "seen": 1794309282.358676,
+    "mtime": 1794319825.0278728,
+    "seen": 1794397561.657687,
     "ast_hash": "514d591b4c0254b390142858be5981e4",
     "semantic_hash": "514d591b4c0254b390142858be5981e4"
   },
@@ -235,9 +235,9 @@
     "semantic_hash": ""
   },
   "src/game/config.js": {
-    "mtime": 1794303421.4971676,
-    "seen": 1794307445.1609645,
-    "ast_hash": "bac1fb05d5e4bc4e9b9a9284185ccfc8",
+    "mtime": 1794397290.9666717,
+    "seen": 1794397561.657687,
+    "ast_hash": "0837e217bd29de166aa47902850307c3",
     "semantic_hash": ""
   },
   "src/game/enemies.js": {
@@ -247,9 +247,9 @@
     "semantic_hash": "776877318cf2e8a7d8ad1848631ff515"
   },
   "src/game/enemySpritesV2.js": {
-    "mtime": 1794299430.1716416,
-    "seen": 1794299920.0493393,
-    "ast_hash": "af4d22aa8f54ebf13d4d2dd4f61df7e2",
+    "mtime": 1794397290.9696743,
+    "seen": 1794397561.657687,
+    "ast_hash": "6662dcf5b78bdba93fc906afb1912aff",
     "semantic_hash": ""
   },
   "src/game/engine.js": {
@@ -259,9 +259,9 @@
     "semantic_hash": ""
   },
   "src/game/gameEngine.js": {
-    "mtime": 1794309047.1692784,
-    "seen": 1794309282.358676,
-    "ast_hash": "460c1b54f672a3d2d674ad10564df735",
+    "mtime": 1794377086.8010912,
+    "seen": 1794397561.657687,
+    "ast_hash": "e652b23c8a4b588b041cb90fe008844a",
     "semantic_hash": ""
   },
   "src/game/proceduralEnemies.js": {
@@ -283,9 +283,9 @@
     "semantic_hash": "8dd5584aa251b2d1cb0d3ad37ba77cc7"
   },
   "src/services/nativeBridge.js": {
-    "mtime": 1794309047.998664,
-    "seen": 1794309282.358676,
-    "ast_hash": "a6929a6557ea4c8784b50de55f7a9c34",
+    "mtime": 1794311393.0587313,
+    "seen": 1794311515.037086,
+    "ast_hash": "15b50d9caf7b102e0eb0e704d26275b2",
     "semantic_hash": ""
   },
   "sync_engine.cjs": {
@@ -1261,21 +1261,21 @@
     "semantic_hash": ""
   },
   "public/enemy-sprites-v2/poses/39-giant-scorpion-attack.webp": {
-    "mtime": 1793358570.6585069,
-    "seen": 1793815820.9632776,
-    "ast_hash": "fbb2d3f5d855875f6db74d40d5682d42",
+    "mtime": 1794377086.691418,
+    "seen": 1794397561.657687,
+    "ast_hash": "446d23fb1a19883061bee0e6641eb937",
     "semantic_hash": ""
   },
   "public/enemy-sprites-v2/poses/39-giant-scorpion-dizzy.webp": {
-    "mtime": 1793890878.185532,
-    "seen": 1793891863.585829,
-    "ast_hash": "5a0a46eea9f8f89792e49e094d6ec1b3",
+    "mtime": 1794377086.6949377,
+    "seen": 1794397561.657687,
+    "ast_hash": "49533606dbddbfa9a673b96791f62d85",
     "semantic_hash": ""
   },
   "public/enemy-sprites-v2/poses/39-giant-scorpion-idle.webp": {
-    "mtime": 1793358570.1453855,
-    "seen": 1793815820.9632776,
-    "ast_hash": "666ebf2ca9bbe7d1122b04cbe62bd536",
+    "mtime": 1794377086.698195,
+    "seen": 1794397561.657687,
+    "ast_hash": "877a92fa271f62bf91636bf5d9f52895",
     "semantic_hash": ""
   },
   "public/enemy-sprites-v2/poses/40-pharaoh-revenant-anim-atk-follow.webp": {
@@ -1723,9 +1723,9 @@
     "semantic_hash": ""
   },
   "public/enemy-sprites-v2/thumbs/39-giant-scorpion-thumb.webp": {
-    "mtime": 1793429618.6996896,
-    "seen": 1793815820.9632776,
-    "ast_hash": "2b95164ea0a8ab228d64dfac31d8dc71",
+    "mtime": 1794377086.7550168,
+    "seen": 1794397561.6590674,
+    "ast_hash": "8d19ae20a5fce84c0e6ac1473bfcd851",
     "semantic_hash": ""
   },
   "public/enemy-sprites-v2/thumbs/40-pharaoh-revenant-thumb.webp": {
@@ -1963,9 +1963,9 @@
     "semantic_hash": ""
   },
   "src/game/worlds.js": {
-    "mtime": 1794242448.2312028,
-    "seen": 1794243561.6891515,
-    "ast_hash": "94836f9ded70ed4a4bf222715fc5454a",
+    "mtime": 1794397290.9718077,
+    "seen": 1794397561.657687,
+    "ast_hash": "162c5f8e48b90db01b6d680eccd0ffae",
     "semantic_hash": ""
   },
   "public/enemy-sprites-v2/poses/05-grumpy-teddy-attack.webp": {
@@ -1999,9 +1999,9 @@
     "semantic_hash": ""
   },
   "public/enemy-sprites-v2/poses/w1-01-asura-footman-dizzy.webp": {
-    "mtime": 1794306448.817,
-    "seen": 1794307445.161965,
-    "ast_hash": "77883828570d03988a1791e1af99b073",
+    "mtime": 1794377086.7008574,
+    "seen": 1794397561.657687,
+    "ast_hash": "83fb0914ae0405ef229168d61f872767",
     "semantic_hash": ""
   },
   "public/enemy-sprites-v2/poses/w1-01-asura-footman-idle.webp": {
@@ -2017,9 +2017,9 @@
     "semantic_hash": ""
   },
   "public/enemy-sprites-v2/poses/w1-02-rakshasa-huntress-dizzy.webp": {
-    "mtime": 1794306449.064,
-    "seen": 1794307445.161965,
-    "ast_hash": "3630345c7f493956c317fe7c5944e17f",
+    "mtime": 1794377086.7035613,
+    "seen": 1794397561.657687,
+    "ast_hash": "baadce35fa205a38233d59a7dac35cf7",
     "semantic_hash": ""
   },
   "public/enemy-sprites-v2/poses/w1-02-rakshasa-huntress-idle.webp": {
@@ -2035,9 +2035,9 @@
     "semantic_hash": ""
   },
   "public/enemy-sprites-v2/poses/w1-03-kumbhakaran-dizzy.webp": {
-    "mtime": 1794306449.229,
-    "seen": 1794307445.161965,
-    "ast_hash": "43817d3ca4bca71a685dbba76b4a91f7",
+    "mtime": 1794377086.7059436,
+    "seen": 1794397561.657687,
+    "ast_hash": "e19b513ec1d68ea17401acaa8ec801d4",
     "semantic_hash": ""
   },
   "public/enemy-sprites-v2/poses/w1-03-kumbhakaran-idle.webp": {
@@ -2059,9 +2059,9 @@
     "semantic_hash": ""
   },
   "public/enemy-sprites-v2/poses/w1-04-mahishasura-dizzy.webp": {
-    "mtime": 1794306449.545,
-    "seen": 1794307445.161965,
-    "ast_hash": "568fcb043711b93b899ef35e12641637",
+    "mtime": 1794377086.7084546,
+    "seen": 1794397561.657687,
+    "ast_hash": "bd344d72665e0288f6a8c0769e956abd",
     "semantic_hash": ""
   },
   "public/enemy-sprites-v2/poses/w1-04-mahishasura-idle.webp": {
@@ -2077,9 +2077,9 @@
     "semantic_hash": ""
   },
   "public/enemy-sprites-v2/poses/w1-05-vetala-warlock-dizzy.webp": {
-    "mtime": 1793890878.2388,
-    "seen": 1793891863.585829,
-    "ast_hash": "8df93be37d36f5f2f6c472f0bbdd1663",
+    "mtime": 1794377086.7114723,
+    "seen": 1794397561.657687,
+    "ast_hash": "e5b8eaca349ee95c2154a5fb890ff3aa",
     "semantic_hash": ""
   },
   "public/enemy-sprites-v2/poses/w1-05-vetala-warlock-idle.webp": {
@@ -2089,27 +2089,27 @@
     "semantic_hash": ""
   },
   "public/enemy-sprites-v2/poses/w1-06-ravana-attack.webp": {
-    "mtime": 1794306924.883,
-    "seen": 1794307445.161965,
-    "ast_hash": "359d324c88b6952bfc1d29b6a4314ca3",
+    "mtime": 1794377086.7148995,
+    "seen": 1794397561.657687,
+    "ast_hash": "6ed67753fc6119b7067cd59af9152b38",
     "semantic_hash": ""
   },
   "public/enemy-sprites-v2/poses/w1-06-ravana-dizzy.webp": {
-    "mtime": 1794306925.035,
-    "seen": 1794307445.161965,
-    "ast_hash": "188d3785eb9cba36c6b3df1c38fc4e2f",
+    "mtime": 1794377086.7178943,
+    "seen": 1794397561.657687,
+    "ast_hash": "6e5bfbb500601c63e9aeb732cf32a4f1",
     "semantic_hash": ""
   },
   "public/enemy-sprites-v2/poses/w1-06-ravana-idle.webp": {
-    "mtime": 1794306924.662,
-    "seen": 1794307445.161965,
-    "ast_hash": "cd7ae17f4c47f45518d24dd96f635e84",
+    "mtime": 1794377086.7203186,
+    "seen": 1794397561.657687,
+    "ast_hash": "1c856aa81ce6cc0403cfa3018c8e075d",
     "semantic_hash": ""
   },
   "public/enemy-sprites-v2/poses/w1-06-ravana-sppose.webp": {
-    "mtime": 1794306925.221,
-    "seen": 1794307445.161965,
-    "ast_hash": "8a7218c483d51d3f97100a348b5054ad",
+    "mtime": 1794397290.942418,
+    "seen": 1794397561.657687,
+    "ast_hash": "3131c5b3059f4a64cc68d05294091928",
     "semantic_hash": ""
   },
   "public/enemy-sprites-v2/poses/w2-01-shade-dummy-attack.webp": {
@@ -2119,9 +2119,9 @@
     "semantic_hash": ""
   },
   "public/enemy-sprites-v2/poses/w2-01-shade-dummy-dizzy.webp": {
-    "mtime": 1793890878.2503154,
-    "seen": 1793891863.585829,
-    "ast_hash": "318a2b55268d052aac01dbc7bbec8938",
+    "mtime": 1794377086.7257843,
+    "seen": 1794397561.657687,
+    "ast_hash": "6e1051c13335ce38488b13d3e869fa2a",
     "semantic_hash": ""
   },
   "public/enemy-sprites-v2/poses/w2-01-shade-dummy-idle.webp": {
@@ -2137,9 +2137,9 @@
     "semantic_hash": ""
   },
   "public/enemy-sprites-v2/poses/w2-02-umbral-mime-dizzy.webp": {
-    "mtime": 1793890878.253316,
-    "seen": 1793891863.585829,
-    "ast_hash": "9213d63ad689b828868321b8a81b042e",
+    "mtime": 1794377086.7267833,
+    "seen": 1794397561.657687,
+    "ast_hash": "b5a15fd3dbce2e73e2609fedd1fb731c",
     "semantic_hash": ""
   },
   "public/enemy-sprites-v2/poses/w2-02-umbral-mime-idle.webp": {
@@ -2148,34 +2148,16 @@
     "ast_hash": "f6529450ea5cf3329fde87bd20eec802",
     "semantic_hash": ""
   },
-  "public/enemy-sprites-v2/poses/w2-03-forgotten-knight-attack.webp": {
-    "mtime": 1793890878.2564332,
-    "seen": 1793891863.585829,
-    "ast_hash": "37cd5c66563ee2da5f289fc7a63e9571",
-    "semantic_hash": ""
-  },
-  "public/enemy-sprites-v2/poses/w2-03-forgotten-knight-dizzy.webp": {
-    "mtime": 1793890878.2579396,
-    "seen": 1793891863.585829,
-    "ast_hash": "6307441d9de1a49918bc0897f34caec2",
-    "semantic_hash": ""
-  },
-  "public/enemy-sprites-v2/poses/w2-03-forgotten-knight-idle.webp": {
-    "mtime": 1793890878.2599497,
-    "seen": 1793891863.585829,
-    "ast_hash": "912a3431fe54fa46725578f3ca80d30e",
-    "semantic_hash": ""
-  },
   "public/enemy-sprites-v2/poses/w2-04-gloom-serpent-attack.webp": {
-    "mtime": 1793890878.261659,
-    "seen": 1793891863.585829,
-    "ast_hash": "eeadf0573204583f48a3308692255a4a",
+    "mtime": 1794377086.7403638,
+    "seen": 1794397561.657687,
+    "ast_hash": "4cbb448ddac86bd46e9cb723d6ac1bc5",
     "semantic_hash": ""
   },
   "public/enemy-sprites-v2/poses/w2-04-gloom-serpent-dizzy.webp": {
-    "mtime": 1793890878.2631602,
-    "seen": 1793891863.585829,
-    "ast_hash": "b16d02d257354d1768d01b8f5565dd00",
+    "mtime": 1794377086.7427433,
+    "seen": 1794397561.657687,
+    "ast_hash": "aca96f413e1cd5d49929d598e9d663ba",
     "semantic_hash": ""
   },
   "public/enemy-sprites-v2/poses/w2-04-gloom-serpent-idle.webp": {
@@ -2185,21 +2167,21 @@
     "semantic_hash": ""
   },
   "public/enemy-sprites-v2/poses/w2-05-hollow-monk-attack.webp": {
-    "mtime": 1793890878.2661707,
-    "seen": 1793891863.585829,
-    "ast_hash": "708798c464cbd8d6a0cc4a8f33540ee7",
+    "mtime": 1794377086.7457507,
+    "seen": 1794397561.657687,
+    "ast_hash": "ab476ef12cb711acd5b341448db70b01",
     "semantic_hash": ""
   },
   "public/enemy-sprites-v2/poses/w2-05-hollow-monk-dizzy.webp": {
-    "mtime": 1793890878.2671719,
-    "seen": 1793891863.585829,
-    "ast_hash": "0282115cc21c378eb6830f123566c176",
+    "mtime": 1794377086.7494462,
+    "seen": 1794397561.657687,
+    "ast_hash": "aa1cbed6b21e1f10644e391dc448a45a",
     "semantic_hash": ""
   },
   "public/enemy-sprites-v2/poses/w2-05-hollow-monk-idle.webp": {
-    "mtime": 1793890878.2691693,
-    "seen": 1793891863.585829,
-    "ast_hash": "d9024954ba5a595dfa8f22fc87f7149e",
+    "mtime": 1794377086.7514472,
+    "seen": 1794397561.657687,
+    "ast_hash": "6896df7f07d033845ee762bf8f8a89bb",
     "semantic_hash": ""
   },
   "public/enemy-sprites-v2/poses/w2-06-dark-slapper-attack.webp": {
@@ -2209,9 +2191,9 @@
     "semantic_hash": ""
   },
   "public/enemy-sprites-v2/poses/w2-06-dark-slapper-dizzy.webp": {
-    "mtime": 1794299430.139605,
-    "seen": 1794299920.0503383,
-    "ast_hash": "f41fde06e059dd5a09bb5a7feed12d63",
+    "mtime": 1794377086.7538884,
+    "seen": 1794397561.657687,
+    "ast_hash": "2676544a4772e65c95713399f720cb65",
     "semantic_hash": ""
   },
   "public/enemy-sprites-v2/poses/w2-06-dark-slapper-idle.webp": {
@@ -2263,9 +2245,9 @@
     "semantic_hash": ""
   },
   "public/enemy-sprites-v2/thumbs/w1-06-ravana-thumb.webp": {
-    "mtime": 1794299430.1479235,
-    "seen": 1794299920.0503383,
-    "ast_hash": "181e14765c9dc59c1ff1a48a26db2187",
+    "mtime": 1794377086.7573853,
+    "seen": 1794397561.6590674,
+    "ast_hash": "23941b34825e99e45981c9ca42c8eff5",
     "semantic_hash": ""
   },
   "public/enemy-sprites-v2/thumbs/w2-01-shade-dummy-thumb.webp": {
@@ -2280,12 +2262,6 @@
     "ast_hash": "40bc81599de8cb0935a29c792c7a6c6c",
     "semantic_hash": ""
   },
-  "public/enemy-sprites-v2/thumbs/w2-03-forgotten-knight-thumb.webp": {
-    "mtime": 1793890878.2831714,
-    "seen": 1793891863.585829,
-    "ast_hash": "6972946bf2293267e76955351c01915b",
-    "semantic_hash": ""
-  },
   "public/enemy-sprites-v2/thumbs/w2-04-gloom-serpent-thumb.webp": {
     "mtime": 1793890878.2841716,
     "seen": 1793891863.585829,
@@ -2293,9 +2269,9 @@
     "semantic_hash": ""
   },
   "public/enemy-sprites-v2/thumbs/w2-05-hollow-monk-thumb.webp": {
-    "mtime": 1793890878.2851717,
-    "seen": 1793891863.585829,
-    "ast_hash": "35a9650e87d417728976e54871042d9b",
+    "mtime": 1794377086.7609012,
+    "seen": 1794397561.6590674,
+    "ast_hash": "98e4d3cb2624580c23951084fc8f28cd",
     "semantic_hash": ""
   },
   "public/enemy-sprites-v2/thumbs/w2-06-dark-slapper-thumb.webp": {
@@ -2350,6 +2326,72 @@
     "mtime": 1794299824.6349235,
     "seen": 1794309282.358676,
     "ast_hash": "403daa7606b504f4f92a615a49540354",
+    "semantic_hash": ""
+  },
+  "public/enemy-sprites-v2/poses/w2-03-umbral-puppeteer-attack.webp": {
+    "mtime": 1794397290.94612,
+    "seen": 1794397561.657687,
+    "ast_hash": "783bd98ffb5e0d40b5c96776a1bfcfb9",
+    "semantic_hash": ""
+  },
+  "public/enemy-sprites-v2/poses/w2-03-umbral-puppeteer-dizzy.webp": {
+    "mtime": 1794397290.9481692,
+    "seen": 1794397561.657687,
+    "ast_hash": "640a04a293370966d2dad8c27c5f47b7",
+    "semantic_hash": ""
+  },
+  "public/enemy-sprites-v2/poses/w2-03-umbral-puppeteer-idle.webp": {
+    "mtime": 1794397290.9502554,
+    "seen": 1794397561.657687,
+    "ast_hash": "cf656603ebd1761f6cd09398e90c1546",
+    "semantic_hash": ""
+  },
+  "public/enemy-sprites-v2/poses/w2-03-umbral-puppeteer-sppose.webp": {
+    "mtime": 1794397290.9532807,
+    "seen": 1794397561.657687,
+    "ast_hash": "4350d1fe8bf3deccf455391834ac29f7",
+    "semantic_hash": ""
+  },
+  "public/enemy-sprites-v2/thumbs/w2-03-umbral-puppeteer-thumb.webp": {
+    "mtime": 1794397290.9546847,
+    "seen": 1794397561.6590674,
+    "ast_hash": "c8846092e1064de8792fa39de3db2c15",
+    "semantic_hash": ""
+  },
+  "public/stage-bg/boss19.webp": {
+    "mtime": 1794377086.763902,
+    "seen": 1794397561.6590674,
+    "ast_hash": "e3f6a72e461afc2f46de115687de4472",
+    "semantic_hash": ""
+  },
+  "public/stage-bg/boss205.webp": {
+    "mtime": 1794377086.767036,
+    "seen": 1794397561.6590674,
+    "ast_hash": "796cf3544897e0b22dba5ad6851e76dc",
+    "semantic_hash": ""
+  },
+  "public/stage-bg/boss215.webp": {
+    "mtime": 1794377086.768974,
+    "seen": 1794397561.6590674,
+    "ast_hash": "0780b12af874b729ef0798f992a5e6e3",
+    "semantic_hash": ""
+  },
+  "public/stage-bg/boss29.webp": {
+    "mtime": 1794377086.772436,
+    "seen": 1794397561.6590674,
+    "ast_hash": "627cf4c17bb882e7f789a70a1e92385b",
+    "semantic_hash": ""
+  },
+  "public/stage-bg/boss39.webp": {
+    "mtime": 1794377086.7744265,
+    "seen": 1794397561.6590674,
+    "ast_hash": "73b028094943b05f6b8dc4e4da13a537",
+    "semantic_hash": ""
+  },
+  "public/stage-bg/boss9.webp": {
+    "mtime": 1794377086.778935,
+    "seen": 1794397561.6590674,
+    "ast_hash": "ae701627cfcd550e652e8f7875ba17b8",
     "semantic_hash": ""
   },
   "package-lock.json": {
