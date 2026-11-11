@@ -353,7 +353,7 @@ export default function BattleScreen() {
       // Win check
       if (s.enemyHp <= 0) {
         const coinMult = s.isHard ? CONFIG.hard.coinMult : 1;
-        const coins = getEnemyCoinReward(s.enemyId, playerStats.coinMult * coinMult);
+        const coins = getEnemyCoinReward(s.enemyId, playerStats.coinMult * coinMult, s.isHard);
         const gemsReward = isBoss ? (s.isHard ? 0 : CONFIG.gems.pairBoss) : 0;
         s.phase = 'win';
         s.wonCoins = coins;

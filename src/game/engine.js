@@ -177,10 +177,11 @@ export function computeEnemyAttack(enemyId) {
   return { interval, atkDmg };
 }
 
-export function getEnemyCoinReward(enemyId, coinMult) {
+export function getEnemyCoinReward(enemyId, coinMult, isHard = false) {
   const enemy = ALL_ENEMIES ? ALL_ENEMIES[enemyId] : null;
   const hp = enemy ? enemy.hp : calcEnemyHp(enemyId);
-  const { bounty } = calcEnemyBounty(hp, enemyId);
+  const hpMult = isHard ? (CONFIG.hard?.hpMult || 3.0) : 1;
+  const { bounty } = calcEnemyBounty(hp * hpMult, enemyId);
   return Math.floor(bounty * (coinMult || 1));
 }
 

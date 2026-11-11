@@ -52,6 +52,8 @@ export const NativeBridge = {
   interstitialPrepared: false,
   bannerVisible: false,
   activeRewardCallback: null,
+  activeInterstitialCallback: null,
+  activeInterstitialShowing: false,
   productsMap: {},
   packagesMap: {},
 
@@ -139,7 +141,25 @@ export const NativeBridge = {
       // Setup Interstitial Ad listeners
       AdMob.addListener(InterstitialAdPluginEvents.Dismissed, () => {
         this.interstitialPrepared = false;
+        this.activeInterstitialShowing = false;
+        if (this.activeInterstitialCallback) {
+          const cb = this.activeInterstitialCallback;
+          this.activeInterstitialCallback = null;
+          cb(true);
+        }
         this.prepareInterstitialAd(); // Pre-load next interstitial
+      });
+
+      AdMob.addListener(InterstitialAdPluginEvents.FailedToShow, (err) => {
+        console.warn('AdMob interstitial failed to show:', err);
+        this.interstitialPrepared = false;
+        this.activeInterstitialShowing = false;
+        if (this.activeInterstitialCallback) {
+          const cb = this.activeInterstitialCallback;
+          this.activeInterstitialCallback = null;
+          cb(false);
+        }
+        this.prepareInterstitialAd();
       });
 
       AdMob.addListener(InterstitialAdPluginEvents.FailedToLoad, (err) => {
@@ -211,7 +231,7 @@ export const NativeBridge = {
     }
   },
 
-  // Interstitial: Pre-caches next interstitial for instant playback on every 4th win
+  // Interstitial: Pre-caches next interstitial for instant playback on every 3rd fight
   async prepareInterstitialAd() {
     if (!this.isNative || !this.admobInitialized) return;
     try {
@@ -225,27 +245,39 @@ export const NativeBridge = {
     }
   },
 
-  async showInterstitial() {
+  async showInterstitial(onClose) {
     if (!this.isNative) {
       console.log('[Ads] Interstitial requested (web mode — simulated).');
+      if (onClose) onClose(false);
       return false;
     }
     try {
+      this.activeInterstitialCallback = onClose;
       if (!this.interstitialPrepared) {
         console.log('AdMob: Interstitial not yet prepared, preparing now...');
         await this.prepareInterstitialAd();
       }
       if (!this.interstitialPrepared) {
         console.warn('AdMob: Interstitial could not be prepared.');
+        this.activeInterstitialCallback = null;
+        if (onClose) onClose(false);
         return false;
       }
+      this.activeInterstitialShowing = true;
       await AdMob.showInterstitial();
       this.interstitialPrepared = false;
       return true;
     } catch (err) {
       console.warn('Native AdMob interstitial error:', err);
+      this.activeInterstitialShowing = false;
+      this.activeInterstitialCallback = null;
+      if (onClose) onClose(false);
       return false;
     }
+  },
+
+  isInterstitialShowing() {
+    return !!this.activeInterstitialShowing;
   },
 
   // Banner: shown on Home, Stages, and Shop screens

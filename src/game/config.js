@@ -78,6 +78,7 @@ export const CONFIG = {
     "slapTaperFrac": 0.35,
     "stunCooldownSec": 4,
     "slapEarlyMult": 3.5,
+    "slapMidMult": 2.2,
     "slapEarlyCapFrac": 2.0,
     "slapCritPayFrac": 0.5,
     "luckCoinMult": 3,
@@ -98,8 +99,8 @@ export const CONFIG = {
     "hp": {
       "base0": 65,
       "early": [65, 95, 140, 210, 360, 420, 580, 780, 1050, 2500],
-      "base10": 4000,
-      "growth": 1.30,
+      "base10": 2800,
+      "growth": 1.25,
       "tailStart": 30,
       "tailGrowth": 1.325,
       "bossMult": 2.50,
@@ -107,8 +108,8 @@ export const CONFIG = {
     },
     "damage": {
       "earlyDmg": [8, 12, 15, 20, 26, 24, 28, 34, 40, 48],
-      "base10": 100,
-      "growth": 1.12,
+      "base10": 58,
+      "growth": 1.11,
       "tailStart": 30,
       "tailGrowth": 1.14,
       "bossMult": 1.80,
@@ -125,11 +126,11 @@ export const CONFIG = {
     },
     "bounty": {
       "earlyRate": 0.50,
-      "baseRate": 0.50,
+      "baseRate": 0.55,
       "rateDecay": 0.994,
-      "minRate": 0.33,
+      "minRate": 0.38,
       "minBounty": 30,
-      "scale": 0.40,
+      "scale": 0.52,
       "bossBonusMult": 1.75,
       "normalKillBonusMult": 0.30,
       "hardKillBonusMult": 1.25
@@ -170,7 +171,7 @@ export const CONFIG = {
     "hpMult": 3.0,
     "atkMult": 1.35,
     "intervalMult": 0.88,
-    "coinMult": 1.5,
+    "coinMult": 2.5,
     "gemReward": 5,
     "emberBonus": 1.5
   },
@@ -251,7 +252,7 @@ export const CONFIG = {
       "id": "onTarget",
       "name": "On Target",
       "tier": 2,
-      "cost": 40000,
+      "cost": 25000,
       "prereq": "secondHand",
       "fx": "Combo stacks survive switching enemies (resets on loss)."
     },
@@ -259,7 +260,7 @@ export const CONFIG = {
       "id": "quickReflexes",
       "name": "Quick Reflexes",
       "tier": 2,
-      "cost": 70000,
+      "cost": 45000,
       "prereq": "secondHand",
       "fx": "+10% attack speed."
     },
@@ -267,7 +268,7 @@ export const CONFIG = {
       "id": "criticalSlaps",
       "name": "Critical Slaps",
       "tier": 2,
-      "cost": 120000,
+      "cost": 80000,
       "prereq": "strongerHands",
       "fx": "+5% crit chance."
     },
@@ -275,7 +276,7 @@ export const CONFIG = {
       "id": "thunderclap",
       "name": "Seismic Slam",
       "tier": 2,
-      "cost": 250000,
+      "cost": 160000,
       "prereq": "staminaTraining",
       "reqBoss": 4,
       "fx": "Every 8th slap lands a devastating SEISMIC SLAM dealing 4x damage and dazing the enemy for 1s!"
@@ -284,7 +285,7 @@ export const CONFIG = {
       "id": "heavySlap",
       "name": "Heavy Slap",
       "tier": 2,
-      "cost": 400000,
+      "cost": 260000,
       "prereq": "strongerHands",
       "fx": "12% chance a slap lands HEAVY for 3x damage."
     },
@@ -292,7 +293,7 @@ export const CONFIG = {
       "id": "precisionInstinct",
       "name": "Precision Instinct",
       "tier": 2,
-      "cost": 650000,
+      "cost": 420000,
       "prereq": "strongerHands",
       "fx": "Unlocks PRECISION strikes: a gold weak spot flashes on the enemy mid-fight — tap it for a devastating 8.5x critical strike! Fortune Luck makes it appear more often. Max 3 per fight (+1 per 5 Luck, max 6)."
     },
@@ -300,7 +301,7 @@ export const CONFIG = {
       "id": "deflect",
       "name": "Deflect",
       "tier": 2,
-      "cost": 100000,
+      "cost": 65000,
       "prereq": "basic",
       "fx": "Boss normal attacks spawn a parry ring at a random spot — tap it exactly as the ring closes into the gold circle to deflect the blow completely. Random spot every time; boss specials cannot be deflected."
     },
@@ -704,7 +705,7 @@ export const CONFIG = {
     {"id": "beadsVoid", "icon": "📿", "name": "Beads of the Void", "srcW": 1, "srcS": 4, "vals": [0.20, 0.40, 0.60], "fmt": "pct", "desc": "+{v} Soul Embers earned"},
     {"id": "mirrorPalm", "icon": "🪞", "name": "Mirror Palm", "srcW": 1, "srcS": 5, "vals": [9, 8, 7], "fmt": "count", "desc": "Skin power triggers every {v} slaps"}
   ],
-  "ads": {"interstitialEveryWins": 4, "interstitialMinGapSec": 180},
+  "ads": {"interstitialEveryFights": 3, "interstitialEveryWins": 3, "interstitialMinGapSec": 0},
   "weakSpot": {"mult": 8.5, "dur": 1.5, "durHard": 1.2, "firstAt": 2.2, "everyMin": 5, "everyMax": 8, "frenzyGain": 12, "capBase": 3, "capPerLuck": 5, "capMax": 6, "luckScale": 0.06},
   "gems": {
     "elite": 1,
@@ -1176,7 +1177,10 @@ export const CONFIG = {
     }
   ],
   "ads": {
-    "enabled": false,
+    "enabled": true,
+    "interstitialEveryFights": 3,
+    "interstitialEveryWins": 3,
+    "interstitialMinGapSec": 0,
     "placements": {
       "rewarded_revive_boss": true,
       "rewarded_offline_double": true
