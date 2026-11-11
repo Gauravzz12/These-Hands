@@ -13,14 +13,14 @@
     "semantic_hash": "5e6e3cea3e89137071c142dd7835b0ef"
   },
   "android/app/build.gradle": {
-    "mtime": 1794313464.1549828,
-    "seen": 1794397561.657687,
-    "ast_hash": "6bf3d666ef4f8bcc050f00251f7f10d7",
+    "mtime": 1794419452.4924538,
+    "seen": 1794419798.68114,
+    "ast_hash": "6673b98d7b5f61c73a1a156f0ec62368",
     "semantic_hash": ""
   },
   "android/app/capacitor.build.gradle": {
-    "mtime": 1794319825.0288787,
-    "seen": 1794397561.657687,
+    "mtime": 1794419515.3636436,
+    "seen": 1794419798.68114,
     "ast_hash": "ab2c953c47a743ed4496c3b72aa299a2",
     "semantic_hash": "ab2c953c47a743ed4496c3b72aa299a2"
   },
@@ -49,8 +49,8 @@
     "semantic_hash": "682315a426653617c6a74fc12bef55b6"
   },
   "android/capacitor.settings.gradle": {
-    "mtime": 1794319825.0278728,
-    "seen": 1794397561.657687,
+    "mtime": 1794419515.3612688,
+    "seen": 1794419798.68114,
     "ast_hash": "514d591b4c0254b390142858be5981e4",
     "semantic_hash": "514d591b4c0254b390142858be5981e4"
   },
@@ -235,9 +235,9 @@
     "semantic_hash": ""
   },
   "src/game/config.js": {
-    "mtime": 1794416916.2340503,
-    "seen": 1794417010.4306738,
-    "ast_hash": "5eb42263dc90f5693134d6301eb66b66",
+    "mtime": 1794418910.3502505,
+    "seen": 1794419798.68114,
+    "ast_hash": "2f8c80a8c70c4ab4dfe936b19ce2d8d8",
     "semantic_hash": ""
   },
   "src/game/enemies.js": {
@@ -295,10 +295,10 @@
     "semantic_hash": "9d07411876a0e57444601e2093f5259c"
   },
   "vite.config.js": {
-    "mtime": 1792867873.212411,
-    "seen": 1793814802.2002916,
-    "ast_hash": "5d54447744c19ccd28638a5c668d15ea",
-    "semantic_hash": "5d54447744c19ccd28638a5c668d15ea"
+    "mtime": 1794419495.1165037,
+    "seen": 1794419798.68114,
+    "ast_hash": "36b18dbc45923ca616524d5608fbb3a4",
+    "semantic_hash": ""
   },
   "GEMINI.md": {
     "mtime": 1793814664.9101558,
@@ -2398,6 +2398,12 @@
     "mtime": 1794406099.0996876,
     "seen": 1794406911.5876224,
     "ast_hash": "a78cfd6615478e3b17c2c4096780d537",
+    "semantic_hash": ""
+  },
+  "android/app/src/main/baseline-prof.txt": {
+    "mtime": 1794419543.9480708,
+    "seen": 1794419798.68114,
+    "ast_hash": "98b1306ccbf15f0d11ea7b6107cecb7c",
     "semantic_hash": ""
   },
   "package-lock.json": {

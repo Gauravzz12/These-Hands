@@ -1186,7 +1186,7 @@ export const CONFIG = {
       "rewarded_offline_double": true
     }
   },
-  "appVersion": "1.3.0 · Layout, Loading & Economy Guide"
+  "appVersion": "1.4.0 · Layout, Loading & Economy Guide"
 };
 
 export const GROUPS = [
