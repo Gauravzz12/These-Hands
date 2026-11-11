@@ -1029,13 +1029,13 @@ export const V2_CONFIGS = [
       },
       "attack1": {
         "src": "/enemy-sprites-v2/poses/36-giant-serpent-attack.webp",
-        "w": 962,
-        "h": 800
+        "w": 893,
+        "h": 1000
       },
       "attack": {
         "src": "/enemy-sprites-v2/poses/36-giant-serpent-attack.webp",
-        "w": 1104,
-        "h": 917
+        "w": 893,
+        "h": 1000
       },
       "dizzy": {
         "src": "/enemy-sprites-v2/poses/36-giant-serpent-dizzy.webp",
@@ -1883,6 +1883,13 @@ export const V2_CONFIGS = [
       "src": "/enemy-sprites-v2/poses/w1-06-ravana-attack.webp",
       "w": 484,
       "h": 900
+    },
+    "atkFollow": {
+      "src": "/enemy-sprites-v2/poses/w1-06-ravana-atkfollow.webp",
+      "w": 543,
+      "h": 900,
+      "gCx": 0.5,
+      "gFull": 1
     },
     "dizzy": {
       "src": "/enemy-sprites-v2/poses/w1-06-ravana-dizzy.webp",
