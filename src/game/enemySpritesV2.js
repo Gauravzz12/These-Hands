@@ -1963,11 +1963,11 @@ export const V2_CONFIGS = [
 },
 {
   "idx": 212,
-  "id": "w2-03-forgotten-knight",
-  "name": "The Forgotten Knight",
+  "id": "w2-03-lantern-wraith",
+  "name": "Lantern Wraith",
   "refH": 900,
-  "cheekX": 0.28,
-  "cheekY": 0.34,
+  "cheekX": 0.5,
+  "cheekY": 0.13,
   "colors": [
     "#1d1a24",
     "#8a5ae0",
@@ -1976,22 +1976,27 @@ export const V2_CONFIGS = [
   ],
   "poses": {
     "idle": {
-      "src": "/enemy-sprites-v2/poses/w2-03-forgotten-knight-idle.webp",
-      "w": 556,
+      "src": "/enemy-sprites-v2/poses/w2-03-lantern-wraith-idle.webp",
+      "w": 457,
       "h": 900
     },
     "attack": {
-      "src": "/enemy-sprites-v2/poses/w2-03-forgotten-knight-attack.webp",
-      "w": 538,
+      "src": "/enemy-sprites-v2/poses/w2-03-lantern-wraith-attack.webp",
+      "w": 508,
       "h": 928
     },
     "dizzy": {
-      "src": "/enemy-sprites-v2/poses/w2-03-forgotten-knight-dizzy.webp",
-      "w": 543,
+      "src": "/enemy-sprites-v2/poses/w2-03-lantern-wraith-dizzy.webp",
+      "w": 439,
+      "h": 900
+    },
+    "spPose": {
+      "src": "/enemy-sprites-v2/poses/w2-03-lantern-wraith-sppose.webp",
+      "w": 463,
       "h": 900
     }
   },
-  "thumb": "/enemy-sprites-v2/thumbs/w2-03-forgotten-knight-thumb.webp"
+  "thumb": "/enemy-sprites-v2/thumbs/w2-03-lantern-wraith-thumb.webp"
 },
 {
   "idx": 213,
