@@ -1,17 +1,17 @@
-# Graph Report - these-hands  (2026-11-11)
+# Graph Report - these-hands  (2026-11-12)
 
 ## Corpus Check
-- 51 files · ~76,751 words
+- 51 files · ~76,915 words
 - Verdict: corpus is large enough that graph structure adds value.
 - Unclassified: 22 file(s) not represented in the graph (top: .xml 10, (none) 3, .properties 2)
 
 ## Summary
-- 617 nodes · 1748 edges · 31 communities (21 shown, 10 thin omitted)
+- 618 nodes · 1750 edges · 34 communities (24 shown, 10 thin omitted)
 - Extraction: 93% EXTRACTED · 7% INFERRED · 0% AMBIGUOUS · INFERRED: 114 edges (avg confidence: 0.85)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `199db63c`
+- Built from commit: `24121893`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -19,9 +19,9 @@
 - GameContext.jsx
 - package.json
 - initGameEngine
-- config.js
+- gameEngine.js
 - ref_fs
-- fmtNum
+- renderAwards
 - renderHub
 - claimChest
 - renderWorlds
@@ -29,8 +29,8 @@
 - draw
 - switchTab
 - dependencies
-- applySkinVisuals
-- main.jsx
+- castSpecial
+- nativeBridge.js
 - ExampleInstrumentedTest.java
 - MainActivity.java
 - tutShow
@@ -38,7 +38,10 @@
 - vite
 - .oxlintrc.json
 - scripts
+- generate_android_icons.cjs
+- genQuests
 - applyHit
+- atkRefDps
 - .unlock
 
 ## God Nodes (most connected - your core abstractions)
@@ -68,11 +71,11 @@
 ## Import Cycles
 - 2-file cycle: `src/game/config.js -> src/game/enemies.js -> src/game/config.js`
 
-## Communities (31 total, 10 thin omitted)
+## Communities (34 total, 10 thin omitted)
 
 ### Community 0 - "GameContext.jsx"
 Cohesion: 0.06
-Nodes (76): react, AchToast(), ATTR_DESCS, AttrsScreen(), ACH_EMOJIS, AwardsScreen(), fmtNum(), STAT_DEFS (+68 more)
+Nodes (75): react, AchToast(), ATTR_DESCS, AttrsScreen(), ACH_EMOJIS, AwardsScreen(), fmtNum(), STAT_DEFS (+67 more)
 
 ### Community 1 - "package.json"
 Cohesion: 0.17
@@ -80,55 +83,55 @@ Nodes (15): devDependencies, oxlint@^1.88.0, puppeteer-core@^25.16.0, sharp@^0.3
 
 ### Community 2 - "initGameEngine"
 Cohesion: 0.07
-Nodes (43): initGameEngine(), atkRefDps(), closeMockCheckout(), closeStoreCheckoutModal(), confirmMockPurchase(), confirmStoreCheckoutModal(), dailyStage(), dailyStageMult() (+35 more)
+Nodes (36): initGameEngine(), bossBgImg(), closeMockCheckout(), closeStoreCheckoutModal(), confirmMockPurchase(), confirmStoreCheckoutModal(), defaultAttrs(), defaultChest() (+28 more)
 
-### Community 3 - "config.js"
+### Community 3 - "gameEngine.js"
 Cohesion: 0.08
-Nodes (38): ABILITY_ICONS, ACH_ICON_FALLBACK, ACH_ICONS, ENEMY_ART, HAND_URI, ICON_URL_CACHE, iconUrl(), makeSprite() (+30 more)
+Nodes (39): ABILITY_ICONS, ACH_ICON_FALLBACK, ACH_ICONS, ENEMY_ART, HAND_URI, ICON_URL_CACHE, iconUrl(), makeSprite() (+31 more)
 
 ### Community 4 - "ref_fs"
-Cohesion: 0.06
-Nodes (25): code, fs, fs, i, src, fs, i, src (+17 more)
+Cohesion: 0.08
+Nodes (18): code, fs, fs, i, src, fs, i, src (+10 more)
 
-### Community 5 - "fmtNum"
-Cohesion: 0.18
-Nodes (28): buyCoinPack(), buyOffline(), buySkin(), checkCollectionReward(), creditCoinsQuiet(), fmtNum(), grantGems(), grantStorePurchaseReward() (+20 more)
+### Community 5 - "renderAwards"
+Cohesion: 0.19
+Nodes (18): buyCoinPack(), buyOffline(), buySkin(), checkAchievements(), checkCollectionReward(), creditCoinsQuiet(), debugMaxBuild(), frame() (+10 more)
 
 ### Community 6 - "renderHub"
 Cohesion: 0.12
-Nodes (37): attrCap(), attrCost(), attrCurText(), attrEffectiveCap(), attrFxText(), attrLevelGate(), attrNextShort(), attrNextText() (+29 more)
+Nodes (37): abilitiesHtml(), attrCap(), attrCost(), attrCurText(), attrEffectiveCap(), attrFxText(), attrLevelGate(), attrNextShort() (+29 more)
 
 ### Community 7 - "claimChest"
 Cohesion: 0.23
 Nodes (14): activateCoinBoost(), activateDmgBoost(), chestPreview(), chestUnlocked(), claimChest(), dailyLevelMult(), frontierBounty(), getDayReward() (+6 more)
 
 ### Community 8 - "renderWorlds"
-Cohesion: 0.25
-Nodes (11): buyArt(), relicDef(), relicDescText(), relicEquipped(), relicStars(), renderWorlds(), startWorldFight(), toggleRelic() (+3 more)
+Cohesion: 0.20
+Nodes (13): initShopFilters(), relicDescText(), relicStars(), renderSelect(), renderWorlds(), setShopFilter(), Sound, startWorldFight() (+5 more)
 
 ### Community 9 - "MathPixelCanvas"
 Cohesion: 0.40
 Nodes (12): generateGoblinSproutOption1(), generateGoblinSproutOption2(), generateGooseOption1(), generateGooseOption2(), generateMimeOption1(), generateMimeOption2(), generateMonkeyOption1(), generateMonkeyOption2() (+4 more)
 
 ### Community 10 - "draw"
-Cohesion: 0.13
-Nodes (18): bossBgImg(), draw(), drawBossSpecialFx(), drawEnemy(), drawFx(), drawSpecialFx(), drawStage(), drawWeakSpot() (+10 more)
+Cohesion: 0.19
+Nodes (12): draw(), drawBossSpecialFx(), drawEnemy(), drawFx(), drawSpecialFx(), drawWeakSpot(), fxDraw(), fxImg() (+4 more)
 
 ### Community 11 - "switchTab"
-Cohesion: 0.22
-Nodes (13): checkAchievements(), hideEndOverlay(), hideFightLoader(), preloadAllSkins(), renderAwards(), claimAllAchievements(), renderDebug(), resize() (+5 more)
+Cohesion: 0.16
+Nodes (19): advanceEndless(), endlessPick(), endlessPool(), ensureHubReady(), hideEndOverlay(), preloadAllSkins(), renderDebug(), renderHub() (+11 more)
 
 ### Community 12 - "dependencies"
-Cohesion: 0.12
-Nodes (19): dependencies, @capacitor/android@^8.6.0, @capacitor/app@^8.1.2, @capacitor/cli@^8.6.0, @capacitor-community/admob@^8.3.0, @capacitor/core@^8.6.0, @capacitor/splash-screen@^8.0.2, @capacitor/status-bar@^8.0.4 (+11 more)
+Cohesion: 0.14
+Nodes (14): dependencies, @capacitor/android@^8.6.0, @capacitor/app@^8.1.2, @capacitor/cli@^8.6.0, @capacitor-community/admob@^8.3.0, @capacitor/splash-screen@^8.0.2, react@^19.3.1, react-dom@^19.3.1 (+6 more)
 
-### Community 13 - "applySkinVisuals"
-Cohesion: 0.32
-Nodes (8): applySkinVisuals(), buildSkinArt(), ensureHubReady(), ensureSkinArt(), equipSkin(), greyCopyOf(), renderStartShowcase(), setHubState()
-
-### Community 14 - "main.jsx"
+### Community 13 - "castSpecial"
 Cohesion: 0.33
-Nodes (4): react-dom@^19.3.1, react-dom, App(), NativeBridge
+Nodes (13): barrierStats(), buySpecUpgrade(), castSpecial(), fmtMult(), renderSpecials(), renderSpecRail(), renderSpecRailCd(), specCdOf() (+5 more)
+
+### Community 14 - "nativeBridge.js"
+Cohesion: 0.16
+Nodes (9): @capacitor/core@^8.6.0, @capacitor/status-bar@^8.0.4, @revenuecat/purchases-capacitor@^14.0.0, @capacitor/core, @capacitor/status-bar, @revenuecat/purchases-capacitor, App(), NativeBridge (+1 more)
 
 ### Community 17 - "tutShow"
 Cohesion: 0.36
@@ -146,13 +149,25 @@ Nodes (5): plugins, rules, react/only-export-components, react/rules-of-hooks, $
 Cohesion: 0.20
 Nodes (10): scripts, build, build:apk, build:bundle, cap:open, cap:sync, dev, lint (+2 more)
 
+### Community 29 - "generate_android_icons.cjs"
+Cohesion: 0.25
+Nodes (7): densities, fs, generate(), path, resDir, sharp, srcIcon
+
+### Community 30 - "genQuests"
+Cohesion: 0.33
+Nodes (6): dailyStage(), dailyStageMult(), dailyTier(), genQuests(), highestDefeatedBounty(), seededPick()
+
 ### Community 31 - "applyHit"
 Cohesion: 0.06
-Nodes (87): abilitiesHtml(), abilityDef(), activateFrenzy(), advanceEndless(), advanceGauntlet(), advanceRush(), applyBossEffect(), applyHit() (+79 more)
+Nodes (92): abilityDef(), activateFrenzy(), advanceGauntlet(), advanceRush(), applyBossEffect(), applyHit(), applySkinVisuals(), applySpecialHit() (+84 more)
+
+### Community 32 - "atkRefDps"
+Cohesion: 0.67
+Nodes (4): atkRefDps(), designMult(), expectedBuild(), expectedDps()
 
 ### Community 33 - ".unlock"
-Cohesion: 0.14
-Nodes (19): chooseEnemy(), enemyUnlocked(), fmtMinSec(), fmtTime(), grantGroupReward(), groupComplete(), groupRewardCoins(), hardUnlocked() (+11 more)
+Cohesion: 0.20
+Nodes (14): chooseEnemy(), enemyUnlocked(), fmtMinSec(), fmtTime(), grantGroupReward(), groupComplete(), groupRewardCoins(), hardUnlocked() (+6 more)
 
 ## Knowledge Gaps
 - **10 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
@@ -160,17 +175,17 @@ Nodes (19): chooseEnemy(), enemyUnlocked(), fmtMinSec(), fmtTime(), grantGroupRe
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `initGameEngine()` connect `initGameEngine` to `GameContext.jsx`, `.unlock`, `config.js`, `fmtNum`, `renderHub`, `claimChest`, `renderWorlds`, `draw`, `switchTab`, `applySkinVisuals`, `main.jsx`, `tutShow`, `applyHit`?**
+- **Why does `initGameEngine()` connect `initGameEngine` to `GameContext.jsx`, `atkRefDps`, `.unlock`, `gameEngine.js`, `renderAwards`, `renderHub`, `claimChest`, `renderWorlds`, `draw`, `switchTab`, `castSpecial`, `nativeBridge.js`, `tutShow`, `genQuests`, `applyHit`?**
   _High betweenness centrality (0.612) - this node is a cross-community bridge._
 - **Are the 21 inferred relationships involving `initGameEngine()` (e.g. with `buyLevel()` and `castSpecial()`) actually correct?**
   _`initGameEngine()` has 21 INFERRED edges - model-reasoned connections that need verification._
 - **Should `GameContext.jsx` be split into smaller, more focused modules?**
-  _Cohesion score 0.05911949685534591 - nodes in this community are weakly interconnected._
-- **Why does `react` connect `GameContext.jsx` to `package.json`, `dependencies`, `main.jsx`?**
+  _Cohesion score 0.05970695970695971 - nodes in this community are weakly interconnected._
+- **Why does `react` connect `GameContext.jsx` to `package.json`, `dependencies`, `nativeBridge.js`?**
   _High betweenness centrality (0.205) - this node is a cross-community bridge._
 - **Should `initGameEngine` be split into smaller, more focused modules?**
-  _Cohesion score 0.06561085972850679 - nodes in this community are weakly interconnected._
-- **Why does `sharp` connect `package.json` to `ref_fs`?**
+  _Cohesion score 0.07373737373737374 - nodes in this community are weakly interconnected._
+- **Why does `sharp` connect `package.json` to `generate_android_icons.cjs`?**
   _High betweenness centrality (0.097) - this node is a cross-community bridge._
-- **Should `config.js` be split into smaller, more focused modules?**
-  _Cohesion score 0.07585568917668825 - nodes in this community are weakly interconnected._
+- **Should `gameEngine.js` be split into smaller, more focused modules?**
+  _Cohesion score 0.07535460992907801 - nodes in this community are weakly interconnected._

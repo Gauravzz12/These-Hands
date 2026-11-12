@@ -14,10 +14,14 @@ public class MainActivity extends BridgeActivity {
         try {
             WebView webView = getBridge().getWebView();
             if (webView != null) {
-                webView.setLayerType(View.LAYER_TYPE_HARDWARE, null);
+                webView.setOverScrollMode(View.OVER_SCROLL_NEVER);
+                webView.setVerticalScrollBarEnabled(false);
+                webView.setHorizontalScrollBarEnabled(false);
+
                 WebSettings settings = webView.getSettings();
                 settings.setDomStorageEnabled(true);
                 settings.setDatabaseEnabled(true);
+                settings.setCacheMode(WebSettings.LOAD_DEFAULT);
             }
         } catch (Exception ignored) {}
     }
