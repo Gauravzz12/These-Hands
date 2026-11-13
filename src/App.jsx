@@ -754,6 +754,22 @@ export default function App() {
         </div>
       </div>
 
+      <div id="skillRewardOverlay" role="dialog" aria-label="Skill reward" style={{'display': 'none'}}>
+        <div className="sr-card">
+          <div className="sr-badge">🏆 SKILL REWARD!</div>
+          <div className="sr-title">YOU GOT A SKILL!</div>
+          <div className="sr-ability">
+            <div className="sr-icon"><img id="srIcon" alt="" /></div>
+            <div>
+              <div className="sr-new">GRUMPY TEDDY DEFEATED</div>
+              <div className="sr-name" id="srName">Second Hand</div>
+              <div className="sr-fx" id="srFx"></div>
+            </div>
+          </div>
+          <button className="ctl-btn sr-claim" id="srClaimBtn" type="button">🎁 CLAIM IT</button>
+          <div className="sr-hint">Your left hand joins the fight — slaps alternate L / R, doubling your cycle rate.</div>
+        </div>
+      </div>
       <div id="achToast" role="status"></div>
       <div id="globalToast" role="status"></div>
       <div id="hangToast" role="alert">
