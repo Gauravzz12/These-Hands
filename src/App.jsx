@@ -95,6 +95,23 @@ export default function App() {
               <div className="b-timer" id="boostDmgTimer">WATCH AD</div>
             </div>
           </div>
+
+          <div className="hub-side-shop" id="hubSideShop">
+            <div className="booster-slot">
+              <button className="booster-circle-btn noads" id="hubRemoveAdsBtn" type="button" aria-label="Remove Ads">
+                <span className="b-ring-svg-wrap">
+                  <svg viewBox="0 0 54 54" className="b-ring-svg">
+                    <circle className="b-ring-bg" cx="27" cy="27" r="23" />
+                    <circle className="b-ring-fill" cx="27" cy="27" r="23" />
+                  </svg>
+                </span>
+                <span className="b-ico">🚫</span>
+                <span className="b-mult" id="hubRemoveAdsPrice">₹199</span>
+              </button>
+              <div className="b-name">REMOVE ADS</div>
+              <div className="b-timer" id="hubRemoveAdsSub">ONE-TIME</div>
+            </div>
+          </div>
         </div>
 
         <div className="hub-content">
