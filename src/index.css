@@ -4847,3 +4847,203 @@ margin-top: 7px;
 #endOverlay .end-btns .end-next { background: #22c55e; color: #221407; }
 #endOverlay .end-btns .end-trio { background: #38bdf8; color: #221407; }
 #endOverlay .end-btns .end-home { background: #e7e5e4; color: #221407; }
+
+/* ===== ARCADE POP — GLOBAL THEME (Gaurav: "make all the UI in this style", 2026-11-13) =====
+   The end-modal treatment rolled out game-wide: flat colours, thick ink
+   borders, hard offset shadows, chunky press-down buttons. */
+:root { --ap-ink: #221407; }
+
+/* — Buttons: chunky, ink-bordered, hard shadow, press-down — */
+.ctl-btn, .up-btn, .tab-btn, .shop-filter-btn, .claim-all-btn,
+.auto-advance-btn, .perks-toggle, .save-io button, .ab-row button {
+  border: 3px solid var(--ap-ink);
+  box-shadow: 4px 4px 0 var(--ap-ink);
+  border-radius: 12px;
+}
+.ctl-btn:active, .up-btn:active, .tab-btn:active, .shop-filter-btn:active,
+.claim-all-btn:active, .auto-advance-btn:active, .perks-toggle:active {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 var(--ap-ink);
+}
+.ar-btn, .rail-circle, .booster-circle-btn, .home-btn, .icon-btn {
+  border: 3px solid var(--ap-ink);
+  box-shadow: 3px 3px 0 var(--ap-ink);
+}
+.ar-btn:active, .rail-circle:active, .booster-circle-btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0 var(--ap-ink);
+}
+
+/* — Pills & chips — */
+.pill, .hud-boost-pill, .fx-chip, #procChip, .quest-row .q-chip, .ch-day-tag {
+  border: 2.5px solid var(--ap-ink);
+  box-shadow: 3px 3px 0 var(--ap-ink);
+}
+
+/* — Bars: ink-outlined tracks — */
+#hpTrack, #playerBar, #atkRow {
+  border: 3px solid var(--ap-ink);
+  box-shadow: 3px 3px 0 var(--ap-ink);
+}
+
+/* — Cards & rows: the chunky tile look — */
+.ecard, .skin-card, .skill-card, .feature-card, .stat-tile, .ach-row, .more-row, .attr-tile,
+.spec-row, .quest-row, .ch-day-card, .help-card, .shop-promo-card,
+.wg-aw, .at-row, .set-row, .hub-item, .sel-trio-bar, .attrs-booster-banner {
+  border: 3px solid var(--ap-ink);
+  box-shadow: 4px 4px 0 var(--ap-ink);
+  border-radius: 14px;
+}
+.ecard-fight {
+  border: 3px solid var(--ap-ink);
+  box-shadow: 3px 3px 0 var(--ap-ink);
+}
+
+/* — Panels, sheets & modal shells — */
+.hub-card, #attrPanel, #skillDetail, #awayCard, .perks-accordion,
+.mock-card, #tutOverlay .tut-card, #playLoader .fl-card, .menu-summary {
+  border: 4px solid var(--ap-ink);
+  box-shadow: 8px 8px 0 var(--ap-ink);
+  border-radius: 18px;
+}
+#achToast {
+  border: 3px solid var(--ap-ink);
+  box-shadow: 5px 5px 0 var(--ap-ink);
+  border-radius: 14px;
+}
+
+/* — Hub / start menu — */
+.menu-logo {
+  text-shadow: 4px 4px 0 var(--ap-ink);
+}
+#playBtn, .hub-battle-cta {
+  border: 4px solid var(--ap-ink);
+  box-shadow: 6px 6px 0 var(--ap-ink);
+  border-radius: 16px;
+}
+#playBtn:active, .hub-battle-cta:active {
+  transform: translate(3px, 3px);
+  box-shadow: 3px 3px 0 var(--ap-ink);
+}
+.hub-menu .hub-item { background: #fffdf4; }
+
+/* — Skill tree nodes — */
+.tnode, .snode {
+  border: 3px solid var(--ap-ink);
+  box-shadow: 3px 3px 0 var(--ap-ink);
+}
+
+/* — Bottom nav — */
+.bnav-btn {
+  border: 2.5px solid transparent;
+  border-radius: 12px;
+}
+.bnav-btn.active {
+  border-color: var(--ap-ink);
+  box-shadow: 3px 3px 0 var(--ap-ink);
+  background: var(--gold);
+  color: #221407;
+}
+
+/* — Settings controls — */
+.set-toggle {
+  border: 3px solid var(--ap-ink);
+  box-shadow: 2px 2px 0 var(--ap-ink);
+}
+.set-slider {
+  border: 2.5px solid var(--ap-ink);
+}
+
+/* — Level-up & boss-intro overlays — */
+#levelUpOverlay .lu-card, #bossIntro .bi-card {
+  border: 4px solid var(--ap-ink);
+  box-shadow: 8px 8px 0 var(--ap-ink);
+  border-radius: 18px;
+}
+#levelUpBtn, #attrsLevelUpBtn {
+  border: 3px solid var(--ap-ink);
+  box-shadow: 4px 4px 0 var(--ap-ink);
+  border-radius: 12px;
+}
+#attrToggle {
+  border: 3px solid var(--ap-ink);
+  box-shadow: 3px 3px 0 var(--ap-ink);
+  border-radius: 12px;
+}
+
+/* ===== ARCADE POP — TYPOGRAPHY & TEXT FIT (refinement, 2026-11-13) =====
+   Display font for titles and buttons, hard offset shadows on headings,
+   and a containment pass: text wraps inside its box with breathing room. */
+
+/* — Headings & titles in the display voice — */
+.sel-title {
+  font-family: "Bungee", "Nunito", sans-serif;
+  font-size: 21px;
+  letter-spacing: 0.03em;
+  color: var(--ap-ink);
+  text-shadow: 2px 2px 0 rgba(34, 20, 7, 0.16);
+  line-height: 1.15;
+}
+.sel-sub { line-height: 1.3; overflow-wrap: break-word; }
+.sel-ghead, .ssh-title, .shop-sec-head, .wg-tag {
+  font-family: "Bungee", "Nunito", sans-serif;
+  letter-spacing: 0.03em;
+  line-height: 1.25;
+  overflow-wrap: break-word;
+}
+.at-name, .ecard .nm, .skin-card .gem-pack-name, .stat-tile span {
+  font-family: "Bungee", "Nunito", sans-serif;
+  letter-spacing: 0.02em;
+  line-height: 1.2;
+  overflow-wrap: break-word;
+}
+.tree-pillar-pill {
+  font-weight: 900;
+  letter-spacing: 0.05em;
+  padding: 4px 10px;
+  white-space: nowrap;
+}
+
+/* — Buttons speak Bungee too — */
+.up-btn, .ecard-fight, .claim-all-btn, .shop-filter-btn, .tab-btn,
+.bnav-btn, .auto-advance-btn, .perks-toggle {
+  font-family: "Bungee", "Nunito", sans-serif;
+  letter-spacing: 0.02em;
+  line-height: 1.15;
+}
+.bnav-btn { font-size: 10.5px; padding: 6px 2px; }
+.up-btn { white-space: normal; text-align: center; padding: 8px 10px; }
+.ecard-fight { white-space: normal; text-align: center; padding: 8px 6px; }
+
+/* — Containment: nothing spills outside its box — */
+.ecard, .skin-card, .attr-tile, .stat-tile, .ach-row, .more-row,
+.set-row, .spec-row, .quest-row, .feature-card, .skill-card,
+.end-stats .es, .hub-item, .sel-trio-bar {
+  min-width: 0;
+  overflow-wrap: break-word;
+}
+.skin-desc, .at-desc, .at-fx, .ecard .st, .end-sub, .end-tip,
+.more-row .mr-sub, .set-row .sr-sub, .quest-row .q-sub, .pack-note {
+  overflow-wrap: break-word;
+  line-height: 1.35;
+}
+.ecard .nm, .ecard .st { padding: 0 4px; }
+.attr-tile { padding: 10px 12px; }
+.stat-tile { padding: 10px 12px; }
+.ach-row, .more-row, .set-row { padding: 10px 14px; }
+#enemyMeta { line-height: 1.3; padding: 0 10px; overflow-wrap: break-word; }
+#enemyName {
+  font-family: "Bungee", "Nunito", sans-serif;
+  letter-spacing: 0.02em;
+  overflow-wrap: break-word;
+  line-height: 1.15;
+  padding: 0 8px;
+}
+.pill { padding: 4px 12px; line-height: 1.2; }
+.fx-chip, #procChip { line-height: 1.2; padding: 4px 10px; }
+.end-ad-cell .end-boss-dmg-btn, .end-ad-cell .end-revive-btn {
+  white-space: normal;
+  overflow-wrap: break-word;
+}
+.mock-line, .mock-card { overflow-wrap: break-word; }
+#skillDetail { overflow-wrap: break-word; line-height: 1.35; }
