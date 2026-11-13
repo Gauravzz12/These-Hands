@@ -12,9 +12,9 @@ function buildAllEnemies() {
   if (_allEnemies) return _allEnemies;
   _allEnemies = ROSTER.map((r, i) => {
     const pos = i % 5;
-    const elite = pos === 4;
     const boss = i % 10 === 9;
-    const miniBoss = elite && !boss;
+    const miniBoss = pos === 4 && !boss;
+    const elite = pos === 4 || i % 10 === 8;
 
     const hp = calcEnemyHp(i, boss, elite);
     const { coinRate, bounty } = calcEnemyBounty(hp, i, boss);
@@ -26,6 +26,7 @@ function buildAllEnemies() {
       name: r[0],
       group: Math.floor(i / 5),
       elite,
+      miniBoss,
       hp,
       coinRate,
       bounty,
