@@ -4177,6 +4177,72 @@ margin-top: 7px;
 }
 
 /* Floating side boosters on home showcase */
+.hub-side-shop {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  z-index: 10;
+  pointer-events: auto;
+}
+.hub-side-shop .booster-slot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+}
+.hub-side-shop .booster-circle-btn {
+  width: 48px;
+  height: 48px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.45), inset 0 1px 2px rgba(255, 255, 255, 0.25);
+}
+.hub-side-shop .b-ring-svg-wrap,
+.hub-side-shop .b-ring-svg {
+  width: 48px;
+  height: 48px;
+}
+.hub-side-shop .b-ico {
+  font-size: 20px;
+}
+.hub-side-shop .b-mult {
+  font-size: 9px;
+  bottom: 4px;
+}
+.hub-side-shop .b-name {
+  font-family: "Bungee", "Nunito", sans-serif;
+  font-size: 8px;
+  color: #ffffff;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.9), 0 0 4px rgba(0,0,0,0.8);
+  letter-spacing: 0.03em;
+  line-height: 1.1;
+  margin-top: 1px;
+}
+.hub-side-shop .b-timer {
+  font-family: "Nunito", sans-serif;
+  font-weight: 800;
+  font-size: 8px;
+  color: #ffdf40;
+  background: rgba(22, 12, 6, 0.85);
+  padding: 1px 5px;
+  border-radius: 999px;
+  letter-spacing: 0.02em;
+  line-height: 1.25;
+}
+.booster-circle-btn.noads .b-ring-fill {
+  stroke: #f43f5e;
+  stroke-dashoffset: 0;
+  filter: drop-shadow(0 0 4px rgba(244, 63, 94, 0.8));
+}
+.booster-circle-btn.noads.owned {
+  opacity: 0.55;
+  cursor: default;
+}
+.booster-circle-btn.noads.owned .b-ring-fill {
+  stroke: #22c55e;
+  filter: none;
+}
 .hub-side-boosters {
   position: absolute;
   top: 10px;

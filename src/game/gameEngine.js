@@ -1515,6 +1515,16 @@ function fmtMinSec(ms) {
 
 function updateAdBoostersUi() {
   const now = Date.now();
+  const raBtn = $("hubRemoveAdsBtn");
+  if (raBtn) {
+    const raOwned = !!G.adsRemoved;
+    raBtn.disabled = raOwned;
+    raBtn.classList.toggle("owned", raOwned);
+    const raPrice = $("hubRemoveAdsPrice");
+    if (raPrice) raPrice.textContent = raOwned ? "✓" : storePriceOf("feature_remove_ads", "₹199");
+    const raSub = $("hubRemoveAdsSub");
+    if (raSub) raSub.textContent = raOwned ? "OWNED" : "ONE-TIME";
+  }
   const coinLeft = Math.max(0, (G.adCoinBoostUntil || 0) - now);
   const dmgLeft = Math.max(0, (G.adDmgBoostUntil || 0) - now);
   const coinActive = coinLeft > 0;
@@ -3056,6 +3066,19 @@ if(window.__skinEvolve){const sn4=$("skinNotice");if(sn4){const parts=window.__s
   if(typeof ensureHubReady==="function")ensureHubReady();
 })();const runDeferredChecks = () => {};(function(){const order=[];const fg=Math.max(0,Math.floor(G.current/5));for(let g=fg;g<GROUPS.length;g++)order.push(g);for(let g=0;g<fg;g++)order.push(g);let oi=0;const step=()=>{for(let k=0;k<5;k++){try{if(ENEMIES[fg*5+k])void ENEMIES[fg*5+k].spr}catch(e){}}};setTimeout(step,3000)})();
 // Wire Ad-Based Booster Buttons & Modals
+const hubRaBtn = $("hubRemoveAdsBtn");
+if (hubRaBtn) {
+  hubRaBtn.addEventListener("click", () => {
+    if (G.adsRemoved) { showShopToast("Ads are already removed!"); return; }
+    startStorePurchase({
+      kind: "feature",
+      id: "remove_ads",
+      name: "Remove Ads",
+      price: storePriceOf("feature_remove_ads", "₹199"),
+      desc: "No interstitial or banner ads, forever. Rewarded ads stay optional."
+    });
+  });
+}
 const boostCoinBtn = $("boostCoinBtn");
 if (boostCoinBtn) {
   boostCoinBtn.addEventListener("click", () => {
