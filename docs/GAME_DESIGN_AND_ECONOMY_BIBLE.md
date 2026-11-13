@@ -410,3 +410,4 @@ Monetization is designed to be fair, predictable, and fully respectful of combat
 * **2× Battle Damage Booster:** Watching a rewarded video activates a 10-minute timer doubling all slap damage dealt (`G.adDmgBoostUntil`).
 * **End-of-Fight Doubler:** Upon victory, players can watch a rewarded ad to double their entire fight haul (Slap coins + Bounty).
 * **Boss Revive:** If defeated by a chapter boss, player can watch an ad to revive once at $50\%$ HP with specials refreshed.
+
