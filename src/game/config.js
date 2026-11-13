@@ -77,9 +77,9 @@ export const CONFIG = {
     "slapFightCapFrac": 1.35,
     "slapTaperFrac": 0.35,
     "stunCooldownSec": 4,
-    "slapEarlyMult": 1.3,
-    "slapMidMult": 1.15,
-    "slapEarlyCapFrac": 0.45,
+    "slapEarlyMult": 3.5,
+    "slapMidMult": 2.2,
+    "slapEarlyCapFrac": 1.75,
     "slapCritPayFrac": 0.5,
     "luckCoinMult": 3,
     "vampPerLevel": 1.0,
@@ -98,17 +98,17 @@ export const CONFIG = {
   "enemyProgression": {
     "hp": {
       "base0": 65,
-      "early": [65, 95, 140, 210, 360, 420, 580, 780, 1050, 2500],
-      "base10": 2800,
-      "growth": 1.26,
+      "early": [65, 95, 140, 210, 380, 440, 600, 820, 1150, 2750],
+      "base10": 3200,
+      "growth": 1.255,
       "tailStart": 30,
-      "tailGrowth": 1.44,
+      "tailGrowth": 1.442,
       "bossMult": 2.50,
       "eliteMult": 1.55
     },
     "damage": {
-      "earlyDmg": [8, 12, 15, 20, 26, 24, 28, 34, 40, 48],
-      "base10": 58,
+      "earlyDmg": [8, 12, 15, 20, 26, 26, 30, 36, 44, 52],
+      "base10": 64,
       "growth": 1.11,
       "tailStart": 30,
       "tailGrowth": 1.14,
@@ -1315,18 +1315,26 @@ export function calcAttrCost(key, currentLevel) {
   const base = def.baseCost || 60;
 
   // Early curve (levels 0-9, up to Monkey Boss):
-  // Steeper progression scaling from baseCost (60-380) up to ~15,000-40,000 coins
+  // Fast-paced and rewarding early progression (base up to ~11k-30k)
   if (lvl < 10) {
-    return Math.round(base * Math.pow(1.85, lvl));
+    return Math.round(base * Math.pow(1.78, lvl));
   }
 
-  // Beyond Level 10 (post-Monkey Boss to Endgame):
-  // Progressive geometric scale from the Level 10 cost up to maxCost at maxLevel N
-  const cost10 = Math.round(base * Math.pow(1.85, 9));
-  const remainingLevels = Math.max(1, N - 10);
-  const progress = (lvl - 9) / remainingLevels;
+  // Post-Monkey Mid-Game (levels 10-25, Stage 3 Kickboxer through Stage 5):
+  // Steep upgrade price jump so upgrades require grinding multiple fights despite rich coin rewards
+  if (lvl <= 25) {
+    const cost9 = Math.round(base * Math.pow(1.78, 9));
+    const step = lvl - 9;
+    return Math.round(cost9 * 1.8 * Math.pow(1.28, step));
+  }
+
+  // Late Game (levels 26 to maxLevel N):
+  // Smooth geometric scaling to maxCost (1.85B for Power)
+  const cost25 = Math.round(base * Math.pow(1.78, 9) * 1.8 * Math.pow(1.28, 16));
+  const remainingLevels = Math.max(1, N - 25);
+  const progress = (lvl - 25) / remainingLevels;
   const maxCost = def.maxCost || 65000000;
-  return Math.round(cost10 * Math.pow(maxCost / cost10, Math.min(1, progress)));
+  return Math.round(cost25 * Math.pow(maxCost / cost25, Math.min(1, progress)));
 }
 
 export function calcAttrCap(playerLevel, dragonMastery = 0) {

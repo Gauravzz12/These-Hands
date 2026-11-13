@@ -1,7 +1,7 @@
-# Graph Report - these-hands  (2026-11-12)
+# Graph Report - these-hands  (2026-11-13)
 
 ## Corpus Check
-- 51 files · ~76,915 words
+- 51 files · ~76,965 words
 - Verdict: corpus is large enough that graph structure adds value.
 - Unclassified: 22 file(s) not represented in the graph (top: .xml 10, (none) 3, .properties 2)
 
@@ -11,7 +11,7 @@
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `24121893`
+- Built from commit: `22410adb`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -53,8 +53,8 @@
 6. `useGame()` - 28 edges
 7. `spawnEnemy()` - 25 edges
 8. `MathPixelCanvas` - 23 edges
-9. `hasSkill()` - 22 edges
-10. `renderHub()` - 22 edges
+9. `renderHub()` - 22 edges
+10. `hasSkill()` - 22 edges
 
 ## Surprising Connections (you probably didn't know these)
 - `initGameEngine()` --calls--> `calcLevelUpCost()`  [EXTRACTED]
