@@ -6,23 +6,27 @@ export const CONFIG = {
     "critChance": 0.1,
     "critMult": 2
   },
-  "capPerLevel": 3,
+  "capPerLevel": 2,
   "levelUp": {
-    "base": 180,
-    "growth": 2.15,
+    "base": 150,
+    "growth": 1.95,
     "rampStart": 9,
-    "midGrowth": 1.62,
+    "midAnchor": 46000,
+    "midGrowth": 1.33,
     "midStart": 25,
-    "lateGrowth": 1.38,
+    "lateAnchor": 4400000,
+    "lateGrowth": 1.21,
     "grindStart": 45,
-    "endGrowth": 1.28,
+    "endAnchor": 240000000,
+    "endGrowth": 1.26,
     "worldStart": 50,
     "worldGrowth": 1.22,
-    "worldCap": 80
+    "worldCap": 80,
+    "mortalCap": 35
   },
   "levelCap": 80,
   "attrs": {
-    "power": { "name": "Power", "baseCost": 60, "maxCost": 1850000000, "growth": 1.16, "lateGrowth": 1.40, "maxLevel": 80 },
+    "power": { "name": "Power", "baseCost": 60, "maxCost": 12000000000, "growth": 1.16, "lateGrowth": 1.40, "maxLevel": 80 },
     "speed": { "name": "Speed", "baseCost": 110, "maxCost": 75000000, "growth": 1.16, "lateGrowth": 1.51, "maxLevel": 40 },
     "critChance": { "name": "Crit Chance", "baseCost": 130, "maxCost": 85000000, "growth": 1.18, "lateGrowth": 1.58, "maxLevel": 55 },
     "critDamage": { "name": "Crit Damage", "baseCost": 90, "maxCost": 65000000, "growth": 1.16, "lateGrowth": 1.51, "maxLevel": 65 },
@@ -31,7 +35,7 @@ export const CONFIG = {
     "combo": { "name": "Combo", "baseCost": 75, "maxCost": 60000000, "growth": 1.16, "lateGrowth": 1.51, "maxLevel": 65 },
     "coinMult": { "name": "Coin Mult.", "baseCost": 80, "maxCost": 65000000, "growth": 1.16, "lateGrowth": 1.51, "maxLevel": 65 },
     "accuracy": { "name": "Accuracy", "baseCost": 95, "maxCost": 30000000, "growth": 1.3, "lateGrowth": 3.9, "maxLevel": 14 },
-    "bossDamage": { "name": "Boss Hunter", "baseCost": 220, "maxCost": 95000000, "growth": 1.16, "lateGrowth": 1.51, "maxLevel": 40 },
+    "bossDamage": { "name": "Giant Slayer", "baseCost": 220, "maxCost": 95000000, "growth": 1.16, "lateGrowth": 1.51, "maxLevel": 40 },
     "vampirism": { "name": "Life Leech", "baseCost": 380, "maxCost": 150000000, "growth": 1.18, "lateGrowth": 1.58, "maxLevel": 40 },
     "luck": { "name": "Fortune Luck", "baseCost": 140, "maxCost": 85000000, "growth": 1.2, "lateGrowth": 1.69, "maxLevel": 50 }
   },
@@ -61,28 +65,31 @@ export const CONFIG = {
     "coinPerLevel": 0.05,
     "accuracyBase": 0.85,
     "accuracyPerLevel": 0.01,
-    "powerGrowth": 1.08,
+    "powerGrowth": 1.095,
     "accuracyCap": 0.99,
-    "bossDmgPerLevel": 0.005,
-    "bossDmgCap": 0.20,
+    "bossDmgPerLevel": 0.015,
+    "bossDmgCap": 0.60,
     "luckPerLevel": 0.005,
     "luckChanceCap": 0.25,
     "luckDmgMult": 1.5,
     "strikeCoinMult": 0.32,
-    "killBountyMult": 1.65,
+    "killBountyMult": 1.30,
     "critCoinMult": 0.50,
     "slapBaseFrac": 0.10,
     "slapDmgBonusScale": 5,
     "slapDmgBonusCap": 1,
-    "slapFightCapFrac": 1.35,
-    "slapTaperFrac": 0.35,
+    "slapFightCapFrac": 2.25,
+    "slapTaperFrac": 0.65,
     "stunCooldownSec": 4,
-    "slapEarlyMult": 3.5,
-    "slapMidMult": 2.2,
+    "slapEarlyMult": 3.0,
+    "slapMidMult": 2.5,
+    "slapLateMult": 2.0,
+    "slapLateBossMult": 1.75,
+    "worldSlapCapFrac": 1.35,
     "slapEarlyCapFrac": 1.75,
     "slapCritPayFrac": 0.5,
     "luckCoinMult": 3,
-    "vampPerLevel": 1.0,
+    "vampPerLevel": 0.0015,
     "speedCostLateMult": 3,
     "speedCostLatePow": 6,
     "specialPerLevel": 0.005,
@@ -98,7 +105,14 @@ export const CONFIG = {
   "enemyProgression": {
     "hp": {
       "base0": 65,
-      "early": [65, 95, 140, 210, 380, 440, 600, 820, 1150, 2750],
+      "early": [65, 95, 140, 210, 340, 420, 580, 800, 1150, 2100],
+      "hpTable": [
+        65,95,140,210,340,420,580,800,1150,2100,
+        2850,3550,4420,5500,7600,8400,10500,13100,17500,24500,
+        34500,43000,53500,66500,92000,102000,127000,158000,212000,295000,
+        420000,580000,800000,1105000,1620000,1850000,2550000,3520000,5150000,7450000,
+        10600000,14750000,20500000,28500000,42500000,52000000,92000000,165000000,310000000,780000000
+      ],
       "base10": 3200,
       "growth": 1.255,
       "tailStart": 30,
@@ -107,7 +121,14 @@ export const CONFIG = {
       "eliteMult": 1.55
     },
     "damage": {
-      "earlyDmg": [8, 12, 15, 20, 26, 26, 30, 36, 44, 52],
+      "earlyDmg": [8, 12, 15, 20, 26, 28, 32, 38, 46, 54],
+      "dmgTable": [
+        8,12,15,20,26,28,32,38,46,54,
+        64,71,78,86,128,105,117,129,185,260,
+        174,192,212,234,345,286,316,349,495,690,
+        467,512,560,613,890,736,805,882,1280,1780,
+        1158,1268,1388,1520,2220,1823,1996,2186,3180,4717
+      ],
       "base10": 64,
       "growth": 1.11,
       "tailStart": 30,
@@ -117,6 +138,13 @@ export const CONFIG = {
     },
     "interval": {
       "early": [2.40, 2.35, 2.30, 2.25, 2.05, 2.20, 2.15, 2.10, 2.05, 1.95],
+      "table": [
+        2.40,2.35,2.30,2.25,2.05,2.20,2.15,2.10,2.05,1.95,
+        2.13,2.10,2.08,2.05,2.03,2.00,1.98,1.95,1.93,1.84,
+        1.88,1.86,1.84,1.82,1.79,1.77,1.75,1.73,1.71,1.63,
+        1.67,1.65,1.63,1.61,1.59,1.57,1.55,1.53,1.51,1.44,
+        1.48,1.46,1.44,1.42,1.40,1.40,1.40,1.40,1.40,1.40
+      ],
       "base": 2.4,
       "decay": 0.988,
       "floor": 1.40,
@@ -127,11 +155,11 @@ export const CONFIG = {
     "bounty": {
       "earlyRate": 0.50,
       "baseRate": 0.55,
-      "rateDecay": 0.994,
-      "minRate": 0.38,
+      "rateDecay": 1.0,
+      "minRate": 0.55,
       "minBounty": 30,
       "scale": 0.52,
-      "bossBonusMult": 1.75,
+      "bossBonusMult": 1.35,
       "normalKillBonusMult": 0.30,
       "hardKillBonusMult": 1.25
     }
@@ -168,16 +196,22 @@ export const CONFIG = {
     ]
   },
   "hard": {
-    "hpMult": 3.0,
-    "atkMult": 1.35,
-    "intervalMult": 0.88,
-    "coinMult": 2.5,
+    "hpMult": 1.75,
+    "atkMult": 1.25,
+    "dmgMult": 1.25,
+    "intervalMult": 1.0,
+    "coinMult": 4.75,
+    "noSlapCoins": true,
     "gemReward": 5,
-    "emberBonus": 1.5
+    "emberBonus": 1.5,
+    "groupMasteryGems": 15,
+    "groupMasteryCoinPct": 0.02
   },
   "playerHp": {
     "base": 100,
-    "perLevel": 25
+    "perLevel": 25,
+    "expBase": 15,
+    "expGrowth": 1.145
   },
   "enemyAttack": {
     "intervalStart": 3,
@@ -227,7 +261,7 @@ export const CONFIG = {
       "id": "strongerHands",
       "name": "Stronger Hands",
       "tier": 1,
-      "cost": 1200,
+      "cost": 850,
       "prereq": "basic",
       "fx": "+20% damage on every slap."
     },
@@ -235,7 +269,7 @@ export const CONFIG = {
       "id": "staminaTraining",
       "name": "Stamina Training",
       "tier": 1,
-      "cost": 350,
+      "cost": 300,
       "prereq": "basic",
       "fx": "+50 max HP."
     },
@@ -243,17 +277,26 @@ export const CONFIG = {
       "id": "secondHand",
       "name": "Second Hand",
       "tier": 1,
-      "cost": 10000,
+      "cost": 1200,
       "prereq": "basic",
-      "reqBoss": 9,
+      "reqBoss": 4,
       "fx": "Alternates L / R hands, doubling your cycle rate."
+    },
+    {
+      "id": "twinMastery",
+      "name": "Twin Mastery",
+      "tier": 2,
+      "cost": 10000,
+      "prereq": "secondHand",
+      "reqBoss": 9,
+      "fx": "Off-hand slaps strike +25% faster and grant +10% combo charge."
     },
     {
       "id": "onTarget",
       "name": "On Target",
       "tier": 2,
       "cost": 25000,
-      "prereq": "secondHand",
+      "prereq": "twinMastery",
       "fx": "Combo stacks survive switching enemies (resets on loss)."
     },
     {
@@ -261,7 +304,7 @@ export const CONFIG = {
       "name": "Quick Reflexes",
       "tier": 2,
       "cost": 45000,
-      "prereq": "secondHand",
+      "prereq": "twinMastery",
       "fx": "+10% attack speed."
     },
     {
@@ -278,7 +321,7 @@ export const CONFIG = {
       "tier": 2,
       "cost": 160000,
       "prereq": "staminaTraining",
-      "reqBoss": 4,
+      "reqBoss": 9,
       "fx": "Every 8th slap lands a devastating SEISMIC SLAM dealing 4x damage and dazing the enemy for 1s!"
     },
     {
@@ -303,7 +346,7 @@ export const CONFIG = {
       "tier": 2,
       "cost": 65000,
       "prereq": "basic",
-      "fx": "Boss normal attacks spawn a parry ring at a random spot — tap it exactly as the ring closes into the gold circle to deflect the blow completely. Random spot every time; boss specials cannot be deflected."
+      "fx": "Mini-Boss, Elite and Boss attacks — plus every 3rd-attack Group Signature Move — spawn a parry ring at a random spot; tap it exactly as the ring closes into the gold circle to deflect the blow completely. Random spot every time; boss specials cannot be deflected."
     },
     {
       "id": "comboMastery",
@@ -368,7 +411,7 @@ export const CONFIG = {
       "tier": 4,
       "cost": 45000000,
       "prereq": "clutchSurge",
-      "fx": "+100 max HP and regenerate 2 HP/s during fights."
+      "fx": "+250 max HP and regenerate 1.5% Max HP/s during fights."
     },
     {
       "id": "kineticShield",
@@ -377,7 +420,7 @@ export const CONFIG = {
       "cost": 68000000,
       "prereq": "clutchSurge",
       "reqBoss": 29,
-      "fx": "Every 20 slaps builds a shield absorbing 30 enemy damage (max 90)."
+      "fx": "Every 20 slaps builds a shield absorbing 15% of Max HP damage (max 45% of Max HP)."
     },
     {
       "id": "goldenTouch",
@@ -414,20 +457,20 @@ export const CONFIG = {
     },
     {
       "id": "aegisBulwark",
-      "name": "Aegis Retaliation",
+      "name": "Bulwark of Aegis",
       "tier": 5,
-      "cost": 335000000,
+      "cost": 320000000,
       "prereq": "kineticShield",
       "fx": "When Defense or Barrier mitigates damage, 50% of the blocked damage is reflected back."
     },
     {
       "id": "ultimateSlap",
-      "name": "Ultimate Slap",
+      "name": "Godhand Strike",
       "tier": 5,
-      "cost": 490000000,
+      "cost": 450000000,
       "prereq": "titanSlayer",
-      "reqBoss": 39,
-      "fx": "Every 15s of combat, your next slap is an ULTIMATE: 10x damage."
+      "reqBoss": 49,
+      "fx": "Slaps charge the Godhand Ultimate: a 20x screen-shattering strike."
     }
   ],
   "skillFx": {
@@ -438,8 +481,8 @@ export const CONFIG = {
     "heavyChance": 0.12,
     "heavyMult": 3,
     "staminaHp": 50,
-    "unstoppableHp": 100,
-    "regen": 2,
+    "unstoppableHp": 250,
+    "regen": 0.015,
     "comboMasteryStacks": 5,
     "comboMasteryPer": 0.005,
     "bossMult": 1.25,
@@ -449,7 +492,7 @@ export const CONFIG = {
     "barrageHits": 3,
     "barrageMult": 0.5,
     "ultEvery": 15,
-    "ultMult": 10,
+    "ultMult": 20,
     "retaliationMitigate": 0.20,
     "retaliationMult": 3.0,
     "parryChance": 0.15,
@@ -460,159 +503,64 @@ export const CONFIG = {
     "clutchSpeed": 0.8,
     "clutchDmg": 1.25,
     "shieldPerHits": 20,
-    "shieldAmt": 30,
-    "shieldMax": 90,
+    "shieldAmt": 0.15,
+    "shieldMax": 0.45,
     "echoChance": 0.25,
     "echoMult": 1.6,
     "titanMult": 1.35
   },
   "levelAbilities": [
-    {
-      "level": 2,
-      "id": "ironPalm",
-      "name": "Iron Palm",
-      "fx": "+10% damage on every slap."
-    },
-    {
-      "level": 3,
-      "id": "quickening",
-      "name": "Quickening",
-      "fx": "+8% attack speed."
-    },
-    {
-      "level": 4,
-      "id": "thickSkin",
-      "name": "Thick Skin",
-      "fx": "Enemy attacks deal 10% less damage (min 1)."
-    },
-    {
-      "level": 5,
-      "id": "greed",
-      "name": "Greed",
-      "fx": "+15% coins — strikes and kill bonuses."
-    },
-    {
-      "level": 6,
-      "id": "vampireSlap",
-      "name": "Vampire Slap",
-      "fx": "Every 10th slap heals you for 10 HP."
-    },
-    {
-      "level": 7,
-      "id": "critSurge",
-      "name": "Crit Surge",
-      "fx": "+5% crit chance."
-    },
-    {
-      "level": 8,
-      "id": "bossBane",
-      "name": "Boss Bane",
-      "fx": "+20% damage vs elites and bosses."
-    },
-    {
-      "level": 9,
-      "id": "goldenAura",
-      "name": "Golden Aura",
-      "fx": "+25% coins — strikes and kill bonuses."
-    },
-    {
-      "level": 10,
-      "id": "counterCadence",
-      "name": "Counter-Cadence",
-      "fx": "Retaliating against an enemy attack guarantees your next slap lands as a 2.5x critical hit."
-    },
-    {
-      "level": 11,
-      "id": "battleFocus",
-      "name": "Battle Focus",
-      "fx": "At 8+ Combo stacks, gain +12% stun chance to lock enemies down."
-    },
-    {
-      "level": 12,
-      "id": "toughGrit",
-      "name": "Tough Grit",
-      "fx": "Below 50% HP: take 15% less damage and heal +1 HP on every slap."
-    },
-    {
-      "level": 13,
-      "id": "overcharge",
-      "name": "Overcharge Wave",
-      "fx": "Critical hits emit a shockwave dealing true bonus damage equal to 5x Defense."
-    },
-    {
-      "level": 14,
-      "id": "giantStature",
-      "name": "Giant Stature",
-      "fx": "+75 Max HP permanently, and slaps against Elites/Bosses build double combo."
-    },
-    {
-      "level": 15,
-      "id": "secondWind",
-      "name": "Second Wind",
-      "fx": "Once per fight, a killing blow instead leaves you at 25% HP."
-    },
-    {
-      "level": 16,
-      "id": "swiftRecovery",
-      "name": "Swift Recovery",
-      "fx": "Enemy debuffs expire 40% faster. Clearing a debuff grants +20% speed for 3s."
-    },
-    {
-      "level": 17,
-      "id": "midasStrike",
-      "name": "Midas Strike",
-      "fx": "Striking an enemy during their attack windup awards +35% bonus coins."
-    },
-    {
-      "level": 18,
-      "id": "ironResolve",
-      "name": "Iron Resolve",
-      "fx": "Every 25 slaps cleanses negative debuffs and restores 4% Max HP."
-    },
-    {
-      "level": 19,
-      "id": "executioner",
-      "name": "Executioner",
-      "fx": "Enemies below 25% HP take +30% amplified damage from all attacks."
-    },
-    {
-      "level": 20,
-      "id": "godhandAwakening",
-      "name": "Godhand Awakening",
-      "fx": "+15% permanent damage, +8% speed, and every 50th slap is a 5x Godhand strike."
-    }
+    { "level": 2, "id": "ironPalm", "name": "Iron Palm", "fx": "+25% damage on every slap permanently." },
+    { "level": 3, "id": "quickening", "name": "Quickening", "fx": "+10% slap speed." },
+    { "level": 4, "id": "thickSkin", "name": "Thick Skin", "fx": "Reduces incoming enemy attack damage by 15%." },
+    { "level": 5, "id": "greed", "name": "Greed", "fx": "+20% coins from all sources." },
+    { "level": 6, "id": "vampireSlap", "name": "Vampire Slap", "fx": "Every 6th slap heals you for 2% of Max HP (min 12 HP)." },
+    { "level": 7, "id": "critSurge", "name": "Crit Surge", "fx": "+8% critical strike chance." },
+    { "level": 8, "id": "secondWind", "name": "Second Wind", "fx": "Once per fight, when HP drops to 0, immediately recover 30% HP." },
+    { "level": 9, "id": "bossBane", "name": "Boss Bane", "fx": "+25% damage against Group Elites, Mini-Bosses, and Bosses." },
+    { "level": 10, "id": "goldenAura", "name": "Golden Aura", "fx": "+30% coins earned." },
+    { "level": 11, "id": "counterCadence", "name": "Counter Cadence", "fx": "After taking a hit, your next slap deals 2x damage." },
+    { "level": 12, "id": "battleFocus", "name": "Battle Focus", "fx": "At combo stack 8+, your slaps gain +15% stun chance." },
+    { "level": 13, "id": "toughGrit", "name": "Tough Grit", "fx": "When below 50% HP, take 25% less damage." },
+    { "level": 14, "id": "overcharge", "name": "Overcharge", "fx": "Critical hits discharge kinetic defense, dealing bonus damage equal to 50% of your Defense stat." },
+    { "level": 15, "id": "giantStature", "name": "Giant Stature", "fx": "+150 Max HP, and striking an Elite or Boss grants +1 extra combo stack." },
+    { "level": 16, "id": "swiftRecovery", "name": "Swift Recovery", "fx": "Dodging or blocking an enemy attack boosts your slap speed by +30% for 2.5s." },
+    { "level": 17, "id": "midasStrike", "name": "Midas Strike", "fx": "Slaps landed within 0.8s of an enemy's attack timer grant 2x coins." },
+    { "level": 18, "id": "ironResolve", "name": "Iron Resolve", "fx": "Every 25th slap cleanses all active debuffs (Burn, Slow, Daze, Specials Lock) and heals 10% Max HP." },
+    { "level": 19, "id": "executioner", "name": "Executioner", "fx": "Slaps deal +50% damage against enemies below 25% HP." },
+    { "level": 20, "id": "godhandAwakening", "name": "Godhand Awakening", "fx": "Every 30th slap triggers Godhand Awakening: deals 3x damage, stuns for 1.5s, and shakes the screen." }
   ],
   "abilityFx": {
-    "ironPalm": 1.1,
-    "quickening": 0.92,
-    "thickSkin": 0.9,
-    "greed": 1.15,
-    "vampEvery": 10,
+    "ironPalm": 1.25,
+    "quickening": 0.90,
+    "thickSkin": 0.85,
+    "greed": 1.20,
+    "vampEvery": 6,
     "vampHeal": 10,
-    "critSurge": 0.05,
-    "secondWindFrac": 0.25,
-    "bossBane": 1.2,
-    "goldenAura": 1.25,
+    "critSurge": 0.08,
+    "secondWindFrac": 0.30,
+    "bossBane": 1.25,
+    "goldenAura": 1.30,
     "counterCadence": true,
     "battleFocusStacks": 8,
-    "battleFocusStun": 0.12,
+    "battleFocusStun": 0.15,
     "toughGritHp": 0.5,
-    "toughGritReduction": 0.85,
+    "toughGritReduction": 0.75,
     "toughGritHeal": 1,
-    "overchargeDefMult": 5,
-    "giantStatureHp": 75,
+    "overchargeDefMult": 0.5,
+    "giantStatureHp": 150,
     "swiftRecoveryDebuffMult": 0.6,
-    "swiftRecoverySpeed": 0.8,
-    "midasStrikeMult": 1.35,
+    "swiftRecoverySpeed": 0.70,
+    "midasStrikeMult": 2.0,
     "ironResolveEvery": 25,
-    "ironResolveHpPct": 0.04,
+    "ironResolveHpPct": 0.10,
     "executionerHpFrac": 0.25,
-    "executionerDmgMult": 1.3,
-    "godhandDmg": 1.15,
-    "godhandSpeed": 0.92,
-    "godhandEvery": 50,
-    "godhandMult": 5,
-    "masteryPer": 0.025
+    "executionerDmgMult": 1.5,
+    "godhandDmg": 1.0,
+    "godhandSpeed": 1.0,
+    "godhandEvery": 30,
+    "godhandMult": 3,
+    "masteryPer": 0.02
   },
   "boss": {
     "enrageBelow": 0.3,
@@ -680,16 +628,28 @@ export const CONFIG = {
     "49": {"name": "DRAGON RENEWAL", "pct": 0.20, "every": 6, "max": 4, "blurb": "Ancient blood knits shut — heals 20% of his HP, up to 4 times per fight."},
     "205": {"name": "AMRITA OF THE NAVEL", "pct": 0.15, "every": 9999, "max": 1, "blurb": "The nectar of immortality — heals 15% of his HP, once per fight."}
   },
+  "firstClearChests": {
+    "4": {"coins": 220, "gems": 2},
+    "9": {"coins": 1850, "gems": 5},
+    "14": {"coins": 5400, "gems": 2},
+    "19": {"coins": 23500, "gems": 5},
+    "24": {"coins": 65000, "gems": 2},
+    "29": {"coins": 285000, "gems": 5},
+    "34": {"coins": 1150000, "gems": 3},
+    "39": {"coins": 7200000, "gems": 5},
+    "44": {"coins": 30000000, "gems": 3},
+    "49": {"coins": 750000000, "gems": 10}
+  },
   "gauntlet": {"bonusMult": 4.5, "gemFirst": 1},
   "worldArts": [
     {"id": "echoPalm", "icon": "🔁", "name": "Echo Palm", "cost": 20, "desc": "Every 8th slap echoes — a phantom slap lands at 60% damage."},
     {"id": "frenzyHeart", "icon": "💓", "name": "Frenzy Heart", "cost": 15, "desc": "Your frenzy meter fills 30% faster."},
-    {"id": "phoenixHeart", "icon": "🕊️", "name": "Phoenix Heart", "cost": 35, "desc": "Once per fight, a fatal blow leaves you standing at 25% HP."},
+    {"id": "phoenixHeart", "icon": "🕊️", "name": "Phoenix Heart", "cost": 35, "desc": "Once per fight, a fatal blow leaves you standing at 25% HP + 1.5s invulnerability."},
     {"id": "battleTrance", "icon": "⚡", "name": "Battle Trance", "cost": 25, "desc": "+12% slap speed and +25% critical damage across all fights."},
     {"id": "giantsGrip", "icon": "✊", "name": "Giant's Grip", "cost": 15, "desc": "+1 max precision crits per fight (weak-spot cap)."},
     {"id": "eagleEye", "icon": "👁️", "name": "Eagle Eye", "cost": 12, "desc": "Weak spots stay open 0.6s longer."},
     {"id": "greedMantra", "icon": "🪙", "name": "Greed Mantra", "cost": 18, "desc": "+25% coins from world fights."},
-    {"id": "bossHunter", "icon": "🏹", "name": "Boss Hunter", "cost": 25, "desc": "+15% damage against bosses."}
+    {"id": "bossHunter", "icon": "🏹", "name": "Sovereign's Bane", "cost": 25, "desc": "+15% damage against all bosses."}
   ],
   "relics": [
     {"id": "warBell", "icon": "🔔", "name": "Bronze War Bell", "srcW": 0, "srcS": 0, "vals": [0.10, 0.20, 0.30], "fmt": "pct", "desc": "+{v} coins in world fights"},
@@ -700,12 +660,12 @@ export const CONFIG = {
     {"id": "tenKingsCrown", "icon": "👑", "name": "Crown of Ten Kings", "srcW": 0, "srcS": 5, "vals": [0.15, 0.25, 0.40], "fmt": "pct", "desc": "+{v} damage vs world final bosses"},
     {"id": "firstFoeSplinter", "icon": "🪵", "name": "Splinter of the First Foe", "srcW": 1, "srcS": 0, "vals": [0.08, 0.16, 0.24], "fmt": "pct", "desc": "+{v} damage vs non-bosses"},
     {"id": "silentGlove", "icon": "🧤", "name": "Silent Glove", "srcW": 1, "srcS": 1, "vals": [0.04, 0.07, 0.10], "fmt": "pct", "desc": "+{v} slap speed"},
-    {"id": "eclipseSigil", "icon": "🎭", "name": "Puppet Strings", "srcW": 1, "srcS": 2, "vals": [0.15, 0.30, 0.45], "fmt": "pct", "desc": "Boss specials charge {v} slower"},
+    {"id": "eclipseSigil", "icon": "🎭", "name": "Puppet Strings", "srcW": 1, "srcS": 2, "vals": [0.15, 0.30, 0.45], "fmt": "pct", "desc": "Enemy specials & signature moves charge {v} slower"},
     {"id": "venomfangCoil", "icon": "🐍", "name": "Venomfang Coil", "srcW": 1, "srcS": 3, "vals": [0.10, 0.20, 0.30], "fmt": "pct", "desc": "+{v} damage vs stunned enemies"},
     {"id": "beadsVoid", "icon": "📿", "name": "Beads of the Void", "srcW": 1, "srcS": 4, "vals": [0.20, 0.40, 0.60], "fmt": "pct", "desc": "+{v} Soul Embers earned"},
     {"id": "mirrorPalm", "icon": "🪞", "name": "Mirror Palm", "srcW": 1, "srcS": 5, "vals": [9, 8, 7], "fmt": "count", "desc": "Skin power triggers every {v} slaps"}
   ],
-  "ads": {"interstitialEveryFights": 3, "interstitialEveryWins": 3, "interstitialMinGapSec": 0},
+  "ads": {"interstitialEveryFights": 3, "interstitialEveryWins": 3, "interstitialFightPoints": 3.0, "interstitialMinGapSec": 75},
   "weakSpot": {"mult": 8.5, "dur": 1.5, "durHard": 1.2, "firstAt": 2.2, "everyMin": 5, "everyMax": 8, "frenzyGain": 12, "capBase": 3, "capPerLuck": 5, "capMax": 6, "luckScale": 0.06},
   "gems": {
     "elite": 1,
@@ -842,7 +802,7 @@ export const CONFIG = {
     {
       "id": "doubleSlap",
       "name": "Double Slap",
-      "boss": 14,
+      "boss": 9,
       "mult": 7,
       "multMax": 15,
       "cd": 25,
@@ -1181,7 +1141,8 @@ export const CONFIG = {
     "enabled": true,
     "interstitialEveryFights": 3,
     "interstitialEveryWins": 3,
-    "interstitialMinGapSec": 0,
+    "interstitialFightPoints": 3.0,
+    "interstitialMinGapSec": 75,
     "placements": {
       "rewarded_revive_boss": true,
       "rewarded_offline_double": true
@@ -1280,30 +1241,18 @@ export function calcLevelUpCost(currentLevel) {
   const c = CONFIG.levelUp;
   const cap = c.worldCap || CONFIG.levelCap || 80;
   if (lv >= cap) return Infinity;
-  const base = c.base || 60;
+  const base = c.base || 150;
   if (lv === 1) return base;
-  if (lv <= (c.rampStart || 9)) return Math.round(base * Math.pow(c.growth || 1.85, lv - 1));
-  const costRamp = Math.round(base * Math.pow(c.growth || 1.85, (c.rampStart || 9) - 1));
+  const rampStart = c.rampStart || 9;
+  if (lv <= rampStart) return Math.round(base * Math.pow(c.growth || 1.95, lv - 1));
   const midStart = c.midStart || 25;
-  if (lv <= midStart) {
-    const extra = lv - (c.rampStart || 9);
-    return Math.round(costRamp * Math.pow(c.midGrowth || 1.48, extra));
-  }
-  const costMid = Math.round(costRamp * Math.pow(c.midGrowth || 1.48, midStart - (c.rampStart || 9)));
+  if (lv <= midStart) return Math.round((c.midAnchor || 46000) * Math.pow(c.midGrowth || 1.33, lv - (rampStart + 1)));
   const grindStart = c.grindStart || 45;
-  if (lv <= grindStart) {
-    const extra = lv - midStart;
-    return Math.round(costMid * Math.pow(c.lateGrowth || 1.28, extra));
-  }
-  const costGrind = Math.round(costMid * Math.pow(c.lateGrowth || 1.28, grindStart - midStart));
+  if (lv <= grindStart) return Math.round((c.lateAnchor || 4400000) * Math.pow(c.lateGrowth || 1.21, lv - (midStart + 1)));
   const worldStart = c.worldStart || 50;
-  if (lv <= worldStart) {
-    const extra = lv - grindStart;
-    return Math.round(costGrind * Math.pow(c.endGrowth || 1.22, extra));
-  }
-  const costWorld = Math.round(costGrind * Math.pow(c.endGrowth || 1.22, worldStart - grindStart));
-  const extraWorld = lv - worldStart;
-  return Math.round(costWorld * Math.pow(c.worldGrowth || 1.18, extraWorld));
+  if (lv <= worldStart) return Math.round((c.endAnchor || 240000000) * Math.pow(c.endGrowth || 1.26, lv - (grindStart + 1)));
+  const costWorld = Math.round((c.endAnchor || 240000000) * Math.pow(c.endGrowth || 1.26, worldStart - (grindStart + 1)));
+  return Math.round(costWorld * Math.pow(c.worldGrowth || 1.22, lv - worldStart));
 }
 
 export function calcAttrCost(key, currentLevel) {
@@ -1313,28 +1262,16 @@ export function calcAttrCost(key, currentLevel) {
   const lvl = currentLevel != null ? currentLevel : 0;
   if (lvl >= N) return Infinity;
   const base = def.baseCost || 60;
-
-  // Early curve (levels 0-9, up to Monkey Boss):
-  // Fast-paced and rewarding early progression (base up to ~11k-30k)
-  if (lvl < 10) {
-    return Math.round(base * Math.pow(1.78, lvl));
-  }
-
-  // Post-Monkey Mid-Game (levels 10-25, Stage 3 Kickboxer through Stage 5):
-  // Steep upgrade price jump so upgrades require grinding multiple fights despite rich coin rewards
-  if (lvl <= 25) {
-    const cost9 = Math.round(base * Math.pow(1.78, 9));
-    const step = lvl - 9;
-    return Math.round(cost9 * 1.8 * Math.pow(1.28, step));
-  }
-
-  // Late Game (levels 26 to maxLevel N):
-  // Smooth geometric scaling to maxCost (1.85B for Power)
-  const cost25 = Math.round(base * Math.pow(1.78, 9) * 1.8 * Math.pow(1.28, 16));
-  const remainingLevels = Math.max(1, N - 25);
-  const progress = (lvl - 25) / remainingLevels;
+  // Bible v2.2 dynamic staging: T = min(25, floor(N/2)), S1 = min(9, T-1)
+  const T = Math.min(25, Math.floor(0.5 * N));
+  const S1 = Math.min(9, T - 1);
+  const costS1 = base * Math.pow(1.62, S1);
+  if (lvl <= S1) return Math.round(base * Math.pow(1.62, lvl));
+  const costT = costS1 * Math.pow(1.31, T - S1);
+  if (lvl <= T) return Math.round(costS1 * Math.pow(1.31, lvl - S1));
   const maxCost = def.maxCost || 65000000;
-  return Math.round(cost25 * Math.pow(maxCost / cost25, Math.min(1, progress)));
+  const progress = (lvl - T) / Math.max(1, N - 1 - T);
+  return Math.round(costT * Math.pow(maxCost / costT, Math.min(1, progress)));
 }
 
 export function calcAttrCap(playerLevel, dragonMastery = 0) {
@@ -1344,6 +1281,7 @@ export function calcAttrCap(playerLevel, dragonMastery = 0) {
 
 export function calcEnemyHp(i, isBoss = false, isElite = false) {
   const cfg = CONFIG.enemyProgression.hp;
+  if (cfg.hpTable && i < cfg.hpTable.length) return cfg.hpTable[i];
   if (i === 0) return cfg.base0;
   if (i < 10) {
     if (cfg.early && cfg.early[i] != null) return cfg.early[i];
@@ -1363,12 +1301,13 @@ export function calcEnemyHp(i, isBoss = false, isElite = false) {
 
 export function calcEnemyDamage(i, isBoss = false, isElite = false) {
   const cfg = CONFIG.enemyProgression.damage;
+  if (cfg.dmgTable && i < cfg.dmgTable.length) return cfg.dmgTable[i];
   if (i < 10) return cfg.earlyDmg[i];
   const step = i - 10;
   const tailStart = cfg.tailStart != null ? cfg.tailStart : Infinity;
   let d;
   if (i <= tailStart) d = cfg.base10 * Math.pow(cfg.growth, step);
-  else d = cfg.base10 * Math.pow(cfg.growth, tailStart - 10) * Math.pow(cfg.tailGrowth || 1.03, i - tailStart);
+  else d = cfg.base10 * Math.pow(cfg.growth, tailStart - 10) * Math.pow(cfg.tailGrowth || 1.14, i - tailStart);
   if (isBoss) d *= cfg.bossMult;
   else if (isElite) d *= cfg.eliteMult;
   return Math.round(d);
@@ -1376,6 +1315,7 @@ export function calcEnemyDamage(i, isBoss = false, isElite = false) {
 
 export function calcEnemyInterval(i, isBoss = false, isMiniBoss = false) {
   const cfg = CONFIG.enemyProgression.interval;
+  if (cfg.table && i < cfg.table.length) return cfg.table[i];
   if (i < 10 && cfg.early && cfg.early[i] != null) return cfg.early[i];
   let interval = Math.max(cfg.floor, cfg.base * Math.pow(cfg.decay, i));
   if (isBoss) interval = Math.max(cfg.bossFloor, interval * cfg.bossMult);
@@ -1385,9 +1325,8 @@ export function calcEnemyInterval(i, isBoss = false, isMiniBoss = false) {
 
 export function calcEnemyBounty(hp, i, isBoss = false) {
   const cfg = CONFIG.enemyProgression.bounty;
-  let coinRate = i < 10 ? cfg.earlyRate : Math.max(cfg.minRate, cfg.baseRate * Math.pow(cfg.rateDecay, i - 10));
-  coinRate = Math.round(coinRate * 1000) / 1000;
-  let bounty = Math.max(cfg.minBounty, Math.round(hp * coinRate * (cfg.scale || 0.35)));
+  const coinRate = i < 10 ? (cfg.earlyRate || 0.50) : (cfg.baseRate || 0.55);
+  let bounty = Math.max(cfg.minBounty, Math.round(hp * coinRate * (cfg.scale || 0.52)));
   if (isBoss && cfg.bossBonusMult) bounty = Math.round(bounty * cfg.bossBonusMult);
   return { coinRate, bounty };
 }
@@ -1395,9 +1334,10 @@ export function calcEnemyBounty(hp, i, isBoss = false) {
 export function calcPlayerMaxHp(playerLevel, hasStamina = false, hasUnstoppable = false) {
   const hpCfg = CONFIG.playerHp;
   const skCfg = CONFIG.skillFx;
-  let hp = hpCfg.base + hpCfg.perLevel * Math.max(0, (playerLevel || 1) - 1);
+  const lvl = Math.max(1, playerLevel || 1);
+  let hp = hpCfg.base + hpCfg.perLevel * (lvl - 1) + Math.round((hpCfg.expBase || 15) * Math.pow(hpCfg.expGrowth || 1.145, lvl - 1));
   if (hasStamina) hp += skCfg.staminaHp || 50;
-  if (hasUnstoppable) hp += skCfg.unstoppableHp || 100;
+  if (hasUnstoppable) hp += skCfg.unstoppableHp || 250;
   return hp;
 }
 
