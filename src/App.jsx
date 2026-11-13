@@ -621,20 +621,13 @@ export default function App() {
               <span className="ead-bonus" id="endAdDoubleBonus">+0</span>
             </button>
           </div>
-          <div id="endBossDmgAdWrap" className="end-boss-ad-wrap" style={{'display': 'none'}}>
-            <div className="eba-title">💥 BOSS TOUGH TO BEAT?</div>
-            <div className="eba-sub">Power up your hands with 2X DAMAGE for 10 minutes!</div>
-            <button className="end-boss-dmg-btn" id="endBossDmgAdBtn" type="button">
-              ⚡ WATCH AD — 2X DAMAGE (10m)
-            </button>
-          </div>
-          <div id="endReviveWrap" className="end-revive-wrap" style={{'display': 'none'}}>
-            <button className="end-revive-btn" id="endReviveBtn" type="button">
-              <span className="ead-icon">🎬</span>
-              <span className="ead-text">WATCH AD — REVIVE WITH 50% HP</span>
-              <span className="ead-bonus">💚</span>
-            </button>
-            <div className="end-revive-sub">The enemy stays wounded — pick up right where you fell. Once per enemy.</div>
+          <div className="end-ad-row">
+            <div id="endBossDmgAdWrap" className="end-ad-cell" style={{'display': 'none'}}>
+              <button className="end-boss-dmg-btn" id="endBossDmgAdBtn" type="button">⚡ 2X DAMAGE · AD</button>
+            </div>
+            <div id="endReviveWrap" className="end-ad-cell" style={{'display': 'none'}}>
+              <button className="end-revive-btn" id="endReviveBtn" type="button">🎬 REVIVE · 50% HP</button>
+            </div>
           </div>
           <div className="end-btns">
             <button className="ctl-btn end-trio" id="endTrioBtn" style={{'display': 'none'}}>⚔ CHALLENGE TRIO</button>

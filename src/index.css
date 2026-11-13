@@ -3925,7 +3925,7 @@ margin-top: 7px;
   justify-content: space-between;
   gap: 8px;
   padding: 10px 14px;
-  background: linear-gradient(180deg, #fb7185 0%, #e11d48 55%, #9f1239 100%);
+  background: #e11d48;
   border: 2.5px solid #fecdd3;
   border-radius: 14px;
   color: #fff;
@@ -3953,6 +3953,29 @@ margin-top: 7px;
   color: #9f1239;
   text-align: center;
 }
+.end-ad-row {
+  display: flex;
+  gap: 8px;
+  width: 100%;
+  margin: 10px 0 6px;
+  justify-content: center;
+}
+.end-ad-cell {
+  flex: 1 1 0;
+  max-width: calc(50% - 4px);
+  display: flex;
+}
+.end-ad-cell .end-boss-dmg-btn,
+.end-ad-cell .end-revive-btn {
+  width: 100%;
+  max-width: none;
+  height: 100%;
+  padding: 9px 6px;
+  font-size: 12px;
+  line-height: 1.2;
+  text-align: center;
+  justify-content: center;
+}
 .end-ad-double-wrap {
   width: 100%;
   margin: 10px 0 6px;
@@ -3968,7 +3991,7 @@ margin-top: 7px;
   justify-content: space-between;
   gap: 8px;
   padding: 10px 14px;
-  background: linear-gradient(180deg, #10b981 0%, #059669 50%, #047857 100%);
+  background: #059669;
   border: 2.5px solid #a7f3d0;
   border-radius: 14px;
   color: #fff;
@@ -4742,3 +4765,85 @@ margin-top: 7px;
 /* Signature-move icons inside fx chips (Bible v2.2 S8 follow-up) */
 .fx-chip .sig-ico{width:13px;height:13px;vertical-align:-2px;margin-right:4px;image-rendering:pixelated}
 .fx-chip.sig{background:#3d2b12;border-color:#d9a441}
+
+/* ===== END MODAL — ARCADE POP (Gaurav's pick, 2026-11-13) =====
+   Chunky flat-colour arcade treatment for the fight-result overlay:
+   thick ink borders, hard offset shadows, badge sprite, tile stats. */
+#endOverlay .end-card {
+  background: #fff7e6;
+  border: 4px solid #221407;
+  border-radius: 22px;
+  box-shadow: 10px 12px 0 #221407, 0 30px 60px rgba(0, 0, 0, 0.5);
+}
+#endOverlay .end-head {
+  font-size: 42px;
+  letter-spacing: 0.02em;
+  text-shadow: 3px 3px 0 #221407;
+}
+#endOverlay.lose .end-head { color: #f43f5e; }
+#endOverlay.win .end-head { color: #f59e0b; }
+#endOverlay #endTrophy {
+  color: #f59e0b;
+  filter: drop-shadow(2px 2px 0 #221407);
+}
+#endOverlay #endSprite {
+  background: #ffe9bd;
+  border: 3px solid #221407;
+  border-radius: 50%;
+  padding: 8px;
+  transform: rotate(-2deg);
+}
+#endOverlay .end-sub { color: #44403c; font-weight: 800; }
+#endOverlay .end-tip { color: #78716c; }
+#endOverlay .end-unlock.show {
+  background: #fef3c7;
+  border: 3px solid #221407;
+  border-radius: 10px;
+  box-shadow: 3px 3px 0 #221407;
+  color: #92400e;
+  padding: 6px 10px;
+}
+#endOverlay .end-stats .es {
+  background: #ffffff;
+  border: 3px solid #221407;
+  border-radius: 12px;
+  box-shadow: 4px 4px 0 #221407;
+  padding: 8px 4px;
+}
+#endOverlay .end-stats .es span { color: #78716c; font-weight: 900; letter-spacing: 0.06em; }
+#endOverlay .end-stats .es b { color: #221407; font-family: "Bungee", sans-serif; font-size: 15px; }
+#endOverlay .egt-card {
+  border: 3px solid #221407;
+  border-radius: 12px;
+  box-shadow: 3px 3px 0 #221407;
+  background: #ffffff;
+}
+#endOverlay .end-ad-double-btn,
+#endOverlay .end-ad-cell .end-boss-dmg-btn,
+#endOverlay .end-ad-cell .end-revive-btn {
+  border: 3px solid #221407;
+  box-shadow: 4px 4px 0 #221407;
+  border-radius: 12px;
+}
+#endOverlay .end-ad-double-btn:active,
+#endOverlay .end-ad-cell .end-boss-dmg-btn:active,
+#endOverlay .end-ad-cell .end-revive-btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 #221407;
+}
+#endOverlay .end-btns .ctl-btn {
+  border: 3px solid #221407;
+  border-radius: 14px;
+  box-shadow: 5px 5px 0 #221407;
+  font-family: "Bungee", sans-serif;
+  letter-spacing: 0.02em;
+}
+#endOverlay .end-btns .ctl-btn:active {
+  transform: translate(3px, 3px);
+  box-shadow: 2px 2px 0 #221407;
+}
+#endOverlay .end-btns .end-again { background: #f59e0b; color: #221407; }
+#endOverlay .end-btns .end-choose { background: #221407; color: #fff7e6; }
+#endOverlay .end-btns .end-next { background: #22c55e; color: #221407; }
+#endOverlay .end-btns .end-trio { background: #38bdf8; color: #221407; }
+#endOverlay .end-btns .end-home { background: #e7e5e4; color: #221407; }
