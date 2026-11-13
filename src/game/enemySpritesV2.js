@@ -1276,27 +1276,27 @@ export const V2_CONFIGS = [
     "name": "Crystal Dragon",
     "refH": 900,
     "cheekX": 0.5,
-    "cheekY": 0.31,
-    "colors": ["#7c6cf0", "#4a3fb0", "#bfeaff", "#8f7ff5", "#2c2470"],
+    "cheekY": 0.25,
+    "colors": ["#0b3d4a", "#082a38", "#2fd6f5", "#8ff1ff", "#14606f"],
     "poses": {
       "idle": {
         "src": "/enemy-sprites-v2/poses/48-crystal-dragon-idle.webp",
-        "w": 656,
+        "w": 440,
         "h": 900
       },
       "attack1": {
         "src": "/enemy-sprites-v2/poses/48-crystal-dragon-attack.webp",
-        "w": 672,
-        "h": 900
+        "w": 965,
+        "h": 960
       },
       "attack": {
         "src": "/enemy-sprites-v2/poses/48-crystal-dragon-attack.webp",
-        "w": 685,
-        "h": 917
+        "w": 965,
+        "h": 960
       },
       "dizzy": {
         "src": "/enemy-sprites-v2/poses/48-crystal-dragon-dizzy.webp",
-        "w": 649,
+        "w": 630,
         "h": 900
       }
     },
