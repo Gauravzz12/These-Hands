@@ -1649,10 +1649,10 @@ function updateAdBoostersUi() {
   if (bossAdBtn) {
     if (dmgActive) {
       bossAdBtn.disabled = true;
-      bossAdBtn.textContent = "⚡ 2X DAMAGE ACTIVE (" + fmtMinSec(dmgLeft) + ")";
+      bossAdBtn.textContent = "⚡ 2X DMG · " + fmtMinSec(dmgLeft);
     } else {
       bossAdBtn.disabled = false;
-      bossAdBtn.textContent = "⚡ WATCH AD — 2X DAMAGE (10m)";
+      bossAdBtn.textContent = "⚡ 2X DAMAGE · AD";
     }
   }
 }
@@ -2128,9 +2128,9 @@ const FM3=G.fightMode;if(FM3&&FM3.type==="bossrush"){nextBtnEl.style.display="no
       bossAdWrap.style.display="";
       const dmgLeft=Math.max(0,(G.adDmgBoostUntil||0)-Date.now());
       if(dmgLeft>0){
-        if(bossAdBtn){bossAdBtn.disabled=true;bossAdBtn.textContent="⚡ 2X DAMAGE ACTIVE ("+fmtMinSec(dmgLeft)+")";}
+        if(bossAdBtn){bossAdBtn.disabled=true;bossAdBtn.textContent="⚡ 2X DMG · "+fmtMinSec(dmgLeft);}
       }else{
-        if(bossAdBtn){bossAdBtn.disabled=false;bossAdBtn.textContent="⚡ WATCH AD — 2X DAMAGE (10m)";}
+        if(bossAdBtn){bossAdBtn.disabled=false;bossAdBtn.textContent="⚡ 2X DAMAGE · AD";}
       }
     }else{
       bossAdWrap.style.display="none";

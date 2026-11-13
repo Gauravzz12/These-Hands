@@ -3953,6 +3953,29 @@ margin-top: 7px;
   color: #9f1239;
   text-align: center;
 }
+.end-ad-row {
+  display: flex;
+  gap: 8px;
+  width: 100%;
+  margin: 10px 0 6px;
+  justify-content: center;
+}
+.end-ad-cell {
+  flex: 1 1 0;
+  max-width: calc(50% - 4px);
+  display: flex;
+}
+.end-ad-cell .end-boss-dmg-btn,
+.end-ad-cell .end-revive-btn {
+  width: 100%;
+  max-width: none;
+  height: 100%;
+  padding: 9px 6px;
+  font-size: 12px;
+  line-height: 1.2;
+  text-align: center;
+  justify-content: center;
+}
 .end-ad-double-wrap {
   width: 100%;
   margin: 10px 0 6px;
