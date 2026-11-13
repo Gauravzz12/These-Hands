@@ -536,7 +536,7 @@ Relics drop from their corresponding World Portal stage (`W0 S0`–`W1 S5`) and 
 | 📿 | Beads of the Void | W1 S4 | $+20\%$ | $+40\%$ | $+60\%$ | Soul Embers earned |
 | 🪞 | Mirror Palm | W1 S5 | Every 9 | Every 8 | Every 7 | Slaps between equipped hand-skin power procs |
 
-> **Implementation note (code, 2026-11-13):** Guardian *names/sprites* in-game remain the shipped art set (Asura Footman, Rakshasa Huntress, Kumbhakaran, Mahishasura, Vetala Warlock, Ravana / Shade of the Dummy, Umbral Mime, Umbral Puppeteer, Gloom Serpent, The Hollow Monk, The Dark Slapper) — the table's stats, bounties, embers and relic placements apply by stage slot. The Venomfang Coil / Beads rows are listed in source-stage order in code (W1 S3 coil, W1 S4 beads). DragonMastery in code is staged exactly as above (Dragon Lord first clear → 1, W0 S5 first clear → 2); the attribute ceiling is 70 + 5 × min(2, mastery), and the Lv 36–50 player gate (Level × 2 + mastery × 10) is unchanged.
+> **Implementation note (code, 2026-11-13):** Guardian names in code are exactly the table names above; sprite art/slugs remain the shipped sets (the art depicts the same guardians). DragonMastery keeps its repeat-rank grind (+1 per Dragon Lord kill and per world-final-boss first clear, cap 10, for the damage/HP rank bonus), while the Power ceiling is staged by progression — Dragon Lord defeated → cap 75, W0 S5 defeated → cap 80 — so ranks alone can never max Power before the Shadow Verse. The Lv 36–50 player gate (Level × 2 + mastery × 10) is unchanged.
 
 ## 9. Ads Cadence & Monetization Rules
 
