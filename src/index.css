@@ -3909,6 +3909,50 @@ margin-top: 7px;
 }
 
 /* 4. Round-End Ad Double Rewards Button */
+.end-revive-wrap {
+  width: 100%;
+  margin: 10px 0 6px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+.end-revive-btn {
+  width: 100%;
+  max-width: 320px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 10px 14px;
+  background: linear-gradient(180deg, #fb7185 0%, #e11d48 55%, #9f1239 100%);
+  border: 2.5px solid #fecdd3;
+  border-radius: 14px;
+  color: #fff;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(225, 29, 72, 0.45), inset 0 2px 0 rgba(255, 255, 255, 0.4);
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.15s ease, filter 0.2s ease, opacity 0.2s ease;
+}
+.end-revive-btn:not(:disabled):hover {
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+}
+.end-revive-btn:not(:disabled):active {
+  transform: scale(0.97);
+}
+.end-revive-btn:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+.end-revive-sub {
+  font-family: "Nunito", sans-serif;
+  font-weight: 700;
+  font-size: 11px;
+  color: #9f1239;
+  text-align: center;
+}
 .end-ad-double-wrap {
   width: 100%;
   margin: 10px 0 6px;
