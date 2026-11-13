@@ -425,7 +425,7 @@ flowchart TD
 | **T4** | Frenzy | 135,000,000 | Boss Hunter | — | Slaps charge FRENZY meter: triggers 10s of $+50\%$ damage and $+30\%$ speed. |
 | **T4** | Colossus Bane | 180,000,000 | Boss Hunter | Boss #40 (Shadow) | $+35\%$ damage vs Giant, Titan, and Dragon enemies. |
 | **T5** | Rapid Barrage | 245,000,000 | Dual-Hand | — | Every 10th slap unleashes a 5-slap rapid barrage. |
-| **T5** | Bulwark of Aegis | 320,000,000 | Kinetic Barrier | — | Reflects $50\%$ of mitigated/blocked damage back at the attacker. |
+| **T5** | Bulwark Guard | 320,000,000 | Kinetic Barrier | — | Reflects $50\%$ of mitigated/blocked damage back at the attacker. |
 | **T5** | Godhand Strike | 450,000,000 | Colossus Bane | Boss #50 (Dragon) | Slaps charge Godhand Ultimate ($20\times$ screen-shattering strike). |
 
 ---
@@ -434,7 +434,7 @@ flowchart TD
 
 Specials are high-impact cooldown abilities unlocked by defeating major chapter bosses:
 
-### 7.1 "Guard" Special (Formerly Aegis Barrier)
+### 7.1 "Guard" Special
 * **Visuals & Icon:** Features custom high-impact crossed martial arts guard fists: `guard.webp`.
 * **Mechanic:** Crossing both hands blocks incoming attacks with **$100\%$ complete damage negation** ($0$ damage taken; displays `"BLOCKED!"` floating text).
 * **Upgrades:** Strictly limited to **2 upgrades only (Max Level = 3)** with endgame pricing:
@@ -457,16 +457,43 @@ Specials are high-impact cooldown abilities unlocked by defeating major chapter 
 
 ## 8. Worlds Portal, World Arts, Soul Embers & Relics
 
-Defeating the **Dragon Lord (#50)** in the Mortal Realm awards **`+1 DragonMastery`** and opens the **Worlds Portal** to **World 0 (*Asura Realm*)** and **World 1 (*Shadow Verse*)**.
+Defeating the **Dragon Lord (#50)** in the Mortal Realm opens the **Worlds Portal** to **World 0 (*Asura Realm*)** and **World 1 (*Shadow Verse*)**, where progression is governed by two stage-gated `DragonMastery` unlocks so that **Power cannot be maxed before entering the Shadow Verse**:
 
-### 8.1 Soul Embers
-* **Earning:** Awarded exclusively from World Portal battles (First clear gives large bonus; repeat clears grant baseline embers).
-* **Void Beads Relic:** Equipping `beadsVoid` boosts Soul Ember earnings by $+20\% / +40\% / +60\%$.
-* **Currency Role:** Used in the Artifacts Sanctuary to buy permanent, game-wide passive **World Arts**.
+* **World 0 — *Asura Realm* (`W0 S0`–`W0 S5`):** Unlocked upon defeating **#50 Dragon Lord** (`DragonMastery = 1`), raising the Attribute Level Gate from **70 $\to$ 75** (`Power` Lv 71–75).
+* **World 1 — *Shadow Verse* (`W1 S0`–`W1 S5`):** Unlocked upon defeating **W0 S5 (*Ten-King Asura*)** (`DragonMastery = 2`), raising the Attribute Level Gate from **75 $\to$ 80** (`Power` Lv 76–80 `MAX`).
+
+---
+
+### 8.1 World Portal Stage Roster & Soul Ember Economy
+
+Each Portal World consists of **6 escalating stages (`S0`–`S5`)**: four standard/elite encounters (`S0`, `S1`, `S3`, `S4`), one mid-world guardian (`S2`), and one **World Final Boss (`S5`)**.
+
+* **Strictly Monotonic Coin Scaling:** World stage HP and Repeat Bounties scale continuously above **#50 Dragon Lord** (`780M HP` / `301.16M Bounty`) from **`320.3M` (`W0 S0`) $\to$ `18.53B` (`W1 S5`)**, funding the `58.35B` cumulative coin cost of `Power` Levels 70 $\to$ 80 without requiring players to backtrack to the Mortal Realm.
+* **Soul Ember Payouts (First Clear vs. Repeat Clear):**
+  * **First Clear:** Grants a one-time lump-sum bonus (`+3` to `+15` Soul Embers per stage; **`88 Soul Embers` total** across all 12 stages) plus the stage's guaranteed **★1 Relic**.
+  * **Repeat Clear:** Grants baseline Soul Embers (`+1` to `+6` per victory) for World Arts and Relic ★2/★3 ascension.
+  * **Hard Mode & Relic Multipliers:** Clearing a World Stage on Hard Mode ($1.75\times$ HP, $1.25\times$ Dmg, $4.75\times$ Base Bounty on KO) multiplies Soul Ember drops by **$1.5\times$** (rounded up), stacking multiplicatively with **Beads of the Void** (`+20% / +40% / +60%`).
+
+| Stage | Guardian Name | Stage Role | Health (HP) | Attack Dmg | Interval | Repeat Bounty | Embers (1st / Repeat) | Relic Dropped (★1) |
+|---|---|---|---|---|---|---|---|---|
+| **W0 S0** | Asura Vanguard | Standard | **1,120,000,000** | 4,950 | 1.38s | **320,320,000** | $+3$ / $+1$ | 🔔 Bronze War Bell |
+| **W0 S1** | Rakshasa Bloodblade | Standard | **1,550,000,000** | 5,350 | 1.36s | **443,300,000** | $+4$ / $+1$ | 🗡️ Rakshasa Fang |
+| **W0 S2** | Dusk Bellkeeper | Mini-Boss | **2,150,000,000** | 5,850 | 1.35s | **614,900,000** | $+5$ / $+2$ | 🔔 Slumber Bell |
+| **W0 S3** | Stampede Warlord | Standard | **3,000,000,000** | 6,350 | 1.34s | **858,000,000** | $+5$ / $+2$ | 📯 Horn of the Stampede |
+| **W0 S4** | Whispering Skull-Lich | Elite | **4,200,000,000** | 7,000 | 1.32s | **1,201,200,000** | $+6$ / $+2$ | 💀 Skull of Whispers |
+| **W0 S5** | **Ten-King Asura** | **World Final Boss** | **5,600,000,000** | 7,900 | 1.30s | **2,162,160,000** | $+10$ / $+3$ | 👑 Crown of Ten Kings |
+| **W1 S0** | Hollow Firstborn | Standard | **7,800,000,000** | 8,400 | 1.30s | **2,230,800,000** | $+6$ / $+2$ | 🪵 Splinter of the First Foe |
+| **W1 S1** | Silent Shade | Standard | **11,000,000,000** | 9,150 | 1.28s | **3,146,000,000** | $+7$ / $+3$ | 🧤 Silent Glove |
+| **W1 S2** | Void Marionette | Mini-Boss | **15,500,000,000** | 10,100 | 1.26s | **4,433,000,000** | $+8$ / $+3$ | 🎭 Puppet Strings |
+| **W1 S3** | Venomfang Naga | Standard | **22,000,000,000** | 11,050 | 1.25s | **6,292,000,000** | $+9$ / $+4$ | 🐍 Venomfang Coil |
+| **W1 S4** | Void Ascendant | Elite | **31,500,000,000** | 12,300 | 1.24s | **9,009,000,000** | $+10$ / $+5$ | 📿 Beads of the Void |
+| **W1 S5** | **Mirror God of the Void** | **World Final Boss** | **48,000,000,000** | 14,200 | 1.22s | **18,532,800,000** | $+15$ / $+6$ | 🪞 Mirror Palm |
 
 ---
 
 ### 8.2 World Arts Table & Revive Stacking Order
+
+Soul Embers are spent in the **Artifacts Sanctuary** to unlock 8 permanent, game-wide passive **World Arts** (**`165 Soul Embers` total**):
 
 | Icon | Artifact Name | Cost (Embers) | Permanent In-Game Effect |
 |---|---|---|---|
@@ -482,13 +509,17 @@ Defeating the **Dragon Lord (#50)** in the Mortal Realm awards **`+1 DragonMaste
 #### Sequential Revive Priority Order (When Multiple Death-Saves Are Unlocked):
 1. **First Trigger — *Second Wind* (Player Lv 8 Passive):** Automatically triggers on the first fatal blow, restoring **$30\%$ Max HP**.
 2. **Second Trigger — *Phoenix Heart* (World Art):** Automatically triggers on the second fatal blow, restoring **$25\%$ Max HP** and granting **$1.5\text{s}$ of damage immunity** so rapid DoT ticks or multi-hit strikes cannot double-KO the player.
-3. **Third Trigger — *Boss Revive* (Rewarded Ad):** Offered if the player falls a third time against a Mini-Boss or Chapter Boss, reviving at **$50\%$ Max HP** with all Special cooldowns refreshed.
+3. **Third Trigger — *Boss Revive* (Rewarded Ad):** Offered if the player falls a third time against a Mini-Boss, Chapter Boss, or World Final Boss, reviving at **$50\%$ Max HP** with all Special cooldowns refreshed.
 
 ---
 
-### 8.3 Relics System (World Drops)
+### 8.3 Relics System & Deterministic ★1 $\to$ ★3 Ascension
 
-Relics drop from specific World Bosses and can be upgraded from ★1 to ★3:
+Relics drop from their corresponding World Portal stage (`W0 S0`–`W1 S5`) and provide permanent passive modifiers once unlocked. To prevent RNG frustration and give Soul Embers a long-term endgame sink after all 8 World Arts (`165 Embers`) are purchased, Relic ascension is **100% deterministic**:
+
+* **★1 Unlock:** Guaranteed drop upon **First Clear** of the source stage.
+* **★2 Ascension:** Requires **3 Repeat Clears** of the source stage + **`10 Soul Embers`**.
+* **★3 Ascension (MAX):** Requires **8 Repeat Clears** of the source stage + **`25 Soul Embers`** (`35 Embers` total per Relic; `420 Embers` across all 12 Relics, keeping `Beads of the Void` at `W1 S4` highly valuable for endgame ★3 completion).
 
 | Icon | Relic Name | Source | ★1 Bonus | ★2 Bonus | ★3 Bonus | Stat Modified |
 |---|---|---|---|---|---|---|
@@ -497,15 +528,15 @@ Relics drop from specific World Bosses and can be upgraded from ★1 to ★3:
 | 🔔 | Slumber Bell | W0 S2 | $-4\%$ | $-8\%$ | $-12\%$ | Enemy attack speed |
 | 📯 | Horn of the Stampede | W0 S3 | $+10\%$ | $+20\%$ | $+30\%$ | Damage in world fights |
 | 💀 | Skull of Whispers | W0 S4 | $-10\%$ | $-20\%$ | $-30\%$ | Weak-spot appearance interval |
-| 👑 | Crown of Ten Kings | W0 S5 | $+15\%$ | $+25\%$ | $+40\%$ | Damage vs world final bosses |
-| 🪵 | Splinter of the First Foe | W1 S0 | $+8\%$ | $+16\%$ | $+24\%$ | Damage vs non-bosses |
+| 👑 | Crown of Ten Kings | W0 S5 | $+15\%$ | $+25\%$ | $+40\%$ | Damage vs world final bosses (`W0 S5` & `W1 S5`) |
+| 🪵 | Splinter of the First Foe | W1 S0 | $+8\%$ | $+16\%$ | $+24\%$ | Damage vs non-bosses (`S0–S4` & Mortal Standard/Elites) |
 | 🧤 | Silent Glove | W1 S1 | $+4\%$ | $+7\%$ | $+10\%$ | Slap cycle speed |
 | 🎭 | Puppet Strings | W1 S2 | $+15\%$ | $+30\%$ | $+45\%$ | Enemy special / signature move delay |
 | 🐍 | Venomfang Coil | W1 S3 | $+10\%$ | $+20\%$ | $+30\%$ | Damage vs stunned enemies |
 | 📿 | Beads of the Void | W1 S4 | $+20\%$ | $+40\%$ | $+60\%$ | Soul Embers earned |
-| 🪞 | Mirror Palm | W1 S5 | Every 9 | Every 8 | Every 7 | Slaps between skin power procs |
+| 🪞 | Mirror Palm | W1 S5 | Every 9 | Every 8 | Every 7 | Slaps between equipped hand-skin power procs |
 
----
+> **Implementation note (code, 2026-11-13):** Guardian *names/sprites* in-game remain the shipped art set (Asura Footman, Rakshasa Huntress, Kumbhakaran, Mahishasura, Vetala Warlock, Ravana / Shade of the Dummy, Umbral Mime, Umbral Puppeteer, Gloom Serpent, The Hollow Monk, The Dark Slapper) — the table's stats, bounties, embers and relic placements apply by stage slot. The Venomfang Coil / Beads rows are listed in source-stage order in code (W1 S3 coil, W1 S4 beads). DragonMastery in code is staged exactly as above (Dragon Lord first clear → 1, W0 S5 first clear → 2); the attribute ceiling is 70 + 5 × min(2, mastery), and the Lv 36–50 player gate (Level × 2 + mastery × 10) is unchanged.
 
 ## 9. Ads Cadence & Monetization Rules
 

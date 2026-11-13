@@ -457,7 +457,7 @@ export const CONFIG = {
     },
     {
       "id": "aegisBulwark",
-      "name": "Bulwark of Aegis",
+      "name": "Bulwark Guard",
       "tier": 5,
       "cost": 320000000,
       "prereq": "kineticShield",

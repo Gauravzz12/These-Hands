@@ -395,6 +395,18 @@ export default function App() {
         <div id="worldsList"></div>
       </section>
 
+      <section id="pageSanctuary" className="page" aria-label="Artifacts Sanctuary">
+        <div className="sel-head">
+          <button className="home-btn" data-goto="home" aria-label="Back to home"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 2.5 11h2.7v9h5.3v-6h3v6h5.3v-9h2.7L12 3z" fill="currentColor"/></svg></button>
+          <div>
+            <div className="sel-title">SANCTUARY</div>
+            <div className="sel-sub">ARTIFACTS SANCTUARY — WORLD ARTS & RELICS</div>
+            <div className="pill" id="sanctuaryEmbers" style={{'marginTop': '6px', 'display': 'inline-block'}}>🔥 0 EMBERS</div>
+          </div>
+        </div>
+        <div id="sanctuaryList"></div>
+      </section>
+
       <section id="pageSkills" className="page" aria-label="Skill tree">
         <div className="sel-head">
           <button className="home-btn" data-goto="home" aria-label="Back to home"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 2.5 11h2.7v9h5.3v-6h3v6h5.3v-9h2.7L12 3z" fill="currentColor"/></svg></button>
@@ -774,6 +786,14 @@ export default function App() {
               <span className="mr-main">
                 <span className="mr-title">SHOP</span>
                 <span className="mr-sub">SKINS, GEMS & BUNDLES</span>
+              </span>
+              <span className="mr-arrow">›</span>
+            </button>
+            <button className="more-row" data-goto="sanctuary">
+              <span className="mr-ico gold"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 3 7v2h18V7l-9-5zM5 11v8H3v-8h2zm4 0v8H7v-8h2zm6 0v8h-2v-8h2zm6 0v8h-2v-8h2zM3 21h18v-2H3v2z" fill="currentColor"/></svg></span>
+              <span className="mr-main">
+                <span className="mr-title">SANCTUARY</span>
+                <span className="mr-sub">WORLD ARTS, RELICS & ASCENSION</span>
               </span>
               <span className="mr-arrow">›</span>
             </button>

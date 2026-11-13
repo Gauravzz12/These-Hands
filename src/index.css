@@ -4628,3 +4628,7 @@ margin-top: 7px;
 .fl-dots span:nth-child(3){animation-delay:.32s}
 .fl-sub{font-family:"Nunito",sans-serif;font-weight:900;font-size:11px;letter-spacing:.3em;color:#cbb8ef}
 @keyframes flPulse{from{transform:scale(.72);opacity:.55}to{transform:scale(1.12);opacity:1}}
+
+/* Signature-move icons inside fx chips (Bible v2.2 S8 follow-up) */
+.fx-chip .sig-ico{width:13px;height:13px;vertical-align:-2px;margin-right:4px;image-rendering:pixelated}
+.fx-chip.sig{background:#3d2b12;border-color:#d9a441}
