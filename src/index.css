@@ -5093,7 +5093,7 @@ margin-top: 7px;
 .sr-hint { font-size: 11px; font-weight: 700; color: #78716c; margin-top: 10px; line-height: 1.4; }
 
 /* ===== DECONGEST: skill tree room + battle breathing space ===== */
-#skillTreeWrap { height: min(640px, 150vw); }
+#skillTreeWrap { height: min(680px, 155vw); }
 .tnode { width: 42px; height: 42px; }
 .tnode img { width: 25px; height: 25px; }
 .tnode, .snode { border-width: 2px; box-shadow: 2px 2px 0 var(--ap-ink); }
