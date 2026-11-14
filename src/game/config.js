@@ -640,7 +640,7 @@ export const CONFIG = {
     "49": {"coins": 650000000, "gems": 10}
   },
     
-  "gauntlet": {"bonusMult": 4.5, "gemFirst": 1},
+  "gauntlet": {"bonusMult": 1.0, "gemFirst": 1},
   "worldArts": [
     {"id": "echoPalm", "icon": "🔁", "name": "Echo Palm", "cost": 20, "desc": "Every 8th slap echoes — a phantom slap lands at 60% damage."},
     {"id": "frenzyHeart", "icon": "💓", "name": "Frenzy Heart", "cost": 15, "desc": "Your frenzy meter fills 30% faster."},

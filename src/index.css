@@ -5168,3 +5168,15 @@ margin-top: 7px;
 .hub-mode-badge{position:absolute;top:-10px;right:10px;font-family:Bungee,cursive;font-size:10px;letter-spacing:.04em;background:#f2b01e;color:#221407;border:2.5px solid #221407;border-radius:999px;padding:3px 9px;box-shadow:2px 2px 0 #221407;transform:rotate(2deg)}
 .hub-card.feature.red .hub-mode-badge{background:#fb7185;color:#fff}
 .hub-card.feature.locked .hub-mode-badge{background:#d6cbb8;color:#6b5b3e}
+
+/* Battle banners live ON the stage now — they never shrink the fight area */
+#battleOverlays{position:absolute;top:6px;left:50%;transform:translateX(-50%);z-index:7;display:flex;flex-direction:column;align-items:center;gap:4px;pointer-events:none;max-width:97%;width:max-content}
+#battleOverlays #fxChips{padding:0}
+#modeHud{margin:0;font-size:11px;padding:3px 11px}
+#blitzTiersBtn{position:absolute;top:6px;right:8px;z-index:8;font-family:Bungee,cursive;font-size:10.5px;letter-spacing:.03em;background:#f2b01e;color:#221407;border:2.5px solid #221407;border-radius:999px;padding:4px 10px;box-shadow:2px 2px 0 #221407;cursor:pointer}
+#blitzTiersBtn:active{transform:translate(1px,1px);box-shadow:1px 1px 0 #221407}
+#blitzTiersPanel{position:absolute;top:42px;right:8px;z-index:8;width:246px;max-height:302px;overflow-y:auto;background:#fff8e7;border:3px solid #221407;border-radius:14px;box-shadow:4px 4px 0 #221407;padding:8px}
+.bt-head{font-family:Bungee,cursive;font-size:11px;margin:2px 4px 6px;color:#221407}
+.bt-row{display:flex;justify-content:space-between;gap:8px;font-family:Nunito,sans-serif;font-weight:700;font-size:11px;padding:3px 6px;border-radius:7px;color:#5b4a2f}
+.bt-row.done{background:#d9f2c2;color:#2e5b1e}
+.bt-row.next{background:#ffe1a8;color:#221407;outline:2px solid #b97e08}
