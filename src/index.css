@@ -5180,3 +5180,6 @@ margin-top: 7px;
 .bt-row{display:flex;justify-content:space-between;gap:8px;font-family:Nunito,sans-serif;font-weight:700;font-size:11px;padding:3px 6px;border-radius:7px;color:#5b4a2f}
 .bt-row.done{background:#d9f2c2;color:#2e5b1e}
 .bt-row.next{background:#ffe1a8;color:#221407;outline:2px solid #b97e08}
+.contract-card.done{opacity:.6}
+.contract-done-chip{display:flex;align-items:center;padding:0 10px;font-family:Bungee,cursive;font-size:10px;color:#166534;background:#bbf7d0;border:2px solid #221407;border-radius:999px;white-space:nowrap}
+.contract-alldone{margin-top:8px;text-align:center;font-family:Bungee,cursive;font-size:11px;color:#166534;background:#dcfce7;border:2.5px solid #221407;border-radius:10px;padding:7px 8px;box-shadow:2px 2px 0 #221407}

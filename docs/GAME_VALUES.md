@@ -304,7 +304,7 @@ $$\text{Cost}(\text{lvl}) = \begin{cases}
 * **Heavy Hands:** $+30\%$ damage.
 * **Dizzy Touch:** $+10\%$ stun chance.
 
-### Dojo Bounties (4 Active · Refresh on Completion or 30m)
+### Dojo Bounties (4 Per Day · A Fresh Board Every Day)
 Completing a contract pays **$2.5\times$ Frontier Enemy's bounty** $\times$ `coinMult` + **3–6 Gems**. Calibrated targets:
 * **NO SPECIALS** (0 Specials) · **SPECIAL SHOW** (2 / 3 / 4 / 6 Specials) · **PARRY MASTER** (1–5 Deflects)
 * **CRIT HUNTER** (5–30 Crits) · **COMBO KING** (15–100 Combo) · **DAZE & CONFUSE** (1–6 Stuns)
