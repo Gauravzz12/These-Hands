@@ -21,10 +21,10 @@ export const CONFIG = {
     "endGrowth": 1.26,
     "worldStart": 50,
     "worldGrowth": 1.22,
-    "worldCap": 80,
+    "worldCap": 50,
     "mortalCap": 35
   },
-  "levelCap": 80,
+  "levelCap": 50,
   "attrs": {
     "power": { "name": "Power", "baseCost": 60, "maxCost": 45000000000, "growth": 1.16, "lateGrowth": 1.40, "maxLevel": 80 },
     "speed": { "name": "Speed", "baseCost": 110, "maxCost": 75000000, "growth": 1.16, "lateGrowth": 1.51, "maxLevel": 40 },
@@ -640,7 +640,7 @@ export const CONFIG = {
     "49": {"coins": 650000000, "gems": 10}
   },
     
-  "gauntlet": {"bonusMult": 1.0, "gemFirst": 1},
+  "gauntlet": {"bonusMult": 3.25, "gemFirst": 3},
   "worldArts": [
     {"id": "echoPalm", "icon": "🔁", "name": "Echo Palm", "cost": 20, "desc": "Every 8th slap echoes — a phantom slap lands at 60% damage."},
     {"id": "frenzyHeart", "icon": "💓", "name": "Frenzy Heart", "cost": 15, "desc": "Your frenzy meter fills 30% faster."},
@@ -837,6 +837,7 @@ export const CONFIG = {
     {
       "name": "Pocket of Coins",
       "coins": 50000,
+      "frontierMult": 15,
       "gems": 120,
       "bonus": "",
       "tag": "QUICK BOOST",
@@ -845,6 +846,7 @@ export const CONFIG = {
     {
       "name": "Bag of Gold",
       "coins": 250000,
+      "frontierMult": 60,
       "gems": 350,
       "bonus": "+25% BONUS",
       "tag": "POPULAR",
@@ -853,6 +855,7 @@ export const CONFIG = {
     {
       "name": "Chest of Gold",
       "coins": 1500000,
+      "frontierMult": 250,
       "gems": 900,
       "bonus": "+45% BONUS",
       "tag": "GREAT VALUE",
@@ -861,6 +864,7 @@ export const CONFIG = {
     {
       "name": "Royal Treasury",
       "coins": 8000000,
+      "frontierMult": 1000,
       "gems": 2400,
       "bonus": "+70% BONUS",
       "tag": "BEST VALUE",
@@ -869,6 +873,7 @@ export const CONFIG = {
     {
       "name": "Dragon's Hoard",
       "coins": 35000000,
+      "frontierMult": 4000,
       "gems": 6000,
       "bonus": "+100% 2X BONUS",
       "tag": "WHALE TIER",
@@ -1236,17 +1241,30 @@ export const GROUPS = [
 
 
 // Centralized formula calculators driven entirely by CONFIG
+export const CHAPTER_CAPS = [
+  { reqBossIdx: -1, maxPlayerLv: 10, maxPowerLv: 20, lockLabel: "DEFEAT STAGE #10 TO UNLOCK" },
+  { reqBossIdx: 9,  maxPlayerLv: 18, maxPowerLv: 36, lockLabel: "DEFEAT STAGE #20 TO UNLOCK" },
+  { reqBossIdx: 19, maxPlayerLv: 26, maxPowerLv: 52, lockLabel: "DEFEAT STAGE #30 TO UNLOCK" },
+  { reqBossIdx: 29, maxPlayerLv: 33, maxPowerLv: 66, lockLabel: "DEFEAT STAGE #40 TO UNLOCK" },
+  { reqBossIdx: 39, maxPlayerLv: 38, maxPowerLv: 70, lockLabel: "DEFEAT DRAGON LORD (#50) TO UNLOCK" },
+  { reqBossIdx: 49, maxPlayerLv: 44, maxPowerLv: 75, lockLabel: "DEFEAT RAVANA (ASURA REALM) TO UNLOCK" },
+];
+export function getProgressionCaps(defeated, asuraFinal) {
+  if (asuraFinal) return { maxPlayerLv: 50, maxPowerLv: 80, lockLabel: "MAX CHAPTER REACHED" };
+  const has = (i) => defeated && (typeof defeated.has === "function" ? defeated.has(i) : (defeated.indexOf ? defeated.indexOf(i) >= 0 : false));
+  let active = CHAPTER_CAPS[0];
+  for (const tier of CHAPTER_CAPS) { if (tier.reqBossIdx === -1 || has(tier.reqBossIdx)) active = tier; }
+  return active;
+}
+
 export function calcLevelUpCost(currentLevel) {
   const lv = currentLevel != null ? currentLevel : 1;
-  const cap = (CONFIG.levelUp && CONFIG.levelUp.worldCap) || CONFIG.levelCap || 80;
-  if (lv >= cap) return Infinity;
+  if (lv >= 50) return Infinity;
   // Bible v3.1 smoothed curve (Section 5): no post-Monkey level-gate stall
   if (lv <= 9) return Math.round(150 * Math.pow(1.75, lv - 1));
   if (lv <= 25) return Math.round(18500 * Math.pow(1.28, lv - 10));
-  if (lv <= 45) return Math.round(1250000 * Math.pow(1.24, lv - 26));
-  if (lv <= 50) return Math.round(120000000 * Math.pow(1.26, lv - 46));
-  const cost50 = Math.round(120000000 * Math.pow(1.26, 4));
-  return Math.round(cost50 * Math.pow(1.22, lv - 50));
+  if (lv <= 35) return Math.round(960000 * Math.pow(1.23, lv - 26));
+  return Math.round(8200000 * Math.pow(1.22, lv - 36));
 }
 
 export function calcAttrCost(key, currentLevel) {
