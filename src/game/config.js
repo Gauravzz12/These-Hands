@@ -26,7 +26,7 @@ export const CONFIG = {
   },
   "levelCap": 80,
   "attrs": {
-    "power": { "name": "Power", "baseCost": 60, "maxCost": 12000000000, "growth": 1.16, "lateGrowth": 1.40, "maxLevel": 80 },
+    "power": { "name": "Power", "baseCost": 60, "maxCost": 45000000000, "growth": 1.16, "lateGrowth": 1.40, "maxLevel": 80 },
     "speed": { "name": "Speed", "baseCost": 110, "maxCost": 75000000, "growth": 1.16, "lateGrowth": 1.51, "maxLevel": 40 },
     "critChance": { "name": "Crit Chance", "baseCost": 130, "maxCost": 85000000, "growth": 1.18, "lateGrowth": 1.58, "maxLevel": 55 },
     "critDamage": { "name": "Crit Damage", "baseCost": 90, "maxCost": 65000000, "growth": 1.16, "lateGrowth": 1.51, "maxLevel": 65 },
@@ -65,9 +65,9 @@ export const CONFIG = {
     "coinPerLevel": 0.05,
     "accuracyBase": 0.85,
     "accuracyPerLevel": 0.01,
-    "powerGrowth": 1.082,
-    "powerFlatPerLvl": 2.5,
-    "powerMilestoneMult": 1.30,
+    "powerGrowth": 1.076,
+    "powerFlatPerLvl": 2.2,
+    "powerMilestoneMult": 1.28,
     "accuracyCap": 0.99,
     "bossDmgPerLevel": 0.015,
     "bossDmgCap": 0.60,
@@ -75,28 +75,28 @@ export const CONFIG = {
     "luckChanceCap": 0.25,
     "luckDmgMult": 1.5,
     "strikeCoinMult": 0.32,
-    "killBountyMult": 1.20,
+    "killBountyMult": 1.30,
     "critCoinMult": 0.50,
     "slapBaseFrac": 0.10,
     "slapEarlyBaseFrac": 0.07,
-    "slapMidBaseFrac": 0.04,
-    "slapLateBaseFrac": 0.035,
+    "slapMidBaseFrac": 0.055,
+    "slapLateBaseFrac": 0.055,
     "slapDmgBonusScale": 4,
     "slapDmgBonusCap": 1,
-    "slapFightCapFrac": 0.85,
-    "slapTaperFrac": 0.20,
+    "slapFightCapFrac": 1.15,
+    "slapTaperFrac": 0.25,
     "stunCooldownSec": 4,
     "stunImmunitySec": 2.5,
     "bossStunMult": 0.5,
     "slapEarlyMult": 2.2,
     "slapEarlyBossMult": 1.65,
-    "slapMidMult": 1.4,
-    "slapMidBossMult": 1.1,
-    "slapLateMult": 1.1,
-    "slapLateBossMult": 0.9,
+    "slapMidMult": 1.5,
+    "slapMidBossMult": 1.2,
+    "slapLateMult": 1.35,
+    "slapLateBossMult": 1.1,
     "worldSlapCapFrac": 1.35,
-    "slapEarlyCapFrac": 1.25,
-    "slapMidCapFrac": 0.90,
+    "slapEarlyCapFrac": 1.75,
+    "slapMidCapFrac": 1.15,
     "slapCritPayFrac": 0.35,
     "luckCoinMult": 2.5,
     "vampPerLevel": 0.0008,
@@ -116,13 +116,7 @@ export const CONFIG = {
     "hp": {
       "base0": 65,
       "early": [65, 97, 145, 220, 365, 455, 640, 895, 1300, 2415],
-      "hpTable": [
-        65,97,145,220,365,455,640,895,1300,2415,
-        4130,5310,6820,8750,12460,14200,18300,23550,32450,46850,
-        68000,87400,112200,143800,205200,234500,301100,386300,534500,767000,
-        1176000,1665000,2355000,3335000,5012000,5868000,8295000,11740000,17610000,26120000,
-        38100000,54350000,77470000,110410000,168810000,211800000,384200000,706400000,1360600000,3510000000
-      ],
+      "hpTable": [65, 97, 145, 220, 363, 455, 638, 893, 1303, 2415, 4150, 5582, 7507, 10098, 16297, 18267, 24569, 33045, 49779, 77713, 80403, 108142, 145451, 195631, 315749, 353901, 475997, 640217, 964422, 1505618, 1708298, 2519739, 3716615, 5482007, 9703152, 11926791, 17592017, 25948225, 42866468, 73389690, 83269072, 122821881, 181162274, 267214354, 472969407, 581358229, 857503388, 1264817497, 1820000000, 2150000000],
       "base10": 3200,
       "growth": 1.255,
       "tailStart": 30,
@@ -132,13 +126,7 @@ export const CONFIG = {
     },
     "damage": {
       "earlyDmg": [8, 12, 15, 20, 26, 28, 32, 38, 46, 54],
-      "dmgTable": [
-        8,12,15,20,26,28,32,38,46,54,
-        66,74,83,93,141,117,132,148,224,307,
-        209,234,263,295,446,371,416,467,708,970,
-        652,722,800,886,1326,1088,1206,1336,1998,2706,
-        1817,2013,2231,2472,3697,3035,3362,3725,5573,6150
-      ],
+      "dmgTable": [8, 12, 15, 20, 26, 28, 32, 38, 46, 54, 64, 72, 81, 91, 138, 115, 130, 146, 222, 305, 208, 234, 263, 296, 449, 375, 421, 474, 720, 990, 663, 732, 809, 894, 1334, 1092, 1207, 1333, 1989, 2686, 1799, 1988, 2197, 2427, 3621, 2964, 3275, 3619, 5399, 4650],
       "base10": 64,
       "growth": 1.11,
       "tailStart": 30,
@@ -170,7 +158,7 @@ export const CONFIG = {
       "minBounty": 30,
       "scale": 0.52,
       "bossBonusMult": 1.35,
-      "bountyTable": [30, 32, 36, 55, 88, 109, 151, 208, 299, 737, 815, 1015, 1264, 1573, 2174, 2402, 3003, 3747, 5005, 9459, 9867, 12298, 15301, 19019, 26312, 29172, 36322, 45188, 60632, 113900, 120120, 165880, 228800, 316030, 463320, 529100, 729300, 1006720, 1472900, 2876445, 3031600, 4218500, 5863000, 8151000, 12155000, 14872000, 26312000, 47190000, 88660000, 301158000],
+      "bountyTable": [30, 30, 36, 55, 88, 109, 151, 208, 299, 737, 1150, 1501, 1958, 2556, 3736, 4353, 5680, 7413, 10254, 15780, 16474, 21499, 28056, 36613, 53513, 62353, 81370, 106188, 146890, 226052, 259507, 372393, 534384, 766841, 1232466, 1579098, 2266005, 3251717, 4946187, 8370022, 9608785, 13788606, 19786650, 28393843, 45634585, 58469311, 83903462, 120401468, 183142673, 309917141],
       "normalKillBonusMult": 0.30,
       "hardKillBonusMult": 1.25
     }
@@ -640,16 +628,16 @@ export const CONFIG = {
     "205": {"name": "AMRITA OF THE NAVEL", "pct": 0.15, "every": 9999, "max": 1, "blurb": "The nectar of immortality — heals 15% of his HP, once per fight."}
   },
   "firstClearChests": {
-    "4": {"coins": 180, "gems": 2},
-    "9": {"coins": 1500, "gems": 5},
-    "14": {"coins": 4200, "gems": 2},
-    "19": {"coins": 18500, "gems": 5},
-    "24": {"coins": 50000, "gems": 2},
-    "29": {"coins": 220000, "gems": 5},
-    "34": {"coins": 900000, "gems": 3},
-    "39": {"coins": 5500000, "gems": 5},
-    "44": {"coins": 24000000, "gems": 3},
-    "49": {"coins": 600000000, "gems": 10}
+    "4": {"coins": 200, "gems": 2},
+    "9": {"coins": 1850, "gems": 5},
+    "14": {"coins": 6500, "gems": 2},
+    "19": {"coins": 32000, "gems": 5},
+    "24": {"coins": 110000, "gems": 2},
+    "29": {"coins": 450000, "gems": 5},
+    "34": {"coins": 2500000, "gems": 3},
+    "39": {"coins": 16500000, "gems": 5},
+    "44": {"coins": 90000000, "gems": 3},
+    "49": {"coins": 650000000, "gems": 10}
   },
     
   "gauntlet": {"bonusMult": 4.5, "gemFirst": 1},
@@ -1250,21 +1238,15 @@ export const GROUPS = [
 // Centralized formula calculators driven entirely by CONFIG
 export function calcLevelUpCost(currentLevel) {
   const lv = currentLevel != null ? currentLevel : 1;
-  const c = CONFIG.levelUp;
-  const cap = c.worldCap || CONFIG.levelCap || 80;
+  const cap = (CONFIG.levelUp && CONFIG.levelUp.worldCap) || CONFIG.levelCap || 80;
   if (lv >= cap) return Infinity;
-  const base = c.base || 150;
-  if (lv === 1) return base;
-  const rampStart = c.rampStart || 9;
-  if (lv <= rampStart) return Math.round(base * Math.pow(c.growth || 1.95, lv - 1));
-  const midStart = c.midStart || 25;
-  if (lv <= midStart) return Math.round((c.midAnchor || 46000) * Math.pow(c.midGrowth || 1.33, lv - (rampStart + 1)));
-  const grindStart = c.grindStart || 45;
-  if (lv <= grindStart) return Math.round((c.lateAnchor || 4400000) * Math.pow(c.lateGrowth || 1.21, lv - (midStart + 1)));
-  const worldStart = c.worldStart || 50;
-  if (lv <= worldStart) return Math.round((c.endAnchor || 240000000) * Math.pow(c.endGrowth || 1.26, lv - (grindStart + 1)));
-  const costWorld = Math.round((c.endAnchor || 240000000) * Math.pow(c.endGrowth || 1.26, worldStart - (grindStart + 1)));
-  return Math.round(costWorld * Math.pow(c.worldGrowth || 1.22, lv - worldStart));
+  // Bible v3.1 smoothed curve (Section 5): no post-Monkey level-gate stall
+  if (lv <= 9) return Math.round(150 * Math.pow(1.75, lv - 1));
+  if (lv <= 25) return Math.round(18500 * Math.pow(1.28, lv - 10));
+  if (lv <= 45) return Math.round(1250000 * Math.pow(1.24, lv - 26));
+  if (lv <= 50) return Math.round(120000000 * Math.pow(1.26, lv - 46));
+  const cost50 = Math.round(120000000 * Math.pow(1.26, 4));
+  return Math.round(cost50 * Math.pow(1.22, lv - 50));
 }
 
 export function calcAttrCost(key, currentLevel) {
@@ -1274,13 +1256,13 @@ export function calcAttrCost(key, currentLevel) {
   const lvl = currentLevel != null ? currentLevel : 0;
   if (lvl >= N) return Infinity;
   const base = def.baseCost || 60;
-  // Bible v3.0 dynamic staging (stage-2 growth 1.35): T = min(25, floor(N/2)), S1 = min(9, T-1)
+  // Bible v3.1 smoothed staging (stage-1 1.56, stage-2 1.29): T = min(25, floor(N/2)), S1 = min(9, T-1)
   const T = Math.min(25, Math.floor(0.5 * N));
   const S1 = Math.min(9, T - 1);
-  const costS1 = base * Math.pow(1.62, S1);
-  if (lvl <= S1) return Math.round(base * Math.pow(1.62, lvl));
-  const costT = costS1 * Math.pow(1.35, T - S1);
-  if (lvl <= T) return Math.round(costS1 * Math.pow(1.35, lvl - S1));
+  const costS1 = base * Math.pow(1.56, S1);
+  if (lvl <= S1) return Math.round(base * Math.pow(1.56, lvl));
+  const costT = costS1 * Math.pow(1.29, T - S1);
+  if (lvl <= T) return Math.round(costS1 * Math.pow(1.29, lvl - S1));
   const maxCost = def.maxCost || 65000000;
   const progress = (lvl - T) / Math.max(1, N - 1 - T);
   return Math.round(costT * Math.pow(maxCost / costT, Math.min(1, progress)));
