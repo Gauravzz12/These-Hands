@@ -26,7 +26,7 @@ export const CONFIG = {
   },
   "levelCap": 80,
   "attrs": {
-    "power": { "name": "Power", "baseCost": 60, "maxCost": 12000000000, "growth": 1.16, "lateGrowth": 1.40, "maxLevel": 80 },
+    "power": { "name": "Power", "baseCost": 60, "maxCost": 45000000000, "growth": 1.16, "lateGrowth": 1.40, "maxLevel": 80 },
     "speed": { "name": "Speed", "baseCost": 110, "maxCost": 75000000, "growth": 1.16, "lateGrowth": 1.51, "maxLevel": 40 },
     "critChance": { "name": "Crit Chance", "baseCost": 130, "maxCost": 85000000, "growth": 1.18, "lateGrowth": 1.58, "maxLevel": 55 },
     "critDamage": { "name": "Crit Damage", "baseCost": 90, "maxCost": 65000000, "growth": 1.16, "lateGrowth": 1.51, "maxLevel": 65 },
@@ -65,9 +65,9 @@ export const CONFIG = {
     "coinPerLevel": 0.05,
     "accuracyBase": 0.85,
     "accuracyPerLevel": 0.01,
-    "powerGrowth": 1.082,
-    "powerFlatPerLvl": 2.5,
-    "powerMilestoneMult": 1.30,
+    "powerGrowth": 1.076,
+    "powerFlatPerLvl": 2.2,
+    "powerMilestoneMult": 1.28,
     "accuracyCap": 0.99,
     "bossDmgPerLevel": 0.015,
     "bossDmgCap": 0.60,
@@ -75,28 +75,28 @@ export const CONFIG = {
     "luckChanceCap": 0.25,
     "luckDmgMult": 1.5,
     "strikeCoinMult": 0.32,
-    "killBountyMult": 1.20,
+    "killBountyMult": 1.30,
     "critCoinMult": 0.50,
     "slapBaseFrac": 0.10,
     "slapEarlyBaseFrac": 0.07,
-    "slapMidBaseFrac": 0.04,
-    "slapLateBaseFrac": 0.035,
+    "slapMidBaseFrac": 0.055,
+    "slapLateBaseFrac": 0.055,
     "slapDmgBonusScale": 4,
     "slapDmgBonusCap": 1,
-    "slapFightCapFrac": 0.85,
-    "slapTaperFrac": 0.20,
+    "slapFightCapFrac": 1.15,
+    "slapTaperFrac": 0.25,
     "stunCooldownSec": 4,
     "stunImmunitySec": 2.5,
     "bossStunMult": 0.5,
     "slapEarlyMult": 2.2,
     "slapEarlyBossMult": 1.65,
-    "slapMidMult": 1.4,
-    "slapMidBossMult": 1.1,
-    "slapLateMult": 1.1,
-    "slapLateBossMult": 0.9,
+    "slapMidMult": 1.5,
+    "slapMidBossMult": 1.2,
+    "slapLateMult": 1.35,
+    "slapLateBossMult": 1.1,
     "worldSlapCapFrac": 1.35,
-    "slapEarlyCapFrac": 1.25,
-    "slapMidCapFrac": 0.90,
+    "slapEarlyCapFrac": 1.75,
+    "slapMidCapFrac": 1.15,
     "slapCritPayFrac": 0.35,
     "luckCoinMult": 2.5,
     "vampPerLevel": 0.0008,
@@ -116,13 +116,7 @@ export const CONFIG = {
     "hp": {
       "base0": 65,
       "early": [65, 97, 145, 220, 365, 455, 640, 895, 1300, 2415],
-      "hpTable": [
-        65,97,145,220,365,455,640,895,1300,2415,
-        4130,5310,6820,8750,12460,14200,18300,23550,32450,46850,
-        68000,87400,112200,143800,205200,234500,301100,386300,534500,767000,
-        1176000,1665000,2355000,3335000,5012000,5868000,8295000,11740000,17610000,26120000,
-        38100000,54350000,77470000,110410000,168810000,211800000,384200000,706400000,1360600000,3510000000
-      ],
+      "hpTable": [65, 97, 145, 220, 363, 455, 638, 893, 1303, 2415, 4150, 5582, 7507, 10098, 16297, 18267, 24569, 33045, 49779, 77713, 80403, 108142, 145451, 195631, 315749, 353901, 475997, 640217, 964422, 1505618, 1708298, 2519739, 3716615, 5482007, 9703152, 11926791, 17592017, 25948225, 42866468, 73389690, 83269072, 122821881, 181162274, 267214354, 472969407, 581358229, 857503388, 1264817497, 1820000000, 2150000000],
       "base10": 3200,
       "growth": 1.255,
       "tailStart": 30,
@@ -132,13 +126,7 @@ export const CONFIG = {
     },
     "damage": {
       "earlyDmg": [8, 12, 15, 20, 26, 28, 32, 38, 46, 54],
-      "dmgTable": [
-        8,12,15,20,26,28,32,38,46,54,
-        66,74,83,93,141,117,132,148,224,307,
-        209,234,263,295,446,371,416,467,708,970,
-        652,722,800,886,1326,1088,1206,1336,1998,2706,
-        1817,2013,2231,2472,3697,3035,3362,3725,5573,6150
-      ],
+      "dmgTable": [8, 12, 15, 20, 26, 28, 32, 38, 46, 54, 64, 72, 81, 91, 138, 115, 130, 146, 222, 305, 208, 234, 263, 296, 449, 375, 421, 474, 720, 990, 663, 732, 809, 894, 1334, 1092, 1207, 1333, 1989, 2686, 1799, 1988, 2197, 2427, 3621, 2964, 3275, 3619, 5399, 4650],
       "base10": 64,
       "growth": 1.11,
       "tailStart": 30,
@@ -170,7 +158,7 @@ export const CONFIG = {
       "minBounty": 30,
       "scale": 0.52,
       "bossBonusMult": 1.35,
-      "bountyTable": [30, 32, 36, 55, 88, 109, 151, 208, 299, 737, 815, 1015, 1264, 1573, 2174, 2402, 3003, 3747, 5005, 9459, 9867, 12298, 15301, 19019, 26312, 29172, 36322, 45188, 60632, 113900, 120120, 165880, 228800, 316030, 463320, 529100, 729300, 1006720, 1472900, 2876445, 3031600, 4218500, 5863000, 8151000, 12155000, 14872000, 26312000, 47190000, 88660000, 301158000],
+      "bountyTable": [30, 30, 36, 55, 88, 109, 151, 208, 299, 737, 1150, 1501, 1958, 2556, 3736, 4353, 5680, 7413, 10254, 15780, 16474, 21499, 28056, 36613, 53513, 62353, 81370, 106188, 146890, 226052, 259507, 372393, 534384, 766841, 1232466, 1579098, 2266005, 3251717, 4946187, 8370022, 9608785, 13788606, 19786650, 28393843, 45634585, 58469311, 83903462, 120401468, 183142673, 309917141],
       "normalKillBonusMult": 0.30,
       "hardKillBonusMult": 1.25
     }
@@ -272,7 +260,7 @@ export const CONFIG = {
       "id": "strongerHands",
       "name": "Stronger Hands",
       "tier": 1,
-      "cost": 850,
+      "cost": 600,
       "prereq": "basic",
       "fx": "+20% damage on every slap."
     },
@@ -280,7 +268,7 @@ export const CONFIG = {
       "id": "staminaTraining",
       "name": "Stamina Training",
       "tier": 1,
-      "cost": 300,
+      "cost": 250,
       "prereq": "basic",
       "fx": "+50 max HP."
     },
@@ -288,7 +276,7 @@ export const CONFIG = {
       "id": "secondHand",
       "name": "Second Hand",
       "tier": 1,
-      "cost": 1200,
+      "cost": 1000,
       "prereq": "basic",
       "reqBoss": 4,
       "fx": "Alternates L / R hands, doubling your cycle rate."
@@ -297,7 +285,7 @@ export const CONFIG = {
       "id": "twinMastery",
       "name": "Twin Mastery",
       "tier": 2,
-      "cost": 10000,
+      "cost": 3200,
       "prereq": "secondHand",
       "reqBoss": 9,
       "fx": "Off-hand slaps strike +25% faster and grant +10% combo charge."
@@ -306,7 +294,7 @@ export const CONFIG = {
       "id": "onTarget",
       "name": "On Target",
       "tier": 2,
-      "cost": 25000,
+      "cost": 6500,
       "prereq": "twinMastery",
       "fx": "Combo stacks survive switching enemies (resets on loss)."
     },
@@ -314,7 +302,7 @@ export const CONFIG = {
       "id": "quickReflexes",
       "name": "Quick Reflexes",
       "tier": 2,
-      "cost": 45000,
+      "cost": 11000,
       "prereq": "twinMastery",
       "fx": "+10% attack speed."
     },
@@ -322,7 +310,7 @@ export const CONFIG = {
       "id": "criticalSlaps",
       "name": "Critical Slaps",
       "tier": 2,
-      "cost": 80000,
+      "cost": 24000,
       "prereq": "strongerHands",
       "fx": "+5% crit chance."
     },
@@ -330,7 +318,7 @@ export const CONFIG = {
       "id": "thunderclap",
       "name": "Seismic Slam",
       "tier": 2,
-      "cost": 160000,
+      "cost": 35000,
       "prereq": "staminaTraining",
       "reqBoss": 9,
       "fx": "Every 8th slap lands a devastating SEISMIC SLAM dealing 4x damage and dazing the enemy for 1s!"
@@ -339,7 +327,7 @@ export const CONFIG = {
       "id": "heavySlap",
       "name": "Heavy Slap",
       "tier": 2,
-      "cost": 260000,
+      "cost": 55000,
       "prereq": "strongerHands",
       "fx": "12% chance a slap lands HEAVY for 3x damage."
     },
@@ -347,7 +335,7 @@ export const CONFIG = {
       "id": "precisionInstinct",
       "name": "Precision Instinct",
       "tier": 2,
-      "cost": 420000,
+      "cost": 85000,
       "prereq": "strongerHands",
       "fx": "Unlocks PRECISION strikes: a gold weak spot flashes on the enemy mid-fight — tap it for a devastating 8.5x critical strike! Fortune Luck makes it appear more often. Max 3 per fight (+1 per 5 Luck, max 6)."
     },
@@ -355,7 +343,7 @@ export const CONFIG = {
       "id": "deflect",
       "name": "Deflect",
       "tier": 2,
-      "cost": 65000,
+      "cost": 16500,
       "prereq": "basic",
       "fx": "Mini-Boss, Elite and Boss attacks — plus every 3rd-attack Group Signature Move — spawn a parry ring at a random spot; tap it exactly as the ring closes into the gold circle to deflect the blow completely. Random spot every time; boss specials cannot be deflected."
     },
@@ -363,7 +351,7 @@ export const CONFIG = {
       "id": "comboMastery",
       "name": "Combo Mastery",
       "tier": 3,
-      "cost": 1000000,
+      "cost": 150000,
       "prereq": "onTarget",
       "fx": "Combo cap +5 stacks and +0.5% damage per stack."
     },
@@ -371,7 +359,7 @@ export const CONFIG = {
       "id": "dizzyPunisher",
       "name": "Opportunist",
       "tier": 3,
-      "cost": 2000000,
+      "cost": 260000,
       "prereq": "quickReflexes",
       "fx": "Slaps deal +35% damage to Stunned enemies."
     },
@@ -379,7 +367,7 @@ export const CONFIG = {
       "id": "clutchSurge",
       "name": "Adrenaline Rush",
       "tier": 3,
-      "cost": 4000000,
+      "cost": 450000,
       "prereq": "thunderclap",
       "fx": "Below 35% HP: gain +20% attack speed and +25% damage."
     },
@@ -387,7 +375,7 @@ export const CONFIG = {
       "id": "coinMagnet",
       "name": "Coin Magnet",
       "tier": 3,
-      "cost": 6500000,
+      "cost": 750000,
       "prereq": "criticalSlaps",
       "fx": "+20% coins from every KO."
     },
@@ -395,7 +383,7 @@ export const CONFIG = {
       "id": "bossHunter",
       "name": "Boss Hunter",
       "tier": 3,
-      "cost": 12000000,
+      "cost": 1250000,
       "prereq": "heavySlap",
       "reqBoss": 19,
       "fx": "+25% damage vs group elites and bosses."
@@ -404,7 +392,7 @@ export const CONFIG = {
       "id": "echoStrike",
       "name": "Acoustic Echo",
       "tier": 4,
-      "cost": 19000000,
+      "cost": 2400000,
       "prereq": "comboMastery",
       "fx": "Critical slaps have a 25% chance to echo for 160% bonus damage."
     },
@@ -412,7 +400,7 @@ export const CONFIG = {
       "id": "dualHand",
       "name": "Dual-Hand Technique",
       "tier": 4,
-      "cost": 30000000,
+      "cost": 4500000,
       "prereq": "dizzyPunisher",
       "fx": "+15% attack speed — both hands blur."
     },
@@ -420,7 +408,7 @@ export const CONFIG = {
       "id": "unstoppable",
       "name": "Unstoppable Hands",
       "tier": 4,
-      "cost": 45000000,
+      "cost": 8500000,
       "prereq": "clutchSurge",
       "fx": "+250 max HP and regenerate 0.75% Max HP/s during fights."
     },
@@ -428,7 +416,7 @@ export const CONFIG = {
       "id": "kineticShield",
       "name": "Kinetic Barrier",
       "tier": 4,
-      "cost": 68000000,
+      "cost": 16000000,
       "prereq": "clutchSurge",
       "reqBoss": 29,
       "fx": "Every 20 slaps builds a shield absorbing 15% of Max HP damage (max 45% of Max HP)."
@@ -437,7 +425,7 @@ export const CONFIG = {
       "id": "goldenTouch",
       "name": "Treasure Hunter",
       "tier": 4,
-      "cost": 90000000,
+      "cost": 32000000,
       "prereq": "coinMagnet",
       "fx": "Elites and Bosses drop +50% bonus coins, and defeat grants +1 extra Gem."
     },
@@ -445,7 +433,7 @@ export const CONFIG = {
       "id": "frenzy",
       "name": "Frenzy",
       "tier": 4,
-      "cost": 135000000,
+      "cost": 65000000,
       "prereq": "bossHunter",
       "fx": "Slaps charge FRENZY: 10s of +50% damage and +30% speed."
     },
@@ -453,7 +441,7 @@ export const CONFIG = {
       "id": "titanSlayer",
       "name": "Colossus Bane",
       "tier": 4,
-      "cost": 180000000,
+      "cost": 140000000,
       "prereq": "bossHunter",
       "reqBoss": 39,
       "fx": "+35% damage vs Giant, Titan, and Dragon enemies."
@@ -462,7 +450,7 @@ export const CONFIG = {
       "id": "rapidBarrage",
       "name": "Rapid Barrage",
       "tier": 5,
-      "cost": 245000000,
+      "cost": 320000000,
       "prereq": "dualHand",
       "fx": "Every 10th slap unleashes a barrage: 3 extra hits at 50% damage."
     },
@@ -470,7 +458,7 @@ export const CONFIG = {
       "id": "aegisBulwark",
       "name": "Bulwark Guard",
       "tier": 5,
-      "cost": 320000000,
+      "cost": 750000000,
       "prereq": "kineticShield",
       "fx": "When Defense or Barrier mitigates damage, 50% of the blocked damage is reflected back."
     },
@@ -478,7 +466,7 @@ export const CONFIG = {
       "id": "ultimateSlap",
       "name": "Godhand Strike",
       "tier": 5,
-      "cost": 450000000,
+      "cost": 2500000000,
       "prereq": "titanSlayer",
       "reqBoss": 49,
       "fx": "Slaps charge the Godhand Ultimate: a 20x screen-shattering strike."
@@ -640,16 +628,16 @@ export const CONFIG = {
     "205": {"name": "AMRITA OF THE NAVEL", "pct": 0.15, "every": 9999, "max": 1, "blurb": "The nectar of immortality — heals 15% of his HP, once per fight."}
   },
   "firstClearChests": {
-    "4": {"coins": 180, "gems": 2},
-    "9": {"coins": 1500, "gems": 5},
-    "14": {"coins": 4200, "gems": 2},
-    "19": {"coins": 18500, "gems": 5},
-    "24": {"coins": 50000, "gems": 2},
-    "29": {"coins": 220000, "gems": 5},
-    "34": {"coins": 900000, "gems": 3},
-    "39": {"coins": 5500000, "gems": 5},
-    "44": {"coins": 24000000, "gems": 3},
-    "49": {"coins": 600000000, "gems": 10}
+    "4": {"coins": 200, "gems": 2},
+    "9": {"coins": 1850, "gems": 5},
+    "14": {"coins": 6500, "gems": 2},
+    "19": {"coins": 32000, "gems": 5},
+    "24": {"coins": 110000, "gems": 2},
+    "29": {"coins": 450000, "gems": 5},
+    "34": {"coins": 2500000, "gems": 3},
+    "39": {"coins": 16500000, "gems": 5},
+    "44": {"coins": 90000000, "gems": 3},
+    "49": {"coins": 650000000, "gems": 10}
   },
     
   "gauntlet": {"bonusMult": 4.5, "gemFirst": 1},
@@ -1250,21 +1238,15 @@ export const GROUPS = [
 // Centralized formula calculators driven entirely by CONFIG
 export function calcLevelUpCost(currentLevel) {
   const lv = currentLevel != null ? currentLevel : 1;
-  const c = CONFIG.levelUp;
-  const cap = c.worldCap || CONFIG.levelCap || 80;
+  const cap = (CONFIG.levelUp && CONFIG.levelUp.worldCap) || CONFIG.levelCap || 80;
   if (lv >= cap) return Infinity;
-  const base = c.base || 150;
-  if (lv === 1) return base;
-  const rampStart = c.rampStart || 9;
-  if (lv <= rampStart) return Math.round(base * Math.pow(c.growth || 1.95, lv - 1));
-  const midStart = c.midStart || 25;
-  if (lv <= midStart) return Math.round((c.midAnchor || 46000) * Math.pow(c.midGrowth || 1.33, lv - (rampStart + 1)));
-  const grindStart = c.grindStart || 45;
-  if (lv <= grindStart) return Math.round((c.lateAnchor || 4400000) * Math.pow(c.lateGrowth || 1.21, lv - (midStart + 1)));
-  const worldStart = c.worldStart || 50;
-  if (lv <= worldStart) return Math.round((c.endAnchor || 240000000) * Math.pow(c.endGrowth || 1.26, lv - (grindStart + 1)));
-  const costWorld = Math.round((c.endAnchor || 240000000) * Math.pow(c.endGrowth || 1.26, worldStart - (grindStart + 1)));
-  return Math.round(costWorld * Math.pow(c.worldGrowth || 1.22, lv - worldStart));
+  // Bible v3.1 smoothed curve (Section 5): no post-Monkey level-gate stall
+  if (lv <= 9) return Math.round(150 * Math.pow(1.75, lv - 1));
+  if (lv <= 25) return Math.round(18500 * Math.pow(1.28, lv - 10));
+  if (lv <= 45) return Math.round(1250000 * Math.pow(1.24, lv - 26));
+  if (lv <= 50) return Math.round(120000000 * Math.pow(1.26, lv - 46));
+  const cost50 = Math.round(120000000 * Math.pow(1.26, 4));
+  return Math.round(cost50 * Math.pow(1.22, lv - 50));
 }
 
 export function calcAttrCost(key, currentLevel) {
@@ -1274,13 +1256,13 @@ export function calcAttrCost(key, currentLevel) {
   const lvl = currentLevel != null ? currentLevel : 0;
   if (lvl >= N) return Infinity;
   const base = def.baseCost || 60;
-  // Bible v3.0 dynamic staging (stage-2 growth 1.35): T = min(25, floor(N/2)), S1 = min(9, T-1)
+  // Bible v3.1 smoothed staging (stage-1 1.56, stage-2 1.29): T = min(25, floor(N/2)), S1 = min(9, T-1)
   const T = Math.min(25, Math.floor(0.5 * N));
   const S1 = Math.min(9, T - 1);
-  const costS1 = base * Math.pow(1.62, S1);
-  if (lvl <= S1) return Math.round(base * Math.pow(1.62, lvl));
-  const costT = costS1 * Math.pow(1.35, T - S1);
-  if (lvl <= T) return Math.round(costS1 * Math.pow(1.35, lvl - S1));
+  const costS1 = base * Math.pow(1.56, S1);
+  if (lvl <= S1) return Math.round(base * Math.pow(1.56, lvl));
+  const costT = costS1 * Math.pow(1.29, T - S1);
+  if (lvl <= T) return Math.round(costS1 * Math.pow(1.29, lvl - S1));
   const maxCost = def.maxCost || 65000000;
   const progress = (lvl - T) / Math.max(1, N - 1 - T);
   return Math.round(costT * Math.pow(maxCost / costT, Math.min(1, progress)));
