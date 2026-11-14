@@ -182,6 +182,22 @@ export default function App() {
               </span>
             </button>
 
+            <button className="hub-card" id="hubBlitzCard" type="button">
+              <span className="hc-ico gold"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><circle cx="12" cy="13" r="7.5" fill="none" stroke="currentColor" strokeWidth="2.2"/><path d="M12 9v4l3 2M9 2.5h6" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" fill="none"/></svg></span>
+              <span className="hc-main">
+                <span className="hc-title">GOLDEN DUMMY BLITZ</span>
+                <span className="hc-sub" id="hubBlitzSub">DEFEAT THE MONKEY (#10) TO UNLOCK</span>
+              </span>
+            </button>
+
+            <button className="hub-card" id="hubReflexCard" type="button">
+              <span className="hc-ico blue"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" strokeWidth="2.2"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" strokeWidth="2"/><circle cx="12" cy="12" r="1.4" fill="currentColor"/></svg></span>
+              <span className="hc-main">
+                <span className="hc-title">REFLEX SLAP-OFF</span>
+                <span className="hc-sub" id="hubReflexSub">DEFEAT 5 FOES TO UNLOCK</span>
+              </span>
+            </button>
+
             <button className="hub-card worlds-card" id="hubWorldsCard" type="button">
               <span className="hc-ico purple"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm4.9 4.1a8 8 0 0 1 1 3.4h-3.1a13.6 13.6 0 0 0-1.3-3.9c.5-.3 1.1-.5 1.7-.7.6.3 1.2.7 1.7 1.2zM12 4.1c.7 1 1.3 2.4 1.6 4h-3.2c.3-1.6.9-3 1.6-4zM7.1 6.1c.5-.5 1.1-.9 1.7-1.2.6.2 1.2.4 1.7.7A13.6 13.6 0 0 0 9.2 9.5H6.1a8 8 0 0 1 1-3.4zM4.3 11.5h4.5c0 1.7.2 3.3.7 4.7a8.1 8.1 0 0 1-5.2-4.7zm0 2h5.2a8.1 8.1 0 0 1-2.4 3.4 10.6 10.6 0 0 1-.8-3.4H4.3zm7.7 6.4c-.7-1-1.3-2.4-1.6-4h3.2c-.3 1.6-.9 3-1.6 4zm-1.9-6.4h3.8c-.1 1.4-.3 2.6-.6 3.6h-2.6c-.3-1-.5-2.2-.6-3.6zm1.9-1.9h-3.8c.1-1.4.3-2.6.6-3.6h2.6c.3 1 .5 2.2.6 3.6zm4.9 5.3a8.1 8.1 0 0 1-2.4-3.4h5.2a8.1 8.1 0 0 1-2.8 3.4zm.9-3.4a10.6 10.6 0 0 1-.8 3.4h-2c.5-1.4.7-3 .7-4.7h4.5a8 8 0 0 1-2.4 2.1z" fill="currentColor" transform="scale(0.92) translate(1,1)"/></svg></span>
               <span className="hc-main">
@@ -283,6 +299,7 @@ export default function App() {
       </div>
 
       <div id="fxChips" aria-live="polite"></div>
+      <div id="modeHud" style={{'display': 'none'}}></div>
       <div id="playerBar" aria-label="Your health">
         <svg className="heart-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21C6 16.5 2.5 12.8 2.5 8.9 2.5 5.9 4.9 3.5 7.9 3.5c1.7 0 3.2.8 4.1 2.1.9-1.3 2.4-2.1 4.1-2.1 3 0 5.4 2.4 5.4 5.4 0 3.9-3.5 7.6-9.5 12.1z" fill="#d63c30" stroke="#8f1f16" strokeWidth="1.4"/></svg>
         <div id="playerTrack"><div id="playerFill"></div><span id="playerText"></span></div>
@@ -768,6 +785,25 @@ export default function App() {
           </div>
           <button className="ctl-btn sr-claim" id="srClaimBtn" type="button">🎁 CLAIM IT</button>
           <div className="sr-hint">Your left hand joins the fight — slaps alternate L / R, doubling your cycle rate.</div>
+        </div>
+      </div>
+      <div id="draftOverlay" role="dialog" aria-label="Cornerman draft" style={{'display': 'none'}}>
+        <div className="draft-card-wrap">
+          <div className="draft-badge">🥊 YOUR CORNERMAN SAYS…</div>
+          <div className="draft-title">PICK A FIGHT BUFF</div>
+          <div className="draft-sub" id="draftSub">It lasts for the rest of this run.</div>
+          <div className="draft-cards" id="draftCards"></div>
+        </div>
+      </div>
+
+      <div id="modeResultOverlay" role="dialog" aria-label="Mode result" style={{'display': 'none'}}>
+        <div className="mr-card">
+          <div className="mr-badge" id="mrBadge">MODE RESULT</div>
+          <div className="mr-head" id="mrHead">RESULT</div>
+          <div className="mr-sub" id="mrSub"></div>
+          <div className="mr-stats" id="mrStats"></div>
+          <button className="ctl-btn mr-primary" id="mrPrimaryBtn" type="button">CONTINUE</button>
+          <button className="ctl-btn mr-home" id="mrHomeBtn" type="button">BACK TO HUB</button>
         </div>
       </div>
       <div id="achToast" role="status"></div>
