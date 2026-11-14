@@ -182,6 +182,24 @@ export default function App() {
               </span>
             </button>
 
+            <button className="hub-card feature gold" id="hubBlitzCard" type="button">
+              <img className="hc-img" src="/enemy-sprites-v2/thumbs/51-golden-dummy-thumb.webp" alt=""/>
+              <span className="hub-mode-badge" id="hubBlitzBadge">NEW</span>
+              <span className="hc-main">
+                <span className="hc-title">GOLDEN DUMMY BLITZ</span>
+                <span className="hc-sub" id="hubBlitzSub">DEFEAT THE MONKEY (#10) TO UNLOCK</span>
+              </span>
+            </button>
+
+            <button className="hub-card feature red" id="hubReflexCard" type="button">
+              <img className="hc-img" id="hubReflexImg" src="/enemy-sprites-v2/thumbs/01-training-dummy-thumb.webp" alt=""/>
+              <span className="hub-mode-badge" id="hubReflexBadge">DUEL</span>
+              <span className="hc-main">
+                <span className="hc-title">REFLEX SLAP-OFF</span>
+                <span className="hc-sub" id="hubReflexSub">DEFEAT 5 FOES TO UNLOCK</span>
+              </span>
+            </button>
+
             <button className="hub-card worlds-card" id="hubWorldsCard" type="button">
               <span className="hc-ico purple"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm4.9 4.1a8 8 0 0 1 1 3.4h-3.1a13.6 13.6 0 0 0-1.3-3.9c.5-.3 1.1-.5 1.7-.7.6.3 1.2.7 1.7 1.2zM12 4.1c.7 1 1.3 2.4 1.6 4h-3.2c.3-1.6.9-3 1.6-4zM7.1 6.1c.5-.5 1.1-.9 1.7-1.2.6.2 1.2.4 1.7.7A13.6 13.6 0 0 0 9.2 9.5H6.1a8 8 0 0 1 1-3.4zM4.3 11.5h4.5c0 1.7.2 3.3.7 4.7a8.1 8.1 0 0 1-5.2-4.7zm0 2h5.2a8.1 8.1 0 0 1-2.4 3.4 10.6 10.6 0 0 1-.8-3.4H4.3zm7.7 6.4c-.7-1-1.3-2.4-1.6-4h3.2c-.3 1.6-.9 3-1.6 4zm-1.9-6.4h3.8c-.1 1.4-.3 2.6-.6 3.6h-2.6c-.3-1-.5-2.2-.6-3.6zm1.9-1.9h-3.8c.1-1.4.3-2.6.6-3.6h2.6c.3 1 .5 2.2.6 3.6zm4.9 5.3a8.1 8.1 0 0 1-2.4-3.4h5.2a8.1 8.1 0 0 1-2.8 3.4zm.9-3.4a10.6 10.6 0 0 1-.8 3.4h-2c.5-1.4.7-3 .7-4.7h4.5a8 8 0 0 1-2.4 2.1z" fill="currentColor" transform="scale(0.92) translate(1,1)"/></svg></span>
               <span className="hc-main">
@@ -283,6 +301,7 @@ export default function App() {
       </div>
 
       <div id="fxChips" aria-live="polite"></div>
+      <div id="modeHud" style={{'display': 'none'}}></div>
       <div id="playerBar" aria-label="Your health">
         <svg className="heart-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21C6 16.5 2.5 12.8 2.5 8.9 2.5 5.9 4.9 3.5 7.9 3.5c1.7 0 3.2.8 4.1 2.1.9-1.3 2.4-2.1 4.1-2.1 3 0 5.4 2.4 5.4 5.4 0 3.9-3.5 7.6-9.5 12.1z" fill="#d63c30" stroke="#8f1f16" strokeWidth="1.4"/></svg>
         <div id="playerTrack"><div id="playerFill"></div><span id="playerText"></span></div>
@@ -497,7 +516,7 @@ export default function App() {
         <div id="helpScroll">
           <div className="help-card"><div className="help-h">1 · YOUR HANDS DO THE WORK</div><p>Your hands slap on their own — your job is to make every slap count. Coins are paid on <b>every strike</b>, so even a fight you lose still earns. Unlock <b>FRENZY</b> in the skill tree, then land hits to charge its meter — misses don't charge it. When the meter is full, tap the glowing <b>FRENZY!</b> button mid-fight: 10 seconds of +50% damage and +30% speed, unleashed when YOU say so.</p></div>
           <div className="help-card"><div className="help-h">2 · GROW ON THREE FRONTS</div><p><b>Attributes</b> (Power, Speed, Crit, Combo…) are capped by your <b>player level</b> — level up to raise the cap, and every level also grants a permanent perk (Iron Palm, Thick Skin, Vampire Slap…). <b>Skills</b> from the tree are the third front: Second Hand doubles your slap rate, and bosses further in are mathematically impossible without the tree. Attributes alone won't carry you. <b>Precision Instinct</b> in the tree makes a gold weak spot flash on the enemy mid-fight — tap it for a guaranteed 2× crit. Fortune Luck makes it appear more often, with a per-fight cap so it never takes over.</p></div>
-          <div className="help-card"><div className="help-h">3 · CLIMB THE ROSTER</div><p>Beat an enemy to unlock the next — 50 of them, in 10 groups, with a boss every 10th. Clearing an odd-numbered group (1, 3, 5, …) opens its <b>TRIO GAUNTLET</b> — the group's 3 toughest back-to-back, your HP carrying over — and beating it is <b>required</b> to unlock the next group. Even-numbered groups end in a boss instead — no trio needed there. Bosses enrage under 30% HP. Beaten enemies can be re-fought any time for coins, and every defeated enemy unlocks a <b>HARD</b> rematch on the Levels screen (red button): far tougher, pays 2.5× coins and a one-time gem.</p></div>
+          <div className="help-card"><div className="help-h">3 · CLIMB THE ROSTER</div><p>Beat an enemy to unlock the next — 50 of them, in 10 groups, with a boss every 10th. Clearing a group opens its <b>TRIO GAUNTLET</b> — the group's 3 toughest back-to-back, your HP carrying over, with a Cornerman buff draft between rounds. It's a bonus challenge mode for extra coins and a first-clear gem — beating enemies is the only thing progression ever asks for. Bosses enrage under 30% HP. Beaten enemies can be re-fought any time for coins, and clearing an enemy's group unlocks its <b>HARD</b> rematch on the Levels screen (red button): far tougher, the knockout pays 4.75× coins and a one-time gem.</p></div>
           <div className="help-card"><div className="help-h">4 · EVERY DAY COUNTS</div><p>Defeat the <b>Grumpy Teddy (#5)</b> to unlock the <b>daily chest</b> — a 7-day login streak that pays coins every day and gems on day 7, with amounts that grow with your progress. Defeat the <b>Mischievous Monkey (#10)</b> to unlock <b>daily quests</b>. Check <b>Awards</b> for lifetime stats and achievements (every achievement pays gems), and spend gems in the <b>Shop</b> on hand skins, coin packs and the Offline Earnings unlock.</p></div>
           <div className="help-card"><div className="help-h">5 · WATCH THE COUNTDOWN</div><p>Enemies hit back on the timer under their HP bar. Your HP refills every fight, and levelling up is also defence. If you're walled, the answer is almost always: farm the best enemy you can beat, buy what's cheapest for damage, and come back.</p></div>
           <div className="help-card"><div className="help-h">6 · SPECIAL SKILLS</div><p>Bosses drop <b>special skills</b>: the Mischievous Monkey (#10) grants <b>Double Slap</b> — both hands at once — and Shogun (#30) grants <b>Uppercut Punch</b>. Fire them from the specials rail in battle, and upgrade them to Lv5 inside the <b>Skills</b> tab. Equipped hand skins also grant small bonuses — check the Shop cards.</p></div>
@@ -768,6 +787,25 @@ export default function App() {
           </div>
           <button className="ctl-btn sr-claim" id="srClaimBtn" type="button">🎁 CLAIM IT</button>
           <div className="sr-hint">Your left hand joins the fight — slaps alternate L / R, doubling your cycle rate.</div>
+        </div>
+      </div>
+      <div id="draftOverlay" role="dialog" aria-label="Cornerman draft" style={{'display': 'none'}}>
+        <div className="draft-card-wrap">
+          <div className="draft-badge">🥊 YOUR CORNERMAN SAYS…</div>
+          <div className="draft-title">PICK A FIGHT BUFF</div>
+          <div className="draft-sub" id="draftSub">It lasts for the rest of this run.</div>
+          <div className="draft-cards" id="draftCards"></div>
+        </div>
+      </div>
+
+      <div id="modeResultOverlay" role="dialog" aria-label="Mode result" style={{'display': 'none'}}>
+        <div className="mr-card">
+          <div className="mr-badge" id="mrBadge">MODE RESULT</div>
+          <div className="mr-head" id="mrHead">RESULT</div>
+          <div className="mr-sub" id="mrSub"></div>
+          <div className="mr-stats" id="mrStats"></div>
+          <button className="ctl-btn mr-primary" id="mrPrimaryBtn" type="button">CONTINUE</button>
+          <button className="ctl-btn mr-home" id="mrHomeBtn" type="button">BACK TO HUB</button>
         </div>
       </div>
       <div id="achToast" role="status"></div>

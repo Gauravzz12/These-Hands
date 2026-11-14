@@ -2209,8 +2209,24 @@ function loadPoseImage(poseDef) {
   img.src = poseDef.src;
 }
 
+V2_CONFIGS.push({
+    "idx": 300,
+    "id": "51-golden-dummy",
+    "name": "Golden Dummy",
+    "refH": 909,
+    "cheekX": 0.22,
+    "cheekY": 0.55,
+    "colors": ["#ffd94d", "#d99a16", "#b07050", "#e02020", "#8a5a00"],
+    "poses": {
+      "idle": { "src": "/enemy-sprites-v2/poses/51-golden-dummy-idle.webp", "w": 548, "h": 907 },
+      "attack": { "src": "/enemy-sprites-v2/poses/51-golden-dummy-attack.webp", "w": 597, "h": 1001 },
+      "dizzy": { "src": "/enemy-sprites-v2/poses/51-golden-dummy-dizzy.webp", "w": 588, "h": 962 }
+    },
+    "thumb": "/enemy-sprites-v2/thumbs/51-golden-dummy-thumb.webp"
+  });
+
 export function isV2Enemy(index) {
-  return typeof index === 'number' && ((index >= 0 && index <= 49) || (index >= 200 && index <= 205) || (index >= 210 && index <= 215));
+  return typeof index === 'number' && ((index >= 0 && index <= 49) || (index >= 200 && index <= 205) || (index >= 210 && index <= 215) || index === 300);
 }
 
 export function preloadV2Sprites(targetIndex = 0) {

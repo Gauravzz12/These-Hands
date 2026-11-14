@@ -5113,3 +5113,58 @@ margin-top: 7px;
 #app[data-screen="battle"] .rail-circle { border-width: 2.5px; box-shadow: 2px 2px 0 var(--ap-ink); }
 #app[data-screen="battle"] #attrPanel .attr-tile { border-width: 2.5px; box-shadow: 3px 3px 0 var(--ap-ink); }
 #app[data-screen="battle"] .fx-chip { border-width: 2px; box-shadow: 2px 2px 0 var(--ap-ink); }
+
+/* ===== MODES, DRAFTS, CONTRACTS & TURF (Arcade Pop) ===== */
+#modeHud{margin:6px auto 0;width:fit-content;max-width:94%;background:#221407;color:#ffe9a8;border:2.5px solid #221407;border-radius:999px;padding:4px 14px;font-family:'Bungee',cursive;font-size:12.5px;letter-spacing:.4px;box-shadow:0 3px 0 #221407;text-align:center}
+#modeHud.gold{background:#b97e08;color:#fff8e1}
+#draftOverlay{position:fixed;inset:0;z-index:48;background:rgba(24,14,4,.62);display:flex;align-items:center;justify-content:center;padding:16px}
+.draft-card-wrap{background:#fff7e0;border:4px solid #221407;border-radius:18px;box-shadow:0 8px 0 #221407;max-width:430px;width:100%;padding:18px 16px 16px;text-align:center}
+.draft-badge{display:inline-block;background:#0284c7;color:#fff;border:2.5px solid #221407;border-radius:999px;padding:3px 12px;font-family:'Bungee',cursive;font-size:11px;box-shadow:0 3px 0 #221407;transform:rotate(-1.5deg)}
+.draft-title{font-family:'Bungee',cursive;font-size:24px;color:#221407;text-shadow:2px 2px 0 #f2b01e;margin-top:10px}
+.draft-sub{font-size:13px;font-weight:700;color:#6b543a;margin-top:2px}
+.draft-cards{display:flex;gap:10px;margin-top:14px}
+.draft-card{flex:1;background:#fffdf4;border:3px solid #221407;border-radius:14px;box-shadow:0 5px 0 #221407;padding:12px 8px 10px;cursor:pointer;font-family:inherit;text-align:center;transition:transform .06s}
+.draft-card:active{transform:translateY(4px);box-shadow:0 1px 0 #221407}
+.draft-ico{font-size:30px;line-height:1}
+.draft-name{font-family:'Bungee',cursive;font-size:12.5px;color:#221407;margin-top:7px;line-height:1.25}
+.draft-desc{font-size:11px;font-weight:700;color:#6b543a;margin-top:5px;line-height:1.35}
+#modeResultOverlay{position:fixed;inset:0;z-index:48;background:rgba(24,14,4,.62);display:flex;align-items:center;justify-content:center;padding:16px}
+.mr-card{background:#fff7e0;border:4px solid #221407;border-radius:18px;box-shadow:0 8px 0 #221407;max-width:400px;width:100%;padding:20px 18px 16px;text-align:center}
+.mr-badge{display:inline-block;background:#b97e08;color:#fff;border:2.5px solid #221407;border-radius:999px;padding:3px 12px;font-family:'Bungee',cursive;font-size:11px;box-shadow:0 3px 0 #221407}
+.mr-head{font-family:'Bungee',cursive;font-size:25px;color:#221407;text-shadow:2px 2px 0 #f2b01e;margin-top:10px;line-height:1.15}
+.mr-sub{font-size:13.5px;font-weight:700;color:#6b543a;margin-top:4px}
+.mr-stats{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:14px 0 4px}
+.mr-stat{background:#fffdf4;border:2.5px solid #221407;border-radius:12px;box-shadow:0 3px 0 #221407;padding:7px 12px;min-width:96px}
+.mr-stat b{display:block;font-family:'Bungee',cursive;font-size:15px;color:#221407}
+.mr-stat span{font-size:10px;font-weight:800;color:#8a6d3b;letter-spacing:.6px}
+.mr-primary{width:100%;margin-top:12px;background:#059669!important;color:#fff!important}
+.mr-home{width:100%;margin-top:8px;background:#fffdf4!important;color:#221407!important}
+.contract-board{margin-bottom:12px}
+.contract-head{display:flex;justify-content:space-between;align-items:baseline;background:#221407;color:#ffe9a8;border:3px solid #221407;border-radius:12px 12px 0 0;padding:8px 12px;font-family:'Bungee',cursive;font-size:14px;box-shadow:0 4px 0 #221407}
+.contract-head span{font-family:'Nunito',sans-serif;font-weight:800;font-size:11px;color:#f2b01e}
+.contract-cards{display:flex;flex-direction:column;gap:8px;background:#f7e8c8;border:3px solid #221407;border-top:none;border-radius:0 0 12px 12px;padding:10px;box-shadow:0 4px 0 #221407}
+.contract-card{display:flex;gap:10px;align-items:center;background:#fffdf4;border:2.5px solid #221407;border-radius:12px;box-shadow:0 3px 0 #221407;padding:8px 10px}
+.contract-card img{width:44px;height:44px;object-fit:contain}
+.contract-main{flex:1;min-width:0;text-align:left}
+.contract-name{font-family:'Bungee',cursive;font-size:12.5px;color:#221407}
+.contract-rule{font-size:11.5px;font-weight:700;color:#6b543a;line-height:1.3}
+.contract-reward{font-size:11px;font-weight:900;color:#b3540a}
+.contract-fight{background:#d63c30;color:#fff;border:2.5px solid #221407;border-radius:10px;box-shadow:0 3px 0 #221407;font-family:'Bungee',cursive;font-size:12px;padding:8px 12px;cursor:pointer}
+.contract-fight:active{transform:translateY(2px);box-shadow:0 1px 0 #221407}
+.turf-bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;background:#e9f6df;border:2.5px solid #221407;border-radius:12px;box-shadow:0 3px 0 #221407;padding:8px 10px;margin-top:8px;font-size:12px;font-weight:800;color:#2c4a12}
+.turf-bar .turf-title{font-family:'Bungee',cursive;font-size:12px;color:#221407}
+.turf-bar button{background:#fffdf4;border:2px solid #221407;border-radius:9px;box-shadow:0 2px 0 #221407;font-family:'Bungee',cursive;font-size:11px;padding:5px 9px;cursor:pointer;color:#221407}
+.turf-bar button.collect{background:#65a30d;color:#fff}
+.turf-bar button:active{transform:translateY(2px);box-shadow:none}
+.fx-chip.anomaly{background:#7c2d12;color:#ffd9a8;border-color:#221407}
+.fx-chip.contract{background:#1e3a8a;color:#dbeafe;border-color:#221407}
+
+/* Feature mode cards (Blitz / Reflex) — sprite-forward */
+.hub-card.feature{position:relative;overflow:visible}
+.hub-card.feature .hc-img{width:58px;height:58px;flex:0 0 58px;object-fit:contain;background:#fff8e7;border:2.5px solid #221407;border-radius:12px;box-shadow:2.5px 2.5px 0 #221407;padding:2px}
+.hub-card.feature.gold{background:#fff3cf}
+.hub-card.feature.red{background:#ffe9e4}
+.hub-card.feature.locked .hc-img{filter:grayscale(1);opacity:.55}
+.hub-mode-badge{position:absolute;top:-10px;right:10px;font-family:Bungee,cursive;font-size:10px;letter-spacing:.04em;background:#f2b01e;color:#221407;border:2.5px solid #221407;border-radius:999px;padding:3px 9px;box-shadow:2px 2px 0 #221407;transform:rotate(2deg)}
+.hub-card.feature.red .hub-mode-badge{background:#fb7185;color:#fff}
+.hub-card.feature.locked .hub-mode-badge{background:#d6cbb8;color:#6b5b3e}
