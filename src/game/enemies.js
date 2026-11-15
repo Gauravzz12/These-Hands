@@ -21,8 +21,10 @@ function buildAllEnemies() {
     const interval = calcEnemyInterval(i, boss, miniBoss);
     const atkDmg = calcEnemyDamage(i, boss, elite);
 
+    const evasion = i < 20 ? 0 : i < 24 ? 0.05 : i < 28 ? 0.06 : i < 30 ? 0.08 : i < 38 ? 0.10 : i < 48 ? 0.12 : i === 48 ? 0.14 : 0.15;
     const built = {
       idx: i,
+      evasion,
       name: r[0],
       group: Math.floor(i / 5),
       elite,
