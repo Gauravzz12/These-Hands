@@ -2,11 +2,11 @@
 // Two original realms, 6 enemies each: slot 3 (index 2) is the mini-boss,
 // slot 6 (index 5) is the world final boss. Virtual idx 200-205 / 210-215
 // keep world enemies clear of the main roster (0-49) and the reserved
-// 50-99 expansion. Stats follow Economy Bible v3.1 Section 6.2 (numbers by
-// slot): strictly monotonic scaling above the Dragon Lord (2.15B HP /
-// 309.92M bounty) — W0 S0 starts at 3.1B HP / 365M bounty and W1 S5 ends at
-// 225B HP / 28.5B bounty. Guardian names/sprites stay with the shipped art
-// (Ravana, Dark Slapper et al.); the table's stats/embers apply by slot.
+// 50-99 expansion. Stats follow Balance v2.6.5 Audited Final Section 12
+// (numbers by slot): strictly monotonic scaling above the Dragon Lord
+// (343M HP / 57M bounty) — W0 S0 starts at 357.5M HP / 62M bounty and
+// W1 S5 ends at 26.5B HP / 455M bounty. Guardian names/sprites stay with
+// the shipped art (Ravana, Dark Slapper et al.); stats/embers by slot.
 import { getV2Sprite } from './enemySpritesV2.js';
 
 export const WORLD_IDX_BASE = [200, 210];
@@ -24,12 +24,12 @@ export const WORLDS = [
     accent: '#e8862e',
     lockText: 'DEFEAT THE DRAGON LORD TO OPEN THE PORTAL',
     enemies: [
-      { name: 'Asura Footman',     slug: 'w1-01-asura-footman',     hp: 650000000,  atkDmg: 4400, atkInterval: 1.38, bounty: 66600000, evasion: 0.15, embersFirst: 3, embersRepeat: 1, scale: 1.0 },
-      { name: 'Rakshasa Huntress', slug: 'w1-02-rakshasa-huntress', hp: 850000000, atkDmg: 5100, atkInterval: 1.36, bounty: 91100000, evasion: 0.15, embersFirst: 4, embersRepeat: 1, scale: 1.0 },
-      { name: 'Kumbhakaran',       slug: 'w1-03-kumbhakaran',       hp: 1120000000, atkDmg: 5950, atkInterval: 1.35, bounty: 126100000, evasion: 0.15, embersFirst: 5, embersRepeat: 2, scale: 1.3,  role: 'MINI BOSS', title: 'The Sleeping Giant' },
-      { name: 'Mahishasura',       slug: 'w1-04-mahishasura',       hp: 1450000000, atkDmg: 6950, atkInterval: 1.34, bounty: 171600000, evasion: 0.16, embersFirst: 5, embersRepeat: 2, scale: 1.3 },
-      { name: 'Vetala Warlock',    slug: 'w1-05-vetala-warlock',    hp: 1880000000, atkDmg: 8200, atkInterval: 1.32, bounty: 236400000, evasion: 0.16, embersFirst: 6, embersRepeat: 2, scale: 1.1 },
-      { name: 'Ravana',            slug: 'w1-06-ravana',            hp: 4600000000, atkDmg: 9800, atkInterval: 1.30, bounty: 324000000, evasion: 0.16, embersFirst: 10, embersRepeat: 3, scale: 1.45, role: 'WORLD BOSS', title: 'The Ten-Headed King' },
+      { name: 'Asura Footman',     slug: 'w1-01-asura-footman',     hp: 357500000,  atkDmg: 4400, atkInterval: 1.38, bounty: 62000000, evasion: 0.15, embersFirst: 3, embersRepeat: 1, scale: 1.0 },
+      { name: 'Rakshasa Huntress', slug: 'w1-02-rakshasa-huntress', hp: 467500000, atkDmg: 5100, atkInterval: 1.36, bounty: 73000000, evasion: 0.15, embersFirst: 4, embersRepeat: 1, scale: 1.0 },
+      { name: 'Kumbhakaran',       slug: 'w1-03-kumbhakaran',       hp: 616000000, atkDmg: 5950, atkInterval: 1.35, bounty: 86000000, evasion: 0.15, embersFirst: 5, embersRepeat: 2, scale: 1.3,  role: 'MINI BOSS', title: 'The Sleeping Giant' },
+      { name: 'Mahishasura',       slug: 'w1-04-mahishasura',       hp: 797500000, atkDmg: 6950, atkInterval: 1.34, bounty: 101000000, evasion: 0.16, embersFirst: 5, embersRepeat: 2, scale: 1.3 },
+      { name: 'Vetala Warlock',    slug: 'w1-05-vetala-warlock',    hp: 1034000000, atkDmg: 8200, atkInterval: 1.32, bounty: 119000000, evasion: 0.16, embersFirst: 6, embersRepeat: 2, scale: 1.1 },
+      { name: 'Ravana',            slug: 'w1-06-ravana',            hp: 3200000000, atkDmg: 9800, atkInterval: 1.30, bounty: 140000000, evasion: 0.16, embersFirst: 10, embersRepeat: 3, scale: 1.45, role: 'WORLD BOSS', title: 'The Ten-Headed King' },
     ],
   },
   {
@@ -41,12 +41,12 @@ export const WORLDS = [
     accent: '#9a6ae0',
     lockText: 'DEFEAT RAVANA TO CROSS INTO THE SHADOW VERSE',
     enemies: [
-      { name: 'Shade of the Dummy',  slug: 'w2-01-shade-dummy',      hp: 3200000000,  atkDmg: 11800, atkInterval: 1.30, bounty: 465900000, evasion: 0.16, embersFirst: 6, embersRepeat: 2, scale: 1.0 },
-      { name: 'Umbral Mime',         slug: 'w2-02-umbral-mime',      hp: 4200000000, atkDmg: 13900, atkInterval: 1.28, bounty: 565100000, evasion: 0.16, embersFirst: 7, embersRepeat: 3, scale: 1.0 },
-      { name: 'Umbral Puppeteer', slug: 'w2-03-umbral-puppeteer', hp: 9000000000, atkDmg: 16400, atkInterval: 1.26, bounty: 684100000, evasion: 0.17, embersFirst: 8, embersRepeat: 3, scale: 1.25, role: 'MINI BOSS', title: 'Master of Strings' },
-      { name: 'Gloom Serpent',       slug: 'w2-04-gloom-serpent',    hp: 5500000000, atkDmg: 19200, atkInterval: 1.25, bounty: 822800000, evasion: 0.17, embersFirst: 9, embersRepeat: 4, scale: 1.2 },
-      { name: 'The Hollow Monk',     slug: 'w2-05-hollow-monk',      hp: 6000000000, atkDmg: 22500, atkInterval: 1.24, bounty: 971600000, evasion: 0.18, embersFirst: 10, embersRepeat: 5, scale: 1.1 },
-      { name: 'The Dark Slapper',    slug: 'w2-06-dark-slapper',     hp: 22000000000, atkDmg: 26500, atkInterval: 1.22, bounty: 1150000000, evasion: 0.18, embersFirst: 15, embersRepeat: 6, scale: 1.5,  role: 'WORLD BOSS', title: 'Your Shadow, Perfected' },
+      { name: 'Shade of the Dummy',  slug: 'w2-01-shade-dummy',      hp: 1760000000,  atkDmg: 11800, atkInterval: 1.30, bounty: 175000000, evasion: 0.16, embersFirst: 6, embersRepeat: 2, scale: 1.0 },
+      { name: 'Umbral Mime',         slug: 'w2-02-umbral-mime',      hp: 2310000000, atkDmg: 13900, atkInterval: 1.28, bounty: 212000000, evasion: 0.16, embersFirst: 7, embersRepeat: 3, scale: 1.0 },
+      { name: 'Umbral Puppeteer', slug: 'w2-03-umbral-puppeteer', hp: 2750000000, atkDmg: 16400, atkInterval: 1.26, bounty: 256000000, evasion: 0.17, embersFirst: 8, embersRepeat: 3, scale: 1.25, role: 'MINI BOSS', title: 'Master of Strings' },
+      { name: 'Gloom Serpent',       slug: 'w2-04-gloom-serpent',    hp: 3850000000, atkDmg: 19200, atkInterval: 1.25, bounty: 310000000, evasion: 0.17, embersFirst: 9, embersRepeat: 4, scale: 1.2 },
+      { name: 'The Hollow Monk',     slug: 'w2-05-hollow-monk',      hp: 5500000000, atkDmg: 22500, atkInterval: 1.24, bounty: 375000000, evasion: 0.18, embersFirst: 10, embersRepeat: 5, scale: 1.1 },
+      { name: 'The Dark Slapper',    slug: 'w2-06-dark-slapper',     hp: 26500000000, atkDmg: 26500, atkInterval: 1.22, bounty: 455000000, evasion: 0.18, embersFirst: 15, embersRepeat: 6, scale: 1.5,  role: 'WORLD BOSS', title: 'Your Shadow, Perfected' },
     ],
   },
 ];
