@@ -5176,24 +5176,7 @@ margin-top: 7px;
 #blitzTiersBtn{position:absolute;top:6px;right:8px;z-index:8;font-family:Bungee,cursive;font-size:10.5px;letter-spacing:.03em;background:#f2b01e;color:#221407;border:2.5px solid #221407;border-radius:999px;padding:4px 10px;box-shadow:2px 2px 0 #221407;cursor:pointer}
 #blitzTiersBtn:active{transform:translate(1px,1px);box-shadow:1px 1px 0 #221407}
 #blitzTiersPanel{position:absolute;top:42px;right:8px;z-index:8;width:min(302px,88vw);background:#fff8e7;border:3px solid #221407;border-radius:14px;box-shadow:4px 4px 0 #221407;padding:10px}
-.bt-head{display:flex;justify-content:space-between;align-items:center;font-family:Bungee,cursive;font-size:12px;margin:0 2px 8px;color:#221407}
 .bt-best{font-family:Nunito,sans-serif;font-weight:800;font-size:10px;background:#221407;color:#ffd94d;border-radius:999px;padding:2px 8px}
-.bt-now{background:#fff;border:2.5px solid #221407;border-radius:10px;padding:7px 9px;margin-bottom:8px}
-.bt-now-top{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
-.bt-now-tier{font-family:Bungee,cursive;font-size:11.5px;color:#221407}
-.bt-now-dmg{font-family:Nunito,sans-serif;font-weight:900;font-size:12px;color:#b97e08}
-.bt-bar{height:9px;background:#eadfc6;border:2px solid #221407;border-radius:99px;overflow:hidden;margin:6px 0 5px}
-.bt-bar i{display:block;height:100%;background:#f2b01e;transition:width .25s}
-.bt-next{font-family:Nunito,sans-serif;font-weight:700;font-size:10.5px;color:#5b4a2f;line-height:1.35}
-.bt-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:5px}
-.bt-chip{position:relative;border:2px solid #221407;border-radius:8px;background:#f3e9d2;color:#8a764f;padding:4px 2px 3px;text-align:center;line-height:1.1}
-.bt-chip b{display:block;font-family:Bungee,cursive;font-size:12px}
-.bt-chip span{display:block;font-family:Nunito,sans-serif;font-weight:800;font-size:7.5px;letter-spacing:.01em;white-space:nowrap;overflow:hidden}
-.bt-chip i{position:absolute;top:-6px;right:-3px;font-style:normal;font-size:9px}
-.bt-chip.done{background:#d9f2c2;color:#2e5b1e}
-.bt-chip.next{background:#ffe1a8;color:#221407;box-shadow:0 0 0 2px #b97e08;animation:btPulse 1s infinite}
-@keyframes btPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
-.bt-foot{font-family:Nunito,sans-serif;font-weight:700;font-size:9.5px;color:#8a764f;margin-top:8px;line-height:1.4}
 .rw-card{display:flex;flex-direction:column;gap:3px;text-align:left}
 .rw-row{display:flex;justify-content:space-between;align-items:baseline;gap:10px;font-family:Nunito,sans-serif;font-weight:800;font-size:13px;color:#5b3a12}
 .rw-row .rw-val{font-weight:900;color:#221407;white-space:nowrap}
@@ -5205,3 +5188,19 @@ margin-top: 7px;
 .contract-card.done{opacity:.6}
 .contract-done-chip{display:flex;align-items:center;padding:0 10px;font-family:Bungee,cursive;font-size:10px;color:#166534;background:#bbf7d0;border:2px solid #221407;border-radius:999px;white-space:nowrap}
 .contract-alldone{margin-top:8px;text-align:center;font-family:Bungee,cursive;font-size:11px;color:#166534;background:#dcfce7;border:2.5px solid #221407;border-radius:10px;padding:7px 8px;box-shadow:2px 2px 0 #221407}
+.btb-head{display:flex;justify-content:space-between;align-items:center;font-family:Bungee,cursive;font-size:12px;margin:0 2px 8px;color:#221407}
+.btb-foot{font-family:Nunito,sans-serif;font-weight:700;font-size:9.5px;color:#5b4a2f;text-align:center;margin-top:6px}
+.btc-league{border:2.5px solid #221407;border-radius:10px;margin-bottom:5px;background:#fff;overflow:hidden}
+.btc-league.lock{opacity:.6}
+.btc-lhead{display:flex;align-items:center;gap:7px;padding:6px 9px}
+.btc-lhead i{width:14px;height:14px;border-radius:4px;border:2px solid #221407;flex:none}
+.btc-lhead b{font-family:Bungee,cursive;font-size:12px;color:#221407;flex:1}
+.btc-lhead span{font-family:Nunito,sans-serif;font-weight:900;font-size:9.5px;color:#5b4a2f}
+.btc-league.cur .btc-lhead{background:#fff3cf}
+.btc-trow{display:flex;align-items:center;gap:7px;padding:4px 9px;border-top:1.5px dashed #d8cba6;font-family:Nunito,sans-serif;font-size:11px}
+.btc-trow b{font-weight:900;color:#b97e08;width:14px}
+.btc-trow span{font-weight:800;color:#221407;flex:1}
+.btc-trow em{font-style:normal;font-weight:700;color:#5b4a2f;font-size:10px}
+.btc-trow strong{font-weight:900;color:#b97e08;font-size:10px}
+.btc-trow.next{background:#fff8e1}
+.btc-trow.lock{opacity:.55}
