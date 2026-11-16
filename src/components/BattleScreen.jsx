@@ -210,7 +210,7 @@ export default function BattleScreen() {
             const spec = bossSpec;
             const existing = s.activeEffects.find(e => e.kind === spec.kind);
             if (!existing) {
-              const eff = { kind: spec.kind, label: spec.name, timer: spec.dur || 6 };
+              const eff = { kind: spec.kind, label: spec.name, timer: spec.dur || 6, amt: spec.amt };
               if (spec.kind === 'shield') eff.hitsLeft = spec.hits || 5;
               s.activeEffects = [...s.activeEffects, eff];
             }
@@ -273,7 +273,7 @@ export default function BattleScreen() {
       // Accuracy check
       let acc = playerStats.accuracy;
       const accEffect = s.activeEffects.find(ef => ef.kind === 'acc');
-      if (accEffect) acc *= (1 - (accEffect.amt || 0.3));
+      if (accEffect) acc *= (1 - (accEffect.amt != null ? accEffect.amt : 0.25));
       if (Math.random() > acc) {
         // Miss
         return s;
@@ -580,7 +580,9 @@ export default function BattleScreen() {
         {bs.activeEffects.length > 0 && (
           <div style={{ position:'absolute', bottom:8, left:0, right:0, display:'flex', flexWrap:'wrap', gap:5, justifyContent:'center', padding:'5px 10px 1px' }}>
             {bs.activeEffects.map((ef, i) => (
-              <span key={i} className={`fx-chip ${ef.kind}`}>{ef.label}</span>
+              <span key={i} className={`fx-chip ${ef.kind}`}>
+                {ef.label}{ef.kind === 'acc' && ef.amt ? ` · ACC -${Math.round(ef.amt * 100)}%` : ''} · {Math.ceil(ef.timer)}s
+              </span>
             ))}
           </div>
         )}

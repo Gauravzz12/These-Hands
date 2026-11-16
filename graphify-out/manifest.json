@@ -19,8 +19,8 @@
     "semantic_hash": ""
   },
   "android/app/capacitor.build.gradle": {
-    "mtime": 1794534598.8218946,
-    "seen": 1794534619.5083382,
+    "mtime": 1794815268.7263272,
+    "seen": 1794815330.8316438,
     "ast_hash": "ab2c953c47a743ed4496c3b72aa299a2",
     "semantic_hash": "ab2c953c47a743ed4496c3b72aa299a2"
   },
@@ -49,8 +49,8 @@
     "semantic_hash": "682315a426653617c6a74fc12bef55b6"
   },
   "android/capacitor.settings.gradle": {
-    "mtime": 1794534598.8202305,
-    "seen": 1794534619.5083382,
+    "mtime": 1794815268.7253106,
+    "seen": 1794815330.8316438,
     "ast_hash": "514d591b4c0254b390142858be5981e4",
     "semantic_hash": "514d591b4c0254b390142858be5981e4"
   },
@@ -127,9 +127,9 @@
     "semantic_hash": "8bac246e0138c7d2cab584be02430f8e"
   },
   "src/App.jsx": {
-    "mtime": 1794303416.2640502,
-    "seen": 1794307445.1609645,
-    "ast_hash": "2712bec2ba89c1e824baed7c310ac392",
+    "mtime": 1794814575.0347698,
+    "seen": 1794815330.8326604,
+    "ast_hash": "d7f408fb5ea0642e25d0004d39fc8ee1",
     "semantic_hash": ""
   },
   "src/components/AchToast.jsx": {
@@ -151,9 +151,9 @@
     "semantic_hash": "8c55697d80a5cc256c1e8e0c586bb6f6"
   },
   "src/components/BattleScreen.jsx": {
-    "mtime": 1794415623.6600544,
-    "seen": 1794415695.437956,
-    "ast_hash": "bc9690e3a66849c2ff6ea2960d285e11",
+    "mtime": 1794815178.791275,
+    "seen": 1794815330.8326604,
+    "ast_hash": "b25b02fc6ce01f81da856fd018786dd2",
     "semantic_hash": ""
   },
   "src/components/HelpScreen.jsx": {
@@ -235,21 +235,21 @@
     "semantic_hash": ""
   },
   "src/game/config.js": {
-    "mtime": 1794534561.2001703,
-    "seen": 1794534619.5083382,
-    "ast_hash": "f3da6448ccff8e65b27314f58043bc50",
+    "mtime": 1794815076.87682,
+    "seen": 1794815330.8326604,
+    "ast_hash": "f378e493aa8347b865eaf77670e99279",
     "semantic_hash": ""
   },
   "src/game/enemies.js": {
-    "mtime": 1793844411.551326,
-    "seen": 1793845547.3623104,
-    "ast_hash": "776877318cf2e8a7d8ad1848631ff515",
-    "semantic_hash": "776877318cf2e8a7d8ad1848631ff515"
+    "mtime": 1794814575.0487719,
+    "seen": 1794815330.8326604,
+    "ast_hash": "dfde601109728a365f49082be18b0f9e",
+    "semantic_hash": ""
   },
   "src/game/enemySpritesV2.js": {
-    "mtime": 1794406099.121958,
-    "seen": 1794406911.5876224,
-    "ast_hash": "dce99a10bbdef759a23489821aa32b6e",
+    "mtime": 1794814575.0517695,
+    "seen": 1794815330.8326604,
+    "ast_hash": "0a9443b39049121c3559f1a380dd4aa2",
     "semantic_hash": ""
   },
   "src/game/engine.js": {
@@ -259,9 +259,9 @@
     "semantic_hash": ""
   },
   "src/game/gameEngine.js": {
-    "mtime": 1794494689.0299025,
-    "seen": 1794494772.0513859,
-    "ast_hash": "88b73535281a90ad09a85fe58cbbe2df",
+    "mtime": 1794815154.5078042,
+    "seen": 1794815330.8326604,
+    "ast_hash": "08847db32c9b3ef588f28ae0de62e078",
     "semantic_hash": ""
   },
   "src/game/proceduralEnemies.js": {
@@ -673,9 +673,9 @@
     "semantic_hash": ""
   },
   "public/enemy-sprites-v2/poses/11-bodybuilder-attack1.webp": {
-    "mtime": 1793373301.734,
-    "seen": 1793815820.9632776,
-    "ast_hash": "e7c7c0048013fe525a7b001a1dad5e1a",
+    "mtime": 1794814574.9952495,
+    "seen": 1794815330.8326604,
+    "ast_hash": "d51c70526cb6a4e4167fe4128e1a194a",
     "semantic_hash": ""
   },
   "public/enemy-sprites-v2/poses/11-bodybuilder-attack2.webp": {
@@ -691,9 +691,9 @@
     "semantic_hash": ""
   },
   "public/enemy-sprites-v2/poses/11-bodybuilder-idle.webp": {
-    "mtime": 1793373301.876,
-    "seen": 1793815820.9632776,
-    "ast_hash": "d863d968a8d6d98c76422ab0451e2841",
+    "mtime": 1794814574.9972475,
+    "seen": 1794815330.8326604,
+    "ast_hash": "b02ff7c18528010580ee9ed855bef5d0",
     "semantic_hash": ""
   },
   "public/enemy-sprites-v2/poses/12-luchador-attack.webp": {
@@ -715,9 +715,9 @@
     "semantic_hash": ""
   },
   "public/enemy-sprites-v2/poses/13-kickboxer-attack.webp": {
-    "mtime": 1793358697.715402,
-    "seen": 1793815820.9632776,
-    "ast_hash": "d685bff9406b11a6043859c6675bd1b0",
+    "mtime": 1794814574.9992452,
+    "seen": 1794815330.8326604,
+    "ast_hash": "8c9c094e808673b0f2c2c6b39669810a",
     "semantic_hash": ""
   },
   "public/enemy-sprites-v2/poses/13-kickboxer-dizzy.webp": {
@@ -733,9 +733,9 @@
     "semantic_hash": ""
   },
   "public/enemy-sprites-v2/poses/14-adult-boxer-attack1.webp": {
-    "mtime": 1793358562.7672608,
-    "seen": 1793815820.9632776,
-    "ast_hash": "f085b7cd8fd5aca18ec21f0128e9b2aa",
+    "mtime": 1794814575.001758,
+    "seen": 1794815330.8326604,
+    "ast_hash": "34d61e9288d9b617d8921d1aefc432f3",
     "semantic_hash": ""
   },
   "public/enemy-sprites-v2/poses/14-adult-boxer-attack2.webp": {
@@ -751,9 +751,9 @@
     "semantic_hash": ""
   },
   "public/enemy-sprites-v2/poses/14-adult-boxer-idle.webp": {
-    "mtime": 1793358562.9166007,
-    "seen": 1793815820.9632776,
-    "ast_hash": "3dfc60a1982a3e000f89ceebf50c203e",
+    "mtime": 1794814575.0037663,
+    "seen": 1794815330.8326604,
+    "ast_hash": "b95954a5c7aec726a6fb1c4437688e56",
     "semantic_hash": ""
   },
   "public/enemy-sprites-v2/poses/15-sumo-attack.webp": {
@@ -769,9 +769,9 @@
     "semantic_hash": ""
   },
   "public/enemy-sprites-v2/poses/15-sumo-idle.webp": {
-    "mtime": 1793358564.0850742,
-    "seen": 1793815820.9632776,
-    "ast_hash": "2112063388f7c82f5512ad7af9d9ad78",
+    "mtime": 1794814575.0057693,
+    "seen": 1794815330.8326604,
+    "ast_hash": "77723cbf302dca0ad7d5d8d67af5a003",
     "semantic_hash": ""
   },
   "public/enemy-sprites-v2/poses/16-castle-guard-attack.webp": {
@@ -1021,9 +1021,9 @@
     "semantic_hash": ""
   },
   "public/enemy-sprites-v2/poses/26-ninja-recruit-idle.webp": {
-    "mtime": 1794306448.006,
-    "seen": 1794307445.161965,
-    "ast_hash": "3747d660cb0dc490151dfe1a8f25e891",
+    "mtime": 1794814575.0087695,
+    "seen": 1794815330.8326604,
+    "ast_hash": "937bdee0a362d405527301c1b556abf1",
     "semantic_hash": ""
   },
   "public/enemy-sprites-v2/poses/27-shuriken-master-attack.webp": {
@@ -1423,21 +1423,21 @@
     "semantic_hash": ""
   },
   "public/enemy-sprites-v2/poses/48-crystal-dragon-attack.webp": {
-    "mtime": 1793890878.2075322,
-    "seen": 1793891863.585829,
-    "ast_hash": "dc9721649d45b238676c041ea9fa8585",
+    "mtime": 1794814575.0117714,
+    "seen": 1794815330.8336818,
+    "ast_hash": "a74820779a3ecbe7918d2f760e6d2bd4",
     "semantic_hash": ""
   },
   "public/enemy-sprites-v2/poses/48-crystal-dragon-dizzy.webp": {
-    "mtime": 1793517479.9711633,
-    "seen": 1793815820.9632776,
-    "ast_hash": "949ae2111056885e150d3bc53a572b02",
+    "mtime": 1794814575.0137725,
+    "seen": 1794815330.8336818,
+    "ast_hash": "783a346bc46969a5618315301792c6bf",
     "semantic_hash": ""
   },
   "public/enemy-sprites-v2/poses/48-crystal-dragon-idle.webp": {
-    "mtime": 1793517479.9731672,
-    "seen": 1793815820.9632776,
-    "ast_hash": "933a2a58f5519b681133ba2da8b477b6",
+    "mtime": 1794814575.0167718,
+    "seen": 1794815330.8336818,
+    "ast_hash": "73161b4465f3bf904de98589bb7e504c",
     "semantic_hash": ""
   },
   "public/enemy-sprites-v2/poses/49-ancient-dragon-attack.webp": {
@@ -1459,9 +1459,9 @@
     "semantic_hash": ""
   },
   "public/enemy-sprites-v2/poses/50-final-dragon-anim-atk-follow.webp": {
-    "mtime": 1793358573.4458792,
-    "seen": 1793815820.9632776,
-    "ast_hash": "0a717446be65ff8a2ff3dd52c8eba377",
+    "mtime": 1794814575.0197701,
+    "seen": 1794815330.8336818,
+    "ast_hash": "a6c3b4873d6e75561900b87e2f32f018",
     "semantic_hash": ""
   },
   "public/enemy-sprites-v2/poses/50-final-dragon-anim-atk-windup.webp": {
@@ -1771,9 +1771,9 @@
     "semantic_hash": ""
   },
   "public/enemy-sprites-v2/thumbs/48-crystal-dragon-thumb.webp": {
-    "mtime": 1793517479.9792936,
-    "seen": 1793815820.9632776,
-    "ast_hash": "c539f15502540af821ba764ebeecff59",
+    "mtime": 1794814575.030772,
+    "seen": 1794815330.8346822,
+    "ast_hash": "62fcb61822226d4c814850cfa61f2051",
     "semantic_hash": ""
   },
   "public/enemy-sprites-v2/thumbs/49-ancient-dragon-thumb.webp": {
@@ -1963,9 +1963,9 @@
     "semantic_hash": ""
   },
   "src/game/worlds.js": {
-    "mtime": 1794397290.9718077,
-    "seen": 1794397561.657687,
-    "ast_hash": "162c5f8e48b90db01b6d680eccd0ffae",
+    "mtime": 1794814575.0617726,
+    "seen": 1794815330.8326604,
+    "ast_hash": "2406c50713212a57cbbc045a21eaa186",
     "semantic_hash": ""
   },
   "public/enemy-sprites-v2/poses/05-grumpy-teddy-attack.webp": {
@@ -2410,6 +2410,48 @@
     "mtime": 1794534407.845,
     "seen": 1794534619.5091915,
     "ast_hash": "41936db1fc27168c0e8f90e242cfd01f",
+    "semantic_hash": ""
+  },
+  "docs/BalanceConfig.cs": {
+    "mtime": 1794814574.9872494,
+    "seen": 1794815330.8316438,
+    "ast_hash": "2f207971fa37b1f558571467b1316c3e",
+    "semantic_hash": ""
+  },
+  "docs/GAME_DESIGN_AND_ECONOMY_BIBLE.md": {
+    "mtime": 1794815207.3018289,
+    "seen": 1794815330.8326604,
+    "ast_hash": "0d00d87e1b226e84f0113d4ba259ea94",
+    "semantic_hash": ""
+  },
+  "docs/GAME_VALUES.md": {
+    "mtime": 1794815194.4429617,
+    "seen": 1794815330.8326604,
+    "ast_hash": "1f720d47c234f871fef5b70bda447729",
+    "semantic_hash": ""
+  },
+  "public/enemy-sprites-v2/poses/51-golden-dummy-attack.webp": {
+    "mtime": 1794814575.022768,
+    "seen": 1794815330.8336818,
+    "ast_hash": "69cd5f5de08a14edb819ef44a4bb782c",
+    "semantic_hash": ""
+  },
+  "public/enemy-sprites-v2/poses/51-golden-dummy-dizzy.webp": {
+    "mtime": 1794814575.0257728,
+    "seen": 1794815330.8336818,
+    "ast_hash": "f79f004c633f3ec7cc702ce711460e64",
+    "semantic_hash": ""
+  },
+  "public/enemy-sprites-v2/poses/51-golden-dummy-idle.webp": {
+    "mtime": 1794814575.0287702,
+    "seen": 1794815330.8336818,
+    "ast_hash": "4a06e163a69a3332c23c0d9a34e51256",
+    "semantic_hash": ""
+  },
+  "public/enemy-sprites-v2/thumbs/51-golden-dummy-thumb.webp": {
+    "mtime": 1794814575.0317712,
+    "seen": 1794815330.8346822,
+    "ast_hash": "468b498df8ed0ec8087f7aba7eaf482a",
     "semantic_hash": ""
   },
   "package-lock.json": {

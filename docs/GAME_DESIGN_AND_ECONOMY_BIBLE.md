@@ -164,7 +164,8 @@ Hard Mode uses the **exact same 50 enemies** (same names, visuals, and Group Sig
 2. **Timer Pause (Not Reset):** Stunning an enemy **pauses** their attack swing bar for the stun duration instead of resetting it back to $0.0\text{s}$.
 3. **Boss Tenacity (`bossStunDurationMult: 0.50`):** All Mini-Bosses and Chapter Bosses reduce incoming Stun/Daze durations by **$50\%$** (except `Uppercut Punch`'s fixed $3.0\text{s}$ stun).
 
-#### Group Signature Moves (Triggered Every 3rd Enemy Attack in Groups 3–10):
+#### Group Signature Moves (Triggered Every 3rd Enemy Attack in Groups 2–10):
+* **G2 Playpen Outlaws / Backyard Bunch:** *Dirt Fling* ($1.4\times$ damage + **Accuracy Loss**: $-25\%$ for normal enemies, $-40\%$ for Mischievous Monkey boss for $3.0\text{s}$).
 * **G3 Gym Rats:** *Haymaker Knockback* (resets player Combo stacks to $0$).
 * **G4 Dojo Masters:** *Iron Guard Stance* ($-30\%$ incoming slap damage for $2.0\text{s}$).
 * **G5 Alleyway Syndicate:** *Sucker Punch* ($1.4\times$ damage + **Daze**: $-15\%$ slap speed for $2.5\text{s}$).

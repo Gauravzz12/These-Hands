@@ -617,7 +617,7 @@ export const CONFIG = {
     "9": {
       "name": "BANANA SLING",
       "kind": "acc",
-      "dur": 5, "amt": 0.35, "blurb": "Accuracy -35% for 5s — your slaps can MISS!",
+      "dur": 5, "amt": 0.40, "blurb": "Accuracy -40% for 5s — your slaps can MISS!",
       "desc": "Launches slippery bananas that blur your vision"
     },
     "19": {

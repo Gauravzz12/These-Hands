@@ -249,7 +249,7 @@ Every 3rd attack by any enemy in a group triggers that group's **Stage Signature
 | Group | Enemies | Stage Theme | 3rd-Attack Group Signature Move & Debuff (Unblockable) |
 |---|---|---|---|
 | **1** | #1-#5 | Cozy Corner | **Heavy Windup:** Deals $1.35\times$ attack damage with a red warning flash (no status debuff). |
-| **2** | #6-#10 | Backyard Bunch | **Dirt Fling:** Deals $1.40\times$ damage and reduces **Player Accuracy by $-15\%$ for $3.0\text{s}$**. |
+| **2** | #6-#10 | Backyard Bunch | **Dirt Fling:** Deals $1.40\times$ damage and reduces **Player Accuracy by $-25\%$ (Normal Enemies) / $-40\%$ (Monkey Boss) for $3.0\text{s}$**. |
 | **3** | #11-#15 | Fight Club | **Ring Haymaker:** Deals $1.60\times$ damage and knocks hands back, **delaying your next slap by $0.65\text{s}$**. |
 | **4** | #16-#20 | Castle Guard | **Buckler Brace:** Deals $1.50\times$ damage and raises an armor shield that **reduces damage of your next 3 slaps by $45\%$**. |
 | **5** | #21-#25 | Graveyard Shift | **Grave Rot:** Reduces **all Player Healing by $50\%$ for $4.0\text{s}$** and inflicts $1\%$ Max HP/s decay. |
@@ -274,7 +274,7 @@ Every 3rd attack by any enemy in a group triggers that group's **Stage Signature
 
 | Boss | Move | v2.6.6 Audited Final Effect (Unblockable) |
 |---|---|---|
-| **#10 Mischievous Monkey** | BANANA SLING | Accuracy $-35\%$ for $5\text{s}$ — missed slaps lose 2 Combo stacks and pause Special charging! |
+| **#10 Mischievous Monkey** | BANANA SLING | Accuracy $-40\%$ for $5\text{s}$ — missed slaps lose 2 Combo stacks and pause Special charging! |
 | **#20 Dark Knight** | IRON BULWARK | Iron fortress — absorbs 6 slaps at **$65\%$ damage reduction** and reflects $10\%$ damage back! |
 | **#30 Shogun Warlord** | KATANA OMNISLASH | Unblockable blade strike dealing **$1.50\times$ damage** and $1.5\text{s}$ stagger! |
 | **#40 Pharaoh Revenant** | SAND CURSE & RENEWAL | Reduces slap speed by $35\%$ for $5\text{s}$! Also triggers **ETERNAL RENEWAL** ($15\%$ Max HP heal at $60\%$ & $30\%$ HP, `MaxHeals = 2`). |
