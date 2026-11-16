@@ -689,7 +689,7 @@ export const CONFIG = {
     {"id": "beadsVoid", "icon": "📿", "name": "Beads of the Void", "srcW": 1, "srcS": 4, "vals": [0.20, 0.40, 0.60], "fmt": "pct", "desc": "+{v} Soul Embers earned"},
     {"id": "mirrorPalm", "icon": "🪞", "name": "Mirror Palm", "srcW": 1, "srcS": 5, "vals": [10, 9, 8], "fmt": "count", "desc": "Skin power triggers every {v} slaps"}
   ],
-  "ads": {"interstitialEveryFights": 3, "interstitialEveryWins": 3, "interstitialFightPoints": 3.0, "interstitialMinGapSec": 75},
+  "ads": {"interstitialEveryFights": 3, "interstitialEveryWins": 3, "interstitialFightPoints": 3.0, "interstitialMinGapSec": 75, "rewardedCoinBoostSec": 600, "rewardedDmgWins": 7, "rewardedDmgMaxAttempts": 10},
   "weakSpot": {"mult": 4.5, "dur": 1.5, "durHard": 1.2, "firstAt": 2.2, "everyMin": 5, "everyMax": 8, "frenzyGain": 12, "capBase": 3, "capPerLuck": 5, "capMax": 6, "luckScale": 0.06},
   "gems": {
     "elite": 1,
@@ -1192,7 +1192,7 @@ export const CONFIG = {
       "rewarded_offline_double": true
     }
   },
-  "appVersion": "2.6.5 · Balance v2.6.5 Audited Final"
+  "appVersion": "2.6.6 · Balance v2.6.6"
 };
 
 export const GROUPS = [
