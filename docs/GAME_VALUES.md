@@ -301,44 +301,44 @@ Calibrated across all 50 enemies with strictly monotonic bounties and unblockabl
 | 8 | Cocky Goose | Backyard Bunch | 2,350 | 39 | 2.10s | 0% | ~65 | 930 | 0 | |
 | 9 | Trash Panda | Backyard Bunch | 4,200 | 48 | 2.05s | 0% | ~99 | 1,410 | 0 | ELITE |
 | 10 | Mischievous Monkey | Backyard Bunch | 8,500 | 40 | 1.95s | 0% | ~154 | 2,200 | 2 | BOSS |
-| 11 | Bodybuilder | Fight Club | 12,500 | 66 | 2.13s | 0% | ~248 | 4,510 | 0 | |
-| 12 | Luchador Wrestler | Fight Club | 18,500 | 75 | 2.10s | 0% | ~340 | 6,173 | 0 | |
-| 13 | Kickboxer | Fight Club | 27,500 | 85 | 2.08s | 0% | ~464 | 8,432 | 0 | |
-| 14 | Adult Boxer | Fight Club | 41,000 | 96 | 2.05s | 0% | ~633 | 11,518 | 0 | |
+| 11 | Bodybuilder | Fight Club | 16,250 | 66 | 2.13s | 0% | ~248 | 4,510 | 0 | |
+| 12 | Luchador Wrestler | Fight Club | 24,050 | 75 | 2.10s | 0% | ~340 | 6,173 | 0 | |
+| 13 | Kickboxer | Fight Club | 35,750 | 85 | 2.08s | 0% | ~464 | 8,432 | 0 | |
+| 14 | Adult Boxer | Fight Club | 53,300 | 96 | 2.05s | 0% | ~633 | 11,518 | 0 | |
 | 15 | Sumo Champion | Fight Club | 68,000 | 115 | 2.03s | 0% | ~941 | 17,100 | 0 | MINI-BOSS |
-| 16 | Castle Guard | Castle Guard | 92,000 | 110 | 2.00s | 0% | ~1,241 | 22,565 | 0 | |
-| 17 | Royal Executioner | Castle Guard | 125,000 | 120 | 1.98s | 0% | ~1,672 | 30,397 | 0 | |
-| 18 | Knight | Castle Guard | 165,000 | 130 | 1.95s | 0% | ~2,247 | 40,852 | 0 | |
+| 16 | Castle Guard | Castle Guard | 119,600 | 110 | 2.00s | 0% | ~1,241 | 22,565 | 0 | |
+| 17 | Royal Executioner | Castle Guard | 162,500 | 120 | 1.98s | 0% | ~1,672 | 30,397 | 0 | |
+| 18 | Knight | Castle Guard | 214,500 | 130 | 1.95s | 0% | ~2,247 | 40,852 | 0 | |
 | 19 | Barbarian | Castle Guard | 210,000 | 132 | 1.93s | 0% | ~2,639 | 47,977 | 0 | ELITE |
 | 20 | Dark Knight | Castle Guard | 335,000 | 90 | 1.84s | 0% | ~3,135 | 57,000 | 2 | BOSS |
-| 21 | Skeleton Warrior | Graveyard Shift | 420,000 | 147 | 1.88s | 5% | ~3,410 | 62,000 | 0 | |
-| 22 | Zombie | Graveyard Shift | 560,000 | 164 | 1.86s | 5% | ~4,400 | 80,000 | 0 | |
-| 23 | Armored Skeleton | Graveyard Shift | 750,000 | 185 | 1.84s | 5% | ~5,720 | 104,000 | 0 | |
-| 24 | Scarab Swarm | Graveyard Shift | 1,000,000 | 208 | 1.82s | 5% | ~7,425 | 135,000 | 0 | |
+| 21 | Skeleton Warrior | Graveyard Shift | 546,000 | 147 | 1.88s | 5% | ~3,410 | 62,000 | 0 | |
+| 22 | Zombie | Graveyard Shift | 728,000 | 164 | 1.86s | 5% | ~4,400 | 80,000 | 0 | |
+| 23 | Armored Skeleton | Graveyard Shift | 975,000 | 185 | 1.84s | 5% | ~5,720 | 104,000 | 0 | |
+| 24 | Scarab Swarm | Graveyard Shift | 1,300,000 | 208 | 1.82s | 5% | ~7,425 | 135,000 | 0 | |
 | 25 | Mummy Guard | Graveyard Shift | 1,380,000 | 244 | 1.79s | 6% | ~10,175 | 185,000 | 0 | MINI-BOSS |
-| 26 | Ninja Recruit | Shadow Dojo | 1,750,000 | 260 | 1.77s | 6% | ~13,200 | 240,000 | 0 | |
-| 27 | Shuriken Master | Shadow Dojo | 2,200,000 | 287 | 1.75s | 6% | ~17,160 | 312,000 | 0 | |
-| 28 | Samurai Duelist | Shadow Dojo | 2,750,000 | 318 | 1.73s | 6% | ~22,275 | 405,000 | 0 | |
+| 26 | Ninja Recruit | Shadow Dojo | 2,275,000 | 260 | 1.77s | 6% | ~13,200 | 240,000 | 0 | |
+| 27 | Shuriken Master | Shadow Dojo | 2,860,000 | 287 | 1.75s | 6% | ~17,160 | 312,000 | 0 | |
+| 28 | Samurai Duelist | Shadow Dojo | 3,575,000 | 318 | 1.73s | 6% | ~22,275 | 405,000 | 0 | |
 | 29 | Shadow Assassin | Shadow Dojo | 3,350,000 | 351 | 1.71s | 8% | ~28,875 | 525,000 | 0 | ELITE |
 | 30 | Shogun Warlord | Shadow Dojo | 4,100,000 | 250 | 1.63s | 8% | ~37,400 | 680,000 | 2 | BOSS |
-| 31 | Werewolf | Dark Woods | 3,220,000 | 445 | 1.67s | 10% | ~59,125 | 1,075,000 | 0 | |
-| 32 | Giant Spider | Dark Woods | 4,270,000 | 512 | 1.65s | 10% | ~75,955 | 1,381,000 | 0 | |
-| 33 | Orc Warrior | Dark Woods | 5,740,000 | 588 | 1.63s | 10% | ~97,900 | 1,780,000 | 0 | |
-| 34 | Bog Witch | Dark Woods | 7,700,000 | 676 | 1.61s | 10% | ~126,445 | 2,299,000 | 0 | |
+| 31 | Werewolf | Dark Woods | 4,186,000 | 445 | 1.67s | 10% | ~59,125 | 1,075,000 | 0 | |
+| 32 | Giant Spider | Dark Woods | 5,551,000 | 512 | 1.65s | 10% | ~75,955 | 1,381,000 | 0 | |
+| 33 | Orc Warrior | Dark Woods | 7,462,000 | 588 | 1.63s | 10% | ~97,900 | 1,780,000 | 0 | |
+| 34 | Bog Witch | Dark Woods | 10,010,000 | 676 | 1.61s | 10% | ~126,445 | 2,299,000 | 0 | |
 | 35 | Shadow Beast | Dark Woods | 10,500,000 | 790 | 1.59s | 10% | ~168,245 | 3,059,000 | 0 | MINI-BOSS |
-| 36 | Giant Serpent | Pharaoh's Tomb | 13,300,000 | 882 | 1.57s | 10% | ~214,170 | 3,894,000 | 0 | |
-| 37 | Anubis Warrior | Pharaoh's Tomb | 16,450,000 | 991 | 1.55s | 10% | ~270,270 | 4,914,000 | 0 | |
-| 38 | Sphinx Riddler | Pharaoh's Tomb | 20,300,000 | 1,109 | 1.53s | 10% | ~336,545 | 6,119,000 | 0 | |
+| 36 | Giant Serpent | Pharaoh's Tomb | 17,290,000 | 882 | 1.57s | 10% | ~214,170 | 3,894,000 | 0 | |
+| 37 | Anubis Warrior | Pharaoh's Tomb | 21,385,000 | 991 | 1.55s | 10% | ~270,270 | 4,914,000 | 0 | |
+| 38 | Sphinx Riddler | Pharaoh's Tomb | 26,390,000 | 1,109 | 1.53s | 10% | ~336,545 | 6,119,000 | 0 | |
 | 39 | Giant Scorpion | Pharaoh's Tomb | 24,500,000 | 1,243 | 1.51s | 12% | ~407,935 | 7,417,000 | 0 | ELITE |
 | 40 | Pharaoh Revenant | Pharaoh's Tomb | 29,400,000 | 1,386 | 1.44s | 12% | ~489,500 | 8,900,000 | 2 | BOSS |
-| 41 | Troll | Mountain Stronghold | 38,500,000 | 1,512 | 1.48s | 12% | ~638,000 | 11,600,000 | 0 | |
-| 42 | Ogre | Mountain Stronghold | 49,700,000 | 1,646 | 1.46s | 12% | ~770,000 | 14,000,000 | 0 | |
-| 43 | Minotaur | Mountain Stronghold | 64,400,000 | 1,798 | 1.44s | 12% | ~935,000 | 17,000,000 | 0 | |
-| 44 | Cyclops | Mountain Stronghold | 82,600,000 | 1,966 | 1.42s | 12% | ~1,133,000 | 20,600,000 | 0 | |
+| 41 | Troll | Mountain Stronghold | 50,050,000 | 1,512 | 1.48s | 12% | ~638,000 | 11,600,000 | 0 | |
+| 42 | Ogre | Mountain Stronghold | 64,610,000 | 1,646 | 1.46s | 12% | ~770,000 | 14,000,000 | 0 | |
+| 43 | Minotaur | Mountain Stronghold | 83,720,000 | 1,798 | 1.44s | 12% | ~935,000 | 17,000,000 | 0 | |
+| 44 | Cyclops | Mountain Stronghold | 107,380,000 | 1,966 | 1.42s | 12% | ~1,133,000 | 20,600,000 | 0 | |
 | 45 | Stone Golem | Mountain Stronghold | 106,400,000 | 2,167 | 1.40s | 12% | ~1,408,000 | 25,600,000 | 0 | MINI-BOSS |
-| 46 | Elder Dragon | Dragon Lair | 136,500,000 | 2,335 | 1.40s | 12% | ~1,672,000 | 30,400,000 | 0 | |
-| 47 | Dragon Champion | Dragon Lair | 175,000,000 | 2,520 | 1.40s | 12% | ~1,980,000 | 36,000,000 | 0 | |
-| 48 | Crystal Dragon | Dragon Lair | 220,500,000 | 2,722 | 1.40s | 12% | ~2,332,000 | 42,400,000 | 0 | |
+| 46 | Elder Dragon | Dragon Lair | 177,450,000 | 2,335 | 1.40s | 12% | ~1,672,000 | 30,400,000 | 0 | |
+| 47 | Dragon Champion | Dragon Lair | 227,500,000 | 2,520 | 1.40s | 12% | ~1,980,000 | 36,000,000 | 0 | |
+| 48 | Crystal Dragon | Dragon Lair | 286,650,000 | 2,722 | 1.40s | 12% | ~2,332,000 | 42,400,000 | 0 | |
 | 49 | Ancient Dragon | Dragon Lair | 276,500,000 | 2,940 | 1.40s | 14% | ~2,706,000 | 49,200,000 | 0 | ELITE |
 | 50 | Dragon Lord | Dragon Lair | 343,000,000 | 2,950 | 1.40s | 15% | ~3,135,000 | 57,000,000 | 2 | FINAL BOSS |
 
