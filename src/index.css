@@ -5204,3 +5204,5 @@ margin-top: 7px;
 .btc-trow strong{font-weight:900;color:#b97e08;font-size:10px}
 .btc-trow.next{background:#fff8e1}
 .btc-trow.lock{opacity:.55}
+/* Fight Report (win screens): the defeated enemy becomes a small greyscale mugshot */
+#endOverlay.win #endSprite{filter:grayscale(1);opacity:.78;width:56px!important;height:56px!important}

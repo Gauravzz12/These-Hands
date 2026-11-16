@@ -2023,7 +2023,7 @@ if(FM2&&FM2.type==="gauntlet"){
     }).join("");
   }
   if(win){
-    endHeadEl.textContent="⚔ GAUNTLET CLEARED!";
+    endHeadEl.textContent="FIGHT REPORT";
     endSubEl.textContent="All 3 down back-to-back — the "+GROUPS[FM2.group].name+" trio is beaten!";
     const v2=G.lastVictory||{};
     if(v2.unlockNext)endSubEl.textContent+=" "+v2.unlockNext+" is now UNLOCKED!";
@@ -2057,8 +2057,8 @@ if(FM2&&FM2.type==="gauntlet"){
   if(e.spr&&e.spr.thumb){endSpriteEl.src=e.spr.thumb;endSpriteEl.alt=e.name;const ps=Math.round(92*Math.min(e.scale||1,1.6));endSpriteEl.style.width=ps+"px";endSpriteEl.style.height=ps+"px"}
   if(trioEl)trioEl.style.display="none";
   if(win){
-    endHeadEl.textContent=e.worldBoss?"\uD83D\uDC51 WORLD BOSS DEFEATED!":e.miniBoss?"\u2B50 MINI BOSS DOWN!":"KNOCKOUT!";
-    endSubEl.textContent=e.name+" is down.";
+    endHeadEl.textContent="FIGHT REPORT";
+    endSubEl.textContent=(e.worldBoss?"\uD83D\uDC51 ":e.miniBoss?"\u2B50 ":"")+e.name+" \u2014 DEFEATED \u2713";
     const vW=G.lastVictory||{};
     const wrows=[];const wnotes=[];
     if(vW.total)wrows.push(["\u{1FA99} Coins","+"+fmtNum(vW.total),1]);
@@ -2100,8 +2100,8 @@ if(FM2&&FM2.type==="gauntlet"){
   const stageHasTrio = true;
   const stageCleared = groupComplete(g);
   if(win && isGroupEnd){
-    endHeadEl.textContent=e.boss?"👑 BOSS DEFEATED!":e.elite?"⭐ ELITE KNOCKED OUT!":"KNOCKOUT!";
-    endSubEl.textContent=e.name+" is down.";
+    endHeadEl.textContent="FIGHT REPORT";
+    endSubEl.textContent=e.name+" \u2014 DEFEATED \u2713";
     if(endTrioBtnEl){
       if(stageHasTrio && stageCleared){
         endTrioBtnEl.style.display="";
@@ -2129,8 +2129,8 @@ if(FM2&&FM2.type==="gauntlet"){
       endHeadEl.textContent="🐉 DRAGON ALMIGHTY SLAIN!";
       endSubEl.textContent="Dragon Mastery Rank "+G.dragonMastery+" \u2014 attribute caps +"+(G.dragonMastery*10)+", damage & HP +"+(G.dragonMastery*5)+"%. Hard Mode is open!";
     } else {
-      endHeadEl.textContent=e.boss?"👑 BOSS DEFEATED!":e.elite?"⭐ ELITE KNOCKED OUT!":"KNOCKOUT!";
-      endSubEl.textContent=e.name+" is down.";
+      endHeadEl.textContent="FIGHT REPORT";
+      endSubEl.textContent=e.name+" \u2014 DEFEATED \u2713";
     }
     if(endTrioBtnEl)endTrioBtnEl.style.display="none";
     nextBtnEl.style.display="";
@@ -2174,7 +2174,7 @@ if(FM2&&FM2.type==="gauntlet"){
     }
   }
 }
-const FM3=G.fightMode;if(FM3&&FM3.type==="bossrush"){nextBtnEl.style.display="none";if(win){endHeadEl.textContent="\uD83D\uDC51 BOSS RUSH CLEARED!";const v3=G.lastVictory||{};endSubEl.textContent="All "+FM3.queue.length+" bosses down back-to-back! Earned "+fmtNum((FM3.earned||0)+(v3.rushBonus||0))+" coins this run.";if(v3.rushBonus){const rrows=[["\u{1F590} Strike coins","+"+fmtNum(FM3.earned||0)],["\u{1F451} Rush completion bonus","+"+fmtNum(v3.rushBonus)]];if(v3.rushGem)rrows.push(["\u{1F48E} Completion gems","+"+v3.rushGem]);if(v3.rushEmbers)rrows.push(["\u{1F525} Dragon Lord bonus","+"+v3.rushEmbers]);rrows.push(["\u{1FA99} TOTAL COINS","+"+fmtNum((FM3.earned||0)+v3.rushBonus),1]);endUnlockEl.innerHTML=rewardCardHtml(rrows);endUnlockEl.classList.add("show")}}else{endHeadEl.textContent="\uD83D\uDC51 BOSS RUSH ENDED";endSubEl.textContent="You fell on boss "+(FM3.step+1)+" of "+FM3.queue.length+". Strike coins and boss bonuses are kept \u2014 upgrade and run it again."}}if(FM3&&FM3.type==="endless"){nextBtnEl.style.display="none";endHeadEl.textContent="\uD83C\uDF0A SURVIVAL ENDED \u2014 WAVE "+(FM3.wave||1);endSubEl.textContent="You cleared "+((FM3.wave||1)-1)+" waves and earned "+fmtNum((FM3.earned||0)+(G.fightHitCoins||0))+" coins this run. Best: WAVE "+(G.endlessBest||0)+"."}
+const FM3=G.fightMode;if(FM3&&FM3.type==="bossrush"){nextBtnEl.style.display="none";if(win){endHeadEl.textContent="FIGHT REPORT";const v3=G.lastVictory||{};endSubEl.textContent="All "+FM3.queue.length+" bosses down back-to-back! Earned "+fmtNum((FM3.earned||0)+(v3.rushBonus||0))+" coins this run.";if(v3.rushBonus){const rrows=[["\u{1F590} Strike coins","+"+fmtNum(FM3.earned||0)],["\u{1F451} Rush completion bonus","+"+fmtNum(v3.rushBonus)]];if(v3.rushGem)rrows.push(["\u{1F48E} Completion gems","+"+v3.rushGem]);if(v3.rushEmbers)rrows.push(["\u{1F525} Dragon Lord bonus","+"+v3.rushEmbers]);rrows.push(["\u{1FA99} TOTAL COINS","+"+fmtNum((FM3.earned||0)+v3.rushBonus),1]);endUnlockEl.innerHTML=rewardCardHtml(rrows);endUnlockEl.classList.add("show")}}else{endHeadEl.textContent="\uD83D\uDC51 BOSS RUSH ENDED";endSubEl.textContent="You fell on boss "+(FM3.step+1)+" of "+FM3.queue.length+". Strike coins and boss bonuses are kept \u2014 upgrade and run it again."}}if(FM3&&FM3.type==="endless"){nextBtnEl.style.display="none";endHeadEl.textContent="\uD83C\uDF0A SURVIVAL ENDED \u2014 WAVE "+(FM3.wave||1);endSubEl.textContent="You cleared "+((FM3.wave||1)-1)+" waves and earned "+fmtNum((FM3.earned||0)+(G.fightHitCoins||0))+" coins this run. Best: WAVE "+(G.endlessBest||0)+"."}
   const vNorm=G.lastVictory;
   if(win&&vNorm&&!FM2&&!(G.enemy&&G.enemy.world!=null)){
     const rows=[];const notes=[];
@@ -2246,6 +2246,7 @@ const FM3=G.fightMode;if(FM3&&FM3.type==="bossrush"){nextBtnEl.style.display="no
     }
   }
   if(endStatsEl){
+    endStatsEl.style.display="";
     let statsHtml="";
     if(win){
       statsHtml+='<div class="es"><span>FIGHT TIME</span><b>'+fmtTime(G.fightTime)+'</b></div>';
@@ -2258,6 +2259,17 @@ const FM3=G.fightMode;if(FM3&&FM3.type==="bossrush"){nextBtnEl.style.display="no
       statsHtml+='<div class="es"><span>DAMAGE DEALT</span><b>'+fmtNum(Math.max(0,Math.floor(e.maxHp-remHp)))+'</b></div>';
     }
     endStatsEl.innerHTML=statsHtml;
+  }
+  // Fight Report: on a win, the fight stats move INTO the reward card; the separate tiles hide.
+  if(win&&endUnlockEl){
+    const card=endUnlockEl.querySelector(".rw-card");
+    if(card){
+      const mkRow=(l,v)=>{const d=document.createElement("div");d.className="rw-row";const a1=document.createElement("span");a1.className="rw-lbl";a1.textContent=l;const b1=document.createElement("span");b1.className="rw-val";b1.textContent=v;d.appendChild(a1);d.appendChild(b1);return d};
+      const r1=mkRow("\u23F1 Fight time",fmtTime(G.fightTime)),r2=mkRow("\u{1F525} Max combo","x"+Math.max(1,G.bestCombo));
+      const anchorRow=card.querySelector(".rw-row.total")||card.querySelector(".rw-note");
+      if(anchorRow){card.insertBefore(r1,anchorRow);card.insertBefore(r2,anchorRow)}else{card.appendChild(r1);card.appendChild(r2)}
+      if(endStatsEl)endStatsEl.style.display="none";
+    }
   }
   const triggerAutoAdvance=()=>{
     if(win&&G.autoAdvance&&nextBtnEl&&nextBtnEl.style.display!=="none"){
@@ -2280,6 +2292,7 @@ const FM3=G.fightMode;if(FM3&&FM3.type==="bossrush"){nextBtnEl.style.display="no
     triggerAutoAdvance();
   }
 }
+
 function hideEndOverlay(){
   if(autoAdvanceTimer){clearTimeout(autoAdvanceTimer);autoAdvanceTimer=null;}
   endOverlayEl.className="";
