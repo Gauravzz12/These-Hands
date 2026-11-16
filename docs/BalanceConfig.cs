@@ -134,7 +134,7 @@ namespace IdleSlapper.Config
 
     public static class BalanceConfig
     {
-        public const string Version = "2.6.6";
+        public const string Version = "2.6.6-AUDITED";
         public const int MaxPlayerLevel = 50;
         public const int MaxEndlessMasteryBonusLevels = 3;
         public const double BaseSlapDamage = 10.0;
@@ -170,9 +170,16 @@ namespace IdleSlapper.Config
         public const int MissComboStackPenalty = 2;
         public const float MissSpecialChargePauseSec = 1.5f;
 
-        public const float ParryRingDurationSec = 0.425f;
-        public const float ParryGoldWindowSec = 0.074f;
-        public const float BossSignatureParryMitigation = 0.50f;
+        // v2.6.6 Audited Final: parry rings REPLACED by Active Brace; Signatures are 100% Unblockable.
+        public const float BraceStanceSec = 1.00f;
+        public const float BraceCooldownSec = 5.00f;
+        public const float BraceCounterSlapMult = 1.50f;
+        public const float IronStance1CooldownSec = 4.30f;
+        public const float IronStance2CooldownSec = 3.60f;
+        public const float IronStance3CooldownSec = 3.00f;
+        public const bool SignaturesAreUnblockable = true;
+        public const float SignatureWindupSec = 0.75f;
+        public const float BraceInterruptCooldownRefund = 0.75f;
 
         public const float BaseStunChance = 0.05f;
         public const float MaxStunChance = 0.25f;
@@ -261,7 +268,7 @@ namespace IdleSlapper.Config
         public const float TrioGauntletSlapCoinMult = 0.50f;
         public const float TrioGauntletCompletionMult = 1.35f;
         public const float TrioGauntletBaseBreatherHeal = 0.05f;
-        public const float TrioGauntletParryHealPerHit = 0.03f;
+        public const float TrioGauntletParryHealPerHit = 0.04f; // Clean Defense: per Normal Attack Braced (Deflect) or Blocked (Guard)
         public const float TrioGauntletMaxParryHeal = 0.12f;
         public const float TrioGauntletFinisherHeal = 0.05f;
         public const float TrioGauntletFinisherCdRefundSec = 3.0f;
@@ -492,7 +499,7 @@ namespace IdleSlapper.Config
             new EnemyConfig { Id=7 , Name="Mime",                 GroupIndex=2 , World=WorldId.MainRoster, MaxHp=1450       , AttackDamage=33   , AttackInterval=2.15f, Evasion=0.00f, BaseBounty=645       , Tag=EnemyTag.Normal,    MaxHeals=0, IsColossus=false },
             new EnemyConfig { Id=8 , Name="Cocky Goose",          GroupIndex=2 , World=WorldId.MainRoster, MaxHp=2350       , AttackDamage=39   , AttackInterval=2.10f, Evasion=0.00f, BaseBounty=930       , Tag=EnemyTag.Normal,    MaxHeals=0, IsColossus=false },
             new EnemyConfig { Id=9 , Name="Trash Panda",          GroupIndex=2 , World=WorldId.MainRoster, MaxHp=4200       , AttackDamage=48   , AttackInterval=2.05f, Evasion=0.00f, BaseBounty=1410      , Tag=EnemyTag.Elite,     MaxHeals=0, IsColossus=false },
-            new EnemyConfig { Id=10, Name="Mischievous Monkey",   GroupIndex=2 , World=WorldId.MainRoster, MaxHp=8500       , AttackDamage=58   , AttackInterval=1.95f, Evasion=0.00f, BaseBounty=2200      , Tag=EnemyTag.Boss,      MaxHeals=2, IsColossus=false },
+            new EnemyConfig { Id=10, Name="Mischievous Monkey",   GroupIndex=2 , World=WorldId.MainRoster, MaxHp=8500       , AttackDamage=40   , AttackInterval=1.95f, Evasion=0.00f, BaseBounty=2200      , Tag=EnemyTag.Boss,      MaxHeals=2, IsColossus=false },
             // Group 3: Fight Club (Ch. 2 -> #20 Bounty 57K, 26.0 Dark Knight Kills)
             new EnemyConfig { Id=11, Name="Bodybuilder",          GroupIndex=3 , World=WorldId.MainRoster, MaxHp=12500      , AttackDamage=66   , AttackInterval=2.13f, Evasion=0.00f, BaseBounty=4510      , Tag=EnemyTag.Normal,    MaxHeals=0, IsColossus=false },
             new EnemyConfig { Id=12, Name="Luchador Wrestler",    GroupIndex=3 , World=WorldId.MainRoster, MaxHp=18500      , AttackDamage=75   , AttackInterval=2.10f, Evasion=0.00f, BaseBounty=6173      , Tag=EnemyTag.Normal,    MaxHeals=0, IsColossus=false },
@@ -504,7 +511,7 @@ namespace IdleSlapper.Config
             new EnemyConfig { Id=17, Name="Royal Executioner",    GroupIndex=4 , World=WorldId.MainRoster, MaxHp=125000     , AttackDamage=120  , AttackInterval=1.98f, Evasion=0.00f, BaseBounty=30397     , Tag=EnemyTag.Normal,    MaxHeals=0, IsColossus=false },
             new EnemyConfig { Id=18, Name="Knight",               GroupIndex=4 , World=WorldId.MainRoster, MaxHp=165000     , AttackDamage=130  , AttackInterval=1.95f, Evasion=0.00f, BaseBounty=40852     , Tag=EnemyTag.Normal,    MaxHeals=0, IsColossus=false },
             new EnemyConfig { Id=19, Name="Barbarian",            GroupIndex=4 , World=WorldId.MainRoster, MaxHp=210000     , AttackDamage=132  , AttackInterval=1.93f, Evasion=0.00f, BaseBounty=47977     , Tag=EnemyTag.Elite,     MaxHeals=0, IsColossus=false },
-            new EnemyConfig { Id=20, Name="Dark Knight",          GroupIndex=4 , World=WorldId.MainRoster, MaxHp=335000     , AttackDamage=135  , AttackInterval=1.84f, Evasion=0.00f, BaseBounty=57000     , Tag=EnemyTag.Boss,      MaxHeals=2, IsColossus=false },
+            new EnemyConfig { Id=20, Name="Dark Knight",          GroupIndex=4 , World=WorldId.MainRoster, MaxHp=335000     , AttackDamage=90  , AttackInterval=1.84f, Evasion=0.00f, BaseBounty=57000     , Tag=EnemyTag.Boss,      MaxHeals=2, IsColossus=false },
             // Group 5: Graveyard Shift (Ch. 3 -> #30 Bounty 680K, 26.1 Shogun Kills)
             new EnemyConfig { Id=21, Name="Skeleton Warrior",     GroupIndex=5 , World=WorldId.MainRoster, MaxHp=420000     , AttackDamage=147  , AttackInterval=1.88f, Evasion=0.05f, BaseBounty=62000     , Tag=EnemyTag.Normal,    MaxHeals=0, IsColossus=false },
             new EnemyConfig { Id=22, Name="Zombie",               GroupIndex=5 , World=WorldId.MainRoster, MaxHp=560000     , AttackDamage=164  , AttackInterval=1.86f, Evasion=0.05f, BaseBounty=80000     , Tag=EnemyTag.Normal,    MaxHeals=0, IsColossus=false },
@@ -516,7 +523,7 @@ namespace IdleSlapper.Config
             new EnemyConfig { Id=27, Name="Shuriken Master",      GroupIndex=6 , World=WorldId.MainRoster, MaxHp=2200000    , AttackDamage=287  , AttackInterval=1.75f, Evasion=0.06f, BaseBounty=312000    , Tag=EnemyTag.Normal,    MaxHeals=0, IsColossus=false },
             new EnemyConfig { Id=28, Name="Samurai Duelist",      GroupIndex=6 , World=WorldId.MainRoster, MaxHp=2750000    , AttackDamage=318  , AttackInterval=1.73f, Evasion=0.06f, BaseBounty=405000    , Tag=EnemyTag.Normal,    MaxHeals=0, IsColossus=false },
             new EnemyConfig { Id=29, Name="Shadow Assassin",      GroupIndex=6 , World=WorldId.MainRoster, MaxHp=3350000    , AttackDamage=351  , AttackInterval=1.71f, Evasion=0.08f, BaseBounty=525000    , Tag=EnemyTag.Elite,     MaxHeals=0, IsColossus=false },
-            new EnemyConfig { Id=30, Name="Shogun Warlord",       GroupIndex=6 , World=WorldId.MainRoster, MaxHp=4100000    , AttackDamage=386  , AttackInterval=1.63f, Evasion=0.08f, BaseBounty=680000    , Tag=EnemyTag.Boss,      MaxHeals=2, IsColossus=false },
+            new EnemyConfig { Id=30, Name="Shogun Warlord",       GroupIndex=6 , World=WorldId.MainRoster, MaxHp=4100000    , AttackDamage=250  , AttackInterval=1.63f, Evasion=0.08f, BaseBounty=680000    , Tag=EnemyTag.Boss,      MaxHeals=2, IsColossus=false },
             // Group 7: Dark Woods (Ch. 4 -> #40 Bounty 8.9M, 26.0 Pharaoh Kills)
             new EnemyConfig { Id=31, Name="Werewolf",             GroupIndex=7 , World=WorldId.MainRoster, MaxHp=3220000    , AttackDamage=445  , AttackInterval=1.67f, Evasion=0.10f, BaseBounty=1075000   , Tag=EnemyTag.Normal,    MaxHeals=0, IsColossus=false },
             new EnemyConfig { Id=32, Name="Giant Spider",         GroupIndex=7 , World=WorldId.MainRoster, MaxHp=4270000    , AttackDamage=512  , AttackInterval=1.65f, Evasion=0.10f, BaseBounty=1381000   , Tag=EnemyTag.Normal,    MaxHeals=0, IsColossus=false },
@@ -540,7 +547,7 @@ namespace IdleSlapper.Config
             new EnemyConfig { Id=47, Name="Dragon Champion",      GroupIndex=10, World=WorldId.MainRoster, MaxHp=175000000  , AttackDamage=2520 , AttackInterval=1.40f, Evasion=0.12f, BaseBounty=36000000  , Tag=EnemyTag.Normal,    MaxHeals=0, IsColossus=true  },
             new EnemyConfig { Id=48, Name="Crystal Dragon",       GroupIndex=10, World=WorldId.MainRoster, MaxHp=220500000  , AttackDamage=2722 , AttackInterval=1.40f, Evasion=0.12f, BaseBounty=42400000  , Tag=EnemyTag.Normal,    MaxHeals=0, IsColossus=true  },
             new EnemyConfig { Id=49, Name="Ancient Dragon",       GroupIndex=10, World=WorldId.MainRoster, MaxHp=276500000  , AttackDamage=2940 , AttackInterval=1.40f, Evasion=0.14f, BaseBounty=49200000  , Tag=EnemyTag.Elite,     MaxHeals=0, IsColossus=true  },
-            new EnemyConfig { Id=50, Name="Dragon Lord",          GroupIndex=10, World=WorldId.MainRoster, MaxHp=343000000  , AttackDamage=3192 , AttackInterval=1.40f, Evasion=0.15f, BaseBounty=57000000  , Tag=EnemyTag.FinalBoss, MaxHeals=2, IsColossus=true  }
+            new EnemyConfig { Id=50, Name="Dragon Lord",          GroupIndex=10, World=WorldId.MainRoster, MaxHp=343000000  , AttackDamage=2950 , AttackInterval=1.40f, Evasion=0.15f, BaseBounty=57000000  , Tag=EnemyTag.FinalBoss, MaxHeals=2, IsColossus=true  }
         };
 
         // ====================================================================
@@ -575,7 +582,7 @@ namespace IdleSlapper.Config
             new SkillConfig { Id="twin_mastery",        Name="Twin Mastery",        Tier=2, CoinCost=3200,      PrerequisiteSkillId="second_hand",         RequiredBossId=0,  Trigger=SkillActivationTrigger.AlwaysOn,            PrimaryEffectType=SkillEffectType.SpeedMult,            ValuePrimary=0.90f,  SecondaryEffectType=SkillEffectType.ComboChargeBonus,       ValueSecondary=0.10f,   ProcChance=1.00f, ProcIntervalSlaps=0,  StateHpThreshold=0f },
             new SkillConfig { Id="on_target",           Name="On Target",           Tier=2, CoinCost=6500,      PrerequisiteSkillId="twin_mastery",        RequiredBossId=0,  Trigger=SkillActivationTrigger.AlwaysOn,            PrimaryEffectType=SkillEffectType.ComboPersistOnSwitch, ValuePrimary=1.0f,   SecondaryEffectType=SkillEffectType.None,                   ValueSecondary=0f,      ProcChance=1.00f, ProcIntervalSlaps=0,  StateHpThreshold=0f },
             new SkillConfig { Id="quick_reflexes",      Name="Quick Reflexes",      Tier=2, CoinCost=15000,     PrerequisiteSkillId="twin_mastery",        RequiredBossId=10, Trigger=SkillActivationTrigger.AlwaysOn,            PrimaryEffectType=SkillEffectType.SpeedMult,            ValuePrimary=0.90f,  SecondaryEffectType=SkillEffectType.None,                   ValueSecondary=0f,      ProcChance=1.00f, ProcIntervalSlaps=0,  StateHpThreshold=0f },
-            new SkillConfig { Id="deflect",             Name="Deflect",             Tier=2, CoinCost=22000,     PrerequisiteSkillId="basic_slap",          RequiredBossId=0,  Trigger=SkillActivationTrigger.AlwaysOn,            PrimaryEffectType=SkillEffectType.ParryUnlock,          ValuePrimary=1.00f,  SecondaryEffectType=SkillEffectType.BossSigParryMitigation, ValueSecondary=0.50f,   ProcChance=1.00f, ProcIntervalSlaps=0,  StateHpThreshold=0f },
+            new SkillConfig { Id="deflect",             Name="Deflect",             Tier=2, CoinCost=22000,     PrerequisiteSkillId="basic_slap",          RequiredBossId=0,  Trigger=SkillActivationTrigger.AlwaysOn,            PrimaryEffectType=SkillEffectType.ParryUnlock,          ValuePrimary=1.00f,  SecondaryEffectType=SkillEffectType.None,                   ValueSecondary=0f,     // Active Brace unlock; signatures now pierce (SignaturesAreUnblockable)   ProcChance=1.00f, ProcIntervalSlaps=0,  StateHpThreshold=0f },
             new SkillConfig { Id="critical_slaps",      Name="Critical Slaps",      Tier=2, CoinCost=35000,     PrerequisiteSkillId="stronger_hands",      RequiredBossId=0,  Trigger=SkillActivationTrigger.AlwaysOn,            PrimaryEffectType=SkillEffectType.CritChance,           ValuePrimary=0.05f,  SecondaryEffectType=SkillEffectType.None,                   ValueSecondary=0f,      ProcChance=1.00f, ProcIntervalSlaps=0,  StateHpThreshold=0f },
             new SkillConfig { Id="seismic_slam",        Name="Seismic Slam",        Tier=2, CoinCost=55000,     PrerequisiteSkillId="stamina_training",    RequiredBossId=10, Trigger=SkillActivationTrigger.ProcEveryNSlaps,     PrimaryEffectType=SkillEffectType.ProcHitDamageMult,    ValuePrimary=3.00f,  SecondaryEffectType=SkillEffectType.Passive,                ValueSecondary=0.80f,   ProcChance=1.00f, ProcIntervalSlaps=5,  StateHpThreshold=0f },
             new SkillConfig { Id="heavy_slap",          Name="Heavy Slap",          Tier=2, CoinCost=90000,     PrerequisiteSkillId="stronger_hands",      RequiredBossId=10, Trigger=SkillActivationTrigger.ProcOnHit,           PrimaryEffectType=SkillEffectType.ProcHitDamageMult,    ValuePrimary=2.50f,  SecondaryEffectType=SkillEffectType.None,                   ValueSecondary=0f,      ProcChance=0.12f, ProcIntervalSlaps=0,  StateHpThreshold=0f },
@@ -594,7 +601,10 @@ namespace IdleSlapper.Config
             new SkillConfig { Id="colossus_bane",       Name="Colossus Bane",       Tier=4, CoinCost=600000000, PrerequisiteSkillId="boss_hunter",         RequiredBossId=35, Trigger=SkillActivationTrigger.AlwaysOn,            PrimaryEffectType=SkillEffectType.ColossusDamage,       ValuePrimary=0.35f,  SecondaryEffectType=SkillEffectType.None,                   ValueSecondary=0f,      ProcChance=1.00f, ProcIntervalSlaps=0,  StateHpThreshold=0f },
             new SkillConfig { Id="rapid_barrage",       Name="Rapid Barrage",       Tier=5, CoinCost=1200000000,PrerequisiteSkillId="dual_hand_technique", RequiredBossId=40, Trigger=SkillActivationTrigger.ProcEveryNSlaps,     PrimaryEffectType=SkillEffectType.ProcHitDamageMult,    ValuePrimary=2.20f,  SecondaryEffectType=SkillEffectType.Passive,                ValueSecondary=0.40f,   ProcChance=1.00f, ProcIntervalSlaps=6,  StateHpThreshold=0f },
             new SkillConfig { Id="bulwark_guard",       Name="Bulwark Guard",       Tier=5, CoinCost=2400000000,PrerequisiteSkillId="kinetic_barrier",     RequiredBossId=40, Trigger=SkillActivationTrigger.AlwaysOn,            PrimaryEffectType=SkillEffectType.ShieldReflectPct,     ValuePrimary=0.50f,  SecondaryEffectType=SkillEffectType.None,                   ValueSecondary=0f,      ProcChance=1.00f, ProcIntervalSlaps=0,  StateHpThreshold=0f },
-            new SkillConfig { Id="godhand_strike",      Name="Godhand Strike",      Tier=5, CoinCost=5000000000,PrerequisiteSkillId="colossus_bane",       RequiredBossId=45, Trigger=SkillActivationTrigger.ProcEveryNSlaps,     PrimaryEffectType=SkillEffectType.ProcHitDamageMult,    ValuePrimary=8.00f,  SecondaryEffectType=SkillEffectType.None,                   ValueSecondary=0f,      ProcChance=1.00f, ProcIntervalSlaps=20, StateHpThreshold=0f }
+            new SkillConfig { Id="godhand_strike",      Name="Godhand Strike",      Tier=5, CoinCost=5000000000,PrerequisiteSkillId="colossus_bane",       RequiredBossId=45, Trigger=SkillActivationTrigger.ProcEveryNSlaps,     PrimaryEffectType=SkillEffectType.ProcHitDamageMult,    ValuePrimary=8.00f,  SecondaryEffectType=SkillEffectType.None,                   ValueSecondary=0f,      ProcChance=1.00f, ProcIntervalSlaps=20, StateHpThreshold=0f },
+            new SkillConfig { Id="iron_stance_1",       Name="Iron Stance I",       Tier=4, CoinCost=120000000, PrerequisiteSkillId="deflect",             RequiredBossId=30, Trigger=SkillActivationTrigger.AlwaysOn,            PrimaryEffectType=SkillEffectType.Passive,              ValuePrimary=-0.70f, SecondaryEffectType=SkillEffectType.None,                   ValueSecondary=0f,      ProcChance=1.00f, ProcIntervalSlaps=0,  StateHpThreshold=0f }, // Brace CD 5.00s -> 4.30s
+            new SkillConfig { Id="iron_stance_2",       Name="Iron Stance II",      Tier=5, CoinCost=1500000000,PrerequisiteSkillId="iron_stance_1",       RequiredBossId=40, Trigger=SkillActivationTrigger.AlwaysOn,            PrimaryEffectType=SkillEffectType.Passive,              ValuePrimary=-0.70f, SecondaryEffectType=SkillEffectType.None,                   ValueSecondary=0f,      ProcChance=1.00f, ProcIntervalSlaps=0,  StateHpThreshold=0f }, // Brace CD 4.30s -> 3.60s
+            new SkillConfig { Id="iron_stance_3",       Name="Iron Stance III",     Tier=5, CoinCost=12000000000,PrerequisiteSkillId="iron_stance_2",      RequiredBossId=50, Trigger=SkillActivationTrigger.AlwaysOn,            PrimaryEffectType=SkillEffectType.Passive,              ValuePrimary=-0.60f, SecondaryEffectType=SkillEffectType.None,                   ValueSecondary=0f,      ProcChance=1.00f, ProcIntervalSlaps=0,  StateHpThreshold=0f }  // Brace CD 3.60s -> 3.00s
         };
 
         public static readonly HandSkinConfig[] HandSkins = new[]

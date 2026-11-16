@@ -5165,6 +5165,7 @@ margin-top: 7px;
 .hub-card.feature.gold{background:#fff3cf}
 .hub-card.feature.red{background:#ffe9e4}
 .hub-card.feature.locked .hc-img{filter:grayscale(1);opacity:.55}
+#hubGauntletCard{position:relative;overflow:visible}
 .hub-mode-badge{position:absolute;top:-10px;right:10px;font-family:Bungee,cursive;font-size:10px;letter-spacing:.04em;background:#f2b01e;color:#221407;border:2.5px solid #221407;border-radius:999px;padding:3px 9px;box-shadow:2px 2px 0 #221407;transform:rotate(2deg)}
 .hub-card.feature.red .hub-mode-badge{background:#fb7185;color:#fff}
 .hub-card.feature.locked .hub-mode-badge{background:#d6cbb8;color:#6b5b3e}

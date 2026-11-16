@@ -183,6 +183,7 @@ export default function App() {
             </button>
 
             <button className="hub-card" id="hubGauntletCard" type="button">
+              <span className="hub-mode-badge" id="hubGauntletBadge" style={{'display': 'none'}}>✦ NEW TRIO</span>
               <span className="hc-ico red"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M4 4l7.2 7.2-1.4 1.4L2.6 5.4 4 4zm16 0 1.4 1.4-7.2 7.2-1.4-1.4L20 4zM12.9 13.5l6.6 6.6-1.4 1.4-6.6-6.6 1.4-1.4zM11.1 13.5l1.4 1.4-6.6 6.6-1.4-1.4 6.6-6.6z" fill="currentColor"/></svg></span>
               <span className="hc-main">
                 <span className="hc-title">TRIO GAUNTLET</span>
@@ -658,7 +659,6 @@ export default function App() {
             </div>
           </div>
           <div className="end-btns">
-            <button className="ctl-btn end-trio" id="endTrioBtn" style={{'display': 'none'}}>⚔ CHALLENGE TRIO</button>
             <button className="ctl-btn end-next" id="nextBtn">NEXT VICTIM →</button>
             <button className="ctl-btn end-again" id="againBtn">FIGHT AGAIN</button>
             <button className="ctl-btn end-choose" id="chooseBtn">CHOOSE ENEMY</button>
