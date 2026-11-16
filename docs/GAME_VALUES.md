@@ -17,9 +17,9 @@ You fight enemies in order (#1 $\to$ #50). Every 5 enemies form a **group**; eve
 | Game start | Enemies #1-#5, Player Lv cap 10, Power cap 12, Attributes, Shop |
 | Beat #5 Grumpy Teddy | **Second Hand** skill — claim it FREE from the pop-up card (reduces base slap interval from $1.500\text{s} \to 1.275\text{s}$) |
 | Beat #5 | 7-day Login Chest starts appearing |
-| 5 total defeats | **Reflex Slap-Off** (2 charges, 30-min recharge per charge) |
+| Beat #10 Monkey + own **Deflect** (22,000c) & **Precision Instinct** (140,000c) | **Reflex Slap-Off** (2 charges, 30-min recharge per charge) |
 | 10 total defeats | **Golden Dummy Blitz** (2 charges, 45-min recharge per charge) |
-| Clear any group of 5 | **Trio Gauntlet** for that group (shared 30-min global cooldown; no Turf Tribute) + One-Time **Group Reward Chest** |
+| Clear any group of 5 | One-Time **Group Reward Chest** · **Trio Gauntlet** lives on the hub and always offers your **current stage's trio** (30-min cooldown; no Turf Tribute) |
 | Beat #10 Monkey | Chapter 2: Lv cap 18, Power cap 24 · **Double Slap** Special Move · **Endless Mode** (45-min cooldown) · **Daily Quests** (refresh at midnight) |
 | Beat #20 Dark Knight | Chapter 3: Lv cap 26, Power cap 36 · **Guard** Special Move · **Boss Rush** (60-min cooldown, includes Cornerman Drafts) |
 | Beat #30 Shogun | Chapter 4: Lv cap 33, Power cap 48 · **Special Move Mastery** ($-3\text{s}$ cooldown on Double Slap & Guard) |
@@ -399,8 +399,8 @@ Bought with coins from the skill tree. **Speed Skills are mandatory to lower you
 ---
 ## 11. Game Modes & Timings (v2.6.5 Audited Final)
 
-### 11.1 Trio Gauntlet — True Endurance Mode (Unlock: Clear Any Group of 5)
-* **Format:** Fight the group's 3 toughest enemies (#3 Normal, #4 Elite, #5 Mini-Boss/Boss) back-to-back with **1 persistent health bar**:
+### 11.1 Trio Gauntlet — True Endurance Mode (Hub Card · Your Current Stage's Trio · 30-Min Cooldown)
+* **Format:** Launched from the **main hub** (no longer on the Stages screen) and always built from **your current stage** — the group of your next undefeated enemy. Fight that group's 3 toughest enemies (#3 Normal, #4 Elite, #5 Mini-Boss/Boss) back-to-back with **1 persistent health bar**:
   * **Bout 1 (Enemy #3):** $1.00\times$ HP · $1.00\times$ Dmg
   * **Bout 2 (Enemy #4 Elite):** $1.15\times$ HP · $1.10\times$ Dmg
   * **Bout 3 (Enemy #5 Boss/Mini-Boss):** $1.25\times$ HP · $1.15\times$ Dmg
@@ -463,7 +463,7 @@ Bought with coins from the skill tree. **Speed Skills are mandatory to lower you
 | 19 | GRANDMASTER | $\times 31.35$ | $\times 4.30$ | -- | $+1\text{💎}$ |
 | 20 | LEGEND | $\times 33.00$ | $\times 4.50$ | $+2\text{💎}$ | $+1\text{💎}$ |
 
-### 11.5 Reflex Slap-Off (Unlock: 5 Defeats · 2 Charges · 30-Min Recharge)
+### 11.5 Reflex Slap-Off (Unlock: Beat #10 + Deflect & Precision Instinct · 2 Charges · 30-Min Recharge)
 * **Format:** Duel your strongest defeated enemy. Slaps drain **$2\%$** of the pool, parry rings **$12\%$**, weak spots **$8\%$**. A missed ring costs $15\%$ of your Max HP; 2 consecutive ring misses = instant loss.
 * **Payout:** Win pays **$2.0 \times \text{Enemy Bounty} \times \text{TotalCoinMult} + 1\text{💎}$**.
 
@@ -571,11 +571,11 @@ Every equipped skin grants a **Global Multiplicative Bonus** and an **Active Ski
 
 * **Interstitials:** Shown after every 3 fight wins, minimum gap $75\text{s}$ (removed forever by ₹199 Remove Ads).
 * **Rewarded — $2\times$ Coins Boost:** Watch an ad $\to$ all coin earnings $\times 2$ for **$10\text{ minutes}$** (re-watching resets timer to $10\text{m}$, no stacking).
-* **Rewarded — $2\times$ Damage Boost:** Watch an ad $\to$ all slap & special damage $\times 2$ for **$10\text{ minutes}$** (no stacking).
+* **Rewarded — $2\times$ Damage Boost:** Watch an ad $\to$ all slap & special damage $\times 2$ for your next **7 fight wins** (hard cap **10 fight attempts**; losses consume an attempt, not a win; each Gauntlet / Boss Rush bout counts as 1 fight; 1 Endless run counts as 1 fight; paused in Golden Dummy Blitz & Reflex Slap-Off; re-watching resets to 7 wins / 10 attempts).
 * **Rewarded — Fight Revive:** On defeat, resume the same fight at $50\%$ Max HP with enemy swing timer reset and debuffs cleared (**1 revive per fight attempt**; disabled in Gauntlet, Boss Rush, Endless, Blitz, Reflex).
 * **Contextual Loss Screen Ad Prompts:**
   * Enemy **below $35\%$ HP:** Highlight **"Watch Ad: Revive at 50% HP & Finish Him!"**
-  * Enemy **at or above $35\%$ HP:** Highlight **"Watch Ad: Activate $2\times$ Damage (10m) & Retry!"**
+  * Enemy **at or above $35\%$ HP:** Highlight **"Watch Ad: Activate $2\times$ Damage (7 Wins) & Retry!"**
 * **Rewarded — Offline Double:** Watch an ad on the Offline Miner claim card to deliver a true **$2.0\times$ payout** across the entire 8-hour claim window (raises the chapter hard cap from $17.5\%$ to **$35.0\%$** of the current chapter's incremental build cost).
 
 ---
@@ -607,7 +607,7 @@ Every equipped skin grants a **Global Multiplicative Bonus** and an **Active Ski
 ---
 ## 17. Every Timer in One Table (v2.6.5 Audited Final)
 
-| Timer | v2.6.5 Duration |
+| Timer | v2.6.6 Duration |
 |---|---|
 | **Attribute-Only Slap Interval Floor (Speed Lv 25, No Skills)** | $0.9075\text{ seconds}$ |
 | **Permanent Skill-Unlocked Slap Interval Floor (Speed Lv 25 + Skills)** | $0.499\text{ seconds}$ |
@@ -622,7 +622,7 @@ Every equipped skin grants a **Global Multiplicative Bonus** and an **Active Ski
 | **Golden Dummy Blitz Charge Recharge** | $45\text{ minutes}$ per charge (2 charges max; max $29\text{s}$ fight duration) |
 | **Endless Mode Cooldown** | $45\text{ minutes}$ after a run ends |
 | **Boss Rush Cooldown** | $60\text{ minutes}$ after a run ends |
-| **Rewarded Ad Boosts ($2\times$ Coins / $2\times$ Damage)** | $10\text{ minutes}$ each (no stacking; re-watching resets to $10\text{m}$) |
+| **Rewarded Ad Boosts ($2\times$ Coins / $2\times$ Damage)** | $10\text{ minutes}$ ($2\times$ Coins, resets to $10\text{m}$) · **7 fight wins / 10 max attempts** ($2\times$ Damage, resets to 7 wins) |
 | **Interstitial Ad Minimum Gap** | $75\text{ seconds}$ (after every 3 fight wins) |
 | **Offline Slap Miner Accrual Cap** | $8\text{ hours}$ (minimum $60\text{s}$ away; $45\text{s}$ kill-rate clamp & $17.5\% / 35.0\%$ chapter cost cap) |
 | **Dojo Bounties, Daily Quests & Login Chest** | Refresh daily at midnight |

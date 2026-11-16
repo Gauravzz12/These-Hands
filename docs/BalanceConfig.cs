@@ -1,5 +1,5 @@
 // ============================================================================
-// IDLE SLAPPER — COMPLETE GAME BALANCE CONFIG (v2.6.5 AUDITED FINAL)
+// IDLE SLAPPER — COMPLETE GAME BALANCE CONFIG (v2.6.6)
 // Drop-in Unity C# Static Configuration
 // All 6/6 design pillars & all 11 audit fixes mathematically verified and
 // reconciled 1:1 with IDLE_SLAPPER_Complete_Game_Values_v2.6.5.md.
@@ -134,7 +134,7 @@ namespace IdleSlapper.Config
 
     public static class BalanceConfig
     {
-        public const string Version = "2.6.5-AUDITED";
+        public const string Version = "2.6.6";
         public const int MaxPlayerLevel = 50;
         public const int MaxEndlessMasteryBonusLevels = 3;
         public const double BaseSlapDamage = 10.0;
@@ -242,7 +242,11 @@ namespace IdleSlapper.Config
 
         public const int InterstitialWinsInterval = 3;
         public const float InterstitialMinGapSec = 75.0f;
-        public const float RewardedBoostDurationSec = 600.0f;
+        public const float RewardedCoinBoostDurationSec = 600.0f; // 10 minutes (2x Coins)
+        public const int RewardedDamageBoostWins = 7;             // 7 fight wins (2x Damage)
+        public const int RewardedDamageBoostMaxAttempts = 10;      // Hard cap on attempts per ad
+        public const float RewardedDamageBoostMult = 2.0f;
+        public const float RewardedCoinBoostMult = 2.0f;
         public const float RewardedReviveHpPercent = 0.50f;
         public const float VipPassKoCoinBonus = 0.25f;
 
@@ -250,6 +254,8 @@ namespace IdleSlapper.Config
         public const float ReflexRechargeSec = 30.0f * 60.0f;
         public const float ReflexWinBountyMult = 2.0f;
         public const int ReflexWinGems = 1;
+        public const int ReflexRequiredBossId = 10;
+        public static readonly string[] ReflexRequiredSkillIds = { "deflect", "precision_instinct" };
 
         public const float TrioGauntletCooldownSec = 30.0f * 60.0f;
         public const float TrioGauntletSlapCoinMult = 0.50f;
