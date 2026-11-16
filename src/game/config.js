@@ -350,7 +350,7 @@ export const CONFIG = {
       "tier": 2,
       "cost": 22000,
       "prereq": "basic",
-      "fx": "Unlocks ACTIVE BRACE: swipe down or hold anywhere mid-fight to raise a 1s defensive stance (5s cooldown). It negates 100% of the next Normal Attack and answers with a 1.5x Counter-Slap. Signature Moves are UNBLOCKABLE — they pierce Brace and Guard."
+      "fx": "Unlocks PARRY: tap the PARRY button the instant an enemy attack lands (0.30s window) to negate 100% of it and answer with a 1.5x Counter-Slap. 10s cooldown. Signature Moves are UNBLOCKABLE — they cannot be parried and pierce Guard."
     },
     {
       "id": "comboMastery",
@@ -492,7 +492,7 @@ export const CONFIG = {
       "cost": 120000000,
       "prereq": "deflect",
       "reqBoss": 29,
-      "fx": "Active Brace cooldown -0.70s (5.00s to 4.30s)."
+      "fx": "Parry cooldown -2s (10s to 8s)."
     },
     {
       "id": "ironStance2",
@@ -501,7 +501,7 @@ export const CONFIG = {
       "cost": 1500000000,
       "prereq": "ironStance1",
       "reqBoss": 39,
-      "fx": "Active Brace cooldown -0.70s (4.30s to 3.60s)."
+      "fx": "Parry cooldown -3s (8s to 5s)."
     },
     {
       "id": "ironStance3",
@@ -510,7 +510,7 @@ export const CONFIG = {
       "cost": 12000000000,
       "prereq": "ironStance2",
       "reqBoss": 49,
-      "fx": "Active Brace cooldown -0.60s (3.60s to 3.00s)."
+      "fx": "Parry window widens (0.30s to 0.50s). Cooldown stays 5s."
     }
   ],
   "skillFx": {
@@ -537,9 +537,10 @@ export const CONFIG = {
     "retaliationMult": 3.0,
     "parryChance": 0.15,
     "parryDeflect": 0.5,
-    "braceStanceSec": 1.0,
-    "braceCdSec": 5.0,
-    "braceCounterMult": 1.5,
+    "parryWindowSec": 0.3,
+    "parryWindowWideSec": 0.5,
+    "parryCdSec": 10,
+    "parryCounterMult": 1.5,
     "dizzyMult": 1.35,
     "clutchHpFrac": 0.3,
     "clutchSpeed": 0.833,
@@ -561,13 +562,13 @@ export const CONFIG = {
     {"level": 14, "id": "secondWind", "name": "Second Wind", "fx": "Once per fight, when HP drops to 0, immediately recover 25% HP."},
     {"level": 16, "id": "bossBane", "name": "Boss Bane", "fx": "+20% damage against Group Elites, Mini-Bosses, and Bosses."},
     {"level": 18, "id": "goldenAura", "name": "Golden Aura", "fx": "+15% coins earned."},
-    {"level": 20, "id": "counterCadence", "name": "Counter Cadence", "fx": "After taking an un-braced hit, your next slap deals 1.75x damage."},
+    {"level": 20, "id": "counterCadence", "name": "Counter Cadence", "fx": "After taking an un-parried hit, your next slap deals 1.75x damage."},
     {"level": 22, "id": "battleFocus", "name": "Battle Focus", "fx": "At combo stack 10+, your stuns last +0.20s longer (beyond the normal cap)."},
     {"level": 24, "id": "toughGrit", "name": "Tough Grit", "fx": "When below 40% HP, take 20% less damage."},
     {"level": 26, "id": "ironResolve", "name": "Iron Resolve", "fx": "Every 30th slap cleanses all active debuffs and heals 2% Max HP."},
     {"level": 28, "id": "overcharge", "name": "Overcharge", "fx": "Critical hits gain +1% bonus Crit Damage per Defense level (up to +40%)."},
     {"level": 30, "id": "giantStature", "name": "Giant Stature", "fx": "+600 Max HP, and striking an Elite or Boss grants +1 extra combo stack."},
-    {"level": 32, "id": "swiftRecovery", "name": "Swift Recovery", "fx": "Bracing or blocking an enemy attack boosts your slap speed by +25% for 2.5s."},
+    {"level": 32, "id": "swiftRecovery", "name": "Swift Recovery", "fx": "Parrying or blocking an enemy attack boosts your slap speed by +25% for 2.5s."},
     {"level": 34, "id": "midasStrike", "name": "Midas Strike", "fx": "Slaps landed within 0.6s of an enemy's attack timer grant 1.5x coins."},
     {"level": 36, "id": "executioner", "name": "Executioner", "fx": "Slaps deal +35% damage against enemies below 25% HP."},
     {"level": 38, "id": "godhandAwakening", "name": "Godhand Awakening", "fx": "Every 30th slap triggers Godhand Awakening: deals 2.5x damage and stuns for 1.0s."},
@@ -629,7 +630,7 @@ export const CONFIG = {
     "29": {
       "name": "KATANA OMNISLASH",
       "kind": "heavy",
-      "mult": 1.5, "stun": 1.5, "blurb": "Unblockable blade strike dealing 1.5× damage and 1.5s stagger — Brace and Guard cannot stop it!",
+      "mult": 1.5, "stun": 1.5, "blurb": "Unblockable blade strike dealing 1.5× damage and 1.5s stagger — Parry and Guard cannot stop it!",
       "desc": "Swift dual-blade strike leaving you staggered"
     },
     "39": {

@@ -303,6 +303,10 @@ export default function App() {
             </button>
             <span className="rc-sub" id="frenzySub"></span>
           </div>
+          <div className="rail-item" id="parryItem" style={{'display': 'none'}}>
+            <button id="parryBtn" className="rail-circle parry" type="button" aria-label="Parry — tap as the enemy attack lands">✋</button>
+            <span className="rc-sub" id="parrySub">PARRY</span>
+          </div>
           <div className="rail-item" id="procItem" style={{'display': 'none'}}>
             <div id="procCircle" className="rail-circle" role="img" aria-label="Skin power charge">
               <img id="procCircImg" alt="" />

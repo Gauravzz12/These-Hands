@@ -134,7 +134,7 @@ namespace IdleSlapper.Config
 
     public static class BalanceConfig
     {
-        public const string Version = "2.6.6-AUDITED";
+        public const string Version = "2.6.7";
         public const int MaxPlayerLevel = 50;
         public const int MaxEndlessMasteryBonusLevels = 3;
         public const double BaseSlapDamage = 10.0;
@@ -170,16 +170,16 @@ namespace IdleSlapper.Config
         public const int MissComboStackPenalty = 2;
         public const float MissSpecialChargePauseSec = 1.5f;
 
-        // v2.6.6 Audited Final: parry rings REPLACED by Active Brace; Signatures are 100% Unblockable.
-        public const float BraceStanceSec = 1.00f;
-        public const float BraceCooldownSec = 5.00f;
-        public const float BraceCounterSlapMult = 1.50f;
-        public const float IronStance1CooldownSec = 4.30f;
-        public const float IronStance2CooldownSec = 3.60f;
-        public const float IronStance3CooldownSec = 3.00f;
+        // v2.6.7: Active Brace REPLACED by Tap-Parry (Gaurav's call); Signatures stay 100% Unblockable.
+        public const float ParryWindowSec = 0.30f;
+        public const float ParryWindowWideSec = 0.50f;
+        public const float ParryCooldownSec = 10.00f;
+        public const float ParryCounterSlapMult = 1.50f;
+        public const float IronStance1CooldownSec = 8.00f;
+        public const float IronStance2CooldownSec = 5.00f;
+        public const float IronStance3WindowSec = 0.50f;
         public const bool SignaturesAreUnblockable = true;
         public const float SignatureWindupSec = 0.75f;
-        public const float BraceInterruptCooldownRefund = 0.75f;
 
         public const float BaseStunChance = 0.05f;
         public const float MaxStunChance = 0.25f;
@@ -268,7 +268,7 @@ namespace IdleSlapper.Config
         public const float TrioGauntletSlapCoinMult = 0.50f;
         public const float TrioGauntletCompletionMult = 1.35f;
         public const float TrioGauntletBaseBreatherHeal = 0.05f;
-        public const float TrioGauntletParryHealPerHit = 0.04f; // Clean Defense: per Normal Attack Braced (Deflect) or Blocked (Guard)
+        public const float TrioGauntletParryHealPerHit = 0.04f; // Clean Defense: per Normal Attack Parried (Deflect) or Blocked (Guard)
         public const float TrioGauntletMaxParryHeal = 0.12f;
         public const float TrioGauntletFinisherHeal = 0.05f;
         public const float TrioGauntletFinisherCdRefundSec = 3.0f;
@@ -582,7 +582,7 @@ namespace IdleSlapper.Config
             new SkillConfig { Id="twin_mastery",        Name="Twin Mastery",        Tier=2, CoinCost=3200,      PrerequisiteSkillId="second_hand",         RequiredBossId=0,  Trigger=SkillActivationTrigger.AlwaysOn,            PrimaryEffectType=SkillEffectType.SpeedMult,            ValuePrimary=0.90f,  SecondaryEffectType=SkillEffectType.ComboChargeBonus,       ValueSecondary=0.10f,   ProcChance=1.00f, ProcIntervalSlaps=0,  StateHpThreshold=0f },
             new SkillConfig { Id="on_target",           Name="On Target",           Tier=2, CoinCost=6500,      PrerequisiteSkillId="twin_mastery",        RequiredBossId=0,  Trigger=SkillActivationTrigger.AlwaysOn,            PrimaryEffectType=SkillEffectType.ComboPersistOnSwitch, ValuePrimary=1.0f,   SecondaryEffectType=SkillEffectType.None,                   ValueSecondary=0f,      ProcChance=1.00f, ProcIntervalSlaps=0,  StateHpThreshold=0f },
             new SkillConfig { Id="quick_reflexes",      Name="Quick Reflexes",      Tier=2, CoinCost=15000,     PrerequisiteSkillId="twin_mastery",        RequiredBossId=10, Trigger=SkillActivationTrigger.AlwaysOn,            PrimaryEffectType=SkillEffectType.SpeedMult,            ValuePrimary=0.90f,  SecondaryEffectType=SkillEffectType.None,                   ValueSecondary=0f,      ProcChance=1.00f, ProcIntervalSlaps=0,  StateHpThreshold=0f },
-            new SkillConfig { Id="deflect",             Name="Deflect",             Tier=2, CoinCost=22000,     PrerequisiteSkillId="basic_slap",          RequiredBossId=0,  Trigger=SkillActivationTrigger.AlwaysOn,            PrimaryEffectType=SkillEffectType.ParryUnlock,          ValuePrimary=1.00f,  SecondaryEffectType=SkillEffectType.None,                   ValueSecondary=0f,     // Active Brace unlock; signatures now pierce (SignaturesAreUnblockable)   ProcChance=1.00f, ProcIntervalSlaps=0,  StateHpThreshold=0f },
+            new SkillConfig { Id="deflect",             Name="Deflect",             Tier=2, CoinCost=22000,     PrerequisiteSkillId="basic_slap",          RequiredBossId=0,  Trigger=SkillActivationTrigger.AlwaysOn,            PrimaryEffectType=SkillEffectType.ParryUnlock,          ValuePrimary=1.00f,  SecondaryEffectType=SkillEffectType.None,                   ValueSecondary=0f,     // Tap-Parry unlock; signatures unblockable (SignaturesAreUnblockable)   ProcChance=1.00f, ProcIntervalSlaps=0,  StateHpThreshold=0f },
             new SkillConfig { Id="critical_slaps",      Name="Critical Slaps",      Tier=2, CoinCost=35000,     PrerequisiteSkillId="stronger_hands",      RequiredBossId=0,  Trigger=SkillActivationTrigger.AlwaysOn,            PrimaryEffectType=SkillEffectType.CritChance,           ValuePrimary=0.05f,  SecondaryEffectType=SkillEffectType.None,                   ValueSecondary=0f,      ProcChance=1.00f, ProcIntervalSlaps=0,  StateHpThreshold=0f },
             new SkillConfig { Id="seismic_slam",        Name="Seismic Slam",        Tier=2, CoinCost=55000,     PrerequisiteSkillId="stamina_training",    RequiredBossId=10, Trigger=SkillActivationTrigger.ProcEveryNSlaps,     PrimaryEffectType=SkillEffectType.ProcHitDamageMult,    ValuePrimary=3.00f,  SecondaryEffectType=SkillEffectType.Passive,                ValueSecondary=0.80f,   ProcChance=1.00f, ProcIntervalSlaps=5,  StateHpThreshold=0f },
             new SkillConfig { Id="heavy_slap",          Name="Heavy Slap",          Tier=2, CoinCost=90000,     PrerequisiteSkillId="stronger_hands",      RequiredBossId=10, Trigger=SkillActivationTrigger.ProcOnHit,           PrimaryEffectType=SkillEffectType.ProcHitDamageMult,    ValuePrimary=2.50f,  SecondaryEffectType=SkillEffectType.None,                   ValueSecondary=0f,      ProcChance=0.12f, ProcIntervalSlaps=0,  StateHpThreshold=0f },
@@ -602,9 +602,9 @@ namespace IdleSlapper.Config
             new SkillConfig { Id="rapid_barrage",       Name="Rapid Barrage",       Tier=5, CoinCost=1200000000,PrerequisiteSkillId="dual_hand_technique", RequiredBossId=40, Trigger=SkillActivationTrigger.ProcEveryNSlaps,     PrimaryEffectType=SkillEffectType.ProcHitDamageMult,    ValuePrimary=2.20f,  SecondaryEffectType=SkillEffectType.Passive,                ValueSecondary=0.40f,   ProcChance=1.00f, ProcIntervalSlaps=6,  StateHpThreshold=0f },
             new SkillConfig { Id="bulwark_guard",       Name="Bulwark Guard",       Tier=5, CoinCost=2400000000,PrerequisiteSkillId="kinetic_barrier",     RequiredBossId=40, Trigger=SkillActivationTrigger.AlwaysOn,            PrimaryEffectType=SkillEffectType.ShieldReflectPct,     ValuePrimary=0.50f,  SecondaryEffectType=SkillEffectType.None,                   ValueSecondary=0f,      ProcChance=1.00f, ProcIntervalSlaps=0,  StateHpThreshold=0f },
             new SkillConfig { Id="godhand_strike",      Name="Godhand Strike",      Tier=5, CoinCost=5000000000,PrerequisiteSkillId="colossus_bane",       RequiredBossId=45, Trigger=SkillActivationTrigger.ProcEveryNSlaps,     PrimaryEffectType=SkillEffectType.ProcHitDamageMult,    ValuePrimary=8.00f,  SecondaryEffectType=SkillEffectType.None,                   ValueSecondary=0f,      ProcChance=1.00f, ProcIntervalSlaps=20, StateHpThreshold=0f },
-            new SkillConfig { Id="iron_stance_1",       Name="Iron Stance I",       Tier=4, CoinCost=120000000, PrerequisiteSkillId="deflect",             RequiredBossId=30, Trigger=SkillActivationTrigger.AlwaysOn,            PrimaryEffectType=SkillEffectType.Passive,              ValuePrimary=-0.70f, SecondaryEffectType=SkillEffectType.None,                   ValueSecondary=0f,      ProcChance=1.00f, ProcIntervalSlaps=0,  StateHpThreshold=0f }, // Brace CD 5.00s -> 4.30s
-            new SkillConfig { Id="iron_stance_2",       Name="Iron Stance II",      Tier=5, CoinCost=1500000000,PrerequisiteSkillId="iron_stance_1",       RequiredBossId=40, Trigger=SkillActivationTrigger.AlwaysOn,            PrimaryEffectType=SkillEffectType.Passive,              ValuePrimary=-0.70f, SecondaryEffectType=SkillEffectType.None,                   ValueSecondary=0f,      ProcChance=1.00f, ProcIntervalSlaps=0,  StateHpThreshold=0f }, // Brace CD 4.30s -> 3.60s
-            new SkillConfig { Id="iron_stance_3",       Name="Iron Stance III",     Tier=5, CoinCost=12000000000,PrerequisiteSkillId="iron_stance_2",      RequiredBossId=50, Trigger=SkillActivationTrigger.AlwaysOn,            PrimaryEffectType=SkillEffectType.Passive,              ValuePrimary=-0.60f, SecondaryEffectType=SkillEffectType.None,                   ValueSecondary=0f,      ProcChance=1.00f, ProcIntervalSlaps=0,  StateHpThreshold=0f }  // Brace CD 3.60s -> 3.00s
+            new SkillConfig { Id="iron_stance_1",       Name="Iron Stance I",       Tier=4, CoinCost=120000000, PrerequisiteSkillId="deflect",             RequiredBossId=30, Trigger=SkillActivationTrigger.AlwaysOn,            PrimaryEffectType=SkillEffectType.Passive,              ValuePrimary=-2.00f, SecondaryEffectType=SkillEffectType.None,                   ValueSecondary=0f,      ProcChance=1.00f, ProcIntervalSlaps=0,  StateHpThreshold=0f }, // Parry CD 10s -> 8s
+            new SkillConfig { Id="iron_stance_2",       Name="Iron Stance II",      Tier=5, CoinCost=1500000000,PrerequisiteSkillId="iron_stance_1",       RequiredBossId=40, Trigger=SkillActivationTrigger.AlwaysOn,            PrimaryEffectType=SkillEffectType.Passive,              ValuePrimary=-3.00f, SecondaryEffectType=SkillEffectType.None,                   ValueSecondary=0f,      ProcChance=1.00f, ProcIntervalSlaps=0,  StateHpThreshold=0f }, // Parry CD 8s -> 5s
+            new SkillConfig { Id="iron_stance_3",       Name="Iron Stance III",     Tier=5, CoinCost=12000000000,PrerequisiteSkillId="iron_stance_2",      RequiredBossId=50, Trigger=SkillActivationTrigger.AlwaysOn,            PrimaryEffectType=SkillEffectType.Passive,              ValuePrimary=0f, SecondaryEffectType=SkillEffectType.None,                   ValueSecondary=0f,      ProcChance=1.00f, ProcIntervalSlaps=0,  StateHpThreshold=0f }  // Parry window 0.30s -> 0.50s; CD stays 5s
         };
 
         public static readonly HandSkinConfig[] HandSkins = new[]
