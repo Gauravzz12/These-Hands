@@ -1647,6 +1647,9 @@ width: 34px; height: 34px; display: flex; align-items: center; justify-content: 
 text-shadow: 0 1px 2px rgba(0,0,0,.5);
 }
 .rail-circle.cooling { opacity: .55; }
+.rail-circle.parry { background: #ffd23e; border-color: #221407; color: #221407; font-size: 19px; font-weight: 900; }
+.rail-circle.parry.hot { animation: parryPulse .16s infinite alternate; border-color: #fff; }
+@keyframes parryPulse { from { transform: scale(1); } to { transform: scale(1.14); } }
 .rail-circle.ready { border-color: var(--gold); box-shadow: 0 0 0 2px rgba(242,176,30,.45), 0 3px 10px rgba(0,0,0,.35); }
 .rc-sub { font-size: 9.5px; font-weight: 900; letter-spacing: .05em; color: #ffe9bd; text-shadow: 0 1px 3px rgba(0,0,0,.8); min-height: 11px; line-height: 1; }
 #frenzyCircle { border-color: #b3540a; }

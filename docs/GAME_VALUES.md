@@ -22,9 +22,9 @@ You fight enemies in order (#1 $\to$ #50). Every 5 enemies form a **group**; eve
 | Beat #10 Monkey | Chapter 2: Lv cap 18, Power cap 24 · **Double Slap** Special Move · **Endless Mode** (45-min cooldown) · **Daily Quests** (refresh at midnight) |
 | Beat #10 Monkey + Unlock **Deflect** (`22k`) & **Precision Instinct** (`140k`) | **Reflex Slap-Off** (2 charges, 30-min recharge per charge) |
 | Beat #20 Dark Knight | Chapter 3: Lv cap 26, Power cap 36 · **Guard** Special Move · **Boss Rush** (60-min cooldown, includes Cornerman Drafts) |
-| Beat #30 Shogun | Chapter 4: Lv cap 33, Power cap 48 · **Special Move Mastery** ($-3\text{s}$ cooldown on Double Slap & Guard) · **Iron Stance I** (`4.30s` Brace CD) |
-| Beat #40 Pharaoh | Chapter 5: Lv cap 38, Power cap 60 · **Uppercut Punch** Special Move · Tier 5 Skills (*Rapid Barrage*, *Bulwark Guard*, & *Iron Stance II* `3.60s` Brace CD) |
-| Beat #50 Dragon Lord | Chapter 6: Lv cap 44, Power cap 70 · **Worlds Portal** (Asura Realm) · 🔥 Ember economy · **Dragon Mastery 1** ($\times 1.25$ global Power multiplier) · **Iron Stance III** (`3.00s` Brace CD) |
+| Beat #30 Shogun | Chapter 4: Lv cap 33, Power cap 48 · **Special Move Mastery** ($-3\text{s}$ cooldown on Double Slap & Guard) · **Iron Stance I** (Parry CD `8s`) |
+| Beat #40 Pharaoh | Chapter 5: Lv cap 38, Power cap 60 · **Uppercut Punch** Special Move · Tier 5 Skills (*Rapid Barrage*, *Bulwark Guard*, & *Iron Stance II* (Parry CD `5s`) |
+| Beat #50 Dragon Lord | Chapter 6: Lv cap 44, Power cap 70 · **Worlds Portal** (Asura Realm) · 🔥 Ember economy · **Dragon Mastery 1** ($\times 1.25$ global Power multiplier) · **Iron Stance III** (Parry window `0.50s`) |
 | Beat #206 Ravana (Asura final boss) | Chapter 7: Lv cap 50 (max), Power cap 80 (max) · **Shadow Verse** · **Dragon Mastery 2** ($\times 1.45$ global Power multiplier, replaces Mastery 1) |
 | Beat #216 Dark Slapper (Shadow Verse final) | Current endgame (gates future Chapter 8+ Roster #51-#100) |
 
@@ -89,7 +89,7 @@ Caps block NEW purchases only. Every attribute has an explicit per-chapter ceili
 | 17 | 825 | 900 | 452,484 | 1,190,180 | -- |
 | 18 | 919 | 994 | 610,853 | 1,642,664 | **Golden Aura** ($+15\%$ coins earned) |
 | 19 | 1,028 | 1,103 | 824,652 | 2,253,517 | -- |
-| 20 | 1,154 | 1,229 | 1,113,280 | 3,078,169 | **Counter Cadence** (After un-braced hit, next slap deals $1.75\times$ dmg) |
+| 20 | 1,154 | 1,229 | 1,113,280 | 3,078,169 | **Counter Cadence** (After un-parried hit, next slap deals $1.75\times$ dmg) |
 | 21 | 1,302 | 1,377 | 1,502,928 | 4,191,449 | -- |
 | 22 | 1,475 | 1,550 | 2,028,953 | 5,694,377 | **Battle Focus** (At combo stack $10+$, slaps gain $+0.20\text{s}$ stun duration above cap) |
 | 23 | 1,681 | 1,756 | 2,739,086 | 7,723,330 | -- |
@@ -234,17 +234,17 @@ Base slap damage from the `Power` attribute before Dragon Mastery: $(10 + 2.2L) 
 | **Speed Progression & 3-Tier Floor System** | • **Base Interval:** $1.500\text{s}$<br>• **Attribute-Only Floor (Speed Lv 25 at $\times 0.9801/\text{lv}$, 0 Speed Skills):** $1.500 \times 0.9801^{25} = \mathbf{0.9075\text{s}}$<br>• **Permanent Skill-Unlocked Floor (Speed Lv 25 + *Second Hand* $\times 0.85$, *Quickening* $\times 0.94$, *Twin Mastery* $\times 0.90$, *Quick Reflexes* $\times 0.90$, *Dual-Hand* $\times 0.85$):** **$0.499\text{s}$** ($2.00\text{ slaps/s}$)<br>• **Skin & World Relic Floor (`Speed.HardCapValue = 0.350f`):** Lowers permanent floor down to **$0.350\text{s}$** ($2.86\text{ slaps/s}$)<br>• **Temporary Overdrive Floor (*Frenzy* $\times 0.7692$, *Adrenaline Rush* $\times 0.8333$, *Swift Recovery* $\times 0.80$, *Infinity Gauntlet Time Stop* $\times 0.6667$):** **$0.300\text{s}$** ($3.33\text{ slaps/s}$) |
 | **Crit Chance Cap & $1:8$ Overcap Conversion** | • Base (**$15\%$**) + `Crit %` Lv 45 ($45\%$) + *Crit Surge* ($8\%$) + *Critical Slaps* ($5\%$) = **$73\%$ F2P Crit** ($81\%$ with *Wolverine Skin* $+8\%$), exceeding the **$70\%$ hard cap**.<br>• **Overcap Rule (`OvercapCritToCritDmgRatio = 8.0f`):** Any Crit Chance above **$70\%$** converts **$1:8$** into **Bonus Critical Damage ($+1\%$ excess Crit Chance $= +8\%$ Crit Damage)** ($+24\%$ F2P at Lv 45 / $+88\%$ w/ Wolverine). |
 | **Armored Poise (Anti-Cheese Lock)** | Active on all **Elites, Mini-Bosses, and Bosses** starting at Enemy #9 (Trash Panda):<br>• **Basic Slaps** landed at **Combo Stack $\le 4$** that are neither Critical Hits nor Skill Procs deal **$-40\%$ damage ($\times 0.60$)**.<br>• **Full $100\%$ Damage Bypass:** Any Critical Hit, any Skill Proc / Weak Spot / Special Move, OR any slap landed at **Combo Stack $\ge 5$** deals $100\%$ full damage. |
-| **Active Brace (`Deflect`) & Unblockable Signatures** | • **Active Brace (`Deflect` skill, $22,000\text{c}$):** Swipe-Down or Hold anywhere on screen to enter a **$1.00\text{s}$ defensive stance** on a fixed **$5.00\text{s}$ base cooldown** (unaffected by Slap Speed; reduced to **$4.30\text{s} \to 3.60\text{s} \to 3.00\text{s}$** via *Iron Stance I–III*). Negates **$100\%$** of the next Normal Attack, deals a **$1.50\times$ Counter-Slap**, and triggers *Swift Recovery*.<br>• **Unblockable Signatures (`SignaturesAreUnblockable = true`):** Every 3rd-attack Group Signature and Boss Signature Move **pierces $100\%$ through both Active Brace and `Guard`**.<br>• **Signature Freeze & Anti-Waste Refund:** During `SignatureWindupSec` ($0.75\text{s}$) and Signature animation, new Brace inputs are locked out (Red Shattered-Shield `UNBLOCKABLE` warning), any active Brace stance timer **freezes (`dt = 0`) without being consumed**, and if a Signature delays an enemy's normal swing past the stance window, **$75\%$ of the Brace cooldown is refunded**. |
+| **Tap-Parry (`Deflect`) & Unblockable Signatures** | • **Tap-Parry (`Deflect` skill, $22,000\text{c}$):** Tap the **PARRY button** the instant an enemy Normal Attack lands — a **$0.30\text{s}$ timing window** ($0.50\text{s}$ with *Iron Stance III*) — on a fixed **$10.00\text{s}$ base cooldown** (unaffected by Slap Speed; reduced to **$8.00\text{s} \to 5.00\text{s}$** via *Iron Stance I–II*). A timed tap negates **$100\%$** of the attack, deals a **$1.50\times$ Counter-Slap**, and triggers *Swift Recovery*. A mistimed tap still spends the cooldown.<br>• **Unblockable Signatures (`SignaturesAreUnblockable = true`):** Every 3rd-attack Group Signature and Boss Signature Move **pierces $100\%$ through both Tap-Parry and `Guard`** — they cannot be parried.<br>• **Signature lockout:** During `SignatureWindupSec` ($0.75	ext{s}$) and the Signature animation, parry taps are refused with the `UNBLOCKABLE` warning and **no cooldown is spent**. |
 | **Enemy Evasion & Miss Penalty** | • Base player accuracy is $85\%$ ($+1.7857\%/\text{lv}$ up to exact **$110.0\%$** at Lv 14); post-evasion hit chance is `Clamp(playerAccuracy - enemyEvasion, 0.05, 1.00)`.<br>• **Miss Penalty:** Missing a slap drains **2 Combo Stacks** and pauses Special Move cooldown charging for **$1.5\text{s}$**. |
 | **Combo System** | Base max 4 stacks · Combo attribute adds **$+0.20\%$** dmg/stack and **$+0.25$** max stacks/lv ($20.25$ stacks at Lv 65) · *Combo Mastery* skill adds $+5$ stacks and $+0.5\%$ dmg/stack (Max $25.25$ stacks $\times 13.5\% = \mathbf{4.41\times\text{ damage}}$ / $+341\%$ bonus damage). |
 | **Stun & Diminishing Returns** | Base chance $5\%$ ($+0.4\%/\text{lv}$, cap **$25\%$ at Lv 50**) · Base duration $0.50\text{s}$ ($+0.018\text{s}/\text{lv}$, attr cap **$1.40\text{s}$ at Lv 50**; *Battle Focus* adds $+0.20\text{s}$ after cap up to **$1.60\text{s}$**) · Enemy swing timer pauses while stunned/dazed · **Post-stun immunity: $3.5\text{s}$ normal / $5.0\text{s}$ bosses** · Bosses take $\times 0.50$ stun & daze duration · **$6.0\text{s}$ internal stun cooldown**. |
-| **Weak Spots (Precision Instinct)** | Unlocks via *Precision Instinct* skill (timer-driven `AlwaysOn` system; **Tap** input, completely separate from Swipe-Down Brace) · First at $2.2\text{s}$, then every $5\text{--}8\text{s}$ · Window $1.5\text{s}$ ($1.2\text{s}$ on Hard) · Hit deals **$\times 4.5$ slap damage** + $12$ Frenzy meter · Per-fight cap 3 ($+1$ per 15 Fortune levels, max **6**; **7 with *Giant's Grip***). |
+| **Weak Spots (Precision Instinct)** | Unlocks via *Precision Instinct* skill (timer-driven `AlwaysOn` system; **Tap** input, completely separate from the Parry button) · First at $2.2\text{s}$, then every $5\text{--}8\text{s}$ · Window $1.5\text{s}$ ($1.2\text{s}$ on Hard) · Hit deals **$\times 4.5$ slap damage** + $12$ Frenzy meter · Per-fight cap 3 ($+1$ per 15 Fortune levels, max **6**; **7 with *Giant's Grip***). |
 | **Boss Heals & Enrage Grace** | • **Main Bosses (`MaxHeals = 2`):** Heal **$15\%$ Max HP** once at **$60\%$ HP** and once at **$30\%$ HP**.<br>• **World Guardians (`MaxHeals = 1` on `#203`, `#206`, `#213`, `#216`):** Heal **$15\%$ Max HP** once at **$50\%$ HP**.<br>• **Enrage Suppression:** Below $40\%$ HP, bosses enrage (**$\times 0.80$ interval**, **$+10\%$ damage**). If a heal lifts a boss above $40\%$ HP, Enrage is suppressed for an **$8.0\text{s}$ grace window**.<br>• *All boss heals are disabled inside Boss Rush.* |
 | **Revive Priority & Enemy Pacing** | • **Revive Priority:** Main Roster & Side Modes allow at most **1 auto-revive per fight** (*Second Wind* Lv 14 takes priority over *Phoenix Heart*). Inside Endgame Worlds (`#201-#216`), *Second Wind* and *Phoenix Heart* may each trigger once sequentially.<br>• **Enemy Pacing:** First swing at $\times 1.15$ interval; subsequent swings at $\times 1.00$ decaying by $0.99/\text{swing}$ down to $\times 0.85$.<br>• **Revive Ad:** Resume same fight at $50\%$ Max HP, enemy HP unchanged, swing timer reset, debuffs cleared — **once per fight attempt** (disabled in Gauntlet / Boss Rush / Endless / Blitz / Reflex). |
 
 ### 6.1 The 10-Group Stage Debuff Progression (Every 3rd Enemy Attack — Unblockable)
 
-Every 3rd attack by any enemy in a group triggers that group's **Stage Signature Move** (**100% Unblockable** — pierces Brace and Guard):
+Every 3rd attack by any enemy in a group triggers that group's **Stage Signature Move** (**100% Unblockable** — pierces Parry and Guard):
 
 | Group | Enemies | Stage Theme | 3rd-Attack Group Signature Move & Debuff (Unblockable) |
 |---|---|---|---|
@@ -270,7 +270,7 @@ Every 3rd attack by any enemy in a group triggers that group's **Stage Signature
 | **Guard** | Boss #20 | Blocks $100\%$ of one Normal attack | $24\text{s} \to 18\text{s}$ | Unlocked on beating #20 Dark Knight! Cross both hands to block $100\%$ of the next Normal Attack (pierced without consumption by Unblockable Signatures; $-3\text{s}$ CD with Shogun Mastery). |
 | **Uppercut Punch** | Boss #40 | $18\times \to 32\times$ slap dmg | $32\text{s} \to 20\text{s}$ | A ferocious rising uppercut that deals massive damage and stuns for $2.5\text{s}$ ($1.25\text{s}$ vs Bosses). |
 
-**Boss Signature Moves Against You** (**100% Unblockable** — bypasses Brace and Guard without consuming them):
+**Boss Signature Moves Against You** (**100% Unblockable** — bypasses Parry and Guard without consuming them):
 
 | Boss | Move | v2.6.6 Audited Final Effect (Unblockable) |
 |---|---|---|
@@ -301,44 +301,44 @@ Calibrated across all 50 enemies with strictly monotonic bounties and unblockabl
 | 8 | Cocky Goose | Backyard Bunch | 2,350 | 39 | 2.10s | 0% | ~65 | 930 | 0 | |
 | 9 | Trash Panda | Backyard Bunch | 4,200 | 48 | 2.05s | 0% | ~99 | 1,410 | 0 | ELITE |
 | 10 | Mischievous Monkey | Backyard Bunch | 8,500 | 40 | 1.95s | 0% | ~154 | 2,200 | 2 | BOSS |
-| 11 | Bodybuilder | Fight Club | 12,500 | 66 | 2.13s | 0% | ~248 | 4,510 | 0 | |
-| 12 | Luchador Wrestler | Fight Club | 18,500 | 75 | 2.10s | 0% | ~340 | 6,173 | 0 | |
-| 13 | Kickboxer | Fight Club | 27,500 | 85 | 2.08s | 0% | ~464 | 8,432 | 0 | |
-| 14 | Adult Boxer | Fight Club | 41,000 | 96 | 2.05s | 0% | ~633 | 11,518 | 0 | |
+| 11 | Bodybuilder | Fight Club | 16,250 | 66 | 2.13s | 0% | ~248 | 4,510 | 0 | |
+| 12 | Luchador Wrestler | Fight Club | 24,050 | 75 | 2.10s | 0% | ~340 | 6,173 | 0 | |
+| 13 | Kickboxer | Fight Club | 35,750 | 85 | 2.08s | 0% | ~464 | 8,432 | 0 | |
+| 14 | Adult Boxer | Fight Club | 53,300 | 96 | 2.05s | 0% | ~633 | 11,518 | 0 | |
 | 15 | Sumo Champion | Fight Club | 68,000 | 115 | 2.03s | 0% | ~941 | 17,100 | 0 | MINI-BOSS |
-| 16 | Castle Guard | Castle Guard | 92,000 | 110 | 2.00s | 0% | ~1,241 | 22,565 | 0 | |
-| 17 | Royal Executioner | Castle Guard | 125,000 | 120 | 1.98s | 0% | ~1,672 | 30,397 | 0 | |
-| 18 | Knight | Castle Guard | 165,000 | 130 | 1.95s | 0% | ~2,247 | 40,852 | 0 | |
+| 16 | Castle Guard | Castle Guard | 119,600 | 110 | 2.00s | 0% | ~1,241 | 22,565 | 0 | |
+| 17 | Royal Executioner | Castle Guard | 162,500 | 120 | 1.98s | 0% | ~1,672 | 30,397 | 0 | |
+| 18 | Knight | Castle Guard | 214,500 | 130 | 1.95s | 0% | ~2,247 | 40,852 | 0 | |
 | 19 | Barbarian | Castle Guard | 210,000 | 132 | 1.93s | 0% | ~2,639 | 47,977 | 0 | ELITE |
 | 20 | Dark Knight | Castle Guard | 335,000 | 90 | 1.84s | 0% | ~3,135 | 57,000 | 2 | BOSS |
-| 21 | Skeleton Warrior | Graveyard Shift | 420,000 | 147 | 1.88s | 5% | ~3,410 | 62,000 | 0 | |
-| 22 | Zombie | Graveyard Shift | 560,000 | 164 | 1.86s | 5% | ~4,400 | 80,000 | 0 | |
-| 23 | Armored Skeleton | Graveyard Shift | 750,000 | 185 | 1.84s | 5% | ~5,720 | 104,000 | 0 | |
-| 24 | Scarab Swarm | Graveyard Shift | 1,000,000 | 208 | 1.82s | 5% | ~7,425 | 135,000 | 0 | |
+| 21 | Skeleton Warrior | Graveyard Shift | 546,000 | 147 | 1.88s | 5% | ~3,410 | 62,000 | 0 | |
+| 22 | Zombie | Graveyard Shift | 728,000 | 164 | 1.86s | 5% | ~4,400 | 80,000 | 0 | |
+| 23 | Armored Skeleton | Graveyard Shift | 975,000 | 185 | 1.84s | 5% | ~5,720 | 104,000 | 0 | |
+| 24 | Scarab Swarm | Graveyard Shift | 1,300,000 | 208 | 1.82s | 5% | ~7,425 | 135,000 | 0 | |
 | 25 | Mummy Guard | Graveyard Shift | 1,380,000 | 244 | 1.79s | 6% | ~10,175 | 185,000 | 0 | MINI-BOSS |
-| 26 | Ninja Recruit | Shadow Dojo | 1,750,000 | 260 | 1.77s | 6% | ~13,200 | 240,000 | 0 | |
-| 27 | Shuriken Master | Shadow Dojo | 2,200,000 | 287 | 1.75s | 6% | ~17,160 | 312,000 | 0 | |
-| 28 | Samurai Duelist | Shadow Dojo | 2,750,000 | 318 | 1.73s | 6% | ~22,275 | 405,000 | 0 | |
+| 26 | Ninja Recruit | Shadow Dojo | 2,275,000 | 260 | 1.77s | 6% | ~13,200 | 240,000 | 0 | |
+| 27 | Shuriken Master | Shadow Dojo | 2,860,000 | 287 | 1.75s | 6% | ~17,160 | 312,000 | 0 | |
+| 28 | Samurai Duelist | Shadow Dojo | 3,575,000 | 318 | 1.73s | 6% | ~22,275 | 405,000 | 0 | |
 | 29 | Shadow Assassin | Shadow Dojo | 3,350,000 | 351 | 1.71s | 8% | ~28,875 | 525,000 | 0 | ELITE |
 | 30 | Shogun Warlord | Shadow Dojo | 4,100,000 | 250 | 1.63s | 8% | ~37,400 | 680,000 | 2 | BOSS |
-| 31 | Werewolf | Dark Woods | 3,220,000 | 445 | 1.67s | 10% | ~59,125 | 1,075,000 | 0 | |
-| 32 | Giant Spider | Dark Woods | 4,270,000 | 512 | 1.65s | 10% | ~75,955 | 1,381,000 | 0 | |
-| 33 | Orc Warrior | Dark Woods | 5,740,000 | 588 | 1.63s | 10% | ~97,900 | 1,780,000 | 0 | |
-| 34 | Bog Witch | Dark Woods | 7,700,000 | 676 | 1.61s | 10% | ~126,445 | 2,299,000 | 0 | |
+| 31 | Werewolf | Dark Woods | 4,186,000 | 445 | 1.67s | 10% | ~59,125 | 1,075,000 | 0 | |
+| 32 | Giant Spider | Dark Woods | 5,551,000 | 512 | 1.65s | 10% | ~75,955 | 1,381,000 | 0 | |
+| 33 | Orc Warrior | Dark Woods | 7,462,000 | 588 | 1.63s | 10% | ~97,900 | 1,780,000 | 0 | |
+| 34 | Bog Witch | Dark Woods | 10,010,000 | 676 | 1.61s | 10% | ~126,445 | 2,299,000 | 0 | |
 | 35 | Shadow Beast | Dark Woods | 10,500,000 | 790 | 1.59s | 10% | ~168,245 | 3,059,000 | 0 | MINI-BOSS |
-| 36 | Giant Serpent | Pharaoh's Tomb | 13,300,000 | 882 | 1.57s | 10% | ~214,170 | 3,894,000 | 0 | |
-| 37 | Anubis Warrior | Pharaoh's Tomb | 16,450,000 | 991 | 1.55s | 10% | ~270,270 | 4,914,000 | 0 | |
-| 38 | Sphinx Riddler | Pharaoh's Tomb | 20,300,000 | 1,109 | 1.53s | 10% | ~336,545 | 6,119,000 | 0 | |
+| 36 | Giant Serpent | Pharaoh's Tomb | 17,290,000 | 882 | 1.57s | 10% | ~214,170 | 3,894,000 | 0 | |
+| 37 | Anubis Warrior | Pharaoh's Tomb | 21,385,000 | 991 | 1.55s | 10% | ~270,270 | 4,914,000 | 0 | |
+| 38 | Sphinx Riddler | Pharaoh's Tomb | 26,390,000 | 1,109 | 1.53s | 10% | ~336,545 | 6,119,000 | 0 | |
 | 39 | Giant Scorpion | Pharaoh's Tomb | 24,500,000 | 1,243 | 1.51s | 12% | ~407,935 | 7,417,000 | 0 | ELITE |
 | 40 | Pharaoh Revenant | Pharaoh's Tomb | 29,400,000 | 1,386 | 1.44s | 12% | ~489,500 | 8,900,000 | 2 | BOSS |
-| 41 | Troll | Mountain Stronghold | 38,500,000 | 1,512 | 1.48s | 12% | ~638,000 | 11,600,000 | 0 | |
-| 42 | Ogre | Mountain Stronghold | 49,700,000 | 1,646 | 1.46s | 12% | ~770,000 | 14,000,000 | 0 | |
-| 43 | Minotaur | Mountain Stronghold | 64,400,000 | 1,798 | 1.44s | 12% | ~935,000 | 17,000,000 | 0 | |
-| 44 | Cyclops | Mountain Stronghold | 82,600,000 | 1,966 | 1.42s | 12% | ~1,133,000 | 20,600,000 | 0 | |
+| 41 | Troll | Mountain Stronghold | 50,050,000 | 1,512 | 1.48s | 12% | ~638,000 | 11,600,000 | 0 | |
+| 42 | Ogre | Mountain Stronghold | 64,610,000 | 1,646 | 1.46s | 12% | ~770,000 | 14,000,000 | 0 | |
+| 43 | Minotaur | Mountain Stronghold | 83,720,000 | 1,798 | 1.44s | 12% | ~935,000 | 17,000,000 | 0 | |
+| 44 | Cyclops | Mountain Stronghold | 107,380,000 | 1,966 | 1.42s | 12% | ~1,133,000 | 20,600,000 | 0 | |
 | 45 | Stone Golem | Mountain Stronghold | 106,400,000 | 2,167 | 1.40s | 12% | ~1,408,000 | 25,600,000 | 0 | MINI-BOSS |
-| 46 | Elder Dragon | Dragon Lair | 136,500,000 | 2,335 | 1.40s | 12% | ~1,672,000 | 30,400,000 | 0 | |
-| 47 | Dragon Champion | Dragon Lair | 175,000,000 | 2,520 | 1.40s | 12% | ~1,980,000 | 36,000,000 | 0 | |
-| 48 | Crystal Dragon | Dragon Lair | 220,500,000 | 2,722 | 1.40s | 12% | ~2,332,000 | 42,400,000 | 0 | |
+| 46 | Elder Dragon | Dragon Lair | 177,450,000 | 2,335 | 1.40s | 12% | ~1,672,000 | 30,400,000 | 0 | |
+| 47 | Dragon Champion | Dragon Lair | 227,500,000 | 2,520 | 1.40s | 12% | ~1,980,000 | 36,000,000 | 0 | |
+| 48 | Crystal Dragon | Dragon Lair | 286,650,000 | 2,722 | 1.40s | 12% | ~2,332,000 | 42,400,000 | 0 | |
 | 49 | Ancient Dragon | Dragon Lair | 276,500,000 | 2,940 | 1.40s | 14% | ~2,706,000 | 49,200,000 | 0 | ELITE |
 | 50 | Dragon Lord | Dragon Lair | 343,000,000 | 2,950 | 1.40s | 15% | ~3,135,000 | 57,000,000 | 2 | FINAL BOSS |
 
@@ -361,9 +361,9 @@ Calibrated across all 50 enemies with strictly monotonic bounties and unblockabl
 | 91-100 | Cosmic Void & Heaven (#91-#100) | Groups 19-20 | $2.65\text{Qa} \to 35.5\text{Qa}$ | $1.90\text{M} \to 4.20\text{M}$ | 1.20s | $43.0\text{T} \to 580\text{T}$ | BOSS #100 |
 
 ---
-## 10. Skills — All 30 (v2.6.6 Audited Final with Active Brace & 3-Rank `Iron Stance`)
+## 10. Skills — All 30 (v2.6.7 with Tap-Parry & 3-Rank `Iron Stance`)
 
-Bought with coins from the skill tree. **Speed Skills are mandatory to lower your permanent attack interval from the $0.9075\text{s}$ attribute-only floor down to the $0.499\text{s}$ permanent cap**, **Proc/Crit/Combo Skills bypass the $-40\%$ Armored Poise damage reduction**, and **Deflect + Iron Stance I–III** unlock and scale your active defensive Brace stance (`5.00s -> 4.30s -> 3.60s -> 3.00s`).
+Bought with coins from the skill tree. **Speed Skills are mandatory to lower your permanent attack interval from the $0.9075\text{s}$ attribute-only floor down to the $0.499\text{s}$ permanent cap**, **Proc/Crit/Combo Skills bypass the $-40\%$ Armored Poise damage reduction**, and **Deflect + Iron Stance I–III** unlock and scale your Tap-Parry (cooldown `10s -> 8s -> 5s`; *Iron Stance III* widens the window to `0.50s`).
 
 | Tier | Skill | Cost (v2.6.6) | Needs First | Boss Gate | Trigger, `ProcChance` & `ProcIntervalSlaps` | v2.6.6 Audited Final Effect |
 |---|---|---|---|---|---|---|
@@ -374,7 +374,7 @@ Bought with coins from the skill tree. **Speed Skills are mandatory to lower you
 | 2 | **Twin Mastery** | 3,200 | Second Hand | -- | `AlwaysOn` (`100%`) | Reduces permanent slap interval by $\times 0.90$ and grants $+10\%$ combo charge (`ComboChargeBonus`, no boss gate). |
 | 2 | **On Target** | 6,500 | Twin Mastery | -- | `AlwaysOn` (`100%`) | Combo stacks survive switching enemies (resets on defeat). |
 | 2 | **Quick Reflexes** | 15,000 | Twin Mastery | Beat #10 | `AlwaysOn` (`100%`) | Reduces permanent slap interval by $\times 0.90$. |
-| 2 | **Deflect** | 22,000 | Basic Slap | -- | `AlwaysOn` (`100%`) | Unlocks **Active Brace**: Swipe-Down or Hold anywhere on screen for a **$1.00\text{s}$ defensive stance** on a **$5.00\text{s}$ base cooldown**. Negates $100\%$ of the next Normal Attack and deals a **$1.50\times$ Counter-Slap** (Unblockable Signatures pierce Brace without consuming it and freeze its timer). |
+| 2 | **Deflect** | 22,000 | Basic Slap | -- | `AlwaysOn` (`100%`) | Unlocks **Tap-Parry**: tap the **PARRY button** the instant an enemy attack lands (**$0.30\text{s}$ window**) on a **$10.00\text{s}$ base cooldown**. Negates $100\%$ of the Normal Attack and deals a **$1.50\times$ Counter-Slap** (Signatures are Unblockable and cannot be parried). |
 | 2 | **Critical Slaps** | 35,000 | Stronger Hands | -- | `AlwaysOn` (`100%`) | $+5\%$ critical strike chance (helps bypass Armored Poise). |
 | 2 | **Seismic Slam** | 55,000 | Stamina Training | Beat #10 | `ProcEveryNSlaps` (`100%`, every `5` slaps) | Every **5th slap** lands a SEISMIC SLAM dealing **$3.0\times$ damage** (`ValuePrimary = 3.00f`, bypasses Poise) and dazing the enemy for $0.8\text{s}$ ($0.4\text{s}$ vs Bosses)! |
 | 2 | **Heavy Slap** | 90,000 | Stronger Hands | Beat #10 | `ProcOnHit` (`ProcChance = 12%`) | $12\%$ chance a slap lands HEAVY for **$2.5\times$ damage** (`ValuePrimary = 2.50f`, bypasses Poise). |
@@ -388,15 +388,15 @@ Bought with coins from the skill tree. **Speed Skills are mandatory to lower you
 | 4 | **Dual-Hand Technique** | 18,000,000 | Opportunist | Beat #20 | `AlwaysOn` (`100%`) | Reduces permanent slap interval by $\times 0.85$ (reaches exact $0.499\text{s}$ permanent cap at Speed Lv 25). |
 | 4 | **Unstoppable Hands** | 38,000,000 | Adrenaline Rush | Beat #30 | `AlwaysOn` (`100%`) | $+1,400$ Max HP (applies immediately upon purchase) and regenerate **$0.35\%$ Max HP/s** during fights. |
 | 4 | **Kinetic Barrier** | 75,000,000 | Adrenaline Rush | Beat #30 | `ProcEveryNSlaps` (`100%`, every `10` slaps) | Every **10 slaps** builds a shield absorbing **$12\%$ of Max HP** damage (max $24\%$ Max HP, $10\text{s}$ internal cooldown). |
-| 4 | **Iron Stance I** | 120,000,000 | Deflect | Beat #30 | `AlwaysOn` (`100%`) | Reduces Active Brace cooldown by **$-0.70\text{s}$** ($5.00\text{s} \to \mathbf{4.30\text{s}}$). |
+| 4 | **Iron Stance I** | 120,000,000 | Deflect | Beat #30 | `AlwaysOn` (`100%`) | Reduces Parry cooldown by **$-2.00\text{s}$** ($10.00\text{s} \to \mathbf{8.00\text{s}}$). |
 | 4 | **Treasure Hunter** | 150,000,000 | Coin Magnet | Beat #30 | `AlwaysOn` (`100%`) | Elites and Bosses drop $+25\%$ bonus coins, and first-clear/milestone defeats grant $+1$ extra Gem. |
 | 4 | **Frenzy** | 300,000,000 | Boss Hunter | Beat #30 | `ActiveDurationState` (`25` slaps) | Slaps charge FRENZY: $10\text{s}$ of $+50\%$ damage and $+30\%$ Overdrive speed ($\times 0.7692$ interval, bypasses $0.499\text{s}$ cap down to $0.30\text{s}$). |
 | 4 | **Colossus Bane** | 600,000,000 | Boss Hunter | Beat #35 | `AlwaysOn` (`100%`) | $+35\%$ damage vs Giant, Titan, and Dragon enemies (`IsColossus == true`: #35-#50 & Worlds). |
 | 5 | **Rapid Barrage** | 1,200,000,000 | Dual-Hand Technique | Beat #40 | `ProcEveryNSlaps` (`100%`, every `6` slaps) | Every **6th slap** unleashes a barrage: 3 extra hits at $40\%$ damage each ($+120\%$ bonus $= \mathbf{2.20\times}$ total slap damage). |
-| 5 | **Iron Stance II** | 1,500,000,000 | Iron Stance I | Beat #40 | `AlwaysOn` (`100%`) | Reduces Active Brace cooldown by **$-0.70\text{s}$** ($4.30\text{s} \to \mathbf{3.60\text{s}}$). |
+| 5 | **Iron Stance II** | 1,500,000,000 | Iron Stance I | Beat #40 | `AlwaysOn` (`100%`) | Reduces Parry cooldown by **$-3.00\text{s}$** ($8.00\text{s} \to \mathbf{5.00\text{s}}$). |
 | 5 | **Bulwark Guard** | 2,400,000,000 | Kinetic Barrier | Beat #40 | `AlwaysOn` (`100%`) | When Defense or Barrier mitigates damage, $50\%$ of the blocked damage is reflected back to the enemy. |
 | 5 | **Godhand Strike** | 5,000,000,000 | Colossus Bane | Beat #45 | `ProcEveryNSlaps` (`100%`, every `20` slaps) | Every **20th slap** triggers the Godhand Ultimate: an **$8.0\times$ screen-shattering strike** (`ValuePrimary = 8.00f`)! |
-| 5 | **Iron Stance III** | 12,000,000,000 | Iron Stance II | Beat #50 | `AlwaysOn` (`100%`) | Reduces Active Brace cooldown by **$-0.60\text{s}$** ($3.60\text{s} \to \mathbf{3.00\text{s}}$ cap). |
+| 5 | **Iron Stance III** | 12,000,000,000 | Iron Stance II | Beat #50 | `AlwaysOn` (`100%`) | **Widens the Parry window** ($0.30\text{s} \to \mathbf{0.50\text{s}}$). Cooldown stays $5.00\text{s}$. |
 
 **Exact Total Cost of the Skill Tree (All 30 Skills): 23,417,667,750 coins (`9,797,667,750` base + `13,620,000,000` Iron Stance I–III).**
 
@@ -411,7 +411,7 @@ Bought with coins from the skill tree. **Speed Skills are mandatory to lower you
 * **No Cornerman Drafts & No Special Resets:** Special Move cooldowns (`Double Slap`, `Guard`, `Uppercut`) do NOT reset between bouts; Combo Stacks decay by $50\%$ during the $2\text{s}$ transition between bouts.
 * **Clutch Execution Recovery:**
   * **Base Breather:** $+5\%$ Max HP between bouts.
-  * **Clean Defense Bonus:** **$+4\%$ Max HP** for every Normal Attack Braced (*Deflect*) or Blocked (*Guard*) during the bout (capped at $+12\%$ Max HP).
+  * **Clean Defense Bonus:** **$+4\%$ Max HP** for every Normal Attack Parried (*Deflect*) or Blocked (*Guard*) during the bout (capped at $+12\%$ Max HP).
   * **Overkill Finisher:** Landing the killing blow with a Special Move or Weak Spot grants $+5\%$ Max HP and shaves $-3\text{s}$ off active Special cooldowns.
 * **Payout & Cooldown:** Slap coins $\times 0.50$; Completion Bonus $= (\text{Sum of 3 Bounties}) \times 1.35 \times \text{TotalCoinMult} + 3\text{💎}$ first clear ($1\text{💎}$ repeats on highest cleared group only). **Shared 30-minute global cooldown.**
 
@@ -468,7 +468,7 @@ Bought with coins from the skill tree. **Speed Skills are mandatory to lower you
 | 20 | LEGEND | $\times 33.00$ | $\times 4.50$ | $+2\text{💎}$ | $+1\text{💎}$ |
 
 ### 11.5 Reflex Slap-Off (Unlock: Beat #10 + Deflect & Precision Instinct · 2 Charges · 30-Min Recharge)
-* **Format:** Duel your strongest defeated enemy using both unlocked skills (`IsReflexSlapOffUnlocked`). Slaps drain **$2\%$** of the pool, **Red Danger Swipes (Brace)** drain **$12\%$**, and **Gold Weak Spot Taps (Precision)** drain **$8\%$**. A missed Danger Swipe costs $15\%$ of your Max HP; 2 consecutive misses = instant loss ($2\times$ Damage ad boost is paused).
+* **Format:** Duel your strongest defeated enemy using both unlocked skills (`IsReflexSlapOffUnlocked`). Slaps drain **$2\%$** of the pool, **Red Danger Prompts (Parry button)** drain **$12\%$**, and **Gold Weak Spot Taps (Precision)** drain **$8\%$**. A missed Danger Prompt costs $15\%$ of your Max HP; 2 consecutive misses = instant loss ($2\times$ Damage ad boost is paused).
 * **Payout:** Win pays **$2.0 \times \text{Enemy Bounty} \times \text{TotalCoinMult} + 1\text{💎}$**.
 
 ### 11.6 Street Brawl Anomalies (25% Chance on Repeat Main-Roster Fights)
@@ -617,8 +617,8 @@ Every equipped skin grants a **Global Multiplicative Bonus** and an **Active Ski
 | **Permanent Skill-Unlocked Slap Interval Floor (Speed Lv 25 + Skills)** | $0.499\text{ seconds}$ |
 | **Skin & World Relic Slap Interval Floor (`Speed.HardCapValue`)** | $0.350\text{ seconds}$ |
 | **Temporary Overdrive Slap Interval Floor** | $0.300\text{ seconds}$ (Frenzy, Adrenaline, Swift Recovery, Time Stop) |
-| **Active Brace (`Deflect`) Stance & Cooldown** | $1.00\text{s}$ stance · **$5.00\text{s}$** base CD ($4.30\text{s} \to 3.60\text{s} \to 3.00\text{s}$ w/ *Iron Stance I–III*; freezes during Signatures; $75\%$ CD refund if interrupted) |
-| **Signature Move Windup (`SignatureWindupSec`)** | $0.75\text{s}$ (Unblockable — pierces Brace and Guard without consuming them) |
+| **Tap-Parry (`Deflect`) Window & Cooldown** | $0.30\text{s}$ window ($0.50\text{s}$ w/ *Iron Stance III*) · **$10.00\text{s}$** base CD ($8.00\text{s} \to 5.00\text{s}$ w/ *Iron Stance I–II*) |
+| **Signature Move Windup (`SignatureWindupSec`)** | $0.75\text{s}$ (Unblockable — pierces Parry and Guard without consuming them) |
 | **Infinity Gauntlet Time Stop Duration & Cooldown** | $5.0\text{s}$ active freeze · $16.0\text{s}$ post-freeze recharge cooldown |
 | **Frenzy Duration** | $10.0\text{ seconds}$ ($13.0\text{s}$ with ₹99 Overcharge Booster) |
 | **Boss Post-Heal Enrage Suppression Grace Window** | $8.0\text{ seconds}$ |
