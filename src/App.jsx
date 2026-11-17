@@ -291,6 +291,7 @@ export default function App() {
         </div>
         <div id="comboTag"></div>
         <div id="bossWarn" role="alert"></div>
+        <div id="parryCallout" aria-hidden="true"></div>
         <div id="battleOverlays"><div id="modeHud" style={{'display': 'none'}}></div><div id="fxChips" aria-live="polite"></div></div>
         <button id="blitzTiersBtn" type="button" style={{'display': 'none'}}>🏆 TIERS ▾</button>
         <div id="blitzTiersPanel" style={{'display': 'none'}}></div>
@@ -304,7 +305,7 @@ export default function App() {
             <span className="rc-sub" id="frenzySub"></span>
           </div>
           <div className="rail-item" id="parryItem" style={{'display': 'none'}}>
-            <button id="parryBtn" className="rail-circle parry" type="button" aria-label="Parry — tap as the enemy attack lands">✋</button>
+            <button id="parryBtn" className="rail-circle parry" type="button" aria-label="Parry — tap as the enemy attack lands"></button>
             <span className="rc-sub" id="parrySub">PARRY</span>
           </div>
           <div className="rail-item" id="procItem" style={{'display': 'none'}}>
