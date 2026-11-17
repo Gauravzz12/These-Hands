@@ -5210,3 +5210,36 @@ margin-top: 7px;
 .btc-trow.lock{opacity:.55}
 /* Fight Report (win screens): the defeated enemy becomes a small greyscale mugshot */
 #endOverlay.win #endSprite{filter:grayscale(1);opacity:.78;width:56px!important;height:56px!important}
+
+/* ===== Battle UI polish: parry button, lock state (shared) ===== */
+#levelUpBtn.locked { background: #e9dcba; border-color: #8f6010; color: #5b4a1f; box-shadow: 2px 2px 0 rgba(34,20,7,.55); }
+#levelUpBtn.locked svg { width: 12px; height: 12px; }
+.rail-circle.parry { width: 54px; height: 54px; }
+.rail-circle.parry svg { display: block; }
+.rail-circle.parry.hot { box-shadow: 0 0 0 3px #fff, 0 0 22px rgba(255,210,62,.9); }
+.parry-cd { position: absolute; right: -5px; bottom: -5px; z-index: 2; background: #221407; color: #ffd23e; border: 2px solid #ffd23e; border-radius: 999px; font-size: 12px; font-weight: 900; line-height: 1; padding: 2px 6px; }
+#parryItem { position: relative; }
+#parryPop { position: absolute; top: -20px; left: 50%; transform: translateX(-50%) scale(.5); font-family: "Bungee", "Nunito", sans-serif; font-size: 14px; letter-spacing: .03em; color: #ffd23e; text-shadow: 0 2px 0 #221407, 0 0 10px rgba(255,210,62,.6); opacity: 0; pointer-events: none; white-space: nowrap; z-index: 8; }
+#parryItem.parried #parryPop { animation: parryPopAnim .75s ease-out; }
+#parryItem.parried #parryBtn { animation: parryBtnPop .38s ease-out; }
+@keyframes parryPopAnim { 0% { opacity: 0; transform: translateX(-50%) translateY(8px) scale(.5); } 22% { opacity: 1; transform: translateX(-50%) translateY(0) scale(1.18); } 55% { opacity: 1; transform: translateX(-50%) translateY(-6px) scale(1); } 100% { opacity: 0; transform: translateX(-50%) translateY(-18px) scale(1); } }
+@keyframes parryBtnPop { 0% { transform: scale(1); } 35% { transform: scale(1.28); box-shadow: 0 0 0 4px #fff, 0 0 30px rgba(255,210,62,1); } 100% { transform: scale(1); } }
+
+/* ===== Battle screen: Compact Pro layout (Gaurav pick, 2026-11-17) ===== */
+#app[data-screen="battle"] #enemyBar { padding: 1px 12px 5px; }
+#app[data-screen="battle"] #enemyName { font-size: 18px; }
+#app[data-screen="battle"] #enemyMeta { font-size: 10.5px; }
+#app[data-screen="battle"] #hpTrack { height: 22px; margin-top: 4px; }
+#app[data-screen="battle"] #battleOverlays { top: 4px; }
+#app[data-screen="battle"] .fx-chip { font-size: 10px; padding: 2px 8px; }
+#app[data-screen="battle"] #playerBar { margin-top: 5px; }
+#app[data-screen="battle"] #atkRow { margin: 4px 0 5px; }
+#app[data-screen="battle"] #attrPanel { padding: 4px 9px 6px; }
+#app[data-screen="battle"] .rail-circle.parry { width: 56px; height: 56px; }
+
+/* Parry fail feedback: red pop + shake (success pop is gold, above) */
+#parryPop.miss { color: #ff5a48; }
+#parryItem.missed #parryPop { animation: parryPopAnim .8s ease-out; }
+#parryItem.missed #parryBtn { animation: parryShake .32s ease-out; }
+#parryItem.denied #parryBtn { animation: parryShake .25s ease-out; }
+@keyframes parryShake { 0%, 100% { transform: translateX(0); } 20% { transform: translateX(-4px); } 45% { transform: translateX(4px); } 70% { transform: translateX(-3px); } 90% { transform: translateX(2px); } }

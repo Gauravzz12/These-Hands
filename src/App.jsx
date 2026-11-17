@@ -304,7 +304,8 @@ export default function App() {
             <span className="rc-sub" id="frenzySub"></span>
           </div>
           <div className="rail-item" id="parryItem" style={{'display': 'none'}}>
-            <button id="parryBtn" className="rail-circle parry" type="button" aria-label="Parry — tap as the enemy attack lands">✋</button>
+            <button id="parryBtn" className="rail-circle parry" type="button" aria-label="Parry — tap as the enemy attack lands"></button>
+            <span id="parryPop" aria-hidden="true">PARRIED!</span>
             <span className="rc-sub" id="parrySub">PARRY</span>
           </div>
           <div className="rail-item" id="procItem" style={{'display': 'none'}}>
