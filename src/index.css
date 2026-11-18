@@ -5258,163 +5258,20 @@ margin-top: 7px;
 .feed-item.f-ultimate { background: #d9b8ff; }
 @keyframes feedIn { from { opacity: 0; transform: translateX(-10px); } to { opacity: 1; transform: translateX(0); } }
 
-/* ===== MAIN MENU OPTIONS (review build, ?menu=a|b|c — Gaurav picks, loser variants get deleted) ===== */
-/* --- A: FULL ARENA (Brawl Stars / Subway Surfers: the stage IS the screen) --- */
-#startMenu[data-menu="a"]{background:#3a2413 url('/stage-bg/g0.webp') center/cover no-repeat !important}
-#startMenu[data-menu="a"] .menu-tag{background:rgba(31,20,10,.78);color:#ffd23e;border-color:rgba(255,210,62,.55)}
-#startMenu[data-menu="a"] #menuMusicBtn{background:rgba(31,20,10,.78);color:#ffd23e;border-color:rgba(255,210,62,.55)}
-#startMenu[data-menu="a"] .menu-kicker{color:#ffd23e;text-shadow:0 2px 0 rgba(31,20,10,.85)}
-#startMenu[data-menu="a"] .menu-logo-img{width:min(185px,46vw)}
-#startMenu[data-menu="a"] .menu-stage{background:transparent;border:none;box-shadow:none;max-width:520px}
-#startMenu[data-menu="a"] .menu-enemy-img{width:86%;height:84%;bottom:19%}
-#startMenu[data-menu="a"] .menu-summary .ms{background:rgba(31,20,10,.8);color:#fdf3d8;border-color:rgba(255,210,62,.5);box-shadow:0 2px 0 rgba(0,0,0,.35)}
-#startMenu[data-menu="a"] .menu-hint{color:#ffd23e;text-shadow:0 1px 0 rgba(31,20,10,.8)}
-/* --- B: HERO CARD (Royal Match / Stumble Guys: big framed hero, sticker stats) --- */
-#startMenu[data-menu="b"]{background:#f7ecd5 !important}
-#startMenu[data-menu="b"] .menu-logo-img{width:min(215px,54vw)}
-#startMenu[data-menu="b"] .menu-kicker{color:#d63c30}
-#startMenu[data-menu="b"] .menu-stage{border:3.5px solid #221407;border-radius:22px;box-shadow:0 6px 0 #221407;overflow:visible;margin-top:16px}
-#startMenu[data-menu="b"] .menu-stage .ring-floor{border-radius:0 0 18px 18px}
-#startMenu[data-menu="b"] .menu-stage-badge{position:absolute;top:-15px;left:50%;transform:translateX(-50%) rotate(-2deg);background:#d63c30;color:#fff;border:2.5px solid #221407;box-shadow:0 3px 0 #221407;z-index:3;margin:0;white-space:nowrap}
-#startMenu[data-menu="b"] .menu-enemy-img{width:76%;height:78%}
-#startMenu[data-menu="b"] .menu-summary{position:relative;z-index:4;margin-top:-14px}
-#startMenu[data-menu="b"] .menu-summary .ms{background:#fff;border:2.5px solid #221407;box-shadow:0 3px 0 #221407;font-size:12px;padding:7px 13px}
-#startMenu[data-menu="b"] .play-btn-arcade{background:#ffb703 !important;border:3px solid #221407 !important;box-shadow:0 6px 0 #221407,0 10px 18px rgba(43,28,16,.25) !important;color:#221407 !important}
-/* --- C: COMIC POSTER (sunburst poster, sticker chips, flat red FIGHT) --- */
-#startMenu[data-menu="c"]{background:repeating-conic-gradient(from -8deg at 50% 30%,#f6c453 0deg 9deg,#f0b73e 9deg 18deg) !important}
-#startMenu[data-menu="c"] .menu-tag{background:#fff;color:#221407;border:2.5px solid #221407;box-shadow:0 3px 0 #221407}
-#startMenu[data-menu="c"] #menuMusicBtn{background:#fff;color:#221407;border:2.5px solid #221407;box-shadow:0 3px 0 #221407}
-#startMenu[data-menu="c"] .menu-kicker{display:inline-block;background:#d63c30;color:#fff;padding:4px 16px;border:2.5px solid #221407;border-radius:8px;box-shadow:0 3px 0 #221407;transform:rotate(-2deg);text-shadow:none}
-#startMenu[data-menu="c"] .menu-logo-img{width:min(330px,84vw)}
-#startMenu[data-menu="c"] .menu-stage{width:min(76vw,325px);height:auto;aspect-ratio:1/1;flex:none;border-radius:50%;border:4px solid #221407;box-shadow:0 6px 0 #221407;margin:4px auto}
-#startMenu[data-menu="c"] .menu-stage .ring-floor{display:none}
-#startMenu[data-menu="c"] .menu-stage .ring-rug{bottom:9%}
-#startMenu[data-menu="c"] .menu-stage-badge{position:absolute;top:14px;left:50%;transform:translateX(-50%) rotate(3deg);background:#d63c30;color:#fff;border:2.5px solid #221407;box-shadow:0 3px 0 #221407;z-index:3;margin:0;white-space:nowrap;font-size:10.5px}
-#startMenu[data-menu="c"] .menu-enemy-img{width:74%;height:72%;bottom:15%}
-#startMenu[data-menu="c"] .menu-summary .ms{background:#fff;border:2.5px solid #221407;box-shadow:0 3px 0 #221407;font-size:12px;padding:7px 13px}
-#startMenu[data-menu="c"] .menu-summary .ms:first-child{transform:rotate(-3deg)}
-#startMenu[data-menu="c"] .menu-summary .ms:last-child{transform:rotate(3deg)}
-#startMenu[data-menu="c"] .play-btn-arcade{background:#d63c30 !important;border:3px solid #221407 !important;box-shadow:0 6px 0 #221407,0 10px 18px rgba(43,28,16,.3) !important;color:#fff !important}
-#startMenu[data-menu="c"] .menu-hint{color:#7a2c14;text-shadow:0 1px 0 rgba(255,255,255,.5)}
-
-/* menu options — fix pass */
-#startMenu[data-menu="a"] .menu-header{background:#fdf6e0;border:3px solid #221407;border-radius:16px;box-shadow:0 5px 0 #221407;padding:8px 20px 10px}
-#startMenu[data-menu="a"] .menu-kicker{color:#b45309;text-shadow:none}
-#startMenu[data-menu="a"] .menu-logo-img{width:min(168px,42vw)}
-#startMenu[data-menu="a"] .menu-stage .ring-floor{height:22%}
-#startMenu[data-menu="a"] .menu-enemy-img{width:74%;height:68%;bottom:15%}
-#startMenu[data-menu="a"] .menu-stage-badge{position:relative;z-index:5}
-#startMenu[data-menu="b"] .menu-enemy-img{bottom:15.5%}
-#startMenu[data-menu="c"] .menu-logo-img{border:3.5px solid #221407;border-radius:14px;box-shadow:0 5px 0 #221407;background:#fff8ea}
-#startMenu[data-menu="c"] .menu-stage{overflow:visible}
-#startMenu[data-menu="c"] .menu-stage-badge{top:auto;bottom:-13px;transform:translateX(-50%) rotate(-2deg);font-size:11px}
-
-/* ===== MENU REVAMP ROUND 2 — completely new directions (?menu=d|e|f): drawn SVG icons (no emoji), type logo (no logo.webp), new copy ===== */
-/* shared revamp bones */
-#startMenu[data-menu="d"] .menu-tag,#startMenu[data-menu="e"] .menu-tag,#startMenu[data-menu="f"] .menu-tag{display:none}
-#startMenu[data-menu="d"] .menu-hint,#startMenu[data-menu="e"] .menu-hint,#startMenu[data-menu="f"] .menu-hint{display:none}
-#startMenu[data-menu="d"] .menu-kicker,#startMenu[data-menu="e"] .menu-kicker,#startMenu[data-menu="f"] .menu-kicker{display:none}
-#startMenu[data-menu="d"] .menu-logo-img,#startMenu[data-menu="e"] .menu-logo-img,#startMenu[data-menu="f"] .menu-logo-img{display:none}
-#startMenu[data-menu="d"] .menu-header::before,#startMenu[data-menu="e"] .menu-header::before,#startMenu[data-menu="f"] .menu-header::before{content:"IDLE";display:block;font-family:"Bungee",sans-serif;line-height:.95}
-#startMenu[data-menu="d"] .menu-header::after,#startMenu[data-menu="e"] .menu-header::after,#startMenu[data-menu="f"] .menu-header::after{content:"SLAPPER";display:block;font-family:"Bungee",sans-serif;line-height:.95}
-#startMenu[data-menu="d"] .play-btn-arcade .pb-text,#startMenu[data-menu="e"] .play-btn-arcade .pb-text,#startMenu[data-menu="f"] .play-btn-arcade .pb-text{display:none}
-#startMenu[data-menu="d"] .play-btn-arcade .pb-icon,#startMenu[data-menu="e"] .play-btn-arcade .pb-icon,#startMenu[data-menu="f"] .play-btn-arcade .pb-icon{display:none}
-#startMenu[data-menu="d"] .menu-top-bar,#startMenu[data-menu="e"] .menu-top-bar,#startMenu[data-menu="f"] .menu-top-bar{justify-content:flex-end}
-/* --- D: DARK ARENA (near-black, spotlight stage, gold accents, red FIGHT) --- */
-#startMenu[data-menu="d"]{background:#14100d !important}
-#startMenu[data-menu="d"] #menuMusicBtn{background:rgba(255,255,255,.05);color:#f5b301;border:1.5px solid rgba(245,179,1,.45);box-shadow:none}
-#startMenu[data-menu="d"] .menu-header::before{font-size:34px;color:#f7ecd5;letter-spacing:.14em}
-#startMenu[data-menu="d"] .menu-header::after{font-size:52px;color:#f5b301;letter-spacing:.05em;text-shadow:0 4px 0 rgba(0,0,0,.6)}
-#startMenu[data-menu="d"] .menu-stage{border:1px solid rgba(245,179,1,.28);border-radius:24px;box-shadow:0 24px 48px rgba(0,0,0,.55)}
-#startMenu[data-menu="d"] .menu-stage-badge{background:transparent;border:none;box-shadow:none;color:#ffd23e;font-family:"Nunito",sans-serif;font-weight:800;font-size:11px;letter-spacing:.22em}
-#startMenu[data-menu="d"] .menu-enemy-img{width:78%;height:76%}
-#startMenu[data-menu="d"] .menu-summary{background:rgba(255,255,255,.05);border:1px solid rgba(245,179,1,.22);border-radius:14px;padding:9px 16px;gap:16px}
-#startMenu[data-menu="d"] .menu-summary .ms{background:transparent;border:none;box-shadow:none;color:#f7ecd5;font-size:12.5px;padding:0}
-#startMenu[data-menu="d"] .play-btn-arcade{background:#e0342b !important;border:none !important;border-radius:16px;box-shadow:0 6px 0 #7c1d16,0 16px 30px rgba(224,52,43,.35) !important;color:#fff !important}
-#startMenu[data-menu="d"] .play-btn-arcade::after{content:"FIGHT";font-family:"Bungee",sans-serif;font-size:27px;letter-spacing:.1em}
-/* --- E: LIGHT MINIMAL (premium casual: airy, hairlines, ink pill PLAY) --- */
-#startMenu[data-menu="e"]{background:#faf7f1 !important}
-#startMenu[data-menu="e"] #menuMusicBtn{background:transparent;color:#221407;border:1.5px solid #ddd3bd;box-shadow:none}
-#startMenu[data-menu="e"] .menu-header::before{font-size:30px;color:#221407;letter-spacing:.2em}
-#startMenu[data-menu="e"] .menu-header::after{font-size:46px;color:#d63c30;letter-spacing:.06em}
-#startMenu[data-menu="e"] .menu-stage{border:none;border-radius:28px;box-shadow:0 18px 34px rgba(43,28,16,.16)}
-#startMenu[data-menu="e"] .menu-stage-badge{background:#fff;color:#221407;border:none;box-shadow:0 4px 14px rgba(43,28,16,.18);font-family:"Nunito",sans-serif;font-weight:800;letter-spacing:.14em}
-#startMenu[data-menu="e"] .menu-enemy-img{width:72%;height:74%}
-#startMenu[data-menu="e"] .menu-summary{border-top:1.5px solid #e7dcc3;padding-top:10px;gap:0}
-#startMenu[data-menu="e"] .menu-summary .ms{background:transparent;border:none;box-shadow:none;color:#221407;font-size:12.5px;padding:2px 14px;border-radius:0}
-#startMenu[data-menu="e"] .menu-summary .ms + .ms{border-left:1.5px solid #e7dcc3}
-#startMenu[data-menu="e"] .play-btn-arcade{background:#221407 !important;border:none !important;border-radius:999px;box-shadow:0 12px 24px rgba(34,20,7,.3) !important;color:#faf7f1 !important;max-width:340px}
-#startMenu[data-menu="e"] .play-btn-arcade::after{content:"PLAY";font-family:"Bungee",sans-serif;font-size:24px;letter-spacing:.14em}
-/* --- F: RED POSTER (flat red field, huge type, tilted scene card, white FIGHT) --- */
-#startMenu[data-menu="f"]{background:#d63c30 !important}
-#startMenu[data-menu="f"] #menuMusicBtn{background:#fff;color:#221407;border:2.5px solid #221407;box-shadow:0 3px 0 #221407}
-#startMenu[data-menu="f"] .menu-header::before{font-size:40px;color:#fff;letter-spacing:.1em;text-shadow:0 4px 0 #221407}
-#startMenu[data-menu="f"] .menu-header::after{font-size:62px;color:#ffd23e;letter-spacing:.03em;text-shadow:0 5px 0 #221407}
-#startMenu[data-menu="f"] .menu-stage{border:4px solid #fff;border-radius:20px;box-shadow:0 8px 0 #221407;transform:rotate(-1.2deg)}
-#startMenu[data-menu="f"] .menu-stage-badge{background:#ffd23e;color:#221407;border:2.5px solid #221407;box-shadow:0 3px 0 #221407;transform:rotate(2deg)}
-#startMenu[data-menu="f"] .menu-enemy-img{width:74%;height:76%}
-#startMenu[data-menu="f"] .menu-summary .ms{background:transparent;border:none;box-shadow:none;color:#fff;font-size:13px;padding:2px 8px}
-#startMenu[data-menu="f"] .play-btn-arcade{background:#fff !important;border:3px solid #221407 !important;border-radius:18px;box-shadow:0 6px 0 #221407 !important;color:#d63c30 !important}
-#startMenu[data-menu="f"] .play-btn-arcade::after{content:"FIGHT";font-family:"Bungee",sans-serif;font-size:27px;letter-spacing:.1em}
-
-#startMenu[data-menu="d"] .menu-summary .ms-ico{font-size:0;width:15px;height:15px;background-size:contain;background-repeat:no-repeat;background-position:center}
-#startMenu[data-menu="d"] .menu-summary .ms:nth-child(1) .ms-ico{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M13 2 4 14h6l-1 8 9-12h-6l1-8z' fill='%23f5b301'/%3E%3C/svg%3E")}
-#startMenu[data-menu="d"] .menu-summary .ms:nth-child(2) .ms-ico{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 0l2.1 6.9L21 4l-2.9 6.9L24 12l-5.9 1.1L21 20l-6.9-2.9L12 24l-2.1-6.9L3 20l2.9-6.9L0 12l5.9-1.1L3 4l6.9 2.9z' fill='%23f5b301'/%3E%3C/svg%3E")}
-#startMenu[data-menu="d"] .menu-summary .ms:nth-child(3) .ms-ico{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='9' fill='%23f5b301' stroke='%23b97e08' stroke-width='2'/%3E%3Ccircle cx='12' cy='12' r='4.2' fill='none' stroke='%23b97e08' stroke-width='2'/%3E%3C/svg%3E")}
-#startMenu[data-menu="e"] .menu-summary .ms-ico{font-size:0;width:15px;height:15px;background-size:contain;background-repeat:no-repeat;background-position:center}
-#startMenu[data-menu="e"] .menu-summary .ms:nth-child(1) .ms-ico{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M13 2 4 14h6l-1 8 9-12h-6l1-8z' fill='%23221407'/%3E%3C/svg%3E")}
-#startMenu[data-menu="e"] .menu-summary .ms:nth-child(2) .ms-ico{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 0l2.1 6.9L21 4l-2.9 6.9L24 12l-5.9 1.1L21 20l-6.9-2.9L12 24l-2.1-6.9L3 20l2.9-6.9L0 12l5.9-1.1L3 4l6.9 2.9z' fill='%23221407'/%3E%3C/svg%3E")}
-#startMenu[data-menu="e"] .menu-summary .ms:nth-child(3) .ms-ico{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='9' fill='none' stroke='%23221407' stroke-width='2.2'/%3E%3Ccircle cx='12' cy='12' r='4.2' fill='%23221407'/%3E%3C/svg%3E")}
-#startMenu[data-menu="f"] .menu-summary .ms-ico{font-size:0;width:15px;height:15px;background-size:contain;background-repeat:no-repeat;background-position:center}
-#startMenu[data-menu="f"] .menu-summary .ms:nth-child(1) .ms-ico{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M13 2 4 14h6l-1 8 9-12h-6l1-8z' fill='%23ffffff'/%3E%3C/svg%3E")}
-#startMenu[data-menu="f"] .menu-summary .ms:nth-child(2) .ms-ico{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 0l2.1 6.9L21 4l-2.9 6.9L24 12l-5.9 1.1L21 20l-6.9-2.9L12 24l-2.1-6.9L3 20l2.9-6.9L0 12l5.9-1.1L3 4l6.9 2.9z' fill='%23ffffff'/%3E%3C/svg%3E")}
-#startMenu[data-menu="f"] .menu-summary .ms:nth-child(3) .ms-ico{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='9' fill='none' stroke='%23ffffff' stroke-width='2.2'/%3E%3Ccircle cx='12' cy='12' r='4.2' fill='%23ffffff'/%3E%3C/svg%3E")}/* revamp fix pass: grounding + floor + summary shadows */
-#startMenu[data-menu="d"] .menu-enemy-img{bottom:15.5%}
-#startMenu[data-menu="e"] .menu-enemy-img{bottom:15.5%}
-#startMenu[data-menu="f"] .menu-enemy-img{bottom:15.5%}
-#startMenu[data-menu="d"] .menu-stage .ring-floor{height:20%}
-#startMenu[data-menu="e"] .menu-summary{background:#fff;box-shadow:0 6px 18px rgba(43,28,16,.12);border-radius:999px;padding:6px 10px}
-#startMenu[data-menu="f"] .menu-summary{background:rgba(34,20,7,.28);box-shadow:none;border-radius:999px;padding:7px 12px}
-/* ===== MENU ROUND 3 — no fight showcase, no score cards (?menu=g|h|i) ===== */
-#startMenu[data-menu="g"] .menu-tag,#startMenu[data-menu="h"] .menu-tag,#startMenu[data-menu="i"] .menu-tag{display:none}
-#startMenu[data-menu="g"] .menu-hint,#startMenu[data-menu="h"] .menu-hint,#startMenu[data-menu="i"] .menu-hint{display:none}
-#startMenu[data-menu="g"] .menu-kicker,#startMenu[data-menu="h"] .menu-kicker,#startMenu[data-menu="i"] .menu-kicker{display:none}
-#startMenu[data-menu="g"] .menu-logo-img,#startMenu[data-menu="h"] .menu-logo-img,#startMenu[data-menu="i"] .menu-logo-img{display:none}
-#startMenu[data-menu="g"] .menu-stage,#startMenu[data-menu="h"] .menu-stage,#startMenu[data-menu="i"] .menu-stage{display:none}
-#startMenu[data-menu="g"] .menu-summary,#startMenu[data-menu="h"] .menu-summary,#startMenu[data-menu="i"] .menu-summary{display:none}
-#startMenu[data-menu="g"] .menu-header::before,#startMenu[data-menu="h"] .menu-header::before,#startMenu[data-menu="i"] .menu-header::before{content:"IDLE";display:block;font-family:"Bungee",sans-serif;line-height:.95}
-#startMenu[data-menu="g"] .menu-header::after,#startMenu[data-menu="h"] .menu-header::after,#startMenu[data-menu="i"] .menu-header::after{content:"SLAPPER";display:block;font-family:"Bungee",sans-serif;line-height:.95}
-#startMenu[data-menu="g"] .play-btn-arcade .pb-text,#startMenu[data-menu="h"] .play-btn-arcade .pb-text,#startMenu[data-menu="i"] .play-btn-arcade .pb-text{display:none}
-#startMenu[data-menu="g"] .play-btn-arcade .pb-icon,#startMenu[data-menu="h"] .play-btn-arcade .pb-icon,#startMenu[data-menu="i"] .play-btn-arcade .pb-icon{display:none}
-#startMenu[data-menu="g"] .play-btn-arcade::after,#startMenu[data-menu="h"] .play-btn-arcade::after,#startMenu[data-menu="i"] .play-btn-arcade::after{content:"PLAY";font-family:"Bungee",sans-serif;letter-spacing:.12em}
-#startMenu[data-menu="g"] .menu-top-bar,#startMenu[data-menu="h"] .menu-top-bar,#startMenu[data-menu="i"] .menu-top-bar{justify-content:flex-end}
-/* --- G: KEY ART (full-bleed generated art, type logo on top, gold PLAY) --- */
-#startMenu[data-menu="g"]{background:#5d0f14 url('/menu-keyart.webp') center/cover no-repeat !important}
-#startMenu[data-menu="g"] #menuMusicBtn{background:rgba(20,8,4,.55);color:#ffd23e;border:1.5px solid rgba(255,210,62,.5);box-shadow:none}
-#startMenu[data-menu="g"] .menu-header::before{font-size:36px;color:#fdf3d8;letter-spacing:.16em;text-shadow:0 3px 0 rgba(40,4,4,.65)}
-#startMenu[data-menu="g"] .menu-header::after{font-size:58px;color:#ffb703;letter-spacing:.04em;text-shadow:0 4px 0 rgba(40,4,4,.65)}
-#startMenu[data-menu="g"] .play-btn-arcade{background:#ffb703 !important;border:3px solid #221407 !important;border-radius:18px;box-shadow:0 6px 0 #221407,0 14px 28px rgba(0,0,0,.45) !important;color:#221407 !important}
-#startMenu[data-menu="g"] .play-btn-arcade::after{font-size:26px}
-/* --- H: BIG TYPE (flat ink field, giant type over the burst fx, white PLAY) --- */
-#startMenu[data-menu="h"]{background:#171310 !important;justify-content:center;gap:34px}
-#startMenu[data-menu="h"] #menuMusicBtn{background:transparent;color:#f5b301;border:1.5px solid rgba(245,179,1,.4);box-shadow:none}
-#startMenu[data-menu="h"] .menu-top-bar{position:absolute;top:16px;right:18px;width:auto}
-#startMenu[data-menu="h"] .menu-header{background:url('/fx/burst.webp') center/330px no-repeat;padding:104px 0}
-#startMenu[data-menu="h"] .menu-header::before{font-size:52px;color:#fdf3d8;letter-spacing:.12em;text-shadow:0 4px 0 rgba(0,0,0,.7)}
-#startMenu[data-menu="h"] .menu-header::after{font-size:82px;color:#ffb703;letter-spacing:.02em;text-shadow:0 5px 0 rgba(0,0,0,.7)}
-#startMenu[data-menu="h"] .play-btn-arcade{background:#fdf3d8 !important;border:none !important;border-radius:999px;box-shadow:0 12px 26px rgba(0,0,0,.5) !important;color:#171310 !important;max-width:330px}
-#startMenu[data-menu="h"] .play-btn-arcade::after{font-size:24px}
-/* --- I: BURST POSTER (cream field, burst graphic, ink/red type, red PLAY) --- */
-#startMenu[data-menu="i"]{background:#f7ecd5 !important;justify-content:center;gap:30px}
-#startMenu[data-menu="i"] #menuMusicBtn{background:transparent;color:#221407;border:1.5px solid #d8c49a;box-shadow:none}
-#startMenu[data-menu="i"] .menu-top-bar{position:absolute;top:16px;right:18px;width:auto}
-#startMenu[data-menu="i"] .menu-header{background:url('/fx/burst.webp') top center/235px no-repeat;padding-top:225px}
-#startMenu[data-menu="i"] .menu-header::before{font-size:36px;color:#221407;letter-spacing:.18em}
-#startMenu[data-menu="i"] .menu-header::after{font-size:58px;color:#d63c30;letter-spacing:.04em}
-#startMenu[data-menu="i"] .play-btn-arcade{background:#d63c30 !important;border:3px solid #221407 !important;border-radius:18px;box-shadow:0 6px 0 #221407 !important;color:#fff !important;max-width:360px}
-#startMenu[data-menu="i"] .play-btn-arcade::after{font-size:26px}
-/* round 3 fix: distribution (base menu forces space-between !important) */
-#startMenu[data-menu="g"]{justify-content:flex-start !important}
-#startMenu[data-menu="g"] .menu-actions{margin-top:auto}
-#startMenu[data-menu="h"]{justify-content:center !important}
-#startMenu[data-menu="i"]{justify-content:center !important}
+/* ===== MAIN MENU — FINAL (G Key Art, refined: Gaurav's pick) ===== */
+#startMenu{background:#5d0f14 url('/menu-keyart.webp') center/cover no-repeat !important;justify-content:flex-start !important}
+.menu-top-bar{width:100%;display:flex;align-items:center;justify-content:space-between}
+.menu-ver{font-family:"Nunito",sans-serif;font-weight:800;font-size:11px;letter-spacing:.14em;color:rgba(253,243,216,.72)}
+#startMenu #menuMusicBtn{background:rgba(20,8,4,.55);color:#ffd23e;border:1.5px solid rgba(255,210,62,.5);box-shadow:none}
+.menu-header{text-align:center;margin-top:4px}
+.menu-logo-type span{display:block;font-family:"Bungee",sans-serif;line-height:.98}
+.menu-logo-type .mlt-top{font-size:38px;color:#fdf3d8;letter-spacing:.17em;text-shadow:0 3px 0 rgba(40,4,4,.65)}
+.menu-logo-type .mlt-main{font-size:66px;color:#ffb703;letter-spacing:.03em;text-shadow:0 5px 0 rgba(40,4,4,.65)}
+.menu-tagline{font-family:"Bungee",sans-serif;font-size:12.5px;letter-spacing:.18em;color:#fdf3d8;text-shadow:0 2px 0 rgba(40,4,4,.6);margin-top:9px}
+#startMenu .menu-actions{margin-top:auto;width:100%;max-width:430px;display:flex;flex-direction:column;align-items:center;gap:13px}
+.menu-feats{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+.menu-feats .mf{display:inline-flex;align-items:center;gap:6px;background:rgba(20,8,4,.55);border:1.5px solid rgba(255,210,62,.45);color:#fdf3d8;border-radius:999px;padding:6px 12px;font-family:"Nunito",sans-serif;font-weight:800;font-size:11.5px;letter-spacing:.06em}
+.menu-feats .mf svg{width:14px;height:14px;color:#f5b301;flex:none}
+#startMenu .play-btn-arcade{background:#ffb703 !important;border:3px solid #221407 !important;border-radius:18px;box-shadow:0 6px 0 #221407,0 14px 28px rgba(0,0,0,.45) !important;color:#221407 !important;animation:menuPlayPulse 2s ease-in-out infinite}
+#startMenu .play-btn-arcade .pb-text{font-family:"Bungee",sans-serif;font-size:26px;letter-spacing:.12em}
+@keyframes menuPlayPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.03)}}

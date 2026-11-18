@@ -684,7 +684,7 @@ export default function App() {
 
       <div id="startMenu" className="open" role="dialog" aria-label="Start menu">
         <div className="menu-top-bar">
-          <span className="menu-tag">★ ARCADE BRAWLER ★</span>
+          <span className="menu-ver" id="menuVersion"></span>
           <button id="menuMusicBtn" aria-label="Toggle music" aria-pressed="true">
             <svg viewBox="0 0 24 24" aria-hidden="true">
               <path d="M4 9v6h4l6 5V4L8 9H4z" fill="currentColor"/>
@@ -694,29 +694,18 @@ export default function App() {
           </button>
         </div>
         <div className="menu-header">
-          <div className="menu-kicker">STEP INTO THE ARENA</div>
-          <img className="menu-logo-img" src="/logo.webp" alt="Idle Slapper" />
-        </div>
-        <div className="menu-stage" id="menuStage" aria-hidden="true">
-          <div className="menu-stage-badge" id="menuStageBadge">STAGE 1 • TRAINING DUMMY</div>
-          <div className="ring-floor"></div>
-          <div className="ring-rug"></div>
-          <img id="menuEnemy" className="menu-enemy-img" src="/enemy-sprites-v2/poses/01-training-dummy-idle.webp" alt="Opponent" />
-          <div id="menuHand" className="menu-hand-wrap">
-            <img src="/hand-art/hand-default.webp" alt="" onError={(e) => { e.currentTarget.style.display='none'; }} />
-          </div>
-        </div>
-        <div className="menu-summary">
-          <div className="ms"><span className="ms-ico">⚡</span><span id="menuStatWins">0 KOs</span></div>
-          <div className="ms"><span className="ms-ico">💥</span><span id="menuStatCombo">0 Combo</span></div>
-          <div className="ms"><span className="ms-ico">💰</span><span id="menuStatCoins">0 Coins</span></div>
+          <div className="menu-logo-type"><span className="mlt-top">IDLE</span><span className="mlt-main">SLAPPER</span></div>
+          <div className="menu-tagline">★ TAP · SLAP · WIN! ★</div>
         </div>
         <div className="menu-actions">
+          <div className="menu-feats">
+            <span className="mf"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" fill="currentColor"/></svg>50+ FOES</span>
+            <span className="mf"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2.2"/><ellipse cx="12" cy="12" rx="4.2" ry="9" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M3.5 9h17M3.5 15h17" stroke="currentColor" stroke-width="1.8"/></svg>2 WORLDS</span>
+            <span className="mf"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0l2.1 6.9L21 4l-2.9 6.9L24 12l-5.9 1.1L21 20l-6.9-2.9L12 24l-2.1-6.9L3 20l2.9-6.9L0 12l5.9-1.1L3 4l6.9 2.9z" fill="currentColor"/></svg>30 SKILLS</span>
+          </div>
           <button id="playBtn" className="play-btn-arcade">
-            <span className="pb-icon">🥊</span>
-            <span className="pb-text">TAP TO FIGHT</span>
+            <span className="pb-text">PLAY</span>
           </button>
-          <div className="menu-hint">⚡ TOUCH ANYWHERE TO ENTER THE RING ⚡</div>
         </div>
       </div>
 
