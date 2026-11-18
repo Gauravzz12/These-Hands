@@ -5300,3 +5300,10 @@ margin-top: 7px;
 .tnode-price{position:absolute;top:calc(100% - 3px);left:50%;transform:translateX(-50%);background:#f2b01e;color:#221407;border:1.5px solid #221407;border-radius:999px;font-family:"Nunito",sans-serif;font-weight:900;font-size:8.5px;line-height:1;padding:2px 5px;pointer-events:none;white-space:nowrap;z-index:3}
 .ar-label{white-space:normal;line-height:1.15;overflow:visible;text-overflow:clip}
 #shopFilterMore{position:sticky;right:0;flex:none;align-self:center;background:#221407;color:#fff6df;font-weight:900;font-size:17px;line-height:1;border-radius:999px;padding:6px 10px;margin-left:2px;box-shadow:0 1px 3px rgba(0,0,0,.3)}
+
+/* Skin power tap-to-activate states (2026-11-19) */
+#procCircle.resting { opacity: .55; filter: grayscale(.7); }
+#procItem.charged { cursor: pointer; }
+#procItem.charged #procCircTxt { color: #b3540a; font-weight: 900; }
+#procCircle.denied { animation: procDeniedShake .3s ease; }
+@keyframes procDeniedShake { 0%,100% { transform: translateX(0); } 25% { transform: translateX(-3px); } 75% { transform: translateX(3px); } }
