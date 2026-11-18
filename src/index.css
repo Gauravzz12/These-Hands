@@ -5257,3 +5257,21 @@ margin-top: 7px;
 .feed-item.f-secondwind { background: #a7e8c9; }
 .feed-item.f-ultimate { background: #d9b8ff; }
 @keyframes feedIn { from { opacity: 0; transform: translateX(-10px); } to { opacity: 1; transform: translateX(0); } }
+
+/* ===== MAIN MENU — FINAL (G Key Art, refined: Gaurav's pick) ===== */
+#startMenu{background:#5d0f14 url('/menu-keyart.webp') center/cover no-repeat !important;justify-content:flex-start !important}
+.menu-top-bar{width:100%;display:flex;align-items:center;justify-content:space-between}
+.menu-ver{font-family:"Nunito",sans-serif;font-weight:800;font-size:11px;letter-spacing:.14em;color:rgba(253,243,216,.72)}
+#startMenu #menuMusicBtn{background:rgba(20,8,4,.55);color:#ffd23e;border:1.5px solid rgba(255,210,62,.5);box-shadow:none}
+.menu-header{text-align:center;margin-top:4px}
+.menu-logo-type span{display:block;font-family:"Bungee",sans-serif;line-height:.98}
+.menu-logo-type .mlt-top{font-size:38px;color:#fdf3d8;letter-spacing:.17em;text-shadow:0 3px 0 rgba(40,4,4,.65)}
+.menu-logo-type .mlt-main{font-size:66px;color:#ffb703;letter-spacing:.03em;text-shadow:0 5px 0 rgba(40,4,4,.65)}
+.menu-tagline{font-family:"Bungee",sans-serif;font-size:12.5px;letter-spacing:.18em;color:#fdf3d8;text-shadow:0 2px 0 rgba(40,4,4,.6);margin-top:9px}
+#startMenu .menu-actions{margin-top:auto;width:100%;max-width:430px;display:flex;flex-direction:column;align-items:center;gap:13px}
+.menu-feats{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+.menu-feats .mf{display:inline-flex;align-items:center;gap:6px;background:rgba(20,8,4,.55);border:1.5px solid rgba(255,210,62,.45);color:#fdf3d8;border-radius:999px;padding:6px 12px;font-family:"Nunito",sans-serif;font-weight:800;font-size:11.5px;letter-spacing:.06em}
+.menu-feats .mf svg{width:14px;height:14px;color:#f5b301;flex:none}
+#startMenu .play-btn-arcade{background:#ffb703 !important;border:3px solid #221407 !important;border-radius:18px;box-shadow:0 6px 0 #221407,0 14px 28px rgba(0,0,0,.45) !important;color:#221407 !important;animation:menuPlayPulse 2s ease-in-out infinite}
+#startMenu .play-btn-arcade .pb-text{font-family:"Bungee",sans-serif;font-size:26px;letter-spacing:.12em}
+@keyframes menuPlayPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.03)}}
