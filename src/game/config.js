@@ -746,7 +746,7 @@ export const CONFIG = {
     {"id": "eclipseSigil", "icon": "🎭", "name": "Puppet Strings", "srcW": 1, "srcS": 2, "vals": [0.15, 0.30, 0.45], "fmt": "pct", "desc": "Enemy specials & signature moves charge {v} slower"},
     {"id": "venomfangCoil", "icon": "🐍", "name": "Venomfang Coil", "srcW": 1, "srcS": 3, "vals": [0.10, 0.20, 0.30], "fmt": "pct", "desc": "+{v} damage vs stunned enemies"},
     {"id": "beadsVoid", "icon": "📿", "name": "Beads of the Void", "srcW": 1, "srcS": 4, "vals": [0.20, 0.40, 0.60], "fmt": "pct", "desc": "+{v} Soul Embers earned"},
-    {"id": "mirrorPalm", "icon": "🪞", "name": "Mirror Palm", "srcW": 1, "srcS": 5, "vals": [10, 9, 8], "fmt": "count", "desc": "Skin power triggers every {v} slaps"}
+    {"id": "mirrorPalm", "icon": "🪞", "name": "Mirror Palm", "srcW": 1, "srcS": 5, "vals": [10, 9, 8], "fmt": "count", "desc": "Skin power charges every {v} slaps"}
   ],
   "ads": {"interstitialEveryFights": 3, "interstitialEveryWins": 3, "interstitialFightPoints": 3.0, "interstitialMinGapSec": 75, "rewardedCoinBoostSec": 600, "rewardedDmgWins": 7, "rewardedDmgMaxAttempts": 10},
   "weakSpot": {"mult": 4.5, "dur": 1.5, "durHard": 1.2, "firstAt": 2.2, "everyMin": 5, "everyMax": 8, "frenzyGain": 12, "capBase": 3, "capPerLuck": 5, "capMax": 6, "luckScale": 0.06},
@@ -788,7 +788,7 @@ export const CONFIG = {
       },
       "power": {
         "name": "WEB SNARE",
-        "desc": "every 11th slap deals 1.5x damage and webs the enemy, slowing its swings by 25% for 2.5s"
+        "desc": "Charges every {n} slaps — TAP the battle icon to unleash it: 1.5x damage and webs the enemy, slowing its swings by 25% for 2.5s"
       },
       "price": {
         "cur": "gems",
@@ -808,7 +808,7 @@ export const CONFIG = {
       },
       "power": {
         "name": "BERSERKER SLASH",
-        "desc": "every 11th slap is a guaranteed crit for 2.2x damage and heals you for 2% of Max HP"
+        "desc": "Charges every {n} slaps — TAP the battle icon to unleash it: a guaranteed crit for 2.2x damage that heals you for 2% of Max HP"
       },
       "price": {
         "cur": "gems",
@@ -833,7 +833,7 @@ export const CONFIG = {
       },
       "power": {
         "name": "THUNDER CALL",
-        "desc": "every 11th slap deals 3x damage and dazes the enemy for 0.6s"
+        "desc": "Charges every {n} slaps — TAP the battle icon to unleash it: 3x damage and dazes the enemy for 0.6s"
       },
       "price": {
         "cur": "gems",
@@ -858,7 +858,7 @@ export const CONFIG = {
       },
       "power": {
         "name": "GAMMA SMASH",
-        "desc": "every 11th slap deals 4x damage, shatters half the enemy's shield and boosts your damage by 20% for 3s"
+        "desc": "Charges every {n} slaps — TAP the battle icon to unleash it: 4x damage, shatters half the enemy's shield and boosts your damage by 20% for 3s"
       },
       "price": {
         "cur": "gems",
@@ -882,7 +882,7 @@ export const CONFIG = {
       },
       "power": {
         "name": "TIME STOP",
-        "desc": "every 11th slap STOPS TIME for 5s: +30% damage and +50% slap speed while it lasts. The stones then need 16s to recharge"
+        "desc": "Charges every {n} slaps — TAP the battle icon to unleash it: STOPS TIME for 5s (+30% damage, +50% slap speed). The stones then need 16s to recharge — the countdown shows on the icon"
       },
       "price": {
         "cur": "gems",
