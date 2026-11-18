@@ -134,7 +134,7 @@ namespace IdleSlapper.Config
 
     public static class BalanceConfig
     {
-        public const string Version = "2.6.7";
+        public const string Version = "2.7.6";
         public const int MaxPlayerLevel = 50;
         public const int MaxEndlessMasteryBonusLevels = 3;
         public const double BaseSlapDamage = 10.0;
