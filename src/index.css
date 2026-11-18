@@ -5375,3 +5375,46 @@ margin-top: 7px;
 #startMenu[data-menu="d"] .menu-stage .ring-floor{height:20%}
 #startMenu[data-menu="e"] .menu-summary{background:#fff;box-shadow:0 6px 18px rgba(43,28,16,.12);border-radius:999px;padding:6px 10px}
 #startMenu[data-menu="f"] .menu-summary{background:rgba(34,20,7,.28);box-shadow:none;border-radius:999px;padding:7px 12px}
+/* ===== MENU ROUND 3 — no fight showcase, no score cards (?menu=g|h|i) ===== */
+#startMenu[data-menu="g"] .menu-tag,#startMenu[data-menu="h"] .menu-tag,#startMenu[data-menu="i"] .menu-tag{display:none}
+#startMenu[data-menu="g"] .menu-hint,#startMenu[data-menu="h"] .menu-hint,#startMenu[data-menu="i"] .menu-hint{display:none}
+#startMenu[data-menu="g"] .menu-kicker,#startMenu[data-menu="h"] .menu-kicker,#startMenu[data-menu="i"] .menu-kicker{display:none}
+#startMenu[data-menu="g"] .menu-logo-img,#startMenu[data-menu="h"] .menu-logo-img,#startMenu[data-menu="i"] .menu-logo-img{display:none}
+#startMenu[data-menu="g"] .menu-stage,#startMenu[data-menu="h"] .menu-stage,#startMenu[data-menu="i"] .menu-stage{display:none}
+#startMenu[data-menu="g"] .menu-summary,#startMenu[data-menu="h"] .menu-summary,#startMenu[data-menu="i"] .menu-summary{display:none}
+#startMenu[data-menu="g"] .menu-header::before,#startMenu[data-menu="h"] .menu-header::before,#startMenu[data-menu="i"] .menu-header::before{content:"IDLE";display:block;font-family:"Bungee",sans-serif;line-height:.95}
+#startMenu[data-menu="g"] .menu-header::after,#startMenu[data-menu="h"] .menu-header::after,#startMenu[data-menu="i"] .menu-header::after{content:"SLAPPER";display:block;font-family:"Bungee",sans-serif;line-height:.95}
+#startMenu[data-menu="g"] .play-btn-arcade .pb-text,#startMenu[data-menu="h"] .play-btn-arcade .pb-text,#startMenu[data-menu="i"] .play-btn-arcade .pb-text{display:none}
+#startMenu[data-menu="g"] .play-btn-arcade .pb-icon,#startMenu[data-menu="h"] .play-btn-arcade .pb-icon,#startMenu[data-menu="i"] .play-btn-arcade .pb-icon{display:none}
+#startMenu[data-menu="g"] .play-btn-arcade::after,#startMenu[data-menu="h"] .play-btn-arcade::after,#startMenu[data-menu="i"] .play-btn-arcade::after{content:"PLAY";font-family:"Bungee",sans-serif;letter-spacing:.12em}
+#startMenu[data-menu="g"] .menu-top-bar,#startMenu[data-menu="h"] .menu-top-bar,#startMenu[data-menu="i"] .menu-top-bar{justify-content:flex-end}
+/* --- G: KEY ART (full-bleed generated art, type logo on top, gold PLAY) --- */
+#startMenu[data-menu="g"]{background:#5d0f14 url('/menu-keyart.webp') center/cover no-repeat !important}
+#startMenu[data-menu="g"] #menuMusicBtn{background:rgba(20,8,4,.55);color:#ffd23e;border:1.5px solid rgba(255,210,62,.5);box-shadow:none}
+#startMenu[data-menu="g"] .menu-header::before{font-size:36px;color:#fdf3d8;letter-spacing:.16em;text-shadow:0 3px 0 rgba(40,4,4,.65)}
+#startMenu[data-menu="g"] .menu-header::after{font-size:58px;color:#ffb703;letter-spacing:.04em;text-shadow:0 4px 0 rgba(40,4,4,.65)}
+#startMenu[data-menu="g"] .play-btn-arcade{background:#ffb703 !important;border:3px solid #221407 !important;border-radius:18px;box-shadow:0 6px 0 #221407,0 14px 28px rgba(0,0,0,.45) !important;color:#221407 !important}
+#startMenu[data-menu="g"] .play-btn-arcade::after{font-size:26px}
+/* --- H: BIG TYPE (flat ink field, giant type over the burst fx, white PLAY) --- */
+#startMenu[data-menu="h"]{background:#171310 !important;justify-content:center;gap:34px}
+#startMenu[data-menu="h"] #menuMusicBtn{background:transparent;color:#f5b301;border:1.5px solid rgba(245,179,1,.4);box-shadow:none}
+#startMenu[data-menu="h"] .menu-top-bar{position:absolute;top:16px;right:18px;width:auto}
+#startMenu[data-menu="h"] .menu-header{background:url('/fx/burst.webp') center/330px no-repeat;padding:104px 0}
+#startMenu[data-menu="h"] .menu-header::before{font-size:52px;color:#fdf3d8;letter-spacing:.12em;text-shadow:0 4px 0 rgba(0,0,0,.7)}
+#startMenu[data-menu="h"] .menu-header::after{font-size:82px;color:#ffb703;letter-spacing:.02em;text-shadow:0 5px 0 rgba(0,0,0,.7)}
+#startMenu[data-menu="h"] .play-btn-arcade{background:#fdf3d8 !important;border:none !important;border-radius:999px;box-shadow:0 12px 26px rgba(0,0,0,.5) !important;color:#171310 !important;max-width:330px}
+#startMenu[data-menu="h"] .play-btn-arcade::after{font-size:24px}
+/* --- I: BURST POSTER (cream field, burst graphic, ink/red type, red PLAY) --- */
+#startMenu[data-menu="i"]{background:#f7ecd5 !important;justify-content:center;gap:30px}
+#startMenu[data-menu="i"] #menuMusicBtn{background:transparent;color:#221407;border:1.5px solid #d8c49a;box-shadow:none}
+#startMenu[data-menu="i"] .menu-top-bar{position:absolute;top:16px;right:18px;width:auto}
+#startMenu[data-menu="i"] .menu-header{background:url('/fx/burst.webp') top center/235px no-repeat;padding-top:225px}
+#startMenu[data-menu="i"] .menu-header::before{font-size:36px;color:#221407;letter-spacing:.18em}
+#startMenu[data-menu="i"] .menu-header::after{font-size:58px;color:#d63c30;letter-spacing:.04em}
+#startMenu[data-menu="i"] .play-btn-arcade{background:#d63c30 !important;border:3px solid #221407 !important;border-radius:18px;box-shadow:0 6px 0 #221407 !important;color:#fff !important;max-width:360px}
+#startMenu[data-menu="i"] .play-btn-arcade::after{font-size:26px}
+/* round 3 fix: distribution (base menu forces space-between !important) */
+#startMenu[data-menu="g"]{justify-content:flex-start !important}
+#startMenu[data-menu="g"] .menu-actions{margin-top:auto}
+#startMenu[data-menu="h"]{justify-content:center !important}
+#startMenu[data-menu="i"]{justify-content:center !important}
