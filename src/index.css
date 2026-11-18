@@ -5308,3 +5308,70 @@ margin-top: 7px;
 #startMenu[data-menu="c"] .menu-logo-img{border:3.5px solid #221407;border-radius:14px;box-shadow:0 5px 0 #221407;background:#fff8ea}
 #startMenu[data-menu="c"] .menu-stage{overflow:visible}
 #startMenu[data-menu="c"] .menu-stage-badge{top:auto;bottom:-13px;transform:translateX(-50%) rotate(-2deg);font-size:11px}
+
+/* ===== MENU REVAMP ROUND 2 — completely new directions (?menu=d|e|f): drawn SVG icons (no emoji), type logo (no logo.webp), new copy ===== */
+/* shared revamp bones */
+#startMenu[data-menu="d"] .menu-tag,#startMenu[data-menu="e"] .menu-tag,#startMenu[data-menu="f"] .menu-tag{display:none}
+#startMenu[data-menu="d"] .menu-hint,#startMenu[data-menu="e"] .menu-hint,#startMenu[data-menu="f"] .menu-hint{display:none}
+#startMenu[data-menu="d"] .menu-kicker,#startMenu[data-menu="e"] .menu-kicker,#startMenu[data-menu="f"] .menu-kicker{display:none}
+#startMenu[data-menu="d"] .menu-logo-img,#startMenu[data-menu="e"] .menu-logo-img,#startMenu[data-menu="f"] .menu-logo-img{display:none}
+#startMenu[data-menu="d"] .menu-header::before,#startMenu[data-menu="e"] .menu-header::before,#startMenu[data-menu="f"] .menu-header::before{content:"IDLE";display:block;font-family:"Bungee",sans-serif;line-height:.95}
+#startMenu[data-menu="d"] .menu-header::after,#startMenu[data-menu="e"] .menu-header::after,#startMenu[data-menu="f"] .menu-header::after{content:"SLAPPER";display:block;font-family:"Bungee",sans-serif;line-height:.95}
+#startMenu[data-menu="d"] .play-btn-arcade .pb-text,#startMenu[data-menu="e"] .play-btn-arcade .pb-text,#startMenu[data-menu="f"] .play-btn-arcade .pb-text{display:none}
+#startMenu[data-menu="d"] .play-btn-arcade .pb-icon,#startMenu[data-menu="e"] .play-btn-arcade .pb-icon,#startMenu[data-menu="f"] .play-btn-arcade .pb-icon{display:none}
+#startMenu[data-menu="d"] .menu-top-bar,#startMenu[data-menu="e"] .menu-top-bar,#startMenu[data-menu="f"] .menu-top-bar{justify-content:flex-end}
+/* --- D: DARK ARENA (near-black, spotlight stage, gold accents, red FIGHT) --- */
+#startMenu[data-menu="d"]{background:#14100d !important}
+#startMenu[data-menu="d"] #menuMusicBtn{background:rgba(255,255,255,.05);color:#f5b301;border:1.5px solid rgba(245,179,1,.45);box-shadow:none}
+#startMenu[data-menu="d"] .menu-header::before{font-size:34px;color:#f7ecd5;letter-spacing:.14em}
+#startMenu[data-menu="d"] .menu-header::after{font-size:52px;color:#f5b301;letter-spacing:.05em;text-shadow:0 4px 0 rgba(0,0,0,.6)}
+#startMenu[data-menu="d"] .menu-stage{border:1px solid rgba(245,179,1,.28);border-radius:24px;box-shadow:0 24px 48px rgba(0,0,0,.55)}
+#startMenu[data-menu="d"] .menu-stage-badge{background:transparent;border:none;box-shadow:none;color:#ffd23e;font-family:"Nunito",sans-serif;font-weight:800;font-size:11px;letter-spacing:.22em}
+#startMenu[data-menu="d"] .menu-enemy-img{width:78%;height:76%}
+#startMenu[data-menu="d"] .menu-summary{background:rgba(255,255,255,.05);border:1px solid rgba(245,179,1,.22);border-radius:14px;padding:9px 16px;gap:16px}
+#startMenu[data-menu="d"] .menu-summary .ms{background:transparent;border:none;box-shadow:none;color:#f7ecd5;font-size:12.5px;padding:0}
+#startMenu[data-menu="d"] .play-btn-arcade{background:#e0342b !important;border:none !important;border-radius:16px;box-shadow:0 6px 0 #7c1d16,0 16px 30px rgba(224,52,43,.35) !important;color:#fff !important}
+#startMenu[data-menu="d"] .play-btn-arcade::after{content:"FIGHT";font-family:"Bungee",sans-serif;font-size:27px;letter-spacing:.1em}
+/* --- E: LIGHT MINIMAL (premium casual: airy, hairlines, ink pill PLAY) --- */
+#startMenu[data-menu="e"]{background:#faf7f1 !important}
+#startMenu[data-menu="e"] #menuMusicBtn{background:transparent;color:#221407;border:1.5px solid #ddd3bd;box-shadow:none}
+#startMenu[data-menu="e"] .menu-header::before{font-size:30px;color:#221407;letter-spacing:.2em}
+#startMenu[data-menu="e"] .menu-header::after{font-size:46px;color:#d63c30;letter-spacing:.06em}
+#startMenu[data-menu="e"] .menu-stage{border:none;border-radius:28px;box-shadow:0 18px 34px rgba(43,28,16,.16)}
+#startMenu[data-menu="e"] .menu-stage-badge{background:#fff;color:#221407;border:none;box-shadow:0 4px 14px rgba(43,28,16,.18);font-family:"Nunito",sans-serif;font-weight:800;letter-spacing:.14em}
+#startMenu[data-menu="e"] .menu-enemy-img{width:72%;height:74%}
+#startMenu[data-menu="e"] .menu-summary{border-top:1.5px solid #e7dcc3;padding-top:10px;gap:0}
+#startMenu[data-menu="e"] .menu-summary .ms{background:transparent;border:none;box-shadow:none;color:#221407;font-size:12.5px;padding:2px 14px;border-radius:0}
+#startMenu[data-menu="e"] .menu-summary .ms + .ms{border-left:1.5px solid #e7dcc3}
+#startMenu[data-menu="e"] .play-btn-arcade{background:#221407 !important;border:none !important;border-radius:999px;box-shadow:0 12px 24px rgba(34,20,7,.3) !important;color:#faf7f1 !important;max-width:340px}
+#startMenu[data-menu="e"] .play-btn-arcade::after{content:"PLAY";font-family:"Bungee",sans-serif;font-size:24px;letter-spacing:.14em}
+/* --- F: RED POSTER (flat red field, huge type, tilted scene card, white FIGHT) --- */
+#startMenu[data-menu="f"]{background:#d63c30 !important}
+#startMenu[data-menu="f"] #menuMusicBtn{background:#fff;color:#221407;border:2.5px solid #221407;box-shadow:0 3px 0 #221407}
+#startMenu[data-menu="f"] .menu-header::before{font-size:40px;color:#fff;letter-spacing:.1em;text-shadow:0 4px 0 #221407}
+#startMenu[data-menu="f"] .menu-header::after{font-size:62px;color:#ffd23e;letter-spacing:.03em;text-shadow:0 5px 0 #221407}
+#startMenu[data-menu="f"] .menu-stage{border:4px solid #fff;border-radius:20px;box-shadow:0 8px 0 #221407;transform:rotate(-1.2deg)}
+#startMenu[data-menu="f"] .menu-stage-badge{background:#ffd23e;color:#221407;border:2.5px solid #221407;box-shadow:0 3px 0 #221407;transform:rotate(2deg)}
+#startMenu[data-menu="f"] .menu-enemy-img{width:74%;height:76%}
+#startMenu[data-menu="f"] .menu-summary .ms{background:transparent;border:none;box-shadow:none;color:#fff;font-size:13px;padding:2px 8px}
+#startMenu[data-menu="f"] .play-btn-arcade{background:#fff !important;border:3px solid #221407 !important;border-radius:18px;box-shadow:0 6px 0 #221407 !important;color:#d63c30 !important}
+#startMenu[data-menu="f"] .play-btn-arcade::after{content:"FIGHT";font-family:"Bungee",sans-serif;font-size:27px;letter-spacing:.1em}
+
+#startMenu[data-menu="d"] .menu-summary .ms-ico{font-size:0;width:15px;height:15px;background-size:contain;background-repeat:no-repeat;background-position:center}
+#startMenu[data-menu="d"] .menu-summary .ms:nth-child(1) .ms-ico{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M13 2 4 14h6l-1 8 9-12h-6l1-8z' fill='%23f5b301'/%3E%3C/svg%3E")}
+#startMenu[data-menu="d"] .menu-summary .ms:nth-child(2) .ms-ico{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 0l2.1 6.9L21 4l-2.9 6.9L24 12l-5.9 1.1L21 20l-6.9-2.9L12 24l-2.1-6.9L3 20l2.9-6.9L0 12l5.9-1.1L3 4l6.9 2.9z' fill='%23f5b301'/%3E%3C/svg%3E")}
+#startMenu[data-menu="d"] .menu-summary .ms:nth-child(3) .ms-ico{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='9' fill='%23f5b301' stroke='%23b97e08' stroke-width='2'/%3E%3Ccircle cx='12' cy='12' r='4.2' fill='none' stroke='%23b97e08' stroke-width='2'/%3E%3C/svg%3E")}
+#startMenu[data-menu="e"] .menu-summary .ms-ico{font-size:0;width:15px;height:15px;background-size:contain;background-repeat:no-repeat;background-position:center}
+#startMenu[data-menu="e"] .menu-summary .ms:nth-child(1) .ms-ico{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M13 2 4 14h6l-1 8 9-12h-6l1-8z' fill='%23221407'/%3E%3C/svg%3E")}
+#startMenu[data-menu="e"] .menu-summary .ms:nth-child(2) .ms-ico{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 0l2.1 6.9L21 4l-2.9 6.9L24 12l-5.9 1.1L21 20l-6.9-2.9L12 24l-2.1-6.9L3 20l2.9-6.9L0 12l5.9-1.1L3 4l6.9 2.9z' fill='%23221407'/%3E%3C/svg%3E")}
+#startMenu[data-menu="e"] .menu-summary .ms:nth-child(3) .ms-ico{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='9' fill='none' stroke='%23221407' stroke-width='2.2'/%3E%3Ccircle cx='12' cy='12' r='4.2' fill='%23221407'/%3E%3C/svg%3E")}
+#startMenu[data-menu="f"] .menu-summary .ms-ico{font-size:0;width:15px;height:15px;background-size:contain;background-repeat:no-repeat;background-position:center}
+#startMenu[data-menu="f"] .menu-summary .ms:nth-child(1) .ms-ico{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M13 2 4 14h6l-1 8 9-12h-6l1-8z' fill='%23ffffff'/%3E%3C/svg%3E")}
+#startMenu[data-menu="f"] .menu-summary .ms:nth-child(2) .ms-ico{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 0l2.1 6.9L21 4l-2.9 6.9L24 12l-5.9 1.1L21 20l-6.9-2.9L12 24l-2.1-6.9L3 20l2.9-6.9L0 12l5.9-1.1L3 4l6.9 2.9z' fill='%23ffffff'/%3E%3C/svg%3E")}
+#startMenu[data-menu="f"] .menu-summary .ms:nth-child(3) .ms-ico{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='9' fill='none' stroke='%23ffffff' stroke-width='2.2'/%3E%3Ccircle cx='12' cy='12' r='4.2' fill='%23ffffff'/%3E%3C/svg%3E")}/* revamp fix pass: grounding + floor + summary shadows */
+#startMenu[data-menu="d"] .menu-enemy-img{bottom:15.5%}
+#startMenu[data-menu="e"] .menu-enemy-img{bottom:15.5%}
+#startMenu[data-menu="f"] .menu-enemy-img{bottom:15.5%}
+#startMenu[data-menu="d"] .menu-stage .ring-floor{height:20%}
+#startMenu[data-menu="e"] .menu-summary{background:#fff;box-shadow:0 6px 18px rgba(43,28,16,.12);border-radius:999px;padding:6px 10px}
+#startMenu[data-menu="f"] .menu-summary{background:rgba(34,20,7,.28);box-shadow:none;border-radius:999px;padding:7px 12px}
