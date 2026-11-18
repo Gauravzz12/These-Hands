@@ -1,634 +1,572 @@
-# IDLE SLAPPER — COMPLETE GAME VALUES & NUMBERS REFERENCE (v2.6.6 AUDITED FINAL)
+# IDLE SLAPPER — Complete Game Sheet (All Values)
 
-*Every number in the finalized v2.6.6 economy and combat engine, verified via deterministic tick-by-tick ($\Delta t = 0.05\text{s}$) simulations to pass all 6/6 design pillars ($32\text{s}\text{--}55\text{s}$ Boss TTK across all 7 Chapters, $16.2\text{s}\text{--}22.6\text{s}$ Un-Parried Survival, Strict Anti-Cheese Locks, Narrow-Loss Ad Hooks at $\sim 88\%$ chapter cap, $24.1\text{--}33.2$ Boss Kills per Chapter uniformly across Chapters 1–7, and true $2.0\times$ Ad-Offline scaling capped at $17.5\% / 35.0\%$) and reconciled 1:1 with `BalanceConfig.cs` (`Version = "2.6.6-AUDITED"`).*
-
-*Coins are the soft currency, 💎 gems the premium currency, 🔥 Dragon Embers the Worlds currency. In tables, `--` means "not applicable / not offered at that level".*
-
-## Contents
-1. Game Flow & Unlock Order  ·  2. Chapter Progression & Attribute Caps  ·  3. Player Level, HP & Perks  ·  4. Attributes (Reconciled Log-Space Cost Curves)  ·  5. Slap-Coin & Knockout Economy  ·  6. Combat Systems, Speed Caps & Anti-Cheese Locks  ·  7. Player Special Moves & Boss Signatures  ·  8. Enemies #1-#50 (Playable Main Roster)  ·  9. Roster Data #51-#100 (Post-Shadow Verse Expansion)  ·  10. Skills (All 30)  ·  11. Game Modes & Timings  ·  12. The Worlds (Asura Realm & Shadow Verse)  ·  13. Shop, Hand Skins & Real-Money Purchases  ·  14. Ads  ·  15. Daily Systems, Quests & Achievements  ·  16. Offline Earnings (45s Kill-Rate Cap & 17.5%/35% Chapter Hard Cap)  ·  17. Every Timer in One Table
+**Balance:** v2.7.6 Ship-Ready Final Audited & Paced Specification · **App version string:** 2.7.6 · Balance v2.7.6
+**Source:** audited, mathematically verified, and play-paced from the v2.6.6 live game code baseline (18 Nov 2026) — every formula, cap, boss mechanic, chapter entry transition, Hard Mode multiplier, and reserved `#51–#100` combat parameter is 100% self-consistent across Chapters 1–6 and post-game Worlds.
+**Currencies:** 🪙 Coins (soft) · 💎 Gems (premium) · 🔥 Embers (Worlds currency)
 
 ---
-## 1. Game Flow & Unlock Order
 
-You fight enemies in order (#1 $\to$ #50). Every 5 enemies form a **group**; every 10 enemies end with a **boss** (idx 9, 19, 29, 39 are elites, idx 49 the Dragon Lord). Beating bosses raises your **Player Level Cap, Power Cap, and Secondary Attribute Caps** in chapters (Section 2). Systems unlock in this order:
+## 1. Player Base & Derived Stats
 
-| When | What Unlocks |
-|---|---|
-| Game start | Enemies #1-#5, Player Lv cap 10, Power cap 12, Attributes, Shop |
-| Beat #5 Grumpy Teddy | **Second Hand** skill — claim it FREE from the pop-up card (reduces base slap interval from $1.500\text{s} \to 1.275\text{s}$) |
-| Beat #5 | 7-day Login Chest starts appearing |
-| 10 total defeats | **Golden Dummy Blitz** (2 charges, 45-min recharge per charge) |
-| Clear any group of 5 | **Trio Gauntlet** for that group (shared 30-min global cooldown; no Turf Tribute) + One-Time **Group Reward Chest** |
-| Beat #10 Monkey | Chapter 2: Lv cap 18, Power cap 24 · **Double Slap** Special Move · **Endless Mode** (45-min cooldown) · **Daily Quests** (refresh at midnight) |
-| Beat #10 Monkey + Unlock **Deflect** (`22k`) & **Precision Instinct** (`140k`) | **Reflex Slap-Off** (2 charges, 30-min recharge per charge) |
-| Beat #20 Dark Knight | Chapter 3: Lv cap 26, Power cap 36 · **Guard** Special Move · **Boss Rush** (60-min cooldown, includes Cornerman Drafts) |
-| Beat #30 Shogun | Chapter 4: Lv cap 33, Power cap 48 · **Special Move Mastery** ($-3\text{s}$ cooldown on Double Slap & Guard) · **Iron Stance I** (Parry CD `8s`) |
-| Beat #40 Pharaoh | Chapter 5: Lv cap 38, Power cap 60 · **Uppercut Punch** Special Move · Tier 5 Skills (*Rapid Barrage*, *Bulwark Guard*, & *Iron Stance II* (Parry CD `5s`) |
-| Beat #50 Dragon Lord | Chapter 6: Lv cap 44, Power cap 70 · **Worlds Portal** (Asura Realm) · 🔥 Ember economy · **Dragon Mastery 1** ($\times 1.25$ global Power multiplier) · **Iron Stance III** (Parry window `0.50s`) |
-| Beat #206 Ravana (Asura final boss) | Chapter 7: Lv cap 50 (max), Power cap 80 (max) · **Shadow Verse** · **Dragon Mastery 2** ($\times 1.45$ global Power multiplier, replaces Mastery 1) |
-| Beat #216 Dark Slapper (Shadow Verse final) | Current endgame (gates future Chapter 8+ Roster #51-#100) |
-
-**Skill Boss Gates** (on top of coin cost):
-* **Second Hand** — free claim on beating #5
-* **Quick Reflexes + Seismic Slam + Heavy Slap + Precision Instinct + Combo Mastery** — beat #10 (*Twin Mastery and On Target have no boss gate so the speed/combo branch opens in Chapter 1 without inflating Chapter 1 build costs*)
-* **Boss Hunter + Coin Magnet + Dual-Hand Technique** — beat #20
-* **Unstoppable Hands + Acoustic Echo + Kinetic Barrier + Iron Stance I + Treasure Hunter + Frenzy** — beat #30
-* **Colossus Bane** — beat #35 Shadow Beast (*available before fighting #40 Pharaoh*)
-* **Rapid Barrage + Iron Stance II + Bulwark Guard** — beat #40 Pharaoh (*available in Chapter 5*)
-* **Godhand Strike** — beat #45 Stone Golem (*available before fighting #50 Dragon Lord*)
-* **Iron Stance III** — beat #50 Dragon Lord (*available in Chapter 6*)
-
----
-## 2. Chapter Progression & Attribute Caps
-
-Caps block NEW purchases only. Every attribute has an explicit per-chapter ceiling so players cannot dump all coins into `Power` and `Speed` while ignoring skills and secondary attributes, and **Speed (`max 25`)**, **Crit % (`max 45`)**, **Accuracy (`max 14`)**, and **Stun (`max 50`)** are calibrated so zero coins are ever wasted on dead levels:
-
-| Chapter Gate (Boss Defeated) | Player Lv Cap | Power Cap (Max 80) | Base Slap Dmg at Power Cap (w/ Mastery) | Speed Cap (Max 25) | Crit % Cap (Max 45) | Crit Dmg / Combo / Coins Cap (Max 65) | Def / Giant Slayer / Leech Cap (Max 40) | Stun / Fortune Cap (Max 50) | Accuracy Cap (Max 14) | Label Shown in Game |
-|---|---|---|---|---|---|---|---|---|---|---|
-| Start of game (Ch. 1) | 10 | 12 | $112.22$ | 8 | 10 | 12 | 10 | 10 | 4 ($92.14\%$) | DEFEAT STAGE #10 TO UNLOCK |
-| Enemy #10 Monkey (Ch. 2) | 18 | 24 | $596.86$ | 13 | 18 | 22 | 18 | 18 | 6 ($95.71\%$) | DEFEAT STAGE #20 TO UNLOCK |
-| Enemy #20 Dark Knight (Ch. 3) | 26 | 36 | $2,613.58$ | 18 | 26 | 32 | 26 | 26 | 8 ($99.29\%$) | DEFEAT STAGE #30 TO UNLOCK |
-| Enemy #30 Shogun (Ch. 4) | 33 | 48 | $10,442.07$ | 21 | 33 | 42 | 32 | 34 | 11 ($104.64\%$) | DEFEAT STAGE #40 TO UNLOCK |
-| Enemy #40 Pharaoh (Ch. 5) | 38 | 60 | $50,615.61$ | 23 | 39 | 52 | 36 | 42 | 13 ($108.21\%$) | DEFEAT DRAGON LORD (#50) TO UNLOCK |
-| Enemy #50 Dragon Lord (Ch. 6) | 44 | 70 | $194,573.03$ ($\times 1.25$) | 25 | 45 | 60 | 40 | 47 | 14 ($110.00\%$) | DEFEAT RAVANA (ASURA REALM) TO UNLOCK |
-| Ravana — Asura Realm (Ch. 7) | 50 | 80 | $681,620.13$ ($\times 1.45$) | 25 | 45 | 65 | 40 | 50 | 14 ($110.00\%$) | MAX CHAPTER REACHED |
-
-*Hard limits: Permanent Player Level cap 50 · Endless Mastery adds $+1$ temporary level per 15 Endless waves survived (Waves 15, 30, 45; supports temporary Levels 51–53 during an Endless run).*
-
----
-## 3. Player Level, HP & Perks
-
-* **Base Max HP Formula (Exact Match to Table, Supports Temp Levels 51–53 in Endless Mode):**
-  $$\text{Base Max HP}(\text{Lv}) = 100 + 25 \times (\text{Lv}-1) + \text{round}\left(15 \times 1.212^{\text{Lv}-1}\right)$$
-* **Total Max HP Formula (Explicit Skill Purchase Flags Required):**
-  Flat skill HP bonuses (*Stamina Training* $+75$, *Unstoppable Hands* $+1,400$) apply **immediately when those skills are purchased**; even-level perks (*Giant Stature* $+600$ at Lv 30, *Dragonblood Vigour* $+4,500$ at Lv 40, *Transcendent Hand* $\times 1.15$ at Lv 50) apply automatically upon reaching their respective Player Levels.
-* **Level-Up Cost Formula (Exact Piecewise Curve — 100% Identical to Table & `GetLevelUpCost`):**
-  * **Lv 1–10:** $\text{round}\left(\exp\left(\ln(150) + (\ln(55,369) - \ln(150)) \times \left(\frac{\text{Lv}-1}{9}\right)^{1.065}\right)\right)$
-  * **Lv 11–40:** $\text{round}\left(55,369 \times 1.35^{\text{Lv}-10}\right)$
-  * **Lv 41–44:** $\text{round}\left(450,069,728 \times 1.25^{\text{Lv}-40}\right)$
-  * **Lv 45–49:** $\text{round}\left(1,210,000,000 \times 1.10435^{\text{Lv}-45}\right)$
-
-| Lv | Base Max HP | Total Max HP (w/ Unlocked Skills) | Cost to Next Level | Cumulative Coins Spent | Even-Level Perk Unlocked |
-|---|---|---|---|---|---|
-| 1 | 115 | 115 | 150 | 0 | -- |
-| 2 | 143 | 143 | 265 | 150 | **Iron Palm** ($+20\%$ slap damage) |
-| 3 | 172 | 172 | 494 | 415 | -- |
-| 4 | 202 | 202 | 939 | 909 | **Quickening** ($+6\%$ slap speed, $\times 0.94$ interval) |
-| 5 | 232 | 307 | 1,813 | 1,848 | -- |
-| 6 | 264 | 339 | 3,539 | 3,661 | **Thick Skin** ($-12\%$ incoming enemy damage) |
-| 7 | 298 | 373 | 6,967 | 7,200 | -- |
-| 8 | 333 | 408 | 13,818 | 14,167 | **Greed** ($+15\%$ coins from all sources) |
-| 9 | 370 | 445 | 27,582 | 27,985 | -- |
-| 10 | 410 | 485 | 55,369 | 55,567 | **Vampire Slap** (Every 10th slap heals $1\%$ Max HP, min 10 HP) |
-| 11 | 453 | 528 | 74,748 | 110,936 | -- |
-| 12 | 499 | 574 | 100,910 | 185,684 | **Crit Surge** ($+8\%$ critical strike chance) |
-| 13 | 551 | 626 | 136,229 | 286,594 | -- |
-| 14 | 608 | 683 | 183,908 | 422,823 | **Second Wind** (Once/fight at 0 HP, recover $25\%$ Max HP) |
-| 15 | 671 | 746 | 248,276 | 606,731 | -- |
-| 16 | 743 | 818 | 335,173 | 855,007 | **Boss Bane** ($+20\%$ damage vs Elites, Mini-Bosses & Bosses) |
-| 17 | 825 | 900 | 452,484 | 1,190,180 | -- |
-| 18 | 919 | 994 | 610,853 | 1,642,664 | **Golden Aura** ($+15\%$ coins earned) |
-| 19 | 1,028 | 1,103 | 824,652 | 2,253,517 | -- |
-| 20 | 1,154 | 1,229 | 1,113,280 | 3,078,169 | **Counter Cadence** (After un-parried hit, next slap deals $1.75\times$ dmg) |
-| 21 | 1,302 | 1,377 | 1,502,928 | 4,191,449 | -- |
-| 22 | 1,475 | 1,550 | 2,028,953 | 5,694,377 | **Battle Focus** (At combo stack $10+$, slaps gain $+0.20\text{s}$ stun duration above cap) |
-| 23 | 1,681 | 1,756 | 2,739,086 | 7,723,330 | -- |
-| 24 | 1,924 | 1,999 | 3,697,766 | 10,462,416 | **Tough Grit** (Below $40\%$ HP, take $20\%$ less damage) |
-| 25 | 2,214 | 2,289 | 4,991,984 | 14,160,182 | -- |
-| 26 | 2,560 | 2,635 | 6,739,179 | 19,152,166 | **Iron Resolve** (Every 30th slap cleanses 1 debuff & heals $2\%$ Max HP) |
-| 27 | 2,974 | 3,049 | 9,097,891 | 25,891,345 | -- |
-| 28 | 3,471 | 3,546 | 12,282,153 | 34,989,236 | **Overcharge** (Crits gain $+1\%$ bonus Crit Damage per Defense level, up to $+40\%$) |
-| 29 | 4,067 | 4,142 | 16,580,907 | 47,271,389 | -- |
-| 30 | 4,785 | 5,460 | 22,384,224 | 63,852,296 | **Giant Stature** ($+600$ Max HP; hitting Elite/Boss grants $+1$ combo stack) |
-| 31 | 5,649 | 6,324 | 30,218,703 | 86,236,520 | -- |
-| 32 | 6,692 | 8,767 | 40,795,249 | 116,455,223 | **Swift Recovery** (Bracing/blocking boosts slap speed by $+25\%$ for $2.5\text{s}$) |
-| 33 | 7,950 | 10,025 | 55,073,586 | 157,250,472 | -- |
-| 34 | 9,469 | 11,544 | 74,349,341 | 212,324,058 | **Midas Strike** (Slaps within $0.6\text{s}$ of enemy attack grant $1.5\times$ coins) |
-| 35 | 11,306 | 13,381 | 100,371,610 | 286,673,399 | -- |
-| 36 | 13,526 | 15,601 | 135,501,674 | 387,045,009 | **Executioner** (Slaps deal $+35\%$ damage vs enemies below $25\%$ HP) |
-| 37 | 16,212 | 18,287 | 182,927,260 | 522,546,683 | -- |
-| 38 | 19,462 | 21,537 | 246,951,801 | 705,473,943 | **Godhand Awakening** (Every 30th slap deals $2.5\times$ dmg & $1.0\text{s}$ stun) |
-| 39 | 23,396 | 25,471 | 333,384,931 | 952,425,744 | -- |
-| 40 | 28,158 | 34,733 | 450,069,728 | 1,285,810,675 | **Dragonblood Vigour** ($+4,500$ Max HP & $-20\%$ Boss Signature/Burn dmg) |
-| 41 | 33,924 | 40,499 | 562,582,160 | 1,735,880,332 | -- |
-| 42 | 40,908 | 47,483 | 703,227,700 | 2,298,462,492 | -- |
-| 43 | 49,367 | 55,942 | 879,034,625 | 3,001,690,192 | -- |
-| 44 | 59,614 | 66,189 | 1,098,793,281 | 3,880,724,817 | **Asura Slayer** ($+25\%$ World fight damage & $+15\%$ Crit Damage) |
-| 45 | 72,028 | 78,603 | 1,210,000,000 | 4,979,518,098 | -- |
-| 46 | 87,069 | 93,644 | 1,336,263,500 | 6,189,518,098 | -- |
-| 47 | 105,293 | 111,868 | 1,475,702,596 | 7,525,781,598 | -- |
-| 48 | 127,375 | 133,950 | 1,629,692,162 | 9,001,484,194 | -- |
-| 49 | 154,133 | 160,708 | 1,799,750,539 | 10,631,176,356 | -- |
-| 50 | 186,559 | 222,104 | MAX | 12,430,926,895 | **Transcendent Hand** (Permanent $\times 1.25$ Global Damage & $\times 1.15$ Max HP) |
-
-**Exact Total Cost Lv 1 $\to$ 50: 12,430,926,895 coins (matches `GetLevelUpCost` sum to the exact coin).**
-
----
-## 4. Attributes (Reconciled Log-Space Cost Curves)
-
-All 12 attributes use the exact unified log-space formula so that **Formula Sum == Table 4.1 Sum == Summary Table Total Cost** to the exact integer, with **zero dead levels across all 12 attributes**:
-$$\text{Cost}(L) = \text{round}\left(\exp\left(\ln(\text{BaseCost}) + (\ln(\text{MaxCost}) - \ln(\text{BaseCost})) \times \left(\frac{L-1}{\text{MaxLv}-1}\right)^{1.05}\right)\right)$$
-
-| Attribute | Effect per Level (v2.6.6 Audited Final) | Base Cost (Lv 1) | Max Cost (Final Lv) | Max Lv | **Exact Total Cost (Sum of All Levels)** |
-|---|---|---|---|---|---|
-| **Damage (`power`)** | Slap dmg: $(10 + 2.2L) \times 1.076^L \times 1.28^{\lfloor L/10 \rfloor}$ | 80 | 45,000,000,000 | 80 | **191,966,342,607** |
-| **Speed (`speed`)** | Attack interval $\times \mathbf{0.9801}/\text{lv}$ ($0.9075\text{s}$ attr-only at Lv 25; **$0.499\text{s}$** w/ Speed Skills; **$0.350\text{s}$** hard floor w/ Skins & Relics; **$0.300\text{s}$** overdrive floor) | 110 | 180,000,000 | 25 | **427,264,587** |
-| **Crit % (`critChance`)** | $+1\%$ crit chance/lv (base **$15\%$**, cap **$70\%$**; any Crit % above $70\%$ converts **$1:8$** into Bonus Crit Damage: $+1\% \text{ excess} = +8\% \text{ Crit Dmg}$) | 130 | 3,200,000,000 | 45 | **9,610,812,411** |
-| **Crit Dmg (`critDamage`)** | $+5\%$ crit damage/lv (base $\times 2.0$) | 90 | 6,500,000,000 | 65 | **25,366,696,921** |
-| **Defense (`defense`)** | $+1\%$ damage reduction/lv (capped at $40\%$) | 180 | 2,800,000,000 | 40 | **7,803,282,974** |
-| **Stun (`stun`)** | **$+0.4\%$** stun chance/lv (base $5\%$, cap **$25\%$ at Lv 50**) and **$+0.018\text{s}$** stun duration/lv (base $0.50\text{s}$, attr cap **$1.40\text{s}$ at Lv 50**; *Battle Focus* adds $+0.20\text{s}$ above attr cap up to $1.60\text{s}$) | 130 | 3,500,000,000 | 50 | **11,432,042,855** |
-| **Combo (`combo`)** | **$+0.20\%$** damage per combo stack and **$+0.25$** max stacks/lv (base 4 stacks; balanced with Crit Dmg) | 75 | 6,000,000,000 | 65 | **23,301,997,279** |
-| **Coins (`coinMult`)** | $+4\%$ coins per level (max $+260\%$ at Lv 65) | 80 | 6,500,000,000 | 65 | **25,225,327,089** |
-| **Accuracy (`accuracy`)** | **$+1.7857\%$** hit chance/lv (base $85\%$, reaches exact **$110.0\%$** cap at Lv 14; final post-evasion hit chance clamped to $[5\%, 100\%]$) | 150 | 1,800,000,000 | 14 | **2,463,441,154** |
-| **Giant Slayer (`bossDamage`)** | $+1.5\%$ damage vs elites & bosses/lv (cap $+60\%$) | 180 | 2,800,000,000 | 40 | **7,803,282,974** |
-| **Life Leech (`vampirism`)** | Every **8th slap** heals **$+0.15\%$ of Max HP/lv** (cap **$6.0\%$ Max HP** at Lv 40) | 260 | 3,600,000,000 | 40 | **10,089,392,839** |
-| **Fortune (`luck`)** | $+0.5\%$ lucky-slap chance/lv (cap $25\%$); lucky = $1.5\times$ damage, $2.5\times$ coins | 140 | 3,800,000,000 | 50 | **12,407,033,279** |
-
-### 4.1 Milestone Attribute Purchase Costs (Exact Values from `GetAttributeCost`)
-
-| Buy Lv | Damage (Max 80) | Speed (Max 25) | Crit % (Max 45) | Crit Dmg (Max 65) | Defense (Max 40) | Stun (Max 50) | Combo (Max 65) | Coins (Max 65) | Accuracy (Max 14) | Giant Slayer (Max 40) | Life Leech (Max 40) | Fortune (Max 50) |
-|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| 1 | 80 | 110 | 130 | 90 | 180 | 130 | 75 | 80 | 150 | 180 | 260 | 140 |
-| 4 | 153 | 551 | 359 | 186 | 552 | 323 | 156 | 166 | 4,946 | 552 | 791 | 348 |
-| 8 | 389 | 5,565 | 1,537 | 529 | 2,754 | 1,194 | 446 | 476 | 744,356 | 2,754 | 3,902 | 1,287 |
-| 10 | 627 | 18,200 | 3,239 | 904 | 6,275 | 2,332 | 763 | 816 | 9,722,452 | 6,275 | 8,840 | 2,515 |
-| 12 | 1,016 | 60,320 | 6,887 | 1,553 | 14,433 | 4,591 | 1,315 | 1,406 | 130,720,210 | 14,433 | 20,215 | 4,952 |
-| 14 | 1,655 | 202,129 | 14,742 | 2,681 | 33,453 | 9,092 | 2,277 | 2,436 | 1,800,000,000 | 33,453 | 46,578 | 9,811 |
-| 18 | 4,434 | 2,331,581 | 68,712 | 8,088 | 183,108 | 36,211 | 6,913 | 7,403 | -- | 183,108 | 251,923 | 39,101 |
-| 22 | 12,022 | 27,692,009 | 326,200 | 24,724 | 1,022,820 | 146,621 | 21,268 | 22,795 | -- | 1,022,820 | 1,390,295 | 158,428 |
-| 24 | 19,869 | 96,316,804 | 714,866 | 43,408 | 2,432,876 | 296,570 | 37,459 | 40,169 | -- | 2,432,876 | 3,286,869 | 320,559 |
-| 25 | 25,564 | 180,000,000 | 1,059,643 | 57,571 | 3,757,546 | 422,279 | 49,760 | 53,372 | -- | 3,757,546 | 5,061,039 | 456,513 |
-| 32 | 151,280 | -- | 17,021,394 | 421,977 | 80,659,415 | 5,107,992 | 368,857 | 396,307 | -- | 80,659,415 | 106,323,367 | 5,528,638 |
-| 36 | 421,790 | -- | 84,415,746 | 1,331,066 | 472,825,774 | 21,509,749 | 1,171,083 | 1,259,475 | -- | 472,825,774 | 615,567,533 | 23,297,000 |
-| 40 | 1,182,959 | -- | 422,518,344 | 4,226,443 | 2,800,000,000 | 91,328,487 | 3,742,825 | 4,029,313 | -- | 2,800,000,000 | 3,600,000,000 | 98,984,989 |
-| 45 | 4,325,437 | -- | 3,200,000,000 | 18,063,447 | -- | 562,449,042 | 16,128,380 | 17,384,522 | -- | -- | -- | 610,128,658 |
-| 48 | 9,449,981 | -- | -- | 43,355,992 | -- | 1,682,532,055 | 38,903,484 | 41,964,911 | -- | -- | -- | 1,826,113,356 |
-| 50 | 15,933,287 | -- | -- | 77,844,568 | -- | 3,500,000,000 | 70,081,659 | 75,634,503 | -- | -- | -- | 3,800,000,000 |
-| 60 | 220,446,912 | -- | -- | 1,477,570,637 | -- | -- | 1,352,538,662 | 1,463,391,584 | -- | -- | -- | -- |
-| 65 | 827,097,565 | -- | -- | 6,500,000,000 | -- | -- | 6,000,000,000 | 6,500,000,000 | -- | -- | -- | -- |
-| 70 | 3,119,315,236 | -- | -- | -- | -- | -- | -- | -- | -- | -- | -- | -- |
-| 80 | 45,000,000,000 | -- | -- | -- | -- | -- | -- | -- | -- | -- | -- | -- |
-
-### 4.2 Power — Base Slap Damage per Level
-
-Base slap damage from the `Power` attribute before Dragon Mastery: $(10 + 2.2L) \times 1.076^L \times 1.28^{\lfloor L/10 \rfloor}$.
-
-| Power Lv | Damage | Power Lv | Damage | Power Lv | Damage | Power Lv | Damage |
-|---|---|---|---|---|---|---|---|
-| 0 | 10.00 | 21 | 428.76 | 42 | 5,960.12 | 63 | 65,985.99 |
-| 1 | 13.13 | 22 | 479.41 | 43 | 6,550.87 | 64 | 72,052.08 |
-| 2 | 16.67 | 23 | 535.27 | 44 | 7,196.99 | 65 | 78,659.08 |
-| 3 | 20.68 | 24 | 596.86 | 45 | 7,903.48 | 66 | 85,854.18 |
-| 4 | 25.20 | 25 | 664.72 | 46 | 8,675.79 | 67 | 93,688.59 |
-| 5 | 30.29 | 26 | 739.45 | 47 | 9,519.84 | 68 | 102,217.95 |
-| 6 | 36.00 | 27 | 821.70 | 48 | 10,442.07 | 69 | 111,502.62 |
-| 7 | 42.42 | 28 | 912.17 | 49 | 11,449.50 | 70 | 155,658.42 |
-| 8 | 49.59 | 29 | 1,011.65 | 50 | 16,063.67 | 71 | 169,735.26 |
-| 9 | 57.61 | 30 | 1,434.87 | 51 | 17,601.39 | 72 | 185,052.69 |
-| 10 | 85.21 | 31 | 1,588.61 | 52 | 19,280.06 | 73 | 201,717.99 |
-| 11 | 97.99 | 32 | 1,757.43 | 53 | 21,112.22 | 74 | 219,847.54 |
-| 12 | 112.22 | 33 | 1,942.74 | 54 | 23,111.51 | 75 | 239,567.66 |
-| 13 | 128.04 | 34 | 2,146.07 | 55 | 25,292.75 | 76 | 261,015.40 |
-| 14 | 145.63 | 35 | 2,369.07 | 56 | 27,672.05 | 77 | 284,339.45 |
-| 15 | 165.14 | 36 | 2,613.58 | 57 | 30,266.90 | 78 | 309,701.13 |
-| 16 | 186.79 | 37 | 2,881.58 | 58 | 33,096.34 | 79 | 337,275.45 |
-| 17 | 210.76 | 38 | 3,175.21 | 59 | 36,181.04 | 80 | 470,082.85 |
-| 18 | 237.31 | 39 | 3,496.83 | 60 | 50,615.61 | -- | -- |
-| 19 | 266.67 | 40 | 4,926.71 | 61 | 55,306.18 | -- | -- |
-| 20 | 382.88 | 41 | 5,420.14 | 62 | 60,417.36 | -- | -- |
-
-*Dragon Mastery (`GetPowerBaseDamage`): Beating #50 Dragon Lord grants Mastery 1 ($\times 1.25$ global Power multiplier, raising Power Lv 70 to $194,573.03$); beating #206 Ravana grants Mastery 2 ($\times 1.45$ global Power multiplier, replacing Mastery 1 and raising Power Lv 80 to $681,620.13$).*
-
----
-## 5. Slap-Coin & Knockout Economy
-
-* **Coins per Slap** = $\text{Enemy Bounty} \times \text{Slap Fraction}$.
-
-| Enemy Band | Base Fraction | Max Multiplier (Normal) | Max Multiplier (Boss) | Per-Fight Slap-Coin Cap | Frontier Challenger Bonus (Unbeaten / Highest Unlocked Enemy) |
-|---|---|---|---|---|---|
-| #1-#10 | $7.0\%$ of bounty | $\times 2.0$ | $\times 1.50$ | $175\%$ of bounty | $+25\%$ slap coins & $200\%$ cap |
-| #11-#30 | $5.5\%$ of bounty | $\times 1.4$ | $\times 1.15$ | $125\%$ of bounty | $+25\%$ slap coins & $175\%$ cap |
-| #31-#50 | $5.5\%$ of bounty | $\times 1.3$ | $\times 1.10$ | $125\%$ of bounty | $+25\%$ slap coins & $175\%$ cap |
-| Worlds | $10.0\%$ of bounty | -- | -- | $135\%$ of bounty | $+25\%$ slap coins & $175\%$ cap |
-
-* **Post-Cap Rate:** Past a fight's slap-coin cap, slaps pay at **$25\%$** of the normal rate.
-* **Over-Level Anti-Farm Decay:** Farming normal enemies more than 5 slots below your current frontier applies a **$-10\%$ coin penalty per slot** below $\text{Frontier} - 5$ (floored at $40\%$ payout).
-* **Normal Fight Total Payout (Slap Cap + KO):**
-  $$\text{NormalFightCoins} = \text{Bounty} \times (\text{SlapCapFraction} + 1.30 \times \text{TotalCoinMult})$$
-  where $\text{TotalCoinMult} = (1 + 0.04 \times \text{CoinsLv}) \times \text{Greed } (1.15) \times \text{Golden Aura } (1.15) \times \text{Coin Magnet } (1.20) \times \text{Treasure Hunter } (1.25\text{ on Elites/Bosses}) \times \text{VIP Pass } (1.25) \times \text{Active Boosts}$.
-* **Hard Mode (Per Enemy, After First Clear — Balanced $+5.7\%$ Raw CPS / $+9\%$ Effective CPS Mastery Bonus):**
-  * **Enemy Stats:** HP $\times 1.75$, Damage $\times 1.25$.
-  * **Payout (`CalculateHardFightKoCoins`):** **KO Coins $= 1.85 \times \text{Bounty} \times (\text{SlapCapFraction} + 1.30 \times \text{TotalCoinMult})$** ($1.85\times$ Normal Fight total payout; no per-slap coins in Hard Mode so $100\%$ of the reward is paid on KO without making Normal Mode or Street Brawl Anomalies obsolete).
-  * **Gems & Embers:** **$+3\text{💎}$ on First Hard Clear per enemy only** ($150\text{💎}$ total across #1-#50), World Embers $\times 1.5$ in Hard World fights.
-  * **Group Mastery (All 5 in a group cleared on Hard):** **$+10\text{💎}$** ($100\text{💎}$ total across 10 groups) and **$+2\%$ permanent coins**.
-* **First-Clear Bonus Chests:** #5 $\to$ 250c + 2💎 · #10 $\to$ 2,200c + 5💎 · #15 $\to$ 18,000c + 2💎 · #20 $\to$ 90,000c + 5💎 · #25 $\to$ 400,000c + 2💎 · #30 $\to$ 2,000,000c + 5💎 · #35 $\to$ 12,000,000c + 3💎 · #40 $\to$ 75,000,000c + 5💎 · #45 $\to$ 280,000,000c + 3💎 · #50 $\to$ 1,500,000,000c + 10💎.
-* **Group Reward Chest:** Clearing all 5 enemies in a group unlocks a one-time claimable chest = $100\%$ of the group's 5 bounties combined.
-
----
-## 6. Combat Systems, Speed Caps & Anti-Cheese Locks
-
-| System | v2.6.6 Audited Final Numbers |
-|---|---|
-| **Player Base Stats** | Damage $10$ (before Power) · Base attack interval $1.500\text{s}$ · Base crit chance **$15\%$** · Base crit damage $\times 2.0$ |
-| **Skill Damage Stacking Contract** | All active `SkillEffectType.DamageMult` bonuses (`stronger_hands` $= +0.20$, `opportunist` $= +0.35$ vs stunned/dazed) sum **additively** into one pool: $\text{skillPoolMult} = 1 + \sum \text{bonus}$ (`basic_slap` $= 1.00$ identity). Per-trigger proc multipliers (`SkillEffectType.ProcHitDamageMult`: `seismic_slam` $3.0\times$, `heavy_slap` $2.5\times$, `rapid_barrage` $2.2\times$, `godhand_strike` $8.0\times$, `acoustic_echo` $+100\%$, `echo_palm` $+60\%$) apply per-trigger on top of the additive pool. |
-| **Speed Progression & 3-Tier Floor System** | • **Base Interval:** $1.500\text{s}$<br>• **Attribute-Only Floor (Speed Lv 25 at $\times 0.9801/\text{lv}$, 0 Speed Skills):** $1.500 \times 0.9801^{25} = \mathbf{0.9075\text{s}}$<br>• **Permanent Skill-Unlocked Floor (Speed Lv 25 + *Second Hand* $\times 0.85$, *Quickening* $\times 0.94$, *Twin Mastery* $\times 0.90$, *Quick Reflexes* $\times 0.90$, *Dual-Hand* $\times 0.85$):** **$0.499\text{s}$** ($2.00\text{ slaps/s}$)<br>• **Skin & World Relic Floor (`Speed.HardCapValue = 0.350f`):** Lowers permanent floor down to **$0.350\text{s}$** ($2.86\text{ slaps/s}$)<br>• **Temporary Overdrive Floor (*Frenzy* $\times 0.7692$, *Adrenaline Rush* $\times 0.8333$, *Swift Recovery* $\times 0.80$, *Infinity Gauntlet Time Stop* $\times 0.6667$):** **$0.300\text{s}$** ($3.33\text{ slaps/s}$) |
-| **Crit Chance Cap & $1:8$ Overcap Conversion** | • Base (**$15\%$**) + `Crit %` Lv 45 ($45\%$) + *Crit Surge* ($8\%$) + *Critical Slaps* ($5\%$) = **$73\%$ F2P Crit** ($81\%$ with *Wolverine Skin* $+8\%$), exceeding the **$70\%$ hard cap**.<br>• **Overcap Rule (`OvercapCritToCritDmgRatio = 8.0f`):** Any Crit Chance above **$70\%$** converts **$1:8$** into **Bonus Critical Damage ($+1\%$ excess Crit Chance $= +8\%$ Crit Damage)** ($+24\%$ F2P at Lv 45 / $+88\%$ w/ Wolverine). |
-| **Armored Poise (Anti-Cheese Lock)** | Active on all **Elites, Mini-Bosses, and Bosses** starting at Enemy #9 (Trash Panda):<br>• **Basic Slaps** landed at **Combo Stack $\le 4$** that are neither Critical Hits nor Skill Procs deal **$-40\%$ damage ($\times 0.60$)**.<br>• **Full $100\%$ Damage Bypass:** Any Critical Hit, any Skill Proc / Weak Spot / Special Move, OR any slap landed at **Combo Stack $\ge 5$** deals $100\%$ full damage. |
-| **Tap-Parry (`Deflect`) & Unblockable Signatures** | • **Tap-Parry (`Deflect` skill, $22,000\text{c}$):** Tap the **PARRY button** the instant an enemy Normal Attack lands — a **$0.30\text{s}$ timing window** ($0.50\text{s}$ with *Iron Stance III*) — on a fixed **$10.00\text{s}$ base cooldown** (unaffected by Slap Speed; reduced to **$8.00\text{s} \to 5.00\text{s}$** via *Iron Stance I–II*). A timed tap negates **$100\%$** of the attack, deals a **$1.50\times$ Counter-Slap**, and triggers *Swift Recovery*. A mistimed tap still spends the cooldown.<br>• **Unblockable Signatures (`SignaturesAreUnblockable = true`):** Every 3rd-attack Group Signature and Boss Signature Move **pierces $100\%$ through both Tap-Parry and `Guard`** — they cannot be parried.<br>• **Signature lockout:** During `SignatureWindupSec` ($0.75	ext{s}$) and the Signature animation, parry taps are refused with the `UNBLOCKABLE` warning and **no cooldown is spent**. |
-| **Enemy Evasion & Miss Penalty** | • Base player accuracy is $85\%$ ($+1.7857\%/\text{lv}$ up to exact **$110.0\%$** at Lv 14); post-evasion hit chance is `Clamp(playerAccuracy - enemyEvasion, 0.05, 1.00)`.<br>• **Miss Penalty:** Missing a slap drains **2 Combo Stacks** and pauses Special Move cooldown charging for **$1.5\text{s}$**. |
-| **Combo System** | Base max 4 stacks · Combo attribute adds **$+0.20\%$** dmg/stack and **$+0.25$** max stacks/lv ($20.25$ stacks at Lv 65) · *Combo Mastery* skill adds $+5$ stacks and $+0.5\%$ dmg/stack (Max $25.25$ stacks $\times 13.5\% = \mathbf{4.41\times\text{ damage}}$ / $+341\%$ bonus damage). |
-| **Stun & Diminishing Returns** | Base chance $5\%$ ($+0.4\%/\text{lv}$, cap **$25\%$ at Lv 50**) · Base duration $0.50\text{s}$ ($+0.018\text{s}/\text{lv}$, attr cap **$1.40\text{s}$ at Lv 50**; *Battle Focus* adds $+0.20\text{s}$ after cap up to **$1.60\text{s}$**) · Enemy swing timer pauses while stunned/dazed · **Post-stun immunity: $3.5\text{s}$ normal / $5.0\text{s}$ bosses** · Bosses take $\times 0.50$ stun & daze duration · **$6.0\text{s}$ internal stun cooldown**. |
-| **Weak Spots (Precision Instinct)** | Unlocks via *Precision Instinct* skill (timer-driven `AlwaysOn` system; **Tap** input, completely separate from the Parry button) · First at $2.2\text{s}$, then every $5\text{--}8\text{s}$ · Window $1.5\text{s}$ ($1.2\text{s}$ on Hard) · Hit deals **$\times 4.5$ slap damage** + $12$ Frenzy meter · Per-fight cap 3 ($+1$ per 15 Fortune levels, max **6**; **7 with *Giant's Grip***). |
-| **Boss Heals & Enrage Grace** | • **Main Bosses (`MaxHeals = 2`):** Heal **$15\%$ Max HP** once at **$60\%$ HP** and once at **$30\%$ HP**.<br>• **World Guardians (`MaxHeals = 1` on `#203`, `#206`, `#213`, `#216`):** Heal **$15\%$ Max HP** once at **$50\%$ HP**.<br>• **Enrage Suppression:** Below $40\%$ HP, bosses enrage (**$\times 0.80$ interval**, **$+10\%$ damage**). If a heal lifts a boss above $40\%$ HP, Enrage is suppressed for an **$8.0\text{s}$ grace window**.<br>• *All boss heals are disabled inside Boss Rush.* |
-| **Revive Priority & Enemy Pacing** | • **Revive Priority:** Main Roster & Side Modes allow at most **1 auto-revive per fight** (*Second Wind* Lv 14 takes priority over *Phoenix Heart*). Inside Endgame Worlds (`#201-#216`), *Second Wind* and *Phoenix Heart* may each trigger once sequentially.<br>• **Enemy Pacing:** First swing at $\times 1.15$ interval; subsequent swings at $\times 1.00$ decaying by $0.99/\text{swing}$ down to $\times 0.85$.<br>• **Revive Ad:** Resume same fight at $50\%$ Max HP, enemy HP unchanged, swing timer reset, debuffs cleared — **once per fight attempt** (disabled in Gauntlet / Boss Rush / Endless / Blitz / Reflex). |
-
-### 6.1 The 10-Group Stage Debuff Progression (Every 3rd Enemy Attack — Unblockable)
-
-Every 3rd attack by any enemy in a group triggers that group's **Stage Signature Move** (**100% Unblockable** — pierces Parry and Guard):
-
-| Group | Enemies | Stage Theme | 3rd-Attack Group Signature Move & Debuff (Unblockable) |
+| Stat | Base | Formula / per-level | Cap |
 |---|---|---|---|
-| **1** | #1-#5 | Cozy Corner | **Heavy Windup:** Deals $1.35\times$ attack damage with a red warning flash (no status debuff). |
-| **2** | #6-#10 | Backyard Bunch | **Dirt Fling:** Deals $1.40\times$ damage and reduces **Player Accuracy by $-25\%$ (Normal Enemies) / $-40\%$ (Monkey Boss) for $3.0\text{s}$**. |
-| **3** | #11-#15 | Fight Club | **Ring Haymaker:** Deals $1.60\times$ damage and knocks hands back, **delaying your next slap by $0.65\text{s}$**. |
-| **4** | #16-#20 | Castle Guard | **Buckler Brace:** Deals $1.50\times$ damage and raises an armor shield that **reduces damage of your next 3 slaps by $45\%$**. |
-| **5** | #21-#25 | Graveyard Shift | **Grave Rot:** Reduces **all Player Healing by $50\%$ for $4.0\text{s}$** and inflicts $1\%$ Max HP/s decay. |
-| **6** | #26-#30 | Shadow Dojo | **Chi Disruption:** **Resets your Combo Stacks to 0** and adds **$+2.0\text{s}$ cooldown** to active Special Moves. |
-| **7** | #31-#35 | Dark Woods | **Cursed Webbing:** Entangles hands, **reducing Player Slap Speed by $30\%$ for $4.0\text{s}$**. |
-| **8** | #36-#40 | Pharaoh's Tomb | **Sands of Siphon:** Reduces **Player Crit Chance by $25\%$ for $4.0\text{s}$** and **heals the enemy for $1.5\%$ Max HP (max 3 triggers per fight / $4.5\%$ Max HP cap)**. |
-| **9** | #41-#45 | Mountain Stronghold | **Tremor Smash:** **Stuns your hands for $0.7\text{s}$** and **reduces your Defense stat by $50\%$ for $4.0\text{s}$**. |
-| **10** | #46-#50 | Dragon Lair | **Draconic Scorch:** **Destroys $50\%$ of active player shields** and **burns for $3\%$ Max HP/s over $4.0\text{s}$**. |
+| Slap damage | 10 | $(10 + \text{Power} \times 2.2) \times 1.076^{\text{Power}} \times 1.28^{\lfloor \text{Power}/10 \rfloor}$, then skill/ability/skin/mastery multipliers | — |
+| Attack interval | $1.5\text{s}$ | $1.5 \times 0.9801^{\text{Speed}}$ ($\times 0.5$ w/ Second Hand, $\times 0.90$ Quick Reflexes, $\times 0.85$ Dual-Hand, $\times 0.94$ Quickening) | final floor $0.499\text{s}$ · $0.35\text{s}$ with speed skin/relic/art · $0.30\text{s}$ in Frenzy/Time Stop/overdrive |
+| Crit chance | $15\%$ | $+1\%$/Crit Chance level ($+5\%$ Critical Slaps, $+8\%$ Crit Surge) | $70\%$ — **overcap converts: each $+1\%$ over the cap adds $+8\%$ crit damage ($\times 8$ rule)** |
+| Crit damage | $\times 2$ | $+0.05$ per Crit Damage level (+ overcap conversion, + Rakshasa Fang relic, + skin crit-dmg) | — |
+| Combo | — | $4$ base stacks $+ 0.25$ stacks/Combo level ($+5$ Combo Mastery); each stack $+0.2\%$ dmg ($+0.5\%$ Combo Mastery $= 0.7\%$/stack) | $25$ stacks ($+17.5\%$ dmg at max build) |
+| Coin multiplier | $\times 1$ | $+4\%$/Coin Mult. level ($\times 3.60$ at Lv 65) $\times 1.20$ Coin Magnet $\times 1.15$ Greed $\times 1.15$ Golden Aura ($\times 1.20$ Hard Stage Mastery, $\times 1.25$ VIP Pass, $\times 2$ while $2\times$ Coins ad runs) | **$\times 5.7132$** F2P base max · **$\times 6.8558$** w/ Hard Mastery · **$\times 8.5698$** w/ Hard Mastery + VIP |
+| Accuracy (hit chance) | $85\%$ | $+1.786\%$/Accuracy level | $110\%$ |
+| Boss damage | $\times 1$ | $+1.5\%$/Giant Slayer level | $+60\%$ from attribute ($\times$ Boss Bane $1.20$ and Boss Hunter skill on top) |
+| Life Leech | 0 | $+0.06\%$ of **Player Max HP/s** per Vampirism level ($2.40\%$ Max HP/s at Lv 40), normalized per slap as $\min(0.015,\; 0.0006 \times \text{Vampirism\_Lv} \times \text{Interval}) \times \text{PlayerMaxHP}$ | **$2.40\%$ Max HP/s** ($1.50\%$ Max HP/slap ceiling; zero dead levels at $0.499\text{s}$ [$1.20\%$/slap] and $0.35\text{s}$ [$0.84\%$/slap]; Lv 39–40 cap at $1.50\%$/slap when interval $\ge 0.625\text{s}$) |
+| Defense (damage reduction) | 0 | $+1\%$/Defense level | $40\%$ |
+| Stun | $5\%$ chance | $+0.4\%$ chance and $+0.018\text{s}$ duration per Stun level | $25\%$ chance · $1.4\text{s}$ duration (bosses take $\frac{1}{2}$ stun; $4\text{s}$ stun cooldown, $2.5\text{s}$ immunity) |
+| Fortune Luck (lucky strike) | 0 | $+0.5\%$/Luck level — a lucky slap pays $\times 1.5$ damage and $\times 2.5$ coins | $25\%$ |
+| Player HP | 100 | $100 + 35 \times \text{Lv} + 220 \times \max(0, \text{Lv} - 20) + 1400 \times \max(0, \text{Lv} - 30)$ ($+75$ Stamina Training, $+3,500$ Unstoppable Hands, $+1,500$ Giant Stature, $+4,500$ Dragonblood Vigour, $\times 1.15$ Transcendent Hand) | — |
+
+**Max-build reference *(v2.7.6)* (Lv 50, all attributes maxed, all 30 skills, including Second Hand & Transcendent Hand):**
+- **Attack interval:** $0.499\text{s}$ standard max-build floor ($0.35\text{s}$ with speed skin/relic/art).
+- **Un-procced base slap:** $1,353,839$ damage/slap (including `Stronger Hands ×1.20`, `Iron Palm ×1.20`, `Lv 50 Mastery ×1.60`, and `Transcendent Hand ×1.25`) $\rightarrow$ **$2,713,104$ raw base DPS** at $0.499\text{s}$ interval (before crits, combo, and skill procs).
+- **Expected post-proc theoretical DPS:** **$\approx 39,300,869$ DPS** ($\approx 39.30\text{M}$ DPS, incorporating $70\%$ crit at $\times 6.04$, $25$-stack combo at $+17.5\%$, Seismic Slam, Heavy Slap, Rapid Barrage, Acoustic Echo, and Godhand Strike; excludes active/temporary buffs such as Frenzy, Precision Weak Spots, and Special Moves).
+- **Survivability & utility:** Max HP $52,929$ · max leech sustain **$1,270\text{ HP/s}$ ($2.40\%$ Max HP/s)** at both $0.499\text{s}$ ($1.20\%$/slap) and $0.35\text{s}$ ($0.84\%$/slap) · coin $\times 5.7132$ F2P base ($\times 6.8558$ w/ Hard Mastery, $\times 8.5698$ w/ VIP) · boss $\times 1.92$ · defense $40\%$.
+
+**Damage roll pipeline (per slap):** $\text{damage} \times \text{combo multiplier} \times \text{tag multiplier} \times \text{crit multiplier}$, where tag = Godhand Ultimate $\times 8$ (every 20 slaps) $\rightarrow$ Heavy Slap $12\%$ $\times 2.5$ $\rightarrow$ crit. Then $\times 1.25$ Boss Hunter (elites), $\times 1.35$ Colossus Bane (`#35+` & world guardians), $\times$ boss-damage multiplier vs elites/bosses. Rapid Barrage: every 6th slap adds 3 hits at $40\%$. Acoustic Echo: crits have $20\%$ chance to echo $+100\%$. Opportunist: $+35\%$ vs stunned (additive $1.55$ pool with Stronger Hands). Adrenaline Rush ($\le 30\%$ HP): $+25\%$ dmg, $\times 0.833$ interval. **$2\times$ Damage ad boost: $\times 2$.** Dragon Mastery: $\times 1.25$ (stage 1) / $\times 1.45$ (stage 2). Level mastery: $+2\%$ per player level above 20. Transcendent Hand (Lv 50): $\times 1.25$ global damage.
+
+**Slap cycle:** windup $0.22\text{s}$ · strike $0.30\text{s}$ · hold $0.38\text{s}$ · recover $0.68\text{s}$ (scaled by interval). Second Hand alternates L/R, doubling cycle rate.
 
 ---
-## 7. Player Special Moves & Boss Signatures
 
-**Player Special Moves** (scale automatically with Chapter Index from Chapter 2 to Chapter 7 via `GetSpecialMoveValue` and `GetSpecialMoveCooldown`; cooldowns do NOT reset between fights in Trio Gauntlet or Boss Rush):
+## 2. Levels, Level-Up Costs & Chapter Caps
 
-| Move | Earned From | Damage (Base $\to$ Maxed) | Cooldown (Base $\to$ Maxed) | What It Does |
+**Level-up cost formula (piecewise, closed form):**
+- Lv 1–10: log-interpolated $150 \rightarrow 55,369$ (exponent $1.065$)
+- Lv 11–40: $55,369 \times 1.35^{\text{Lv} - 10}$
+- Lv 41–44: $450,069,657 \times 1.25^{\text{Lv} - 40}$
+- Lv 45–49: $1,210,000,000 \times 1.10435^{\text{Lv} - 45}$ · Lv 50 = cap
+
+| Lv $\rightarrow$ Lv+1 cost | | | | |
 |---|---|---|---|---|
-| **Double Slap** | Boss #10 | $7\times \to 15\times$ slap dmg | $25\text{s} \to 15\text{s}$ | Both hands slam together for one crushing hit (bypasses Armored Poise; $-3\text{s}$ CD with Shogun Mastery). |
-| **Guard** | Boss #20 | Blocks $100\%$ of one Normal attack | $24\text{s} \to 18\text{s}$ | Unlocked on beating #20 Dark Knight! Cross both hands to block $100\%$ of the next Normal Attack (pierced without consumption by Unblockable Signatures; $-3\text{s}$ CD with Shogun Mastery). |
-| **Uppercut Punch** | Boss #40 | $18\times \to 32\times$ slap dmg | $32\text{s} \to 20\text{s}$ | A ferocious rising uppercut that deals massive damage and stuns for $2.5\text{s}$ ($1.25\text{s}$ vs Bosses). |
+| 1$\rightarrow$2: **150** | 2$\rightarrow$3: **265** | 3$\rightarrow$4: **494** | 4$\rightarrow$5: **939** | 5$\rightarrow$6: **1,813** |
+| 6$\rightarrow$7: **3,539** | 7$\rightarrow$8: **6,967** | 8$\rightarrow$9: **13,818** | 9$\rightarrow$10: **27,582** | 10$\rightarrow$11: **55,369** |
+| 11$\rightarrow$12: **74,748** | 12$\rightarrow$13: **100,910** | 13$\rightarrow$14: **136,229** | 14$\rightarrow$15: **183,908** | 15$\rightarrow$16: **248,276** |
+| 16$\rightarrow$17: **335,173** | 17$\rightarrow$18: **452,484** | 18$\rightarrow$19: **610,853** | 19$\rightarrow$20: **824,652** | 20$\rightarrow$21: **1,113,280** |
+| 21$\rightarrow$22: **1,502,928** | 22$\rightarrow$23: **2,028,953** | 23$\rightarrow$24: **2,739,086** | 24$\rightarrow$25: **3,697,766** | 25$\rightarrow$26: **4,991,984** |
+| 26$\rightarrow$27: **6,739,179** | 27$\rightarrow$28: **9,097,891** | 28$\rightarrow$29: **12,282,153** | 29$\rightarrow$30: **16,580,907** | 30$\rightarrow$31: **22,384,224** |
+| 31$\rightarrow$32: **30,218,703** | 32$\rightarrow$33: **40,795,249** | 33$\rightarrow$34: **55,073,586** | 34$\rightarrow$35: **74,349,341** | 35$\rightarrow$36: **100,371,610** |
+| 36$\rightarrow$37: **135,501,674** | 37$\rightarrow$38: **182,927,260** | 38$\rightarrow$39: **246,951,801** | 39$\rightarrow$40: **333,384,931** | 40$\rightarrow$41: **450,069,657** |
+| 41$\rightarrow$42: **562,587,160** | 42$\rightarrow$43: **703,233,950** | 43$\rightarrow$44: **879,042,438** | 44$\rightarrow$45: **1,098,803,047** | 45$\rightarrow$46: **1,210,000,000** |
+| 46$\rightarrow$47: **1,336,263,500** | 47$\rightarrow$48: **1,475,702,596** | 48$\rightarrow$49: **1,629,692,162** | 49$\rightarrow$50: **1,799,750,539** | |
 
-**Boss Signature Moves Against You** (**100% Unblockable** — bypasses Parry and Guard without consuming them):
+**Chapter caps** — player level and every attribute are capped per chapter; over-cap progress is kept, not lost. General gate on top: no attribute above $2 \times \text{player level}$ ($+5$ per Dragon Mastery stage).
 
-| Boss | Move | v2.6.6 Audited Final Effect (Unblockable) |
-|---|---|---|
-| **#10 Mischievous Monkey** | BANANA SLING | Accuracy $-40\%$ for $5\text{s}$ — missed slaps lose 2 Combo stacks and pause Special charging! |
-| **#20 Dark Knight** | IRON BULWARK | Iron fortress — absorbs 6 slaps at **$65\%$ damage reduction** and reflects $10\%$ damage back! |
-| **#30 Shogun Warlord** | KATANA OMNISLASH | Unblockable blade strike dealing **$1.50\times$ damage** and $1.5\text{s}$ stagger! |
-| **#40 Pharaoh Revenant** | SAND CURSE & RENEWAL | Reduces slap speed by $35\%$ for $5\text{s}$! Also triggers **ETERNAL RENEWAL** ($15\%$ Max HP heal at $60\%$ & $30\%$ HP, `MaxHeals = 2`). |
-| **#50 Dragon Lord** | DRAGON HELLFIRE & RENEWAL | Unblockable caldera blaze burns for **$1.2\%$ Max HP/s over $5\text{s}$**! Also triggers **DRAGON RENEWAL** ($15\%$ Max HP heal at $60\%$ & $30\%$ HP, `MaxHeals = 2`). |
-| **#203 Kumbhakaran (Asura #3)** | SEISMIC STOMP & AMRITA | Colossal stomp dealing $2.0\times$ damage + $1.0\text{s}$ stun; heals **$15\%$ Max HP** once at $50\%$ HP (`MaxHeals = 1`). |
-| **#206 Ravana (Asura #6)** | CHANDRAHASA STRIKE | Unblockable moon-blade strike dealing **$1.75\times$ damage**, $1.0\text{s}$ stagger, and $-30\%$ healing for $5\text{s}$ (`MaxHeals = 1`). |
-| **#213 Puppeteer (Shadow #3)** | MARIONETTE GRIP | Strings weave a barrier absorbing 5 slaps at $50\%$ damage reduction and slowing speed by $20\%$ (`MaxHeals = 1`). |
-| **#216 Dark Slapper (Shadow #6)** | COUNTER SLAP | Unblockable perfected slap returned — **$1.75\times$ damage**, $1.2\text{s}$ stagger, and strips active player shields (`MaxHeals = 1`). |
-
----
-## 8. Enemies #1-#50 — The Playable Main Roster (v2.6.6 Audited Final)
-
-Calibrated across all 50 enemies with strictly monotonic bounties and unblockable-signature damage tuning so **every Chapter Boss TTK lands inside $32\text{s}\text{--}55\text{s}$**, **Player Un-Parried Survival stays $\ge 16.2\text{s}$**, and **every single Chapter requires $24.1\text{--}33.2$ Boss Kills** to complete all upgrades. `IsColossus = true` from Enemy #35 (`Shadow Beast`) through #50 (`Dragon Lord`).
-
-| # | Enemy | Group | HP (v2.6.6) | Dmg (v2.6.6) | Atk Every | Evasion | Slap Value (Base) | Bounty (KO Base) | MaxHeals | Tag |
-|---|---|---|---|---|---|---|---|---|---|---|
-| 1 | Training Dummy | Cozy Corner | 65 | 8 | 2.40s | 0% | ~4 | 63 | 0 | |
-| 2 | Rubber Duck | Cozy Corner | 115 | 11 | 2.35s | 0% | ~6 | 91 | 0 | |
-| 3 | Rubber Chicken | Cozy Corner | 195 | 14 | 2.30s | 0% | ~9 | 134 | 0 | |
-| 4 | Cardboard Knight | Cozy Corner | 340 | 18 | 2.25s | 0% | ~14 | 197 | 0 | |
-| 5 | Grumpy Teddy | Cozy Corner | 650 | 25 | 2.05s | 0% | ~23 | 331 | 0 | MINI-BOSS |
-| 6 | Sassy Goblin Sprout | Backyard Bunch | 920 | 28 | 2.20s | 0% | ~31 | 447 | 0 | |
-| 7 | Mime | Backyard Bunch | 1,450 | 33 | 2.15s | 0% | ~45 | 645 | 0 | |
-| 8 | Cocky Goose | Backyard Bunch | 2,350 | 39 | 2.10s | 0% | ~65 | 930 | 0 | |
-| 9 | Trash Panda | Backyard Bunch | 4,200 | 48 | 2.05s | 0% | ~99 | 1,410 | 0 | ELITE |
-| 10 | Mischievous Monkey | Backyard Bunch | 8,500 | 40 | 1.95s | 0% | ~154 | 2,200 | 2 | BOSS |
-| 11 | Bodybuilder | Fight Club | 16,250 | 66 | 2.13s | 0% | ~248 | 4,510 | 0 | |
-| 12 | Luchador Wrestler | Fight Club | 24,050 | 75 | 2.10s | 0% | ~340 | 6,173 | 0 | |
-| 13 | Kickboxer | Fight Club | 35,750 | 85 | 2.08s | 0% | ~464 | 8,432 | 0 | |
-| 14 | Adult Boxer | Fight Club | 53,300 | 96 | 2.05s | 0% | ~633 | 11,518 | 0 | |
-| 15 | Sumo Champion | Fight Club | 68,000 | 115 | 2.03s | 0% | ~941 | 17,100 | 0 | MINI-BOSS |
-| 16 | Castle Guard | Castle Guard | 119,600 | 110 | 2.00s | 0% | ~1,241 | 22,565 | 0 | |
-| 17 | Royal Executioner | Castle Guard | 162,500 | 120 | 1.98s | 0% | ~1,672 | 30,397 | 0 | |
-| 18 | Knight | Castle Guard | 214,500 | 130 | 1.95s | 0% | ~2,247 | 40,852 | 0 | |
-| 19 | Barbarian | Castle Guard | 210,000 | 132 | 1.93s | 0% | ~2,639 | 47,977 | 0 | ELITE |
-| 20 | Dark Knight | Castle Guard | 335,000 | 90 | 1.84s | 0% | ~3,135 | 57,000 | 2 | BOSS |
-| 21 | Skeleton Warrior | Graveyard Shift | 546,000 | 147 | 1.88s | 5% | ~3,410 | 62,000 | 0 | |
-| 22 | Zombie | Graveyard Shift | 728,000 | 164 | 1.86s | 5% | ~4,400 | 80,000 | 0 | |
-| 23 | Armored Skeleton | Graveyard Shift | 975,000 | 185 | 1.84s | 5% | ~5,720 | 104,000 | 0 | |
-| 24 | Scarab Swarm | Graveyard Shift | 1,300,000 | 208 | 1.82s | 5% | ~7,425 | 135,000 | 0 | |
-| 25 | Mummy Guard | Graveyard Shift | 1,380,000 | 244 | 1.79s | 6% | ~10,175 | 185,000 | 0 | MINI-BOSS |
-| 26 | Ninja Recruit | Shadow Dojo | 2,275,000 | 260 | 1.77s | 6% | ~13,200 | 240,000 | 0 | |
-| 27 | Shuriken Master | Shadow Dojo | 2,860,000 | 287 | 1.75s | 6% | ~17,160 | 312,000 | 0 | |
-| 28 | Samurai Duelist | Shadow Dojo | 3,575,000 | 318 | 1.73s | 6% | ~22,275 | 405,000 | 0 | |
-| 29 | Shadow Assassin | Shadow Dojo | 3,350,000 | 351 | 1.71s | 8% | ~28,875 | 525,000 | 0 | ELITE |
-| 30 | Shogun Warlord | Shadow Dojo | 4,100,000 | 250 | 1.63s | 8% | ~37,400 | 680,000 | 2 | BOSS |
-| 31 | Werewolf | Dark Woods | 4,186,000 | 445 | 1.67s | 10% | ~59,125 | 1,075,000 | 0 | |
-| 32 | Giant Spider | Dark Woods | 5,551,000 | 512 | 1.65s | 10% | ~75,955 | 1,381,000 | 0 | |
-| 33 | Orc Warrior | Dark Woods | 7,462,000 | 588 | 1.63s | 10% | ~97,900 | 1,780,000 | 0 | |
-| 34 | Bog Witch | Dark Woods | 10,010,000 | 676 | 1.61s | 10% | ~126,445 | 2,299,000 | 0 | |
-| 35 | Shadow Beast | Dark Woods | 10,500,000 | 790 | 1.59s | 10% | ~168,245 | 3,059,000 | 0 | MINI-BOSS |
-| 36 | Giant Serpent | Pharaoh's Tomb | 17,290,000 | 882 | 1.57s | 10% | ~214,170 | 3,894,000 | 0 | |
-| 37 | Anubis Warrior | Pharaoh's Tomb | 21,385,000 | 991 | 1.55s | 10% | ~270,270 | 4,914,000 | 0 | |
-| 38 | Sphinx Riddler | Pharaoh's Tomb | 26,390,000 | 1,109 | 1.53s | 10% | ~336,545 | 6,119,000 | 0 | |
-| 39 | Giant Scorpion | Pharaoh's Tomb | 24,500,000 | 1,243 | 1.51s | 12% | ~407,935 | 7,417,000 | 0 | ELITE |
-| 40 | Pharaoh Revenant | Pharaoh's Tomb | 29,400,000 | 1,386 | 1.44s | 12% | ~489,500 | 8,900,000 | 2 | BOSS |
-| 41 | Troll | Mountain Stronghold | 50,050,000 | 1,512 | 1.48s | 12% | ~638,000 | 11,600,000 | 0 | |
-| 42 | Ogre | Mountain Stronghold | 64,610,000 | 1,646 | 1.46s | 12% | ~770,000 | 14,000,000 | 0 | |
-| 43 | Minotaur | Mountain Stronghold | 83,720,000 | 1,798 | 1.44s | 12% | ~935,000 | 17,000,000 | 0 | |
-| 44 | Cyclops | Mountain Stronghold | 107,380,000 | 1,966 | 1.42s | 12% | ~1,133,000 | 20,600,000 | 0 | |
-| 45 | Stone Golem | Mountain Stronghold | 106,400,000 | 2,167 | 1.40s | 12% | ~1,408,000 | 25,600,000 | 0 | MINI-BOSS |
-| 46 | Elder Dragon | Dragon Lair | 177,450,000 | 2,335 | 1.40s | 12% | ~1,672,000 | 30,400,000 | 0 | |
-| 47 | Dragon Champion | Dragon Lair | 227,500,000 | 2,520 | 1.40s | 12% | ~1,980,000 | 36,000,000 | 0 | |
-| 48 | Crystal Dragon | Dragon Lair | 286,650,000 | 2,722 | 1.40s | 12% | ~2,332,000 | 42,400,000 | 0 | |
-| 49 | Ancient Dragon | Dragon Lair | 276,500,000 | 2,940 | 1.40s | 14% | ~2,706,000 | 49,200,000 | 0 | ELITE |
-| 50 | Dragon Lord | Dragon Lair | 343,000,000 | 2,950 | 1.40s | 15% | ~3,135,000 | 57,000,000 | 2 | FINAL BOSS |
+| Chapter | Unlock | Max player Lv | Max Power | Other attribute caps |
+|---|---|---|---|---|
+| Start | — | 10 | 12 | speed 8 · critChance 10 · critDamage 12 · combo 12 · coinMult 12 · defense 10 · bossDamage 10 · vampirism 10 · stun 10 · luck 10 · accuracy 4 |
+| Ch. 2 | Defeat #10 (Monkey) | 18 | 24 | speed 13 · critChance 18 · critDamage 22 · combo 22 · coinMult 22 · defense 18 · bossDamage 18 · vampirism 18 · stun 18 · luck 18 · accuracy 6 |
+| Ch. 3 | Defeat #20 (Dark Knight) | 26 | 36 | speed 18 · critChance 26 · critDamage 32 · combo 32 · coinMult 32 · defense 26 · bossDamage 26 · vampirism 26 · stun 26 · luck 26 · accuracy 8 |
+| Ch. 4 | Defeat #30 (Shogun) | 33 | 48 | speed 21 · critChance 33 · critDamage 42 · combo 42 · coinMult 42 · defense 32 · bossDamage 32 · vampirism 32 · stun 34 · luck 34 · accuracy 11 |
+| Ch. 5 | Defeat #40 (Pharaoh) | 38 | 60 | speed 23 · critChance 39 · critDamage 52 · combo 52 · coinMult 52 · defense 36 · bossDamage 36 · vampirism 36 · stun 42 · luck 42 · accuracy 13 |
+| Ch. 6 | Defeat #50 (Dragon Lord) | 44 | 70 | speed 25 · critChance 45 · critDamage 60 · combo 60 · coinMult 60 · defense 40 · bossDamage 40 · vampirism 40 · stun 47 · luck 47 · accuracy 14 |
+| Final | Defeat Ravana (Asura Realm) | 50 | 80 | speed 25 · critChance 45 · critDamage 65 · combo 65 · coinMult 65 · defense 40 · bossDamage 40 · vampirism 40 · stun 50 · luck 50 · accuracy 14 |
 
 ---
-## 9. Roster Data #51-#100 — Post-Shadow Verse Expansion (Chapter 8+)
 
-*In v2.6.6, the unplayable #51-#100 roster is anchored cleanly above #216 The Dark Slapper (`26.5B Base HP` / `26,500 Dmg` / `455M Bounty`) so there is zero backward dip when Chapter 8+ opens after Shadow Verse:*
+## 3. Attributes (12) — Costs
 
-| # | Enemy | Group | HP (v2.6.6) | Dmg (v2.6.6) | Atk Every | Bounty (v2.6.6) | Tag |
+**Cost formula (steepened log curve):**
+$$\text{cost}(L \rightarrow L+1) = \exp\left( \ln(\text{base}) + (\ln(\text{maxCost}) - \ln(\text{base})) \times \left(\frac{L}{\text{maxLv} - 1}\right)^{1.11} \right)$$
+First level = base cost, final level = max cost.
+
+| Attribute | Effect per level | Base cost | Final-level cost | Max Lv | Cost @ Lv 10 | @ Lv 25 | @ Lv 50 |
 |---|---|---|---|---|---|---|---|
-| 51 | Frost Wolf Alpha | Frozen Wastes | 35,000,000,000 | 31,500 | 1.22s | 580,000,000 | |
-| 52 | Ice Witch | Frozen Wastes | 45,500,000,000 | 35,000 | 1.22s | 750,000,000 | |
-| 53 | Snow Golem | Frozen Wastes | 59,000,000,000 | 39,000 | 1.22s | 970,000,000 | |
-| 54 | Yeti Brute | Frozen Wastes | 76,500,000,000 | 43,500 | 1.22s | 1,250,000,000 | |
-| 55 | Glacier Titan | Frozen Wastes | 102,000,000,000 | 49,500 | 1.20s | 1,680,000,000 | MINI-BOSS |
-| 56-60 | Dinosaur Valley (#56-#60) | Dinosaur Valley | $132\text{B} \to 395\text{B}$ | $55\text{k} \to 82\text{k}$ | 1.20s | $2.20\text{B} \to 6.50\text{B}$ | BOSS #60 |
-| 61-70 | Hell Gate & Olympus (#61-#70) | Groups 13-14 | $510\text{B} \to 6.80\text{T}$ | $92\text{k} \to 225\text{k}$ | 1.20s | $8.40\text{B} \to 112.0\text{B}$ | BOSS #70 |
-| 71-80 | Mech Factory & Aliens (#71-#80) | Groups 15-16 | $8.80\text{T} \to 118\text{T}$ | $255\text{k} \to 620\text{k}$ | 1.20s | $146.0\text{B} \to 1.96\text{T}$ | BOSS #80 |
-| 81-90 | Sky Temple & Abyss (#81-#90) | Groups 17-18 | $152\text{T} \to 2.04\text{Qa}$ | $700\text{k} \to 1.70\text{M}$ | 1.20s | $2.50\text{T} \to 33.6\text{T}$ | BOSS #90 |
-| 91-100 | Cosmic Void & Heaven (#91-#100) | Groups 19-20 | $2.65\text{Qa} \to 35.5\text{Qa}$ | $1.90\text{M} \to 4.20\text{M}$ | 1.20s | $43.0\text{T} \to 580\text{T}$ | BOSS #100 |
+| Power | +dmg (see §1) | 80 | 45,000,000,000 | 80 | 610 | 21,986 | 14,730,270 |
+| Speed | interval $\times 0.9801$ | 110 | 180,000,000 | 25 | 24,845 | — | — |
+| Crit Chance | $+1\%$ crit chance | 130 | 3,200,000,000 | 45 | 3,477 | 1,148,015 | — |
+| Crit Damage | $+0.05$ crit mult | 90 | 6,500,000,000 | 65 | 902 | 53,061 | 85,157,120 |
+| Defense | $+1\%$ dmg reduction | 180 | 2,800,000,000 | 40 | 6,964 | 4,394,540 | — |
+| Stun | $+0.4\%$ chance, $+0.018\text{s}$ | 130 | 3,500,000,000 | 50 | 2,438 | 430,835 | — |
+| Combo | $+0.25$ stacks, $+0.2\%$/stack | 75 | 6,000,000,000 | 65 | 761 | 45,841 | 76,681,450 |
+| Coin Mult. | $+4\%$ coins | 80 | 6,500,000,000 | 65 | 814 | 49,165 | 82,784,910 |
+| Accuracy | $+1.7857\%$ hit chance | 150 | 1,800,000,000 | 14 | 29,340,680 | — | — |
+| Giant Slayer | $+1.5\%$ boss dmg | 180 | 2,800,000,000 | 40 | 6,964 | 4,394,540 | — |
+| Life Leech | $+0.06\%$ Max HP/s (interval-scaled/slap) | 260 | 3,600,000,000 | 40 | 9,803 | 5,916,890 | — |
+| Fortune Luck | $+0.5\%$ lucky chance | 140 | 3,800,000,000 | 50 | 2,630 | 465,785 | — |
 
 ---
-## 10. Skills — All 30 (v2.6.7 with Tap-Parry & 3-Rank `Iron Stance`)
 
-Bought with coins from the skill tree. **Speed Skills are mandatory to lower your permanent attack interval from the $0.9075\text{s}$ attribute-only floor down to the $0.499\text{s}$ permanent cap**, **Proc/Crit/Combo Skills bypass the $-40\%$ Armored Poise damage reduction**, and **Deflect + Iron Stance I–III** unlock and scale your Tap-Parry (cooldown `10s -> 8s -> 5s`; *Iron Stance III* widens the window to `0.50s`).
+## 4. Combat Systems
 
-| Tier | Skill | Cost (v2.6.6) | Needs First | Boss Gate | Trigger, `ProcChance` & `ProcIntervalSlaps` | v2.6.6 Audited Final Effect |
-|---|---|---|---|---|---|---|
-| 1 | **Basic Slap** | 0 | -- | -- | `AlwaysOn` (`100%`) | The slap everything starts with (`1.00f` identity). Already yours. |
-| 1 | **Stamina Training** | 300 | Basic Slap | -- | `AlwaysOn` (`100%`) | $+75$ Max HP (applies immediately upon purchase). |
-| 1 | **Stronger Hands** | 750 | Basic Slap | -- | `AlwaysOn` (`100%`) | $+20\%$ damage on every slap (`0.20f` in additive `DamageMult` pool). |
-| 1 | **Second Hand** | FREE (1,000 tag) | Basic Slap | Beat #5 | `AlwaysOn` (`100%`) | Claimed FREE on beating #5 Grumpy Teddy. Alternates L/R hands, reducing base slap interval from $1.500\text{s} \to 1.275\text{s}$ ($\times 0.85$). |
-| 2 | **Twin Mastery** | 3,200 | Second Hand | -- | `AlwaysOn` (`100%`) | Reduces permanent slap interval by $\times 0.90$ and grants $+10\%$ combo charge (`ComboChargeBonus`, no boss gate). |
-| 2 | **On Target** | 6,500 | Twin Mastery | -- | `AlwaysOn` (`100%`) | Combo stacks survive switching enemies (resets on defeat). |
-| 2 | **Quick Reflexes** | 15,000 | Twin Mastery | Beat #10 | `AlwaysOn` (`100%`) | Reduces permanent slap interval by $\times 0.90$. |
-| 2 | **Deflect** | 22,000 | Basic Slap | -- | `AlwaysOn` (`100%`) | Unlocks **Tap-Parry**: tap the **PARRY button** the instant an enemy attack lands (**$0.30\text{s}$ window**) on a **$10.00\text{s}$ base cooldown**. Negates $100\%$ of the Normal Attack and deals a **$1.50\times$ Counter-Slap** (Signatures are Unblockable and cannot be parried). |
-| 2 | **Critical Slaps** | 35,000 | Stronger Hands | -- | `AlwaysOn` (`100%`) | $+5\%$ critical strike chance (helps bypass Armored Poise). |
-| 2 | **Seismic Slam** | 55,000 | Stamina Training | Beat #10 | `ProcEveryNSlaps` (`100%`, every `5` slaps) | Every **5th slap** lands a SEISMIC SLAM dealing **$3.0\times$ damage** (`ValuePrimary = 3.00f`, bypasses Poise) and dazing the enemy for $0.8\text{s}$ ($0.4\text{s}$ vs Bosses)! |
-| 2 | **Heavy Slap** | 90,000 | Stronger Hands | Beat #10 | `ProcOnHit` (`ProcChance = 12%`) | $12\%$ chance a slap lands HEAVY for **$2.5\times$ damage** (`ValuePrimary = 2.50f`, bypasses Poise). |
-| 2 | **Precision Instinct** | 140,000 | Stronger Hands | Beat #10 | `AlwaysOn` (timer-driven) | Unlocks PRECISION strikes: a gold weak spot flashes mid-fight — tap it for a **$4.5\times$ critical strike**! Max 3 per fight ($+1$ per 15 Fortune levels, max 6; 7 w/ *Giant's Grip*). |
-| 3 | **Combo Mastery** | 300,000 | On Target | Beat #10 | `AlwaysOn` (`100%`) | Combo cap $+5$ stacks and $+0.5\%$ damage per stack. |
-| 3 | **Opportunist** | 600,000 | Quick Reflexes | -- | `ProcOnHit` (`100%` vs Stunned/Dazed) | Slaps deal $+35\%$ damage to Stunned or Dazed enemies. |
-| 3 | **Adrenaline Rush** | 1,100,000 | Seismic Slam | -- | `OnLowHpState` (`<30%` HP) | Below **$30\%$ HP**: gain $+20\%$ temporary Overdrive slap speed ($\times 0.8333$ interval) and $+25\%$ damage. |
-| 3 | **Coin Magnet** | 2,000,000 | Critical Slaps | Beat #20 | `AlwaysOn` (`100%`) | $+20\%$ coins from every KO. |
-| 3 | **Boss Hunter** | 3,800,000 | Heavy Slap | Beat #20 | `AlwaysOn` (`100%`) | $+25\%$ damage vs Group Elites, Mini-Bosses, and Bosses. |
-| 4 | **Acoustic Echo** | 8,500,000 | Combo Mastery | Beat #30 | `ProcOnHit` (`ProcChance = 20%` on Crits) | Critical slaps have a **$20\%$ chance** to echo for **$+100\%$ bonus damage** (`ValuePrimary = 1.00f`). |
-| 4 | **Dual-Hand Technique** | 18,000,000 | Opportunist | Beat #20 | `AlwaysOn` (`100%`) | Reduces permanent slap interval by $\times 0.85$ (reaches exact $0.499\text{s}$ permanent cap at Speed Lv 25). |
-| 4 | **Unstoppable Hands** | 38,000,000 | Adrenaline Rush | Beat #30 | `AlwaysOn` (`100%`) | $+1,400$ Max HP (applies immediately upon purchase) and regenerate **$0.35\%$ Max HP/s** during fights. |
-| 4 | **Kinetic Barrier** | 75,000,000 | Adrenaline Rush | Beat #30 | `ProcEveryNSlaps` (`100%`, every `10` slaps) | Every **10 slaps** builds a shield absorbing **$12\%$ of Max HP** damage (max $24\%$ Max HP, $10\text{s}$ internal cooldown). |
-| 4 | **Iron Stance I** | 120,000,000 | Deflect | Beat #30 | `AlwaysOn` (`100%`) | Reduces Parry cooldown by **$-2.00\text{s}$** ($10.00\text{s} \to \mathbf{8.00\text{s}}$). |
-| 4 | **Treasure Hunter** | 150,000,000 | Coin Magnet | Beat #30 | `AlwaysOn` (`100%`) | Elites and Bosses drop $+25\%$ bonus coins, and first-clear/milestone defeats grant $+1$ extra Gem. |
-| 4 | **Frenzy** | 300,000,000 | Boss Hunter | Beat #30 | `ActiveDurationState` (`25` slaps) | Slaps charge FRENZY: $10\text{s}$ of $+50\%$ damage and $+30\%$ Overdrive speed ($\times 0.7692$ interval, bypasses $0.499\text{s}$ cap down to $0.30\text{s}$). |
-| 4 | **Colossus Bane** | 600,000,000 | Boss Hunter | Beat #35 | `AlwaysOn` (`100%`) | $+35\%$ damage vs Giant, Titan, and Dragon enemies (`IsColossus == true`: #35-#50 & Worlds). |
-| 5 | **Rapid Barrage** | 1,200,000,000 | Dual-Hand Technique | Beat #40 | `ProcEveryNSlaps` (`100%`, every `6` slaps) | Every **6th slap** unleashes a barrage: 3 extra hits at $40\%$ damage each ($+120\%$ bonus $= \mathbf{2.20\times}$ total slap damage). |
-| 5 | **Iron Stance II** | 1,500,000,000 | Iron Stance I | Beat #40 | `AlwaysOn` (`100%`) | Reduces Parry cooldown by **$-3.00\text{s}$** ($8.00\text{s} \to \mathbf{5.00\text{s}}$). |
-| 5 | **Bulwark Guard** | 2,400,000,000 | Kinetic Barrier | Beat #40 | `AlwaysOn` (`100%`) | When Defense or Barrier mitigates damage, $50\%$ of the blocked damage is reflected back to the enemy. |
-| 5 | **Godhand Strike** | 5,000,000,000 | Colossus Bane | Beat #45 | `ProcEveryNSlaps` (`100%`, every `20` slaps) | Every **20th slap** triggers the Godhand Ultimate: an **$8.0\times$ screen-shattering strike** (`ValuePrimary = 8.00f`)! |
-| 5 | **Iron Stance III** | 12,000,000,000 | Iron Stance II | Beat #50 | `AlwaysOn` (`100%`) | **Widens the Parry window** ($0.30\text{s} \to \mathbf{0.50\text{s}}$). Cooldown stays $5.00\text{s}$. |
-
-**Exact Total Cost of the Skill Tree (All 30 Skills): 23,417,667,750 coins (`9,797,667,750` base + `13,620,000,000` Iron Stance I–III).**
+**FRENZY** (Frenzy skill): charges after **35 slaps** while Frenzy is inactive (slaps during active Frenzy do not build charge, preventing permanent uptime) $\rightarrow$ $10\text{s}$ of $\times 1.5$ damage and $\times 1.3$ speed ($36.4\%$ max uptime at $0.499\text{s}$ interval, $44.9\%$ at $0.35\text{s}$). Frenzy Overcharge booster (₹99): charges $25\%$ faster (**$26$ inactive slaps**), lasts $13\text{s}$ (**$50.1\%$ uptime at $0.499\text{s}$**, **$58.8\%$ at $0.35\text{s}$**).
+**TIME STOP** (world art): $5\text{s}$, $\times 1.3$ damage, $\times 1.5$ speed.
+**PRECISION STRIKE / weak spots** (Precision Instinct): gold spot flashes (first at $2.2\text{s}$, then every $5\text{–}8\text{s}$, more often with Luck) — tap it within $1.5\text{s}$ ($1.2\text{s}$ on Hard) for $\times 4.5$ damage. Max 3 per fight $+1$ per 15 Luck (max 6). Grants $+12$ Frenzy charge (when inactive).
+**PARRY** (Deflect skill): tap PARRY as an enemy attack lands — $0.3\text{s}$ window (Iron Stance III: $0.5\text{s}$) negates $100\%$ and answers with a $\times 1.5$ Counter-Slap. Cooldown $10\text{s} \rightarrow 8\text{s}$ (Iron Stance I) $\rightarrow 5\text{s}$ (Iron Stance II). Whiffed parry still spends the cooldown. **Signature moves are $100\%$ unblockable** — they pierce Parry and Guard without consuming them.
+**REFLECT SHIELDS:** any enemy shield that reflects player slap damage (such as Dark Knight's *Iron Bulwark*) displays a $0.8\text{s}$ `"SHIELD UP!"` telegraph before activating, caps reflected damage per slap at $\min(0.10 \times \text{PreMitigationSlapDmg},\; 0.08 \times \text{PlayerMaxHP})$, is mitigated by `Defense` and `Thick Skin`, and is **non-lethal** (cannot drop Player HP below $1\text{ HP}$).
+**ENEMY ENRAGE:** below $40\%$ HP, bosses attack $\times 0.8$ interval and $\times 1.1$ damage, with an $8\text{s}$ grace after a heal. Boss intro card: $1.8\text{s}$.
+**ENEMY ATTACKS:** interval from the roster table (elites $\times 0.88$, floor $1\text{s}$); every 3rd attack is the boss's signature (see §6) for main campaign & World bosses, and every 4th attack for reserved `#60–#100` bosses.
 
 ---
-## 11. Game Modes & Timings (v2.6.6 Audited Final)
 
-### 11.1 Trio Gauntlet — True Endurance Mode (Unlock: Clear Any Group of 5)
-* **Format:** Fight the group's 3 toughest enemies (#3 Normal, #4 Elite, #5 Mini-Boss/Boss) back-to-back with **1 persistent health bar**:
-  * **Bout 1 (Enemy #3):** $1.00\times$ HP · $1.00\times$ Dmg
-  * **Bout 2 (Enemy #4 Elite):** $1.15\times$ HP · $1.10\times$ Dmg
-  * **Bout 3 (Enemy #5 Boss/Mini-Boss):** $1.25\times$ HP · $1.15\times$ Dmg
-* **No Cornerman Drafts & No Special Resets:** Special Move cooldowns (`Double Slap`, `Guard`, `Uppercut`) do NOT reset between bouts; Combo Stacks decay by $50\%$ during the $2\text{s}$ transition between bouts.
-* **Clutch Execution Recovery:**
-  * **Base Breather:** $+5\%$ Max HP between bouts.
-  * **Clean Defense Bonus:** **$+4\%$ Max HP** for every Normal Attack Parried (*Deflect*) or Blocked (*Guard*) during the bout (capped at $+12\%$ Max HP).
-  * **Overkill Finisher:** Landing the killing blow with a Special Move or Weak Spot grants $+5\%$ Max HP and shaves $-3\text{s}$ off active Special cooldowns.
-* **Payout & Cooldown:** Slap coins $\times 0.50$; Completion Bonus $= (\text{Sum of 3 Bounties}) \times 1.35 \times \text{TotalCoinMult} + 3\text{💎}$ first clear ($1\text{💎}$ repeats on highest cleared group only). **Shared 30-minute global cooldown.**
+## 5. Enemy Roster — Main 50 *(v2.7.6 Smoothed Stage & Chapter Entry Pacing)*
 
-### 11.2 Boss Rush — Strictly Monotonic Apex Scaling + Cornerman Drafts (Unlock: Beat Boss #20)
-* **Format:** Fight all main-roster Chapter Bosses defeated so far (#10 $\to$ #20 $\to$ #30 $\to$ #40 $\to$ #50) sequentially. **HP and Special Move cooldowns carry over** between rounds.
-* **Strictly Monotonic Apex Boss Scaling (All Boss Heals Disabled in Boss Rush):**
-  * Each round scales cleanly as a fraction of your **Highest Defeated Boss's Base Stats** (`MaxBossHP` and `MaxBossDmg`):
-    * **Round 1 (#10 Monkey):** $\text{HP} = 0.30 \times \text{MaxBossHP}$ · $\text{Dmg} = 0.50 \times \text{MaxBossDmg}$
-    * **Round 2 (#20 Dark Knight):** $\text{HP} = 0.45 \times \text{MaxBossHP}$ · $\text{Dmg} = 0.65 \times \text{MaxBossDmg}$
-    * **Round 3 (#30 Shogun):** $\text{HP} = 0.60 \times \text{MaxBossHP}$ · $\text{Dmg} = 0.78 \times \text{MaxBossDmg}$
-    * **Round 4 (#40 Pharaoh):** $\text{HP} = 0.75 \times \text{MaxBossHP}$ · $\text{Dmg} = 0.90 \times \text{MaxBossDmg}$
-    * **Round 5 (#50 Dragon Lord):** $\text{HP} = 1.00 \times \text{MaxBossHP}$ · $\text{Dmg} = 1.00 \times \text{MaxBossDmg}$
-* **Between-Round Recovery & Cornerman Draft:** Heal $+15\%$ Max HP between rounds and pick **1 of 3 Boxing Cornerman Draft Cards** (active for the remainder of the run):
-  1. 🩹 **Cutman's Ice Pack:** Immediately heal $+35\%$ Max HP right now and reduce incoming Burn/DoT damage by $50\%$.
-  2. 🛡️ **Cornerman's Towel:** Start each remaining boss fight with a $25\%$ Max HP Barrier Shield.
-  3. 🥊 **Loaded Wraps:** Your first 8 slaps in each remaining fight deal $\times 1.75$ damage and bypass boss shields.
-  4. ⚡ **Smelling Salts:** Special Moves start each round $100\%$ charged, and Frenzy fills $40\%$ faster this run.
-  5. 🎯 **Coach's Spotter:** A Gold Weak Spot is guaranteed to spawn $1.5\text{s}$ into each fight, stays open $+0.5\text{s}$ longer, and deals $+30\%$ bonus damage.
-  6. 🔔 **Saved by the Bell:** Bosses start each round Dazed for $1.5\text{s}$ and their attack swing timer is $15\%$ slower this run.
-  7. 🩸 **Second Wind Tonic:** The first time you drop below $35\%$ HP in each round, heal $25\%$ Max HP and gain $+25\%$ Overdrive Slap Speed for $5\text{s}$.
-  8. 💰 **High-Roller Purse:** Bosses deal $+20\%$ damage for the rest of the run, but your final Boss Rush Completion Coin Payout is increased by $+50\%$.
-* **Payout & Cooldown:** Slaps pay $\times 0.50$ slap coins; Completion Payout $= (\text{Sum of Defeated Boss Base Bounties}) \times 1.80 \times \text{TotalCoinMult}$ (plus $+1\text{🔥}$ per boss once Dragon Lord is beaten). **60-minute cooldown.**
+Stages are groups of 5. Even-stage `#5` (`#10, #20, #30, #40, #50`) is the **Chapter Boss (`👑 BOSS ELITE`)**; odd-stage `#5` (`#5, #15, #25, #35, #45`) is a **Mini-Boss (`MINI ELITE`)**; `#9/#19/#29/#39/#49` is an **Elite (`ELITE`)**. All 10 stage enders (`#5, #10, ..., #50`) award first-clear chests (see §6). Bounty = base KO bounty before the $\times 1.30$ kill multiplier and coin multipliers (see §10). **Slap Cap (Frontier / Repeat)** = exact fight slap-coin cap fraction (`bounty × capFrac`) used in §10 ($2.00 / 1.75$ for `#1–#10`, $1.35 / 0.85$ for `#11–#100`).
 
-### 11.3 Endless Mode — Reachable Wave 50 & Mastery Every 15 Waves (Unlock: Beat Boss #10)
-* **Format:** Endless waves cycling your frontier enemy; **HP scales by $1.028^{\text{wave}-1}$** ($3.87\times$ HP at Wave 50) and **Damage scales by $1.022^{\text{wave}-1}$** ($2.90\times$ Dmg at Wave 50). Every 5th wave (`EndlessBossWaveInterval = 5`) spawns a Mini-Boss/Boss wave with **$1.50\times$ HP (`EndlessBossHpMult`)** and **$1.25\times$ Damage (`EndlessBossDmgMult`)**. Pick 1 Cornerman Draft every 5 waves (max 3 active).
-* **Endless Mastery:** Every **15 waves survived** (Waves 15, 30, 45) grants **$+1$ temporary Player Level** for that run (supports temporary Levels 51–53 when at Level 50).
-* **Payout & Cooldown:** Per wave $= \text{Frontier Bounty} \times \min(1.0,\ 0.20 + 0.05 \times \text{wave}) \times \text{TotalCoinMult}$; $+1\text{💎}$ (and $+1\text{🔥}$ post-Dragon Lord) every 5 waves. **45-minute cooldown.**
+| # | Enemy | Stage | HP | ATK DMG | ATK int. | Bounty | Slap Cap (F / R) | Flags |
+|---|---|---|---|---|---|---|---|---|
+| 1 | Training Dummy | 1. Cozy Corner | 65 | 8 | $2.4\text{s}$ | 72 | $2.00 / 1.75$ |  |
+| 2 | Rubber Duck | 1. Cozy Corner | 115 | 11 | $2.35\text{s}$ | 105 | $2.00 / 1.75$ |  |
+| 3 | Rubber Chicken | 1. Cozy Corner | 195 | 14 | $2.3\text{s}$ | 154 | $2.00 / 1.75$ |  |
+| 4 | Cardboard Knight | 1. Cozy Corner | 340 | 18 | $2.25\text{s}$ | 227 | $2.00 / 1.75$ |  |
+| 5 | Grumpy Teddy | 1. Cozy Corner | 650 | 25 | $2.05\text{s}$ | 381 | $2.00 / 1.75$ | MINI ELITE |
+| 6 | Sassy Goblin Sprout | 2. Backyard Bunch | 920 | 28 | $2.2\text{s}$ | 514 | $2.00 / 1.75$ |  |
+| 7 | Mime | 2. Backyard Bunch | 1,450 | 33 | $2.15\text{s}$ | 742 | $2.00 / 1.75$ |  |
+| 8 | Cocky Goose | 2. Backyard Bunch | 2,350 | 39 | $2.1\text{s}$ | 1,070 | $2.00 / 1.75$ |  |
+| 9 | Trash Panda | 2. Backyard Bunch | 4,200 | 48 | $2.05\text{s}$ | 1,622 | $2.00 / 1.75$ | ELITE |
+| 10 | Mischievous Monkey | 2. Backyard Bunch | 8,500 | 40 | $1.95\text{s}$ | 2,530 | $2.00 / 1.75$ | 👑 BOSS ELITE |
+| 11 | Bodybuilder *(v2.7.6)* | 3. Fight Club | 15,235 | 57 | $2.13\text{s}$ | 3,834 | $1.35 / 0.85$ |  |
+| 12 | Luchador Wrestler *(v2.7.6)* | 3. Fight Club | 22,547 | 65 | $2.1\text{s}$ | 5,247 | $1.35 / 0.85$ |  |
+| 13 | Kickboxer | 3. Fight Club | 44,688 | 98 | $2.08\text{s}$ | 7,167 | $1.35 / 0.85$ |  |
+| 14 | Adult Boxer *(v2.7.6)* | 3. Fight Club | 61,200 | 110 | $2.05\text{s}$ | 9,790 | $1.35 / 0.85$ |  |
+| 15 | Sumo Champion | 3. Fight Club | 85,000 | 132 | $2.03\text{s}$ | 14,535 | $1.35 / 0.85$ | MINI ELITE |
+| 16 | Castle Guard | 4. Castle Guard | 149,500 | 127 | $2.0\text{s}$ | 19,180 | $1.35 / 0.85$ |  |
+| 17 | Royal Executioner *(v2.7.6)* | 4. Castle Guard | 168,000 | 138 | $1.98\text{s}$ | 25,837 | $1.35 / 0.85$ |  |
+| 18 | Knight *(v2.7.6)* | 4. Castle Guard | 189,000 | 150 | $1.95\text{s}$ | 34,724 | $1.35 / 0.85$ |  |
+| 19 | Barbarian | 4. Castle Guard | 262,500 | 152 | $1.93\text{s}$ | 40,780 | $1.35 / 0.85$ | ELITE |
+| 20 | Dark Knight | 4. Castle Guard | 540,000 | 104 | $1.84\text{s}$ | 48,450 | $1.35 / 0.85$ | 👑 BOSS ELITE |
+| 21 | Skeleton Warrior *(v2.7.6)* | 5. Graveyard Shift | 552,825 | 138 | $1.88\text{s}$ | 46,500 | $1.35 / 0.85$ | evasion $5\%$ |
+| 22 | Zombie *(v2.7.6)* | 5. Graveyard Shift | 737,100 | 154 | $1.86\text{s}$ | 60,000 | $1.35 / 0.85$ | evasion $5\%$ |
+| 23 | Armored Skeleton | 5. Graveyard Shift | 1,316,250 | 231 | $1.84\text{s}$ | 78,000 | $1.35 / 0.85$ | evasion $5\%$ |
+| 24 | Scarab Swarm *(v2.7.6)* | 5. Graveyard Shift | 1,341,360 | 260 | $1.82\text{s}$ | 101,250 | $1.35 / 0.85$ | evasion $5\%$ |
+| 25 | Mummy Guard | 5. Graveyard Shift | 1,863,000 | 305 | $1.79\text{s}$ | 138,750 | $1.35 / 0.85$ | MINI ELITE evasion $6\%$ |
+| 26 | Ninja Recruit | 6. Shadow Dojo | 3,071,250 | 325 | $1.77\text{s}$ | 180,000 | $1.35 / 0.85$ | evasion $6\%$ |
+| 27 | Shuriken Master *(v2.7.6)* | 6. Shadow Dojo | 3,160,000 | 359 | $1.75\text{s}$ | 234,000 | $1.35 / 0.85$ | evasion $6\%$ |
+| 28 | Samurai Duelist *(v2.7.6)* | 6. Shadow Dojo | 3,256,200 | 398 | $1.73\text{s}$ | 303,750 | $1.35 / 0.85$ | evasion $6\%$ |
+| 29 | Shadow Assassin | 6. Shadow Dojo | 4,522,500 | 439 | $1.71\text{s}$ | 393,750 | $1.35 / 0.85$ | ELITE evasion $8\%$ |
+| 30 | Shogun Warlord | 6. Shadow Dojo | 7,800,000 | 313 | $1.63\text{s}$ | 510,000 | $1.35 / 0.85$ | 👑 BOSS ELITE evasion $8\%$ |
+| 31 | Werewolf *(v2.7.6)* | 7. Dark Woods | 4,552,275 | 451 | $1.67\text{s}$ | 731,000 | $1.35 / 0.85$ | evasion $10\%$ |
+| 32 | Giant Spider *(v2.7.6)* | 7. Dark Woods | 6,036,713 | 518 | $1.65\text{s}$ | 939,080 | $1.35 / 0.85$ | evasion $10\%$ |
+| 33 | Orc Warrior | 7. Dark Woods | 10,819,900 | 794 | $1.63\text{s}$ | 1,210,400 | $1.35 / 0.85$ | evasion $10\%$ |
+| 34 | Bog Witch *(v2.7.6)* | 7. Dark Woods | 10,962,000 | 913 | $1.61\text{s}$ | 1,563,320 | $1.35 / 0.85$ | evasion $10\%$ |
+| 35 | Shadow Beast | 7. Dark Woods | 15,225,000 | 1,067 | $1.59\text{s}$ | 2,080,120 | $1.35 / 0.85$ | MINI ELITE evasion $10\%$ |
+| 36 | Giant Serpent | 8. Pharaoh's Tomb | 25,070,500 | 1,191 | $1.57\text{s}$ | 2,647,920 | $1.35 / 0.85$ | evasion $10\%$ |
+| 37 | Anubis Warrior *(v2.7.6)* | 8. Pharaoh's Tomb | 25,320,000 | 1,338 | $1.55\text{s}$ | 3,341,520 | $1.35 / 0.85$ | evasion $10\%$ |
+| 38 | Sphinx Riddler *(v2.7.6)* | 8. Pharaoh's Tomb | 25,578,000 | 1,497 | $1.53\text{s}$ | 4,160,920 | $1.35 / 0.85$ | evasion $10\%$ |
+| 39 | Giant Scorpion | 8. Pharaoh's Tomb | 35,525,000 | 1,678 | $1.51\text{s}$ | 5,043,560 | $1.35 / 0.85$ | ELITE evasion $12\%$ |
+| 40 | Pharaoh Revenant | 8. Pharaoh's Tomb | 65,000,000 | 1,871 | $1.44\text{s}$ | 6,052,000 | $1.35 / 0.85$ | 👑 BOSS ELITE evasion $12\%$ |
+| 41 | Troll *(v2.7.6)* | 9. Mountain Stronghold | 58,183,125 | 1,644 | $1.48\text{s}$ | 7,192,000 | $1.35 / 0.85$ | evasion $12\%$ |
+| 42 | Ogre *(v2.7.6)* | 9. Mountain Stronghold | 75,109,125 | 1,790 | $1.46\text{s}$ | 8,680,000 | $1.35 / 0.85$ | evasion $12\%$ |
+| 43 | Minotaur *(v2.7.6)* | 9. Mountain Stronghold | 96,500,000 | 2,607 | $1.44\text{s}$ | 10,540,000 | $1.35 / 0.85$ | evasion $12\%$ |
+| 44 | Cyclops *(v2.7.6)* | 9. Mountain Stronghold | 118,742,400 | 2,851 | $1.42\text{s}$ | 12,772,000 | $1.35 / 0.85$ | evasion $12\%$ |
+| 45 | Stone Golem | 9. Mountain Stronghold | 164,920,000 | 3,142 | $1.4\text{s}$ | 15,872,000 | $1.35 / 0.85$ | MINI ELITE evasion $12\%$ |
+| 46 | Elder Dragon | 10. Dragon Lair | 275,047,500 | 3,386 | $1.4\text{s}$ | 18,848,000 | $1.35 / 0.85$ | evasion $12\%$ |
+| 47 | Dragon Champion *(v2.7.6)* | 10. Dragon Lair | 291,500,000 | 3,654 | $1.4\text{s}$ | 22,320,000 | $1.35 / 0.85$ | evasion $12\%$ |
+| 48 | Crystal Dragon *(v2.7.6)* | 10. Dragon Lair | 308,574,000 | 3,947 | $1.4\text{s}$ | 26,288,000 | $1.35 / 0.85$ | evasion $12\%$ |
+| 49 | Ancient Dragon | 10. Dragon Lair | 428,575,000 | 4,263 | $1.4\text{s}$ | 30,504,000 | $1.35 / 0.85$ | ELITE evasion $14\%$ |
+| 50 | Dragon Lord | 10. Dragon Lair | 760,000,000 | 3,850 | $1.4\text{s}$ | 35,340,000 | $1.35 / 0.85$ | 👑 BOSS ELITE evasion $15\%$ |
 
-### 11.4 Golden Dummy Blitz — Achievable 20-Tier Track (Unlock: 10 Defeats · 2 Charges · 45-Min Recharge)
-* **Format:** $20\text{s}$ against the Golden Dummy (pure DPS test; slaps pay 0 coins; $2\times$ Damage ad boost is paused so `Base DPS` benchmarks remain pure). Reaching milestone **Tiers 3, 6, 9, 12, 15, and 18** adds **$+1.5\text{s}$** each (max $+9\text{s} = 29\text{s}$ max duration). `Base DPS` is defined as the player's Expected Steady-State Slap DPS (excluding active Special Moves, Weak Spots, and Frenzy burst).
-* **Payout (Highest Tier Reached Only — Not Cumulative Across Tiers):** Receives the single highest tier's coin payout multiplied by `TotalCoinMult`. Milestone tiers ($3, 6, 9, 12, 15, 18, 20$) pay **$+2\text{💎}$ First-Reach Bonus** ($14\text{💎}$ total track), and repeat runs reaching Tier 10+ award **$+1\text{💎}$** (`RepeatGems = 1`).
+**Curve anchors (v2.7.6):** HP $65 \rightarrow 760,000,000$ (Dragon Lord) · ATK $8 \rightarrow 3,850$ (Dragon Lord) · Bounty $72 \rightarrow 35,340,000$. Chapter 1 (`#1–#10`) preserves baseline HP/ATK with $+15\%$ bounty; Chapters 2–5 (`#11–#50`) ease the first 2 entry enemies of each chapter by $-25\%$ HP/ATK (`#11–#12`, `#21–#22`, `#31–#32`, `#41–#42`) and cap `#4` / `#8` normal HP at $0.72 \times$ the following `#5` / `#9` Elite HP so every stage escalates smoothly into its mini-boss/boss.
 
-| Tier | Name | Score Needed ($\times$ Base DPS) | Total Run Coin Payout ($\times$ Frontier Bounty $\times$ TotalCoinMult) | First-Reach Gem Bonus | Repeat Gem Bonus |
+### Reserved roster `#51–#100` *(World-Relic Endgame Curve)*
+*(In code, gated behind the "Stronger Challengers" coming-soon wall — scaled at $\times 1.0781$ HP/step, $\times 1.0080$ ATK/step, $\times 1.0781$ Bounty/step. Tiers `#90–#100` are tuned for **Lv 50 + World Relics (`Slumber Bell` & `Puppet Strings` Lv 2–3)**, yielding a `~10–12 min` clear with Relics + $2\times$ Ad vs. a `~18.1 min` raw Lv 50 baseline.)*
+
+| # | Enemy | HP | ATK DMG | ATK int. | Bounty | Slap Cap (F / R) | Flags |
+|---|---|---|---|---|---|---|---|
+| 51 | Frost Wolf Alpha | 840,000,000 | 3,850 | $1.38\text{s}$ | 39,000,000 | $1.35 / 0.85$ | evasion $15\%$ |
+| 52 | Ice Witch | 906,000,000 | 3,881 | $1.37\text{s}$ | 42,000,000 | $1.35 / 0.85$ | evasion $15\%$ |
+| 53 | Snow Golem | 976,000,000 | 3,912 | $1.37\text{s}$ | 45,300,000 | $1.35 / 0.85$ | evasion $15\%$ |
+| 54 | Yeti Brute | 1,053,000,000 | 3,943 | $1.36\text{s}$ | 48,900,000 | $1.35 / 0.85$ | evasion $15\%$ |
+| 55 | Glacier Titan | 1,135,000,000 | 3,975 | $1.35\text{s}$ | 52,700,000 | $1.35 / 0.85$ | MINI ELITE evasion $15\%$ |
+| 56 | Raptor Rascal | 1,223,000,000 | 4,007 | $1.35\text{s}$ | 56,800,000 | $1.35 / 0.85$ | evasion $15\%$ |
+| 57 | Triceratops Tank | 1,319,000,000 | 4,039 | $1.34\text{s}$ | 61,300,000 | $1.35 / 0.85$ | evasion $15\%$ |
+| 58 | Pterodactyl Diver | 1,422,000,000 | 4,071 | $1.33\text{s}$ | 66,000,000 | $1.35 / 0.85$ | evasion $15\%$ |
+| 59 | Spinosaurus Brute | 1,533,000,000 | 4,104 | $1.33\text{s}$ | 71,200,000 | $1.35 / 0.85$ | ELITE evasion $16\%$ |
+| 60 | T-Rex King | 1,653,000,000 | 4,136 | $1.32\text{s}$ | 76,800,000 | $1.35 / 0.85$ | 👑 BOSS ELITE evasion $16\%$ |
+| 61 | Fire Elemental | 1,782,000,000 | 4,170 | $1.31\text{s}$ | 82,800,000 | $1.35 / 0.85$ | evasion $16\%$ |
+| 62 | Ice Golem | 1,921,000,000 | 4,203 | $1.31\text{s}$ | 89,200,000 | $1.35 / 0.85$ | evasion $16\%$ |
+| 63 | Demon Warrior | 2,071,000,000 | 4,237 | $1.30\text{s}$ | 96,200,000 | $1.35 / 0.85$ | evasion $16\%$ |
+| 64 | Demon Brute | 2,232,000,000 | 4,270 | $1.29\text{s}$ | 103,700,000 | $1.35 / 0.85$ | evasion $16\%$ |
+| 65 | Cerberus | 2,407,000,000 | 4,305 | $1.29\text{s}$ | 111,800,000 | $1.35 / 0.85$ | MINI ELITE evasion $16\%$ |
+| 66 | Satyr Trickster | 2,595,000,000 | 4,339 | $1.28\text{s}$ | 120,600,000 | $1.35 / 0.85$ | evasion $16\%$ |
+| 67 | Centaur Archer | 2,797,000,000 | 4,374 | $1.27\text{s}$ | 130,000,000 | $1.35 / 0.85$ | evasion $16\%$ |
+| 68 | Griffon | 3,016,000,000 | 4,409 | $1.27\text{s}$ | 140,200,000 | $1.35 / 0.85$ | evasion $16\%$ |
+| 69 | Medusa | 3,251,000,000 | 4,444 | $1.26\text{s}$ | 151,100,000 | $1.35 / 0.85$ | ELITE evasion $17\%$ |
+| 70 | Zeus Thunderer | 3,505,000,000 | 4,480 | $1.25\text{s}$ | 162,900,000 | $1.35 / 0.85$ | 👑 BOSS ELITE evasion $17\%$ |
+| 71 | Rusty Bot | 3,779,000,000 | 4,515 | $1.25\text{s}$ | 175,700,000 | $1.35 / 0.85$ | evasion $17\%$ |
+| 72 | Welder Drone | 4,074,000,000 | 4,552 | $1.24\text{s}$ | 189,400,000 | $1.35 / 0.85$ | evasion $17\%$ |
+| 73 | Crusher Mech | 4,392,000,000 | 4,588 | $1.23\text{s}$ | 204,200,000 | $1.35 / 0.85$ | evasion $17\%$ |
+| 74 | Sawblade Sentinel | 4,735,000,000 | 4,625 | $1.23\text{s}$ | 220,200,000 | $1.35 / 0.85$ | evasion $17\%$ |
+| 75 | Factory Overlord | 5,104,000,000 | 4,662 | $1.22\text{s}$ | 237,400,000 | $1.35 / 0.85$ | MINI ELITE evasion $17\%$ |
+| 76 | Little Grey | 5,503,000,000 | 4,699 | $1.21\text{s}$ | 255,900,000 | $1.35 / 0.85$ | evasion $17\%$ |
+| 77 | Martian Soldier | 5,932,000,000 | 4,737 | $1.20\text{s}$ | 275,900,000 | $1.35 / 0.85$ | evasion $17\%$ |
+| 78 | UFO Pilot | 6,396,000,000 | 4,774 | $1.20\text{s}$ | 297,500,000 | $1.35 / 0.85$ | evasion $17\%$ |
+| 79 | Xeno Hunter | 6,895,000,000 | 4,813 | $1.19\text{s}$ | 320,800,000 | $1.35 / 0.85$ | ELITE evasion $18\%$ |
+| 80 | Alien Warlord | 7,433,000,000 | 4,851 | $1.18\text{s}$ | 345,800,000 | $1.35 / 0.85$ | 👑 BOSS ELITE evasion $18\%$ |
+| 81 | Ancient Guardian | 8,014,000,000 | 4,890 | $1.18\text{s}$ | 372,900,000 | $1.35 / 0.85$ | evasion $18\%$ |
+| 82 | Crystal Titan | 8,639,000,000 | 4,929 | $1.17\text{s}$ | 402,000,000 | $1.35 / 0.85$ | evasion $18\%$ |
+| 83 | Void Knight | 9,314,000,000 | 4,969 | $1.16\text{s}$ | 433,400,000 | $1.35 / 0.85$ | evasion $18\%$ |
+| 84 | Storm Giant | 10,041,000,000 | 5,008 | $1.16\text{s}$ | 467,300,000 | $1.35 / 0.85$ | evasion $18\%$ |
+| 85 | Phoenix | 10,825,000,000 | 5,048 | $1.15\text{s}$ | 503,800,000 | $1.35 / 0.85$ | MINI ELITE evasion $18\%$ |
+| 86 | Bubble Crab | 11,670,000,000 | 5,089 | $1.14\text{s}$ | 543,200,000 | $1.35 / 0.85$ | evasion $18\%$ |
+| 87 | Sailor Squid | 12,581,000,000 | 5,129 | $1.14\text{s}$ | 585,600,000 | $1.35 / 0.85$ | evasion $18\%$ |
+| 88 | Hammerhead Brawler | 13,563,000,000 | 5,171 | $1.13\text{s}$ | 631,400,000 | $1.35 / 0.85$ | evasion $18\%$ |
+| 89 | Angler Horror | 14,622,000,000 | 5,212 | $1.12\text{s}$ | 680,700,000 | $1.35 / 0.85$ | ELITE evasion $19\%$ |
+| 90 | Kraken Spawn | 15,764,000,000 | 5,254 | $1.12\text{s}$ | 733,900,000 | $1.35 / 0.85$ | 👑 BOSS ELITE evasion $19\%$ |
+| 91 | Void Walker | 16,994,000,000 | 5,296 | $1.11\text{s}$ | 791,300,000 | $1.35 / 0.85$ | evasion $19\%$ |
+| 92 | Star Eater | 18,321,000,000 | 5,338 | $1.10\text{s}$ | 853,100,000 | $1.35 / 0.85$ | evasion $19\%$ |
+| 93 | Nebula Serpent | 19,752,000,000 | 5,381 | $1.10\text{s}$ | 919,800,000 | $1.35 / 0.85$ | evasion $19\%$ |
+| 94 | Dark Matter Knight | 21,294,000,000 | 5,424 | $1.09\text{s}$ | 991,700,000 | $1.35 / 0.85$ | evasion $19\%$ |
+| 95 | Eldritch Horror | 22,956,000,000 | 5,467 | $1.08\text{s}$ | 1,069,200,000 | $1.35 / 0.85$ | MINI ELITE evasion $20\%$ |
+| 96 | Celestial Knight | 24,749,000,000 | 5,511 | $1.08\text{s}$ | 1,152,700,000 | $1.35 / 0.85$ | evasion $20\%$ |
+| 97 | Archangel of War | 26,681,000,000 | 5,555 | $1.07\text{s}$ | 1,242,800,000 | $1.35 / 0.85$ | evasion $20\%$ |
+| 98 | Seraphim Judge | 28,764,000,000 | 5,599 | $1.06\text{s}$ | 1,339,900,000 | $1.35 / 0.85$ | evasion $20\%$ |
+| 99 | The Gatekeeper | 31,010,000,000 | 5,644 | $1.06\text{s}$ | 1,444,600,000 | $1.35 / 0.85$ | ELITE evasion $20\%$ |
+| 100 | The Almighty Hand | 33,310,000,000 | 5,689 | $1.05\text{s}$ | 1,550,000,000 | $1.35 / 0.85$ | 👑 BOSS ELITE evasion $20\%$ |
+
+---
+
+## 6. Bosses — Signatures, Heals, First-Clear Chests
+
+**Signature moves** (every 3rd attack on `#10–#50` and World bosses; **every 4th attack** on reserved `#60–#100` bosses; all unblockable):
+
+| Boss | Signature | Effect |
+|---|---|---|
+| Monkey (#10) | BANANA SLING | Accuracy $-40\%$ for $5\text{s}$ — your slaps can MISS! |
+| Dark Knight (#20) | IRON BULWARK | $0.8\text{s}$ telegraph, then absorbs 6 slaps at $65\%$ damage and reflects $10\%$ back, capped at $8\%$ of Player Max HP per slap (mitigated by Defense/Thick Skin, non-lethal)! |
+| Shogun (#30) | KATANA OMNISLASH | Unblockable blade strike dealing $1.5\times$ damage and $1.5\text{s}$ stagger — Parry and Guard cannot stop it! |
+| Pharaoh (#40) | PHARAOH'S SAND CURSE | Ancient sands reduce your slap speed by $35\%$ for $5\text{s}$! |
+| Dragon Lord (#50) | DRAGON HELLFIRE | Unblockable caldera blaze burns for $1.2\%$ of your Max HP per second over $5\text{s}$! |
+| Kumbhakaran (Asura 3) | SEISMIC STOMP | A colossal stomp dealing $2\times$ damage and stunning your slaps for $1\text{s}$! |
+| Ravana (Asura 6) | CHANDRAHASA STRIKE | Unblockable moon-blade strike — $1.75\times$ damage, a $1\text{s}$ stagger, and $-20\%$ healing for $5\text{s}$! |
+| Umbral Puppeteer (Shadow 3) | MARIONETTE GRIP | Strings weave into a barrier — absorbs 5 slaps at $50\%$ damage and slows your slaps by $20\%$! |
+| Dark Slapper (Shadow 6) | COUNTER SLAP | Unblockable perfected slap, returned — $1.75\times$ damage, a $1.2\text{s}$ stagger, and strips your shields! |
+| T-Rex King (#60) *(reserved)* | PRIMAL ROAR | Every 4th attack: deafening apex roar dealing $1.6\times$ damage and reducing Crit Chance by $25\%$ for $5\text{s}$! |
+| Zeus Thunderer (#70) *(reserved)* | OLYMPIAN BOLT | Every 4th attack: unblockable lightning strike dealing $1.6\times$ damage and stunning slaps for $1.0\text{s}$! |
+| Alien Warlord (#80) *(reserved)* | GRAVITY WELL | Every 4th attack: deals $1.6\times$ damage and slows attack speed by $30\%$ for $4\text{s}$! |
+| Kraken Spawn (#90) *(reserved)* | ABYSSAL CRUSH | Every 4th attack: tentacle slam dealing $1.6\times$ damage and reducing Life Leech sustain by $25\%$ for $4\text{s}$! |
+| The Almighty Hand (#100) *(reserved)* | DIVINE JUDGMENT | Every 4th attack: unblockable celestial palm dealing $1.6\times$ damage, stripping shields, and inflicting a $1.0\text{s}$ stagger! |
+
+**Boss heals:**
+
+- **Monkey (#10) — BANANA FEAST:** The Monkey King gorges mid-fight — heals $15\%$ of his HP at $60\%$ and $30\%$ HP (max $2\times$ per fight).
+- **Dark Knight (#20) — DARK RENEWAL:** Darkness knits his wounds shut — heals $15\%$ of his HP at $60\%$ and $30\%$ HP (max $2\times$ per fight).
+- **Shogun (#30) — RONIN'S RESOLVE:** A warrior's second breath — heals $15\%$ of his HP at $60\%$ and $30\%$ HP (max $2\times$ per fight).
+- **Pharaoh (#40) — ETERNAL RENEWAL:** The tomb restores him — heals $15\%$ of his HP at $60\%$ and $30\%$ HP (max $2\times$ per fight).
+- **Dragon Lord (#50) — DRAGON RENEWAL:** Ancient blood knits shut — heals $15\%$ of his HP at $60\%$ and $30\%$ HP (max $2\times$ per fight).
+- **Kumbhakaran (Asura 3) — AMRITA OF THE NAVEL:** The nectar of immortality — heals $15\%$ of his HP, once at $50\%$ HP.
+- **Ravana (Asura 6) — AMRITA OF THE NAVEL:** The nectar of immortality — heals $15\%$ of his HP, once at $50\%$ HP.
+- **Umbral Puppeteer (Shadow 3) — MARIONETTE MENDING:** The puppeteer re-strings its champion — heals $15\%$ of its HP, once at $50\%$ HP.
+- **Dark Slapper (Shadow 6) — SHADOW RENEWAL:** The shadow knits itself whole — heals $15\%$ of his HP, once at $50\%$ HP.
+- **Reserved Bosses (`#60, #70, #80, #90, #100`) — TITANIC REGENERATION:** Heals $15\%$ of Max HP once at $50\%$ HP.
+
+**First-clear chests** (paid once, on first defeating each stage's `#5` Mini-Boss or Boss):
+
+| Enemy # | 5 | 10 | 15 | 20 | 25 | 30 | 35 | 40 | 45 | 50 |
+|---|---|---|---|---|---|---|---|---|---|---|
+| Reward | 250 🪙 + 2 💎 | 2,500 🪙 + 5 💎 | 15,000 🪙 + 2 💎 | 75,000 🪙 + 5 💎 | 300,000 🪙 + 2 💎 | 1,500,000 🪙 + 5 💎 | 8,000,000 🪙 + 3 💎 | 50,000,000 🪙 + 5 💎 | 175,000,000 🪙 + 3 💎 | 900,000,000 🪙 + 10 💎 |
+
+| Reserved # | 55 | 60 | 65 | 70 | 75 | 80 | 85 | 90 | 95 | 100 |
+|---|---|---|---|---|---|---|---|---|---|---|
+| Reward | 1.2B 🪙 + 3 💎 | 1.8B 🪙 + 5 💎 | 2.6B 🪙 + 3 💎 | 3.8B 🪙 + 5 💎 | 5.5B 🪙 + 4 💎 | 8.0B 🪙 + 6 💎 | 11.5B 🪙 + 4 💎 | 17.0B 🪙 + 8 💎 | 25.0B 🪙 + 5 💎 | 40.0B 🪙 + 15 💎 |
+
+**Gem drops:** elite kill = 1 💎 · stage boss = 3 💎 · Dragon Lord = 100 💎 · Treasure Hunter skill: $+1$ 💎 on elite/boss kills and $+25\%$ coins from them.
+
+---
+
+## 7. Skills Tree (30 skills)
+
+| Tier | Skill | Cost 🪙 | Requires | Boss gate | Effect |
 |---|---|---|---|---|---|
-| 1 | BRONZE I | $\times 1.65$ | $\times 0.40$ | -- | -- |
-| 2 | BRONZE II | $\times 3.30$ | $\times 0.60$ | -- | -- |
-| 3 | BRONZE III (+1.5s) | $\times 4.95$ | $\times 0.80$ | $+2\text{💎}$ | -- |
-| 4 | BRONZE IV | $\times 6.60$ | $\times 1.00$ | -- | -- |
-| 5 | SILVER I | $\times 8.25$ | $\times 1.20$ | -- | -- |
-| 6 | SILVER II (+1.5s) | $\times 9.90$ | $\times 1.40$ | $+2\text{💎}$ | -- |
-| 7 | SILVER III | $\times 11.55$ | $\times 1.60$ | -- | -- |
-| 8 | SILVER IV | $\times 13.20$ | $\times 1.80$ | -- | -- |
-| 9 | GOLD I (+1.5s) | $\times 14.85$ | $\times 2.00$ | $+2\text{💎}$ | -- |
-| 10 | GOLD II | $\times 16.50$ | $\times 2.25$ | -- | $+1\text{💎}$ |
-| 11 | GOLD III | $\times 18.15$ | $\times 2.50$ | -- | $+1\text{💎}$ |
-| 12 | GOLD IV (+1.5s) | $\times 19.80$ | $\times 2.75$ | $+2\text{💎}$ | $+1\text{💎}$ |
-| 13 | PLATINUM I | $\times 21.45$ | $\times 3.00$ | -- | $+1\text{💎}$ |
-| 14 | PLATINUM II | $\times 23.10$ | $\times 3.25$ | -- | $+1\text{💎}$ |
-| 15 | DIAMOND I (+1.5s) | $\times 24.75$ | $\times 3.50$ | $+2\text{💎}$ | $+1\text{💎}$ |
-| 16 | DIAMOND II | $\times 26.40$ | $\times 3.70$ | -- | $+1\text{💎}$ |
-| 17 | MASTER I | $\times 28.05$ | $\times 3.90$ | -- | $+1\text{💎}$ |
-| 18 | MASTER II (+1.5s) | $\times 29.70$ | $\times 4.10$ | $+2\text{💎}$ | $+1\text{💎}$ |
-| 19 | GRANDMASTER | $\times 31.35$ | $\times 4.30$ | -- | $+1\text{💎}$ |
-| 20 | LEGEND | $\times 33.00$ | $\times 4.50$ | $+2\text{💎}$ | $+1\text{💎}$ |
+| 1 | Basic Slap | 0 | — | — | The slap everything starts with. Already yours. |
+| 1 | Stronger Hands | 750 | Basic Slap | — | $+20\%$ damage on every slap. |
+| 1 | Stamina Training | 300 | Basic Slap | — | $+75$ max HP. |
+| 1 | Second Hand | 1,000 | Basic Slap | #5 | Alternates L / R hands, doubling your cycle rate. |
+| 2 | Twin Mastery | 3,200 | Second Hand | — | Off-hand slaps strike $+25\%$ faster and grant $+10\%$ combo charge. |
+| 2 | On Target | 6,500 | Twin Mastery | — | Combo stacks survive switching enemies (resets on loss). |
+| 2 | Quick Reflexes | 15,000 | Twin Mastery | #10 | $+10\%$ attack speed. |
+| 2 | Critical Slaps | 35,000 | Stronger Hands | — | $+5\%$ crit chance. |
+| 2 | Seismic Slam | 55,000 | Stamina Training | #10 | Every 5th slap lands a devastating SEISMIC SLAM dealing $3\times$ damage and dazing the enemy for $0.8\text{s}$! |
+| 2 | Heavy Slap | 90,000 | Stronger Hands | #10 | $12\%$ chance a slap lands HEAVY for $2.5\times$ damage. |
+| 2 | Precision Instinct | 140,000 | Stronger Hands | #10 | Unlocks PRECISION strikes: a gold weak spot flashes on the enemy mid-fight — tap it for a devastating $4.5\times$ critical strike! Fortune Luck makes it appear more often. Max 3 per fight ($+1$ per 15 Luck, max 6). |
+| 2 | Deflect | 22,000 | Basic Slap | — | Unlocks PARRY: tap the PARRY button the instant an enemy attack lands ($0.30\text{s}$ window) to negate $100\%$ of it and answer with a $1.5\times$ Counter-Slap. $10\text{s}$ cooldown. Signature Moves are UNBLOCKABLE — they cannot be parried and pierce Guard. |
+| 3 | Combo Mastery | 540,000 | On Target | #10 | Combo cap $+5$ stacks and $+0.5\%$ damage per stack. |
+| 3 | Opportunist | 1,080,000 | Quick Reflexes | — | Slaps deal $+35\%$ damage to Stunned enemies. |
+| 3 | Adrenaline Rush | 1,980,000 | Seismic Slam | — | Below $30\%$ HP: gain $+20\%$ attack speed and $+25\%$ damage. |
+| 3 | Coin Magnet | 3,600,000 | Critical Slaps | #20 | $+20\%$ coins from every KO. |
+| 3 | Boss Hunter | 6,840,000 | Heavy Slap | #20 | $+25\%$ damage vs group elites and bosses. |
+| 4 | Acoustic Echo | 15,300,000 | Combo Mastery | #30 | Critical slaps have a $20\%$ chance to echo for $+100\%$ bonus damage. |
+| 4 | Dual-Hand Technique | 32,400,000 | Opportunist | #20 | $+15\%$ attack speed — both hands blur. |
+| 4 | Unstoppable Hands | 68,400,000 | Adrenaline Rush | #30 | $+3,500$ max HP and regenerate $0.35\%$ Max HP/s during fights. |
+| 4 | Kinetic Barrier | 135,000,000 | Adrenaline Rush | #30 | Every 10 slaps builds a shield absorbing $12\%$ of Max HP damage (max $24\%$ of Max HP). |
+| 4 | Treasure Hunter | 270,000,000 | Coin Magnet | #30 | Elites and Bosses drop $+25\%$ bonus coins, and defeat grants $+1$ extra Gem. |
+| 4 | Frenzy | 540,000,000 | Boss Hunter | #30 | 35 inactive-state slaps charge FRENZY: $10\text{s}$ of $+50\%$ damage and $+30\%$ speed. |
+| 4 | Colossus Bane | 1,080,000,000 | Boss Hunter | #35 | $+35\%$ damage vs Colossi — enemies `#35` and up, and World guardians. |
+| 5 | Rapid Barrage | 2,160,000,000 | Dual-Hand Technique | #40 | Every 6th slap unleashes a barrage: 3 extra hits at $40\%$ damage. |
+| 5 | Bulwark Guard | 4,320,000,000 | Kinetic Barrier | #40 | When Defense or Barrier mitigates damage, $50\%$ of the blocked damage is reflected back. |
+| 5 | Godhand Strike | 9,000,000,000 | Colossus Bane | #45 | Slaps charge the Godhand Ultimate: an $8\times$ screen-shattering strike. |
+| 4 | Iron Stance I | 216,000,000 | Deflect | #30 | Parry cooldown $-2\text{s}$ ($10\text{s}$ to $8\text{s}$). |
+| 5 | Iron Stance II | 2,700,000,000 | Iron Stance I | #40 | Parry cooldown $-3\text{s}$ ($8\text{s}$ to $5\text{s}$). |
+| 5 | Iron Stance III | 21,600,000,000 | Iron Stance II | #50 | Parry window widens ($0.30\text{s}$ to $0.50\text{s}$). Cooldown stays $5\text{s}$. |
 
-### 11.5 Reflex Slap-Off (Unlock: Beat #10 + Deflect & Precision Instinct · 2 Charges · 30-Min Recharge)
-* **Format:** Duel your strongest defeated enemy using both unlocked skills (`IsReflexSlapOffUnlocked`). Slaps drain **$2\%$** of the pool, **Red Danger Prompts (Parry button)** drain **$12\%$**, and **Gold Weak Spot Taps (Precision)** drain **$8\%$**. A missed Danger Prompt costs $15\%$ of your Max HP; 2 consecutive misses = instant loss ($2\times$ Damage ad boost is paused).
-* **Payout:** Win pays **$2.0 \times \text{Enemy Bounty} \times \text{TotalCoinMult} + 1\text{💎}$**.
-
-### 11.6 Street Brawl Anomalies (25% Chance on Repeat Main-Roster Fights)
-* 🎈 **Piñata:** Enemy has **$0.60\times$ HP**, takes **$1.00\times$ full player damage**, deals $0.5\times$ damage, and pays $\times 3.0$ slap coins; flees at **$15\text{s}$** — deal $\ge 50\%$ of its HP ($0.30\times$ normal enemy HP) before it flees to win a $1.35\times$ bounty chest.
-* 💀 **Sudden Death:** Both sides deal $\times 2.2$ damage (`PlayerDamageDealtMult = 2.20`, `EnemyDamageMult = 2.20`); winning pays $\times 1.40$ coins.
-* ⛈️ **Slap Storm:** Your slaps deal $\times 0.5$ (`PlayerDamageDealtMult = 0.50`), but weak spots appear every $1.5\text{s}$.
-* 🔥 **Berserker:** Enemy attacks at $\times 0.7$ interval ($30\%$ faster, `TimerSec = 0.0s`), player stuns blocked; win pays **$+1\text{💎}$ and $\times 1.35$ coins**.
-
-### 11.7 Dojo Bounties — Daily Contract Board (Refreshes at Midnight)
-* **4 contracts per day**, generated once at midnight (no mid-day refills).
-* **Payout per Contract:** **$1.0 \times \text{Frontier Enemy Bounty} \times \text{TotalCoinMult} + 2\text{💎}$** on all 53 contract variants. Completing all 4 contracts in a day awards a **$+4\text{💎}$ Full Board Bonus** (max **$12\text{💎}/\text{day}$** from Dojo Bounties).
+Notes: **Second Hand is granted FREE** by the claim card upon defeating Grumpy Teddy (`#5`) (or unlocks for 1,000 🪙 if the claim card is dismissed). Deflect is the parry unlock; Iron Stance I–III chain off it.
 
 ---
-## 12. The Worlds — Asura Realm & Shadow Verse (v2.6.6 Audited Final)
 
-Unlock: Beat #50 Dragon Lord $\to$ Asura Realm; beat Ravana $\to$ Shadow Verse. World gems: mini-boss first clear $+5\text{💎}$, final boss $+30\text{💎}$. Hard World fights: HP $\times 1.75$, Dmg $\times 1.25$, KO Coins $= 1.85 \times \text{Bounty} \times (1.35 + 1.30 \times \text{TotalCoinMult})$, Embers $\times 1.5$.
+## 8. Level Abilities (auto-unlock at player level)
 
-### World 1 — ASURA REALM (Chapter 6: Lv Cap 44, Power Cap 70, Dragon Mastery 1 $\times 1.25$)
-
-| Slot | ID | Guardian | HP (v2.6.6) | Dmg (v2.6.6) | Atk Every | Evasion | Bounty (v2.6.6) | MaxHeals | 🔥 First Clear | 🔥 Repeats | Role |
-|---|---|---|---|---|---|---|---|---|---|---|---|
-| 1 | 201 | Asura Footman | 357,500,000 | 4,400 | 1.38s | 15% | 62,000,000 | 0 | 3 | 1 | |
-| 2 | 202 | Rakshasa Huntress | 467,500,000 | 5,100 | 1.36s | 15% | 73,000,000 | 0 | 4 | 1 | |
-| 3 | 203 | Kumbhakaran | 616,000,000 | 5,950 | 1.35s | 15% | 86,000,000 | 1 | 5 | 2 | MINI BOSS |
-| 4 | 204 | Mahishasura | 797,500,000 | 6,950 | 1.34s | 16% | 101,000,000 | 0 | 5 | 2 | |
-| 5 | 205 | Vetala Warlock | 1,034,000,000 | 8,200 | 1.32s | 16% | 119,000,000 | 0 | 6 | 2 | |
-| 6 | 206 | Ravana | 3,200,000,000 | 9,800 | 1.30s | 16% | 140,000,000 | 1 | 10 | 3 | WORLD BOSS |
-
-### World 2 — SHADOW VERSE (Chapter 7: Lv Cap 50, Power Cap 80, Dragon Mastery 2 $\times 1.45$)
-
-| Slot | ID | Guardian | HP (v2.6.6 Monotonic) | Dmg (v2.6.6) | Atk Every | Evasion | Bounty (v2.6.6) | MaxHeals | 🔥 First Clear | 🔥 Repeats | Role |
-|---|---|---|---|---|---|---|---|---|---|---|---|
-| 1 | 211 | Shade of the Dummy | 1,760,000,000 | 11,800 | 1.30s | 16% | 175,000,000 | 0 | 6 | 2 | |
-| 2 | 212 | Umbral Mime | 2,310,000,000 | 13,900 | 1.28s | 16% | 212,000,000 | 0 | 7 | 3 | |
-| 3 | 213 | Umbral Puppeteer | 2,750,000,000 | 16,400 | 1.26s | 17% | 256,000,000 | 1 | 8 | 3 | MINI BOSS |
-| 4 | 214 | Gloom Serpent | 3,850,000,000 | 19,200 | 1.25s | 17% | 310,000,000 | 0 | 9 | 4 | |
-| 5 | 215 | The Hollow Monk | 5,500,000,000 | 22,500 | 1.24s | 18% | 375,000,000 | 0 | 10 | 5 | |
-| 6 | 216 | The Dark Slapper | 26,500,000,000 | 26,500 | 1.22s | 18% | 455,000,000 | 1 | 15 | 6 | WORLD BOSS |
-
-### Ember Arts (Sanctuary Store — Total 165🔥)
-* 🔁 **Echo Palm (20🔥):** Every 8th slap (`ProcIntervalSlaps = 8`) echoes — a phantom slap lands at $60\%$ damage (`PrimaryValue = 0.60f`).
-* 💓 **Frenzy Heart (15🔥):** Your Frenzy meter fills $30\%$ faster.
-* 🕊️ **Phoenix Heart (35🔥):** Once per fight (`PhoenixRevive`), a fatal blow leaves you at $25\%$ HP + $1.5\text{s}$ invulnerability (triggers after *Second Wind* in Worlds; does not stack past 1 revive in Main Roster/Side Modes).
-* ⚡ **Battle Trance (25🔥):** $+12\%$ slap speed ($\times 0.8929$ interval multiplier, lowers permanent cap toward $0.35\text{s}$) and $+25\%$ critical damage across all fights.
-* ✊ **Giant's Grip (15🔥):** $+1$ max precision crits per fight (raises weak-spot cap from $6 \to 7$).
-* 👁️ **Eagle Eye (12🔥):** Weak spots stay open $0.5\text{s}$ longer.
-* 🪙 **Greed Mantra (18🔥):** $+25\%$ coins from World fights.
-* 🏹 **Sovereign's Bane (25🔥):** $+15\%$ damage against all bosses.
-
-### Relics (12 Deterministic Guardian Relics — ★2 = 3 Clears + 10🔥 · ★3 = 8 Clears + 25🔥)
-* **Asura 1 — Bronze War Bell (`WorldCoinBonus`):** $+10\% / +20\% / +30\%$ coins in World fights.
-* **Asura 2 — Rakshasa Fang (`CritBonus`):** $+8\% / +16\% / +24\%$ crit damage.
-* **Asura 3 — Slumber Bell (`EnemyAttackSlow`):** Enemies attack $4\% / 8\% / 12\%$ slower.
-* **Asura 4 — Horn of the Stampede (`WorldDamageMult`):** $+10\% / +20\% / +30\%$ damage in World fights.
-* **Asura 5 — Skull of Whispers (`WeakspotSpawnSpeed`):** Weak spots appear $10\% / 20\% / 30\%$ sooner.
-* **Asura 6 — Crown of Ten Kings (`WorldFinalBossDamageMult`):** $+15\% / +25\% / +40\%$ damage vs World final bosses.
-* **Shadow 1 — Splinter of the First Foe (`NonBossDamageMult`):** $+8\% / +16\% / +24\%$ damage vs non-bosses.
-* **Shadow 2 — Silent Glove (`SpeedBonus`):** $+4\% / +7\% / +10\%$ slap speed.
-* **Shadow 3 — Puppet Strings (`EnemySpecialSlow`):** Enemy specials & signature moves charge $15\% / 30\% / 45\%$ slower.
-* **Shadow 4 — Venomfang Coil (`StunnedDamageMult`):** $+10\% / +20\% / +30\%$ damage vs stunned enemies.
-* **Shadow 5 — Beads of the Void (`EmberBonus`):** $+20\% / +40\% / +60\%$ Dragon Embers earned.
-* **Shadow 6 — Mirror Palm (`SetSkinSlapTriggerTo`):** Sets Active Hand Skin normal-slap trigger threshold to **10 / 9 / 8 normal slaps** (applies to Hand Skin active trigger only, never Special Moves or post-freeze cooldown)!
+| Lv | Ability | Effect |
+|---|---|---|
+| 2 | Iron Palm | $+20\%$ damage on every slap permanently. |
+| 4 | Quickening | $+6\%$ slap speed (interval $\times 0.94$). |
+| 6 | Thick Skin | Reduces incoming enemy attack damage by $12\%$. |
+| 8 | Greed | $+15\%$ coins from all sources. |
+| 10 | Vampire Slap | Every 10th slap heals you for $1\%$ of Max HP (min 10 HP). |
+| 12 | Crit Surge | $+8\%$ critical strike chance. |
+| 14 | Second Wind | Once per fight, when HP drops to 0, immediately recover $25\%$ HP. |
+| 16 | Boss Bane | $+20\%$ damage against Group Elites, Mini-Bosses, and Bosses. |
+| 18 | Golden Aura | $+15\%$ coins earned. |
+| 20 | Counter Cadence | After taking an un-parried hit, your next slap deals $1.75\times$ damage. |
+| 22 | Battle Focus | At combo stack $10+$, your stuns last $+0.20\text{s}$ longer (beyond the normal cap). |
+| 24 | Tough Grit | When below $40\%$ HP, take $20\%$ less damage. |
+| 26 | Iron Resolve | Every 30th slap cleanses all active debuffs and heals $2\%$ Max HP. |
+| 28 | Overcharge | Critical hits gain $+1\%$ bonus Crit Damage per Defense level (up to $+40\%$). |
+| 30 | Giant Stature | $+1,500$ Max HP, and striking an Elite or Boss grants $+1$ extra combo stack. |
+| 32 | Swift Recovery | Parrying or blocking an enemy attack boosts your slap speed by $+25\%$ for $2.5\text{s}$. |
+| 34 | Midas Strike | Slaps landed within $0.6\text{s}$ of an enemy's attack timer grant $1.5\times$ coins. |
+| 36 | Executioner | Slaps deal $+35\%$ damage against enemies below $25\%$ HP. |
+| 38 | Dragonblood Vigour | $+4,500$ Max HP and $-20\%$ damage from Boss Signatures and burns (available at Ch. 5 cap for `#50 Dragon Lord`). |
+| 40 | Godhand Awakening | Every 30th slap triggers Godhand Awakening: deals $2.5\times$ damage and stuns for $1.0\text{s}$. |
+| 44 | Asura Slayer | $+25\%$ damage in World fights and $+15\%$ critical damage. |
+| 50 | Transcendent Hand | Permanent $\times 1.25$ global damage and $\times 1.15$ Max HP. |
 
 ---
-## 13. Shop, Hand Skins & Real-Money Purchases
 
-### 13.1 Hand Skins (Global Multiplicative Bonuses + Active 11th-Slap Signature Powers)
+## 9. Special Moves (boss-unlocked, upgradeable)
 
-Every equipped skin grants a **Global Multiplicative Bonus** and an **Active Skin Power** that triggers every **11 normal slaps** (set to **10 slaps at ★1**, **9 slaps at ★2**, and **8 slaps at ★3** with the *Mirror Palm* relic).
-* **Anti-Infinite-Loop Rule:** Slaps landed while a Skin Buff or Time Stop is currently active **do NOT increment the normal-slap counter**, and the **Infinity Gauntlet Time Stop** has a **$16.0\text{s}$ recharge cooldown** after the $5.0\text{s}$ freeze ends before the slap counter resumes charging.
+| Move | Unlock | Base | Max level | Cooldown | Upgrade costs 🪙 |
+|---|---|---|---|---|---|
+| Double Slap | Defeat #10 (Monkey) | $\times 7$ damage instant hit | $\times 15$ dmg | $25\text{s} \rightarrow 15\text{s}$ | 15,000 · 85,000 · 450,000 · 2,400,000 (then $\times 5$/lvl) |
+| Guard | Defeat #20 (Dark Knight) | Blocks $100\%$ of the next Normal Attack (signatures pierce it, unconsumed) | Lv 3 | $24\text{s} \rightarrow 18\text{s}$ | 25,000,000 · 150,000,000 |
+| Uppercut Punch | Defeat #40 (Pharaoh) | $\times 18$ damage $+ 2.5\text{s}$ stun | $\times 32$ dmg | $32\text{s} \rightarrow 20\text{s}$ | 35,000,000 · 110,000,000 · 320,000,000 · 900,000,000 (then $\times 5.5$/lvl) |
 
-| Skin | Gem Price | Bundle Price | Equipped Passive Bonus (Global Multiplier) | Active Skin Power (Every 11 Normal Slaps · 10 / 9 / 8 w/ Mirror Palm) |
+---
+
+## 10. Economy & Payout Formulas *(v2.7.6 Hard Mode Boss HP)*
+
+**KO payout (normal fight):** $\text{round}(\text{bounty} \times 1.30 \times \text{coinMult} \times \text{worldCoinMult})$
+**KO payout (HARD) *(v2.7.6)*:** $\text{round}(1.85 \times \text{bounty} \times (\text{slapCapFrac} + 1.30 \times \text{coinMult}))$ — $\text{slapCapFrac}$ is the fight's slap-coin cap fraction ($0.85\text{–}2.00$). Hard mode itself: **enemy HP $\times 1.75$ ($\times 1.50$ for mini-bosses and bosses), ATK $\times 1.25$**, no slap coins, $+3$ 💎 per Hard win, embers $\times 1.5$ in Worlds; group mastery: $+10$ 💎 and $+2\%$ permanent coin mult per Hard-cleared stage.
+**Slap coins (per slap, normal mode only):** $\text{base} = \text{bounty} \times \text{band fraction}$ ($7\%$ for `#1–10` · $5.5\%$ for `#11–30` · $5.5\%$ `#31+` · $10\%$ Worlds), scaled by damage dealt share of enemy Max HP ($\times 4$ scale, capped), band multipliers (early $\times 2$ / boss $\times 1.5$ · mid $\times 1.4$ / $\times 1.15$ · late $\times 1.3$ / $\times 1.1$), crits pay $+35\%$ of the cap fraction, lucky strikes $\times 2.5$.
+**Fight cap:** total slap coins per fight $\le \text{bounty} \times \text{capFrac}$ (listed in §5's `Slap Cap (F / R)` column) — $1.75$ (`#1–10`) · $0.85$ (`#11–30`) · $0.85$ (`#31+`), frontier (next unbeaten) enemy $2.00$ (`#1–10`) / $1.35$ (`#11+`), Worlds $1.35$ (first-clear frontier $1.75$). Past $25\%$ of the remaining room, per-slap coins taper.
+**Ad Coin Stacking Rule:** When the $2\times$ Coins timer ad is active, the post-victory Double Rewards ad multiplies the payout by $\times 1.5$ (capping combined ad coin stacking at $\times 3.0$ instead of $\times 4.0$).
+**Group (stage) clear bonus:** $100\%$ of the stage's total bounties $\times \text{coinMult}$.
+**Offline Slap Miner** (unlock 200 💎): earns **$0.0012\% \times \text{Frontier Full Payout}$ per second away** (where $\text{Frontier Full Payout} = \text{frontier bounty} \times (1.30 \times \text{coinMult} + \text{frontier capFrac})$), capped at $8\text{h}$ ($28,800\text{s} = 34.56\%$ of a full frontier clear). Minimum away time: $60\text{s}$. Watching a rewarded ad doubles the claim ($2\times$, up to $69.12\%$).
+
+---
+
+## 11. Game Modes
+
+| Mode | Unlock | Rules | Rewards | Cooldown / cost |
 |---|---|---|---|---|
-| **Classic** | Free | -- | -- | -- |
-| **Spider-Man** | 300💎 | ₹149 | **$+10\%$ Slap Speed** (lowers permanent cap toward $0.35\text{s}$) | 🕸️ **Web Snare:** Deals **$1.5\times$ slap damage** and slows the enemy's attack swing timer by **$25\%$ for $2.5\text{s}$**. |
-| **Wolverine** | 1,000💎 | ₹249 | **$+8\%$ Crit Chance & $+15\%$ Crit Dmg** | 爪 **Berserker Slash:** Guaranteed critical strike dealing **$2.2\times$ damage** and healing you for **$2\%$ Max HP**. |
-| **Thor** | 2,000💎 | ₹399 | **$\times 1.15$ Total Damage & $+15\%$ Coins** | ⚡ **Thunder Call:** Calls lightning for **$3.0\times$ slap damage** and **dazes the enemy for $0.6\text{s}$** ($0.3\text{s}$ vs Bosses). |
-| **Hulk** | 3,500💎 | ₹799 | **$\times 1.25$ Total Damage & $+15\%$ Max HP** | 💥 **Gamma Smash:** Deals **$4.0\times$ slap damage**, shatters $50\%$ of enemy shields, and grants **$+20\%$ damage for $3.0\text{s}$**. |
-| **Infinity Gauntlet** | 9,000💎 | ₹2,499 | **$\times 1.35$ Total Damage & $+20\%$ Coins** | 🧤 **Infinity Time Stop:** Freezes the enemy in **Time Stop for $5.0\text{s}$** while granting **$+30\%$ Slap Damage and $+50\%$ Overdrive Slap Speed** (down to $0.30\text{s}$; $16.0\text{s}$ post-freeze recharge cooldown). |
+| **Normal** | start | Beat enemies in order; every stage's 5th is a mini-boss or chapter boss | KO payout (§10), slap coins, first-clear chests | — |
+| **HARD *(v2.7.6)*** | per-enemy after normal clear | **HP $\times 1.75$ ($\times 1.50$ mini-bosses/bosses), ATK $\times 1.25$**, no slap coins | KO $= 1.85 \times \text{bounty} \times (\text{capFrac} + 1.30 \times \text{coinMult})$; $+3$ 💎/win; stage mastery $+10$ 💎 & $+2\%$ coins | — |
+| **Trio Gauntlet** | clear a full stage (all 5) | Fight that stage's trio back-to-back, HP carries over; no per-fight payout | Completion $= \Sigma\,\text{trio bounties} \times 1.35 \times \text{coinMult}$; first clear of a stage's gauntlet $+3$ 💎, repeat best-stage $+1$ 💎 | $30\text{ min}$ per stage + global |
+| **Golden Dummy Blitz** | defeat #10 | $20\text{s}$ vs the unkillable Golden Dummy; tier thresholds $= \text{theoretical DPS} \times \text{tier mult}$. **$2\times$ Damage ad boost is paused during Blitz** (neither active nor consuming charges) | Coins $= \text{frontier bounty} \times \text{tier pay} \times \text{coinMult}$; 💎 at tiers 3/6/9/12/15/18/20 (2 each, once ever); repeat runs reaching Tier 10+ pay $+1$ 💎; $+1.0\text{s}$ time at tiers 3/6/9/12/15/18 | 2 charges, $+1$ per $45\text{ min}$ |
+| **Reflex Slap-Off** | defeat #10 + own Deflect + Precision Instinct | Duel vs your strongest beaten enemy (HP pool = its HP); parry Red Danger prompts — a miss drains $12\%$ of the pool (weak tap $8\%$), missing costs you $15\%$ Max HP, 2 straight misses = loss. **$2\times$ Damage ad boost is paused** | Win: $2 \times \text{enemy bounty} \times \text{coinMult} + 1$ 💎; slap coins kept either way | 2 charges, $+1$ per $30\text{ min}$ |
+| **Endless** | defeat #7 (Mime) | Endless waves from your beaten roster, toughest first; every 5th wave is a boss wave; Cornerman draft buff after waves (see below); partial heal between waves; $+1$ effective level per 15 waves (max $+3$) | Per kill: **$\text{frontier bounty} \times \min(0.35, 0.06 + 0.012 \times \text{wave}) \times \text{coinMult}$**; milestone bonus: $+1$ 💎 every 5 waves cleared past Wave 15 (Waves 20, 25, 30+). Enemy HP $\times 1.028^{\text{wave}-1}$, DMG $\times 1.022^{\text{wave}-1}$; boss waves extra $\times 1.50$ HP / $\times 1.25$ DMG | **$60\text{ min}$** after a run ends in defeat |
+| **Boss Rush** | defeat #20 (Dark Knight) | The 5 stage bosses you've beaten (`#10/20/30/40/50`), back-to-back | Per boss: $\text{bounty} \times \text{coinMult}$; full clear bonus $= \Sigma\,\text{bounties} \times 1.8 \times \text{coinMult}$ ($\times 1.5$ more with High Roller draft); $+1$ 🔥 per boss if Dragon Lord beaten | $60\text{ min}$ |
+| **Parry Training** | own Deflect | $90\text{s}$ vs Training Dummy — parry only: no slapping, no damage numbers, no rewards; dummy unkillable, you take no HP damage; 3 strikes (missed parries) ends it; training parry cooldown $1.2\text{s}$, real $0.30\text{s}$ window | Practice only | 3 free/day, then rewarded ad $= +1$ session, max $+3$/day (6 total) |
+| **Worlds** | defeat Dragon Lord | §12 | Bounties, 🔥 embers, relics | — |
+| **Dojo Bounties** | defeat 3+ enemies | Daily board of 4 contracts on beaten enemies (win with a condition: no specials / use N specials / parry N / land N crits / etc.) | Win pays $1.5 \times \text{frontier bounty}$ (flat, unaffected by `coinMult`) $+ 2\text{–}5$ 💎 by template | New board daily; done contracts don't respawn until tomorrow |
+| **Street Brawl anomalies** | random in normal fights | 🪅 Golden Piñata: HP $\times 0.6$, dmg halved, slap coins $\times 3$, flees in $15\text{s}$, crack $50\%$ HP for a $1.35\times$ bounty chest · 💀 Sudden Death: both sides $\times 2.2$ dmg, win pays $\times 1.4$ · 🎯 Weak-Spot Storm: weak spots every $1.5\text{s}$, normal slaps half dmg (a 4th, Berserk, exists in code) | as stated | — |
 
-### 13.2 Coin Packs, Gem Packs, Bundles & Permanent Features
+**Cornerman draft buffs** (pick 1 of 3 between Endless/Boss Rush fights):
 
-* **Coin Packs (Gems — Scaled by `TotalCoinMult` with Non-Chapter-Skipping Multipliers):** Effective coins = $\max(\text{Base},\ \text{Frontier Bounty} \times \text{TotalCoinMult} \times \text{Scaling})$:
-  * *Pocket of Coins (50💎):* Base $50,000$ or $\text{Frontier Bounty} \times \text{TotalCoinMult} \times \mathbf{3}$
-  * *Bag of Gold (140💎):* Base $250,000$ or $\text{Frontier Bounty} \times \text{TotalCoinMult} \times \mathbf{8}$
-  * *Chest of Gold (350💎):* Base $1,500,000$ or $\text{Frontier Bounty} \times \text{TotalCoinMult} \times \mathbf{20}$
-  * *Royal Treasury (800💎):* Base $8,000,000$ or $\text{Frontier Bounty} \times \text{TotalCoinMult} \times \mathbf{45}$
-  * *Dragon's Hoard (1,800💎):* Base $35,000,000$ or $\text{Frontier Bounty} \times \text{TotalCoinMult} \times \mathbf{100}$
-* **Gem Packs (₹):** Pouch (80💎, ₹49) · Sack (275💎, ₹149) · Chest (850💎, ₹399) · Vault (2,100💎, ₹799) · Titan's Treasury (5,600💎, ₹1,699) · Cosmic Hoard (15,000💎, ₹3,499).
-* **Bundles (₹ — Coins Scale by $\max(\text{FlatBase},\ \text{Frontier Bounty} \times \text{TotalCoinMult} \times \text{BundleMult})$):**
-  * *Starter (₹149):* $\max(25\text{k},\ 10\times)$ coins, 200💎, Spider-Man
-  * *Weapon X (₹249):* $\max(80\text{k},\ 25\times)$ coins, 400💎, Wolverine
-  * *Thunder (₹399):* $\max(250\text{k},\ 60\times)$ coins, 800💎, Thor
-  * *Hero (₹799):* $\max(1\text{M},\ 150\times)$ coins, 1,600💎, Hulk
-  * *Cosmic Infinity (₹2,499):* $\max(10\text{M},\ 400\times)$ coins, 3,000💎, Infinity Gauntlet
-* **Permanent Features:**
-  * **Offline Slap Miner (200💎):** Unlocks passive offline coin mining (up to 8 hours; see Section 16).
-  * **Golden Slapper VIP Pass (₹199):** Permanent $+25\%$ bonus coins from all enemy knockouts, golden hand frame, and golden crown.
-  * **Frenzy Overcharge Booster (₹99):** Frenzy charges $25\%$ faster and lasts $13\text{s}$ (up from $10\text{s}$).
-  * **Remove Ads (₹199):** Removes interstitial and banner ads forever (optional rewarded ads remain available).
+- **ICE PACK** — Heal $35\%$ Max HP right now · damage-over-time taken $-50\%$ for the run
+- **CORNER TOWEL** — Start every fight this run behind a $25\%$ Max HP shield
+- **LOADED WRAPS** — Your first 8 slaps each fight deal $\times 1.75$ and ignore boss shields
+- **SMELLING SALTS** — Specials start every fight fully charged · Frenzy gain $+40\%$
+- **COACH'S SPOTTER** — First weak spot at $1.5\text{s}$ · weak-spot window $+0.5\text{s}$ and damage $+30\%$
+- **SAVED BY THE BELL** — Bosses start each fight dazed $1.5\text{s}$ · enemy swings $15\%$ slower
+- **SECOND WIND TONIC** — Once per fight: dropping below $35\%$ HP heals $25\%$ and speeds you up for $5\text{s}$
+- **HIGH-ROLLER PURSE** — You take $+20\%$ damage · Boss Rush completion bonus $+50\%$
 
 ---
-## 14. Ads
 
-* **Interstitials:** Shown after every 3 fight wins, minimum gap $75\text{s}$ (removed forever by ₹199 Remove Ads).
-* **Rewarded — $2\times$ Coins Boost:** Watch an ad $\to$ all coin earnings $\times 2$ for **$10\text{ minutes}$** (`600s`; re-watching resets timer to $10\text{m}$, no stacking).
-* **Rewarded — $2\times$ Damage Boost:** Watch an ad $\to$ all slap & special damage $\times 2$ for your next **$7\text{ fight wins}$** (hard cap of **$10\text{ fight attempts}$**; losses consume an attempt without consuming a win; each bout in Trio Gauntlet / Boss Rush counts as 1 fight; 1 Endless run counts as 1 match; paused in Golden Dummy Blitz & Reflex Slap-Off; re-watching resets to `7 wins / 10 attempts`).
-* **Rewarded — Fight Revive:** On defeat, resume the same fight at $50\%$ Max HP with enemy swing timer reset and debuffs cleared (**1 revive per fight attempt**; disabled in Gauntlet, Boss Rush, Endless, Blitz, Reflex).
-* **Contextual Loss Screen Ad Prompts:**
-  * Enemy **below $35\%$ HP:** Highlight **"Watch Ad: Revive at 50% HP & Finish Him!"**
-  * Enemy **at or above $35\%$ HP:** Highlight **"Watch Ad: Activate $2\times$ Damage (7 Wins) & Retry!"**
-* **Rewarded — Offline Double:** Watch an ad on the Offline Miner claim card to deliver a true **$2.0\times$ payout** across the entire 8-hour claim window (raises the chapter hard cap from $17.5\%$ to **$35.0\%$** of the current chapter's incremental build cost).
+## 12. Worlds (post-game)
+
+Unlock: defeat the Dragon Lord (`#50`). World 2 (`Shadow Verse`) locks until `Ravana` falls. Slot 3 = mini-boss, slot 6 = world boss. First-clear gems: mini-boss $+5$ 💎, world boss $+30$ 💎.
+
+| World | # | Enemy | HP | ATK DMG | ATK int. | Bounty | 🔥 First | 🔥 Repeat | Role |
+|---|---|---|---|---|---|---|---|---|---|
+| Asura Realm | 1 | Asura Footman | 480,000,000 | 2,400 | $1.38\text{s}$ | 62,000,000 | 3 | 1 |  |
+| Asura Realm | 2 | Rakshasa Huntress | 620,000,000 | 2,750 | $1.36\text{s}$ | 73,000,000 | 4 | 1 |  |
+| Asura Realm | 3 | Kumbhakaran | 850,000,000 | 3,200 | $1.35\text{s}$ | 86,000,000 | 5 | 2 | MINI BOSS |
+| Asura Realm | 4 | Mahishasura | 1,050,000,000 | 3,600 | $1.34\text{s}$ | 101,000,000 | 5 | 2 |  |
+| Asura Realm | 5 | Vetala Warlock | 1,350,000,000 | 4,050 | $1.32\text{s}$ | 119,000,000 | 6 | 2 |  |
+| Asura Realm | 6 | Ravana | 1,950,000,000 | 4,500 | $1.30\text{s}$ | 140,000,000 | 10 | 3 | WORLD BOSS |
+| Shadow Verse | 1 | Shade of the Dummy | 1,650,000,000 | 4,900 | $1.30\text{s}$ | 175,000,000 | 6 | 2 |  |
+| Shadow Verse | 2 | Umbral Mime | 2,150,000,000 | 5,350 | $1.28\text{s}$ | 212,000,000 | 7 | 3 |  |
+| Shadow Verse | 3 | Umbral Puppeteer | 2,850,000,000 | 5,850 | $1.26\text{s}$ | 256,000,000 | 8 | 3 | MINI BOSS |
+| Shadow Verse | 4 | Gloom Serpent | 3,600,000,000 | 6,300 | $1.25\text{s}$ | 310,000,000 | 9 | 4 |  |
+| Shadow Verse | 5 | The Hollow Monk | 4,650,000,000 | 6,800 | $1.24\text{s}$ | 375,000,000 | 10 | 5 |  |
+| Shadow Verse | 6 | The Dark Slapper | 6,800,000,000 | 7,400 | $1.22\text{s}$ | 455,000,000 | 15 | 6 | WORLD BOSS |
+
+World enemies also have $15\text{–}18\%$ evasion. World KO payout uses the same $\times 1.30 \times \text{coinMult}$ formula; world coin mult from relics applies in world fights.
+
+**Relics** (drop from world enemies; each relic has 3 ascension tiers — values shown Lv1/Lv2/Lv3):
+
+| Relic | Source | Effect |
+|---|---|---|
+| Bronze War Bell | Asura 1 | $+10\%/20\%/30\%$ coins in world fights |
+| Rakshasa Fang | Asura 2 | $+8\%/16\%/24\%$ crit damage |
+| Horn of the Stampede | Asura 4 | $+10\%/20\%/30\%$ damage in world fights |
+| Slumber Bell | Asura 3 (Kumbhakaran) | Enemies attack $4\%/8\%/12\%$ slower |
+| Skull of Whispers | Asura 5 | Weak spots appear $10\%/20\%/30\%$ sooner |
+| Crown of Ten Kings | Asura 6 (Ravana) | $+15\%/25\%/40\%$ damage vs world final bosses |
+| Splinter of the First Foe | Shadow 1 | $+8\%/16\%/24\%$ damage vs non-bosses |
+| Silent Glove | Shadow 2 | $+4\%/7\%/10\%$ slap speed |
+| Puppet Strings | Shadow 3 (Puppeteer) | Enemy specials & signature moves charge $15\%/30\%/45\%$ slower |
+| Venomfang Coil | Shadow 4 | $+10\%/20\%/30\%$ damage vs stunned enemies |
+| Beads of the Void | Shadow 5 | $+20\%/40\%/60\%$ Soul Embers earned |
+| Mirror Palm | Shadow 6 (Dark Slapper) | Skin power triggers every $10 / 9 / 8$ slaps (down from 11) |
+
+**Sanctuary arts** (buy with 🔥 embers, permanent):
+
+- **Echo Palm** — 20 🔥 — Every 8th slap echoes — a phantom slap lands at $60\%$ damage.
+- **Frenzy Heart** — 15 🔥 — Your frenzy meter fills $30\%$ faster.
+- **Phoenix Heart** — 35 🔥 — Once per fight, a fatal blow leaves you standing at $25\%$ HP $+ 1.5\text{s}$ invulnerability.
+- **Battle Trance** — 25 🔥 — $+12\%$ slap speed and $+25\%$ critical damage across all fights.
+- **Giant's Grip** — 15 🔥 — $+1$ max precision crits per fight (weak-spot cap).
+- **Eagle Eye** — 12 🔥 — Weak spots stay open $0.6\text{s}$ longer.
+- **Greed Mantra** — 18 🔥 — $+25\%$ coins from world fights.
+- **Sovereign's Bane** — 25 🔥 — $+15\%$ damage against all bosses.
 
 ---
-## 15. Daily Systems, Quests & Achievements
 
-* **7-Day Login Chest (Unlocks after #5):**
-  * Days 1–6 pay $0.50 \times \text{Frontier Bounty} \times \text{TotalCoinMult}$ (min 60 coins).
-  * **Day 7 Chest** pays $2.0 \times \text{Frontier Bounty} \times \text{TotalCoinMult} + \mathbf{25\text{💎}}$.
-* **Daily Quests (Unlocks after #10 · Refreshes at Midnight):**
-  * 6 quest types scaling across 4 defeat tiers (Tier 0: $<10$ · Tier 1: $<20$ · Tier 2: $<35$ · Tier 3: $35+$):
-    * 🏆 *Defeat enemies (8 / 16 / 28 / 45):* Coins $\times 0.85$ rate
-    * 💰 *Earn coins in battle:* $+2\text{💎}$
-    * 💥 *Land critical slaps (20 / 45 / 90 / 180):* Coins $\times 0.65$ rate
-    * 🔥 *Clear HARD fights (1 / 2 / 3 / 4):* $+3\text{💎}$
-    * ⚡ *Trigger FRENZY (2 / 4 / 7 / 12):* $+2\text{💎}$
-    * 🛒 *Buy upgrades (5 / 10 / 18 / 30):* Coins $\times 0.65$ rate
-* **Achievements:** 134 total achievements (16 one-off + 33 ladders) awarding **905💎** across the lifetime of the account.
+## 13. Blitz Tier Table (Golden Dummy Blitz)
+
+Threshold for tier $T = \text{theoretical DPS} \times \text{mult}$ (where $\text{theoretical DPS}$ already includes expected crit/combo/proc multipliers, so $20\text{s}$ of passive slapping equals $20.0\times$ theoretical DPS). Reaching Tiers 3, 6, 9, 12, and 15 grants $+5\text{s}$ total ($25\text{s}$ duration), making **Tier 17 ($23.8\times$)** passively reachable; reaching **Tier 18 ($25.2\times$)** grants another $+1.0\text{s}$ ($26\text{s}$ max duration), so **Tiers 18–20 ($25.2\times\text{–}28.0\times$)** require active Frenzy, Weak-Spot, and Special burst. Coins pay on the HIGHEST tier reached: $\text{frontier bounty} \times \text{pay} \times \text{coinMult}$.
+
+| Tier | Name | DPS mult | Coin pay | 💎 (first time) | Bonus |
+|---|---|---|---|---|---|
+| 1 | BRONZE I | $\times 1.4$ | $\times 0.25$ | — | — |
+| 2 | BRONZE II | $\times 2.8$ | $\times 0.35$ | — | — |
+| 3 | BRONZE III | $\times 4.2$ | $\times 0.45$ | 2 | $+1.0\text{s}$ |
+| 4 | BRONZE IV | $\times 5.6$ | $\times 0.55$ | — | — |
+| 5 | SILVER I | $\times 7.0$ | $\times 0.65$ | — | — |
+| 6 | SILVER II | $\times 8.4$ | $\times 0.75$ | 2 | $+1.0\text{s}$ |
+| 7 | SILVER III | $\times 9.8$ | $\times 0.85$ | — | — |
+| 8 | SILVER IV | $\times 11.2$ | $\times 0.95$ | — | — |
+| 9 | GOLD I | $\times 12.6$ | $\times 1.05$ | 2 | $+1.0\text{s}$ |
+| 10 | GOLD II | $\times 14.0$ | $\times 1.15$ | — | — · $+1$ 💎 repeat (Tier 10+ runs) |
+| 11 | GOLD III | $\times 15.4$ | $\times 1.25$ | — | — · $+1$ 💎 repeat (Tier 10+ runs) |
+| 12 | GOLD IV | $\times 16.8$ | $\times 1.35$ | 2 | $+1.0\text{s}$ · $+1$ 💎 repeat (Tier 10+ runs) |
+| 13 | PLATINUM I | $\times 18.2$ | $\times 1.45$ | — | — · $+1$ 💎 repeat (Tier 10+ runs) |
+| 14 | PLATINUM II | $\times 19.6$ | $\times 1.55$ | — | — · $+1$ 💎 repeat (Tier 10+ runs) |
+| 15 | DIAMOND I | $\times 21.0$ | $\times 1.65$ | 2 | $+1.0\text{s}$ · $+1$ 💎 repeat (Tier 10+ runs) |
+| 16 | DIAMOND II | $\times 22.4$ | $\times 1.75$ | — | — · $+1$ 💎 repeat (Tier 10+ runs) |
+| 17 | MASTER I | $\times 23.8$ | $\times 1.85$ | — | — · $+1$ 💎 repeat (Tier 10+ runs) |
+| 18 | MASTER II | $\times 25.2$ | $\times 1.95$ | 2 | $+1.0\text{s}$ · $+1$ 💎 repeat (Tier 10+ runs) |
+| 19 | GRANDMASTER | $\times 26.6$ | $\times 2.05$ | — | — · $+1$ 💎 repeat (Tier 10+ runs) |
+| 20 | LEGEND | $\times 28.0$ | $\times 2.20$ | 2 | — · $+1$ 💎 repeat (Tier 10+ runs) |
+
+Leagues shown in-game: Bronze (1–4) · Silver (5–8) · Gold (9–12) · Platinum (13–14) · Diamond (15–16) · Master (17–18) · Grandmaster (19) · Legend (20).
 
 ---
-## 16. Offline Earnings (45s Kill-Rate Cap & 17.5%/35% Chapter Hard Cap)
 
-* **Turf Tribute Removed:** Passive group rent (`Turf Tribute`) and Relic Stations are completely removed.
-* **Offline Slap Miner (200💎 Shop Feature — Calibrated at `0.0068` Coefficient + True 2.0× Ad Scaling):**
-  * While away (minimum $60\text{s}$, capped at **$8\text{ hours}$**), `Effective_DPS` is clamped to a maximum of **1 frontier kill every 45 seconds** ($\text{Strongest\_Defeated\_HP} / 45.0$), and total claimable coins are capped at **$17.5\%$** (without ad) or **$35.0\%$** (with $2\times$ Rewarded Ad) of the current chapter's incremental build cost—delivering a true **$2.0\times$ payout** when watching the rewarded ad at any claim duration up to 8 hours:
-    $$\text{Effective\_DPS} = \min\left(\text{Theoretical\_DPS},\ \frac{\text{Strongest\_Defeated\_HP}}{45.0}\right)$$
-    $$\text{RawOfflineCoins} = 0.0068 \times \text{Effective\_DPS} \times \left(\frac{\text{Strongest\_Defeated\_Bounty} \times (\text{SlapCapFraction} + 1.30 \times \text{TotalCoinMult})}{\text{Strongest\_Defeated\_HP}}\right) \times \text{ClaimSec} \times \text{AdMult}$$
-    $$\text{FinalClaimCoins} = \min\left(\text{RawOfflineCoins},\ (\text{watchedAd}\ ?\ 0.35 : 0.175) \times \text{CurrentChapterBuildCost}\right)$$
+## 14. Daily Systems
+
+**Daily chest** (unlock: defeat `#5`): $\text{coins} = \max(60,\; \text{frontier bounty} \times 0.25 \times \text{coinMult})$; gems on cycle days 2/4/6 = 5/10/15 💎; **day 7 = $\text{frontier bounty} \times 1.0 \times \text{coinMult} + 25$ 💎**. Missing a day does not reset the cycle backwards beyond the stored day.
+**Daily quests** (unlock: defeat Monkey `#10`): 3 seeded quests/day from a pool of 6 — Defeats (8/16/28/45 by tier), Battle Coins (target = $\text{highest beaten bounty} \times 6/10/16/26 \times \text{scaling}$), Crits (20/45/90/180), Hard Clears (1–4), Frenzies (2/4/7/12), Buys (5/10/18/30). Coin quests pay $0.35\text{–}0.45 \times \text{highest beaten bounty} \times \text{coinMult}$; gem quests pay 2–4 💎 (capped 15 with level/stage bonuses).
+**Daily bounties:** see Dojo Bounties in §11 ($1.5 \times \text{frontier bounty}$ flat per contract).
 
 ---
-## 17. Every Timer & Charge Counter in One Table (v2.6.6 Audited Final)
 
-| Timer / Counter | v2.6.6 Duration / Charges |
-|---|---|
-| **Attribute-Only Slap Interval Floor (Speed Lv 25, No Skills)** | $0.9075\text{ seconds}$ |
-| **Permanent Skill-Unlocked Slap Interval Floor (Speed Lv 25 + Skills)** | $0.499\text{ seconds}$ |
-| **Skin & World Relic Slap Interval Floor (`Speed.HardCapValue`)** | $0.350\text{ seconds}$ |
-| **Temporary Overdrive Slap Interval Floor** | $0.300\text{ seconds}$ (Frenzy, Adrenaline, Swift Recovery, Time Stop) |
-| **Tap-Parry (`Deflect`) Window & Cooldown** | $0.30\text{s}$ window ($0.50\text{s}$ w/ *Iron Stance III*) · **$10.00\text{s}$** base CD ($8.00\text{s} \to 5.00\text{s}$ w/ *Iron Stance I–II*) |
-| **Signature Move Windup (`SignatureWindupSec`)** | $0.75\text{s}$ (Unblockable — pierces Parry and Guard without consuming them) |
-| **Infinity Gauntlet Time Stop Duration & Cooldown** | $5.0\text{s}$ active freeze · $16.0\text{s}$ post-freeze recharge cooldown |
-| **Frenzy Duration** | $10.0\text{ seconds}$ ($13.0\text{s}$ with ₹99 Overcharge Booster) |
-| **Boss Post-Heal Enrage Suppression Grace Window** | $8.0\text{ seconds}$ |
-| **Piñata Anomaly Flee Timer** | $15.0\text{ seconds}$ ($0.60\times$ HP, $1.00\times$ full damage taken) |
-| **Reflex Slap-Off Charge Recharge** | $30\text{ minutes}$ per charge (2 charges max; unlocked at Beat #10 + *Deflect* & *Precision Instinct*) |
-| **Trio Gauntlet Global Cooldown** | $30\text{ minutes}$ (shared across all groups) |
-| **Golden Dummy Blitz Charge Recharge** | $45\text{ minutes}$ per charge (2 charges max; max $29\text{s}$ fight duration) |
-| **Endless Mode Cooldown** | $45\text{ minutes}$ after a run ends |
-| **Boss Rush Cooldown** | $60\text{ minutes}$ after a run ends |
-| **Rewarded Ad Boosts ($2\times$ Coins / $2\times$ Damage)** | **$10\text{ minutes}$** ($2\times$ Coins, resets to $10\text{m}$) · **$7\text{ fight wins}$** / $10\text{ max attempts}$ ($2\times$ Damage, resets to $7\text{ wins}$) |
-| **Interstitial Ad Minimum Gap** | $75\text{ seconds}$ (after every 3 fight wins) |
-| **Offline Slap Miner Accrual Cap** | $8\text{ hours}$ (minimum $60\text{s}$ away; $45\text{s}$ kill-rate clamp & $17.5\% / 35.0\%$ chapter cost cap) |
-| **Dojo Bounties, Daily Quests & Login Chest** | Refresh daily at midnight |
+## 15. Shop — Packs, Bundles, Skins, Features
+
+**Coin packs (buy with 💎)** — $\text{payout} = \max(\text{flat coins},\; \text{frontier bounty} \times \text{frontierMult} \times \text{coinMult})$:
+
+| Pack | 💎 cost | Flat 🪙 | Frontier $\times$ | Tag |
+|---|---|---|---|---|
+| Pocket of Coins | 50 | 50,000 | $\times 1.5$ | QUICK BOOST |
+| Bag of Gold | 140 | 250,000 | $\times 3.5$ | POPULAR $+25\%$ BONUS |
+| Chest of Gold | 350 | 1,500,000 | $\times 8$ | GREAT VALUE $+45\%$ BONUS |
+| Royal Treasury | 800 | 8,000,000 | $\times 16$ | BEST VALUE $+70\%$ BONUS |
+| Dragon's Hoard | 1800 | 35,000,000 | $\times 32$ | WHALE TIER $+100\%$ 2X BONUS |
+
+**Gem packs (real money, test products):**
+
+| Pack | Price | 💎 | Bonus 💎 |
+|---|---|---|---|
+| Pouch of Gems | ₹49 | 80 | +0 |
+| Sack of Gems | ₹149 | 240 | +35 |
+| Chest of Gems | ₹399 | 700 | +150 |
+| Vault of Gems | ₹799 | 1600 | +500 |
+| Titan's Treasury | ₹1,699 | 3800 | +1800 |
+| Cosmic Hoard | ₹3,499 | 9000 | +6000 |
+
+**Hero bundles (real money):** $\text{payout coins} = \max(\text{flat},\; \text{frontier bounty} \times \text{frontierMult} \times \text{coinMult})$:
+
+| Bundle | Price | (value) | Skin | Flat 🪙 | Frontier $\times$ | 💎 |
+|---|---|---|---|---|---|---|
+| Starter Bundle | ₹149 | ₹499 | spidey | 25,000 | $\times 4$ | 200 |
+| Weapon X Bundle | ₹249 | ₹799 | logan | 80,000 | $\times 10$ | 400 |
+| Thunder Bundle | ₹399 | ₹1,199 | thor | 250,000 | $\times 22$ | 800 |
+| Hero Bundle | ₹799 | ₹2,499 | hulk | 1,000,000 | $\times 45$ | 1,600 |
+| Cosmic Infinity Bundle | ₹2,499 | ₹9,999 | gauntlet | 10,000,000 | $\times 90$ | 3,000 |
+
+**Hand skins** (proc every 11th slap, or $10 / 9 / 8$ slaps with Mirror Palm):
+
+| Skin | Rarity | Price | Passive | Power |
+|---|---|---|---|---|
+| Classic | DEFAULT | default | — | — |
+| Spider-Man | RARE | 300 💎 | $+10\%$ SLAP SPEED | WEB SNARE — proc slap deals $1.5\times$ damage and webs the enemy, slowing its swings by $25\%$ for $2.5\text{s}$ |
+| Wolverine | EPIC | 1000 💎 | $+15\%$ CRIT DAMAGE | BERSERKER SLASH — proc slap is a guaranteed crit for $2.2\times$ damage and heals you for $2\%$ of Max HP |
+| Thor | LEGENDARY | 2000 💎 | $+15\%$ DAMAGE · $+15\%$ COINS | THUNDER CALL — proc slap deals $3\times$ damage and dazes the enemy for $0.6\text{s}$ |
+| Hulk | LEGENDARY | 3500 💎 | $+25\%$ DAMAGE · $+15\%$ MAX HP | GAMMA SMASH — proc slap deals $4\times$ damage, shatters half the enemy's shield and boosts your damage by $20\%$ for $3\text{s}$ |
+| Infinity Gauntlet | MYTHIC | 9000 💎 | $+35\%$ DAMAGE · $+20\%$ COINS | TIME STOP — proc slap STOPS TIME for $5\text{s}$: $+30\%$ damage and $+50\%$ slap speed while it lasts. The stones then need $16\text{s}$ to recharge |
+
+**Feature products:**
+
+- **Offline Slap Miner** (PASSIVE INCOME) — 200 💎 — Earn coins while away at $0.0012\%$ of your Frontier Full Payout per second, up to $34.56\%$ over 8 hours (doubleable to $69.12\%$ with a rewarded ad).
+- **Golden Slapper VIP Pass** (PERMANENT VIP) — ₹199 — Permanent $+25\%$ bonus coins from all enemy knockouts, prestige golden frame on your battle hand, and golden player crown!
+- **Frenzy Overcharge Booster** (TURBO BOOST) — ₹99 — Frenzy charges $25\%$ faster from inactive slaps ($26$ slaps instead of $35$), and Frenzy duration extends to 13 seconds (normally $10\text{s}$; $50.1\%$ uptime at $0.499\text{s}$, $58.8\%$ at $0.35\text{s}$)!
+- **Remove Ads** (NO ADS) — ₹199 — No more interstitial or banner ads, forever. Optional rewarded ads stay available whenever you want a boost.
+
+---
+
+## 16. Ads
+
+**Interstitials:** every 3 fights / 3 wins (3 fight points), minimum $75\text{s}$ apart. Removed permanently by the Remove Ads product (rewarded stay).
+
+**Rewarded placements (all live in code):**
+- **Revive** — after a loss: return at $50\%$ HP with the enemy left wounded; once per enemy, permanently (plus a separate once-per-fight auto-revive outside Worlds). Loss screen highlights Revive when the enemy is under $35\%$ HP.
+- **$2\times$ Damage** — fight-based: one ad arms **7 wins / 10 attempts**; a win consumes one of each, a loss consumes an attempt only. Counts per bout in Gauntlet/Rush, once at the end of an Endless run; **paused in Golden Dummy Blitz and Reflex Slap-Off** (neither active nor consuming charges).
+- **$2\times$ Coins** — $600\text{s}$ ($10\text{ min}$) timer: $\text{coinMult} \times 2$ on everything.
+- **Offline double** — doubles the Offline Miner claim.
+- **Parry Training** — $+1$ training session per ad, max $+3$/day (see §11).
+- **Double Rewards** — victory screen option to multiply the fight's coin payout by $\times 2.0$ (or $\times 1.5$ while the $2\times$ Coins timer is active, capping combined ad coin boost at $\times 3.0$).
+
+---
+
+## 17. Achievements
+
+13 achievements, each paying 💎 once:
+
+| Achievement | Category | Target | 💎 |
+|---|---|---|---|
+| First Knockout — Win your first fight. | Victories | 1 | 1 |
+| Slap Machine — Land 500 slaps. | Slaps | 500 | 2 |
+| Slap Storm — Land 5,000 slaps. | Slaps | 5,000 | 3 |
+| Combo King — Reach a $\times 25$ combo. | Frenzy & Combo | 25 | 2 |
+| Crit Happens — Land 100 critical slaps. | Crits & Luck | 100 | 2 |
+| Giant Slayer — Defeat any Giant enemy. | Bosses & Elites | 1 | 3 |
+| Group Graduate — Defeat every enemy in any one group. | Collection | 1 | 3 |
+| Dragon Slayer — Defeat the Dragon Lord. | Bosses & Elites | 1 | 5 |
+| Grand Champion — Defeat all 50 enemies. | Victories | 50 | 10 |
+| Hard 10 — Clear 10 Hard Mode fights. | Hard Mode | 10 | 2 |
+| Hard 25 — Clear 25 Hard Mode fights. | Hard Mode | 25 | 3 |
+| Hard Mastery — Clear all 50 Hard Mode fights. | Hard Mode | 50 | 10 |
+| Untouchable — Win a fight without taking any damage. | Victories | 1 | 2 |
+
+---
+
+*Ship-ready final audited & play-paced v2.7.6 specification derived from the v2.6.6 live code baseline (18 Nov 2026).*

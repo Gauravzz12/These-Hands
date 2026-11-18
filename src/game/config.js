@@ -83,7 +83,7 @@ export const CONFIG = {
     "slapLateBaseFrac": 0.055,
     "slapDmgBonusScale": 4,
     "slapDmgBonusCap": 1,
-    "slapFightCapFrac": 1.25,
+    "slapFightCapFrac": 0.85,
     "slapTaperFrac": 0.25,
     "stunCooldownSec": 4,
     "stunImmunitySec": 2.5,
@@ -97,12 +97,12 @@ export const CONFIG = {
     "worldSlapCapFrac": 1.35,
     "slapEarlyCapFrac": 1.75,
     "slapEarlyFrontierCapFrac": 2.0,
-    "slapFrontierCapFrac": 1.75,
+    "slapFrontierCapFrac": 1.35,
     "worldSlapFrontierCapFrac": 1.75,
-    "slapMidCapFrac": 1.25,
+    "slapMidCapFrac": 0.85,
     "slapCritPayFrac": 0.35,
     "luckCoinMult": 2.5,
-    "vampPerLevel": 0.0015,
+    "vampPerLevel": 0.0006,
     "speedCostLateMult": 3,
     "speedCostLatePow": 6,
     "specialPerLevel": 0.005,
@@ -119,7 +119,7 @@ export const CONFIG = {
     "hp": {
       "base0": 65,
       "early": [65, 97, 145, 220, 365, 455, 640, 895, 1300, 2415],
-      "hpTable": [65, 115, 195, 340, 650, 920, 1450, 2350, 4200, 8500, 16250, 24050, 35750, 53300, 68000, 119600, 162500, 214500, 210000, 335000, 546000, 728000, 975000, 1300000, 1380000, 2275000, 2860000, 3575000, 3350000, 4100000, 4186000, 5551000, 7462000, 10010000, 10500000, 17290000, 21385000, 26390000, 24500000, 29400000, 50050000, 64610000, 83720000, 107380000, 106400000, 177450000, 227500000, 286650000, 276500000, 343000000, 35000000000, 45500000000, 59000000000, 76500000000, 102000000000, 132000000000, 173611992865, 228341848990, 300324874679, 395000000000, 510000000000, 680085270801, 906894069727, 1209343723527, 1612660497464, 2150483629663, 2867671062026, 3824040883896, 5099360549176, 6800000000000, 8800000000000, 11742194367667, 15668082791825, 20906553807989, 27896456633124, 37223365449468, 49668635468902, 66274860415072, 88433215077698, 118000000000000, 152000000000000, 202839815985148, 270684150979531, 361220548518316, 482038878891509, 643267615079216, 858422925472849, 1145541764739112, 1528693952388047, 2040000000000000, 2650000000000000, 3535624619892389, 4717223189731774, 6293709602695460, 8397054574242723, 11203333165008520, 14947464363419260, 19942876606894064, 26607745480305900, 35500000000000000],
+      "hpTable": [65, 115, 195, 340, 650, 920, 1450, 2350, 4200, 8500, 15235, 22547, 44688, 61200, 85000, 149500, 168000, 189000, 262500, 540000, 552825, 737100, 1316250, 1341360, 1863000, 3071250, 3160000, 3256200, 4522500, 7800000, 4552275, 6036713, 10819900, 10962000, 15225000, 25070500, 25320000, 25578000, 35525000, 65000000, 58183125, 75109125, 96500000, 118742400, 164920000, 275047500, 291500000, 308574000, 428575000, 760000000, 840000000, 906000000, 976000000, 1053000000, 1135000000, 1223000000, 1319000000, 1422000000, 1533000000, 1653000000, 1782000000, 1921000000, 2071000000, 2232000000, 2407000000, 2595000000, 2797000000, 3016000000, 3251000000, 3505000000, 3779000000, 4074000000, 4392000000, 4735000000, 5104000000, 5503000000, 5932000000, 6396000000, 6895000000, 7433000000, 8014000000, 8639000000, 9314000000, 10041000000, 10825000000, 11670000000, 12581000000, 13563000000, 14622000000, 15764000000, 16994000000, 18321000000, 19752000000, 21294000000, 22956000000, 24749000000, 26681000000, 28764000000, 31010000000, 33310000000],
       "base10": 3200,
       "growth": 1.255,
       "tailStart": 30,
@@ -129,7 +129,7 @@ export const CONFIG = {
     },
     "damage": {
       "earlyDmg": [8, 12, 15, 20, 26, 28, 32, 38, 46, 54],
-      "dmgTable": [8, 11, 14, 18, 25, 28, 33, 39, 48, 40, 66, 75, 85, 96, 115, 110, 120, 130, 132, 90, 147, 164, 185, 208, 244, 260, 287, 318, 351, 250, 445, 512, 588, 676, 790, 882, 991, 1109, 1243, 1386, 1512, 1646, 1798, 1966, 2167, 2335, 2520, 2722, 2940, 2950, 31500, 35000, 39000, 43500, 49500, 55000, 60775, 67157, 74208, 82000, 92000, 101611, 112227, 123952, 136901, 151204, 167000, 184447, 203717, 225000, 255000, 281457, 310660, 342892, 378469, 417736, 461078, 508917, 561719, 620000, 700000, 772529, 852573, 940911, 1038401, 1145993, 1264732, 1395775, 1540395, 1700000, 1900000, 2075061, 2266252, 2475059, 2703104, 2952161, 3224166, 3521232, 3845670, 4200000],
+      "dmgTable": [8, 11, 14, 18, 25, 28, 33, 39, 48, 40, 57, 65, 98, 110, 132, 127, 138, 150, 152, 104, 138, 154, 231, 260, 305, 325, 359, 398, 439, 313, 451, 518, 794, 913, 1067, 1191, 1338, 1497, 1678, 1871, 1644, 1790, 2607, 2851, 3142, 3386, 3654, 3947, 4263, 3850, 3850, 3881, 3912, 3943, 3975, 4007, 4039, 4071, 4104, 4136, 4170, 4203, 4237, 4270, 4305, 4339, 4374, 4409, 4444, 4480, 4515, 4552, 4588, 4625, 4662, 4699, 4737, 4774, 4813, 4851, 4890, 4929, 4969, 5008, 5048, 5089, 5129, 5171, 5212, 5254, 5296, 5338, 5381, 5424, 5467, 5511, 5555, 5599, 5644, 5689],
       "base10": 64,
       "growth": 1.11,
       "tailStart": 30,
@@ -140,12 +140,17 @@ export const CONFIG = {
     "interval": {
       "early": [2.40, 2.35, 2.30, 2.25, 2.05, 2.20, 2.15, 2.10, 2.05, 1.95],
       "table": [
-        2.40,2.35,2.30,2.25,2.05,2.20,2.15,2.10,2.05,1.95,
-        2.13,2.10,2.08,2.05,2.03,2.00,1.98,1.95,1.93,1.84,
-        1.88,1.86,1.84,1.82,1.79,1.77,1.75,1.73,1.71,1.63,
-        1.67,1.65,1.63,1.61,1.59,1.57,1.55,1.53,1.51,1.44,
-        1.48,1.46,1.44,1.42,1.40,1.40,1.40,1.40,1.40,1.40
-      , 1.22, 1.22, 1.22, 1.22, 1.2, 1.2, 1.2, 1.2, 1.2, 1.2, 1.2, 1.2, 1.2, 1.2, 1.2, 1.2, 1.2, 1.2, 1.2, 1.2, 1.2, 1.2, 1.2, 1.2, 1.2, 1.2, 1.2, 1.2, 1.2, 1.2, 1.2, 1.2, 1.2, 1.2, 1.2, 1.2, 1.2, 1.2, 1.2, 1.2, 1.2, 1.2, 1.2, 1.2, 1.2, 1.2, 1.2, 1.2, 1.2, 1.2],
+        2.4, 2.35, 2.3, 2.25, 2.05, 2.2, 2.15, 2.1, 2.05, 1.95,
+        2.13, 2.1, 2.08, 2.05, 2.03, 2.0, 1.98, 1.95, 1.93, 1.84,
+        1.88, 1.86, 1.84, 1.82, 1.79, 1.77, 1.75, 1.73, 1.71, 1.63,
+        1.67, 1.65, 1.63, 1.61, 1.59, 1.57, 1.55, 1.53, 1.51, 1.44,
+        1.48, 1.46, 1.44, 1.42, 1.4, 1.4, 1.4, 1.4, 1.4, 1.4,
+        1.38, 1.37, 1.37, 1.36, 1.35, 1.35, 1.34, 1.33, 1.33, 1.32,
+        1.31, 1.31, 1.3, 1.29, 1.29, 1.28, 1.27, 1.27, 1.26, 1.25,
+        1.25, 1.24, 1.23, 1.23, 1.22, 1.21, 1.2, 1.2, 1.19, 1.18,
+        1.18, 1.17, 1.16, 1.16, 1.15, 1.14, 1.14, 1.13, 1.12, 1.12,
+        1.11, 1.1, 1.1, 1.09, 1.08, 1.08, 1.07, 1.06, 1.06, 1.05
+      ],
       "base": 2.4,
       "decay": 0.988,
       "floor": 1.40,
@@ -161,7 +166,7 @@ export const CONFIG = {
       "minBounty": 30,
       "scale": 0.52,
       "bossBonusMult": 1.35,
-      "bountyTable": [63, 91, 134, 197, 331, 447, 645, 930, 1410, 2200, 4510, 6173, 8432, 11518, 17100, 22565, 30397, 40852, 47977, 57000, 62000, 80000, 104000, 135000, 185000, 240000, 312000, 405000, 525000, 680000, 1075000, 1381000, 1780000, 2299000, 3059000, 3894000, 4914000, 6119000, 7417000, 8900000, 11600000, 14000000, 17000000, 20600000, 25600000, 30400000, 36000000, 42400000, 49200000, 57000000, 580000000, 750000000, 970000000, 1250000000, 1680000000, 2200000000, 2884332674, 3781534080, 4957819230, 6500000000, 8400000000, 11201404460, 14937078796, 19918602505, 26561467017, 35419730371, 47232229257, 62984202794, 83989467869, 112000000000, 146000000000, 194838795144, 260014767763, 346992904593, 463066297635, 617967667830, 824685450947, 1100552874217, 1468701342501, 1960000000000, 2500000000000, 3336704178437, 4453437909760, 5943921952763, 7933243686436, 10588354942837, 14132083272216, 18861832521770, 25174542155350, 33600000000000, 43000000000000, 57414226115037, 76660310706712, 102357963092189, 136669842736037, 182483564045427, 243654711822837, 325331319036990, 434387114267279, 580000000000000],
+      "bountyTable": [72, 105, 154, 227, 381, 514, 742, 1070, 1622, 2530, 3834, 5247, 7167, 9790, 14535, 19180, 25837, 34724, 40780, 48450, 46500, 60000, 78000, 101250, 138750, 180000, 234000, 303750, 393750, 510000, 731000, 939080, 1210400, 1563320, 2080120, 2647920, 3341520, 4160920, 5043560, 6052000, 7192000, 8680000, 10540000, 12772000, 15872000, 18848000, 22320000, 26288000, 30504000, 35340000, 39000000, 42000000, 45300000, 48900000, 52700000, 56800000, 61300000, 66000000, 71200000, 76800000, 82800000, 89200000, 96200000, 103700000, 111800000, 120600000, 130000000, 140200000, 151100000, 162900000, 175700000, 189400000, 204200000, 220200000, 237400000, 255900000, 275900000, 297500000, 320800000, 345800000, 372900000, 402000000, 433400000, 467300000, 503800000, 543200000, 585600000, 631400000, 680700000, 733900000, 791300000, 853100000, 919800000, 991700000, 1069200000, 1152700000, 1242800000, 1339900000, 1444600000, 1550000000],
       "normalKillBonusMult": 0.30,
       "hardKillBonusMult": 1.25
     }
@@ -198,7 +203,7 @@ export const CONFIG = {
     ]
   },
   "hard": {
-    "hpMult": 1.75,
+    "hpMult": 1.75, "bossHpMult": 1.5,
     "atkMult": 1.25,
     "dmgMult": 1.25,
     "intervalMult": 1.0,
@@ -211,7 +216,7 @@ export const CONFIG = {
   },
   "playerHp": {
     "base": 100,
-    "perLevel": 25,
+    "perLevel": 35, "lv20Bonus": 220, "lv30Bonus": 1400,
     "expBase": 15,
     "expGrowth": 1.212
   },
@@ -356,7 +361,7 @@ export const CONFIG = {
       "id": "comboMastery",
       "name": "Combo Mastery",
       "tier": 3,
-      "cost": 300000,
+      "cost": 540000,
       "reqBoss": 9,
       "prereq": "onTarget",
       "fx": "Combo cap +5 stacks and +0.5% damage per stack."
@@ -365,7 +370,7 @@ export const CONFIG = {
       "id": "dizzyPunisher",
       "name": "Opportunist",
       "tier": 3,
-      "cost": 600000,
+      "cost": 1080000,
       "prereq": "quickReflexes",
       "fx": "Slaps deal +35% damage to Stunned enemies."
     },
@@ -373,7 +378,7 @@ export const CONFIG = {
       "id": "clutchSurge",
       "name": "Adrenaline Rush",
       "tier": 3,
-      "cost": 1100000,
+      "cost": 1980000,
       "prereq": "thunderclap",
       "fx": "Below 30% HP: gain +20% attack speed and +25% damage."
     },
@@ -381,7 +386,7 @@ export const CONFIG = {
       "id": "coinMagnet",
       "name": "Coin Magnet",
       "tier": 3,
-      "cost": 2000000,
+      "cost": 3600000,
       "reqBoss": 19,
       "prereq": "criticalSlaps",
       "fx": "+20% coins from every KO."
@@ -390,7 +395,7 @@ export const CONFIG = {
       "id": "bossHunter",
       "name": "Boss Hunter",
       "tier": 3,
-      "cost": 3800000,
+      "cost": 6840000,
       "prereq": "heavySlap",
       "reqBoss": 19,
       "fx": "+25% damage vs group elites and bosses."
@@ -399,7 +404,7 @@ export const CONFIG = {
       "id": "echoStrike",
       "name": "Acoustic Echo",
       "tier": 4,
-      "cost": 8500000,
+      "cost": 15300000,
       "reqBoss": 29,
       "prereq": "comboMastery",
       "fx": "Critical slaps have a 20% chance to echo for +100% bonus damage."
@@ -408,7 +413,7 @@ export const CONFIG = {
       "id": "dualHand",
       "name": "Dual-Hand Technique",
       "tier": 4,
-      "cost": 18000000,
+      "cost": 32400000,
       "reqBoss": 19,
       "prereq": "dizzyPunisher",
       "fx": "+15% attack speed — both hands blur."
@@ -417,16 +422,16 @@ export const CONFIG = {
       "id": "unstoppable",
       "name": "Unstoppable Hands",
       "tier": 4,
-      "cost": 38000000,
+      "cost": 68400000,
       "reqBoss": 29,
       "prereq": "clutchSurge",
-      "fx": "+1,400 max HP and regenerate 0.35% Max HP/s during fights."
+      "fx": "+3,500 max HP and regenerate 0.35% Max HP/s during fights."
     },
     {
       "id": "kineticShield",
       "name": "Kinetic Barrier",
       "tier": 4,
-      "cost": 75000000,
+      "cost": 135000000,
       "prereq": "clutchSurge",
       "reqBoss": 29,
       "fx": "Every 10 slaps builds a shield absorbing 12% of Max HP damage (max 24% of Max HP)."
@@ -435,7 +440,7 @@ export const CONFIG = {
       "id": "goldenTouch",
       "name": "Treasure Hunter",
       "tier": 4,
-      "cost": 150000000,
+      "cost": 270000000,
       "reqBoss": 29,
       "prereq": "coinMagnet",
       "fx": "Elites and Bosses drop +25% bonus coins, and defeat grants +1 extra Gem."
@@ -444,16 +449,16 @@ export const CONFIG = {
       "id": "frenzy",
       "name": "Frenzy",
       "tier": 4,
-      "cost": 300000000,
+      "cost": 540000000,
       "reqBoss": 29,
       "prereq": "bossHunter",
-      "fx": "Slaps charge FRENZY: 10s of +50% damage and +30% speed."
+      "fx": "35 inactive-state slaps charge FRENZY: 10s of +50% damage and +30% speed."
     },
     {
       "id": "titanSlayer",
       "name": "Colossus Bane",
       "tier": 4,
-      "cost": 600000000,
+      "cost": 1080000000,
       "prereq": "bossHunter",
       "reqBoss": 34,
       "fx": "+35% damage vs Colossi — enemies #35 and up, and World guardians."
@@ -462,7 +467,7 @@ export const CONFIG = {
       "id": "rapidBarrage",
       "name": "Rapid Barrage",
       "tier": 5,
-      "cost": 1200000000,
+      "cost": 2160000000,
       "prereq": "dualHand",
       "reqBoss": 39,
       "fx": "Every 6th slap unleashes a barrage: 3 extra hits at 40% damage."
@@ -471,7 +476,7 @@ export const CONFIG = {
       "id": "aegisBulwark",
       "name": "Bulwark Guard",
       "tier": 5,
-      "cost": 2400000000,
+      "cost": 4320000000,
       "prereq": "kineticShield",
       "reqBoss": 39,
       "fx": "When Defense or Barrier mitigates damage, 50% of the blocked damage is reflected back."
@@ -480,7 +485,7 @@ export const CONFIG = {
       "id": "ultimateSlap",
       "name": "Godhand Strike",
       "tier": 5,
-      "cost": 5000000000,
+      "cost": 9000000000,
       "prereq": "titanSlayer",
       "reqBoss": 44,
       "fx": "Slaps charge the Godhand Ultimate: an 8x screen-shattering strike."
@@ -489,7 +494,7 @@ export const CONFIG = {
       "id": "ironStance1",
       "name": "Iron Stance I",
       "tier": 4,
-      "cost": 120000000,
+      "cost": 216000000,
       "prereq": "deflect",
       "reqBoss": 29,
       "fx": "Parry cooldown -2s (10s to 8s)."
@@ -498,7 +503,7 @@ export const CONFIG = {
       "id": "ironStance2",
       "name": "Iron Stance II",
       "tier": 5,
-      "cost": 1500000000,
+      "cost": 2700000000,
       "prereq": "ironStance1",
       "reqBoss": 39,
       "fx": "Parry cooldown -3s (8s to 5s)."
@@ -507,7 +512,7 @@ export const CONFIG = {
       "id": "ironStance3",
       "name": "Iron Stance III",
       "tier": 5,
-      "cost": 12000000000,
+      "cost": 21600000000,
       "prereq": "ironStance2",
       "reqBoss": 49,
       "fx": "Parry window widens (0.30s to 0.50s). Cooldown stays 5s."
@@ -521,7 +526,7 @@ export const CONFIG = {
     "heavyChance": 0.12,
     "heavyMult": 2.5,
     "staminaHp": 75,
-    "unstoppableHp": 1400,
+    "unstoppableHp": 3500,
     "regen": 0.0035,
     "comboMasteryStacks": 5,
     "comboMasteryPer": 0.005,
@@ -567,12 +572,12 @@ export const CONFIG = {
     {"level": 24, "id": "toughGrit", "name": "Tough Grit", "fx": "When below 40% HP, take 20% less damage."},
     {"level": 26, "id": "ironResolve", "name": "Iron Resolve", "fx": "Every 30th slap cleanses all active debuffs and heals 2% Max HP."},
     {"level": 28, "id": "overcharge", "name": "Overcharge", "fx": "Critical hits gain +1% bonus Crit Damage per Defense level (up to +40%)."},
-    {"level": 30, "id": "giantStature", "name": "Giant Stature", "fx": "+600 Max HP, and striking an Elite or Boss grants +1 extra combo stack."},
+    {"level": 30, "id": "giantStature", "name": "Giant Stature", "fx": "+1,500 Max HP, and striking an Elite or Boss grants +1 extra combo stack."},
     {"level": 32, "id": "swiftRecovery", "name": "Swift Recovery", "fx": "Parrying or blocking an enemy attack boosts your slap speed by +25% for 2.5s."},
     {"level": 34, "id": "midasStrike", "name": "Midas Strike", "fx": "Slaps landed within 0.6s of an enemy's attack timer grant 1.5x coins."},
     {"level": 36, "id": "executioner", "name": "Executioner", "fx": "Slaps deal +35% damage against enemies below 25% HP."},
-    {"level": 38, "id": "godhandAwakening", "name": "Godhand Awakening", "fx": "Every 30th slap triggers Godhand Awakening: deals 2.5x damage and stuns for 1.0s."},
-    {"level": 40, "id": "dragonbloodVigour", "name": "Dragonblood Vigour", "fx": "+4,500 Max HP and -20% damage from Boss Signatures and burns."},
+    {"level": 40, "id": "godhandAwakening", "name": "Godhand Awakening", "fx": "Every 30th slap triggers Godhand Awakening: deals 2.5x damage and stuns for 1.0s."},
+    {"level": 38, "id": "dragonbloodVigour", "name": "Dragonblood Vigour", "fx": "+4,500 Max HP and -20% damage from Boss Signatures and burns."},
     {"level": 44, "id": "asuraSlayer", "name": "Asura Slayer", "fx": "+25% damage in World fights and +15% critical damage."},
     {"level": 50, "id": "transcendentHand", "name": "Transcendent Hand", "fx": "Permanent \u00d71.25 global damage and \u00d71.15 Max HP."}
   ],
@@ -594,7 +599,7 @@ export const CONFIG = {
     "toughGritReduction": 0.8,
     "toughGritHeal": 1,
     
-    "giantStatureHp": 600,
+    "giantStatureHp": 1500,
     "swiftRecoveryDebuffMult": 0.6,
     "swiftRecoverySpeed": 0.80,
     "midasStrikeMult": 1.5,
@@ -654,7 +659,7 @@ export const CONFIG = {
     "205": {
       "name": "CHANDRAHASA STRIKE",
       "kind": "heavy",
-      "mult": 1.75, "stun": 1.0, "healCut": 0.30, "blurb": "Unblockable moon-blade strike — 1.75× damage, a 1s stagger, and -30% healing for 5s!",
+      "mult": 1.75, "stun": 1.0, "healCut": 0.20, "blurb": "Unblockable moon-blade strike — 1.75× damage, a 1s stagger, and -20% healing for 5s!",
       "desc": "Ten heads howl as the crescent strike falls"
     },
     "212": {
@@ -668,6 +673,36 @@ export const CONFIG = {
       "kind": "heavy",
       "mult": 1.75, "stun": 1.2, "stripShield": true, "blurb": "Unblockable perfected slap, returned — 1.75× damage, a 1.2s stagger, and strips your shields!",
       "desc": "The shadow slaps back with your own technique"
+    },
+    "59": {
+      "name": "PRIMAL ROAR",
+      "kind": "heavy",
+      "mult": 1.6, "critDown": 5, "blurb": "Every 4th attack: deafening apex roar dealing 1.6× damage and reducing Crit Chance by 25% for 5s!",
+      "desc": "The apex predator shakes the earth"
+    },
+    "69": {
+      "name": "OLYMPIAN BOLT",
+      "kind": "heavy",
+      "mult": 1.6, "stun": 1.0, "blurb": "Every 4th attack: unblockable lightning strike dealing 1.6× damage and stunning slaps for 1.0s!",
+      "desc": "The sky itself strikes back"
+    },
+    "79": {
+      "name": "GRAVITY WELL",
+      "kind": "heavy",
+      "mult": 1.6, "slowAmt": 0.30, "slowDur": 4, "blurb": "Every 4th attack: deals 1.6× damage and slows attack speed by 30% for 4s!",
+      "desc": "Gravity itself turns against your hands"
+    },
+    "89": {
+      "name": "ABYSSAL CRUSH",
+      "kind": "heavy",
+      "mult": 1.6, "leechDown": 4, "blurb": "Every 4th attack: tentacle slam dealing 1.6× damage and reducing Life Leech sustain by 25% for 4s!",
+      "desc": "The deep crushes all hope of recovery"
+    },
+    "99": {
+      "name": "DIVINE JUDGMENT",
+      "kind": "heavy",
+      "mult": 1.6, "stun": 1.0, "stripShield": true, "blurb": "Every 4th attack: unblockable celestial palm dealing 1.6× damage, stripping shields, and inflicting a 1.0s stagger!",
+      "desc": "The final hand judges all slaps"
     }
   },
   "healBosses": {
@@ -679,20 +714,14 @@ export const CONFIG = {
     "202": {"name": "AMRITA OF THE NAVEL", "pct": 0.15, "at": [0.5], "blurb": "The nectar of immortality — heals 15% of his HP, once at 50% HP."},
     "205": {"name": "AMRITA OF THE NAVEL", "pct": 0.15, "at": [0.5], "blurb": "The nectar of immortality — heals 15% of his HP, once at 50% HP."},
     "212": {"name": "MARIONETTE MENDING", "pct": 0.15, "at": [0.5], "blurb": "The puppeteer re-strings its champion — heals 15% of its HP, once at 50% HP."},
-    "215": {"name": "SHADOW RENEWAL", "pct": 0.15, "at": [0.5], "blurb": "The shadow knits itself whole — heals 15% of his HP, once at 50% HP."}
+    "215": {"name": "SHADOW RENEWAL", "pct": 0.15, "at": [0.5], "blurb": "The shadow knits itself whole — heals 15% of his HP, once at 50% HP."},
+    "59": {"name": "TITANIC REGENERATION", "pct": 0.15, "at": [0.5], "blurb": "Titanic flesh knits itself whole — heals 15% of Max HP, once at 50% HP."},
+    "69": {"name": "TITANIC REGENERATION", "pct": 0.15, "at": [0.5], "blurb": "Titanic flesh knits itself whole — heals 15% of Max HP, once at 50% HP."},
+    "79": {"name": "TITANIC REGENERATION", "pct": 0.15, "at": [0.5], "blurb": "Titanic flesh knits itself whole — heals 15% of Max HP, once at 50% HP."},
+    "89": {"name": "TITANIC REGENERATION", "pct": 0.15, "at": [0.5], "blurb": "Titanic flesh knits itself whole — heals 15% of Max HP, once at 50% HP."},
+    "99": {"name": "TITANIC REGENERATION", "pct": 0.15, "at": [0.5], "blurb": "Titanic flesh knits itself whole — heals 15% of Max HP, once at 50% HP."},
   },
-  "firstClearChests": {
-    "4": {"coins": 250, "gems": 2},
-    "9": {"coins": 2200, "gems": 5},
-    "14": {"coins": 18000, "gems": 2},
-    "19": {"coins": 90000, "gems": 5},
-    "24": {"coins": 400000, "gems": 2},
-    "29": {"coins": 2000000, "gems": 5},
-    "34": {"coins": 12000000, "gems": 3},
-    "39": {"coins": 75000000, "gems": 5},
-    "44": {"coins": 280000000, "gems": 3},
-    "49": {"coins": 1500000000, "gems": 10}
-  },
+  "firstClearChests": {"4": {"coins": 250, "gems": 2}, "9": {"coins": 2500, "gems": 5}, "14": {"coins": 15000, "gems": 2}, "19": {"coins": 75000, "gems": 5}, "24": {"coins": 300000, "gems": 2}, "29": {"coins": 1500000, "gems": 5}, "34": {"coins": 8000000, "gems": 3}, "39": {"coins": 50000000, "gems": 5}, "44": {"coins": 175000000, "gems": 3}, "49": {"coins": 900000000, "gems": 10}, "54": {"coins": 1200000000, "gems": 3}, "59": {"coins": 1800000000, "gems": 5}, "64": {"coins": 2600000000, "gems": 3}, "69": {"coins": 3800000000, "gems": 5}, "74": {"coins": 5500000000, "gems": 4}, "79": {"coins": 8000000000, "gems": 6}, "84": {"coins": 11500000000, "gems": 4}, "89": {"coins": 17000000000, "gems": 8}, "94": {"coins": 25000000000, "gems": 5}, "99": {"coins": 40000000000, "gems": 15}},
     
   "gauntlet": {"bonusMult": 1.35, "gemFirst": 3},
   "worldArts": [
@@ -733,7 +762,7 @@ export const CONFIG = {
     "gems": 25
   },
   "offline": {
-    "rate": 0.0068,
+    "rate": 0.000012,
     "capSeconds": 28800,
     "minAway": 60,
     "price": 200
@@ -901,7 +930,7 @@ export const CONFIG = {
     {
       "name": "Pocket of Coins",
       "coins": 50000,
-      "frontierMult": 3,
+      "frontierMult": 1.5,
       "gems": 50,
       "bonus": "",
       "tag": "QUICK BOOST",
@@ -910,7 +939,7 @@ export const CONFIG = {
     {
       "name": "Bag of Gold",
       "coins": 250000,
-      "frontierMult": 8,
+      "frontierMult": 3.5,
       "gems": 140,
       "bonus": "+25% BONUS",
       "tag": "POPULAR",
@@ -919,7 +948,7 @@ export const CONFIG = {
     {
       "name": "Chest of Gold",
       "coins": 1500000,
-      "frontierMult": 20,
+      "frontierMult": 8,
       "gems": 350,
       "bonus": "+45% BONUS",
       "tag": "GREAT VALUE",
@@ -928,7 +957,7 @@ export const CONFIG = {
     {
       "name": "Royal Treasury",
       "coins": 8000000,
-      "frontierMult": 45,
+      "frontierMult": 16,
       "gems": 800,
       "bonus": "+70% BONUS",
       "tag": "BEST VALUE",
@@ -937,7 +966,7 @@ export const CONFIG = {
     {
       "name": "Dragon's Hoard",
       "coins": 35000000,
-      "frontierMult": 100,
+      "frontierMult": 32,
       "gems": 1800,
       "bonus": "+100% 2X BONUS",
       "tag": "WHALE TIER",
@@ -1009,7 +1038,7 @@ export const CONFIG = {
       "valPrice": "₹499",
       "skin": "spidey",
       "coins": 25000,
-      "frontierMult": 10,
+      "frontierMult": 4,
       "gems": 200,
       "tagline": "The Webbed Crusader Set",
       "desc": "Equip the Spider-Man glove (+10% Slap Speed & Web Yank stun) plus instant coin and gem boost!"
@@ -1022,7 +1051,7 @@ export const CONFIG = {
       "valPrice": "₹799",
       "skin": "logan",
       "coins": 80000,
-      "frontierMult": 25,
+      "frontierMult": 10,
       "gems": 400,
       "tagline": "Adamantium Rage Set",
       "desc": "Unleash Wolverine (+8% Crit Chance & Berserker Barrage bleeding slashes) with heavy gold and gems."
@@ -1035,7 +1064,7 @@ export const CONFIG = {
       "valPrice": "₹1,199",
       "skin": "thor",
       "coins": 250000,
-      "frontierMult": 60,
+      "frontierMult": 22,
       "gems": 800,
       "tagline": "Lord of Asgard Set",
       "desc": "Harness Thor (+10% Damage & Mjolnir Slam lightning strikes) with massive coin and gem reserves."
@@ -1048,7 +1077,7 @@ export const CONFIG = {
       "valPrice": "₹2,499",
       "skin": "hulk",
       "coins": 1000000,
-      "frontierMult": 150,
+      "frontierMult": 45,
       "gems": 1600,
       "tagline": "Gamma Breaker Set",
       "desc": "Smash obstacles with Hulk (+20% Damage & screen-shaking Gamma Punch) alongside a colossal treasury."
@@ -1061,7 +1090,7 @@ export const CONFIG = {
       "valPrice": "₹9,999",
       "skin": "gauntlet",
       "coins": 10000000,
-      "frontierMult": 400,
+      "frontierMult": 90,
       "gems": 3000,
       "tagline": "Omnipotent Snap Set",
       "desc": "Wield the Mythic Infinity Gauntlet (all 6 stones, true Time Stop) with ultimate coin and gem fortune!"
@@ -1074,7 +1103,7 @@ export const CONFIG = {
       "badge": "PASSIVE INCOME",
       "cur": "gems",
       "price": 200,
-      "desc": "Earn coins while away — 25% of your DPS, up to 8 hours, paid on a claim card when you return."
+      "desc": "Earn coins while away at 0.0012% of your Frontier Full Payout per second, up to 34.56% over 8 hours (doubleable to 69.12% with a rewarded ad)."
     },
     {
       "id": "vip",
@@ -1092,7 +1121,7 @@ export const CONFIG = {
       "cur": "money",
       "price": "₹99",
       "valPrice": "₹299",
-      "desc": "Frenzy charges 25% faster from slaps, and Frenzy duration extends to 13 seconds (normally 10s)!"
+      "desc": "Frenzy charges 25% faster from inactive slaps (26 slaps instead of 35), and Frenzy duration extends to 13 seconds (normally 10s)!"
     },
     {
       "id": "remove_ads",
@@ -1105,7 +1134,7 @@ export const CONFIG = {
     }
   ],
   "frenzy": {
-    "cadence": 25,
+    "cadence": 35,
     "duration": 10,
     "dmgMult": 1.5,
     "speedMult": 1.3
@@ -1116,8 +1145,8 @@ export const CONFIG = {
     "speedMult": 1.5
   },
   "daily": {
-    "chestDayMult": 0.5,
-    "chestDay7Mult": 2.0,
+    "chestDayMult": 0.25,
+    "chestDay7Mult": 1.0,
     "chestDay7Gems": 25,
     "chestMinCoins": 60,
     "questPool": [
@@ -1222,7 +1251,7 @@ export const CONFIG = {
       "rewarded_offline_double": true
     }
   },
-  "appVersion": "2.6.6 · Balance v2.6.6"
+  "appVersion": "2.7.6 · Balance v2.7.6"
 };
 
 export const GROUPS = [
@@ -1347,8 +1376,8 @@ export function calcAttrCost(key, currentLevel) {
   const maxCost = def.maxCost || 65000000;
   if (target <= 1) return Math.round(base);
   if (target >= N) return Math.round(maxCost);
-  // v2.6.1 unified log-space curve: t = ((L-1)/(MaxLv-1))^1.05
-  const t = Math.pow((target - 1) / (N - 1), 1.05);
+  // v2.6.1 unified log-space curve: t = ((L-1)/(MaxLv-1))^1.11
+  const t = Math.pow((target - 1) / (N - 1), 1.11);
   return Math.round(Math.exp(Math.log(base) + (Math.log(maxCost) - Math.log(base)) * t));
 }
 

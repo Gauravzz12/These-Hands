@@ -21,7 +21,7 @@ function buildAllEnemies() {
     const interval = calcEnemyInterval(i, boss, miniBoss);
     const atkDmg = calcEnemyDamage(i, boss, elite);
 
-    const evasion = i < 20 ? 0 : i < 24 ? 0.05 : i < 28 ? 0.06 : i < 30 ? 0.08 : i < 38 ? 0.10 : i < 48 ? 0.12 : i === 48 ? 0.14 : 0.15;
+    const evasion = i < 20 ? 0 : i < 24 ? 0.05 : i < 28 ? 0.06 : i < 30 ? 0.08 : i < 38 ? 0.10 : i < 48 ? 0.12 : i === 48 ? 0.14 : i < 59 ? 0.15 : i < 69 ? 0.16 : i < 79 ? 0.17 : i < 89 ? 0.18 : i < 99 ? 0.19 : 0.20;
     const built = {
       idx: i,
       evasion,
@@ -56,9 +56,9 @@ function buildAllEnemies() {
       for (let j = i - 1; j >= 0; j--) {
         const p = _allEnemies[j];
         if (!p.boss && !p.elite) {
-          if (c.hp < p.hp) c.hp = Math.round(p.hp * 1.05);
-          if (c.bounty < p.bounty) c.bounty = Math.round(p.bounty * 1.03);
-          if (c.atkDmg < p.atkDmg) c.atkDmg = p.atkDmg;
+          if (c.hp < p.hp) c.hp = p.hp;
+          if (c.bounty < p.bounty) c.bounty = p.bounty;
+          /* v2.7.6: no atkDmg clamp — chapter-entry enemies intentionally dip (easing) */
           break;
         }
       }
