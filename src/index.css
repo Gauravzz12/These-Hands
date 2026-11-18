@@ -5275,3 +5275,28 @@ margin-top: 7px;
 #startMenu .play-btn-arcade{background:#ffb703 !important;border:3px solid #221407 !important;border-radius:18px;box-shadow:0 6px 0 #221407,0 14px 28px rgba(0,0,0,.45) !important;color:#221407 !important;animation:menuPlayPulse 2s ease-in-out infinite}
 #startMenu .play-btn-arcade .pb-text{font-family:"Bungee",sans-serif;font-size:26px;letter-spacing:.12em}
 @keyframes menuPlayPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.03)}}
+
+/* ===== UI/QoL fixes 2026-11-18 (audit round) ===== */
+.hub-card .hc-sub{-webkit-line-clamp:3}
+#combatFeed{top:108px}
+#attrToggle{flex-wrap:wrap;overflow:visible}
+#attrToggle .cap{white-space:normal;line-height:1.25}
+.set-top{gap:10px}
+.set-slider-row .set-top{width:100%}
+#musicVolVal{flex:none}
+.shop-filter-btn{min-height:36px;display:inline-flex;align-items:center;justify-content:center}
+.abb-btn{min-height:36px;padding:6px 14px}
+.claim-all-btn{min-height:38px}
+.ach-claim-btn{min-height:38px}
+.auto-advance-btn{min-height:38px}
+.ecard-hard{min-height:34px}
+.qty-bar{display:flex;align-items:center;gap:6px;padding:8px 2px 2px}
+#attrPanel .qty-bar{display:none}
+#attrPanel.open .qty-bar{display:flex}
+.qty-bar .qty-lbl{font-family:"Bungee","Nunito",sans-serif;font-size:10px;color:var(--ink-soft);letter-spacing:.04em;flex:none}
+.qty-bar button{flex:1;min-height:36px;border:2.5px solid var(--ap-ink);border-radius:10px;background:var(--chrome);color:var(--ink);font-family:"Bungee","Nunito",sans-serif;font-size:12px;box-shadow:2.5px 2.5px 0 var(--ap-ink);cursor:pointer}
+.qty-bar button.active{background:#f2b01e}
+.qty-bar button:active{transform:translate(1.5px,1.5px);box-shadow:1px 1px 0 var(--ap-ink)}
+.tnode-price{position:absolute;top:calc(100% - 3px);left:50%;transform:translateX(-50%);background:#f2b01e;color:#221407;border:1.5px solid #221407;border-radius:999px;font-family:"Nunito",sans-serif;font-weight:900;font-size:8.5px;line-height:1;padding:2px 5px;pointer-events:none;white-space:nowrap;z-index:3}
+.ar-label{white-space:normal;line-height:1.15;overflow:visible;text-overflow:clip}
+#shopFilterMore{position:sticky;right:0;flex:none;align-self:center;background:#221407;color:#fff6df;font-weight:900;font-size:17px;line-height:1;border-radius:999px;padding:6px 10px;margin-left:2px;box-shadow:0 1px 3px rgba(0,0,0,.3)}
