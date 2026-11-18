@@ -349,7 +349,7 @@ export default function App() {
           </button>
           <button id="levelUpBtn"></button>
         </div>
-        <div id="attrList"></div>
+        <div className="qty-bar" data-qtybar><span className="qty-lbl">BUY</span><button type="button" data-qty="1" className="active">×1</button><button type="button" data-qty="5">×5</button><button type="button" data-qty="10">×10</button><button type="button" data-qty="max">MAX</button></div><div id="attrList"></div>
       </section>
 
       <footer id="controls">
@@ -386,7 +386,7 @@ export default function App() {
           <div className="attrs-top">
             <div className="atop-line">PLAYER LEVEL <b id="attrsLevelVal">1</b> · CAP <b id="attrsCapVal">5</b> PER ATTRIBUTE</div>
             <div className="atop-line" id="attrsDps"></div>
-            <button id="attrsLevelUpBtn"></button>
+            <button id="attrsLevelUpBtn"></button><div className="qty-bar" data-qtybar><span className="qty-lbl">BUY</span><button type="button" data-qty="1" className="active">×1</button><button type="button" data-qty="5">×5</button><button type="button" data-qty="10">×10</button><button type="button" data-qty="max">MAX</button></div>
             <div className="attrs-booster-banner" id="attrsBoosterBanner">
               <div className="abb-left">
                 <span className="abb-ico">💰</span>
@@ -398,14 +398,14 @@ export default function App() {
               <button className="abb-btn" id="attrsBoostBtn" type="button">WATCH AD</button>
             </div>
           </div>
-          <div id="pageAttrsAccordion" className="perks-accordion">
-            <button type="button" id="pageAttrsToggle" className="perks-toggle" aria-expanded="false" aria-controls="pageAttrsCollapse">
+          <div id="pageAttrsAccordion" className="perks-accordion open">
+            <button type="button" id="pageAttrsToggle" className="perks-toggle" aria-expanded="true" aria-controls="pageAttrsCollapse">
               <div className="perks-toggle-left">
                 <span className="perks-toggle-title">ATTRIBUTES (12)</span>
                 <span className="perks-toggle-sub" id="pageAttrsToggleSub">CAP LV 5 · TAP TO UPGRADE STATS</span>
               </div>
               <div className="perks-toggle-right">
-                <span className="perks-toggle-hint" id="pageAttrsToggleHint">SHOW</span>
+                <span className="perks-toggle-hint" id="pageAttrsToggleHint">HIDE</span>
                 <svg viewBox="0 0 24 24" aria-hidden="true" className="perks-chevron"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
               </div>
             </button>
@@ -566,7 +566,7 @@ export default function App() {
           <button className="shop-filter-btn" data-filter="bundles">🎁 BUNDLES</button>
           <button className="shop-filter-btn" data-filter="perks">⚡ PERKS</button>
           <button className="shop-filter-btn" data-filter="skins">🥊 SKINS</button>
-          <button className="shop-filter-btn" data-filter="coins">🪙 COIN PACKS</button>
+          <button className="shop-filter-btn" data-filter="coins">🪙 COIN PACKS</button><span id="shopFilterMore" aria-hidden="true">›</span>
         </div>
         <div id="shopScroll">
           <div id="shopPromo"></div>
@@ -637,7 +637,7 @@ export default function App() {
             <button className="set-toggle danger-btn" id="setResetBtn">RESET SAVE</button>
           </div>
           <div className="about-block">
-            <div className="about-title">IDLE SLAPPER</div>
+            <div className="about-title" id="aboutTitle">IDLE SLAPPER</div>
             <div className="about-line" id="aboutVersion">Version 1.1.0 · Specials & Frenzy</div>
             <div className="about-line">All progress is stored only on this device — nothing leaves it.</div>
             <div className="about-line">Privacy Policy — coming with the store release.</div>
@@ -841,11 +841,11 @@ export default function App() {
         </button>
         <button className="bnav-btn" data-tab="attrs" data-goto="attrs" aria-label="Attributes">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 7h-4v11h-6V10H5l7-7z" fill="currentColor"/></svg>
-          <span>ATTRS</span>
+          <span>ATTRS</span><span className="bnav-badge" id="bnavAttrsBadge" style={{ display: 'none' }}>0</span>
         </button>
         <button className="bnav-btn" data-tab="skills" data-goto="skills" aria-label="Skills">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8L12 2z" fill="currentColor"/></svg>
-          <span>SKILLS</span>
+          <span>SKILLS</span><span className="bnav-badge" id="bnavSkillsBadge" style={{ display: 'none' }}>0</span>
         </button>
         <button className="bnav-btn" data-tab="levels" data-goto="levels" aria-label="Stages">
           <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="7" height="7" rx="1.5" fill="currentColor"/><rect x="13" y="4" width="7" height="7" rx="1.5" fill="currentColor"/><rect x="4" y="13" width="7" height="7" rx="1.5" fill="currentColor"/><rect x="13" y="13" width="7" height="7" rx="1.5" fill="currentColor"/></svg>
