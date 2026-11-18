@@ -788,7 +788,7 @@ export const CONFIG = {
       },
       "power": {
         "name": "WEB SNARE",
-        "desc": "Charges every {n} slaps — TAP the battle icon to unleash it: 1.5x damage and webs the enemy, slowing its swings by 25% for 2.5s"
+        "desc": "Charges every {n} slaps — TAP the battle icon to unleash it: 1.5x damage and webs the enemy, slowing its swings by 25% for 2.5s. Then a 5s rest"
       },
       "price": {
         "cur": "gems",
@@ -808,7 +808,7 @@ export const CONFIG = {
       },
       "power": {
         "name": "BERSERKER SLASH",
-        "desc": "Charges every {n} slaps — TAP the battle icon to unleash it: a guaranteed crit for 2.2x damage that heals you for 2% of Max HP"
+        "desc": "Charges every {n} slaps — TAP the battle icon to unleash it: a guaranteed crit for 2.2x damage that heals you for 2% of Max HP. Then a 6s rest"
       },
       "price": {
         "cur": "gems",
@@ -833,7 +833,7 @@ export const CONFIG = {
       },
       "power": {
         "name": "THUNDER CALL",
-        "desc": "Charges every {n} slaps — TAP the battle icon to unleash it: 3x damage and dazes the enemy for 0.6s"
+        "desc": "Charges every {n} slaps — TAP the battle icon to unleash it: 3x damage and dazes the enemy for 0.6s. Then a 6s rest"
       },
       "price": {
         "cur": "gems",
@@ -858,7 +858,7 @@ export const CONFIG = {
       },
       "power": {
         "name": "GAMMA SMASH",
-        "desc": "Charges every {n} slaps — TAP the battle icon to unleash it: 4x damage, shatters half the enemy's shield and boosts your damage by 20% for 3s"
+        "desc": "Charges every {n} slaps — TAP the battle icon to unleash it: 4x damage, shatters half the enemy's shield and boosts your damage by 20% for 3s. Then an 8s rest"
       },
       "price": {
         "cur": "gems",
