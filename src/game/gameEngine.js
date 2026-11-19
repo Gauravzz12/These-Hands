@@ -904,7 +904,7 @@ function renderShopBundles(){
         '<div class="bundle-power">⚡ ' + (sk.power ? sk.power.name + ': ' + skinPowerDesc(sk) : sk.desc) + '</div>' +
         (skinOwned && !owned ? '<div class="bundle-note">Skin already owned — you will receive the coins + gems!</div>' : '') +
       '</div>' +
-      (owned ? (G.skin === bd.skin ? '<button class="skin-btn equipped" disabled>SKIN EQUIPPED ✓</button>' : '<button class="skin-btn equip" data-bundle-equip="' + bd.skin + '">EQUIP · ' + sk.name.toUpperCase() + ' SKIN</button>') : '<button class="skin-btn bundle-buy-btn" data-bundle="' + bd.id + '">BUY · ' + price + '</button>') +
+      (owned ? (G.skin === bd.skin ? '<button class="skin-btn equipped" disabled>EQUIPPED ✓</button>' : '<button class="skin-btn equip" data-bundle-equip="' + bd.skin + '">EQUIP</button>') : '<button class="skin-btn bundle-buy-btn" data-bundle="' + bd.id + '">BUY · ' + price + '</button>') +
     '</div>';
   }
   html += '</div>';
