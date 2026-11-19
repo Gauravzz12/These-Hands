@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "371519306578",
+    "project_id": "idle-slapper",
+    "storage_bucket": "idle-slapper.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:371519306578:android:995ef935d29d6152c3988b",
+        "android_client_info": {
+          "package_name": "com.idleslapper.game"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "371519306578-85fuap0qieqgv7d5h5b308k7ksrknv74.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAlPhCkQETnpps3-9So3V3ed6J9Nxm2ow4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "371519306578-85fuap0qieqgv7d5h5b308k7ksrknv74.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

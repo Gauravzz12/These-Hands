@@ -1,8 +1,10 @@
 # Firebase Cloud Save — Setup
 
-The game already contains the full cloud-save system (`src/game/cloudSave.js`).
-It is **dormant** until you connect your own Firebase project — no project,
-no network calls, no behaviour change. Setup takes ~10 minutes, once.
+The game contains the full cloud-save system (`src/game/cloudSave.js`).
+STATUS 2026-11-19: the Firebase project **idle-slapper** is created and fully
+connected (steps 1–6 below are DONE, web + Android apps registered, sync
+verified live). The only remaining item is the SHA-1 fingerprint in step 7.
+(The system goes dormant again only if `FIREBASE_CONFIG` is set back to null.)
 
 How it works once connected:
 
@@ -58,25 +60,32 @@ Settings → **CLOUD SAVE** should read "Cloud save on (guest)…" within a few
 seconds. Play a fight, wait ~5s, and check Firestore → `saves` — your save
 document should be there.
 
-## 7. Android app (Google sign-in inside the WebView)
+## 7. Android app (Google sign-in inside the app)
 
-Anonymous cloud backup works in the Capacitor app as-is. **Google sign-in does
-not work through the web popup inside an app WebView** (Google blocks OAuth in
-embedded webviews) — the Settings button explains this when tapped in the app.
-To enable it in the Android build:
+Anonymous cloud backup works in the Capacitor app as-is. Google sign-in can
+NOT use the web popup inside an app WebView (Google blocks OAuth in embedded
+webviews), so the app uses the native plugin — DONE in code:
 
-1. Firebase Console → Project settings → **Add app → Android**
-   (package `com.idleslapper.game`) → download **`google-services.json`** into
-   `android/app/`.
-2. Add your SHA-1 fingerprint (Play Console → App integrity, or your debug
-   keystore) in the same screen — required for Google sign-in.
-3. Install the native auth bridge and sync Capacitor:
-   `npm i @capacitor-firebase/authentication` then `npx cap sync`.
-   The cloud module already detects the native platform; wiring the plugin's
-   `signInWithGoogle()` credential into `cloudGoogle()` is the remaining step.
+- `@capacitor-firebase/authentication` is installed and configured in
+  `capacitor.config.json` (`skipNativeAuth: true`, Google provider only): the
+  plugin only fetches the Google credential via the native account picker,
+  and `cloudSave.js` links/signs in with it through the Firebase JS SDK —
+  one session, one Firestore client, same as web.
+- The Android app is registered in the Firebase project
+  (`com.idleslapper.game`, app id `1:371519306578:android:995ef935d29d6152c3988b`)
+  and `android/app/google-services.json` is generated and committed.
 
-Until step 7 is done, Android players keep anonymous cloud backup on the same
-device account; the durable cross-device identity on Android lands with the plugin.
+REMAINING — SHA-1 fingerprints (required by Google before app sign-in works):
+
+1. Firebase Console → Project settings → the Android app → **Add fingerprint**:
+   - the **App signing key** SHA-1 from Play Console → Release → Setup →
+     **App integrity** (this is the one production installs use), and
+   - your **debug keystore** SHA-1 if you want sign-in to work in local
+     debug builds (`keytool -list -v -keystore ~/.android/debug.keystore
+     -alias androiddebugkey`, password `android`).
+2. After adding a fingerprint, re-download `google-services.json` from the
+   same screen into `android/app/` (the file gains the Android OAuth client)
+   — or regenerate it; then rebuild the app.
 
 ## 8. Play Console housekeeping
 

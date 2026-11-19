@@ -188,9 +188,35 @@ export async function cloudGoogle() {
   if (!auth || !fb) return;
   const isNative = !!(window.Capacitor && window.Capacitor.isNativePlatform && window.Capacitor.isNativePlatform());
   if (isNative) {
-    // Google blocks OAuth inside embedded WebViews; the Android build needs
-    // the native Firebase Auth plugin (see FIREBASE_SETUP.md, step 7).
-    setStatus({ state: 'error', text: 'In the app, Google sign-in needs the native plugin — see FIREBASE_SETUP.md.' });
+    // Google blocks OAuth inside embedded WebViews, so the account picker is
+    // the native plugin's (configured skipNativeAuth: it only fetches the
+    // Google credential); the Firebase JS SDK stays the single session and
+    // Firestore client, exactly as on web.
+    try {
+      const { FirebaseAuthentication } = await import('@capacitor-firebase/authentication');
+      const result = await FirebaseAuthentication.signInWithGoogle();
+      const idToken = result && result.credential && result.credential.idToken;
+      if (!idToken) throw new Error('Google sign-in returned no credential.');
+      const cred = fb.authM.GoogleAuthProvider.credential(idToken);
+      if (user && user.isAnonymous) {
+        try { user = (await fb.authM.linkWithCredential(user, cred)).user; }
+        catch (le) {
+          if (!le || le.code !== 'auth/credential-already-in-use') throw le;
+          // Google account already has its own cloud identity: switch to it.
+          // Local progress is preserved — reconcile loads cloud only when it
+          // is strictly further ahead, otherwise local is pushed up.
+          user = (await fb.authM.signInWithCredential(auth, cred)).user;
+        }
+      } else {
+        user = (await fb.authM.signInWithCredential(auth, cred)).user;
+      }
+      reconciled = false;
+      readyStatus();
+      await reconcile();
+    } catch (e) {
+      if (e && /cancel/i.test(String(e.code || '') + ' ' + String(e.message || ''))) { readyStatus(); return; }
+      setStatus({ state: 'error', text: 'Google sign-in failed (' + shortErr(e) + ').', canGoogle: !!(user && user.isAnonymous), canSync: !!user });
+    }
     return;
   }
   try {
@@ -223,6 +249,14 @@ export async function cloudGoogle() {
 
 export async function cloudSignOut() {
   if (!auth || !fb) return;
+  try {
+    // Also clear the native plugin's Google session so the next LINK GOOGLE
+    // shows the account picker again instead of silently reusing the account.
+    if (window.Capacitor && window.Capacitor.isNativePlatform && window.Capacitor.isNativePlatform()) {
+      const { FirebaseAuthentication } = await import('@capacitor-firebase/authentication');
+      await FirebaseAuthentication.signOut();
+    }
+  } catch (e) {}
   try { await fb.authM.signOut(auth); } catch (e) {}
   // onAuthStateChanged fires with null and a fresh guest session starts,
   // so cloud backup keeps working; the Google account's save stays stored.
