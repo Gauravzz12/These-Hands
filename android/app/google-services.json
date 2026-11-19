@@ -14,6 +14,38 @@
       },
       "oauth_client": [
         {
+          "client_id": "371519306578-g7v6jq5mvsncgjlof6lsc522faqlbsps.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.idleslapper.game",
+            "certificate_hash": "c982ca0948a9d288a6cc4eacc0130fdffa06651e"
+          }
+        },
+        {
+          "client_id": "371519306578-7glcc8fhj69pddr6bntfre5voc7jmi7q.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.idleslapper.game",
+            "certificate_hash": "5ae39da74a4537006fdb89d1d3296d442c254c4c"
+          }
+        },
+        {
+          "client_id": "371519306578-vbesksufgru3hu40fa7ch5ojdtuntnus.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.idleslapper.game",
+            "certificate_hash": "29ac1a41bbced347fc7b65f08850c3adb69c320d"
+          }
+        },
+        {
+          "client_id": "371519306578-c7ejemq8li8oc4n82aqd3beaohuerv3l.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.idleslapper.game",
+            "certificate_hash": "3525c2d8dba8cd78cf33fee2f51da008a842d167"
+          }
+        },
+        {
           "client_id": "371519306578-85fuap0qieqgv7d5h5b308k7ksrknv74.apps.googleusercontent.com",
           "client_type": 3
         }

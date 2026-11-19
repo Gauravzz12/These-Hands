@@ -3,7 +3,7 @@
 The game contains the full cloud-save system (`src/game/cloudSave.js`).
 STATUS 2026-11-19: the Firebase project **idle-slapper** is created and fully
 connected (steps 1–6 below are DONE, web + Android apps registered, sync
-verified live). The only remaining item is the SHA-1 fingerprint in step 7.
+verified live). Android Google sign-in is fully armed too (step 7 done, incl. SHA-1s).
 (The system goes dormant again only if `FIREBASE_CONFIG` is set back to null.)
 
 How it works once connected:
@@ -75,17 +75,22 @@ webviews), so the app uses the native plugin — DONE in code:
   (`com.idleslapper.game`, app id `1:371519306578:android:995ef935d29d6152c3988b`)
   and `android/app/google-services.json` is generated and committed.
 
-REMAINING — SHA-1 fingerprints (required by Google before app sign-in works):
+SHA-1 fingerprints — DONE 2026-11-19. Registered in the console for the
+Android app (computed from the actual certificates downloaded from Play
+Console → App integrity, since the page no longer prints them as text):
 
-1. Firebase Console → Project settings → the Android app → **Add fingerprint**:
-   - the **App signing key** SHA-1 from Play Console → Release → Setup →
-     **App integrity** (this is the one production installs use), and
-   - your **debug keystore** SHA-1 if you want sign-in to work in local
-     debug builds (`keytool -list -v -keystore ~/.android/debug.keystore
-     -alias androiddebugkey`, password `android`).
-2. After adding a fingerprint, re-download `google-services.json` from the
-   same screen into `android/app/` (the file gains the Android OAuth client)
-   — or regenerate it; then rebuild the app.
+- App signing key (deployment cert): `C9:82:CA:09:48:A9:D2:88:A6:CC:4E:AC:C0:13:0F:DF:FA:06:65:1E`
+- App signing, hybrid classical: `5A:E3:9D:A7:4A:45:37:00:6F:DB:89:D1:D3:29:6D:44:2C:25:4C:4C`
+- App signing, hybrid post-quantum: `29:AC:1A:41:BB:CE:D3:47:FC:7B:65:F0:88:50:C3:AD:B6:9C:32:0D`
+- Upload key: `35:25:C2:D8:DB:A8:CD:78:CF:33:FE:E2:F5:1D:A0:08:A8:42:D1:67`
+
+`google-services.json` includes the four auto-created Android OAuth clients.
+The one fingerprint NOT registered is the Android Studio **debug keystore**
+(auto-generated on the dev PC) — sign-in in a debug build run straight from
+Android Studio will fail until it is added the same way
+(`keytool -list -v -keystore ~/.android/debug.keystore -alias androiddebugkey`,
+password `android`). Play/internal-testing builds and release builds signed
+with the upload key are covered.
 
 ## 8. Play Console housekeeping
 
