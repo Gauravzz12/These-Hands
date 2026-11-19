@@ -21,6 +21,7 @@ let booted = false;
 let reconciled = false;
 let pushTimer = 0;
 let lastPushedRaw = null;
+let lastSyncLabel = '';
 
 let status = {
   configured: !!FIREBASE_CONFIG,
@@ -80,9 +81,9 @@ function readyStatus() {
   if (!user) return;
   setStatus({
     state: 'ready',
-    text: user.isAnonymous
+    text: lastSyncLabel || (user.isAnonymous
       ? 'Cloud save on (guest). Link Google to keep progress across devices.'
-      : 'Cloud save on · ' + (user.email || 'signed in'),
+      : 'Cloud save on · ' + (user.email || 'signed in')),
     canSync: true,
     canGoogle: !!user.isAnonymous,
     canSignOut: !user.isAnonymous
@@ -98,10 +99,11 @@ async function pushNow() {
     setStatus({ state: 'syncing', text: 'Syncing cloud save…' });
     await fb.fsM.setDoc(fb.fsM.doc(db, 'saves', user.uid), { save: raw, updatedAt: Date.now(), v: 1 });
     lastPushedRaw = raw;
+    lastSyncLabel = (user.isAnonymous ? 'Cloud save on (guest)' : 'Cloud save on · ' + (user.email || 'signed in')) +
+      ' · synced ' + new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
     setStatus({
       state: 'synced',
-      text: (user.isAnonymous ? 'Cloud save on (guest)' : 'Cloud save on · ' + (user.email || 'signed in')) +
-        ' · synced ' + new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+      text: lastSyncLabel,
       canSync: true,
       canGoogle: !!user.isAnonymous,
       canSignOut: !user.isAnonymous
