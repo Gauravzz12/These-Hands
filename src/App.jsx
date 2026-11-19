@@ -572,8 +572,8 @@ export default function App() {
           <div id="shopPromo"></div>
           <div id="shopGemVault"></div>
           <div id="shopBundles"></div>
-          <div id="shopFeatures"></div>
           <div id="shopList"></div>
+          <div id="shopFeatures"></div>
           <div id="shopPacks"></div>
           <div id="shopFooter">
             <button className="skin-btn restore-btn" id="restoreBtn">RESTORE PURCHASES</button>
