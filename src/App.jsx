@@ -618,6 +618,12 @@ export default function App() {
             <button className="set-toggle" id="tutReplayBtn">START</button>
           </div>
           <div className="set-row">
+            <div className="set-main"><div className="set-name">CLOUD SAVE</div><div className="set-desc" id="cloudStatus">Progress lives on this device only.</div></div>
+            <button className="set-toggle" id="cloudSyncBtn" style={{display: 'none'}}>SYNC</button>
+            <button className="set-toggle" id="cloudGoogleBtn" style={{display: 'none'}}>LINK GOOGLE</button>
+            <button className="set-toggle" id="cloudOutBtn" style={{display: 'none'}}>SIGN OUT</button>
+          </div>
+          <div className="set-row">
             <div className="set-main"><div className="set-name">🐞 DEBUG MODE</div><div className="set-desc">Playtest tools — unlocks, grants and boss shortcuts. Grants save like normal progress; god mode lasts one session only.</div></div>
             <button className="set-toggle" id="dbgToggleBtn" aria-pressed="false">OFF</button>
           </div>
@@ -639,7 +645,7 @@ export default function App() {
           <div className="about-block">
             <div className="about-title" id="aboutTitle">IDLE SLAPPER</div>
             <div className="about-line" id="aboutVersion">Version 1.1.0 · Specials & Frenzy</div>
-            <div className="about-line">All progress is stored only on this device — nothing leaves it.</div>
+            <div className="about-line" id="aboutStorage">All progress is stored only on this device — nothing leaves it.</div>
             <div className="about-line">Privacy Policy — coming with the store release.</div>
           </div>
         </div>
