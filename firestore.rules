@@ -1,0 +1,11 @@
+rules_version = '2';
+// Idle Slapper cloud saves: each signed-in player can read and write ONLY
+// their own save document (saves/{their-uid}). Paste this into
+// Firebase Console -> Firestore Database -> Rules, then Publish.
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /saves/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+  }
+}
