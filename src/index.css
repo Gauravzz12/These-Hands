@@ -2338,13 +2338,14 @@ font-family: monospace; font-size: 11px; padding: 8px;
 
 /* Bundle Cards */
 .bundle-card {
-  grid-column: 1 / -1; flex-direction: row; align-items: center; text-align: left; gap: 12px;
+  grid-column: 1 / -1; flex-direction: row; flex-wrap: wrap; align-items: center; text-align: left; gap: 12px; padding-top: 25px;
   background: linear-gradient(135deg, #fffbf2 0%, #fff7e6 100%);
   border: 2.5px solid var(--gold-dark);
 }
 .bundle-card .skin-preview { flex: none; width: 88px; height: 88px; }
 .bundle-card .skin-preview img { height: 76px; }
-.bundle-main { flex: 1; min-width: 0; }
+.bundle-main { flex: 1; min-width: 96px; }
+.bundle-card .skin-btn { flex: none; max-width: 118px; white-space: normal; overflow-wrap: anywhere; line-height: 1.15; }
 .bundle-head-row { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
 .bundle-val { font-size: 10px; font-weight: 800; color: #dc2626; text-decoration: line-through; }
 .bundle-tagline { font-size: 10.5px; font-weight: 800; color: #92580c; margin-top: 1px; }
