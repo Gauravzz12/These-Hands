@@ -677,7 +677,7 @@ function hideModeResult(){const ov=$("modeResultOverlay");if(ov)ov.style.display
 let _mhCache="~";
 function updateModeHud(){const el=$("modeHud");const tb=$("blitzTiersBtn"),tp=$("blitzTiersPanel");if(!el)return;let txt="",cls="";if(G.phase==="fighting"&&G.fightMode&&G.fightMode.type==="blitz"&&G.blitz){const B=G.blitz;const nx=B.tier<BLITZ_TIERS.length?(" \u00B7 NEXT "+fmtNum(B.thresholds[B.tier])):" \u00B7 MAX TIER";txt="\u23F1 "+B.t.toFixed(1)+"s \u00B7 \u{1F4A5} "+fmtNum(B.dmg)+" \u00B7 TIER "+B.tier+"/20"+nx;cls="gold";if(tb){tb.style.display="";if(!tb.dataset.w){tb.dataset.w="1";tb.addEventListener("click",()=>{const pn=$("blitzTiersPanel");if(pn)pn.style.display=pn.style.display==="none"?"":"none"})}}}else if(G.phase==="fighting"&&G.fightMode&&G.fightMode.type==="training"&&G.train){const T=G.train;txt="\u{1F94B} PARRIES "+T.parries+" \u00B7 \u{1F525} STREAK "+T.streak+" \u00B7 \u274C "+T.strikes+"/3 \u00B7 \u23F1 "+Math.ceil(T.t)+"s";cls="gold"}else if(G.phase==="fighting"&&G.fightMode&&G.fightMode.type==="reflex"&&G.reflex){txt="\u{1F3AF} PARRIES "+(G.fightParries||0)+" \u00B7 RING MISSES "+G.reflex.missStreak+"/2"}if(tb&&!(G.fightMode&&G.fightMode.type==="blitz"&&G.blitz)){tb.style.display="none";if(tp)tp.style.display="none"}if(txt){el.textContent=txt;el.className=cls;el.style.display=""}else el.style.display="none"}
 function fleeFight(){const e=G.enemy;if(!e)return;G.phase="over";const kept=G.fightHitCoins||0;const dealtFrac=1-((e.hp||0)/Math.max(1,e.maxHp||1));let chest=0;if(dealtFrac>=0.5){chest=Math.round((e.bounty||0)*1.35*stats().coinMult);G.totalCoins+=chest;G.stats.coinsEarned+=chest}const nm=e.name;const fidx=e.idx;G.anomaly=null;Save.store();showModeResult({badge:"🪅 STREET BRAWL",head:"💨 IT FLED!",sub:nm+" escaped unbroken — but every coin you slapped out of it is yours.",stats:chest?[["SLAP COINS KEPT",fmtNum(kept)],["\u{1F381} BOUNTY CHEST (50%+ HP)",fmtNum(chest)]]:[["SLAP COINS KEPT",fmtNum(kept)],["KO BOUNTY","0"]],primary:"FIGHT AGAIN",onPrimary:()=>{hideModeResult();G.current=fidx;G.hardMode=false;G.pendingRespawn=false;switchTab("battle")}});updateModeHud()}
-const BLITZ_TIERS=(()=>{const names=["BRONZE I","BRONZE II","BRONZE III","BRONZE IV","SILVER I","SILVER II","SILVER III","SILVER IV","GOLD I","GOLD II","GOLD III","GOLD IV","PLATINUM I","PLATINUM II","DIAMOND I","DIAMOND II","MASTER I","MASTER II","GRANDMASTER","LEGEND"];const mults=names.map(function(_,i){return Math.round(1.4*(i+1)*100)/100});const pays=[0.25,0.35,0.45,0.55,0.65,0.75,0.85,0.95,1.05,1.15,1.25,1.35,1.45,1.55,1.65,1.75,1.85,1.95,2.05,2.20];return names.map((name,i)=>({name:name,mult:mults[i],coins:pays[i],gems:((i+1)%3===0||i+1===20)?2:0,timeBonus:((i+1)%3===0&&i+1<20)?1.0:0,repeatGems:i>=9?1:0}))})();
+const BLITZ_TIERS=(()=>{const names=["BRONZE I","BRONZE II","BRONZE III","BRONZE IV","SILVER I","SILVER II","SILVER III","SILVER IV","GOLD I","GOLD II","GOLD III","GOLD IV","PLATINUM I","PLATINUM II","DIAMOND I","DIAMOND II","MASTER I","MASTER II","GRANDMASTER","LEGEND"];const mults=names.map(function(_,i){return Math.round(2.8*Math.pow(1.233,i)*100)/100});const pays=[0.25,0.35,0.45,0.55,0.65,0.75,0.85,0.95,1.05,1.15,1.25,1.35,1.45,1.55,1.65,1.75,1.85,1.95,2.05,2.20];return names.map((name,i)=>({name:name,mult:mults[i],coins:pays[i],gems:((i+1)%3===0||i+1===20)?2:0,timeBonus:((i+1)%3===0&&i+1<20)?1.0:0,repeatGems:i>=9?1:0}))})();
 function btLeague(name){return name.replace(/ (I|II|III|IV)$/,"")}
 const BT_LC={"BRONZE":"#c47b42","SILVER":"#9fb4c7","GOLD":"#f2b01e","PLATINUM":"#57c7b8","DIAMOND":"#6ec3ff","MASTER":"#b78bff","GRANDMASTER":"#ff7ab0","LEGEND":"#ffb020"};
 function blitzPayText(t){return "\u00D7"+t.coins.toFixed(2)+(t.gems?" \u00B7 +"+t.gems+"\u{1F48E}":t.repeatGems?" \u00B7 +1\u{1F48E} repeat":"")+(t.timeBonus?" \u00B7 +1.5s":"")}
@@ -904,7 +904,7 @@ function renderShopBundles(){
         '<div class="bundle-power">⚡ ' + (sk.power ? sk.power.name + ': ' + skinPowerDesc(sk) : sk.desc) + '</div>' +
         (skinOwned && !owned ? '<div class="bundle-note">Skin already owned — you will receive the coins + gems!</div>' : '') +
       '</div>' +
-      (owned ? '<button class="skin-btn equipped" disabled>OWNED</button>' : '<button class="skin-btn bundle-buy-btn" data-bundle="' + bd.id + '">BUY · ' + price + '</button>') +
+      (owned ? (G.skin === bd.skin ? '<button class="skin-btn equipped" disabled>SKIN EQUIPPED ✓</button>' : '<button class="skin-btn equip" data-bundle-equip="' + bd.skin + '">EQUIP · ' + sk.name.toUpperCase() + ' SKIN</button>') : '<button class="skin-btn bundle-buy-btn" data-bundle="' + bd.id + '">BUY · ' + price + '</button>') +
     '</div>';
   }
   html += '</div>';
@@ -915,6 +915,8 @@ function renderShopBundles(){
     const bd = CONFIG.bundles.find(x => x.id === bid);
     if (bd) bbtns[i].addEventListener("click", () => startStorePurchase({ kind: "bundle", bundle: bd }));
   }
+  const beqs = bundlesEl.querySelectorAll("[data-bundle-equip]");
+  for (let i = 0; i < beqs.length; i++) beqs[i].addEventListener("click", () => equipSkin(beqs[i].getAttribute("data-bundle-equip")));
 }
 
 function renderShopFeatures(){
