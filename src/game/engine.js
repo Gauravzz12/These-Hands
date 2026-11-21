@@ -95,35 +95,45 @@ export function computePlayerStats(save) {
   const sfx = CONFIG.skillFx;
   const afxMap = CONFIG.abilityFx;
 
-  // Active ad damage boost (strictly 2x outgoing damage)
-  const adDmgMult = (save.adDmgBoostUntil && save.adDmgBoostUntil > Date.now()) ? 2.0 : 1.0;
+  // Active ad damage boost (strictly 1.75x outgoing damage)
+  const adDmgMult = (save.adDmgBoostUntil && save.adDmgBoostUntil > Date.now()) ? 1.75 : 1.0;
 
-  // Base damage matching runtime combat engine
-  let dmg = (CONFIG.playerBase.damage + (a.power || 0) * 2);
+  // Base power damage & level compounding (1.04^(Lv-1))
+  const pwr = a.power || 0;
+  const powerBaseDmg = (CONFIG.playerBase.damage + pwr * (fx.powerFlatPerLvl || 2.5))
+    * Math.pow(fx.powerGrowth || 1.08, pwr)
+    * Math.pow(fx.powerMilestoneMult || 1.25, Math.floor(pwr / 10));
+  const levelMult = Math.pow(1.04, Math.max(0, ab - 1));
+
+  let dmg = powerBaseDmg * levelMult;
   if (s.strongerHands) dmg *= sfx.strongerDmg;
   if (ab >= 2) dmg *= afxMap.ironPalm;
-  if (ab >= 20) dmg *= afxMap.godhandDmg || 1.15;
-  if (ab > 20) dmg *= 1 + (afxMap.masteryPer || 0.02) * (ab - 20);
-  if (save.dragonMastery) dmg *= 1 + save.dragonMastery * 0.05;
+  if (ab >= 50) dmg *= afxMap.transcendentDmg || 1.30;
+  if (save.dragonMastery) dmg *= (save.dragonMastery >= 2 ? 1.45 : 1.25);
   dmg *= adDmgMult;
 
   // Attack interval (lower = faster)
-  let interval = CONFIG.playerBase.attackInterval;
-  interval *= Math.max(fx.speedFloor, Math.pow(fx.speedPerLevel, a.speed || 0));
-  if (s.quickReflexes) interval *= sfx.quickSpeed;
-  if (s.dualHand) interval *= sfx.dualSpeed;
-  if (ab >= 3) interval *= afxMap.quickening;
-  if (ab >= 20) interval *= afxMap.godhandSpeed || 0.92;
+  let interval = CONFIG.playerBase.attackInterval * Math.pow(fx.speedPerLevel || 0.94, a.speed || 0);
+  interval = Math.max(fx.speedFloor || 0.70, interval);
+  if (s.quickReflexes) interval *= (sfx.quickSpeed || 0.85);
+  if (s.dualHand) interval *= (sfx.dualSpeed || 0.85);
+  if (ab >= 4) interval *= afxMap.quickening;
+  if (ab >= 50) interval *= (afxMap.transcendentSpeed || 0.90);
   if (s.secondHand) interval *= 0.5; // two hands = half interval per hand
-  interval = Math.max(0.12, interval);
+  interval = Math.max(0.35, interval);
 
   // Crit
   let critChance = CONFIG.playerBase.critChance + (a.critChance || 0) * fx.critChancePerLevel;
   if (s.criticalSlaps) critChance += sfx.critSlaps;
-  if (ab >= 7) critChance += afxMap.critSurge;
+  if (ab >= 12) critChance += afxMap.critSurgeChance || 0.06;
   critChance = Math.min(fx.critChanceCap || 0.75, critChance);
 
   let critMult = CONFIG.playerBase.critMult + (a.critDamage || 0) * fx.critDamagePerLevel;
+  if (ab >= 12) critMult += afxMap.critSurgeMult || 0.15;
+  if (ab >= 28) {
+    const overchargeMult = 1 + Math.min(afxMap.overchargeCap || 0.32, (a.defense || 0) * (afxMap.overchargeDefScale || 0.008));
+    critMult *= overchargeMult;
+  }
 
   // Combo
   const comboBaseStacks = fx.comboBaseStacks + (s.comboMastery ? sfx.comboMasteryStacks : 0);
@@ -132,25 +142,29 @@ export function computePlayerStats(save) {
   // Active ad coin boost (strictly 2x coin rewards)
   const adCoinMult = (save.adCoinBoostUntil && save.adCoinBoostUntil > Date.now()) ? 2.0 : 1.0;
   let coinMult = 1 + (a.coinMult || 0) * fx.coinPerLevel;
-  if (ab >= 5) coinMult *= afxMap.greed;
-  if (ab >= 9) coinMult *= afxMap.goldenAura;
+  if (ab >= 8) coinMult *= afxMap.greed;
+  if (ab >= 18) coinMult *= afxMap.goldenAura;
   if (s.coinMagnet) coinMult *= sfx.magnetCoins;
   if (s.goldenTouch) coinMult *= sfx.goldenCoins;
   coinMult *= adCoinMult;
 
   // Accuracy
-  let accuracy = Math.min(fx.accuracyCap, fx.accuracyBase + (a.accuracy || 0) * fx.accuracyPerLevel);
+  let accuracy = Math.min((fx.accuracyCap || 0.95) + (ab >= 44 ? 0.10 : 0), (fx.accuracyBase || 0.85) + (a.accuracy || 0) * fx.accuracyPerLevel + (ab >= 44 ? 0.10 : 0));
 
   // Boss damage multiplier
   let bossDmgMult = 1 + Math.min(fx.bossDmgCap || 0.20, (a.bossDamage || 0) * fx.bossDmgPerLevel);
   if (s.bossHunter) bossDmgMult *= sfx.bossMult;
-  if (ab >= 8) bossDmgMult *= afxMap.bossBane;
+  if (ab >= 16) bossDmgMult *= afxMap.bossBane;
 
-  // HP
-  let maxHp = CONFIG.playerHp.base + (ab - 1) * CONFIG.playerHp.perLevel;
-  if (s.staminaTraining) maxHp += sfx.staminaHp;
-  if (s.unstoppable) maxHp += sfx.unstoppableHp;
-  if (save.dragonMastery) maxHp = Math.round(maxHp * (1 + save.dragonMastery * 0.05));
+  // HP (Zero Flat Buffs)
+  let maxHp = calcPlayerMaxHp(ab);
+  if (s.staminaTraining) maxHp *= (sfx.staminaHpPct || 1.20);
+  if (ab >= 6) maxHp *= (afxMap.thickSkinHpPct || 1.15);
+  if (s.unstoppable || s.unstoppableHands) maxHp *= (sfx.unstoppableHpPct || 1.30);
+  if (ab >= 30) maxHp *= (afxMap.titanStatureHpPct || 1.25);
+  if (ab >= 38) maxHp *= (afxMap.dragonbloodHpPct || 1.25);
+  if (ab >= 50) maxHp *= (afxMap.transcendentHpPct || 1.25);
+  maxHp = Math.round(maxHp);
 
   // Theoretical DPS with heavy hits, combos, and crits
   const pH = s.heavySlap ? sfx.heavyChance : 0;

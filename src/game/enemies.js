@@ -10,7 +10,8 @@ let _allEnemies = null;
 
 function buildAllEnemies() {
   if (_allEnemies) return _allEnemies;
-  _allEnemies = ROSTER.map((r, i) => {
+  const roster50 = ROSTER.slice(0, 50);
+  _allEnemies = roster50.map((r, i) => {
     const pos = i % 5;
     const boss = i % 10 === 9;
     const miniBoss = pos === 4 && !boss;
@@ -21,7 +22,7 @@ function buildAllEnemies() {
     const interval = calcEnemyInterval(i, boss, miniBoss);
     const atkDmg = calcEnemyDamage(i, boss, elite);
 
-    const evasion = i < 20 ? 0 : i < 24 ? 0.05 : i < 28 ? 0.06 : i < 30 ? 0.08 : i < 38 ? 0.10 : i < 48 ? 0.12 : i === 48 ? 0.14 : i < 59 ? 0.15 : i < 69 ? 0.16 : i < 79 ? 0.17 : i < 89 ? 0.18 : i < 99 ? 0.19 : 0.20;
+    const evasion = i < 20 ? 0 : i < 24 ? 0.05 : i < 28 ? 0.06 : i < 30 ? 0.08 : i < 38 ? 0.10 : i < 48 ? 0.12 : i === 48 ? 0.14 : 0.15;
     const built = {
       idx: i,
       evasion,
@@ -35,7 +36,7 @@ function buildAllEnemies() {
       atkInterval: interval,
       atkDmg,
       boss,
-      bossAnim: i === 9 ? "vine" : i === 19 ? "rubble" : i === 29 ? "drop" : i === 39 ? "burrow" : i === 49 ? "fly" : i === 59 ? "assemble" : i === 69 ? "sarcophagus" : i === 79 ? "shatter" : i === 89 ? "bolt" : i === 99 ? "descend" : null,
+      bossAnim: i === 9 ? "vine" : i === 19 ? "rubble" : i === 29 ? "drop" : i === 39 ? "burrow" : i === 49 ? "fly" : null,
       scale: r[0] === "Dragon Lord" ? 1.65 : r[0] === "The Almighty Hand" ? 1.7 : (/giant|titan|dragon|golem|king|colossus|almighty/i.test(r[0]) ? (GIANT_SCALE[r[0]] || 1.45) : (boss ? 1.15 : (elite ? 1.08 : 1.0)))
     };
     let sprCache = null;

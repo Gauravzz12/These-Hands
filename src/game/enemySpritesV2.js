@@ -2178,8 +2178,15 @@ function loadPoseImage(poseDef) {
       }
       let total = 0;
       for (let ry = 0; ry < nRows; ry++) total += rows[ry];
-      if (total > 0) {
-        const act = rows.map((v, ry) => v > 0 || (ry > 0 && rows[ry - 1] > 0 && ry < nRows - 1 && rows[ry + 1] > 0));
+      if (total <= 0) {
+        console.warn(`[V2] Pose image is completely blank: ${poseDef.src}`);
+        poseDef.isBlank = true;
+        poseDef.ready = false;
+        poseDef.loading = false;
+        return;
+      }
+      poseDef.isBlank = false;
+      const act = rows.map((v, ry) => v > 0 || (ry > 0 && rows[ry - 1] > 0 && ry < nRows - 1 && rows[ry + 1] > 0));
         let clusters = [], cur = null;
         for (let ry = 0; ry < nRows; ry++) {
           if (act[ry]) { if (!cur) cur = { top: ry, bot: ry, mass: 0 }; cur.bot = ry; cur.mass += rows[ry]; }
@@ -2198,13 +2205,14 @@ function loadPoseImage(poseDef) {
         poseDef.gTop = (main.top * step) / ih;
         poseDef.gBot = Math.min(1, ((main.bot + 1) * step) / ih);
         poseDef.gCx = left <= right ? ((left + right) / 2) / iw : 0.5;
-      }
     } catch (err) { /* measurement is best-effort; defaults keep old behaviour */ }
     poseDef.ready = true;
     poseDef.loading = false;
   };
   img.onerror = () => {
     poseDef.loading = false;
+    poseDef.ready = false;
+    poseDef.isError = true;
   };
   img.src = poseDef.src;
 }
@@ -2328,11 +2336,15 @@ export function getV2Sprite(index) {
   // Initial thumb image for fallback canvas
   const thumbImg = new Image();
   thumbImg.onload = () => {
-    if (!poses.idle.ready) {
-      const c = poses.idle.img;
-      const ctx = c.getContext('2d');
-      ctx.drawImage(thumbImg, 0, 0, c.width, c.height);
-      poses.idle.imgWhite = buildSilhouetteCanvas(c);
+    for (const p of Object.values(poses)) {
+      if (!p.ready) {
+        const c = p.img;
+        if (c && c.getContext) {
+          const ctx = c.getContext('2d');
+          ctx.drawImage(thumbImg, 0, 0, c.width, c.height);
+          p.imgWhite = buildSilhouetteCanvas(c);
+        }
+      }
     }
   };
   thumbImg.src = cfg.thumb;
@@ -2368,16 +2380,35 @@ export function getV2Sprite(index) {
       return (poses.idle && poses.idle.imgWhite) || null;
     },
     getPose(name) {
-      if (name === 'attack') {
-        if (poses.attack2 && poses.attack2.ready) return poses.attack2;
-        if (poses.attack && poses.attack.ready) return poses.attack;
+      const isReady = p => p && p.ready && !p.isBlank;
+      if (isReady(poses[name])) return poses[name];
+
+      if (name.startsWith('atk') || name.startsWith('attack') || name === 'bananaSling') {
+        if (isReady(poses.attack)) return poses.attack;
+        if (isReady(poses.attack2)) return poses.attack2;
+        if (isReady(poses.attack1)) return poses.attack1;
+        if (isReady(poses.atkFollow)) return poses.atkFollow;
+        if (isReady(poses.atkWindup)) return poses.atkWindup;
       }
-      if (name === 'rockStun') {
-        if (poses.rockStun2 && poses.rockStun2.ready) return poses.rockStun2;
-        if (poses.rockStun && poses.rockStun.ready) return poses.rockStun;
+
+      if (name.startsWith('rockStun') || name === 'dizzy') {
+        if (isReady(poses.rockStun2)) return poses.rockStun2;
+        if (isReady(poses.rockStun)) return poses.rockStun;
+        if (isReady(poses.dizzy)) return poses.dizzy;
       }
-      if (poses[name] && poses[name].ready) return poses[name];
-      if (poses.idle && poses.idle.ready) return poses.idle;
+
+      if (name === 'spFollow' || name === 'spPose') {
+        if (isReady(poses.spPose)) return poses.spPose;
+        if (isReady(poses.spFollow)) return poses.spFollow;
+        if (isReady(poses.attack)) return poses.attack;
+      }
+
+      if (isReady(poses.idle)) return poses.idle;
+
+      for (const p of Object.values(poses)) {
+        if (isReady(p)) return p;
+      }
+
       return poses[name] || poses.idle;
     }
   };

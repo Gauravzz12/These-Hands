@@ -1,5 +1,5 @@
 // ============================================================================
-// IDLE SLAPPER — COMPLETE GAME BALANCE CONFIG (v2.6.6)
+// IDLE SLAPPER — COMPLETE GAME BALANCE CONFIG (v3.2.0)
 // Drop-in Unity C# Static Configuration
 // All 6/6 design pillars & all 11 audit fixes mathematically verified and
 // reconciled 1:1 with IDLE_SLAPPER_Complete_Game_Values_v2.6.5.md.
@@ -56,6 +56,7 @@ namespace IdleSlapper.Config
         CritDmg,
         CoinMult,
         HpFlat,
+        HpMult,
         BossDamage,
         ColossusDamage,
         GlobalDamage,
@@ -85,6 +86,7 @@ namespace IdleSlapper.Config
         CoinMult,
         MidasWindowCoinMult,
         HpFlat,
+        HpMult,
         DamageReduction,
         LowHpDamageReduction,
         CritChance,
@@ -117,7 +119,7 @@ namespace IdleSlapper.Config
     }
 
     [Serializable] public struct ChapterGateConfig { public int ChapterIndex; public string GateName; public int RequiredBossId; public int PlayerLevelCap; public int PowerCap; public int SpeedCap; public int CritChanceCap; public int CritDmgComboCoinsCap; public int DefGiantSlayerLeechCap; public int StunFortuneCap; public int AccuracyCap; }
-    [Serializable] public struct AttributeConfig { public AttributeType Type; public string Id; public string DisplayName; public double BaseCost; public double MaxCost; public int MaxLevel; public double EffectPerLevel; public double HardCapValue; }
+    [Serializable] public struct AttributeConfig { public AttributeType Type; public string Id; public string DisplayName; public double BaseCost; public double Growth; public int MaxLevel; public double EffectPerLevel; public double HardCapValue; }
     [Serializable] public struct EvenLevelPerkConfig { public int Level; public string Id; public string Name; public PerkEffectType EffectType; public float PrimaryValue; public float SecondaryValue; public float TertiaryValue; public bool CleanseDebuffOnTrigger; }
     [Serializable] public struct SpecialMoveConfig { public SpecialMoveId Id; public string Name; public int RequiredBossId; public SpecialMoveEffectType PrimaryEffectType; public float PrimaryBaseValue; public float PrimaryMaxedValue; public SpecialMoveEffectType SecondaryEffectType; public float SecondaryDurationSec; public float BaseCooldownSec; public float MaxedCooldownSec; }
     [Serializable] public struct EnemyConfig { public int Id; public string Name; public int GroupIndex; public WorldId World; public double MaxHp; public double AttackDamage; public float AttackInterval; public float Evasion; public double BaseBounty; public EnemyTag Tag; public int MaxHeals; public bool IsColossus; }
@@ -134,17 +136,17 @@ namespace IdleSlapper.Config
 
     public static class BalanceConfig
     {
-        public const string Version = "2.7.6";
+        public const string Version = "3.2.0";
         public const int MaxPlayerLevel = 50;
         public const int MaxEndlessMasteryBonusLevels = 3;
-        public const double BaseSlapDamage = 10.0;
-        public const float BaseSlapInterval = 1.500f;
+        public const double BaseSlapDamage = 12.0;
+        public const float BaseSlapInterval = 1.400f;
         public const float BaseCritChance = 0.15f;
-        public const float MaxCritChanceCap = 0.70f;
+        public const float MaxCritChanceCap = 0.75f;
         public const float OvercapCritToCritDmgRatio = 8.0f; // +1% excess Crit% -> +8% Crit Dmg
         public const float BaseCritDamageMultiplier = 2.0f;
         public const float BaseAccuracy = 0.85f;
-        public const float MaxAccuracyCap = 1.10f;
+        public const float MaxAccuracyCap = 0.95f;
         public const float MinFinalHitChance = 0.05f;
         public const float MaxFinalHitChance = 1.00f;
 
@@ -160,9 +162,9 @@ namespace IdleSlapper.Config
         public const float LuckyCoinMult = 2.5f;
 
         public const float AttrOnlySpeedFloor = 0.9075f;
-        public const float SkillPermanentSpeedFloor = 0.499f;
+        public const float SkillPermanentSpeedFloor = 0.350f;
         public const float SkinRelicSpeedFloor = 0.350f;
-        public const float OverdriveSpeedFloor = 0.300f;
+        public const float OverdriveSpeedFloor = 0.250f;
 
         public const int ArmoredPoiseStartEnemyId = 9;
         public const int ArmoredPoiseMinComboBypass = 5;
@@ -224,8 +226,13 @@ namespace IdleSlapper.Config
         public const float Group8SiphonHealPercent = 0.015f;
         public const int Group8SiphonMaxHealsPerFight = 3;
 
-        public const float KoBaseBountyMultiplier = 1.30f;
-        public const float PostSlapCapRate = 0.25f;
+        public const float KoBaseBountyMultiplier = 1.00f; // v3.2: 100% KO bounty payout
+        public const float FightSlapCapNormal = 0.85f;     // v3.2: Stages 16-50 regular/mini-boss cap
+        public const float FightSlapCapBoss = 0.35f;       // v3.2: Bosses and World Bosses cap
+        public const float SlapIntervalFloorSec = 0.350f;
+        public const float SlapIntervalFloorOverdriveSec = 0.250f;
+        public const float SlapIntervalFloorWorldsSec = 0.280f;
+        public const float AdOverdriveDpsMult = 1.75f;
         public const int AntiFarmSafeSlotRange = 5;
         public const float AntiFarmDecayPerSlot = 0.10f;
         public const float AntiFarmMinPayoutFloor = 0.40f;
@@ -236,7 +243,7 @@ namespace IdleSlapper.Config
         public const float HardModeWorldEmberMult = 1.50f;
         public const int HardModeFirstClearGems = 3;
         public const int HardModeGroupMasteryGems = 10;
-        public const float HardModeGroupMasteryCoinBonus = 0.02f;
+        public const float HardModeGroupMasteryCoinBonus = 0.03f; // v3.2: +3% coin mastery
 
         public const int OfflineMinerGemPrice = 200;
         public const float OfflineMinAwaySeconds = 60.0f;
@@ -296,21 +303,19 @@ namespace IdleSlapper.Config
         public static double GetPlayerBaseMaxHp(int level)
         {
             level = Mathf.Clamp(level, 1, MaxPlayerLevel + MaxEndlessMasteryBonusLevels);
-            return 100.0 + 25.0 * (level - 1) + Math.Round(15.0 * Math.Pow(1.212, level - 1), MidpointRounding.AwayFromZero);
+            return Math.Round(120.0 * Math.Pow(1.14, level - 1), MidpointRounding.AwayFromZero);
         }
 
-        // Note: Includes all flat & %-based HP from Stamina Training (+75), Giant Stature (Lv 30, +600),
-        // Unstoppable Hands (+1400), Dragonblood Vigour (Lv 40, +4500), and Transcendent Hand (Lv 50, x1.15).
-        // Do NOT add SkillEffectType.HpFlat or PerkEffectType.HpFlat a second time at runtime.
         public static double GetPlayerTotalMaxHp(int level, bool hasStaminaTraining = false, bool hasUnstoppableHands = false)
         {
             double hp = GetPlayerBaseMaxHp(level);
-            if (hasStaminaTraining) hp += 75.0;
-            if (level >= 30) hp += 600.0;
-            if (hasUnstoppableHands) hp += 1400.0;
-            if (level >= 40) hp += 4500.0;
-            if (level >= 50) hp = Math.Round(hp * 1.15, MidpointRounding.AwayFromZero);
-            return hp;
+            if (hasStaminaTraining) hp *= 1.20;
+            if (level >= 6) hp *= 1.15; // Thick Skin
+            if (hasUnstoppableHands) hp *= 1.30;
+            if (level >= 30) hp *= 1.25; // Titan Stature
+            if (level >= 38) hp *= 1.25; // Dragonblood Vigour
+            if (level >= 50) hp *= 1.25; // Transcendent Hand
+            return Math.Round(hp, MidpointRounding.AwayFromZero);
         }
 
         public static float GetStunDuration(int stunLevel, bool hasBattleFocusActive = false, bool isBossOrElite = false)
@@ -337,31 +342,22 @@ namespace IdleSlapper.Config
         public static double GetLevelUpCost(int level)
         {
             if (level < 1 || level >= MaxPlayerLevel) return 0.0;
-            if (level <= 10)
-            {
-                double t = Math.Pow((level - 1) / 9.0, 1.065);
-                return Math.Round(Math.Exp(Math.Log(150.0) + (Math.Log(55369.0) - Math.Log(150.0)) * t), MidpointRounding.AwayFromZero);
-            }
-            if (level <= 40) return Math.Round(55369.0 * Math.Pow(1.35, level - 10), MidpointRounding.AwayFromZero);
-            if (level <= 44) return Math.Round(450069728.0 * Math.Pow(1.25, level - 40), MidpointRounding.AwayFromZero);
-            return Math.Round(1210000000.0 * Math.Pow(1.10435, level - 45), MidpointRounding.AwayFromZero);
+            if (level <= 20) return Math.Round(120.0 * Math.Pow(1.425, level - 1), MidpointRounding.AwayFromZero);
+            if (level <= 40) return Math.Round(100560.0 * Math.Pow(1.445, level - 20), MidpointRounding.AwayFromZero);
+            return Math.Round(158600000.0 * Math.Pow(1.34, level - 40), MidpointRounding.AwayFromZero);
         }
 
-        public static double GetAttributeCost(AttributeType type, int targetLevel)
+        public static double GetAttributeCost(AttributeType type, int currentLevel)
         {
             AttributeConfig cfg = Attributes[type];
-            if (targetLevel < 1 || targetLevel > cfg.MaxLevel) return 0.0;
-            if (targetLevel == 1) return cfg.BaseCost;
-            if (targetLevel == cfg.MaxLevel) return cfg.MaxCost;
-            double t = Math.Pow((double)(targetLevel - 1) / (cfg.MaxLevel - 1), 1.05);
-            double logCost = Math.Log(cfg.BaseCost) + (Math.Log(cfg.MaxCost) - Math.Log(cfg.BaseCost)) * t;
-            return Math.Round(Math.Exp(logCost), MidpointRounding.AwayFromZero);
+            if (currentLevel < 0 || currentLevel >= cfg.MaxLevel) return 0.0;
+            return Math.Round(cfg.BaseCost * Math.Pow(cfg.Growth, currentLevel), MidpointRounding.AwayFromZero);
         }
 
         public static double GetPowerBaseDamage(int powerLevel, bool hasDragonMastery1 = false, bool hasDragonMastery2 = false)
         {
             powerLevel = Mathf.Clamp(powerLevel, 0, 80);
-            double baseDmg = (10.0 + 2.2 * powerLevel) * Math.Pow(1.076, powerLevel) * Math.Pow(1.28, powerLevel / 10);
+            double baseDmg = (12.0 + 2.5 * powerLevel) * Math.Pow(1.08, powerLevel) * Math.Pow(1.25, powerLevel / 10);
             if (hasDragonMastery2) return baseDmg * DragonMastery2Mult;
             if (hasDragonMastery1) return baseDmg * DragonMastery1Mult;
             return baseDmg;
@@ -428,44 +424,47 @@ namespace IdleSlapper.Config
 
         public static readonly Dictionary<AttributeType, AttributeConfig> Attributes = new Dictionary<AttributeType, AttributeConfig>
         {
-            { AttributeType.Power,       new AttributeConfig { Type=AttributeType.Power,       Id="power",      DisplayName="Damage",       BaseCost=80,  MaxCost=45000000000, MaxLevel=80, EffectPerLevel=1.0,        HardCapValue=80.0 } },
-            { AttributeType.Speed,       new AttributeConfig { Type=AttributeType.Speed,       Id="speed",      DisplayName="Speed",        BaseCost=110, MaxCost=180000000,   MaxLevel=25, EffectPerLevel=0.9801,     HardCapValue=0.350 } },
-            { AttributeType.CritChance,  new AttributeConfig { Type=AttributeType.CritChance,  Id="critChance", DisplayName="Crit %",       BaseCost=130, MaxCost=3200000000,  MaxLevel=45, EffectPerLevel=0.01,       HardCapValue=0.70 } },
-            { AttributeType.CritDamage,  new AttributeConfig { Type=AttributeType.CritDamage,  Id="critDamage", DisplayName="Crit Dmg",     BaseCost=90,  MaxCost=6500000000,  MaxLevel=65, EffectPerLevel=0.05,       HardCapValue=999.0 } },
-            { AttributeType.Defense,     new AttributeConfig { Type=AttributeType.Defense,     Id="defense",    DisplayName="Defense",      BaseCost=180, MaxCost=2800000000,  MaxLevel=40, EffectPerLevel=0.01,       HardCapValue=0.40 } },
-            { AttributeType.Stun,        new AttributeConfig { Type=AttributeType.Stun,        Id="stun",       DisplayName="Stun",         BaseCost=130, MaxCost=3500000000,  MaxLevel=50, EffectPerLevel=0.004,      HardCapValue=0.25 } },
-            { AttributeType.Combo,       new AttributeConfig { Type=AttributeType.Combo,       Id="combo",      DisplayName="Combo",        BaseCost=75,  MaxCost=6000000000,  MaxLevel=65, EffectPerLevel=0.0020,     HardCapValue=999.0 } },
-            { AttributeType.CoinMult,    new AttributeConfig { Type=AttributeType.CoinMult,    Id="coinMult",   DisplayName="Coins",        BaseCost=80,  MaxCost=6500000000,  MaxLevel=65, EffectPerLevel=0.04,       HardCapValue=2.60 } },
-            { AttributeType.Accuracy,    new AttributeConfig { Type=AttributeType.Accuracy,    Id="accuracy",   DisplayName="Accuracy",     BaseCost=150, MaxCost=1800000000,  MaxLevel=14, EffectPerLevel=0.01785714, HardCapValue=1.10 } },
-            { AttributeType.GiantSlayer, new AttributeConfig { Type=AttributeType.GiantSlayer, Id="bossDamage", DisplayName="Giant Slayer", BaseCost=180, MaxCost=2800000000,  MaxLevel=40, EffectPerLevel=0.015,      HardCapValue=0.60 } },
-            { AttributeType.LifeLeech,   new AttributeConfig { Type=AttributeType.LifeLeech,   Id="vampirism",  DisplayName="Life Leech",   BaseCost=260, MaxCost=3600000000,  MaxLevel=40, EffectPerLevel=0.0015,     HardCapValue=0.060 } },
-            { AttributeType.Fortune,     new AttributeConfig { Type=AttributeType.Fortune,     Id="luck",       DisplayName="Fortune",      BaseCost=140, MaxCost=3800000000,  MaxLevel=50, EffectPerLevel=0.005,      HardCapValue=0.25 } }
+            { AttributeType.Power,       new AttributeConfig { Type=AttributeType.Power,       Id="power",      DisplayName="Damage",       BaseCost=60,  Growth=1.30, MaxLevel=80, EffectPerLevel=1.0,        HardCapValue=80.0 } },
+            { AttributeType.Speed,       new AttributeConfig { Type=AttributeType.Speed,       Id="speed",      DisplayName="Speed",        BaseCost=100, Growth=1.95, MaxLevel=25, EffectPerLevel=0.94,        HardCapValue=0.250 } },
+            { AttributeType.CritChance,  new AttributeConfig { Type=AttributeType.CritChance,  Id="critChance", DisplayName="Crit %",       BaseCost=110, Growth=1.52, MaxLevel=45, EffectPerLevel=0.01,        HardCapValue=0.75 } },
+            { AttributeType.CritDamage,  new AttributeConfig { Type=AttributeType.CritDamage,  Id="critDamage", DisplayName="Crit Dmg",     BaseCost=80,  Growth=1.34, MaxLevel=65, EffectPerLevel=0.05,        HardCapValue=999.0 } },
+            { AttributeType.Defense,     new AttributeConfig { Type=AttributeType.Defense,     Id="defense",    DisplayName="Defense",      BaseCost=140, Growth=1.54, MaxLevel=40, EffectPerLevel=0.01,        HardCapValue=0.40 } },
+            { AttributeType.Stun,        new AttributeConfig { Type=AttributeType.Stun,        Id="stun",       DisplayName="Stun",         BaseCost=110, Growth=1.44, MaxLevel=50, EffectPerLevel=0.005,       HardCapValue=0.25 } },
+            { AttributeType.Combo,       new AttributeConfig { Type=AttributeType.Combo,       Id="combo",      DisplayName="Combo",        BaseCost=70,  Growth=1.34, MaxLevel=65, EffectPerLevel=0.01,        HardCapValue=999.0 } },
+            { AttributeType.CoinMult,    new AttributeConfig { Type=AttributeType.CoinMult,    Id="coinMult",   DisplayName="Coins",        BaseCost=75,  Growth=1.35, MaxLevel=65, EffectPerLevel=0.05,        HardCapValue=3.25 } },
+            { AttributeType.Accuracy,    new AttributeConfig { Type=AttributeType.Accuracy,    Id="accuracy",   DisplayName="Accuracy",     BaseCost=150, Growth=2.95, MaxLevel=14, EffectPerLevel=0.01,        HardCapValue=0.95 } },
+            { AttributeType.GiantSlayer, new AttributeConfig { Type=AttributeType.GiantSlayer, Id="bossDamage", DisplayName="Giant Slayer", BaseCost=150, Growth=1.55, MaxLevel=40, EffectPerLevel=0.005,       HardCapValue=0.20 } },
+            { AttributeType.LifeLeech,   new AttributeConfig { Type=AttributeType.LifeLeech,   Id="vampirism",  DisplayName="Life Leech",   BaseCost=200, Growth=1.54, MaxLevel=40, EffectPerLevel=0.0006,      HardCapValue=0.015 } },
+            { AttributeType.Fortune,     new AttributeConfig { Type=AttributeType.Fortune,     Id="luck",       DisplayName="Fortune",      BaseCost=120, Growth=1.44, MaxLevel=50, EffectPerLevel=0.005,       HardCapValue=0.25 } }
         };
 
         public static readonly EvenLevelPerkConfig[] EvenLevelPerks = new[]
         {
-            new EvenLevelPerkConfig { Level=2,  Id="iron_palm",          Name="Iron Palm",          EffectType=PerkEffectType.DamageMult,              PrimaryValue=0.20f,  SecondaryValue=0f,    TertiaryValue=0f,   CleanseDebuffOnTrigger=false },
-            new EvenLevelPerkConfig { Level=4,  Id="quickening",         Name="Quickening",         EffectType=PerkEffectType.SpeedMult,               PrimaryValue=0.94f,  SecondaryValue=0f,    TertiaryValue=0f,   CleanseDebuffOnTrigger=false },
-            new EvenLevelPerkConfig { Level=6,  Id="thick_skin",         Name="Thick Skin",         EffectType=PerkEffectType.DamageReduction,         PrimaryValue=0.12f,  SecondaryValue=0f,    TertiaryValue=0f,   CleanseDebuffOnTrigger=false },
-            new EvenLevelPerkConfig { Level=8,  Id="greed",              Name="Greed",              EffectType=PerkEffectType.CoinMult,                PrimaryValue=0.15f,  SecondaryValue=0f,    TertiaryValue=0f,   CleanseDebuffOnTrigger=false },
-            new EvenLevelPerkConfig { Level=10, Id="vampire_slap",       Name="Vampire Slap",       EffectType=PerkEffectType.HealEveryNSlaps,         PrimaryValue=0.01f,  SecondaryValue=10f,   TertiaryValue=10f,  CleanseDebuffOnTrigger=false },
-            new EvenLevelPerkConfig { Level=12, Id="crit_surge",         Name="Crit Surge",         EffectType=PerkEffectType.CritChance,              PrimaryValue=0.08f,  SecondaryValue=0f,    TertiaryValue=0f,   CleanseDebuffOnTrigger=false },
-            new EvenLevelPerkConfig { Level=14, Id="second_wind",        Name="Second Wind",        EffectType=PerkEffectType.ReviveOncePerFight,      PrimaryValue=0.25f,  SecondaryValue=0f,    TertiaryValue=0f,   CleanseDebuffOnTrigger=false },
-            new EvenLevelPerkConfig { Level=16, Id="boss_bane",          Name="Boss Bane",          EffectType=PerkEffectType.DamageVsBoss,            PrimaryValue=0.20f,  SecondaryValue=0f,    TertiaryValue=0f,   CleanseDebuffOnTrigger=false },
-            new EvenLevelPerkConfig { Level=18, Id="golden_aura",        Name="Golden Aura",        EffectType=PerkEffectType.CoinMult,                PrimaryValue=0.15f,  SecondaryValue=0f,    TertiaryValue=0f,   CleanseDebuffOnTrigger=false },
-            new EvenLevelPerkConfig { Level=20, Id="counter_cadence",    Name="Counter Cadence",    EffectType=PerkEffectType.CounterSlapDamageMult,   PrimaryValue=1.75f,  SecondaryValue=0f,    TertiaryValue=0f,   CleanseDebuffOnTrigger=false },
-            new EvenLevelPerkConfig { Level=22, Id="battle_focus",       Name="Battle Focus",       EffectType=PerkEffectType.StunDurationAtCombo,     PrimaryValue=0.20f,  SecondaryValue=10f,   TertiaryValue=0f,   CleanseDebuffOnTrigger=false },
-            new EvenLevelPerkConfig { Level=24, Id="tough_grit",         Name="Tough Grit",         EffectType=PerkEffectType.LowHpDamageReduction,    PrimaryValue=0.20f,  SecondaryValue=0.40f, TertiaryValue=0f,   CleanseDebuffOnTrigger=false },
-            new EvenLevelPerkConfig { Level=26, Id="iron_resolve",       Name="Iron Resolve",       EffectType=PerkEffectType.HealEveryNSlaps,         PrimaryValue=0.02f,  SecondaryValue=30f,   TertiaryValue=0f,   CleanseDebuffOnTrigger=true  },
-            new EvenLevelPerkConfig { Level=28, Id="overcharge",         Name="Overcharge",         EffectType=PerkEffectType.DefToCritDmgBonus,       PrimaryValue=0.01f,  SecondaryValue=0.40f, TertiaryValue=0f,   CleanseDebuffOnTrigger=false },
-            new EvenLevelPerkConfig { Level=30, Id="giant_stature",      Name="Giant Stature",      EffectType=PerkEffectType.HpFlat,                  PrimaryValue=600f,   SecondaryValue=1f,    TertiaryValue=0f,   CleanseDebuffOnTrigger=false },
-            new EvenLevelPerkConfig { Level=32, Id="swift_recovery",     Name="Swift Recovery",     EffectType=PerkEffectType.SpeedOnParry,            PrimaryValue=0.25f,  SecondaryValue=2.5f,  TertiaryValue=0f,   CleanseDebuffOnTrigger=false },
-            new EvenLevelPerkConfig { Level=34, Id="midas_strike",       Name="Midas Strike",       EffectType=PerkEffectType.MidasWindowCoinMult,     PrimaryValue=1.50f,  SecondaryValue=0.6f,  TertiaryValue=0f,   CleanseDebuffOnTrigger=false },
-            new EvenLevelPerkConfig { Level=36, Id="executioner",        Name="Executioner",        EffectType=PerkEffectType.LowHpEnemyDamageMult,    PrimaryValue=0.35f,  SecondaryValue=0.25f, TertiaryValue=0f,   CleanseDebuffOnTrigger=false },
-            new EvenLevelPerkConfig { Level=38, Id="godhand_awakening",  Name="Godhand Awakening",  EffectType=PerkEffectType.EveryNSlapDamageAndStun, PrimaryValue=2.50f,  SecondaryValue=30f,   TertiaryValue=1.0f, CleanseDebuffOnTrigger=false },
-            new EvenLevelPerkConfig { Level=40, Id="dragonblood_vigour", Name="Dragonblood Vigour", EffectType=PerkEffectType.HpFlat,                  PrimaryValue=4500f,  SecondaryValue=0.20f, TertiaryValue=0f,   CleanseDebuffOnTrigger=false },
-            new EvenLevelPerkConfig { Level=44, Id="asura_slayer",       Name="Asura Slayer",       EffectType=PerkEffectType.WorldDamageAndCritDmg,   PrimaryValue=0.25f,  SecondaryValue=0.15f, TertiaryValue=0f,   CleanseDebuffOnTrigger=false },
-            new EvenLevelPerkConfig { Level=50, Id="transcendent_hand",  Name="Transcendent Hand",  EffectType=PerkEffectType.GlobalDamageAndHp,       PrimaryValue=1.25f,  SecondaryValue=1.15f, TertiaryValue=0f,   CleanseDebuffOnTrigger=false }
+            new EvenLevelPerkConfig { Level=2,  Id="iron_palm",          Name="Iron Palm",          EffectType=PerkEffectType.DamageMult,              PrimaryValue=1.15f,  SecondaryValue=0f,    TertiaryValue=0f,   CleanseDebuffOnTrigger=false },
+            new EvenLevelPerkConfig { Level=4,  Id="quickening",         Name="Quickening",         EffectType=PerkEffectType.SpeedMult,               PrimaryValue=0.92f,  SecondaryValue=0f,    TertiaryValue=0f,   CleanseDebuffOnTrigger=false },
+            new EvenLevelPerkConfig { Level=6,  Id="thick_skin",         Name="Thick Skin",         EffectType=PerkEffectType.DamageReduction,         PrimaryValue=0.90f,  SecondaryValue=0.15f, TertiaryValue=0f,   CleanseDebuffOnTrigger=false },
+            new EvenLevelPerkConfig { Level=8,  Id="greed",              Name="Greed",              EffectType=PerkEffectType.CoinMult,                PrimaryValue=1.15f,  SecondaryValue=0f,    TertiaryValue=0f,   CleanseDebuffOnTrigger=false },
+            new EvenLevelPerkConfig { Level=10, Id="vampire_slap",       Name="Vampire Slap",       EffectType=PerkEffectType.HealEveryNSlaps,         PrimaryValue=0.02f,  SecondaryValue=8f,    TertiaryValue=0f,   CleanseDebuffOnTrigger=false },
+            new EvenLevelPerkConfig { Level=12, Id="crit_surge",         Name="Crit Surge",         EffectType=PerkEffectType.CritChance,              PrimaryValue=0.06f,  SecondaryValue=0.15f, TertiaryValue=0f,   CleanseDebuffOnTrigger=false },
+            new EvenLevelPerkConfig { Level=14, Id="second_wind",        Name="Second Wind",        EffectType=PerkEffectType.ReviveOncePerFight,      PrimaryValue=0.30f,  SecondaryValue=1.5f,  TertiaryValue=0f,   CleanseDebuffOnTrigger=false },
+            new EvenLevelPerkConfig { Level=16, Id="boss_bane",          Name="Boss Bane",          EffectType=PerkEffectType.DamageVsBoss,            PrimaryValue=1.20f,  SecondaryValue=0f,    TertiaryValue=0f,   CleanseDebuffOnTrigger=false },
+            new EvenLevelPerkConfig { Level=18, Id="golden_aura",        Name="Golden Aura",        EffectType=PerkEffectType.CoinMult,                PrimaryValue=1.20f,  SecondaryValue=0f,    TertiaryValue=0f,   CleanseDebuffOnTrigger=false },
+            new EvenLevelPerkConfig { Level=20, Id="counter_cadence",    Name="Counter Cadence",    EffectType=PerkEffectType.CounterSlapDamageMult,   PrimaryValue=1.80f,  SecondaryValue=0f,    TertiaryValue=0f,   CleanseDebuffOnTrigger=false },
+            new EvenLevelPerkConfig { Level=22, Id="battle_focus",       Name="Battle Focus",       EffectType=PerkEffectType.StunDurationAtCombo,     PrimaryValue=0.25f,  SecondaryValue=0.90f, TertiaryValue=10f,  CleanseDebuffOnTrigger=false },
+            new EvenLevelPerkConfig { Level=24, Id="tough_grit",         Name="Tough Grit",         EffectType=PerkEffectType.LowHpDamageReduction,    PrimaryValue=0.80f,  SecondaryValue=0.15f, TertiaryValue=0.40f,CleanseDebuffOnTrigger=false },
+            new EvenLevelPerkConfig { Level=26, Id="iron_resolve",       Name="Iron Resolve",       EffectType=PerkEffectType.DamageReduction,         PrimaryValue=0.10f,  SecondaryValue=20f,   TertiaryValue=0f,   CleanseDebuffOnTrigger=true  },
+            new EvenLevelPerkConfig { Level=28, Id="overcharge",         Name="Overcharge",         EffectType=PerkEffectType.DefToCritDmgBonus,       PrimaryValue=0.008f, SecondaryValue=0.32f, TertiaryValue=0f,   CleanseDebuffOnTrigger=false },
+            new EvenLevelPerkConfig { Level=30, Id="titan_stature",      Name="Titan Stature",      EffectType=PerkEffectType.DamageVsBoss,            PrimaryValue=1.25f,  SecondaryValue=1.0f,  TertiaryValue=0f,   CleanseDebuffOnTrigger=false },
+            new EvenLevelPerkConfig { Level=32, Id="swift_recovery",     Name="Swift Recovery",     EffectType=PerkEffectType.SpeedOnParry,            PrimaryValue=0.75f,  SecondaryValue=3.0f,  TertiaryValue=0f,   CleanseDebuffOnTrigger=false },
+            new EvenLevelPerkConfig { Level=34, Id="midas_rhythm",       Name="Midas Rhythm",       EffectType=PerkEffectType.MidasWindowCoinMult,     PrimaryValue=1.60f,  SecondaryValue=1.20f, TertiaryValue=0.60f,CleanseDebuffOnTrigger=false },
+            new EvenLevelPerkConfig { Level=36, Id="executioner",        Name="Executioner",        EffectType=PerkEffectType.LowHpEnemyDamageMult,    PrimaryValue=1.35f,  SecondaryValue=0.30f, TertiaryValue=0f,   CleanseDebuffOnTrigger=false },
+            new EvenLevelPerkConfig { Level=38, Id="dragonblood_vigour", Name="Dragonblood Vigour", EffectType=PerkEffectType.DamageReduction,         PrimaryValue=1.25f,  SecondaryValue=0.75f, TertiaryValue=0f,   CleanseDebuffOnTrigger=false },
+            new EvenLevelPerkConfig { Level=40, Id="godhand_awakening",  Name="Godhand Awakening",  EffectType=PerkEffectType.EveryNSlapDamageAndStun, PrimaryValue=3.00f,  SecondaryValue=1.0f,  TertiaryValue=25f,  CleanseDebuffOnTrigger=false },
+            new EvenLevelPerkConfig { Level=42, Id="momentum_surge",     Name="Momentum Surge",     EffectType=PerkEffectType.CritChance,              PrimaryValue=0.05f,  SecondaryValue=10f,   TertiaryValue=0f,   CleanseDebuffOnTrigger=false },
+            new EvenLevelPerkConfig { Level=44, Id="asura_slayer",       Name="Asura Slayer",       EffectType=PerkEffectType.WorldDamageAndCritDmg,   PrimaryValue=1.25f,  SecondaryValue=0.10f, TertiaryValue=0f,   CleanseDebuffOnTrigger=false },
+            new EvenLevelPerkConfig { Level=46, Id="frenzy_echo",        Name="Frenzy Echo",        EffectType=PerkEffectType.SpecialProc,             PrimaryValue=1.00f,  SecondaryValue=5f,    TertiaryValue=0f,   CleanseDebuffOnTrigger=false },
+            new EvenLevelPerkConfig { Level=48, Id="sovereigns_guard",   Name="Sovereign's Guard",  EffectType=PerkEffectType.DamageReduction,         PrimaryValue=0.70f,  SecondaryValue=0f,    TertiaryValue=0f,   CleanseDebuffOnTrigger=false },
+            new EvenLevelPerkConfig { Level=50, Id="transcendent_hand",  Name="Transcendent Hand",  EffectType=PerkEffectType.GlobalDamageAndHp,       PrimaryValue=1.30f,  SecondaryValue=1.25f, TertiaryValue=0.90f,CleanseDebuffOnTrigger=false }
         };
 
         public static readonly SpecialMoveConfig[] SpecialMoves = new[]
@@ -484,127 +483,118 @@ namespace IdleSlapper.Config
         };
 
         // ====================================================================
-        // 8. MAIN ROSTER ENEMIES #1-#50 (v2.6.5 — ALL 7 BOSS TTKs IN 32s-55s)
+                // ====================================================================
+        // 8. MAIN ROSTER ENEMIES #1-#50 (v3.2 — BALANCED 50-STAGE PROGRESSION)
         // ====================================================================
         public static readonly EnemyConfig[] MainRoster = new[]
         {
-            // Group 1: Cozy Corner (Ch. 1 -> 26.4 Monkey Kills)
-            new EnemyConfig { Id=1 , Name="Training Dummy",       GroupIndex=1 , World=WorldId.MainRoster, MaxHp=65         , AttackDamage=8    , AttackInterval=2.40f, Evasion=0.00f, BaseBounty=63        , Tag=EnemyTag.Normal,    MaxHeals=0, IsColossus=false },
-            new EnemyConfig { Id=2 , Name="Rubber Duck",          GroupIndex=1 , World=WorldId.MainRoster, MaxHp=115        , AttackDamage=11   , AttackInterval=2.35f, Evasion=0.00f, BaseBounty=91        , Tag=EnemyTag.Normal,    MaxHeals=0, IsColossus=false },
-            new EnemyConfig { Id=3 , Name="Rubber Chicken",       GroupIndex=1 , World=WorldId.MainRoster, MaxHp=195        , AttackDamage=14   , AttackInterval=2.30f, Evasion=0.00f, BaseBounty=134       , Tag=EnemyTag.Normal,    MaxHeals=0, IsColossus=false },
-            new EnemyConfig { Id=4 , Name="Cardboard Knight",     GroupIndex=1 , World=WorldId.MainRoster, MaxHp=340        , AttackDamage=18   , AttackInterval=2.25f, Evasion=0.00f, BaseBounty=197       , Tag=EnemyTag.Normal,    MaxHeals=0, IsColossus=false },
-            new EnemyConfig { Id=5 , Name="Grumpy Teddy",         GroupIndex=1 , World=WorldId.MainRoster, MaxHp=650        , AttackDamage=25   , AttackInterval=2.05f, Evasion=0.00f, BaseBounty=331       , Tag=EnemyTag.MiniBoss,  MaxHeals=0, IsColossus=false },
-            // Group 2: Backyard Bunch (Ch. 1)
-            new EnemyConfig { Id=6 , Name="Sassy Goblin Sprout",  GroupIndex=2 , World=WorldId.MainRoster, MaxHp=920        , AttackDamage=28   , AttackInterval=2.20f, Evasion=0.00f, BaseBounty=447       , Tag=EnemyTag.Normal,    MaxHeals=0, IsColossus=false },
-            new EnemyConfig { Id=7 , Name="Mime",                 GroupIndex=2 , World=WorldId.MainRoster, MaxHp=1450       , AttackDamage=33   , AttackInterval=2.15f, Evasion=0.00f, BaseBounty=645       , Tag=EnemyTag.Normal,    MaxHeals=0, IsColossus=false },
-            new EnemyConfig { Id=8 , Name="Cocky Goose",          GroupIndex=2 , World=WorldId.MainRoster, MaxHp=2350       , AttackDamage=39   , AttackInterval=2.10f, Evasion=0.00f, BaseBounty=930       , Tag=EnemyTag.Normal,    MaxHeals=0, IsColossus=false },
-            new EnemyConfig { Id=9 , Name="Trash Panda",          GroupIndex=2 , World=WorldId.MainRoster, MaxHp=4200       , AttackDamage=48   , AttackInterval=2.05f, Evasion=0.00f, BaseBounty=1410      , Tag=EnemyTag.Elite,     MaxHeals=0, IsColossus=false },
-            new EnemyConfig { Id=10, Name="Mischievous Monkey",   GroupIndex=2 , World=WorldId.MainRoster, MaxHp=8500       , AttackDamage=40   , AttackInterval=1.95f, Evasion=0.00f, BaseBounty=2200      , Tag=EnemyTag.Boss,      MaxHeals=2, IsColossus=false },
-            // Group 3: Fight Club (Ch. 2 -> #20 Bounty 57K, 26.0 Dark Knight Kills)
-            new EnemyConfig { Id=11, Name="Bodybuilder",          GroupIndex=3 , World=WorldId.MainRoster, MaxHp=16250      , AttackDamage=66   , AttackInterval=2.13f, Evasion=0.00f, BaseBounty=4510      , Tag=EnemyTag.Normal,    MaxHeals=0, IsColossus=false },
-            new EnemyConfig { Id=12, Name="Luchador Wrestler",    GroupIndex=3 , World=WorldId.MainRoster, MaxHp=24050      , AttackDamage=75   , AttackInterval=2.10f, Evasion=0.00f, BaseBounty=6173      , Tag=EnemyTag.Normal,    MaxHeals=0, IsColossus=false },
-            new EnemyConfig { Id=13, Name="Kickboxer",            GroupIndex=3 , World=WorldId.MainRoster, MaxHp=35750      , AttackDamage=85   , AttackInterval=2.08f, Evasion=0.00f, BaseBounty=8432      , Tag=EnemyTag.Normal,    MaxHeals=0, IsColossus=false },
-            new EnemyConfig { Id=14, Name="Adult Boxer",          GroupIndex=3 , World=WorldId.MainRoster, MaxHp=53300      , AttackDamage=96   , AttackInterval=2.05f, Evasion=0.00f, BaseBounty=11518     , Tag=EnemyTag.Normal,    MaxHeals=0, IsColossus=false },
-            new EnemyConfig { Id=15, Name="Sumo Champion",        GroupIndex=3 , World=WorldId.MainRoster, MaxHp=68000      , AttackDamage=115  , AttackInterval=2.03f, Evasion=0.00f, BaseBounty=17100     , Tag=EnemyTag.MiniBoss,  MaxHeals=0, IsColossus=false },
-            // Group 4: Castle Guard (Ch. 2)
-            new EnemyConfig { Id=16, Name="Castle Guard",         GroupIndex=4 , World=WorldId.MainRoster, MaxHp=119600      , AttackDamage=110  , AttackInterval=2.00f, Evasion=0.00f, BaseBounty=22565     , Tag=EnemyTag.Normal,    MaxHeals=0, IsColossus=false },
-            new EnemyConfig { Id=17, Name="Royal Executioner",    GroupIndex=4 , World=WorldId.MainRoster, MaxHp=162500     , AttackDamage=120  , AttackInterval=1.98f, Evasion=0.00f, BaseBounty=30397     , Tag=EnemyTag.Normal,    MaxHeals=0, IsColossus=false },
-            new EnemyConfig { Id=18, Name="Knight",               GroupIndex=4 , World=WorldId.MainRoster, MaxHp=214500     , AttackDamage=130  , AttackInterval=1.95f, Evasion=0.00f, BaseBounty=40852     , Tag=EnemyTag.Normal,    MaxHeals=0, IsColossus=false },
-            new EnemyConfig { Id=19, Name="Barbarian",            GroupIndex=4 , World=WorldId.MainRoster, MaxHp=210000     , AttackDamage=132  , AttackInterval=1.93f, Evasion=0.00f, BaseBounty=47977     , Tag=EnemyTag.Elite,     MaxHeals=0, IsColossus=false },
-            new EnemyConfig { Id=20, Name="Dark Knight",          GroupIndex=4 , World=WorldId.MainRoster, MaxHp=335000     , AttackDamage=90  , AttackInterval=1.84f, Evasion=0.00f, BaseBounty=57000     , Tag=EnemyTag.Boss,      MaxHeals=2, IsColossus=false },
-            // Group 5: Graveyard Shift (Ch. 3 -> #30 Bounty 680K, 26.1 Shogun Kills)
-            new EnemyConfig { Id=21, Name="Skeleton Warrior",     GroupIndex=5 , World=WorldId.MainRoster, MaxHp=546000     , AttackDamage=147  , AttackInterval=1.88f, Evasion=0.05f, BaseBounty=62000     , Tag=EnemyTag.Normal,    MaxHeals=0, IsColossus=false },
-            new EnemyConfig { Id=22, Name="Zombie",               GroupIndex=5 , World=WorldId.MainRoster, MaxHp=728000     , AttackDamage=164  , AttackInterval=1.86f, Evasion=0.05f, BaseBounty=80000     , Tag=EnemyTag.Normal,    MaxHeals=0, IsColossus=false },
-            new EnemyConfig { Id=23, Name="Armored Skeleton",     GroupIndex=5 , World=WorldId.MainRoster, MaxHp=975000     , AttackDamage=185  , AttackInterval=1.84f, Evasion=0.05f, BaseBounty=104000    , Tag=EnemyTag.Normal,    MaxHeals=0, IsColossus=false },
-            new EnemyConfig { Id=24, Name="Scarab Swarm",         GroupIndex=5 , World=WorldId.MainRoster, MaxHp=1300000    , AttackDamage=208  , AttackInterval=1.82f, Evasion=0.05f, BaseBounty=135000    , Tag=EnemyTag.Normal,    MaxHeals=0, IsColossus=false },
-            new EnemyConfig { Id=25, Name="Mummy Guard",          GroupIndex=5 , World=WorldId.MainRoster, MaxHp=1380000    , AttackDamage=244  , AttackInterval=1.79f, Evasion=0.06f, BaseBounty=185000    , Tag=EnemyTag.MiniBoss,  MaxHeals=0, IsColossus=false },
-            // Group 6: Shadow Dojo (Ch. 3)
-            new EnemyConfig { Id=26, Name="Ninja Recruit",        GroupIndex=6 , World=WorldId.MainRoster, MaxHp=2275000    , AttackDamage=260  , AttackInterval=1.77f, Evasion=0.06f, BaseBounty=240000    , Tag=EnemyTag.Normal,    MaxHeals=0, IsColossus=false },
-            new EnemyConfig { Id=27, Name="Shuriken Master",      GroupIndex=6 , World=WorldId.MainRoster, MaxHp=2860000    , AttackDamage=287  , AttackInterval=1.75f, Evasion=0.06f, BaseBounty=312000    , Tag=EnemyTag.Normal,    MaxHeals=0, IsColossus=false },
-            new EnemyConfig { Id=28, Name="Samurai Duelist",      GroupIndex=6 , World=WorldId.MainRoster, MaxHp=3575000    , AttackDamage=318  , AttackInterval=1.73f, Evasion=0.06f, BaseBounty=405000    , Tag=EnemyTag.Normal,    MaxHeals=0, IsColossus=false },
-            new EnemyConfig { Id=29, Name="Shadow Assassin",      GroupIndex=6 , World=WorldId.MainRoster, MaxHp=3350000    , AttackDamage=351  , AttackInterval=1.71f, Evasion=0.08f, BaseBounty=525000    , Tag=EnemyTag.Elite,     MaxHeals=0, IsColossus=false },
-            new EnemyConfig { Id=30, Name="Shogun Warlord",       GroupIndex=6 , World=WorldId.MainRoster, MaxHp=4100000    , AttackDamage=250  , AttackInterval=1.63f, Evasion=0.08f, BaseBounty=680000    , Tag=EnemyTag.Boss,      MaxHeals=2, IsColossus=false },
-            // Group 7: Dark Woods (Ch. 4 -> #40 Bounty 8.9M, 26.0 Pharaoh Kills)
-            new EnemyConfig { Id=31, Name="Werewolf",             GroupIndex=7 , World=WorldId.MainRoster, MaxHp=4186000    , AttackDamage=445  , AttackInterval=1.67f, Evasion=0.10f, BaseBounty=1075000   , Tag=EnemyTag.Normal,    MaxHeals=0, IsColossus=false },
-            new EnemyConfig { Id=32, Name="Giant Spider",         GroupIndex=7 , World=WorldId.MainRoster, MaxHp=5551000    , AttackDamage=512  , AttackInterval=1.65f, Evasion=0.10f, BaseBounty=1381000   , Tag=EnemyTag.Normal,    MaxHeals=0, IsColossus=false },
-            new EnemyConfig { Id=33, Name="Orc Warrior",          GroupIndex=7 , World=WorldId.MainRoster, MaxHp=7462000    , AttackDamage=588  , AttackInterval=1.63f, Evasion=0.10f, BaseBounty=1780000   , Tag=EnemyTag.Normal,    MaxHeals=0, IsColossus=false },
-            new EnemyConfig { Id=34, Name="Bog Witch",            GroupIndex=7 , World=WorldId.MainRoster, MaxHp=10010000    , AttackDamage=676  , AttackInterval=1.61f, Evasion=0.10f, BaseBounty=2299000   , Tag=EnemyTag.Normal,    MaxHeals=0, IsColossus=false },
-            new EnemyConfig { Id=35, Name="Shadow Beast",         GroupIndex=7 , World=WorldId.MainRoster, MaxHp=10500000   , AttackDamage=790  , AttackInterval=1.59f, Evasion=0.10f, BaseBounty=3059000   , Tag=EnemyTag.MiniBoss,  MaxHeals=0, IsColossus=true  },
-            // Group 8: Pharaoh's Tomb (Ch. 4)
-            new EnemyConfig { Id=36, Name="Giant Serpent",        GroupIndex=8 , World=WorldId.MainRoster, MaxHp=17290000   , AttackDamage=882  , AttackInterval=1.57f, Evasion=0.10f, BaseBounty=3894000   , Tag=EnemyTag.Normal,    MaxHeals=0, IsColossus=true  },
-            new EnemyConfig { Id=37, Name="Anubis Warrior",       GroupIndex=8 , World=WorldId.MainRoster, MaxHp=21385000   , AttackDamage=991  , AttackInterval=1.55f, Evasion=0.10f, BaseBounty=4914000   , Tag=EnemyTag.Normal,    MaxHeals=0, IsColossus=true  },
-            new EnemyConfig { Id=38, Name="Sphinx Riddler",       GroupIndex=8 , World=WorldId.MainRoster, MaxHp=26390000   , AttackDamage=1109 , AttackInterval=1.53f, Evasion=0.10f, BaseBounty=6119000   , Tag=EnemyTag.Normal,    MaxHeals=0, IsColossus=true  },
-            new EnemyConfig { Id=39, Name="Giant Scorpion",       GroupIndex=8 , World=WorldId.MainRoster, MaxHp=24500000   , AttackDamage=1243 , AttackInterval=1.51f, Evasion=0.12f, BaseBounty=7417000   , Tag=EnemyTag.Elite,     MaxHeals=0, IsColossus=true  },
-            new EnemyConfig { Id=40, Name="Pharaoh Revenant",     GroupIndex=8 , World=WorldId.MainRoster, MaxHp=29400000   , AttackDamage=1386 , AttackInterval=1.44f, Evasion=0.12f, BaseBounty=8900000   , Tag=EnemyTag.Boss,      MaxHeals=2, IsColossus=true  },
-            // Group 9: Mountain Stronghold (Ch. 5 -> #50 Bounty 57M, 25.8 Dragon Lord Kills)
-            new EnemyConfig { Id=41, Name="Troll",                GroupIndex=9 , World=WorldId.MainRoster, MaxHp=50050000   , AttackDamage=1512 , AttackInterval=1.48f, Evasion=0.12f, BaseBounty=11600000  , Tag=EnemyTag.Normal,    MaxHeals=0, IsColossus=true  },
-            new EnemyConfig { Id=42, Name="Ogre",                 GroupIndex=9 , World=WorldId.MainRoster, MaxHp=64610000   , AttackDamage=1646 , AttackInterval=1.46f, Evasion=0.12f, BaseBounty=14000000  , Tag=EnemyTag.Normal,    MaxHeals=0, IsColossus=true  },
-            new EnemyConfig { Id=43, Name="Minotaur",             GroupIndex=9 , World=WorldId.MainRoster, MaxHp=83720000   , AttackDamage=1798 , AttackInterval=1.44f, Evasion=0.12f, BaseBounty=17000000  , Tag=EnemyTag.Normal,    MaxHeals=0, IsColossus=true  },
-            new EnemyConfig { Id=44, Name="Cyclops",              GroupIndex=9 , World=WorldId.MainRoster, MaxHp=107380000   , AttackDamage=1966 , AttackInterval=1.42f, Evasion=0.12f, BaseBounty=20600000  , Tag=EnemyTag.Normal,    MaxHeals=0, IsColossus=true  },
-            new EnemyConfig { Id=45, Name="Stone Golem",          GroupIndex=9 , World=WorldId.MainRoster, MaxHp=106400000  , AttackDamage=2167 , AttackInterval=1.40f, Evasion=0.12f, BaseBounty=25600000  , Tag=EnemyTag.MiniBoss,  MaxHeals=0, IsColossus=true  },
-            // Group 10: Dragon Lair (Ch. 5)
-            new EnemyConfig { Id=46, Name="Elder Dragon",         GroupIndex=10, World=WorldId.MainRoster, MaxHp=177450000  , AttackDamage=2335 , AttackInterval=1.40f, Evasion=0.12f, BaseBounty=30400000  , Tag=EnemyTag.Normal,    MaxHeals=0, IsColossus=true  },
-            new EnemyConfig { Id=47, Name="Dragon Champion",      GroupIndex=10, World=WorldId.MainRoster, MaxHp=227500000  , AttackDamage=2520 , AttackInterval=1.40f, Evasion=0.12f, BaseBounty=36000000  , Tag=EnemyTag.Normal,    MaxHeals=0, IsColossus=true  },
-            new EnemyConfig { Id=48, Name="Crystal Dragon",       GroupIndex=10, World=WorldId.MainRoster, MaxHp=286650000  , AttackDamage=2722 , AttackInterval=1.40f, Evasion=0.12f, BaseBounty=42400000  , Tag=EnemyTag.Normal,    MaxHeals=0, IsColossus=true  },
-            new EnemyConfig { Id=49, Name="Ancient Dragon",       GroupIndex=10, World=WorldId.MainRoster, MaxHp=276500000  , AttackDamage=2940 , AttackInterval=1.40f, Evasion=0.14f, BaseBounty=49200000  , Tag=EnemyTag.Elite,     MaxHeals=0, IsColossus=true  },
-            new EnemyConfig { Id=50, Name="Dragon Lord",          GroupIndex=10, World=WorldId.MainRoster, MaxHp=343000000  , AttackDamage=2950 , AttackInterval=1.40f, Evasion=0.15f, BaseBounty=57000000  , Tag=EnemyTag.FinalBoss, MaxHeals=2, IsColossus=true  }
+            new EnemyConfig { Id=1 , Name="Training Dummy      ", GroupIndex=1 , World=WorldId.MainRoster, MaxHp=55        , AttackDamage=6    , AttackInterval=2.30f, Evasion=0.00f, BaseBounty=80      , Tag=EnemyTag.Normal   , MaxHeals=0, IsColossus=false },
+            new EnemyConfig { Id=2 , Name="Rubber Duck         ", GroupIndex=1 , World=WorldId.MainRoster, MaxHp=105       , AttackDamage=9    , AttackInterval=2.25f, Evasion=0.00f, BaseBounty=125     , Tag=EnemyTag.Normal   , MaxHeals=0, IsColossus=false },
+            new EnemyConfig { Id=3 , Name="Rubber Chicken      ", GroupIndex=1 , World=WorldId.MainRoster, MaxHp=190       , AttackDamage=13   , AttackInterval=2.20f, Evasion=0.00f, BaseBounty=190     , Tag=EnemyTag.Normal   , MaxHeals=0, IsColossus=false },
+            new EnemyConfig { Id=4 , Name="Cardboard Knight    ", GroupIndex=1 , World=WorldId.MainRoster, MaxHp=350       , AttackDamage=18   , AttackInterval=2.15f, Evasion=0.00f, BaseBounty=285     , Tag=EnemyTag.Normal   , MaxHeals=0, IsColossus=false },
+            new EnemyConfig { Id=5 , Name="Grumpy Teddy        ", GroupIndex=1 , World=WorldId.MainRoster, MaxHp=640       , AttackDamage=22   , AttackInterval=2.05f, Evasion=0.00f, BaseBounty=450     , Tag=EnemyTag.MiniBoss , MaxHeals=0, IsColossus=false },
+            new EnemyConfig { Id=6 , Name="Sassy Goblin Sprout ", GroupIndex=2 , World=WorldId.MainRoster, MaxHp=980       , AttackDamage=24   , AttackInterval=2.15f, Evasion=0.00f, BaseBounty=650     , Tag=EnemyTag.Normal   , MaxHeals=0, IsColossus=false },
+            new EnemyConfig { Id=7 , Name="Mime                ", GroupIndex=2 , World=WorldId.MainRoster, MaxHp=1650      , AttackDamage=27   , AttackInterval=2.10f, Evasion=0.00f, BaseBounty=950     , Tag=EnemyTag.Normal   , MaxHeals=0, IsColossus=false },
+            new EnemyConfig { Id=8 , Name="Cocky Goose         ", GroupIndex=2 , World=WorldId.MainRoster, MaxHp=2950      , AttackDamage=31   , AttackInterval=2.05f, Evasion=0.00f, BaseBounty=1400    , Tag=EnemyTag.Normal   , MaxHeals=0, IsColossus=false },
+            new EnemyConfig { Id=9 , Name="Trash Panda         ", GroupIndex=2 , World=WorldId.MainRoster, MaxHp=5200      , AttackDamage=35   , AttackInterval=2.00f, Evasion=0.00f, BaseBounty=2000    , Tag=EnemyTag.Elite    , MaxHeals=0, IsColossus=false },
+            new EnemyConfig { Id=10, Name="Mischievous Monkey  ", GroupIndex=2 , World=WorldId.MainRoster, MaxHp=11000     , AttackDamage=38   , AttackInterval=1.95f, Evasion=0.00f, BaseBounty=3000    , Tag=EnemyTag.Boss     , MaxHeals=1, IsColossus=false },
+            new EnemyConfig { Id=11, Name="Bodybuilder         ", GroupIndex=3 , World=WorldId.MainRoster, MaxHp=17000     , AttackDamage=44   , AttackInterval=2.08f, Evasion=0.00f, BaseBounty=4500    , Tag=EnemyTag.Normal   , MaxHeals=0, IsColossus=false },
+            new EnemyConfig { Id=12, Name="Luchador Wrestler   ", GroupIndex=3 , World=WorldId.MainRoster, MaxHp=29000     , AttackDamage=52   , AttackInterval=2.05f, Evasion=0.00f, BaseBounty=6500    , Tag=EnemyTag.Normal   , MaxHeals=0, IsColossus=false },
+            new EnemyConfig { Id=13, Name="Kickboxer           ", GroupIndex=3 , World=WorldId.MainRoster, MaxHp=50000     , AttackDamage=64   , AttackInterval=2.02f, Evasion=0.00f, BaseBounty=9200    , Tag=EnemyTag.Normal   , MaxHeals=0, IsColossus=false },
+            new EnemyConfig { Id=14, Name="Adult Boxer         ", GroupIndex=3 , World=WorldId.MainRoster, MaxHp=80000     , AttackDamage=74   , AttackInterval=1.98f, Evasion=0.00f, BaseBounty=13000   , Tag=EnemyTag.Normal   , MaxHeals=0, IsColossus=false },
+            new EnemyConfig { Id=15, Name="Sumo Champion       ", GroupIndex=3 , World=WorldId.MainRoster, MaxHp=138000    , AttackDamage=86   , AttackInterval=1.95f, Evasion=0.00f, BaseBounty=18000   , Tag=EnemyTag.MiniBoss , MaxHeals=0, IsColossus=false },
+            new EnemyConfig { Id=16, Name="Castle Guard        ", GroupIndex=4 , World=WorldId.MainRoster, MaxHp=210000    , AttackDamage=96   , AttackInterval=1.94f, Evasion=0.00f, BaseBounty=24000   , Tag=EnemyTag.Normal   , MaxHeals=0, IsColossus=false },
+            new EnemyConfig { Id=17, Name="Royal Executioner   ", GroupIndex=4 , World=WorldId.MainRoster, MaxHp=310000    , AttackDamage=106  , AttackInterval=1.91f, Evasion=0.00f, BaseBounty=31500   , Tag=EnemyTag.Normal   , MaxHeals=0, IsColossus=false },
+            new EnemyConfig { Id=18, Name="Knight              ", GroupIndex=4 , World=WorldId.MainRoster, MaxHp=440000    , AttackDamage=116  , AttackInterval=1.88f, Evasion=0.00f, BaseBounty=41000   , Tag=EnemyTag.Normal   , MaxHeals=0, IsColossus=false },
+            new EnemyConfig { Id=19, Name="Barbarian           ", GroupIndex=4 , World=WorldId.MainRoster, MaxHp=620000    , AttackDamage=128  , AttackInterval=1.85f, Evasion=0.00f, BaseBounty=52000   , Tag=EnemyTag.Elite    , MaxHeals=0, IsColossus=false },
+            new EnemyConfig { Id=20, Name="Dark Knight         ", GroupIndex=4 , World=WorldId.MainRoster, MaxHp=1050000   , AttackDamage=140  , AttackInterval=1.80f, Evasion=0.00f, BaseBounty=65000   , Tag=EnemyTag.Boss     , MaxHeals=1, IsColossus=false },
+            new EnemyConfig { Id=21, Name="Skeleton Warrior    ", GroupIndex=5 , World=WorldId.MainRoster, MaxHp=960000    , AttackDamage=152  , AttackInterval=1.84f, Evasion=0.05f, BaseBounty=78000   , Tag=EnemyTag.Normal   , MaxHeals=0, IsColossus=false },
+            new EnemyConfig { Id=22, Name="Zombie              ", GroupIndex=5 , World=WorldId.MainRoster, MaxHp=1350000   , AttackDamage=170  , AttackInterval=1.82f, Evasion=0.05f, BaseBounty=98000   , Tag=EnemyTag.Normal   , MaxHeals=0, IsColossus=false },
+            new EnemyConfig { Id=23, Name="Armored Skeleton    ", GroupIndex=5 , World=WorldId.MainRoster, MaxHp=1900000   , AttackDamage=190  , AttackInterval=1.80f, Evasion=0.05f, BaseBounty=125000  , Tag=EnemyTag.Normal   , MaxHeals=0, IsColossus=false },
+            new EnemyConfig { Id=24, Name="Scarab Swarm        ", GroupIndex=5 , World=WorldId.MainRoster, MaxHp=2650000   , AttackDamage=212  , AttackInterval=1.78f, Evasion=0.05f, BaseBounty=160000  , Tag=EnemyTag.Normal   , MaxHeals=0, IsColossus=false },
+            new EnemyConfig { Id=25, Name="Mummy Guard         ", GroupIndex=5 , World=WorldId.MainRoster, MaxHp=3800000   , AttackDamage=238  , AttackInterval=1.75f, Evasion=0.06f, BaseBounty=210000  , Tag=EnemyTag.MiniBoss , MaxHeals=0, IsColossus=false },
+            new EnemyConfig { Id=26, Name="Ninja Recruit       ", GroupIndex=6 , World=WorldId.MainRoster, MaxHp=4900000   , AttackDamage=262  , AttackInterval=1.73f, Evasion=0.06f, BaseBounty=270000  , Tag=EnemyTag.Normal   , MaxHeals=0, IsColossus=false },
+            new EnemyConfig { Id=27, Name="Shuriken Master     ", GroupIndex=6 , World=WorldId.MainRoster, MaxHp=6300000   , AttackDamage=288  , AttackInterval=1.71f, Evasion=0.06f, BaseBounty=345000  , Tag=EnemyTag.Normal   , MaxHeals=0, IsColossus=false },
+            new EnemyConfig { Id=28, Name="Samurai Duelist     ", GroupIndex=6 , World=WorldId.MainRoster, MaxHp=8000000   , AttackDamage=318  , AttackInterval=1.69f, Evasion=0.06f, BaseBounty=435000  , Tag=EnemyTag.Normal   , MaxHeals=0, IsColossus=false },
+            new EnemyConfig { Id=29, Name="Shadow Assassin     ", GroupIndex=6 , World=WorldId.MainRoster, MaxHp=10000000  , AttackDamage=350  , AttackInterval=1.66f, Evasion=0.08f, BaseBounty=535000  , Tag=EnemyTag.Elite    , MaxHeals=0, IsColossus=false },
+            new EnemyConfig { Id=30, Name="Shogun Warlord      ", GroupIndex=6 , World=WorldId.MainRoster, MaxHp=13500000  , AttackDamage=390  , AttackInterval=1.62f, Evasion=0.08f, BaseBounty=650000  , Tag=EnemyTag.Boss     , MaxHeals=1, IsColossus=false },
+            new EnemyConfig { Id=31, Name="Werewolf            ", GroupIndex=7 , World=WorldId.MainRoster, MaxHp=11500000  , AttackDamage=480  , AttackInterval=1.65f, Evasion=0.10f, BaseBounty=850000  , Tag=EnemyTag.Normal   , MaxHeals=0, IsColossus=false },
+            new EnemyConfig { Id=32, Name="Giant Spider        ", GroupIndex=7 , World=WorldId.MainRoster, MaxHp=15000000  , AttackDamage=600  , AttackInterval=1.63f, Evasion=0.10f, BaseBounty=1100000 , Tag=EnemyTag.Normal   , MaxHeals=0, IsColossus=false },
+            new EnemyConfig { Id=33, Name="Orc Warrior         ", GroupIndex=7 , World=WorldId.MainRoster, MaxHp=19500000  , AttackDamage=740  , AttackInterval=1.61f, Evasion=0.10f, BaseBounty=1420000 , Tag=EnemyTag.Normal   , MaxHeals=0, IsColossus=false },
+            new EnemyConfig { Id=34, Name="Bog Witch           ", GroupIndex=7 , World=WorldId.MainRoster, MaxHp=25000000  , AttackDamage=900  , AttackInterval=1.59f, Evasion=0.10f, BaseBounty=1850000 , Tag=EnemyTag.Normal   , MaxHeals=0, IsColossus=false },
+            new EnemyConfig { Id=35, Name="Shadow Beast        ", GroupIndex=7 , World=WorldId.MainRoster, MaxHp=33000000  , AttackDamage=1100 , AttackInterval=1.56f, Evasion=0.10f, BaseBounty=2400000 , Tag=EnemyTag.MiniBoss , MaxHeals=0, IsColossus=false },
+            new EnemyConfig { Id=36, Name="Giant Serpent       ", GroupIndex=8 , World=WorldId.MainRoster, MaxHp=41000000  , AttackDamage=1320 , AttackInterval=1.54f, Evasion=0.10f, BaseBounty=3050000 , Tag=EnemyTag.Normal   , MaxHeals=0, IsColossus=false },
+            new EnemyConfig { Id=37, Name="Anubis Warrior      ", GroupIndex=8 , World=WorldId.MainRoster, MaxHp=48500000  , AttackDamage=1560 , AttackInterval=1.52f, Evasion=0.10f, BaseBounty=3800000 , Tag=EnemyTag.Normal   , MaxHeals=0, IsColossus=false },
+            new EnemyConfig { Id=38, Name="Sphinx Riddler      ", GroupIndex=8 , World=WorldId.MainRoster, MaxHp=56500000  , AttackDamage=1820 , AttackInterval=1.50f, Evasion=0.10f, BaseBounty=4700000 , Tag=EnemyTag.Normal   , MaxHeals=0, IsColossus=false },
+            new EnemyConfig { Id=39, Name="Giant Scorpion      ", GroupIndex=8 , World=WorldId.MainRoster, MaxHp=65000000  , AttackDamage=2080 , AttackInterval=1.48f, Evasion=0.12f, BaseBounty=5700000 , Tag=EnemyTag.Elite    , MaxHeals=0, IsColossus=false },
+            new EnemyConfig { Id=40, Name="Pharaoh Revenant    ", GroupIndex=8 , World=WorldId.MainRoster, MaxHp=78000000  , AttackDamage=2350 , AttackInterval=1.45f, Evasion=0.12f, BaseBounty=6800000 , Tag=EnemyTag.Boss     , MaxHeals=1, IsColossus=false },
+            new EnemyConfig { Id=41, Name="Troll               ", GroupIndex=9 , World=WorldId.MainRoster, MaxHp=95000000  , AttackDamage=2650 , AttackInterval=1.46f, Evasion=0.12f, BaseBounty=8500000 , Tag=EnemyTag.Normal   , MaxHeals=0, IsColossus=false },
+            new EnemyConfig { Id=42, Name="Ogre                ", GroupIndex=9 , World=WorldId.MainRoster, MaxHp=140000000 , AttackDamage=3000 , AttackInterval=1.45f, Evasion=0.12f, BaseBounty=10600000, Tag=EnemyTag.Normal   , MaxHeals=0, IsColossus=false },
+            new EnemyConfig { Id=43, Name="Minotaur            ", GroupIndex=9 , World=WorldId.MainRoster, MaxHp=205000000 , AttackDamage=3380 , AttackInterval=1.43f, Evasion=0.12f, BaseBounty=13200000, Tag=EnemyTag.Normal   , MaxHeals=0, IsColossus=false },
+            new EnemyConfig { Id=44, Name="Cyclops             ", GroupIndex=9 , World=WorldId.MainRoster, MaxHp=295000000 , AttackDamage=3780 , AttackInterval=1.42f, Evasion=0.12f, BaseBounty=16400000, Tag=EnemyTag.Normal   , MaxHeals=0, IsColossus=false },
+            new EnemyConfig { Id=45, Name="Stone Golem         ", GroupIndex=9 , World=WorldId.MainRoster, MaxHp=415000000 , AttackDamage=4200 , AttackInterval=1.40f, Evasion=0.12f, BaseBounty=20500000, Tag=EnemyTag.MiniBoss , MaxHeals=0, IsColossus=false },
+            new EnemyConfig { Id=46, Name="Elder Dragon        ", GroupIndex=10, World=WorldId.MainRoster, MaxHp=540000000 , AttackDamage=4550 , AttackInterval=1.40f, Evasion=0.12f, BaseBounty=24500000, Tag=EnemyTag.Normal   , MaxHeals=0, IsColossus=false },
+            new EnemyConfig { Id=47, Name="Dragon Champion     ", GroupIndex=10, World=WorldId.MainRoster, MaxHp=675000000 , AttackDamage=4900 , AttackInterval=1.39f, Evasion=0.12f, BaseBounty=28800000, Tag=EnemyTag.Normal   , MaxHeals=0, IsColossus=false },
+            new EnemyConfig { Id=48, Name="Crystal Dragon      ", GroupIndex=10, World=WorldId.MainRoster, MaxHp=820000000 , AttackDamage=5250 , AttackInterval=1.39f, Evasion=0.12f, BaseBounty=33200000, Tag=EnemyTag.Normal   , MaxHeals=0, IsColossus=false },
+            new EnemyConfig { Id=49, Name="Ancient Dragon      ", GroupIndex=10, World=WorldId.MainRoster, MaxHp=965000000 , AttackDamage=5580 , AttackInterval=1.38f, Evasion=0.14f, BaseBounty=37500000, Tag=EnemyTag.Elite    , MaxHeals=0, IsColossus=false },
+            new EnemyConfig { Id=50, Name="Dragon Lord         ", GroupIndex=10, World=WorldId.MainRoster, MaxHp=1150000000, AttackDamage=5900 , AttackInterval=1.38f, Evasion=0.15f, BaseBounty=42000000, Tag=EnemyTag.FinalBoss, MaxHeals=1, IsColossus=false },
         };
 
         // ====================================================================
-        // 9. WORLDS GUARDIANS (v2.6.5 — #206 BOUNTY 140M, #216 BOUNTY 455M)
+        // 9. WORLDS GUARDIANS (v3.2 — Asura Realm & Shadow Verse)
         // ====================================================================
         public static readonly EnemyConfig[] WorldGuardians = new[]
         {
-            new EnemyConfig { Id=201, Name="Asura Footman",        GroupIndex=1, World=WorldId.AsuraRealm,  MaxHp=357500000   , AttackDamage=4400 , AttackInterval=1.38f, Evasion=0.15f, BaseBounty=62000000  , Tag=EnemyTag.Normal,    MaxHeals=0, IsColossus=true },
-            new EnemyConfig { Id=202, Name="Rakshasa Huntress",    GroupIndex=1, World=WorldId.AsuraRealm,  MaxHp=467500000   , AttackDamage=5100 , AttackInterval=1.36f, Evasion=0.15f, BaseBounty=73000000  , Tag=EnemyTag.Normal,    MaxHeals=0, IsColossus=true },
-            new EnemyConfig { Id=203, Name="Kumbhakaran",          GroupIndex=1, World=WorldId.AsuraRealm,  MaxHp=616000000   , AttackDamage=5950 , AttackInterval=1.35f, Evasion=0.15f, BaseBounty=86000000  , Tag=EnemyTag.MiniBoss,  MaxHeals=1, IsColossus=true },
-            new EnemyConfig { Id=204, Name="Mahishasura",          GroupIndex=1, World=WorldId.AsuraRealm,  MaxHp=797500000   , AttackDamage=6950 , AttackInterval=1.34f, Evasion=0.16f, BaseBounty=101000000 , Tag=EnemyTag.Normal,    MaxHeals=0, IsColossus=true },
-            new EnemyConfig { Id=205, Name="Vetala Warlock",       GroupIndex=1, World=WorldId.AsuraRealm,  MaxHp=1034000000  , AttackDamage=8200 , AttackInterval=1.32f, Evasion=0.16f, BaseBounty=119000000 , Tag=EnemyTag.Normal,    MaxHeals=0, IsColossus=true },
-            new EnemyConfig { Id=206, Name="Ravana",               GroupIndex=1, World=WorldId.AsuraRealm,  MaxHp=3200000000  , AttackDamage=9800 , AttackInterval=1.30f, Evasion=0.16f, BaseBounty=140000000 , Tag=EnemyTag.WorldBoss, MaxHeals=1, IsColossus=true },
+            new EnemyConfig { Id=201, Name="Asura Footman",        GroupIndex=1, World=WorldId.AsuraRealm,  MaxHp=1600000000  , AttackDamage=6500 , AttackInterval=1.38f, Evasion=0.15f, BaseBounty=60000000  , Tag=EnemyTag.Normal,    MaxHeals=0, IsColossus=true },
+            new EnemyConfig { Id=202, Name="Rakshasa Huntress",    GroupIndex=1, World=WorldId.AsuraRealm,  MaxHp=2900000000  , AttackDamage=7400 , AttackInterval=1.36f, Evasion=0.15f, BaseBounty=80000000  , Tag=EnemyTag.Normal,    MaxHeals=0, IsColossus=true },
+            new EnemyConfig { Id=203, Name="Kumbhakaran",          GroupIndex=1, World=WorldId.AsuraRealm,  MaxHp=5400000000  , AttackDamage=8400 , AttackInterval=1.35f, Evasion=0.15f, BaseBounty=105000000 , Tag=EnemyTag.MiniBoss,  MaxHeals=1, IsColossus=true },
+            new EnemyConfig { Id=204, Name="Mahishasura",          GroupIndex=1, World=WorldId.AsuraRealm,  MaxHp=8800000000  , AttackDamage=9400 , AttackInterval=1.34f, Evasion=0.16f, BaseBounty=135000000 , Tag=EnemyTag.Normal,    MaxHeals=0, IsColossus=true },
+            new EnemyConfig { Id=205, Name="Vetala Warlock",       GroupIndex=1, World=WorldId.AsuraRealm,  MaxHp=13800000000 , AttackDamage=10400, AttackInterval=1.32f, Evasion=0.16f, BaseBounty=170000000 , Tag=EnemyTag.Normal,    MaxHeals=0, IsColossus=true },
+            new EnemyConfig { Id=206, Name="Ravana",               GroupIndex=1, World=WorldId.AsuraRealm,  MaxHp=22000000000 , AttackDamage=11500, AttackInterval=1.30f, Evasion=0.16f, BaseBounty=215000000 , Tag=EnemyTag.WorldBoss, MaxHeals=1, IsColossus=true },
 
-            new EnemyConfig { Id=211, Name="Shade of the Dummy",   GroupIndex=2, World=WorldId.ShadowVerse, MaxHp=1760000000  , AttackDamage=11800, AttackInterval=1.30f, Evasion=0.16f, BaseBounty=175000000 , Tag=EnemyTag.Normal,    MaxHeals=0, IsColossus=true },
-            new EnemyConfig { Id=212, Name="Umbral Mime",          GroupIndex=2, World=WorldId.ShadowVerse, MaxHp=2310000000  , AttackDamage=13900, AttackInterval=1.28f, Evasion=0.16f, BaseBounty=212000000 , Tag=EnemyTag.Normal,    MaxHeals=0, IsColossus=true },
-            new EnemyConfig { Id=213, Name="Umbral Puppeteer",     GroupIndex=2, World=WorldId.ShadowVerse, MaxHp=2750000000  , AttackDamage=16400, AttackInterval=1.26f, Evasion=0.17f, BaseBounty=256000000 , Tag=EnemyTag.MiniBoss,  MaxHeals=1, IsColossus=true },
-            new EnemyConfig { Id=214, Name="Gloom Serpent",        GroupIndex=2, World=WorldId.ShadowVerse, MaxHp=3850000000  , AttackDamage=19200, AttackInterval=1.25f, Evasion=0.17f, BaseBounty=310000000 , Tag=EnemyTag.Normal,    MaxHeals=0, IsColossus=true },
-            new EnemyConfig { Id=215, Name="The Hollow Monk",      GroupIndex=2, World=WorldId.ShadowVerse, MaxHp=5500000000  , AttackDamage=22500, AttackInterval=1.24f, Evasion=0.18f, BaseBounty=375000000 , Tag=EnemyTag.Normal,    MaxHeals=0, IsColossus=true },
-            new EnemyConfig { Id=216, Name="The Dark Slapper",     GroupIndex=2, World=WorldId.ShadowVerse, MaxHp=26500000000 , AttackDamage=26500, AttackInterval=1.22f, Evasion=0.18f, BaseBounty=455000000 , Tag=EnemyTag.WorldBoss, MaxHeals=1, IsColossus=true }
+            new EnemyConfig { Id=211, Name="Shade of the Dummy",   GroupIndex=2, World=WorldId.ShadowVerse, MaxHp=25000000000 , AttackDamage=13200, AttackInterval=1.30f, Evasion=0.16f, BaseBounty=300000000 , Tag=EnemyTag.Normal,    MaxHeals=0, IsColossus=true },
+            new EnemyConfig { Id=212, Name="Umbral Mime",          GroupIndex=2, World=WorldId.ShadowVerse, MaxHp=42000000000 , AttackDamage=15200, AttackInterval=1.28f, Evasion=0.16f, BaseBounty=420000000 , Tag=EnemyTag.Normal,    MaxHeals=0, IsColossus=true },
+            new EnemyConfig { Id=213, Name="Umbral Puppeteer",     GroupIndex=2, World=WorldId.ShadowVerse, MaxHp=70000000000 , AttackDamage=17400, AttackInterval=1.26f, Evasion=0.17f, BaseBounty=575000000 , Tag=EnemyTag.MiniBoss,  MaxHeals=1, IsColossus=true },
+            new EnemyConfig { Id=214, Name="Gloom Serpent",        GroupIndex=2, World=WorldId.ShadowVerse, MaxHp=112000000000, AttackDamage=19600, AttackInterval=1.25f, Evasion=0.17f, BaseBounty=780000000 , Tag=EnemyTag.Normal,    MaxHeals=0, IsColossus=true },
+            new EnemyConfig { Id=215, Name="The Hollow Monk",      GroupIndex=2, World=WorldId.ShadowVerse, MaxHp=165000000000, AttackDamage=22000, AttackInterval=1.24f, Evasion=0.18f, BaseBounty=1050000000, Tag=EnemyTag.Normal,    MaxHeals=0, IsColossus=true },
+            new EnemyConfig { Id=216, Name="The Dark Slapper",     GroupIndex=2, World=WorldId.ShadowVerse, MaxHp=240000000000, AttackDamage=24500, AttackInterval=1.22f, Evasion=0.18f, BaseBounty=1380000000, Tag=EnemyTag.WorldBoss, MaxHeals=1, IsColossus=true }
         };
 
         // ====================================================================
-        // 10. ALL 27 SKILLS (v2.6.5 EXPLICIT PROCCHANCE & PROCINTERVALSLAPS)
+        // 10. ALL 30 SKILLS (v3.2 RE-BALANCED COSTS & ZERO FLAT HP)
         // ====================================================================
         public static readonly SkillConfig[] Skills = new[]
         {
-            new SkillConfig { Id="basic_slap",          Name="Basic Slap",          Tier=1, CoinCost=0,         PrerequisiteSkillId="",                    RequiredBossId=0,  Trigger=SkillActivationTrigger.AlwaysOn,            PrimaryEffectType=SkillEffectType.DamageMult,           ValuePrimary=1.00f,  SecondaryEffectType=SkillEffectType.None,                   ValueSecondary=0f,      ProcChance=1.00f, ProcIntervalSlaps=0,  StateHpThreshold=0f },
-            new SkillConfig { Id="stamina_training",    Name="Stamina Training",    Tier=1, CoinCost=300,       PrerequisiteSkillId="basic_slap",          RequiredBossId=0,  Trigger=SkillActivationTrigger.AlwaysOn,            PrimaryEffectType=SkillEffectType.HpFlat,               ValuePrimary=75f,    SecondaryEffectType=SkillEffectType.None,                   ValueSecondary=0f,      ProcChance=1.00f, ProcIntervalSlaps=0,  StateHpThreshold=0f },
-            new SkillConfig { Id="stronger_hands",      Name="Stronger Hands",      Tier=1, CoinCost=750,       PrerequisiteSkillId="basic_slap",          RequiredBossId=0,  Trigger=SkillActivationTrigger.AlwaysOn,            PrimaryEffectType=SkillEffectType.DamageMult,           ValuePrimary=0.20f,  SecondaryEffectType=SkillEffectType.None,                   ValueSecondary=0f,      ProcChance=1.00f, ProcIntervalSlaps=0,  StateHpThreshold=0f },
-            new SkillConfig { Id="second_hand",         Name="Second Hand",         Tier=1, CoinCost=0,         PrerequisiteSkillId="basic_slap",          RequiredBossId=5,  Trigger=SkillActivationTrigger.AlwaysOn,            PrimaryEffectType=SkillEffectType.SpeedMult,            ValuePrimary=0.85f,  SecondaryEffectType=SkillEffectType.None,                   ValueSecondary=0f,      ProcChance=1.00f, ProcIntervalSlaps=0,  StateHpThreshold=0f },
-            new SkillConfig { Id="twin_mastery",        Name="Twin Mastery",        Tier=2, CoinCost=3200,      PrerequisiteSkillId="second_hand",         RequiredBossId=0,  Trigger=SkillActivationTrigger.AlwaysOn,            PrimaryEffectType=SkillEffectType.SpeedMult,            ValuePrimary=0.90f,  SecondaryEffectType=SkillEffectType.ComboChargeBonus,       ValueSecondary=0.10f,   ProcChance=1.00f, ProcIntervalSlaps=0,  StateHpThreshold=0f },
-            new SkillConfig { Id="on_target",           Name="On Target",           Tier=2, CoinCost=6500,      PrerequisiteSkillId="twin_mastery",        RequiredBossId=0,  Trigger=SkillActivationTrigger.AlwaysOn,            PrimaryEffectType=SkillEffectType.ComboPersistOnSwitch, ValuePrimary=1.0f,   SecondaryEffectType=SkillEffectType.None,                   ValueSecondary=0f,      ProcChance=1.00f, ProcIntervalSlaps=0,  StateHpThreshold=0f },
-            new SkillConfig { Id="quick_reflexes",      Name="Quick Reflexes",      Tier=2, CoinCost=15000,     PrerequisiteSkillId="twin_mastery",        RequiredBossId=10, Trigger=SkillActivationTrigger.AlwaysOn,            PrimaryEffectType=SkillEffectType.SpeedMult,            ValuePrimary=0.90f,  SecondaryEffectType=SkillEffectType.None,                   ValueSecondary=0f,      ProcChance=1.00f, ProcIntervalSlaps=0,  StateHpThreshold=0f },
-            new SkillConfig { Id="deflect",             Name="Deflect",             Tier=2, CoinCost=22000,     PrerequisiteSkillId="basic_slap",          RequiredBossId=0,  Trigger=SkillActivationTrigger.AlwaysOn,            PrimaryEffectType=SkillEffectType.ParryUnlock,          ValuePrimary=1.00f,  SecondaryEffectType=SkillEffectType.None,                   ValueSecondary=0f,     // Tap-Parry unlock; signatures unblockable (SignaturesAreUnblockable)   ProcChance=1.00f, ProcIntervalSlaps=0,  StateHpThreshold=0f },
-            new SkillConfig { Id="critical_slaps",      Name="Critical Slaps",      Tier=2, CoinCost=35000,     PrerequisiteSkillId="stronger_hands",      RequiredBossId=0,  Trigger=SkillActivationTrigger.AlwaysOn,            PrimaryEffectType=SkillEffectType.CritChance,           ValuePrimary=0.05f,  SecondaryEffectType=SkillEffectType.None,                   ValueSecondary=0f,      ProcChance=1.00f, ProcIntervalSlaps=0,  StateHpThreshold=0f },
-            new SkillConfig { Id="seismic_slam",        Name="Seismic Slam",        Tier=2, CoinCost=55000,     PrerequisiteSkillId="stamina_training",    RequiredBossId=10, Trigger=SkillActivationTrigger.ProcEveryNSlaps,     PrimaryEffectType=SkillEffectType.ProcHitDamageMult,    ValuePrimary=3.00f,  SecondaryEffectType=SkillEffectType.Passive,                ValueSecondary=0.80f,   ProcChance=1.00f, ProcIntervalSlaps=5,  StateHpThreshold=0f },
-            new SkillConfig { Id="heavy_slap",          Name="Heavy Slap",          Tier=2, CoinCost=90000,     PrerequisiteSkillId="stronger_hands",      RequiredBossId=10, Trigger=SkillActivationTrigger.ProcOnHit,           PrimaryEffectType=SkillEffectType.ProcHitDamageMult,    ValuePrimary=2.50f,  SecondaryEffectType=SkillEffectType.None,                   ValueSecondary=0f,      ProcChance=0.12f, ProcIntervalSlaps=0,  StateHpThreshold=0f },
-            new SkillConfig { Id="precision_instinct",  Name="Precision Instinct",  Tier=2, CoinCost=140000,    PrerequisiteSkillId="stronger_hands",      RequiredBossId=10, Trigger=SkillActivationTrigger.AlwaysOn,            PrimaryEffectType=SkillEffectType.SpecialProc,          ValuePrimary=4.50f,  SecondaryEffectType=SkillEffectType.WeakSpotCapBonus,       ValueSecondary=3.0f,    ProcChance=1.00f, ProcIntervalSlaps=0,  StateHpThreshold=0f },
-            new SkillConfig { Id="combo_mastery",       Name="Combo Mastery",       Tier=3, CoinCost=300000,    PrerequisiteSkillId="on_target",           RequiredBossId=10, Trigger=SkillActivationTrigger.AlwaysOn,            PrimaryEffectType=SkillEffectType.ComboCapBonus,        ValuePrimary=5.0f,   SecondaryEffectType=SkillEffectType.ComboStackDamageBonus,  ValueSecondary=0.005f,  ProcChance=1.00f, ProcIntervalSlaps=0,  StateHpThreshold=0f },
-            new SkillConfig { Id="opportunist",         Name="Opportunist",         Tier=3, CoinCost=600000,    PrerequisiteSkillId="quick_reflexes",      RequiredBossId=0,  Trigger=SkillActivationTrigger.ProcOnHit,           PrimaryEffectType=SkillEffectType.DamageMult,           ValuePrimary=0.35f,  SecondaryEffectType=SkillEffectType.None,                   ValueSecondary=0f,      ProcChance=1.00f, ProcIntervalSlaps=0,  StateHpThreshold=0f },
-            new SkillConfig { Id="adrenaline_rush",     Name="Adrenaline Rush",     Tier=3, CoinCost=1100000,   PrerequisiteSkillId="seismic_slam",        RequiredBossId=0,  Trigger=SkillActivationTrigger.OnLowHpState,        PrimaryEffectType=SkillEffectType.GlobalDamage,         ValuePrimary=0.25f,  SecondaryEffectType=SkillEffectType.SpeedMult,              ValueSecondary=0.8333f, ProcChance=1.00f, ProcIntervalSlaps=0,  StateHpThreshold=0.30f },
-            new SkillConfig { Id="coin_magnet",         Name="Coin Magnet",         Tier=3, CoinCost=2000000,   PrerequisiteSkillId="critical_slaps",      RequiredBossId=20, Trigger=SkillActivationTrigger.AlwaysOn,            PrimaryEffectType=SkillEffectType.CoinMult,             ValuePrimary=0.20f,  SecondaryEffectType=SkillEffectType.None,                   ValueSecondary=0f,      ProcChance=1.00f, ProcIntervalSlaps=0,  StateHpThreshold=0f },
-            new SkillConfig { Id="boss_hunter",         Name="Boss Hunter",         Tier=3, CoinCost=3800000,   PrerequisiteSkillId="heavy_slap",          RequiredBossId=20, Trigger=SkillActivationTrigger.AlwaysOn,            PrimaryEffectType=SkillEffectType.BossDamage,           ValuePrimary=0.25f,  SecondaryEffectType=SkillEffectType.None,                   ValueSecondary=0f,      ProcChance=1.00f, ProcIntervalSlaps=0,  StateHpThreshold=0f },
-            new SkillConfig { Id="acoustic_echo",       Name="Acoustic Echo",       Tier=4, CoinCost=8500000,   PrerequisiteSkillId="combo_mastery",       RequiredBossId=30, Trigger=SkillActivationTrigger.ProcOnHit,           PrimaryEffectType=SkillEffectType.ProcHitDamageMult,    ValuePrimary=1.00f,  SecondaryEffectType=SkillEffectType.None,                   ValueSecondary=0f,      ProcChance=0.20f, ProcIntervalSlaps=0,  StateHpThreshold=0f },
-            new SkillConfig { Id="dual_hand_technique", Name="Dual-Hand Technique", Tier=4, CoinCost=18000000,  PrerequisiteSkillId="opportunist",         RequiredBossId=20, Trigger=SkillActivationTrigger.AlwaysOn,            PrimaryEffectType=SkillEffectType.SpeedMult,            ValuePrimary=0.85f,  SecondaryEffectType=SkillEffectType.None,                   ValueSecondary=0f,      ProcChance=1.00f, ProcIntervalSlaps=0,  StateHpThreshold=0f },
-            new SkillConfig { Id="unstoppable_hands",   Name="Unstoppable Hands",   Tier=4, CoinCost=38000000,  PrerequisiteSkillId="adrenaline_rush",     RequiredBossId=30, Trigger=SkillActivationTrigger.AlwaysOn,            PrimaryEffectType=SkillEffectType.HpFlat,               ValuePrimary=1400f,  SecondaryEffectType=SkillEffectType.Passive,                ValueSecondary=0.0035f, ProcChance=1.00f, ProcIntervalSlaps=0,  StateHpThreshold=0f },
-            new SkillConfig { Id="kinetic_barrier",     Name="Kinetic Barrier",     Tier=4, CoinCost=75000000,  PrerequisiteSkillId="adrenaline_rush",     RequiredBossId=30, Trigger=SkillActivationTrigger.ProcEveryNSlaps,     PrimaryEffectType=SkillEffectType.ShieldEveryNSlaps,    ValuePrimary=0.12f,  SecondaryEffectType=SkillEffectType.Passive,                ValueSecondary=10.0f,   ProcChance=1.00f, ProcIntervalSlaps=10, StateHpThreshold=0f },
-            new SkillConfig { Id="treasure_hunter",     Name="Treasure Hunter",     Tier=4, CoinCost=150000000, PrerequisiteSkillId="coin_magnet",         RequiredBossId=30, Trigger=SkillActivationTrigger.AlwaysOn,            PrimaryEffectType=SkillEffectType.CoinMult,             ValuePrimary=0.25f,  SecondaryEffectType=SkillEffectType.Passive,                ValueSecondary=1.0f,    ProcChance=1.00f, ProcIntervalSlaps=0,  StateHpThreshold=0f },
-            new SkillConfig { Id="frenzy",              Name="Frenzy",              Tier=4, CoinCost=300000000, PrerequisiteSkillId="boss_hunter",         RequiredBossId=30, Trigger=SkillActivationTrigger.ActiveDurationState, PrimaryEffectType=SkillEffectType.GlobalDamage,         ValuePrimary=0.50f,  SecondaryEffectType=SkillEffectType.SpeedMult,              ValueSecondary=0.7692f, ProcChance=1.00f, ProcIntervalSlaps=0,  StateHpThreshold=0f },
-            new SkillConfig { Id="colossus_bane",       Name="Colossus Bane",       Tier=4, CoinCost=600000000, PrerequisiteSkillId="boss_hunter",         RequiredBossId=35, Trigger=SkillActivationTrigger.AlwaysOn,            PrimaryEffectType=SkillEffectType.ColossusDamage,       ValuePrimary=0.35f,  SecondaryEffectType=SkillEffectType.None,                   ValueSecondary=0f,      ProcChance=1.00f, ProcIntervalSlaps=0,  StateHpThreshold=0f },
-            new SkillConfig { Id="rapid_barrage",       Name="Rapid Barrage",       Tier=5, CoinCost=1200000000,PrerequisiteSkillId="dual_hand_technique", RequiredBossId=40, Trigger=SkillActivationTrigger.ProcEveryNSlaps,     PrimaryEffectType=SkillEffectType.ProcHitDamageMult,    ValuePrimary=2.20f,  SecondaryEffectType=SkillEffectType.Passive,                ValueSecondary=0.40f,   ProcChance=1.00f, ProcIntervalSlaps=6,  StateHpThreshold=0f },
-            new SkillConfig { Id="bulwark_guard",       Name="Bulwark Guard",       Tier=5, CoinCost=2400000000,PrerequisiteSkillId="kinetic_barrier",     RequiredBossId=40, Trigger=SkillActivationTrigger.AlwaysOn,            PrimaryEffectType=SkillEffectType.ShieldReflectPct,     ValuePrimary=0.50f,  SecondaryEffectType=SkillEffectType.None,                   ValueSecondary=0f,      ProcChance=1.00f, ProcIntervalSlaps=0,  StateHpThreshold=0f },
-            new SkillConfig { Id="godhand_strike",      Name="Godhand Strike",      Tier=5, CoinCost=5000000000,PrerequisiteSkillId="colossus_bane",       RequiredBossId=45, Trigger=SkillActivationTrigger.ProcEveryNSlaps,     PrimaryEffectType=SkillEffectType.ProcHitDamageMult,    ValuePrimary=8.00f,  SecondaryEffectType=SkillEffectType.None,                   ValueSecondary=0f,      ProcChance=1.00f, ProcIntervalSlaps=20, StateHpThreshold=0f },
-            new SkillConfig { Id="iron_stance_1",       Name="Iron Stance I",       Tier=4, CoinCost=120000000, PrerequisiteSkillId="deflect",             RequiredBossId=30, Trigger=SkillActivationTrigger.AlwaysOn,            PrimaryEffectType=SkillEffectType.Passive,              ValuePrimary=-2.00f, SecondaryEffectType=SkillEffectType.None,                   ValueSecondary=0f,      ProcChance=1.00f, ProcIntervalSlaps=0,  StateHpThreshold=0f }, // Parry CD 10s -> 8s
-            new SkillConfig { Id="iron_stance_2",       Name="Iron Stance II",      Tier=5, CoinCost=1500000000,PrerequisiteSkillId="iron_stance_1",       RequiredBossId=40, Trigger=SkillActivationTrigger.AlwaysOn,            PrimaryEffectType=SkillEffectType.Passive,              ValuePrimary=-3.00f, SecondaryEffectType=SkillEffectType.None,                   ValueSecondary=0f,      ProcChance=1.00f, ProcIntervalSlaps=0,  StateHpThreshold=0f }, // Parry CD 8s -> 5s
-            new SkillConfig { Id="iron_stance_3",       Name="Iron Stance III",     Tier=5, CoinCost=12000000000,PrerequisiteSkillId="iron_stance_2",      RequiredBossId=50, Trigger=SkillActivationTrigger.AlwaysOn,            PrimaryEffectType=SkillEffectType.Passive,              ValuePrimary=0f, SecondaryEffectType=SkillEffectType.None,                   ValueSecondary=0f,      ProcChance=1.00f, ProcIntervalSlaps=0,  StateHpThreshold=0f }  // Parry window 0.30s -> 0.50s; CD stays 5s
+            new SkillConfig { Id="basic_slap", Name="Basic Slap", Tier=1, CoinCost=0, PrerequisiteSkillId="", RequiredBossId=0, Trigger=SkillActivationTrigger.AlwaysOn, PrimaryEffectType=SkillEffectType.DamageMult, ValuePrimary=1.00f, SecondaryEffectType=SkillEffectType.None, ValueSecondary=0.000f, ProcChance=1.00f, ProcIntervalSlaps=0, StateHpThreshold=0.00f },
+            new SkillConfig { Id="stamina_training", Name="Stamina Training", Tier=1, CoinCost=250, PrerequisiteSkillId="basic_slap", RequiredBossId=0, Trigger=SkillActivationTrigger.AlwaysOn, PrimaryEffectType=SkillEffectType.HpMult, ValuePrimary=0.20f, SecondaryEffectType=SkillEffectType.None, ValueSecondary=0.000f, ProcChance=1.00f, ProcIntervalSlaps=0, StateHpThreshold=0.00f },
+            new SkillConfig { Id="stronger_hands", Name="Stronger Hands", Tier=1, CoinCost=500, PrerequisiteSkillId="basic_slap", RequiredBossId=0, Trigger=SkillActivationTrigger.AlwaysOn, PrimaryEffectType=SkillEffectType.DamageMult, ValuePrimary=0.20f, SecondaryEffectType=SkillEffectType.None, ValueSecondary=0.000f, ProcChance=1.00f, ProcIntervalSlaps=0, StateHpThreshold=0.00f },
+            new SkillConfig { Id="second_hand", Name="Second Hand", Tier=1, CoinCost=900, PrerequisiteSkillId="basic_slap", RequiredBossId=5, Trigger=SkillActivationTrigger.AlwaysOn, PrimaryEffectType=SkillEffectType.SpeedMult, ValuePrimary=0.85f, SecondaryEffectType=SkillEffectType.None, ValueSecondary=0.000f, ProcChance=1.00f, ProcIntervalSlaps=0, StateHpThreshold=0.00f },
+            new SkillConfig { Id="twin_mastery", Name="Twin Mastery", Tier=2, CoinCost=2500, PrerequisiteSkillId="second_hand", RequiredBossId=0, Trigger=SkillActivationTrigger.AlwaysOn, PrimaryEffectType=SkillEffectType.SpeedMult, ValuePrimary=0.90f, SecondaryEffectType=SkillEffectType.ComboChargeBonus, ValueSecondary=0.100f, ProcChance=1.00f, ProcIntervalSlaps=0, StateHpThreshold=0.00f },
+            new SkillConfig { Id="on_target", Name="On Target", Tier=2, CoinCost=5000, PrerequisiteSkillId="twin_mastery", RequiredBossId=0, Trigger=SkillActivationTrigger.AlwaysOn, PrimaryEffectType=SkillEffectType.ComboPersistOnSwitch, ValuePrimary=1.00f, SecondaryEffectType=SkillEffectType.None, ValueSecondary=0.000f, ProcChance=1.00f, ProcIntervalSlaps=0, StateHpThreshold=0.00f },
+            new SkillConfig { Id="deflect", Name="Deflect", Tier=2, CoinCost=6500, PrerequisiteSkillId="basic_slap", RequiredBossId=0, Trigger=SkillActivationTrigger.AlwaysOn, PrimaryEffectType=SkillEffectType.ParryUnlock, ValuePrimary=1.00f, SecondaryEffectType=SkillEffectType.None, ValueSecondary=0.000f, ProcChance=1.00f, ProcIntervalSlaps=0, StateHpThreshold=0.00f },
+            new SkillConfig { Id="quick_reflexes", Name="Quick Reflexes", Tier=2, CoinCost=12000, PrerequisiteSkillId="twin_mastery", RequiredBossId=10, Trigger=SkillActivationTrigger.AlwaysOn, PrimaryEffectType=SkillEffectType.SpeedMult, ValuePrimary=0.90f, SecondaryEffectType=SkillEffectType.None, ValueSecondary=0.000f, ProcChance=1.00f, ProcIntervalSlaps=0, StateHpThreshold=0.00f },
+            new SkillConfig { Id="critical_slaps", Name="Critical Slaps", Tier=2, CoinCost=22000, PrerequisiteSkillId="stronger_hands", RequiredBossId=0, Trigger=SkillActivationTrigger.AlwaysOn, PrimaryEffectType=SkillEffectType.CritChance, ValuePrimary=0.05f, SecondaryEffectType=SkillEffectType.None, ValueSecondary=0.000f, ProcChance=1.00f, ProcIntervalSlaps=0, StateHpThreshold=0.00f },
+            new SkillConfig { Id="seismic_slam", Name="Seismic Slam", Tier=2, CoinCost=35000, PrerequisiteSkillId="stamina_training", RequiredBossId=10, Trigger=SkillActivationTrigger.ProcEveryNSlaps, PrimaryEffectType=SkillEffectType.ProcHitDamageMult, ValuePrimary=3.00f, SecondaryEffectType=SkillEffectType.Passive, ValueSecondary=0.800f, ProcChance=1.00f, ProcIntervalSlaps=5, StateHpThreshold=0.00f },
+            new SkillConfig { Id="heavy_slap", Name="Heavy Slap", Tier=2, CoinCost=55000, PrerequisiteSkillId="stronger_hands", RequiredBossId=10, Trigger=SkillActivationTrigger.ProcOnHit, PrimaryEffectType=SkillEffectType.ProcHitDamageMult, ValuePrimary=2.50f, SecondaryEffectType=SkillEffectType.None, ValueSecondary=0.000f, ProcChance=0.12f, ProcIntervalSlaps=0, StateHpThreshold=0.00f },
+            new SkillConfig { Id="precision_instinct", Name="Precision Instinct", Tier=2, CoinCost=80000, PrerequisiteSkillId="stronger_hands", RequiredBossId=10, Trigger=SkillActivationTrigger.AlwaysOn, PrimaryEffectType=SkillEffectType.CritDmg, ValuePrimary=0.25f, SecondaryEffectType=SkillEffectType.None, ValueSecondary=0.000f, ProcChance=1.00f, ProcIntervalSlaps=0, StateHpThreshold=0.00f },
+            new SkillConfig { Id="combo_mastery", Name="Combo Mastery", Tier=3, CoinCost=220000, PrerequisiteSkillId="on_target", RequiredBossId=10, Trigger=SkillActivationTrigger.AlwaysOn, PrimaryEffectType=SkillEffectType.ComboCapBonus, ValuePrimary=5.00f, SecondaryEffectType=SkillEffectType.ComboStackDamageBonus, ValueSecondary=0.005f, ProcChance=1.00f, ProcIntervalSlaps=0, StateHpThreshold=0.00f },
+            new SkillConfig { Id="dizzy_punisher", Name="Opportunist", Tier=3, CoinCost=450000, PrerequisiteSkillId="quick_reflexes", RequiredBossId=0, Trigger=SkillActivationTrigger.AlwaysOn, PrimaryEffectType=SkillEffectType.SpecialProc, ValuePrimary=1.35f, SecondaryEffectType=SkillEffectType.None, ValueSecondary=0.000f, ProcChance=1.00f, ProcIntervalSlaps=0, StateHpThreshold=0.00f },
+            new SkillConfig { Id="clutch_surge", Name="Adrenaline Rush", Tier=3, CoinCost=850000, PrerequisiteSkillId="seismic_slam", RequiredBossId=0, Trigger=SkillActivationTrigger.OnLowHpState, PrimaryEffectType=SkillEffectType.SpeedMult, ValuePrimary=0.83f, SecondaryEffectType=SkillEffectType.DamageMult, ValueSecondary=1.250f, ProcChance=1.00f, ProcIntervalSlaps=0, StateHpThreshold=0.30f },
+            new SkillConfig { Id="coin_magnet", Name="Coin Magnet", Tier=3, CoinCost=1600000, PrerequisiteSkillId="critical_slaps", RequiredBossId=20, Trigger=SkillActivationTrigger.AlwaysOn, PrimaryEffectType=SkillEffectType.CoinMult, ValuePrimary=0.20f, SecondaryEffectType=SkillEffectType.None, ValueSecondary=0.000f, ProcChance=1.00f, ProcIntervalSlaps=0, StateHpThreshold=0.00f },
+            new SkillConfig { Id="boss_hunter", Name="Boss Hunter", Tier=3, CoinCost=3000000, PrerequisiteSkillId="heavy_slap", RequiredBossId=20, Trigger=SkillActivationTrigger.AlwaysOn, PrimaryEffectType=SkillEffectType.BossDamage, ValuePrimary=0.25f, SecondaryEffectType=SkillEffectType.None, ValueSecondary=0.000f, ProcChance=1.00f, ProcIntervalSlaps=0, StateHpThreshold=0.00f },
+            new SkillConfig { Id="echo_strike", Name="Acoustic Echo", Tier=4, CoinCost=8000000, PrerequisiteSkillId="combo_mastery", RequiredBossId=30, Trigger=SkillActivationTrigger.ProcOnHit, PrimaryEffectType=SkillEffectType.SpecialProc, ValuePrimary=0.35f, SecondaryEffectType=SkillEffectType.None, ValueSecondary=0.000f, ProcChance=0.20f, ProcIntervalSlaps=0, StateHpThreshold=0.00f },
+            new SkillConfig { Id="dual_hand", Name="Dual-Hand Technique", Tier=4, CoinCost=12000000, PrerequisiteSkillId="dizzy_punisher", RequiredBossId=20, Trigger=SkillActivationTrigger.AlwaysOn, PrimaryEffectType=SkillEffectType.SpeedMult, ValuePrimary=0.85f, SecondaryEffectType=SkillEffectType.None, ValueSecondary=0.000f, ProcChance=1.00f, ProcIntervalSlaps=0, StateHpThreshold=0.00f },
+            new SkillConfig { Id="unstoppable", Name="Unstoppable Hands", Tier=4, CoinCost=18000000, PrerequisiteSkillId="clutch_surge", RequiredBossId=30, Trigger=SkillActivationTrigger.AlwaysOn, PrimaryEffectType=SkillEffectType.HpMult, ValuePrimary=0.30f, SecondaryEffectType=SkillEffectType.None, ValueSecondary=0.000f, ProcChance=1.00f, ProcIntervalSlaps=0, StateHpThreshold=0.00f },
+            new SkillConfig { Id="kinetic_shield", Name="Kinetic Barrier", Tier=4, CoinCost=28000000, PrerequisiteSkillId="clutch_surge", RequiredBossId=30, Trigger=SkillActivationTrigger.ProcEveryNSlaps, PrimaryEffectType=SkillEffectType.ShieldEveryNSlaps, ValuePrimary=0.10f, SecondaryEffectType=SkillEffectType.None, ValueSecondary=0.000f, ProcChance=1.00f, ProcIntervalSlaps=10, StateHpThreshold=0.00f },
+            new SkillConfig { Id="iron_stance_1", Name="Iron Stance I", Tier=4, CoinCost=32000000, PrerequisiteSkillId="deflect", RequiredBossId=30, Trigger=SkillActivationTrigger.AlwaysOn, PrimaryEffectType=SkillEffectType.WeakSpotWindowBonus, ValuePrimary=0.10f, SecondaryEffectType=SkillEffectType.None, ValueSecondary=0.000f, ProcChance=1.00f, ProcIntervalSlaps=0, StateHpThreshold=0.00f },
+            new SkillConfig { Id="golden_touch", Name="Treasure Hunter", Tier=4, CoinCost=40000000, PrerequisiteSkillId="coin_magnet", RequiredBossId=30, Trigger=SkillActivationTrigger.AlwaysOn, PrimaryEffectType=SkillEffectType.CoinMult, ValuePrimary=0.25f, SecondaryEffectType=SkillEffectType.None, ValueSecondary=0.000f, ProcChance=1.00f, ProcIntervalSlaps=0, StateHpThreshold=0.00f },
+            new SkillConfig { Id="frenzy", Name="Frenzy", Tier=4, CoinCost=55000000, PrerequisiteSkillId="boss_hunter", RequiredBossId=30, Trigger=SkillActivationTrigger.AlwaysOn, PrimaryEffectType=SkillEffectType.FrenzyChargeBonus, ValuePrimary=0.35f, SecondaryEffectType=SkillEffectType.None, ValueSecondary=0.000f, ProcChance=1.00f, ProcIntervalSlaps=0, StateHpThreshold=0.00f },
+            new SkillConfig { Id="titan_slayer", Name="Colossus Bane", Tier=4, CoinCost=95000000, PrerequisiteSkillId="boss_hunter", RequiredBossId=35, Trigger=SkillActivationTrigger.AlwaysOn, PrimaryEffectType=SkillEffectType.ColossusDamage, ValuePrimary=0.35f, SecondaryEffectType=SkillEffectType.None, ValueSecondary=0.000f, ProcChance=1.00f, ProcIntervalSlaps=0, StateHpThreshold=0.00f },
+            new SkillConfig { Id="rapid_barrage", Name="Rapid Barrage", Tier=5, CoinCost=180000000, PrerequisiteSkillId="dual_hand", RequiredBossId=40, Trigger=SkillActivationTrigger.ProcEveryNSlaps, PrimaryEffectType=SkillEffectType.SpecialProc, ValuePrimary=1.20f, SecondaryEffectType=SkillEffectType.None, ValueSecondary=0.000f, ProcChance=1.00f, ProcIntervalSlaps=6, StateHpThreshold=0.00f },
+            new SkillConfig { Id="iron_stance_2", Name="Iron Stance II", Tier=5, CoinCost=220000000, PrerequisiteSkillId="iron_stance_1", RequiredBossId=40, Trigger=SkillActivationTrigger.AlwaysOn, PrimaryEffectType=SkillEffectType.WeakSpotWindowBonus, ValuePrimary=0.10f, SecondaryEffectType=SkillEffectType.None, ValueSecondary=0.000f, ProcChance=1.00f, ProcIntervalSlaps=0, StateHpThreshold=0.00f },
+            new SkillConfig { Id="aegis_bulwark", Name="Bulwark Guard", Tier=5, CoinCost=280000000, PrerequisiteSkillId="kinetic_shield", RequiredBossId=40, Trigger=SkillActivationTrigger.AlwaysOn, PrimaryEffectType=SkillEffectType.ShieldReflectPct, ValuePrimary=0.25f, SecondaryEffectType=SkillEffectType.None, ValueSecondary=0.000f, ProcChance=1.00f, ProcIntervalSlaps=0, StateHpThreshold=0.00f },
+            new SkillConfig { Id="ultimate_slap", Name="Godhand Strike", Tier=5, CoinCost=450000000, PrerequisiteSkillId="titan_slayer", RequiredBossId=45, Trigger=SkillActivationTrigger.ProcEveryNSlaps, PrimaryEffectType=SkillEffectType.ProcHitDamageMult, ValuePrimary=8.00f, SecondaryEffectType=SkillEffectType.None, ValueSecondary=0.000f, ProcChance=1.00f, ProcIntervalSlaps=20, StateHpThreshold=0.00f },
+            new SkillConfig { Id="iron_stance_3", Name="Iron Stance III", Tier=5, CoinCost=1200000000, PrerequisiteSkillId="iron_stance_2", RequiredBossId=50, Trigger=SkillActivationTrigger.AlwaysOn, PrimaryEffectType=SkillEffectType.BossSigParryMitigation, ValuePrimary=0.50f, SecondaryEffectType=SkillEffectType.None, ValueSecondary=0.000f, ProcChance=1.00f, ProcIntervalSlaps=0, StateHpThreshold=0.00f },
         };
 
         public static readonly HandSkinConfig[] HandSkins = new[]
