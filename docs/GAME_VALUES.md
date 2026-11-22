@@ -103,17 +103,20 @@ $$\text{SlapCoins} = \text{StageBounty} \times 0.50 \times \frac{\min(\text{Slap
 
 ### 3.1 Smooth Geometric HP & Re-Aligned Level-Up Costs (Cap: Lv 50)
 - **Player Max HP (Zero Flat Buffs):**
-$$\text{MaxHP} = \text{round}\left(120 \times 1.14^{\text{Lv}-1}\right) \times \prod \text{HP\% Multipliers}$$
-  - *Base HP:* Lv 1: $120$ · Lv 10: $390$ · Lv 20: $1{,}446$ · Lv 30: $5{,}362$ · Lv 40: $19{,}882$ · Lv 50: $73{,}714$.
-  - *Full-Build Lv 50 HP* (w/ Stamina $1.20\times$, Thick Skin $1.15\times$, Titan $1.25\times$, Unstoppable $1.30\times$, Dragonblood $1.25\times$, Transcendent $1.25\times$): **$258{,}700\text{ HP}$**.
-- **Every Level (1–50):** $+14\%$ Base HP, $+4\%$ compounding Slap Mastery ($1.04^{\text{Lv}-1}$), higher attribute gates.
-- **Level-Up Coin Cost (Playthrough-Verified):**
-  - **Lv 1 to 20:** $\text{round}(120 \times 1.425^{\text{Lv}-1})$
-    - Anchors: Lv 1$\to$2: $120$ · Lv 5$\to$6: $495$ · Lv 9$\to$10: $2{,}043$ · Lv 14$\to$15: $12.0\text{K}$ · Lv 19$\to$20: $70.6\text{K}$ · Lv 20$\to$21: $100.6\text{K}$.
-  - **Lv 21 to 40:** $\text{round}(100{,}560 \times 1.445^{\text{Lv}-20})$
-    - Anchors: Lv 25: $633\text{K}$ · Lv 30: $4.0\text{M}$ · Lv 35: $25.2\text{M}$ · Lv 40: $158.6\text{M}$.
-  - **Lv 41 to 50:** $\text{round}(158.6\text{M} \times 1.34^{\text{Lv}-40})$
-    - Anchors: Lv 44: $511\text{M}$ · Lv 47: $1.23\text{B}$ · Lv 49$\to$50: $2.22\text{B}$.
+$$\text{MaxHP} = \text{round}\left(120 \times 1.135^{\text{Lv}-1}\right) \times \prod \text{HP\% Multipliers}$$
+  - *Base HP:* Lv 1: $120$ · Lv 7: $257$ · Lv 10: $373$ · Lv 20: $1{,}330$ · Lv 30: $4{,}720$ · Lv 40: $16{,}750$ · Lv 50: $59{,}360$.
+  - *Multiplier Perks:* Stamina Training $1.15\times$ (fixed from $0.15$ bug), Unstoppable $1.30\times$, Grandmaster Belt (Lv 50) $1.25\times$.
+  - *Full-Build Lv 50 HP:* **$111{,}300\text{ HP}$**. Minimum HP is strictly $100$.
+- **Every Level (1–50):** $+13.5\%$ Base HP, $+4\%$ compounding Slap Mastery ($1.04^{\text{Lv}-1}$), higher attribute gates ($\text{ReqPlayerLv} = \max(1, \lceil(\text{AttrLv}-3)/2\rceil)$).
+- **10-Belt Promotion System (Boss Stage Gates):**
+  - Promotion levels (4$\to$5, 9$\to$10, 14$\to$15, 19$\to$20, 24$\to$25, 29$\to$30, 34$\to$35, 39$\to$40, 44$\to$45, 49$\to$50) cost $1.5\times$ surcharge and require defeating the Stage Boss (Stages 5, 10, 15, 20, 25, 30, 35, 40, 45, 50).
+- **Level-Up Coin Cost (Steep 3-Layer Growth):**
+  - **Lv 1 to 10:** $300 \times 1.70^{\text{Lv}-1}$ ($1.5\times$ at Lv 4$\to$5 Belt promotion)
+    - Anchors: Lv 1$\to$2: $300$ · Lv 2$\to$3: $510$ · Lv 4$\to$5: $2{,}203$ · Lv 9$\to$10: $53{,}354$.
+  - **Lv 11 to 30:** $\text{costAt10} \times 1.45^{\text{Lv}-10}$ ($1.5\times$ at Belt promotions)
+    - Anchors: Lv 14$\to$15: $162\text{K}$ · Lv 19$\to$20: $1.04\text{M}$ · Lv 29$\to$30: $42.8\text{M}$.
+  - **Lv 31 to 50:** $\text{costAt30} \times 1.33^{\text{Lv}-30}$ ($1.5\times$ at Belt promotions)
+    - Anchors: Lv 34$\to$35: $134\text{M}$ · Lv 39$\to$40: $558\text{M}$ · Lv 44$\to$45: $2.32\text{B}$ · Lv 49$\to$50: $9.66\text{B}$.
 
 ### 3.2 Alternate-Level Milestone Perks (25 Permanent Perks — Every Even Level)
 

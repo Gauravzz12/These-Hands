@@ -2268,10 +2268,10 @@ export function preloadV2Sprites(targetIndex = 0) {
 // transparent, so the enemy would stay invisible forever because poses are
 // rasterized into canvases exactly once. Probe cached pose canvases with a
 // tiny downscale; any pose that reads back blank gets reloaded from its PNG.
-const __probeCanvas = document.createElement('canvas');
-__probeCanvas.width = 16; __probeCanvas.height = 16;
+const __probeCanvas = typeof document !== 'undefined' ? document.createElement('canvas') : null;
+if (__probeCanvas) { __probeCanvas.width = 16; __probeCanvas.height = 16; }
 function canvasBlank(c) {
-  if (!c || !c.width || !c.height) return true;
+  if (!c || !c.width || !c.height || !__probeCanvas) return true;
   try {
     const x = __probeCanvas.getContext('2d');
     x.clearRect(0, 0, 16, 16);
@@ -2380,7 +2380,7 @@ export function getV2Sprite(index) {
       return (poses.idle && poses.idle.imgWhite) || null;
     },
     getPose(name) {
-      const isReady = p => p && p.ready && !p.isBlank;
+      const isReady = p => p && p.ready && !p.isBlank && p.img && p.img.width > 0;
       if (isReady(poses[name])) return poses[name];
 
       if (name.startsWith('atk') || name.startsWith('attack') || name === 'bananaSling') {
@@ -2409,7 +2409,7 @@ export function getV2Sprite(index) {
         if (isReady(p)) return p;
       }
 
-      return poses[name] || poses.idle;
+      return (isReady(poses[name]) ? poses[name] : (isReady(poses.idle) ? poses.idle : (poses[name] || poses.idle)));
     }
   };
 

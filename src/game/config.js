@@ -28,74 +28,74 @@ export const CONFIG = {
   "attrs": {
     "power": {
       "name": "Power",
-      "baseCost": 60,
-      "growth": 1.3,
+      "baseCost": 85,
+      "growth": 1.255,
       "maxLevel": 80
     },
     "speed": {
       "name": "Speed",
-      "baseCost": 100,
-      "growth": 1.95,
+      "baseCost": 135,
+      "growth": 1.92,
       "maxLevel": 25
     },
     "critChance": {
       "name": "Crit Chance",
-      "baseCost": 110,
-      "growth": 1.52,
+      "baseCost": 150,
+      "growth": 1.50,
       "maxLevel": 45
     },
     "critDamage": {
       "name": "Crit Damage",
-      "baseCost": 80,
-      "growth": 1.34,
+      "baseCost": 110,
+      "growth": 1.32,
       "maxLevel": 65
     },
     "defense": {
       "name": "Defense",
-      "baseCost": 140,
-      "growth": 1.54,
+      "baseCost": 190,
+      "growth": 1.52,
       "maxLevel": 40
     },
     "stun": {
       "name": "Stun",
-      "baseCost": 110,
-      "growth": 1.44,
+      "baseCost": 150,
+      "growth": 1.42,
       "maxLevel": 50
     },
     "combo": {
       "name": "Combo",
-      "baseCost": 70,
-      "growth": 1.34,
+      "baseCost": 95,
+      "growth": 1.32,
       "maxLevel": 65
     },
     "coinMult": {
       "name": "Coin Mult.",
-      "baseCost": 75,
-      "growth": 1.35,
+      "baseCost": 100,
+      "growth": 1.33,
       "maxLevel": 65
     },
     "accuracy": {
       "name": "Accuracy",
-      "baseCost": 150,
-      "growth": 2.95,
+      "baseCost": 200,
+      "growth": 2.85,
       "maxLevel": 14
     },
     "bossDamage": {
       "name": "Giant Slayer",
-      "baseCost": 150,
-      "growth": 1.55,
+      "baseCost": 200,
+      "growth": 1.53,
       "maxLevel": 40
     },
     "vampirism": {
       "name": "Life Leech",
-      "baseCost": 200,
-      "growth": 1.54,
+      "baseCost": 270,
+      "growth": 1.52,
       "maxLevel": 40
     },
     "luck": {
       "name": "Fortune Luck",
-      "baseCost": 120,
-      "growth": 1.44,
+      "baseCost": 160,
+      "growth": 1.42,
       "maxLevel": 50
     }
   },
@@ -815,8 +815,8 @@ export const CONFIG = {
     "critSlaps": 0.05,
     "heavyChance": 0.12,
     "heavyMult": 2.5,
-    "staminaHpPct": 0.2,
-    "unstoppableHpPct": 0.3,
+    "staminaHpPct": 1.15,
+    "unstoppableHpPct": 1.30,
     "regen": 0.004,
     "comboMasteryStacks": 5,
     "comboMasteryPer": 0.005,
@@ -1000,6 +1000,7 @@ export const CONFIG = {
     }
   ],
   "abilityFx": {
+    "masteryPer": 0.04,
     "ironPalm": 1.15,
     "quickening": 0.92,
     "thickSkin": 0.9,
@@ -2057,26 +2058,182 @@ export function getProgressionCaps(defeated, asuraFinal) {
   return active;
 }
 
-export function calcLevelUpCost(currentLevel) {
-  const lv = currentLevel != null ? currentLevel : 1;
-  if (lv >= 50) return Infinity;
-  if (lv <= 20) return Math.round(120 * Math.pow(1.425, lv - 1));
-  if (lv <= 40) return Math.round(100560 * Math.pow(1.445, lv - 20));
-  return Math.round(158600000 * Math.pow(1.34, lv - 40));
+export const BELT_RANKS = {
+  5:  { id: 'yellow',      name: 'Yellow Belt — Shockwave',      reqStage: 5,   desc: 'Every 5th slap deals 2x damage + screen shake.' },
+  10: { id: 'orange',      name: 'Orange Belt — Vampire Grip',   reqStage: 10,  desc: 'Every 8th slap heals 3% Max HP.' },
+  15: { id: 'green',       name: 'Green Belt — Second Wind',     reqStage: 15,  desc: 'Survive a fatal blow once per fight at 30% HP + 1s invulnerability.' },
+  20: { id: 'blue',        name: 'Blue Belt — Counter Slap',     reqStage: 20,  desc: 'Taking an un-parried hit charges your next slap to 2x damage.' },
+  25: { id: 'purple',      name: 'Purple Belt — Boss Breaker',   reqStage: 25,  desc: '+25% damage vs Elites/Bosses & reduces boss self-heals by 30%.' },
+  30: { id: 'brown',       name: "Brown Belt — Titan's Guard",   reqStage: 30,  desc: 'Below 40% HP: take -25% damage & slap +15% faster.' },
+  35: { id: 'red',         name: 'Red Belt — Executioner',       reqStage: 35,  desc: '+40% damage against enemies below 30% HP.' },
+  40: { id: 'black',       name: 'Black Belt — Godhand',         reqStage: 40,  desc: 'Every 20th slap unleashes a 3x Thunder Slap + 1s stun.' },
+  45: { id: 'master',      name: 'Master Belt — Realm Breaker',  reqStage: 50,  desc: '+30% damage in Worlds + 25% Crit Damage.' },
+  50: { id: 'grandmaster', name: 'Grandmaster — Transcendent',   reqStage: 106, desc: '1.30x Damage, 1.25x Max HP, permanent Golden Aura.' }, // 106 = Beat W1 Ravana
+};
+
+export const ATTRIBUTE_COSTS_V33 = {
+  power:       { base: 85,  growth: 1.255, max: 80 },
+  speed:       { base: 135, growth: 1.92,  max: 25 },
+  critChance:  { base: 150, growth: 1.50,  max: 45 },
+  critDamage:  { base: 110, growth: 1.32,  max: 65 },
+  defense:     { base: 190, growth: 1.52,  max: 40 },
+  stun:        { base: 150, growth: 1.42,  max: 50 },
+  combo:       { base: 95,  growth: 1.32,  max: 65 },
+  coinMult:    { base: 100, growth: 1.33,  max: 65 },
+  accuracy:    { base: 200, growth: 2.85,  max: 14 },
+  giantSlayer: { base: 200, growth: 1.53,  max: 40 },
+  lifeLeech:   { base: 270, growth: 1.52,  max: 40 },
+  fortuneLuck: { base: 160, growth: 1.42,  max: 50 },
+  bossDamage:  { base: 200, growth: 1.53,  max: 40 },
+  vampirism:   { base: 270, growth: 1.52,  max: 40 },
+  luck:        { base: 160, growth: 1.42,  max: 50 },
+};
+
+export function getAttributeCost(attrKey, currentLevel) {
+  const cfg = ATTRIBUTE_COSTS_V33[attrKey] || CONFIG.attrs[attrKey];
+  if (!cfg) return 999999;
+  const maxLvl = cfg.max || cfg.maxLevel || 999;
+  const lvl = currentLevel != null ? currentLevel : 0;
+  if (lvl >= maxLvl) return Infinity;
+  return Math.round((cfg.base || cfg.baseCost) * Math.pow(cfg.growth, lvl));
 }
 
 export function calcAttrCost(key, currentLevel) {
-  const def = CONFIG.attrs[key];
-  if (!def) return 999999;
-  const N = def.maxLevel || 1;
-  const lvl = currentLevel != null ? currentLevel : 0;
-  if (lvl >= N) return Infinity;
-  return Math.round(def.baseCost * Math.pow(def.growth, lvl));
+  return getAttributeCost(key, currentLevel);
+}
+
+export function getLevelUpCost(currentLevel) {
+  const lv = Math.max(1, currentLevel != null ? currentLevel : 1);
+  if (lv >= 50) return Infinity;
+
+  let baseCost;
+  const costAt10 = 300 * Math.pow(1.70, 9);                // 35,576
+  const costAt30 = costAt10 * Math.pow(1.45, 20);          // ~59.9M
+
+  if (lv <= 10) {
+    baseCost = 300 * Math.pow(1.70, lv - 1);
+  } else if (lv <= 30) {
+    baseCost = costAt10 * Math.pow(1.45, lv - 10);
+  } else {
+    baseCost = costAt30 * Math.pow(1.33, lv - 30);
+  }
+
+  // 1.5x Belt Promotion surcharge on levels 4->5, 9->10, ..., 49->50
+  const nextLevel = lv + 1;
+  const isBeltPromotion = nextLevel % 5 === 0;
+  return Math.round(isBeltPromotion ? baseCost * 1.5 : baseCost);
+}
+
+export const calcLevelUpCost = getLevelUpCost;
+
+export function canLevelUp(state) {
+  const currentLevel = Math.max(1, state.level || state.playerLevel || 1);
+  const nextLevel = currentLevel + 1;
+  if (nextLevel > 50 || nextLevel > (state.chapterLevelCap || 50)) {
+    return { ok: false, reason: 'CHAPTER_CAP' };
+  }
+
+  const belt = BELT_RANKS[nextLevel];
+  if (belt && (state.highestStageCleared || 0) < belt.reqStage) {
+    return { ok: false, reason: 'BOSS_GATE', reqStage: belt.reqStage, belt };
+  }
+
+  const cost = getLevelUpCost(currentLevel);
+  if ((state.coins || 0) < cost) {
+    return { ok: false, reason: 'COINS', cost };
+  }
+
+  return { ok: true, cost, belt: belt || null };
+}
+
+export function getLevelMasteryMultiplier(level) {
+  const lv = Math.max(1, Number(level) || 1);
+  return Math.pow(1.04, lv - 1); // +4% compounding damage EVERY level from Lv 1
+}
+
+export function getAttributeGate(level, chapterCap = 80) {
+  const lv = Math.max(1, Number(level) || 1);
+  // Shifted from (lv * 2) to (4 + lv * 2) so early Power upgrades feel great while leveling is costly
+  return Math.min(chapterCap, 4 + lv * 2);
 }
 
 export function calcAttrCap(playerLevel, dragonMastery = 0) {
-  const capPer = CONFIG.capPerLevel || 3;
-  return ((playerLevel != null ? playerLevel : 1) * capPer) + (dragonMastery * 5);
+  const lv = Math.max(1, Number(playerLevel) || 1);
+  return Math.min(80, 4 + lv * 2) + (dragonMastery * 5);
+}
+
+export function getLevelUpFeedback(newLevel, chapterCap = 80) {
+  const belt = BELT_RANKS[newLevel];
+  const newGate = getAttributeGate(newLevel, chapterCap);
+
+  if (belt) {
+    return {
+      type: 'MODAL',
+      title: `LEVEL ${newLevel}!`,
+      subtitle: 'BELT PROMOTION',
+      headline: belt.name,
+      description: belt.desc,
+      belt: belt,
+    };
+  }
+
+  return {
+    type: 'TOAST',
+    text: `LEVEL ${newLevel}! +13.5% HP · +4% DMG · GATE ${newGate}`,
+  };
+}
+
+export function calculateSlapCoins({
+  stageBounty,
+  slapDamage,
+  enemyMaxHP,
+  isCrit = false,
+  isLucky = false,
+  coinMult = 1.0,
+}) {
+  if (!stageBounty || !enemyMaxHP || slapDamage <= 0) return 0;
+
+  const dmgRatio = Math.min(1.0, slapDamage / enemyMaxHP);
+  let hitBonus = 1.0;
+  if (isCrit) hitBonus *= 1.35;
+  if (isLucky) hitBonus *= 2.50;
+
+  // Zero taper, zero mid-fight decay:
+  // Higher stageBounty immediately boosts coins/slap; higher slapDamage also boosts coins/slap
+  const rawCoins = stageBounty * 0.14 * Math.pow(dmgRatio, 0.45) * hitBonus * coinMult;
+  return Math.max(1, Math.round(rawCoins));
+}
+
+export function getPlayerMaxHP(state) {
+  const level = Math.max(1, state.level || state.playerLevel || 1);
+
+  // Smooth geometric base HP: Lv1 = 120, Lv7 = 257, Lv20 = 1,330, Lv50 = 59,360
+  let hp = Math.round(120 * Math.pow(1.135, level - 1));
+
+  // IMPORTANT: Always multiply by (1 + bonus), NEVER by 0.15!
+  if (state.skills?.staminaTraining) {
+    hp *= 1.15; // +15% Max HP (was accidentally * 0.15 -> 39 HP at Lv7)
+  }
+  if (state.skills?.unstoppableHands || state.skills?.unstoppable) {
+    hp *= 1.30; // +30% Max HP
+  }
+  if (level >= 50) {
+    hp *= 1.25; // Grandmaster Belt: +25% Max HP
+  }
+
+  const skinHpBonus = state.activeSkin?.hpBonus || 0; // e.g., 0.10 for +10%
+  hp *= (1 + skinHpBonus);
+
+  return Math.max(100, Math.round(hp));
+}
+
+export function calcPlayerMaxHp(playerLevel, hasStamina = false, hasUnstoppable = false) {
+  const lvl = Math.max(1, playerLevel || 1);
+  let hp = Math.round(120 * Math.pow(1.135, lvl - 1));
+  if (hasStamina) hp *= 1.15;
+  if (hasUnstoppable) hp *= 1.30;
+  if (lvl >= 50) hp *= 1.25;
+  return Math.max(100, Math.round(hp));
 }
 
 export function calcEnemyHp(i, isBoss = false, isElite = false) {
@@ -2134,14 +2291,6 @@ export function calcEnemyBounty(hp, i, isBoss = false) {
   return { coinRate, bounty };
 }
 
-export function calcPlayerMaxHp(playerLevel, hasStamina = false, hasUnstoppable = false) {
-  const lvl = Math.max(1, playerLevel || 1);
-  const baseHp = Math.round(120 * Math.pow(1.14, lvl - 1));
-  let mult = 1.0;
-  if (hasStamina) mult *= 1.20;
-  if (hasUnstoppable) mult *= 1.30;
-  return Math.round(baseHp * mult);
-}
 
 export { ROSTER } from './roster.js';
 export { ALL_ENEMIES, ENEMIES } from './enemies.js';

@@ -9,7 +9,17 @@ import {
   calcEnemyDamage,
   calcEnemyInterval,
   calcEnemyBounty,
-  calcPlayerMaxHp
+  calcPlayerMaxHp,
+  BELT_RANKS,
+  getLevelUpCost,
+  canLevelUp,
+  getLevelMasteryMultiplier,
+  getAttributeGate,
+  getLevelUpFeedback,
+  calculateSlapCoins,
+  getPlayerMaxHP,
+  ATTRIBUTE_COSTS_V33,
+  getAttributeCost
 } from './config.js';
 
 // ──────────────────────────────────────────────
@@ -157,14 +167,11 @@ export function computePlayerStats(save) {
   if (ab >= 16) bossDmgMult *= afxMap.bossBane;
 
   // HP (Zero Flat Buffs)
-  let maxHp = calcPlayerMaxHp(ab);
-  if (s.staminaTraining) maxHp *= (sfx.staminaHpPct || 1.20);
+  let maxHp = calcPlayerMaxHp(ab, s.staminaTraining, s.unstoppable || s.unstoppableHands);
   if (ab >= 6) maxHp *= (afxMap.thickSkinHpPct || 1.15);
-  if (s.unstoppable || s.unstoppableHands) maxHp *= (sfx.unstoppableHpPct || 1.30);
   if (ab >= 30) maxHp *= (afxMap.titanStatureHpPct || 1.25);
   if (ab >= 38) maxHp *= (afxMap.dragonbloodHpPct || 1.25);
-  if (ab >= 50) maxHp *= (afxMap.transcendentHpPct || 1.25);
-  maxHp = Math.round(maxHp);
+  maxHp = Math.max(100, Math.round(maxHp));
 
   // Theoretical DPS with heavy hits, combos, and crits
   const pH = s.heavySlap ? sfx.heavyChance : 0;
@@ -336,3 +343,16 @@ export function importSave(code) {
     return { ...base, ...clean };
   } catch { return null; }
 }
+
+export {
+  BELT_RANKS,
+  getLevelUpCost,
+  canLevelUp,
+  getLevelMasteryMultiplier,
+  getAttributeGate,
+  getLevelUpFeedback,
+  calculateSlapCoins,
+  getPlayerMaxHP,
+  ATTRIBUTE_COSTS_V33,
+  getAttributeCost
+};

@@ -4,6 +4,7 @@ import {
   computePlayerStats, attrCost, attrCap, levelUpCost,
   getEnemyCoinReward, generateQuests, todayKey,
   ACHIEVEMENTS, calcOfflineEarnings, exportSave, importSave,
+  canLevelUp,
 } from '../game/engine.js';
 import { CONFIG, ALL_ENEMIES } from '../game/config.js';
 
@@ -51,8 +52,15 @@ function reducer(state, action) {
     }
 
     case 'LEVEL_UP': {
-      const cost = levelUpCost(s.playerLevel);
-      if (s.coins < cost) return state;
+      const highestCleared = Object.keys(s.defeatedEnemies || {}).filter(k => s.defeatedEnemies[k]).length;
+      const can = canLevelUp({
+        level: s.playerLevel,
+        coins: s.coins,
+        highestStageCleared: highestCleared,
+        chapterLevelCap: 50
+      });
+      if (!can.ok) return state;
+      const cost = can.cost;
       return {
         ...state,
         save: { ...s, coins: s.coins - cost, playerLevel: s.playerLevel + 1 },

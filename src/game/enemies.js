@@ -43,7 +43,8 @@ function buildAllEnemies() {
     Object.defineProperty(built, "spr", {
       enumerable: true,
       get() {
-        if (!sprCache) sprCache = isV2Enemy(i) ? getV2Sprite(i) : makeSprite(ENEMY_ART[i]);
+        if (isV2Enemy(i)) return getV2Sprite(i);
+        if (!sprCache) sprCache = makeSprite(ENEMY_ART[i]);
         return sprCache;
       }
     });

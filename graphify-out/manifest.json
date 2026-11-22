@@ -90,36 +90,6 @@
     "ast_hash": "2d8fe8de5927a6e2c55bd5371f326249",
     "semantic_hash": "2d8fe8de5927a6e2c55bd5371f326249"
   },
-  "scratch/show_cast.cjs": {
-    "mtime": 1795291387.3430004,
-    "seen": 1795291951.78702,
-    "ast_hash": "cf7abe65e018779e829409b1684cf07f",
-    "semantic_hash": ""
-  },
-  "scratch/show_kill.cjs": {
-    "mtime": 1795291387.3435047,
-    "seen": 1795291951.78702,
-    "ast_hash": "3150143822dcef641e72ea344f1573e3",
-    "semantic_hash": ""
-  },
-  "scratch/show_lvl.cjs": {
-    "mtime": 1795291387.3447888,
-    "seen": 1795291951.78702,
-    "ast_hash": "87b6f1f8250f8822083f47b1e1c7a5db",
-    "semantic_hash": ""
-  },
-  "scratch/show_skills.cjs": {
-    "mtime": 1795291387.3447888,
-    "seen": 1795291951.78702,
-    "ast_hash": "44f4abfd8154261d749bbc7b5e69a650",
-    "semantic_hash": ""
-  },
-  "scratch/show_spec.cjs": {
-    "mtime": 1795291387.3458345,
-    "seen": 1795291951.78702,
-    "ast_hash": "eb73d55fc4b911e8f435b08e73c3a74e",
-    "semantic_hash": ""
-  },
   "scripts/generate_android_icons.cjs": {
     "mtime": 1793560871.8352592,
     "seen": 1793814802.188294,
@@ -175,10 +145,10 @@
     "semantic_hash": "0d97d4cedab69f442df096160e853859"
   },
   "src/components/LevelUpModal.jsx": {
-    "mtime": 1792868989.3977976,
-    "seen": 1793814802.1922922,
-    "ast_hash": "d6bc9463398825f2c6d36cb3787f7fab",
-    "semantic_hash": "d6bc9463398825f2c6d36cb3787f7fab"
+    "mtime": 1795344657.9016466,
+    "seen": 1795346591.0313895,
+    "ast_hash": "0682c474ff59cd8de709c9ffb6e91a61",
+    "semantic_hash": ""
   },
   "src/components/LevelsScreen.jsx": {
     "mtime": 1793844411.5383313,
@@ -223,10 +193,10 @@
     "semantic_hash": "07aaef4d7234f67a50d09128d9ebf880"
   },
   "src/context/GameContext.jsx": {
-    "mtime": 1793527117.9012413,
-    "seen": 1793814802.195304,
-    "ast_hash": "e586e07c71e67c046c6834a5920a0903",
-    "semantic_hash": "e586e07c71e67c046c6834a5920a0903"
+    "mtime": 1795344676.110477,
+    "seen": 1795346591.0313895,
+    "ast_hash": "d2b19a55cf74f2a349c57ceed0ef5969",
+    "semantic_hash": ""
   },
   "src/game/artData.js": {
     "mtime": 1793844411.540327,
@@ -235,33 +205,33 @@
     "semantic_hash": ""
   },
   "src/game/config.js": {
-    "mtime": 1795290857.1911893,
-    "seen": 1795291374.6731398,
-    "ast_hash": "36be53ab26a934a7940ed73fe11e7499",
+    "mtime": 1795344596.033682,
+    "seen": 1795346591.0313895,
+    "ast_hash": "30ae9ed6311096cd7321dd8d68c01c8a",
     "semantic_hash": ""
   },
   "src/game/enemies.js": {
-    "mtime": 1795289332.5642025,
-    "seen": 1795291374.6731398,
-    "ast_hash": "1930947ccce623e65ffe44b06e06511c",
+    "mtime": 1795346088.5614839,
+    "seen": 1795346591.0313895,
+    "ast_hash": "52616a693aab9f55460db488281247c5",
     "semantic_hash": ""
   },
   "src/game/enemySpritesV2.js": {
-    "mtime": 1795291907.049848,
-    "seen": 1795291951.78702,
-    "ast_hash": "94097b46a76a1e2b6d911ab2e27a677f",
+    "mtime": 1795346500.1849997,
+    "seen": 1795346591.0313895,
+    "ast_hash": "7b5d79a06f5d6b9059c785bb33695b79",
     "semantic_hash": ""
   },
   "src/game/engine.js": {
-    "mtime": 1795290060.7034476,
-    "seen": 1795291374.6731398,
-    "ast_hash": "ea47e7b195796a77e73f0c0edda0057c",
+    "mtime": 1795344638.7410376,
+    "seen": 1795346591.0313895,
+    "ast_hash": "1c0ea7001a4b1ad3f47ad989a88f398e",
     "semantic_hash": ""
   },
   "src/game/gameEngine.js": {
-    "mtime": 1795291871.024318,
-    "seen": 1795291951.78702,
-    "ast_hash": "251d079a6f3bdb4ccf183a20a4e548f7",
+    "mtime": 1795346278.8172293,
+    "seen": 1795346591.0313895,
+    "ast_hash": "d7f0f484499f9fc7dbc3c6557a56ec66",
     "semantic_hash": ""
   },
   "src/game/proceduralEnemies.js": {
@@ -2413,9 +2383,9 @@
     "semantic_hash": ""
   },
   "docs/BalanceConfig.cs": {
-    "mtime": 1795291164.5636706,
-    "seen": 1795291374.6731398,
-    "ast_hash": "c11e318a34394e262442966663c25919",
+    "mtime": 1795346379.3537767,
+    "seen": 1795346591.0313895,
+    "ast_hash": "3f87427b7337e9be6216d586f439d102",
     "semantic_hash": ""
   },
   "docs/GAME_DESIGN_AND_ECONOMY_BIBLE.md": {
@@ -2425,9 +2395,9 @@
     "semantic_hash": ""
   },
   "docs/GAME_VALUES.md": {
-    "mtime": 1795290103.2127988,
-    "seen": 1795291374.6731398,
-    "ast_hash": "3784ca6218c24c0b334ca0237c4cdfcd",
+    "mtime": 1795346434.3860173,
+    "seen": 1795346591.0313895,
+    "ast_hash": "e798131ea1fcc7a517522cebd0d055ad",
     "semantic_hash": ""
   },
   "public/enemy-sprites-v2/poses/51-golden-dummy-attack.webp": {

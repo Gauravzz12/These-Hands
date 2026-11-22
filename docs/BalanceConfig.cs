@@ -303,19 +303,16 @@ namespace IdleSlapper.Config
         public static double GetPlayerBaseMaxHp(int level)
         {
             level = Mathf.Clamp(level, 1, MaxPlayerLevel + MaxEndlessMasteryBonusLevels);
-            return Math.Round(120.0 * Math.Pow(1.14, level - 1), MidpointRounding.AwayFromZero);
+            return Math.Round(120.0 * Math.Pow(1.135, level - 1), MidpointRounding.AwayFromZero);
         }
 
         public static double GetPlayerTotalMaxHp(int level, bool hasStaminaTraining = false, bool hasUnstoppableHands = false)
         {
             double hp = GetPlayerBaseMaxHp(level);
-            if (hasStaminaTraining) hp *= 1.20;
-            if (level >= 6) hp *= 1.15; // Thick Skin
-            if (hasUnstoppableHands) hp *= 1.30;
-            if (level >= 30) hp *= 1.25; // Titan Stature
-            if (level >= 38) hp *= 1.25; // Dragonblood Vigour
-            if (level >= 50) hp *= 1.25; // Transcendent Hand
-            return Math.Round(hp, MidpointRounding.AwayFromZero);
+            if (hasStaminaTraining) hp *= 1.15; // +15% Max HP (was 0.15 bug)
+            if (hasUnstoppableHands) hp *= 1.30; // +30% Max HP
+            if (level >= 50) hp *= 1.25; // Grandmaster Belt: +25% Max HP
+            return Math.Max(100.0, Math.Round(hp, MidpointRounding.AwayFromZero));
         }
 
         public static float GetStunDuration(int stunLevel, bool hasBattleFocusActive = false, bool isBossOrElite = false)
@@ -342,9 +339,37 @@ namespace IdleSlapper.Config
         public static double GetLevelUpCost(int level)
         {
             if (level < 1 || level >= MaxPlayerLevel) return 0.0;
-            if (level <= 20) return Math.Round(120.0 * Math.Pow(1.425, level - 1), MidpointRounding.AwayFromZero);
-            if (level <= 40) return Math.Round(100560.0 * Math.Pow(1.445, level - 20), MidpointRounding.AwayFromZero);
-            return Math.Round(158600000.0 * Math.Pow(1.34, level - 40), MidpointRounding.AwayFromZero);
+            double baseCost;
+            if (level <= 10)
+            {
+                baseCost = 300.0 * Math.Pow(1.70, level - 1);
+            }
+            else if (level <= 30)
+            {
+                double costAt10 = 300.0 * Math.Pow(1.70, 9);
+                baseCost = costAt10 * Math.Pow(1.45, level - 10);
+            }
+            else
+            {
+                double costAt10 = 300.0 * Math.Pow(1.70, 9);
+                double costAt30 = costAt10 * Math.Pow(1.45, 20);
+                baseCost = costAt30 * Math.Pow(1.33, level - 30);
+            }
+            // Belt promotion levels cost 1.5x
+            if (level == 4 || level == 9 || level == 14 || level == 19 || level == 24 || level == 29 || level == 34 || level == 39 || level == 44 || level == 49)
+            {
+                baseCost *= 1.50;
+            }
+            return Math.Round(baseCost, MidpointRounding.AwayFromZero);
+        }
+
+        public static double CalculateSlapCoins(double stageBounty, double slapDamage, double enemyMaxHp, bool isCrit, bool isLucky, double coinMult)
+        {
+            double dmgRatio = enemyMaxHp > 0 ? Math.Min(1.0, slapDamage / enemyMaxHp) : 0.05;
+            double critFactor = isCrit ? 1.40 : 1.0;
+            double luckyFactor = isLucky ? 2.50 : 1.0;
+            double coins = 0.14 * stageBounty * Math.Pow(dmgRatio, 0.45) * critFactor * luckyFactor * coinMult;
+            return Math.Max(1.0, Math.Round(coins, MidpointRounding.AwayFromZero));
         }
 
         public static double GetAttributeCost(AttributeType type, int currentLevel)
@@ -424,18 +449,18 @@ namespace IdleSlapper.Config
 
         public static readonly Dictionary<AttributeType, AttributeConfig> Attributes = new Dictionary<AttributeType, AttributeConfig>
         {
-            { AttributeType.Power,       new AttributeConfig { Type=AttributeType.Power,       Id="power",      DisplayName="Damage",       BaseCost=60,  Growth=1.30, MaxLevel=80, EffectPerLevel=1.0,        HardCapValue=80.0 } },
-            { AttributeType.Speed,       new AttributeConfig { Type=AttributeType.Speed,       Id="speed",      DisplayName="Speed",        BaseCost=100, Growth=1.95, MaxLevel=25, EffectPerLevel=0.94,        HardCapValue=0.250 } },
-            { AttributeType.CritChance,  new AttributeConfig { Type=AttributeType.CritChance,  Id="critChance", DisplayName="Crit %",       BaseCost=110, Growth=1.52, MaxLevel=45, EffectPerLevel=0.01,        HardCapValue=0.75 } },
-            { AttributeType.CritDamage,  new AttributeConfig { Type=AttributeType.CritDamage,  Id="critDamage", DisplayName="Crit Dmg",     BaseCost=80,  Growth=1.34, MaxLevel=65, EffectPerLevel=0.05,        HardCapValue=999.0 } },
-            { AttributeType.Defense,     new AttributeConfig { Type=AttributeType.Defense,     Id="defense",    DisplayName="Defense",      BaseCost=140, Growth=1.54, MaxLevel=40, EffectPerLevel=0.01,        HardCapValue=0.40 } },
-            { AttributeType.Stun,        new AttributeConfig { Type=AttributeType.Stun,        Id="stun",       DisplayName="Stun",         BaseCost=110, Growth=1.44, MaxLevel=50, EffectPerLevel=0.005,       HardCapValue=0.25 } },
-            { AttributeType.Combo,       new AttributeConfig { Type=AttributeType.Combo,       Id="combo",      DisplayName="Combo",        BaseCost=70,  Growth=1.34, MaxLevel=65, EffectPerLevel=0.01,        HardCapValue=999.0 } },
-            { AttributeType.CoinMult,    new AttributeConfig { Type=AttributeType.CoinMult,    Id="coinMult",   DisplayName="Coins",        BaseCost=75,  Growth=1.35, MaxLevel=65, EffectPerLevel=0.05,        HardCapValue=3.25 } },
-            { AttributeType.Accuracy,    new AttributeConfig { Type=AttributeType.Accuracy,    Id="accuracy",   DisplayName="Accuracy",     BaseCost=150, Growth=2.95, MaxLevel=14, EffectPerLevel=0.01,        HardCapValue=0.95 } },
-            { AttributeType.GiantSlayer, new AttributeConfig { Type=AttributeType.GiantSlayer, Id="bossDamage", DisplayName="Giant Slayer", BaseCost=150, Growth=1.55, MaxLevel=40, EffectPerLevel=0.005,       HardCapValue=0.20 } },
-            { AttributeType.LifeLeech,   new AttributeConfig { Type=AttributeType.LifeLeech,   Id="vampirism",  DisplayName="Life Leech",   BaseCost=200, Growth=1.54, MaxLevel=40, EffectPerLevel=0.0006,      HardCapValue=0.015 } },
-            { AttributeType.Fortune,     new AttributeConfig { Type=AttributeType.Fortune,     Id="luck",       DisplayName="Fortune",      BaseCost=120, Growth=1.44, MaxLevel=50, EffectPerLevel=0.005,       HardCapValue=0.25 } }
+            { AttributeType.Power,       new AttributeConfig { Type=AttributeType.Power,       Id="power",      DisplayName="Damage",       BaseCost=85,  Growth=1.255, MaxLevel=80, EffectPerLevel=1.0,        HardCapValue=80.0 } },
+            { AttributeType.Speed,       new AttributeConfig { Type=AttributeType.Speed,       Id="speed",      DisplayName="Speed",        BaseCost=135, Growth=1.92, MaxLevel=25, EffectPerLevel=0.94,        HardCapValue=0.250 } },
+            { AttributeType.CritChance,  new AttributeConfig { Type=AttributeType.CritChance,  Id="critChance", DisplayName="Crit %",       BaseCost=150, Growth=1.50, MaxLevel=45, EffectPerLevel=0.01,        HardCapValue=0.75 } },
+            { AttributeType.CritDamage,  new AttributeConfig { Type=AttributeType.CritDamage,  Id="critDamage", DisplayName="Crit Dmg",     BaseCost=110, Growth=1.32, MaxLevel=65, EffectPerLevel=0.05,        HardCapValue=999.0 } },
+            { AttributeType.Defense,     new AttributeConfig { Type=AttributeType.Defense,     Id="defense",    DisplayName="Defense",      BaseCost=190, Growth=1.52, MaxLevel=40, EffectPerLevel=0.01,        HardCapValue=0.40 } },
+            { AttributeType.Stun,        new AttributeConfig { Type=AttributeType.Stun,        Id="stun",       DisplayName="Stun",         BaseCost=150, Growth=1.42, MaxLevel=50, EffectPerLevel=0.005,       HardCapValue=0.25 } },
+            { AttributeType.Combo,       new AttributeConfig { Type=AttributeType.Combo,       Id="combo",      DisplayName="Combo",        BaseCost=95,  Growth=1.32, MaxLevel=65, EffectPerLevel=0.01,        HardCapValue=999.0 } },
+            { AttributeType.CoinMult,    new AttributeConfig { Type=AttributeType.CoinMult,    Id="coinMult",   DisplayName="Coins",        BaseCost=100, Growth=1.33, MaxLevel=65, EffectPerLevel=0.05,        HardCapValue=3.25 } },
+            { AttributeType.Accuracy,    new AttributeConfig { Type=AttributeType.Accuracy,    Id="accuracy",   DisplayName="Accuracy",     BaseCost=200, Growth=2.85, MaxLevel=14, EffectPerLevel=0.01,        HardCapValue=0.95 } },
+            { AttributeType.GiantSlayer, new AttributeConfig { Type=AttributeType.GiantSlayer, Id="bossDamage", DisplayName="Giant Slayer", BaseCost=200, Growth=1.53, MaxLevel=40, EffectPerLevel=0.005,       HardCapValue=0.20 } },
+            { AttributeType.LifeLeech,   new AttributeConfig { Type=AttributeType.LifeLeech,   Id="vampirism",  DisplayName="Life Leech",   BaseCost=270, Growth=1.52, MaxLevel=40, EffectPerLevel=0.0006,      HardCapValue=0.015 } },
+            { AttributeType.Fortune,     new AttributeConfig { Type=AttributeType.Fortune,     Id="luck",       DisplayName="Fortune",      BaseCost=160, Growth=1.42, MaxLevel=50, EffectPerLevel=0.005,       HardCapValue=0.25 } }
         };
 
         public static readonly EvenLevelPerkConfig[] EvenLevelPerks = new[]
