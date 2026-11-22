@@ -378,7 +378,46 @@ Unlock: Beat **#50 Dragon Lord** (grants Dragon Mastery 1: $1.25\times$ dmg, ope
 
 ## 8. Side Modes, Skins, Shop & Cloud Saves (Retained)
 
-- **Side Modes:** Golden Dummy Blitz (geometric curve $2.8 \times 1.233^{\text{tier}}$), Trio Gauntlet, Boss Rush (5 campaign bosses), Endless, Reflex Duel, Parry Training, Dojo Bounties (4/day + 1 optional ad reroll).
+- **Side Modes:** Golden Dummy Blitz (geometric curve $2.8 \times 1.233^{\text{tier}}$), Trio Gauntlet, Boss Rush (5 campaign bosses), Endless, Reflex Duel, Parry Training, Dojo Bounties 2.0 (4/day: 2 Cumulative + 2 Showdown, TTK safety guard $\ge 8$ hits, 1 Free + 2 Ad rerolls, 4/4 Dojo Master Chest paying $3\times$ Frontier Bounty $+ 10\text{ gems}$, doubleable to $6\times + 20\text{ gems}$ via Rewarded Ad).
 - **Skins (Tap-to-Fire, 11 slaps base):** Classic, Spider-Man (300💎), Wolverine (1,000💎), Thor (2,000💎), Hulk (3,500💎), Infinity Gauntlet (9,000💎).
 - **Shop & IAP (INR via Google Play):** Spotlight $70\%$-off first unowned bundle, Store Master ($+25\%$ VIP KO coins), 5 Coin Packs, 6 Gem Packs (₹49–₹3,499), 5 Bundles (₹149–₹2,499), Offline Miner (200💎), VIP Pass (₹199), Frenzy Booster (₹99), Remove Ads (₹199).
 - **Saves:** Signed local `TH3.` blob + Firebase Firestore guest sync + Google Account link (`LINK GOOGLE` / `SYNC`).
+
+---
+
+## 9. Dojo Bounties 2.0 (v3.3 Daily Contracts Architecture)
+
+Unlocks after beating **Stage 3**. Refreshes daily with **4 contracts** split into **2 Cumulative Contracts** (Bucket A) + **2 Showdown Contracts** (Bucket B) so players can never get stuck with an impossible multi-hit contract on an enemy they kill in 3 slaps.
+
+### 9.1 Bucket A — Cumulative Contracts (2 slots/day, progress across ANY fight)
+Progress accumulates across Campaign, Hard Mode, Worlds, Blitz, and Endless. Scales into 3 tiers based on progression: **Early** (Stages 3–15), **Mid** (16–35), **Late** (36–50 & Worlds).
+
+| Contract ID | Goal (Early / Mid / Late) | Unlock Requirement | Reward |
+|---|---|---|---|
+| `crit_hunter` | Land **15 / 30 / 50** total Crits | None | $1.25\times$ frontier + $2/3/4\text{💎}$ |
+| `stun_brawler` | Trigger **4 / 8 / 15** total Stuns | Stun Lv $\ge 1$ | $1.25\times$ frontier + $2/3/4\text{💎}$ |
+| `special_show` | Fire **3 / 6 / 10** Specials or Skin Powers | Beat #10 or own Skin | $1.25\times$ frontier + $2/3/3\text{💎}$ |
+| `bullseye` | Tap **3 / 6 / 10** Weak Spots | Precision Instinct | $1.25\times$ frontier + $3/3/4\text{💎}$ |
+| `parry_master` | Land **3 / 6 / 10** Parries | Deflect | $1.25\times$ frontier + $3/4/4\text{💎}$ |
+| `frenzy_unleashed` | Activate Frenzy **1 / 2 / 3** times | Frenzy | $1.25\times$ frontier + $3/4/5\text{💎}$ |
+| `win_streak` | Win **3 / 5 / 8** fights in a row | None | $1.25\times$ frontier + $2/3/4\text{💎}$ |
+| `combo_streak` | Reach a **15 / 30 / 60** combo streak | On Target | $1.25\times$ frontier + $2/3/4\text{💎}$ |
+
+### 9.2 Bucket B — Showdown Contracts (2 slots/day, single-fight skill checks)
+- **Target Selection Rule:** Pick strictly from the player's **top 4 beaten stages** ($\max(3, \text{highestCleared} - 4)$ to $\text{highestCleared}$) or their **highest beaten Boss** (`#10, #20, #30, #40, #50`).
+- **No High-Count Conditions:** Only speed, survival, or restriction checks—never "land 12 crits in one fight."
+- **TTK Safety Guard:** If any single-fight contract requires multi-hit interaction (`requiresMultiHit: true`), verify $\text{targetHP} / \text{avgSlapDmg} \ge 8$ before assigning.
+
+| Contract ID | Single-Fight Condition | Unlock Requirement | Reward |
+|---|---|---|---|
+| `no_specials` | Beat `[Target]` without using Specials or Skin Powers | Beat #10 or own Skin | $1.50\times$ frontier + $2\text{–}3\text{💎}$ |
+| `speed_blitz` | Beat `[Target]` in under **$15\text{s}$** ($25\text{s}$ for a Boss) | None | $1.50\times$ frontier + $3\text{💎}$ |
+| `untouchable` | Beat `[Target]` finishing with **$\ge 75\%$ HP** | None | $1.50\times$ frontier + $3\text{–}4\text{💎}$ |
+| `hardcore_clear` | Beat `[Target]` on **Hard Mode** | Beat #5 | $1.75\times$ frontier + $4\text{–}5\text{💎}$ |
+| `boss_rematch` | Defeat your **highest beaten Boss** | Beat #10 | $1.75\times$ frontier + $4\text{–}5\text{💎}$ |
+| `clean_hands` | Beat `[Target]` without triggering a revive or ad boost | None | $1.50\times$ frontier + $3\text{💎}$ |
+
+### 9.3 Dojo Master Chest & Daily Rerolls
+- **Dojo Master Chest (4/4 Clear):** Completing all 4 contracts unlocks a bonus chest paying **$3\times$ frontier bounty $+ 10\text{💎}$**.
+- **2× Master Chest Ad:** One optional Rewarded Ad doubles the chest payout to **$6\times$ frontier bounty $+ 20\text{💎}$**.
+- **Rerolls:** **1 free reroll/day** on any uncompleted slot, plus **up to 2 extra rerolls/day via Rewarded Ad** (never rolls a duplicate of an existing contract on the board).

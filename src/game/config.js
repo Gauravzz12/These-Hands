@@ -2320,3 +2320,306 @@ export const ENEMY_GROUPS = new Proxy(GROUPS, {
     return val;
   }
 });
+
+// ============================================================================
+// 6. DOJO BOUNTIES 2.0 (2 Cumulative + 2 Showdown, Zero Impossible Contracts)
+// ============================================================================
+export const CUMULATIVE_BOUNTY_POOL = [
+  {
+    id: 'crit_hunter',
+    title: 'Crit Hunter',
+    metric: 'crits',
+    goals: [15, 30, 50],
+    gems: [2, 3, 4],
+    coinMult: 1.25,
+    isUnlocked: () => true,
+    formatDesc: (g) => `Land ${g} total Crits across any fights.`,
+  },
+  {
+    id: 'stun_brawler',
+    title: 'Stun Brawler',
+    metric: 'stuns',
+    goals: [4, 8, 15],
+    gems: [2, 3, 4],
+    coinMult: 1.25,
+    isUnlocked: (s) => (s?.attrs?.stun || 0) >= 1,
+    formatDesc: (g) => `Trigger ${g} total Stuns across any fights.`,
+  },
+  {
+    id: 'special_show',
+    title: 'Special Show',
+    metric: 'specialsUsed',
+    goals: [3, 6, 10],
+    gems: [2, 3, 3],
+    coinMult: 1.25,
+    isUnlocked: (s) => (s?.highestStageCleared || 0) >= 10 || Boolean(s?.hasNonClassicSkin),
+    formatDesc: (g) => `Fire ${g} Specials or Skin Powers across any fights.`,
+  },
+  {
+    id: 'bullseye',
+    title: 'Bullseye',
+    metric: 'weakSpotsHit',
+    goals: [3, 6, 10],
+    gems: [3, 3, 4],
+    coinMult: 1.25,
+    isUnlocked: (s) => Boolean(s?.skills?.precisionInstinct),
+    formatDesc: (g) => `Tap ${g} Weak Spots across any fights.`,
+  },
+  {
+    id: 'parry_master',
+    title: 'Parry Master',
+    metric: 'parries',
+    goals: [3, 6, 10],
+    gems: [3, 4, 4],
+    coinMult: 1.25,
+    isUnlocked: (s) => Boolean(s?.skills?.deflect),
+    formatDesc: (g) => `Land ${g} Parries across any fights.`,
+  },
+  {
+    id: 'frenzy_unleashed',
+    title: 'Frenzy Unleashed',
+    metric: 'frenzies',
+    goals: [1, 2, 3],
+    gems: [3, 4, 5],
+    coinMult: 1.25,
+    isUnlocked: (s) => Boolean(s?.skills?.frenzy),
+    formatDesc: (g) => `Activate Frenzy ${g} time${g > 1 ? 's' : ''}.`,
+  },
+  {
+    id: 'win_streak',
+    title: 'Win Streak',
+    metric: 'winStreak',
+    goals: [3, 5, 8],
+    gems: [2, 3, 4],
+    coinMult: 1.25,
+    isUnlocked: () => true,
+    formatDesc: (g) => `Win ${g} fights in a row.`,
+  },
+  {
+    id: 'combo_streak',
+    title: 'Combo Streak',
+    metric: 'maxCombo',
+    goals: [15, 30, 60],
+    gems: [2, 3, 4],
+    coinMult: 1.25,
+    isUnlocked: (s) => Boolean(s?.skills?.onTarget),
+    formatDesc: (g) => `Reach a ${g}-hit combo streak across fights.`,
+  },
+];
+
+export const SHOWDOWN_BOUNTY_POOL = [
+  {
+    id: 'speed_blitz',
+    title: 'Speed Blitz',
+    gems: [3, 3, 3],
+    coinMult: 1.50,
+    bossOnly: false,
+    requiresMultiHit: false,
+    isUnlocked: () => true,
+    formatDesc: (target) => {
+      const sec = target.isBoss ? 25 : 15;
+      return `Defeat ${target.name} (#${target.stage}) in under ${sec}s.`;
+    },
+  },
+  {
+    id: 'untouchable',
+    title: 'Untouchable',
+    gems: [3, 3, 4],
+    coinMult: 1.50,
+    bossOnly: false,
+    requiresMultiHit: false,
+    isUnlocked: () => true,
+    formatDesc: (target) => `Defeat ${target.name} (#${target.stage}) with at least 75% HP left.`,
+  },
+  {
+    id: 'clean_hands',
+    title: 'Clean Hands',
+    gems: [3, 3, 3],
+    coinMult: 1.50,
+    bossOnly: false,
+    requiresMultiHit: false,
+    isUnlocked: () => true,
+    formatDesc: (target) => `Defeat ${target.name} (#${target.stage}) without revives or ad boosts.`,
+  },
+  {
+    id: 'no_specials',
+    title: 'No Specials',
+    gems: [2, 3, 3],
+    coinMult: 1.50,
+    bossOnly: false,
+    requiresMultiHit: false,
+    isUnlocked: (s) => (s?.highestStageCleared || 0) >= 10 || Boolean(s?.hasNonClassicSkin),
+    formatDesc: (target) => `Defeat ${target.name} (#${target.stage}) without Specials or Skin Powers.`,
+  },
+  {
+    id: 'hardcore_clear',
+    title: 'Hardcore Clear',
+    gems: [4, 4, 5],
+    coinMult: 1.75,
+    bossOnly: false,
+    requiresMultiHit: false,
+    isUnlocked: (s) => (s?.highestStageCleared || 0) >= 5,
+    formatDesc: (target) => `Defeat ${target.name} (#${target.stage}) on Hard Mode.`,
+  },
+  {
+    id: 'boss_rematch',
+    title: 'Boss Rematch',
+    gems: [4, 5, 5],
+    coinMult: 1.75,
+    bossOnly: true,
+    requiresMultiHit: false,
+    isUnlocked: (s) => (s?.highestStageCleared || 0) >= 10,
+    formatDesc: (target) => `Defeat Boss ${target.name} (#${target.stage}).`,
+  },
+];
+
+export function getBountyTierIndex(highestStageCleared) {
+  if (highestStageCleared >= 36) return 2; // Late
+  if (highestStageCleared >= 16) return 1; // Mid
+  return 0;                                // Early
+}
+
+function pickRandom(list, rng = Math.random) {
+  return list[Math.floor(rng() * list.length)];
+}
+
+export function pickShowdownTarget(state, enemiesByStage = {}, bossOnly = false, rng = Math.random) {
+  const highest = Math.min(50, state?.highestStageCleared || 3);
+
+  if (bossOnly) {
+    const bossStage = Math.max(10, Math.floor(highest / 10) * 10);
+    const boss = enemiesByStage[bossStage] || enemiesByStage[bossStage - 1];
+    return { stage: bossStage, name: boss?.name || `Stage ${bossStage} Boss`, hp: boss?.hp || 1, isBoss: true };
+  }
+
+  const minStage = Math.max(3, highest - 4);
+  const candidates = [];
+  for (let st = minStage; st <= highest; st++) {
+    const enemy = enemiesByStage[st] || enemiesByStage[st - 1];
+    candidates.push({
+      stage: st,
+      name: enemy?.name || `Stage ${st}`,
+      hp: enemy?.hp || 1,
+      isBoss: st % 10 === 0,
+    });
+  }
+  return pickRandom(candidates, rng);
+}
+
+export function buildCumulativeContract(template, tierIndex) {
+  const goal = template.goals[tierIndex];
+  return {
+    bucket: 'CUMULATIVE',
+    id: template.id,
+    title: template.title,
+    metric: template.metric,
+    goal,
+    progress: 0,
+    completed: false,
+    claimed: false,
+    coinMult: template.coinMult,
+    gems: template.gems[tierIndex],
+    desc: template.formatDesc(goal),
+  };
+}
+
+export function buildShowdownContract(template, tierIndex, target) {
+  return {
+    bucket: 'SHOWDOWN',
+    id: template.id,
+    title: template.title,
+    targetStage: target.stage,
+    targetName: target.name,
+    isBossTarget: target.isBoss,
+    goal: 1,
+    progress: 0,
+    completed: false,
+    claimed: false,
+    coinMult: template.coinMult,
+    gems: template.gems[tierIndex],
+    desc: template.formatDesc(target),
+  };
+}
+
+export function generateDailyDojoBounties(state, enemiesByStage = {}, rng = Math.random) {
+  const highest = state?.highestStageCleared || 0;
+  if (highest < 3) return null;
+
+  const tierIndex = getBountyTierIndex(highest);
+  const avgSlapDmg = Math.max(1, state?.avgSlapDmg || 1);
+
+  // 1. Pick 2 distinct Cumulative contracts
+  const cumPool = CUMULATIVE_BOUNTY_POOL.filter((c) => c.isUnlocked(state));
+  const cumPicked = [];
+  while (cumPicked.length < 2 && cumPool.length > 0) {
+    const idx = Math.floor(rng() * cumPool.length);
+    cumPicked.push(buildCumulativeContract(cumPool.splice(idx, 1)[0], tierIndex));
+  }
+
+  // 2. Pick 2 distinct Showdown contracts with TTK safety guard
+  const showPool = SHOWDOWN_BOUNTY_POOL.filter((c) => c.isUnlocked(state));
+  const showPicked = [];
+  let attempts = 0;
+  while (showPicked.length < 2 && showPool.length > 0 && attempts++ < 20) {
+    const idx = Math.floor(rng() * showPool.length);
+    const tpl = showPool[idx];
+    const target = pickShowdownTarget(state, enemiesByStage, tpl.bossOnly, rng);
+
+    // TTK Safety Guard: never assign multi-hit single-fight contracts if target dies in < 8 slaps
+    const estHitsToKill = target.hp / avgSlapDmg;
+    if (tpl.requiresMultiHit && estHitsToKill < 8) continue;
+
+    showPool.splice(idx, 1);
+    showPicked.push(buildShowdownContract(tpl, tierIndex, target));
+  }
+
+  return {
+    contracts: [...cumPicked, ...showPicked],
+    freeRerollsLeft: 1,
+    adRerollsLeft: 2,
+    masterChestClaimed: false,
+  };
+}
+
+export function rerollDojoBounty(board, slotIndex, state, enemiesByStage = {}, method = 'FREE', rng = Math.random) {
+  const current = board?.contracts?.[slotIndex];
+  if (!current || current.completed || current.claimed) {
+    return { ok: false, reason: 'ALREADY_COMPLETED' };
+  }
+  if (method === 'FREE' && board.freeRerollsLeft <= 0) {
+    return { ok: false, reason: 'NO_FREE_REROLLS' };
+  }
+  if (method === 'AD' && board.adRerollsLeft <= 0) {
+    return { ok: false, reason: 'NO_AD_REROLLS' };
+  }
+
+  const tierIndex = getBountyTierIndex(state?.highestStageCleared || 3);
+  const activeIds = new Set(board.contracts.map((c) => c.id));
+
+  let replacement = null;
+  if (current.bucket === 'CUMULATIVE') {
+    const options = CUMULATIVE_BOUNTY_POOL.filter((c) => c.isUnlocked(state) && !activeIds.has(c.id));
+    if (options.length === 0) return { ok: false, reason: 'NO_ALTERNATIVES' };
+    replacement = buildCumulativeContract(pickRandom(options, rng), tierIndex);
+  } else {
+    const options = SHOWDOWN_BOUNTY_POOL.filter((c) => c.isUnlocked(state) && !activeIds.has(c.id));
+    if (options.length === 0) return { ok: false, reason: 'NO_ALTERNATIVES' };
+    const tpl = pickRandom(options, rng);
+    const target = pickShowdownTarget(state, enemiesByStage, tpl.bossOnly, rng);
+    replacement = buildShowdownContract(tpl, tierIndex, target);
+  }
+
+  board.contracts[slotIndex] = replacement;
+  if (method === 'FREE') board.freeRerollsLeft -= 1;
+  if (method === 'AD') board.adRerollsLeft -= 1;
+
+  return { ok: true, contract: replacement };
+}
+
+export function getDojoMasterChestReward(frontierBounty, doubledByAd = false) {
+  const mult = doubledByAd ? 2 : 1;
+  return {
+    coins: Math.round(frontierBounty * 3 * mult),
+    gems: 10 * mult,
+  };
+}

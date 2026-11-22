@@ -366,7 +366,7 @@ namespace IdleSlapper.Config
         public static double CalculateSlapCoins(double stageBounty, double slapDamage, double enemyMaxHp, bool isCrit, bool isLucky, double coinMult)
         {
             double dmgRatio = enemyMaxHp > 0 ? Math.Min(1.0, slapDamage / enemyMaxHp) : 0.05;
-            double critFactor = isCrit ? 1.40 : 1.0;
+            double critFactor = isCrit ? 1.35 : 1.0;
             double luckyFactor = isLucky ? 2.50 : 1.0;
             double coins = 0.14 * stageBounty * Math.Pow(dmgRatio, 0.45) * critFactor * luckyFactor * coinMult;
             return Math.Max(1.0, Math.Round(coins, MidpointRounding.AwayFromZero));

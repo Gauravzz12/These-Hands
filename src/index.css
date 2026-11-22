@@ -5201,6 +5201,15 @@ margin-top: 7px;
 .contract-card.done{opacity:.6}
 .contract-done-chip{display:flex;align-items:center;padding:0 10px;font-family:Bungee,cursive;font-size:10px;color:#166534;background:#bbf7d0;border:2px solid #221407;border-radius:999px;white-space:nowrap}
 .contract-alldone{margin-top:8px;text-align:center;font-family:Bungee,cursive;font-size:11px;color:#166534;background:#dcfce7;border:2.5px solid #221407;border-radius:10px;padding:7px 8px;box-shadow:2px 2px 0 #221407}
+.contract-claim-btn{background:#059669;color:#fff;border:2px solid #221407;border-radius:9px;box-shadow:0 3px 0 #221407;font-family:'Bungee',cursive;font-size:11px;padding:6px 12px;cursor:pointer}
+.contract-claim-btn:active{transform:translateY(2px);box-shadow:0 1px 0 #221407}
+.contract-reroll-btn{background:#fffdf4;color:#221407;border:2px solid #221407;border-radius:8px;box-shadow:0 2px 0 #221407;font-family:'Bungee',cursive;font-size:9.5px;padding:4px 8px;cursor:pointer}
+.contract-reroll-btn:active{transform:translateY(1px);box-shadow:0 1px 0 #221407}
+.contract-reroll-btn.ad{background:#fef3c7;color:#92400e}
+.contract-master-box{margin-top:10px;background:#fff8e7;border:2.5px solid #221407;border-radius:12px;box-shadow:0 3px 0 #221407;padding:12px;text-align:center}
+.contract-master-btn{flex:1;background:#059669;color:#fff;border:2.5px solid #221407;border-radius:10px;box-shadow:0 3px 0 #221407;font-family:'Bungee',cursive;font-size:11px;padding:8px 12px;cursor:pointer}
+.contract-master-btn.ad{background:#f59e0b;color:#221407}
+.contract-master-btn:active{transform:translateY(2px);box-shadow:0 1px 0 #221407}
 .btb-head{display:flex;justify-content:space-between;align-items:center;font-family:Bungee,cursive;font-size:12px;margin:0 2px 8px;color:#221407}
 .btb-foot{font-family:Nunito,sans-serif;font-weight:700;font-size:9.5px;color:#5b4a2f;text-align:center;margin-top:6px}
 .btc-league{border:2.5px solid #221407;border-radius:10px;margin-bottom:5px;background:#fff;overflow:hidden}
