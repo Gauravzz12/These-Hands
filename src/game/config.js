@@ -174,7 +174,7 @@ export const CONFIG = {
     "stunDurCap": 1.4,
     "defensePerLevel": 0.01,
     "defenseCap": 0.4,
-    "adOverdriveMult": 1.75
+    "adOverdriveMult": 2.0
   },
   "enemyProgression": {
     "hp": {
@@ -560,7 +560,7 @@ export const CONFIG = {
       "tier": 1,
       "cost": 250,
       "prereq": "basic",
-      "fx": "+20% Max HP permanently."
+      "fx": "+15% Max HP permanently."
     },
     {
       "id": "strongerHands",
@@ -886,9 +886,9 @@ export const CONFIG = {
     },
     {
       "level": 14,
-      "id": "secondWind",
-      "name": "Second Wind",
-      "fx": "Auto-revive once per fight at 30% HP + 1.5s invulnerability."
+      "id": "ironWill",
+      "name": "Iron Will",
+      "fx": "+15% Max HP and +20% healing from all sources."
     },
     {
       "level": 16,
@@ -904,9 +904,9 @@ export const CONFIG = {
     },
     {
       "level": 20,
-      "id": "counterCadence",
-      "name": "Counter Cadence",
-      "fx": "After an un-parried hit, your next slap deals 1.80x damage."
+      "id": "riposteMastery",
+      "name": "Riposte Mastery",
+      "fx": "Successful parries strike back at 2.2x damage (up from 1.5x) and grant +10 Frenzy meter."
     },
     {
       "level": 22,
@@ -964,9 +964,9 @@ export const CONFIG = {
     },
     {
       "level": 40,
-      "id": "godhandAwakening",
-      "name": "Godhand Awakening",
-      "fx": "Every 25th slap deals 3.0x shockwave damage + 1.0s stun."
+      "id": "thunderFocus",
+      "name": "Thunder Focus",
+      "fx": "Cadence strikes (Seismic Slam, Rapid Barrage, Yellow & Black Belt strikes) deal +25% bonus damage."
     },
     {
       "level": 42,
@@ -996,7 +996,7 @@ export const CONFIG = {
       "level": 50,
       "id": "transcendentHand",
       "name": "Transcendent Hand",
-      "fx": "1.30x Slap Damage, 1.25x Max HP, and +10% Slap Speed."
+      "fx": "+10% slap speed and +15% crit damage."
     }
   ],
   "abilityFx": {
@@ -1045,7 +1045,14 @@ export const CONFIG = {
     "sovereignsGuardHealCut": 0.7,
     "transcendentDmg": 1.3,
     "transcendentHpPct": 0.25,
-    "transcendentSpeed": 0.9
+    "transcendentSpeed": 0.9,
+    "ironWillHpPct": 0.15,
+    "ironWillHealPct": 0.20,
+    "riposteCounterMult": 2.2,
+    "riposteFrenzyGain": 10,
+    "thunderFocusCadencePct": 0.25,
+    "transcendentCritDmg": 0.15,
+    "grandmasterDmg": 1.30
   },
   "boss": {
     "enrageBelow": 0.4,
@@ -1795,7 +1802,7 @@ export const CONFIG = {
       "frontierMult": 4,
       "gems": 200,
       "tagline": "The Webbed Crusader Set",
-      "desc": "Equip the Spider-Man glove (+10% Slap Speed & Web Yank stun) plus instant coin and gem boost!"
+      "desc": "Equip the Spider-Man glove plus instant coin and gem boost!"
     },
     {
       "id": "weapon_x",
@@ -1808,7 +1815,7 @@ export const CONFIG = {
       "frontierMult": 10,
       "gems": 400,
       "tagline": "Adamantium Rage Set",
-      "desc": "Unleash Wolverine (+8% Crit Chance & Berserker Barrage bleeding slashes) with heavy gold and gems."
+      "desc": "Unleash Wolverine with heavy gold and gems."
     },
     {
       "id": "inferno",
@@ -1821,7 +1828,7 @@ export const CONFIG = {
       "frontierMult": 22,
       "gems": 800,
       "tagline": "Lord of Asgard Set",
-      "desc": "Harness Thor (+10% Damage & Mjolnir Slam lightning strikes) with massive coin and gem reserves."
+      "desc": "Harness Thor with massive coin and gem reserves."
     },
     {
       "id": "dragon",
@@ -1834,7 +1841,7 @@ export const CONFIG = {
       "frontierMult": 45,
       "gems": 1600,
       "tagline": "Gamma Breaker Set",
-      "desc": "Smash obstacles with Hulk (+20% Damage & screen-shaking Gamma Punch) alongside a colossal treasury."
+      "desc": "Smash obstacles with Hulk alongside a colossal treasury."
     },
     {
       "id": "cosmic",
@@ -1994,7 +2001,7 @@ export const CONFIG = {
       "ref": "gem_mountain"
     }
   ],
-  "appVersion": "3.2.0 · Balance v3.2 (Stages 1–50 + Worlds 1–2 · Zero-Taper Coins · Playthrough-Verified)"
+  "appVersion": "3.2.1 · Balance v3.2.1 (Progression & Economy Patch)"
 };
 
 export const GROUPS = [
@@ -2046,9 +2053,9 @@ export const CHAPTER_CAPS = [
   { reqBossIdx: -1, maxPlayerLv: 10, maxPowerLv: 12, caps: { power: 12, speed: 8,  critChance: 10, critDamage: 12, combo: 12, coinMult: 12, defense: 10, bossDamage: 10, vampirism: 10, stun: 10, luck: 10, accuracy: 4 },  lockLabel: "DEFEAT STAGE #10 TO UNLOCK" },
   { reqBossIdx: 9,  maxPlayerLv: 18, maxPowerLv: 24, caps: { power: 24, speed: 13, critChance: 18, critDamage: 22, combo: 22, coinMult: 22, defense: 18, bossDamage: 18, vampirism: 18, stun: 18, luck: 18, accuracy: 6 },  lockLabel: "DEFEAT STAGE #20 TO UNLOCK" },
   { reqBossIdx: 19, maxPlayerLv: 26, maxPowerLv: 36, caps: { power: 36, speed: 18, critChance: 26, critDamage: 32, combo: 32, coinMult: 32, defense: 26, bossDamage: 26, vampirism: 26, stun: 26, luck: 26, accuracy: 8 },  lockLabel: "DEFEAT STAGE #30 TO UNLOCK" },
-  { reqBossIdx: 29, maxPlayerLv: 33, maxPowerLv: 48, caps: { power: 48, speed: 21, critChance: 33, critDamage: 42, combo: 42, coinMult: 42, defense: 32, bossDamage: 32, vampirism: 36, stun: 34, luck: 34, accuracy: 11 }, lockLabel: "DEFEAT STAGE #40 TO UNLOCK" },
-  { reqBossIdx: 39, maxPlayerLv: 38, maxPowerLv: 60, caps: { power: 60, speed: 23, critChance: 39, critDamage: 52, combo: 52, coinMult: 52, defense: 36, bossDamage: 36, vampirism: 36, stun: 42, luck: 42, accuracy: 13 }, lockLabel: "DEFEAT DRAGON LORD (#50) TO UNLOCK" },
-  { reqBossIdx: 49, maxPlayerLv: 44, maxPowerLv: 70, caps: { power: 70, speed: 25, critChance: 45, critDamage: 60, combo: 60, coinMult: 60, defense: 40, bossDamage: 40, vampirism: 40, stun: 47, luck: 47, accuracy: 14 }, lockLabel: "DEFEAT RAVANA (ASURA REALM) TO UNLOCK" },
+  { reqBossIdx: 29, maxPlayerLv: 35, maxPowerLv: 48, caps: { power: 48, speed: 21, critChance: 33, critDamage: 42, combo: 42, coinMult: 42, defense: 32, bossDamage: 32, vampirism: 36, stun: 34, luck: 34, accuracy: 11 }, lockLabel: "DEFEAT STAGE #40 TO UNLOCK" },
+  { reqBossIdx: 39, maxPlayerLv: 40, maxPowerLv: 60, caps: { power: 60, speed: 23, critChance: 39, critDamage: 52, combo: 52, coinMult: 52, defense: 36, bossDamage: 36, vampirism: 36, stun: 42, luck: 42, accuracy: 13 }, lockLabel: "DEFEAT DRAGON LORD (#50) TO UNLOCK" },
+  { reqBossIdx: 49, maxPlayerLv: 45, maxPowerLv: 70, caps: { power: 70, speed: 25, critChance: 45, critDamage: 60, combo: 60, coinMult: 60, defense: 40, bossDamage: 40, vampirism: 40, stun: 47, luck: 47, accuracy: 14 }, lockLabel: "DEFEAT RAVANA (ASURA REALM) TO UNLOCK" },
 ];
 export function getProgressionCaps(defeated, asuraFinal) {
   if (asuraFinal) return { maxPlayerLv: 50, maxPowerLv: 80, caps: { power: 80, speed: 25, critChance: 45, critDamage: 65, combo: 65, coinMult: 65, defense: 40, bossDamage: 40, vampirism: 40, stun: 50, luck: 50, accuracy: 14 }, lockLabel: "MAX CHAPTER REACHED" };
@@ -2061,7 +2068,7 @@ export function getProgressionCaps(defeated, asuraFinal) {
 export const BELT_RANKS = {
   5:  { id: 'yellow',      name: 'Yellow Belt — Shockwave',      reqStage: 5,   desc: 'Every 5th slap deals 2x damage + screen shake.' },
   10: { id: 'orange',      name: 'Orange Belt — Vampire Grip',   reqStage: 10,  desc: 'Every 8th slap heals 3% Max HP.' },
-  15: { id: 'green',       name: 'Green Belt — Second Wind',     reqStage: 15,  desc: 'Survive a fatal blow once per fight at 30% HP + 1s invulnerability.' },
+  15: { id: 'green',       name: 'Green Belt — Second Wind',     reqStage: 15,  desc: 'Survive a fatal blow once per fight at 30% HP + 1.5s invulnerability.' },
   20: { id: 'blue',        name: 'Blue Belt — Counter Slap',     reqStage: 20,  desc: 'Taking an un-parried hit charges your next slap to 2x damage.' },
   25: { id: 'purple',      name: 'Purple Belt — Boss Breaker',   reqStage: 25,  desc: '+25% damage vs Elites/Bosses & reduces boss self-heals by 30%.' },
   30: { id: 'brown',       name: "Brown Belt — Titan's Guard",   reqStage: 30,  desc: 'Below 40% HP: take -25% damage & slap +15% faster.' },
@@ -2106,16 +2113,25 @@ export function getLevelUpCost(currentLevel) {
   const lv = Math.max(1, currentLevel != null ? currentLevel : 1);
   if (lv >= 50) return Infinity;
 
+  // v3.2.1 tapered curve: x1.70 (1-10) / step into 11 keeps x1.45 (51,586 anchor) /
+  // x1.37 (12-20) / x1.34 (21-30) / x1.29 (31-40) / x1.28 (41-50)
   let baseCost;
   const costAt10 = 300 * Math.pow(1.70, 9);                // 35,576
-  const costAt30 = costAt10 * Math.pow(1.45, 20);          // ~59.9M
+  const costAt11 = costAt10 * 1.45;                        // 51,586 (spec anchor, unchanged)
+  const costAt20 = costAt11 * Math.pow(1.37, 9);
+  const costAt30 = costAt20 * Math.pow(1.34, 10);
+  const costAt40 = costAt30 * Math.pow(1.29, 10);
 
   if (lv <= 10) {
     baseCost = 300 * Math.pow(1.70, lv - 1);
+  } else if (lv <= 20) {
+    baseCost = costAt11 * Math.pow(1.37, lv - 11);
   } else if (lv <= 30) {
-    baseCost = costAt10 * Math.pow(1.45, lv - 10);
+    baseCost = costAt20 * Math.pow(1.34, lv - 20);
+  } else if (lv <= 40) {
+    baseCost = costAt30 * Math.pow(1.29, lv - 30);
   } else {
-    baseCost = costAt30 * Math.pow(1.33, lv - 30);
+    baseCost = costAt40 * Math.pow(1.28, lv - 40);
   }
 
   // 1.5x Belt Promotion surcharge on levels 4->5, 9->10, ..., 49->50
