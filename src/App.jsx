@@ -793,6 +793,26 @@ export default function App() {
         </div>
       </div>
 
+      <div id="sigIntel" className="sig-intel" role="dialog" aria-label="Enemy intel">
+        <div className="si-card">
+          <img id="siSpr" alt="" />
+          <div className="si-name" id="siName"></div>
+          <div className="si-meta" id="siMeta"></div>
+          <div className="si-stats" id="siStats"></div>
+          <div className="si-spec">
+            <div className="si-spec-name" id="siSpecName"></div>
+            <div className="si-spec-full" id="siSpecFull"></div>
+            <div className="si-spec-cad" id="siCad"></div>
+            <div className="si-tip" id="siTip"></div>
+          </div>
+          <div className="si-heal" id="siHeal"></div>
+          <div className="si-btns">
+            <button id="siBack" className="ctl-btn">BACK</button>
+            <button id="siFight" className="ctl-btn primary">FIGHT →</button>
+          </div>
+        </div>
+      </div>
+
       <div id="skillRewardOverlay" role="dialog" aria-label="Skill reward" style={{'display': 'none'}}>
         <div className="sr-card">
           <div className="sr-badge">🏆 SKILL REWARD!</div>
