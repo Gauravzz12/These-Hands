@@ -2631,6 +2631,7 @@ display: flex; align-items: center; justify-content: center;
 .lu-new { font-size: 10px; font-weight: 800; letter-spacing: .12em; color: var(--accent); }
 .lu-name { font-family: "Bungee", "Nunito", sans-serif; font-size: 19px; line-height: 1.15; margin-top: 1px; }
 .lu-fx { font-size: 12.5px; font-weight: 700; color: var(--ink-soft); line-height: 1.35; margin-top: 2px; }
+.lu-gains { margin-top: 13px; padding-top: 10px; border-top: 2px dashed var(--chrome-edge); font-size: 12.5px; font-weight: 800; color: var(--ink); line-height: 1.45; }
 .lu-hint { margin-top: 13px; font-size: 11px; font-weight: 800; letter-spacing: .06em; color: var(--ink-soft); }
 #abilitiesWrap { padding: 14px 12px calc(16px + env(safe-area-inset-bottom)); }
 .ab-row {

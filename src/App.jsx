@@ -788,6 +788,7 @@ export default function App() {
               <div className="lu-fx" id="luFx"></div>
             </div>
           </div>
+          <div className="lu-gains" id="luGains"></div>
           <div className="lu-hint">TAP TO KEEP SLAPPING</div>
         </div>
       </div>
