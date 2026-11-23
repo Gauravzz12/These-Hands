@@ -5334,3 +5334,20 @@ margin-top: 7px;
   padding: 20px 16px; background: rgba(24, 12, 4, 0.72);
 }
 .sr-icon.big img { width: 52px; height: 52px; image-rendering: auto; border-radius: 12px; }
+/* === Enemy intel sheet (pre-fight special-attack info) === */
+.sig-intel{position:fixed;inset:0;background:rgba(24,12,2,.55);display:none;align-items:center;justify-content:center;z-index:90;padding:18px}
+.sig-intel.open{display:flex}
+.si-card{background:#fff6e5;border:3px solid #221407;border-radius:18px;box-shadow:6px 6px 0 #221407;max-width:340px;width:100%;padding:18px 16px 16px;text-align:center}
+.si-card img{width:96px;height:96px;object-fit:contain}
+.si-card img.sil{filter:brightness(0)}
+.si-name{font-family:Bungee,cursive;font-size:20px;color:#221407;margin-top:4px}
+.si-meta{font-size:11px;font-weight:800;letter-spacing:.4px;color:#8a6a45;margin-top:2px}
+.si-stats{font-size:12.5px;font-weight:800;color:#4a2f16;margin-top:8px}
+.si-spec{margin-top:12px;background:#fde8e4;border:2.5px solid #221407;border-radius:12px;padding:10px 12px;text-align:left}
+.si-spec-name{font-weight:900;color:#a02318;font-size:14px}
+.si-spec-full{font-size:13px;font-weight:600;color:#4a2f16;margin-top:3px;line-height:1.45}
+.si-spec-cad{font-size:10.5px;font-weight:900;letter-spacing:.3px;color:#a02318;margin-top:7px}
+.si-tip{font-size:12.5px;font-weight:700;color:#27567a;margin-top:7px;line-height:1.4}
+.si-heal{font-size:12px;font-weight:800;color:#7a4a21;margin-top:9px}
+.si-btns{display:flex;gap:10px;margin-top:14px}
+.si-btns .ctl-btn{flex:1}
