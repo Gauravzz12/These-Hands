@@ -175,7 +175,7 @@ export default function App() {
             </button>
 
             <button className="hub-card" id="hubRushCard" type="button">
-              <span className="hc-ico gold"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M3 7l4.5 4L12 4l4.5 7L21 7l-1.6 10.2a2 2 0 0 1-2 1.8H6.6a2 2 0 0 1-2-1.8L3 7zm3.4 13.5h11.2V22H6.4v-1.5z" fill="currentColor"/></svg></span>
+              <span className="hc-ico gold"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M1.6 9.2h3M1.6 13.4h3" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" fill="none"/><path fillRule="evenodd" d="M5.2 7.6 8.6 11 13 4.8l4.4 6.2 3.4-3.4-1.5 8.6a2 2 0 0 1-2 1.8H8.7a2 2 0 0 1-2-1.8L5.2 7.6zm8.3 2.4-2.4 4h2.1l-1.6 4 3.6-5h-2.2l1.8-2.9h-1.3z" fill="currentColor"/><path d="M8.2 20.6h9.6v1.6H8.2z" fill="currentColor"/></svg></span>
               <span className="hc-main">
                 <span className="hc-title">BOSS RUSH</span>
                 <span className="hc-sub" id="hubRushSub">BEAT THE DARK KNIGHT (#20) TO UNLOCK</span>
@@ -807,6 +807,22 @@ export default function App() {
           </div>
           <button className="ctl-btn sr-claim" id="srClaimBtn" type="button">🎁 CLAIM IT</button>
           <div className="sr-hint">Your left hand joins the fight — slaps alternate L / R, doubling your cycle rate.</div>
+        </div>
+      </div>
+      <div id="specialUnlockOverlay" role="dialog" aria-label="Special unlocked" style={{'display': 'none'}}>
+        <div className="sr-card">
+          <div className="sr-badge">⚡ NEW SPECIAL UNLOCKED!</div>
+          <div className="sr-title">YOU GOT A SPECIAL!</div>
+          <div className="sr-ability">
+            <div className="sr-icon big"><img id="suIcon" alt="" /></div>
+            <div>
+              <div className="sr-new" id="suBoss">BOSS DEFEATED</div>
+              <div className="sr-name" id="suName"></div>
+              <div className="sr-fx" id="suFx"></div>
+            </div>
+          </div>
+          <button className="ctl-btn sr-claim" id="suClaimBtn" type="button">⚡ CLAIM IT</button>
+          <div className="sr-hint">Find it in the special rail during fights — cast it when its charge is full.</div>
         </div>
       </div>
       <div id="draftOverlay" role="dialog" aria-label="Cornerman draft" style={{'display': 'none'}}>
