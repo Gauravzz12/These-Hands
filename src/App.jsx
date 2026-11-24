@@ -182,14 +182,7 @@ export default function App() {
               </span>
             </button>
 
-            <button className="hub-card" id="hubGauntletCard" type="button">
-              <span className="hub-mode-badge" id="hubGauntletBadge" style={{'display': 'none'}}>✦ NEW TRIO</span>
-              <span className="hc-ico red"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M4 4l7.2 7.2-1.4 1.4L2.6 5.4 4 4zm16 0 1.4 1.4-7.2 7.2-1.4-1.4L20 4zM12.9 13.5l6.6 6.6-1.4 1.4-6.6-6.6 1.4-1.4zM11.1 13.5l1.4 1.4-6.6 6.6-1.4-1.4 6.6-6.6z" fill="currentColor"/></svg></span>
-              <span className="hc-main">
-                <span className="hc-title">TRIO GAUNTLET</span>
-                <span className="hc-sub" id="hubGauntletSub">YOUR CURRENT STAGE'S TRIO · EVERY 30 MIN</span>
-              </span>
-            </button>
+            
 
             <button className="hub-card feature gold" id="hubBlitzCard" type="button">
               <img className="hc-img" src="/enemy-sprites-v2/thumbs/51-golden-dummy-thumb.webp" alt=""/>
@@ -541,7 +534,7 @@ export default function App() {
         <div id="helpScroll">
           <div className="help-card"><div className="help-h">1 · YOUR HANDS DO THE WORK</div><p>Your hands slap on their own — your job is to make every slap count. Coins are paid on <b>every strike</b>, so even a fight you lose still earns. Unlock <b>FRENZY</b> in the skill tree, then land hits to charge its meter — misses don't charge it. When the meter is full, tap the glowing <b>FRENZY!</b> button mid-fight: 10 seconds of +50% damage and +30% speed, unleashed when YOU say so.</p></div>
           <div className="help-card"><div className="help-h">2 · GROW ON THREE FRONTS</div><p><b>Attributes</b> (Power, Speed, Crit, Combo…) are capped by your <b>chapter</b> — beat each chapter's boss to raise the caps, and level up inside them, and every level also grants a permanent perk (Iron Palm, Thick Skin, Vampire Slap…). <b>Skills</b> from the tree are the third front: Second Hand doubles your slap rate, and bosses further in are mathematically impossible without the tree. Attributes alone won't carry you. <b>Precision Instinct</b> in the tree makes a gold weak spot flash on the enemy mid-fight — tap it for a heavy 4.5× precision crit. Fortune Luck makes it appear more often, with a per-fight cap so it never takes over.</p></div>
-          <div className="help-card"><div className="help-h">3 · CLIMB THE ROSTER</div><p>Beat an enemy to unlock the next — 50 of them, in 10 groups, with a boss every 10th. The hub's <b>TRIO GAUNTLET</b> card always offers your current stage's 3 toughest back-to-back (one run every 30 minutes), your HP carrying over, with a small breather heal between fights and your combo halved. It's a bonus challenge mode for extra coins and a first-clear gem — beating enemies is the only thing progression ever asks for. Bosses enrage under 40% HP — faster, harder hits. Beaten enemies can be re-fought any time for coins, and clearing an enemy's group unlocks its <b>HARD</b> rematch on the Levels screen (red button): far tougher, the knockout pays 1.85× a full normal fight’s total payout (slap-coin cap + KO bonus) and a one-time +3 gem bonus.</p></div>
+          <div className="help-card"><div className="help-h">3 · CLIMB THE ROSTER</div><p>Beat an enemy to unlock the next — 50 of them, in 10 groups, with a boss every 10th. Beating enemies is the only thing progression ever asks for. Bosses enrage under 40% HP — faster, harder hits. Beaten enemies can be re-fought any time for coins, and clearing an enemy's group unlocks its <b>HARD</b> rematch on the Levels screen (red button): far tougher, the knockout pays 2.75× a full normal fight’s total payout (slap-coin cap + KO bonus) and a one-time +3 gem bonus.</p></div>
           <div className="help-card"><div className="help-h">4 · EVERY DAY COUNTS</div><p>Defeat the <b>Grumpy Teddy (#5)</b> to unlock the <b>daily chest</b> — a 7-day login streak that pays coins every day and gems on day 7, with amounts that grow with your progress. Defeat the <b>Mischievous Monkey (#10)</b> to unlock <b>daily quests</b>. Check <b>Awards</b> for lifetime stats and achievements (every achievement pays gems), and spend gems in the <b>Shop</b> on hand skins, coin packs and the Offline Earnings unlock.</p></div>
           <div className="help-card"><div className="help-h">5 · WATCH THE COUNTDOWN</div><p>Enemies hit back on the timer under their HP bar. Your HP refills every fight, and levelling up is also defence. If you're walled, the answer is almost always: farm the best enemy you can beat, buy what's cheapest for damage, and come back.</p></div>
           <div className="help-card"><div className="help-h">6 · SPECIAL SKILLS</div><p>Bosses drop <b>special skills</b>: the Mischievous Monkey (#10) grants <b>Double Slap</b> — both hands at once — and Shogun (#30) grants <b>Uppercut Punch</b>. Fire them from the specials rail in battle, and upgrade them to Lv5 inside the <b>Skills</b> tab. Equipped hand skins also grant small bonuses — check the Shop cards.</p></div>
@@ -658,7 +651,7 @@ export default function App() {
           <div id="endTrophy" style={{'display': 'none'}}><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2h12v3h4v2a5 5 0 0 1-5 5h-.42A6 6 0 0 1 13 15.92V18h4v3H7v-3h4v-2.08A6 6 0 0 1 7.42 12H7a5 5 0 0 1-5-5V5h4V2zm-2 5a3 3 0 0 0 3 3V7H4zm16 0h-3v3a3 3 0 0 0 3-3z" fill="currentColor"/></svg></div>
           <div className="end-head" id="endHead">KNOCKOUT!</div>
           <img id="endSprite" alt="" />
-          <div id="endGauntletTrio" className="end-gauntlet-trio" style={{'display': 'none'}}></div>
+          
           <div className="end-sub" id="endSub"></div>
           <div className="end-unlock" id="endUnlock"></div>
           <div className="end-stats" id="endStats"></div>
@@ -809,6 +802,19 @@ export default function App() {
           <div className="si-btns">
             <button id="siBack" className="ctl-btn">BACK</button>
             <button id="siFight" className="ctl-btn primary">FIGHT →</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="rushTierOverlay" className="sig-intel" role="dialog" aria-label="Boss Rush tier">
+        <div className="si-card">
+          <div className="si-name">👑 BOSS RUSH</div>
+          <div className="si-meta">PICK YOUR TIER · ONE 1H COOLDOWN, SHARED BY ALL TIERS</div>
+          <div className="si-btns" style={{'flexDirection': 'column'}}>
+            <button className="ctl-btn primary" id="rtCampaign" type="button">👑 CAMPAIGN RUSH · ×2.00 BONUS</button>
+            <button className="ctl-btn primary" id="rtAsura" type="button">🔥 ASURA RUSH · ×2.50 · +10 EMBERS</button>
+            <button className="ctl-btn primary" id="rtShadow" type="button">🌑 SHADOW RUSH · ×3.00 · +20 EMBERS</button>
+            <button className="ctl-btn" id="rtBack" type="button">← BACK</button>
           </div>
         </div>
       </div>
