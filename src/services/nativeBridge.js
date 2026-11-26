@@ -6,16 +6,18 @@ import { AdMob, RewardAdPluginEvents, InterstitialAdPluginEvents } from '@capaci
 import { Purchases, PRODUCT_CATEGORY, LOG_LEVEL } from '@revenuecat/purchases-capacitor';
 import { CONFIG } from '../game/config.js';
 
-// Google AdMob Rewarded Ad Unit ID
-const REWARDED_AD_UNIT_ID = 'ca-app-pub-4838625298188198/2176399244';
+// Google AdMob Ad Unit IDs — the single source of truth is CONFIG.ads.admob
+// in src/game/config.js. To go live on a format: AdMob console -> Apps ->
+// Idle Slapper -> Ad units -> Add ad unit, then paste the ID into
+// CONFIG.ads.admob. While a live ID is empty, Google's TEST unit is used
+// for that format and it earns nothing.
+const ADMOB_CFG = (CONFIG && CONFIG.ads && CONFIG.ads.admob) || {};
+const REWARDED_AD_UNIT_ID = ADMOB_CFG.rewardedId || 'ca-app-pub-4838625298188198/2176399244';
 // Official Google AdMob Test Rewarded Ad Unit ID (fallback if live unit unverified)
 const TEST_REWARDED_AD_UNIT_ID = 'ca-app-pub-3940256099942544/5224354917';
-
-// Google AdMob Interstitial + Banner Ad Unit IDs
-// Live unit IDs from AdMob console (can be configured here):
-const INTERSTITIAL_AD_UNIT_ID = '';
+const INTERSTITIAL_AD_UNIT_ID = ADMOB_CFG.interstitialId || '';
 const TEST_INTERSTITIAL_AD_UNIT_ID = 'ca-app-pub-3940256099942544/1033173712';
-const BANNER_AD_UNIT_ID = '';
+const BANNER_AD_UNIT_ID = ADMOB_CFG.bannerId || '';
 const TEST_BANNER_AD_UNIT_ID = 'ca-app-pub-3940256099942544/6300978111';
 
 // RevenueCat Public API Key (Google Play)
@@ -118,6 +120,15 @@ export const NativeBridge = {
         initializeForTesting: false,
       });
       this.admobInitialized = true;
+      // Say loudly which formats are earning (live) vs on Google test units.
+      this.adUnits = {
+        rewarded: REWARDED_AD_UNIT_ID ? 'live' : 'test',
+        interstitial: INTERSTITIAL_AD_UNIT_ID ? 'live' : 'test',
+        banner: BANNER_AD_UNIT_ID ? 'live' : 'test',
+      };
+      const onTest = Object.keys(this.adUnits).filter((k) => this.adUnits[k] === 'test');
+      if (onTest.length) console.warn('[AdMob] Running on Google TEST ad units (no revenue) for: ' + onTest.join(', ') + '. Paste live unit IDs into CONFIG.ads.admob in src/game/config.js.');
+      else console.log('[AdMob] All ad formats are on LIVE units.');
 
       // Setup Rewarded Ad listeners
       AdMob.addListener(RewardAdPluginEvents.Rewarded, (reward) => {
@@ -278,6 +289,14 @@ export const NativeBridge = {
 
   isInterstitialShowing() {
     return !!this.activeInterstitialShowing;
+  },
+
+  adUnitStatus() {
+    return this.adUnits || {
+      rewarded: REWARDED_AD_UNIT_ID ? 'live' : 'test',
+      interstitial: INTERSTITIAL_AD_UNIT_ID ? 'live' : 'test',
+      banner: BANNER_AD_UNIT_ID ? 'live' : 'test',
+    };
   },
 
   // Banner: shown on Home, Stages, and Shop screens
