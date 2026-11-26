@@ -163,7 +163,7 @@ export const CONFIG = {
     "slapMidCapFrac": 0.85,
     "slapCritPayFrac": 0.35,
     "luckCoinMult": 2.5,
-    "vampPerLevel": 0.0006,
+    "vampPerLevel": 0.00035,
     "speedCostLateMult": 3,
     "speedCostLatePow": 6,
     "specialPerLevel": 0.005,
@@ -174,7 +174,7 @@ export const CONFIG = {
     "stunDurPerLevel": 0.018,
     "stunDurCap": 1.4,
     "defensePerLevel": 0.01,
-    "defenseCap": 0.4,
+    "defenseCap": 0.3,
     "adOverdriveMult": 2.0
   },
   "enemyProgression": {
@@ -614,7 +614,7 @@ export const CONFIG = {
       "cost": 18000000,
       "prereq": "clutchSurge",
       "reqBoss": 29,
-      "fx": "+30% Max HP and regenerate 0.4% Max HP/s during fights."
+      "fx": "+30% Max HP and regenerate 0.25% Max HP/s during fights."
     },
     {
       "id": "kineticShield",
@@ -716,7 +716,7 @@ export const CONFIG = {
     "heavyMult": 2.5,
     "staminaHpPct": 1.15,
     "unstoppableHpPct": 1.30,
-    "regen": 0.004,
+    "regen": 0.0025,
     "comboMasteryStacks": 5,
     "comboMasteryPer": 0.005,
     "bossMult": 1.25,
@@ -775,7 +775,7 @@ export const CONFIG = {
       "level": 10,
       "id": "vampireSlap",
       "name": "Vampire Slap",
-      "fx": "Every 8th slap heals 2% Max HP."
+      "fx": "Every 8th slap heals 1% Max HP."
     },
     {
       "level": 12,
@@ -906,7 +906,7 @@ export const CONFIG = {
     "thickSkinHpPct": 0.15,
     "greed": 1.15,
     "vampEvery": 8,
-    "vampHealPct": 0.02,
+    "vampHealPct": 0.01,
     "critSurgeChance": 0.06,
     "critSurgeMult": 0.15,
     "secondWindFrac": 0.3,
@@ -1897,7 +1897,7 @@ export const CONFIG = {
       "ref": "gem_mountain"
     }
   ],
-  "appVersion": "3.4.1 · Dojo Bounty Fix"
+  "appVersion": "3.4.2 · Sustain + Over-Level Scaling"
 };
 
 export const GROUPS = [
