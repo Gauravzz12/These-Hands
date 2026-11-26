@@ -695,9 +695,10 @@ shop+='</div></section>';
 const _lk='<section class="world-block locked"><div class="wg-head">\uD83D\uDD25 WORLD ARTS \u00B7 \uD83C\uDF00 WORLD RELICS</div><div class="st" style="padding:10px 14px">Defeat the Dragon Lord to open the Worlds \u2014 Soul Embers, new powers and relic drops await beyond the portal.</div></section>';html+=_lk;shop+=_lk;
 }
 el.innerHTML=html;const sEl=$("sanctuaryList");if(sEl)sEl.innerHTML=shop;const btns=el.querySelectorAll("[data-wfight]");for(let i=0;i<btns.length;i++){btns[i].addEventListener("click",(ev)=>{ev.stopPropagation();const parts=btns[i].getAttribute("data-wfight").split(":");openSigIntelWorld(parseInt(parts[0],10),parseInt(parts[1],10))})};const hb2=el.querySelectorAll("[data-whard]");for(let i=0;i<hb2.length;i++){hb2[i].addEventListener("click",(ev)=>{ev.stopPropagation();const parts=hb2[i].getAttribute("data-whard").split(":");openSigIntelWorld(parseInt(parts[0],10),parseInt(parts[1],10),true)})}const wp=$("worldsEmbers");if(wp)wp.textContent="\uD83D\uDD25 "+(G.embers||0)+" EMBERS";const ab=document.querySelectorAll("#sanctuaryList [data-art], #worldsList [data-art]");for(let i=0;i<ab.length;i++){ab[i].addEventListener("click",(ev)=>{ev.stopPropagation();buyArt(ab[i].getAttribute("data-art"))})}const rb=document.querySelectorAll("#sanctuaryList [data-relic], #worldsList [data-relic]");const ascb=document.querySelectorAll("[data-ascend]");for(let i=0;i<ascb.length;i++){ascb[i].addEventListener("click",(ev)=>{ev.stopPropagation();ascendRelic(ascb[i].getAttribute("data-ascend"))})}const sp2=$("sanctuaryEmbers");if(sp2)sp2.textContent="\uD83D\uDD25 "+(G.embers||0)+" EMBERS";for(let i=0;i<rb.length;i++){rb[i].addEventListener("click",(ev)=>{ev.stopPropagation();toggleRelic(rb[i].getAttribute("data-relic"))})}}
-function renderSelect(){ensureContracts();const lBtn=$("levelsTestModeBtn");if(lBtn){lBtn.textContent=G.testMode?"TEST: ON":"TEST MODE";lBtn.classList.toggle("off",!G.testMode);lBtn.classList.toggle("active",G.testMode);if(G.testMode){lBtn.style.background="var(--gold)";lBtn.style.color="#2b1c10"}else{lBtn.style.background="";lBtn.style.color=""}}selProgressEl.textContent=G.defeated.size+" / 50 defeated · "+G.hardCleared.size+" hard clears"+(G.testMode?" · ⚡ TEST MODE (ALL UNLOCKED)":"");const prevScroll=selListEl?selListEl.scrollTop:0;let html=contractsHtml();html+='<button class="sel-trio-bar world-portal'+(worldsUnlocked()?"":" req")+'" data-wportal="1"><span class="stb-t">\uD83C\uDF00 WORLDS PORTAL'+(worldsUnlocked()?"":" \uD83D\uDD12")+'</span><span class="stb-s">'+(worldsUnlocked()?"Asura Realm & Shadow Verse \u2014 12 new foes beyond the Dragon Lord":"Defeat the Dragon Lord (enemy 50) to open the portal")+'</span></button>';if((G.lossStreak||0)>=2 && G.hardCleared.size < G.defeated.size){html+='<div class="sel-hard-tip">💡 <b>Need coins for upgrades?</b> Defeat earlier foes on <b>Hard Mode</b> for high lump-sum defeat bounties!</div>';}for(let g=0;g<Math.min(10,GROUPS.length);g++)html+=selectGroupHtml(g);html+='<section class="world-gate gate-levels"><div class="wg-tag">\uD83C\uDF0C BEYOND THE DRAGON LORD</div><div class="wg-banner"><div class="wg-banner-l1">STRONGER CHALLENGERS</div><div class="wg-banner-l2">COMING SOON</div></div><div class="wg-seal '+(G.defeated.has(49)?"open":"shut")+'">'+(G.defeated.has(49)?"\uD83D\uDD13 THE DRAGON LORD HAS FALLEN \u2014 WHAT LIES BEYOND IS STILL TAKING SHAPE":"\uD83D\uDD12 FELL THE DRAGON LORD (ENEMY 50) \u2014 THEN WAIT FOR WHAT LIES BEYOND")+'</div><div class="wg-prog">'+G.defeated.size+' / 50 CHALLENGERS FELLED</div><div class="wg-note">New challengers are being forged past the final gate \u2014 stronger than anything you have slapped so far. When they arrive, this road continues.</div></section>';selListEl.innerHTML=html;wireSelectCards();const cBtns=selListEl.querySelectorAll("[data-contract-fight]");for(let i=0;i<cBtns.length;i++)cBtns[i].addEventListener("click",(ev)=>{ev.stopPropagation();chooseEnemy(parseInt(cBtns[i].getAttribute("data-contract-fight"),10))});const clmBtns=selListEl.querySelectorAll("[data-contract-claim]");for(let i=0;i<clmBtns.length;i++)clmBtns[i].addEventListener("click",(ev)=>{ev.stopPropagation();claimContract(parseInt(clmBtns[i].getAttribute("data-contract-claim"),10))});const rrBtns=selListEl.querySelectorAll("[data-contract-reroll]");for(let i=0;i<rrBtns.length;i++)rrBtns[i].addEventListener("click",(ev)=>{ev.stopPropagation();handleContractReroll(parseInt(rrBtns[i].getAttribute("data-contract-reroll"),10),rrBtns[i].getAttribute("data-method")||"FREE")});const chstBtns=selListEl.querySelectorAll("[data-chest-claim]");for(let i=0;i<chstBtns.length;i++)chstBtns[i].addEventListener("click",(ev)=>{ev.stopPropagation();handleMasterChestClaim(chstBtns[i].getAttribute("data-chest-claim")==="ad")});const wpBtn=selListEl.querySelector("[data-wportal]");if(wpBtn)wpBtn.addEventListener("click",()=>{Sound.unlock();switchTab("worlds")});if(prevScroll>0&&selListEl){selListEl.scrollTop=prevScroll}else{requestAnimationFrame(()=>{const curCard=selListEl.querySelector(".ecard.current");if(curCard)curCard.scrollIntoView({block:"center",behavior:"auto"})})}}function chooseEnemy(idx){if(!enemyUnlocked(idx))return;G.current=idx;G.hardMode=false;G.pendingRespawn=false;Save.store();switchTab("battle")}function startHardFight(idx){if(!hardUnlocked(idx))return;G.current=idx;G.hardMode=true;G.pendingRespawn=false;Save.store();switchTab("battle")}// ===== STREET BRAWL ANOMALIES · CORNERMAN DRAFTS · BLITZ · REFLEX · CONTRACTS · TURF =====
+function renderSelect(){ensureContracts();const lBtn=$("levelsTestModeBtn");if(lBtn){lBtn.textContent=G.testMode?"TEST: ON":"TEST MODE";lBtn.classList.toggle("off",!G.testMode);lBtn.classList.toggle("active",G.testMode);if(G.testMode){lBtn.style.background="var(--gold)";lBtn.style.color="#2b1c10"}else{lBtn.style.background="";lBtn.style.color=""}}selProgressEl.textContent=G.defeated.size+" / 50 defeated · "+G.hardCleared.size+" hard clears"+(G.testMode?" · ⚡ TEST MODE (ALL UNLOCKED)":"");const prevScroll=selListEl?selListEl.scrollTop:0;let html=contractsHtml();html+='<button class="sel-trio-bar world-portal'+(worldsUnlocked()?"":" req")+'" data-wportal="1"><span class="stb-t">\uD83C\uDF00 WORLDS PORTAL'+(worldsUnlocked()?"":" \uD83D\uDD12")+'</span><span class="stb-s">'+(worldsUnlocked()?"Asura Realm & Shadow Verse \u2014 12 new foes beyond the Dragon Lord":"Defeat the Dragon Lord (enemy 50) to open the portal")+'</span></button>';if((G.lossStreak||0)>=2 && G.hardCleared.size < G.defeated.size){html+='<div class="sel-hard-tip">💡 <b>Need coins for upgrades?</b> Defeat earlier foes on <b>Hard Mode</b> for high lump-sum defeat bounties!</div>';}for(let g=0;g<Math.min(10,GROUPS.length);g++)html+=selectGroupHtml(g);html+='<section class="world-gate gate-levels"><div class="wg-tag">\uD83C\uDF0C BEYOND THE DRAGON LORD</div><div class="wg-banner"><div class="wg-banner-l1">STRONGER CHALLENGERS</div><div class="wg-banner-l2">COMING SOON</div></div><div class="wg-seal '+(G.defeated.has(49)?"open":"shut")+'">'+(G.defeated.has(49)?"\uD83D\uDD13 THE DRAGON LORD HAS FALLEN \u2014 WHAT LIES BEYOND IS STILL TAKING SHAPE":"\uD83D\uDD12 FELL THE DRAGON LORD (ENEMY 50) \u2014 THEN WAIT FOR WHAT LIES BEYOND")+'</div><div class="wg-prog">'+G.defeated.size+' / 50 CHALLENGERS FELLED</div><div class="wg-note">New challengers are being forged past the final gate \u2014 stronger than anything you have slapped so far. When they arrive, this road continues.</div></section>';selListEl.innerHTML=html;wireSelectCards();const cBtns=selListEl.querySelectorAll("[data-contract-fight]");for(let i=0;i<cBtns.length;i++)cBtns[i].addEventListener("click",(ev)=>{ev.stopPropagation();const cIdx=parseInt(cBtns[i].getAttribute("data-contract-fight"),10);if(cBtns[i].getAttribute("data-contract-hard")==="1"){if(hardUnlocked(cIdx))startHardFight(cIdx);else toast("\uD83D\uDD12 Hard Mode unlocks when this foe's whole group is defeated")}else chooseEnemy(cIdx)});const clmBtns=selListEl.querySelectorAll("[data-contract-claim]");for(let i=0;i<clmBtns.length;i++)clmBtns[i].addEventListener("click",(ev)=>{ev.stopPropagation();claimContract(parseInt(clmBtns[i].getAttribute("data-contract-claim"),10))});const rrBtns=selListEl.querySelectorAll("[data-contract-reroll]");for(let i=0;i<rrBtns.length;i++)rrBtns[i].addEventListener("click",(ev)=>{ev.stopPropagation();handleContractReroll(parseInt(rrBtns[i].getAttribute("data-contract-reroll"),10),rrBtns[i].getAttribute("data-method")||"FREE")});const chstBtns=selListEl.querySelectorAll("[data-chest-claim]");for(let i=0;i<chstBtns.length;i++)chstBtns[i].addEventListener("click",(ev)=>{ev.stopPropagation();handleMasterChestClaim(chstBtns[i].getAttribute("data-chest-claim")==="ad")});const wpBtn=selListEl.querySelector("[data-wportal]");if(wpBtn)wpBtn.addEventListener("click",()=>{Sound.unlock();switchTab("worlds")});if(prevScroll>0&&selListEl){selListEl.scrollTop=prevScroll}else{requestAnimationFrame(()=>{const curCard=selListEl.querySelector(".ecard.current");if(curCard)curCard.scrollIntoView({block:"center",behavior:"auto"})})}}function chooseEnemy(idx){if(!enemyUnlocked(idx))return;G.current=idx;G.hardMode=false;G.pendingRespawn=false;Save.store();switchTab("battle")}function startHardFight(idx){if(!hardUnlocked(idx))return;G.current=idx;G.hardMode=true;G.pendingRespawn=false;Save.store();switchTab("battle")}// ===== STREET BRAWL ANOMALIES · CORNERMAN DRAFTS · BLITZ · REFLEX · CONTRACTS · TURF =====
 const ANOMALIES={pinata:{name:"GOLDEN PIÑATA",banner:"🪅 STREET BRAWL — GOLDEN PIÑATA!",sub:"Enemy HP \u00D70.6 · damage halved · slap coins \u00D73 · FLEES in 15s · crack 50% HP for a 1.35\u00D7 bounty chest!"},sudden:{name:"SUDDEN DEATH",banner:"💀 STREET BRAWL — SUDDEN DEATH!",sub:"BOTH sides deal 2.2\u00D7 damage \u2014 win pays 1.4\u00D7 coins"},storm:{name:"WEAK-SPOT STORM",banner:"🎯 STREET BRAWL — WEAK-SPOT STORM!",sub:"Weak spots rain every 1.5s · normal slaps deal half damage"},berserk:{name:"BERSERK CHALLENGER",banner:"😤 STREET BRAWL — BERSERK CHALLENGER!",sub:"Attacks 30% faster \u00B7 immune to stuns \u00B7 +1 \u{1F48E} and 1.35\u00D7 coins on KO"}};
 function bountyTpl(id){return null}
+function enemiesByStageMap(){const m={};for(const e of ENEMIES)m[e.idx+1]=e;return m}
 function ensureContracts(){
   if(!G.bountyBoard||typeof G.bountyBoard!=="object"){
     G.bountyBoard={freeRerollsLeft:1,adRerollsLeft:2,masterChestClaimed:false};
@@ -715,8 +716,9 @@ function ensureContracts(){
         attrs:G.attrs,
         skills:skillsMap,
         hasNonClassicSkin:G.skin&&G.skin!=="classic"
-      },ENEMIES);
+      },enemiesByStageMap());
       if(board){
+        board.v=2;
         G.bountyBoard=board;
         G.contracts=board.contracts;
       }
@@ -726,7 +728,8 @@ function ensureContracts(){
     }
   }else{
     const hasLegacy=Array.isArray(G.contracts)&&G.contracts.some(c=>c&&!c.bucket);
-    if((!G.contracts||!G.contracts.length||hasLegacy)&&(highest>=3||G.testMode)){
+    const staleBoard=Array.isArray(G.contracts)&&G.contracts.length>0&&(!G.bountyBoard||G.bountyBoard.v!==2)&&!G.contracts.some(c=>c&&(c.completed||c.claimed));
+    if((!G.contracts||!G.contracts.length||hasLegacy||staleBoard)&&(highest>=3||G.testMode)){
       const skillsMap={};
       if(Array.isArray(G.skills))G.skills.forEach(s=>{skillsMap[s]=true});
       const board=generateDailyDojoBounties({
@@ -735,8 +738,9 @@ function ensureContracts(){
         attrs:G.attrs,
         skills:skillsMap,
         hasNonClassicSkin:G.skin&&G.skin!=="classic"
-      },ENEMIES);
+      },enemiesByStageMap());
       if(board){
+        board.v=2;
         G.bountyBoard=board;
         G.contracts=board.contracts;
       }
@@ -826,7 +830,7 @@ function handleContractReroll(slot,method){
     hasNonClassicSkin:G.skin&&G.skin!=="classic"
   };
   if(method==="FREE"){
-    const res=rerollDojoBounty(G.bountyBoard,slot,state,ENEMIES,"FREE");
+    const res=rerollDojoBounty(G.bountyBoard,slot,state,enemiesByStageMap(),"FREE");
     if(res.ok){
       G.contracts=G.bountyBoard.contracts;
       Sound.pop();
@@ -839,7 +843,7 @@ function handleContractReroll(slot,method){
   }else if(method==="AD"){
     AdsManager.showRewarded("bounty_reroll",(ok)=>{
       if(ok){
-        const res=rerollDojoBounty(G.bountyBoard,slot,state,ENEMIES,"AD");
+        const res=rerollDojoBounty(G.bountyBoard,slot,state,enemiesByStageMap(),"AD");
         if(res.ok){
           G.contracts=G.bountyBoard.contracts;
           Sound.pop();
@@ -935,7 +939,7 @@ function contractsHtml(){
 
       if(isShowdown){
         actionHtml='<div style="display:flex;flex-direction:column;gap:4px;align-items:flex-end;">'+
-          '<button class="contract-fight" data-contract-fight="'+(c.targetStage-1)+'">FIGHT</button>'+
+          '<button class="contract-fight" data-contract-fight="'+(c.targetStage-1)+'"'+(c.id==="hardcore_clear"?' data-contract-hard="1"':"")+'>FIGHT</button>'+
           rerollBtn+
           '</div>';
       }else{

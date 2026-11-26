@@ -1897,7 +1897,7 @@ export const CONFIG = {
       "ref": "gem_mountain"
     }
   ],
-  "appVersion": "3.4.0 · No Caps — Prices Are The Wall"
+  "appVersion": "3.4.1 · Dojo Bounty Fix"
 };
 
 export const GROUPS = [
@@ -2396,8 +2396,9 @@ function pickRandom(list, rng = Math.random) {
   return list[Math.floor(rng() * list.length)];
 }
 
-export function pickShowdownTarget(state, enemiesByStage = {}, bossOnly = false, rng = Math.random) {
-  const highest = Math.min(50, state?.highestStageCleared || 3);
+export function pickShowdownTarget(state, enemiesByStage = {}, bossOnly = false, rng = Math.random, capStage = 0) {
+  let highest = Math.min(50, state?.highestStageCleared || 3);
+  if (capStage > 0) highest = Math.min(highest, capStage);
 
   if (bossOnly) {
     const bossStage = Math.max(10, Math.floor(highest / 10) * 10);
@@ -2476,7 +2477,12 @@ export function generateDailyDojoBounties(state, enemiesByStage = {}, rng = Math
   while (showPicked.length < 2 && showPool.length > 0 && attempts++ < 20) {
     const idx = Math.floor(rng() * showPool.length);
     const tpl = showPool[idx];
-    const target = pickShowdownTarget(state, enemiesByStage, tpl.bossOnly, rng);
+    let capStage = 0;
+    if (tpl.id === 'hardcore_clear') {
+      capStage = Math.floor((state?.highestStageCleared || 0) / 5) * 5;
+      if (capStage < 3) { showPool.splice(idx, 1); continue; }
+    }
+    const target = pickShowdownTarget(state, enemiesByStage, tpl.bossOnly, rng, capStage);
 
     // TTK Safety Guard: never assign multi-hit single-fight contracts if target dies in < 8 slaps
     const estHitsToKill = target.hp / avgSlapDmg;
@@ -2517,8 +2523,18 @@ export function rerollDojoBounty(board, slotIndex, state, enemiesByStage = {}, m
   } else {
     const options = SHOWDOWN_BOUNTY_POOL.filter((c) => c.isUnlocked(state) && !activeIds.has(c.id));
     if (options.length === 0) return { ok: false, reason: 'NO_ALTERNATIVES' };
-    const tpl = pickRandom(options, rng);
-    const target = pickShowdownTarget(state, enemiesByStage, tpl.bossOnly, rng);
+    let tpl = pickRandom(options, rng);
+    let capStage = 0;
+    if (tpl.id === 'hardcore_clear') {
+      capStage = Math.floor((state?.highestStageCleared || 0) / 5) * 5;
+      if (capStage < 3) {
+        const rest = options.filter((o) => o.id !== 'hardcore_clear');
+        if (rest.length === 0) return { ok: false, reason: 'NO_ALTERNATIVES' };
+        tpl = pickRandom(rest, rng);
+        capStage = 0;
+      }
+    }
+    const target = pickShowdownTarget(state, enemiesByStage, tpl.bossOnly, rng, capStage);
     replacement = buildShowdownContract(tpl, tierIndex, target);
   }
 
