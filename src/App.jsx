@@ -185,7 +185,7 @@ export default function App() {
             
 
             <button className="hub-card feature gold" id="hubBlitzCard" type="button">
-              <img className="hc-img" src="/enemy-sprites-v2/thumbs/51-golden-dummy-thumb.webp" alt=""/>
+              <img className="hc-img" src="/fx/mode-blitz.webp" alt=""/>
               <span className="hub-mode-badge" id="hubBlitzBadge">NEW</span>
               <span className="hc-main">
                 <span className="hc-title">GOLDEN DUMMY BLITZ</span>
@@ -194,7 +194,7 @@ export default function App() {
             </button>
 
             <button className="hub-card feature red" id="hubReflexCard" type="button">
-              <img className="hc-img" id="hubReflexImg" src="/enemy-sprites-v2/thumbs/01-training-dummy-thumb.webp" alt=""/>
+              <img className="hc-img" id="hubReflexImg" src="/fx/mode-reflex.webp" alt=""/>
               <span className="hub-mode-badge" id="hubReflexBadge">DUEL</span>
               <span className="hc-main">
                 <span className="hc-title">REFLEX SLAP-OFF</span>
@@ -203,7 +203,7 @@ export default function App() {
             </button>
 
             <button className="hub-card feature" id="hubTrainCard" type="button">
-              <img className="hc-img" src="/enemy-sprites-v2/thumbs/01-training-dummy-thumb.webp" alt=""/>
+              <img className="hc-img" src="/fx/mode-training.webp" alt=""/>
               <span className="hub-mode-badge" id="hubTrainBadge">TRAIN</span>
               <span className="hc-main">
                 <span className="hc-title">PARRY TRAINING</span>
