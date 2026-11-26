@@ -213,7 +213,7 @@ export const CONFIG = {
         46,
         54
       ],
-      "dmgTable": [6,9,13,18,22,24,27,31,35,38,44,52,64,74,86,96,106,116,128,140,185,225,275,335,410,490,585,690,810,950,1180,1450,1750,2080,2450,2900,3400,3950,4550,5200,6100,7100,8200,9400,10800,12100,13400,14700,16100,17500],
+      "dmgTable": [6,9,13,18,22,24,27,31,35,38,53,62,77,89,103,115,127,139,154,168,204,248,302,369,451,539,644,759,891,1045,1180,1450,1750,2080,2450,2900,3400,3950,4550,5200,6100,7100,8200,9400,10800,13915,15410,16905,18515,20125],
       "base10": 64,
       "growth": 1.11,
       "tailStart": 30,
@@ -500,7 +500,7 @@ export const CONFIG = {
       "tier": 2,
       "cost": 6500,
       "prereq": "basic",
-      "fx": "Unlocks PARRY: tap PARRY as an enemy attack lands to negate 100% of damage and strike back at 1.5x damage."
+      "fx": "Unlocks PARRY: tap PARRY on the enemy's strike flash to negate 100% of damage and counter for 1.5x damage. No cooldown on success \u2014 mistiming locks Parry for 5s."
     },
     {
       "id": "quickReflexes",
@@ -526,7 +526,7 @@ export const CONFIG = {
       "cost": 35000,
       "prereq": "staminaTraining",
       "reqBoss": 9,
-      "fx": "Every 5th slap lands a devastating SEISMIC SLAM dealing 3x damage and dazing the enemy for 0.8s!"
+      "fx": "Every 8th slap lands a devastating SEISMIC SLAM dealing 3x damage and dazing the enemy for 0.4s!"
     },
     {
       "id": "heavySlap",
@@ -632,7 +632,7 @@ export const CONFIG = {
       "cost": 32000000,
       "prereq": "deflect",
       "reqBoss": 29,
-      "fx": "Parry cooldown -2s (10s to 8s)."
+      "fx": "Reduces Parry miss lockout from 5s to 3s."
     },
     {
       "id": "goldenTouch",
@@ -677,7 +677,7 @@ export const CONFIG = {
       "cost": 220000000,
       "prereq": "ironStance1",
       "reqBoss": 39,
-      "fx": "Parry cooldown -3s (8s to 5s)."
+      "fx": "Parry counter-slaps deal +0.5x bonus damage (2.0x base)."
     },
     {
       "id": "aegisBulwark",
@@ -704,7 +704,7 @@ export const CONFIG = {
       "cost": 1200000000,
       "prereq": "ironStance2",
       "reqBoss": 49,
-      "fx": "Parry window widens (0.30s to 0.50s). Cooldown stays 5s."
+      "fx": "Parry timing window widens from 0.25s to 0.35s."
     }
   ],
   "skillFx": {
@@ -731,17 +731,17 @@ export const CONFIG = {
     "retaliationMult": 3.0,
     "parryChance": 0.15,
     "parryDeflect": 0.5,
-    "parryWindowSec": 0.3,
-    "parryWindowWideSec": 0.5,
-    "parryCdSec": 10,
-    "parryCounterMult": 1.5,
+    "parryWindowSec": 0.25,
+    "parryWindowWideSec": 0.35,
+    "parryCdSec": 0,
+    "parryCounterMult": 1.5, "parryWhiffLockSec": 5.0, "parryWhiffLockIS1Sec": 3.0, "parryCounterIS2Bonus": 0.5,
     "dizzyMult": 1.35,
     "clutchHpFrac": 0.3,
     "clutchSpeed": 0.833,
     "clutchDmg": 1.25,
-    "shieldPerHits": 10,
-    "shieldAmt": 0.12,
-    "shieldMax": 0.24,
+    "shieldPerHits": 10, "thunderclapEvery": 8, "thunderclapDazeSec": 0.4,
+    "shieldAmt": 0.10,
+    "shieldMax": 0.12,
     "echoChance": 0.2,
     "echoMult": 1.0,
     "titanMult": 1.35
@@ -805,7 +805,7 @@ export const CONFIG = {
       "level": 20,
       "id": "riposteMastery",
       "name": "Riposte Mastery",
-      "fx": "Successful parries strike back at 2.2x damage (up from 1.5x) and grant +10 Frenzy meter."
+      "fx": "Successful parries deal +0.5x counter damage and grant +10 Frenzy meter."
     },
     {
       "level": 22,
@@ -1398,16 +1398,16 @@ export const CONFIG = {
     }
   },
   "weakSpot": {
-    "mult": 4.5,
-    "dur": 1.5,
-    "durHard": 1.2,
+    "mult": 2.5,
+    "dur": 0.9,
+    "durHard": 0.75,
     "firstAt": 2.2,
     "everyMin": 5,
     "everyMax": 8,
-    "frenzyGain": 12,
+    "frenzyGain": 5,
     "capBase": 3,
     "capPerLuck": 5,
-    "capMax": 6,
+    "capMax": 3,
     "luckScale": 0.06
   },
   "gems": {
@@ -1902,7 +1902,7 @@ export const CONFIG = {
       "ref": "gem_mountain"
     }
   ],
-  "appVersion": "3.4.3 · AdMob Unit Slots"
+  "appVersion": "3.5.0 · Combat & Blitz Balance"
 };
 
 export const GROUPS = [
@@ -2147,7 +2147,7 @@ export function getPlayerMaxHP(state) {
 
 export function calcPlayerMaxHp(playerLevel, hasStamina = false, hasUnstoppable = false) {
   const lvl = Math.max(1, playerLevel || 1);
-  let hp = Math.round(120 * Math.pow(1.135, lvl - 1));
+  let hp = Math.round(120 * Math.pow(1.125, lvl - 1));
   if (hasStamina) hp *= 1.15;
   if (hasUnstoppable) hp *= 1.30;
   if (lvl >= 50) hp *= 1.25;
