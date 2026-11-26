@@ -1383,6 +1383,11 @@ export const CONFIG = {
   ],
   "ads": {
     "enabled": true,
+    "admob": {
+      "rewardedId": "ca-app-pub-4838625298188198/2176399244",
+      "interstitialId": "",
+      "bannerId": ""
+    },
     "interstitialEveryFights": 3,
     "interstitialEveryWins": 3,
     "interstitialFightPoints": 3.0,
@@ -1897,7 +1902,7 @@ export const CONFIG = {
       "ref": "gem_mountain"
     }
   ],
-  "appVersion": "3.4.2 · Sustain + Over-Level Scaling"
+  "appVersion": "3.4.3 · AdMob Unit Slots"
 };
 
 export const GROUPS = [
