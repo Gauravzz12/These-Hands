@@ -1385,8 +1385,8 @@ export const CONFIG = {
     "enabled": true,
     "admob": {
       "rewardedId": "ca-app-pub-4838625298188198/2176399244",
-      "interstitialId": "",
-      "bannerId": ""
+      "interstitialId": "ca-app-pub-4838625298188198/4210303088",
+      "bannerId": "ca-app-pub-4838625298188198/9493052378"
     },
     "interstitialEveryFights": 3,
     "interstitialEveryWins": 3,
