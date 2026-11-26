@@ -1802,7 +1802,8 @@ export const CONFIG = {
   },
   "daily": {
     "chestDayMult": 0.25,
-    "chestDay7Mult": 1.0,
+    "chestDayRamp": 0.2,
+    "chestDay7Mult": 1.5,
     "chestDay7Gems": 25,
     "chestMinCoins": 60,
     "questPool": [
