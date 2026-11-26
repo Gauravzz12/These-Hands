@@ -163,7 +163,7 @@ export const CONFIG = {
     "slapMidCapFrac": 0.85,
     "slapCritPayFrac": 0.35,
     "luckCoinMult": 2.5,
-    "vampPerLevel": 0.0006,
+    "vampPerLevel": 0.00035,
     "speedCostLateMult": 3,
     "speedCostLatePow": 6,
     "specialPerLevel": 0.005,
@@ -174,7 +174,7 @@ export const CONFIG = {
     "stunDurPerLevel": 0.018,
     "stunDurCap": 1.4,
     "defensePerLevel": 0.01,
-    "defenseCap": 0.4,
+    "defenseCap": 0.3,
     "adOverdriveMult": 2.0
   },
   "enemyProgression": {
@@ -614,7 +614,7 @@ export const CONFIG = {
       "cost": 18000000,
       "prereq": "clutchSurge",
       "reqBoss": 29,
-      "fx": "+30% Max HP and regenerate 0.4% Max HP/s during fights."
+      "fx": "+30% Max HP and regenerate 0.25% Max HP/s during fights."
     },
     {
       "id": "kineticShield",
@@ -716,7 +716,7 @@ export const CONFIG = {
     "heavyMult": 2.5,
     "staminaHpPct": 1.15,
     "unstoppableHpPct": 1.30,
-    "regen": 0.004,
+    "regen": 0.0025,
     "comboMasteryStacks": 5,
     "comboMasteryPer": 0.005,
     "bossMult": 1.25,
@@ -775,7 +775,7 @@ export const CONFIG = {
       "level": 10,
       "id": "vampireSlap",
       "name": "Vampire Slap",
-      "fx": "Every 8th slap heals 2% Max HP."
+      "fx": "Every 8th slap heals 1% Max HP."
     },
     {
       "level": 12,
@@ -906,7 +906,7 @@ export const CONFIG = {
     "thickSkinHpPct": 0.15,
     "greed": 1.15,
     "vampEvery": 8,
-    "vampHealPct": 0.02,
+    "vampHealPct": 0.01,
     "critSurgeChance": 0.06,
     "critSurgeMult": 0.15,
     "secondWindFrac": 0.3,
@@ -1897,7 +1897,7 @@ export const CONFIG = {
       "ref": "gem_mountain"
     }
   ],
-  "appVersion": "3.4.0 · No Caps — Prices Are The Wall"
+  "appVersion": "3.4.2 · Sustain + Over-Level Scaling"
 };
 
 export const GROUPS = [
@@ -2396,8 +2396,9 @@ function pickRandom(list, rng = Math.random) {
   return list[Math.floor(rng() * list.length)];
 }
 
-export function pickShowdownTarget(state, enemiesByStage = {}, bossOnly = false, rng = Math.random) {
-  const highest = Math.min(50, state?.highestStageCleared || 3);
+export function pickShowdownTarget(state, enemiesByStage = {}, bossOnly = false, rng = Math.random, capStage = 0) {
+  let highest = Math.min(50, state?.highestStageCleared || 3);
+  if (capStage > 0) highest = Math.min(highest, capStage);
 
   if (bossOnly) {
     const bossStage = Math.max(10, Math.floor(highest / 10) * 10);
@@ -2476,7 +2477,12 @@ export function generateDailyDojoBounties(state, enemiesByStage = {}, rng = Math
   while (showPicked.length < 2 && showPool.length > 0 && attempts++ < 20) {
     const idx = Math.floor(rng() * showPool.length);
     const tpl = showPool[idx];
-    const target = pickShowdownTarget(state, enemiesByStage, tpl.bossOnly, rng);
+    let capStage = 0;
+    if (tpl.id === 'hardcore_clear') {
+      capStage = Math.floor((state?.highestStageCleared || 0) / 5) * 5;
+      if (capStage < 3) { showPool.splice(idx, 1); continue; }
+    }
+    const target = pickShowdownTarget(state, enemiesByStage, tpl.bossOnly, rng, capStage);
 
     // TTK Safety Guard: never assign multi-hit single-fight contracts if target dies in < 8 slaps
     const estHitsToKill = target.hp / avgSlapDmg;
@@ -2517,8 +2523,18 @@ export function rerollDojoBounty(board, slotIndex, state, enemiesByStage = {}, m
   } else {
     const options = SHOWDOWN_BOUNTY_POOL.filter((c) => c.isUnlocked(state) && !activeIds.has(c.id));
     if (options.length === 0) return { ok: false, reason: 'NO_ALTERNATIVES' };
-    const tpl = pickRandom(options, rng);
-    const target = pickShowdownTarget(state, enemiesByStage, tpl.bossOnly, rng);
+    let tpl = pickRandom(options, rng);
+    let capStage = 0;
+    if (tpl.id === 'hardcore_clear') {
+      capStage = Math.floor((state?.highestStageCleared || 0) / 5) * 5;
+      if (capStage < 3) {
+        const rest = options.filter((o) => o.id !== 'hardcore_clear');
+        if (rest.length === 0) return { ok: false, reason: 'NO_ALTERNATIVES' };
+        tpl = pickRandom(rest, rng);
+        capStage = 0;
+      }
+    }
+    const target = pickShowdownTarget(state, enemiesByStage, tpl.bossOnly, rng, capStage);
     replacement = buildShowdownContract(tpl, tierIndex, target);
   }
 
