@@ -29,73 +29,73 @@ export const CONFIG = {
     "power": {
       "name": "Power",
       "baseCost": 85,
-      "growth": 1.255,
+      "growth": 1.2693,
       "maxLevel": 80
     },
     "speed": {
       "name": "Speed",
       "baseCost": 135,
-      "growth": 1.92,
+      "growth": 1.9837,
       "maxLevel": 25
     },
     "critChance": {
       "name": "Crit Chance",
       "baseCost": 150,
-      "growth": 1.50,
+      "growth": 1.5307,
       "maxLevel": 45
     },
     "critDamage": {
       "name": "Crit Damage",
       "baseCost": 110,
-      "growth": 1.32,
+      "growth": 1.3385,
       "maxLevel": 65
     },
     "defense": {
       "name": "Defense",
       "baseCost": 190,
-      "growth": 1.52,
+      "growth": 1.5522,
       "maxLevel": 40
     },
     "stun": {
       "name": "Stun",
       "baseCost": 150,
-      "growth": 1.42,
+      "growth": 1.4451,
       "maxLevel": 50
     },
     "combo": {
       "name": "Combo",
       "baseCost": 95,
-      "growth": 1.32,
+      "growth": 1.3385,
       "maxLevel": 65
     },
     "coinMult": {
       "name": "Coin Mult.",
       "baseCost": 100,
-      "growth": 1.33,
+      "growth": 1.3491,
       "maxLevel": 65
     },
     "accuracy": {
       "name": "Accuracy",
       "baseCost": 200,
-      "growth": 2.85,
+      "growth": 3.0032,
       "maxLevel": 14
     },
     "bossDamage": {
       "name": "Giant Slayer",
       "baseCost": 200,
-      "growth": 1.53,
+      "growth": 1.5629,
       "maxLevel": 40
     },
     "vampirism": {
       "name": "Life Leech",
       "baseCost": 270,
-      "growth": 1.52,
+      "growth": 1.5522,
       "maxLevel": 40
     },
     "luck": {
       "name": "Fortune Luck",
       "baseCost": 160,
-      "growth": 1.42,
+      "growth": 1.4451,
       "maxLevel": 50
     }
   },
@@ -1897,7 +1897,7 @@ export const CONFIG = {
       "ref": "gem_mountain"
     }
   ],
-  "appVersion": "3.3.0 · Balance v3.3.0 (Difficulty, Economy & Boss Rush Overhaul)"
+  "appVersion": "3.4.0 · No Caps — Prices Are The Wall"
 };
 
 export const GROUPS = [
@@ -1975,21 +1975,21 @@ export const BELT_RANKS = {
 };
 
 export const ATTRIBUTE_COSTS_V33 = {
-  power:       { base: 85,  growth: 1.255, max: 80 },
-  speed:       { base: 135, growth: 1.92,  max: 25 },
-  critChance:  { base: 150, growth: 1.50,  max: 45 },
-  critDamage:  { base: 110, growth: 1.32,  max: 65 },
-  defense:     { base: 190, growth: 1.52,  max: 40 },
-  stun:        { base: 150, growth: 1.42,  max: 50 },
-  combo:       { base: 95,  growth: 1.32,  max: 65 },
-  coinMult:    { base: 100, growth: 1.33,  max: 65 },
-  accuracy:    { base: 200, growth: 2.85,  max: 14 },
-  giantSlayer: { base: 200, growth: 1.53,  max: 40 },
-  lifeLeech:   { base: 270, growth: 1.52,  max: 40 },
-  fortuneLuck: { base: 160, growth: 1.42,  max: 50 },
-  bossDamage:  { base: 200, growth: 1.53,  max: 40 },
-  vampirism:   { base: 270, growth: 1.52,  max: 40 },
-  luck:        { base: 160, growth: 1.42,  max: 50 },
+  power:       { base: 85,  growth: 1.2693, max: 80 },
+  speed:       { base: 135, growth: 1.9837,  max: 25 },
+  critChance:  { base: 150, growth: 1.5307,  max: 45 },
+  critDamage:  { base: 110, growth: 1.3385,  max: 65 },
+  defense:     { base: 190, growth: 1.5522,  max: 40 },
+  stun:        { base: 150, growth: 1.4451,  max: 50 },
+  combo:       { base: 95,  growth: 1.3385,  max: 65 },
+  coinMult:    { base: 100, growth: 1.3491,  max: 65 },
+  accuracy:    { base: 200, growth: 3.0032,  max: 14 },
+  giantSlayer: { base: 200, growth: 1.5629,  max: 40 },
+  lifeLeech:   { base: 270, growth: 1.5522,  max: 40 },
+  fortuneLuck: { base: 160, growth: 1.4451,  max: 50 },
+  bossDamage:  { base: 200, growth: 1.5629,  max: 40 },
+  vampirism:   { base: 270, growth: 1.5522,  max: 40 },
+  luck:        { base: 160, growth: 1.4451,  max: 50 },
 };
 
 export function getAttributeCost(attrKey, currentLevel) {
@@ -2009,25 +2009,26 @@ export function getLevelUpCost(currentLevel) {
   const lv = Math.max(1, currentLevel != null ? currentLevel : 1);
   if (lv >= 50) return Infinity;
 
-  // v3.2.1 tapered curve: x1.70 (1-10) / step into 11 keeps x1.45 (51,586 anchor) /
-  // x1.37 (12-20) / x1.34 (21-30) / x1.29 (31-40) / x1.28 (41-50)
+  // v3.4.0 no-caps curve: prices are the only wall, so the segments steepen —
+  // x1.70 (1-10) / step into 11 keeps x1.45 (51,586 anchor) /
+  // x1.40 (12-20) / x1.38 (21-30) / x1.33 (31-40) / x1.33 (41-50)
   let baseCost;
   const costAt10 = 300 * Math.pow(1.70, 9);                // 35,576
   const costAt11 = costAt10 * 1.45;                        // 51,586 (spec anchor, unchanged)
-  const costAt20 = costAt11 * Math.pow(1.37, 9);
-  const costAt30 = costAt20 * Math.pow(1.34, 10);
-  const costAt40 = costAt30 * Math.pow(1.29, 10);
+  const costAt20 = costAt11 * Math.pow(1.40, 9);
+  const costAt30 = costAt20 * Math.pow(1.38, 10);
+  const costAt40 = costAt30 * Math.pow(1.33, 10);
 
   if (lv <= 10) {
     baseCost = 300 * Math.pow(1.70, lv - 1);
   } else if (lv <= 20) {
-    baseCost = costAt11 * Math.pow(1.37, lv - 11);
+    baseCost = costAt11 * Math.pow(1.40, lv - 11);
   } else if (lv <= 30) {
-    baseCost = costAt20 * Math.pow(1.34, lv - 20);
+    baseCost = costAt20 * Math.pow(1.38, lv - 20);
   } else if (lv <= 40) {
-    baseCost = costAt30 * Math.pow(1.29, lv - 30);
+    baseCost = costAt30 * Math.pow(1.33, lv - 30);
   } else {
-    baseCost = costAt40 * Math.pow(1.28, lv - 40);
+    baseCost = costAt40 * Math.pow(1.33, lv - 40);
   }
 
   // 1.5x Belt Promotion surcharge on levels 4->5, 9->10, ..., 49->50
