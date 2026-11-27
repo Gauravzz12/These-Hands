@@ -4878,11 +4878,11 @@ margin-top: 7px;
   transform: translate(2px, 2px);
   box-shadow: 2px 2px 0 var(--ap-ink);
 }
-.ar-btn, .rail-circle, .booster-circle-btn, .home-btn, .icon-btn {
+.ar-btn, .rail-circle, .home-btn, .icon-btn {
   border: 3px solid var(--ap-ink);
   box-shadow: 3px 3px 0 var(--ap-ink);
 }
-.ar-btn:active, .rail-circle:active, .booster-circle-btn:active {
+.ar-btn:active, .rail-circle:active {
   transform: translate(2px, 2px);
   box-shadow: 1px 1px 0 var(--ap-ink);
 }
