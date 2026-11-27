@@ -2,11 +2,10 @@
 // Two original realms, 6 enemies each: slot 3 (index 2) is the mini-boss,
 // slot 6 (index 5) is the world final boss. Virtual idx 200-205 / 210-215
 // keep world enemies clear of the main roster (0-49) and the reserved
-// 50-99 expansion. Stats follow Balance v2.6.5 Audited Final Section 12
-// (numbers by slot): strictly monotonic scaling above the Dragon Lord
-// (343M HP / 57M bounty) — W0 S0 starts at 357.5M HP / 62M bounty and
-// W1 S5 ends at 26.5B HP / 455M bounty. Guardian names/sprites stay with
-// the shipped art (Ravana, Dark Slapper et al.); stats/embers by slot.
+// 50-99 expansion. Stats scale above the Dragon Lord (4.6B HP / 20,125 ATK):
+// W0 Asura Realm spans 6.5B - 55B HP (60M - 215M bounty) and
+// W1 Shadow Verse spans 65B - 420B HP (300M - 1.38B bounty). Guardian
+// names/sprites stay with the shipped art (Ravana, Dark Slapper et al.).
 import { getV2Sprite } from './enemySpritesV2.js';
 
 export const WORLD_IDX_BASE = [200, 210];

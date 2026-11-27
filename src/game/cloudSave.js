@@ -132,11 +132,23 @@ async function reconcile() {
       const cloudObj = hooks.parseRaw(data.save);
       const localObj = hooks.getLocalObj();
       if (cloudObj && compareSaveObjs(cloudObj, localObj) > 0 && hooks.allowApply) {
+        const mergedCloudRaw = (hooks.mergeIapRaw && localObj) ? hooks.mergeIapRaw(data.save, localObj) : data.save;
         setStatus({ state: 'syncing', text: 'Found a further-ahead cloud save — loading it…' });
-        hooks.applyCloudRaw(data.save);
+        hooks.applyCloudRaw(mergedCloudRaw || data.save);
         return; // page reloads with the cloud save as local
       }
-      if (cloudObj && compareSaveObjs(cloudObj, localObj) === 0) lastPushedRaw = data.save;
+      if (cloudObj && hooks.mergeIapRaw && hooks.allowApply) {
+        const localRaw = hooks.getRaw();
+        const mergedLocalRaw = localRaw ? hooks.mergeIapRaw(localRaw, cloudObj) : null;
+        if (mergedLocalRaw && mergedLocalRaw !== localRaw) {
+          setStatus({ state: 'syncing', text: 'Restoring cloud purchases into save…' });
+          hooks.applyCloudRaw(mergedLocalRaw);
+          return;
+        }
+      }
+      if (cloudObj && compareSaveObjs(cloudObj, localObj) === 0 && (!hooks.mergeIapRaw || hooks.mergeIapRaw(data.save, localObj) === data.save)) {
+        lastPushedRaw = data.save;
+      }
     }
     await pushNow();
   } catch (e) {

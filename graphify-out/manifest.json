@@ -19,9 +19,9 @@
     "semantic_hash": ""
   },
   "android/app/capacitor.build.gradle": {
-    "mtime": 1795106735.7184885,
-    "seen": 1795186684.0720687,
-    "ast_hash": "4188ff3f037fa6b6dcaac1feaa638199",
+    "mtime": 1795813383.1079311,
+    "seen": 1795813411.1486745,
+    "ast_hash": "5ba0be250dd8100eda2e2cc83f54592a",
     "semantic_hash": ""
   },
   "android/app/src/androidTest/java/com/getcapacitor/myapp/ExampleInstrumentedTest.java": {
@@ -31,9 +31,9 @@
     "semantic_hash": "fbaf7cc870c663eb52dcf218531c439d"
   },
   "android/app/src/main/java/com/thesehands/game/MainActivity.java": {
-    "mtime": 1794420219.8095322,
-    "seen": 1794420641.230397,
-    "ast_hash": "06921d17d0240ad544588ce86dfb8353",
+    "mtime": 1795813110.8805609,
+    "seen": 1795813411.1486745,
+    "ast_hash": "cedacd98f95d79b1e2230018a0dcaa9e",
     "semantic_hash": ""
   },
   "android/app/src/test/java/com/getcapacitor/myapp/ExampleUnitTest.java": {
@@ -49,9 +49,9 @@
     "semantic_hash": "682315a426653617c6a74fc12bef55b6"
   },
   "android/capacitor.settings.gradle": {
-    "mtime": 1795106735.7208447,
-    "seen": 1795186684.0720687,
-    "ast_hash": "2acf6c6ee913eaa645ef2b2c94cd505c",
+    "mtime": 1795813383.1069312,
+    "seen": 1795813411.1486745,
+    "ast_hash": "f731ce259e4f04813e0c37d6517b7841",
     "semantic_hash": ""
   },
   "android/gradlew": {
@@ -97,9 +97,9 @@
     "semantic_hash": "8bac246e0138c7d2cab584be02430f8e"
   },
   "src/App.jsx": {
-    "mtime": 1795106735.7347376,
-    "seen": 1795186684.0720687,
-    "ast_hash": "33d829f386929c4f424cbdba39839d06",
+    "mtime": 1795813189.7262964,
+    "seen": 1795813411.1486745,
+    "ast_hash": "6e7b44ee916c72c1ca9216e9c4ef1de0",
     "semantic_hash": ""
   },
   "src/components/AchToast.jsx": {
@@ -205,9 +205,9 @@
     "semantic_hash": ""
   },
   "src/game/config.js": {
-    "mtime": 1795355377.0390396,
-    "seen": 1795355983.3433537,
-    "ast_hash": "e06b814efa52f852b6eb449f30d63888",
+    "mtime": 1795813139.204994,
+    "seen": 1795813411.1486745,
+    "ast_hash": "ac963d1d556dc5988b0c110208e3b4a4",
     "semantic_hash": ""
   },
   "src/game/enemies.js": {
@@ -229,9 +229,9 @@
     "semantic_hash": ""
   },
   "src/game/gameEngine.js": {
-    "mtime": 1795355878.9638836,
-    "seen": 1795355983.3433537,
-    "ast_hash": "31aac743bc27c76998ca2c53108c0e64",
+    "mtime": 1795813347.0879712,
+    "seen": 1795813411.1486745,
+    "ast_hash": "8b755c405f0b3e003faded0ee6bcf73c",
     "semantic_hash": ""
   },
   "src/game/proceduralEnemies.js": {
@@ -253,9 +253,9 @@
     "semantic_hash": "8dd5584aa251b2d1cb0d3ad37ba77cc7"
   },
   "src/services/nativeBridge.js": {
-    "mtime": 1794416600.887213,
-    "seen": 1794417010.4306738,
-    "ast_hash": "1321db89a54df593e67447ce546a1506",
+    "mtime": 1795813149.1242938,
+    "seen": 1795813411.1486745,
+    "ast_hash": "134b15cfcf7a4ed190c12b4f6e09dcb4",
     "semantic_hash": ""
   },
   "sync_engine.cjs": {
@@ -283,9 +283,9 @@
     "semantic_hash": ""
   },
   "PRIVACY_POLICY.md": {
-    "mtime": 1793517479.936222,
-    "seen": 1793815820.9632776,
-    "ast_hash": "b5820855d651797749b5d2777bd07baa",
+    "mtime": 1795813192.4921803,
+    "seen": 1795813411.1486745,
+    "ast_hash": "ddbac89e44a5c744ac1b3d6e2763af7f",
     "semantic_hash": ""
   },
   "README.md": {
@@ -295,15 +295,15 @@
     "semantic_hash": ""
   },
   "index.html": {
-    "mtime": 1795106735.7267594,
-    "seen": 1795186684.0720687,
-    "ast_hash": "1e5ee997dbe12ecf7c2831fa374d7f8e",
+    "mtime": 1795813098.5332088,
+    "seen": 1795813411.1486745,
+    "ast_hash": "a159d16c07e2a6247b13990b6e4725c0",
     "semantic_hash": ""
   },
   "privacy.html": {
-    "mtime": 1793902482.5920053,
-    "seen": 1793902686.7503102,
-    "ast_hash": "814ab9fd116c3553d3f3dd4d73974398",
+    "mtime": 1795813191.1548157,
+    "seen": 1795813411.1486745,
+    "ast_hash": "0061be8d9417028090996ef0e579c8de",
     "semantic_hash": ""
   },
   "store-listing/README.md": {
@@ -1933,9 +1933,9 @@
     "semantic_hash": ""
   },
   "src/game/worlds.js": {
-    "mtime": 1795289332.5632052,
-    "seen": 1795291374.6731398,
-    "ast_hash": "5f484f6b1cc07c4fa26288d261d51018",
+    "mtime": 1795813106.2694712,
+    "seen": 1795813411.1486745,
+    "ast_hash": "d49a732553f2362c1ce21d5178630fd6",
     "semantic_hash": ""
   },
   "public/enemy-sprites-v2/poses/05-grumpy-teddy-attack.webp": {
@@ -2431,9 +2431,9 @@
     "semantic_hash": ""
   },
   "src/game/cloudSave.js": {
-    "mtime": 1795106735.7367353,
-    "seen": 1795186684.0720687,
-    "ast_hash": "01385ad687afcc0104e8f70c48ad02d1",
+    "mtime": 1795813233.1176908,
+    "seen": 1795813411.1486745,
+    "ast_hash": "731f1748436d30b04307e4a5c0b1998a",
     "semantic_hash": ""
   },
   "src/game/firebaseConfig.js": {
@@ -2458,6 +2458,36 @@
     "mtime": 1795106735.7335756,
     "seen": 1795186684.0720687,
     "ast_hash": "b362eb1bfac4c7389fdaaa53328efa04",
+    "semantic_hash": ""
+  },
+  "public/fx/cross-guard.webp": {
+    "mtime": 1795810928.9339201,
+    "seen": 1795813411.150029,
+    "ast_hash": "741b37a5e7b2f3ebc64f9d1de2c66e17",
+    "semantic_hash": ""
+  },
+  "public/fx/double-slap.webp": {
+    "mtime": 1795810928.9349256,
+    "seen": 1795813411.150029,
+    "ast_hash": "b2dbe7e8f84a9a92594296d1da544e4b",
+    "semantic_hash": ""
+  },
+  "public/fx/mode-blitz.webp": {
+    "mtime": 1795810928.9369223,
+    "seen": 1795813411.150029,
+    "ast_hash": "36309a030526568243c75760adb45b9c",
+    "semantic_hash": ""
+  },
+  "public/fx/mode-reflex.webp": {
+    "mtime": 1795810928.9389985,
+    "seen": 1795813411.150029,
+    "ast_hash": "877f5d6732f8785bb4c459df21cb5f6a",
+    "semantic_hash": ""
+  },
+  "public/fx/mode-training.webp": {
+    "mtime": 1795810928.940712,
+    "seen": 1795813411.150029,
+    "ast_hash": "cbb2a6933dff5ec5cf17e4a392b946b7",
     "semantic_hash": ""
   },
   "package-lock.json": {

@@ -80,7 +80,7 @@ export default function App() {
             </div>
 
             <div className="booster-slot">
-              <button className="booster-circle-btn dmg" id="boostDmgBtn" type="button" aria-label="Watch Ad for 2X Damage (7 fight wins)">
+              <button className="booster-circle-btn dmg" id="boostDmgBtn" type="button" aria-label="Watch Ad for 2X Damage (5 fight wins)">
                 <span className="b-ring-svg-wrap">
                   <svg viewBox="0 0 54 54" className="b-ring-svg">
                     <circle className="b-ring-bg" cx="27" cy="27" r="23" />
@@ -161,7 +161,7 @@ export default function App() {
               <span className="hc-ico gold"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8L12 2z" fill="currentColor"/></svg></span>
               <span className="hc-main">
                 <span className="hc-title">SKILLS</span>
-                <span className="hc-sub" id="hubSkillsSub">1 / 24 OWNED</span>
+                <span className="hc-sub" id="hubSkillsSub">1 / 30 OWNED</span>
               </span>
             </button>
 
@@ -175,7 +175,7 @@ export default function App() {
             </button>
 
             <button className="hub-card" id="hubRushCard" type="button">
-              <span className="hc-ico gold"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M1.6 9.2h3M1.6 13.4h3" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" fill="none"/><path fillRule="evenodd" d="M5.2 7.6 8.6 11 13 4.8l4.4 6.2 3.4-3.4-1.5 8.6a2 2 0 0 1-2 1.8H8.7a2 2 0 0 1-2-1.8L5.2 7.6zm8.3 2.4-2.4 4h2.1l-1.6 4 3.6-5h-2.2l1.8-2.9h-1.3z" fill="currentColor"/><path d="M8.2 20.6h9.6v1.6H8.2z" fill="currentColor"/></svg></span>
+              <span className="hc-ico gold"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M1.6 9.2h3M1.6 13.4h3" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" fill="none"/><path fillRule="evenodd" d="M5.2 7.6 8.6 11 13 4.8l4.4 6.2 3.4-3.4-1.5 8.6a2 2 0 0 1-2 1.8H8.7a2 2 0 0 1-2-1.8L5.2 7.6zm8.3 2.4-2.4 4h2.1l-1.6 4 3.6-5h-2.2l1.8-2.9h-1.3z" fill="currentColor"/><path d="M8.2 20.6h9.6v1.6H8.2z" fill="currentColor"/></svg></span>
               <span className="hc-main">
                 <span className="hc-title">BOSS RUSH</span>
                 <span className="hc-sub" id="hubRushSub">BEAT THE DARK KNIGHT (#20) TO UNLOCK</span>
@@ -533,11 +533,11 @@ export default function App() {
         </div>
         <div id="helpScroll">
           <div className="help-card"><div className="help-h">1 · YOUR HANDS DO THE WORK</div><p>Your hands slap on their own — your job is to make every slap count. Coins are paid on <b>every strike</b>, so even a fight you lose still earns. Unlock <b>FRENZY</b> in the skill tree, then land hits to charge its meter — misses don't charge it. When the meter is full, tap the glowing <b>FRENZY!</b> button mid-fight: 10 seconds of +50% damage and +30% speed, unleashed when YOU say so.</p></div>
-          <div className="help-card"><div className="help-h">2 · GROW ON THREE FRONTS</div><p><b>Attributes</b> (Power, Speed, Crit, Combo…) have <b>no caps</b> — buy them as high as your coins allow, right up to each attribute's max. Prices are the only wall, and the top levels cost billions, so maxing everything is a long grind. Every player level also grants a permanent perk (Iron Palm, Thick Skin, Vampire Slap…). <b>Skills</b> from the tree are the third front: Second Hand doubles your slap rate, and bosses further in are mathematically impossible without the tree. Attributes alone won't carry you. <b>Precision Instinct</b> in the tree makes a gold weak spot flash on the enemy mid-fight — tap it for a heavy 4.5× precision crit. Fortune Luck makes it appear more often, with a per-fight cap so it never takes over.</p></div>
+          <div className="help-card"><div className="help-h">2 · GROW ON THREE FRONTS</div><p><b>Attributes</b> (Power, Speed, Crit, Combo…) have <b>no caps</b> — buy them as high as your coins allow, right up to each attribute's max. Prices are the only wall, and the top levels cost billions, so maxing everything is a long grind. Every player level also grants a permanent perk (Iron Palm, Thick Skin, Vampire Slap…). <b>Skills</b> from the tree are the third front: Second Hand doubles your slap rate, and bosses further in are mathematically impossible without the tree. Attributes alone won't carry you. <b>Precision Instinct</b> in the tree makes a gold weak spot flash on the enemy mid-fight — tap it for a heavy 2.5× precision crit (base cap 3 per fight; Fortune Luck makes weak spots appear more frequently).</p></div>
           <div className="help-card"><div className="help-h">3 · CLIMB THE ROSTER</div><p>Beat an enemy to unlock the next — 50 of them, in 10 groups, with a boss every 10th. Beating enemies is the only thing progression ever asks for. Bosses enrage under 40% HP — faster, harder hits. Beaten enemies can be re-fought any time for coins, and clearing an enemy's group unlocks its <b>HARD</b> rematch on the Levels screen (red button): far tougher, the knockout pays 2.75× a full normal fight’s total payout (slap-coin cap + KO bonus) and a one-time +3 gem bonus.</p></div>
           <div className="help-card"><div className="help-h">4 · EVERY DAY COUNTS</div><p>Defeat the <b>Grumpy Teddy (#5)</b> to unlock the <b>daily chest</b> — a 7-day login streak that pays coins every day and gems on day 7, with amounts that grow with your progress. Defeat the <b>Mischievous Monkey (#10)</b> to unlock <b>daily quests</b>. Check <b>Awards</b> for lifetime stats and achievements (every achievement pays gems), and spend gems in the <b>Shop</b> on hand skins, coin packs and the Offline Earnings unlock.</p></div>
           <div className="help-card"><div className="help-h">5 · WATCH THE COUNTDOWN</div><p>Enemies hit back on the timer under their HP bar. Your HP refills every fight, and levelling up is also defence. If you're walled, the answer is almost always: farm the best enemy you can beat, buy what's cheapest for damage, and come back.</p></div>
-          <div className="help-card"><div className="help-h">6 · SPECIAL SKILLS</div><p>Bosses drop <b>special skills</b>: the Mischievous Monkey (#10) grants <b>Double Slap</b> — both hands at once — and Shogun (#30) grants <b>Uppercut Punch</b>. Fire them from the specials rail in battle, and upgrade them to Lv5 inside the <b>Skills</b> tab. Equipped hand skins also grant small bonuses — check the Shop cards.</p></div>
+          <div className="help-card"><div className="help-h">6 · SPECIAL SKILLS</div><p>Bosses drop <b>special skills</b>: the Mischievous Monkey (#10) grants <b>Double Slap</b> — both hands at once — Dark Knight (#20) grants <b>Guard</b>, and Pharaoh (#40) grants <b>Uppercut Punch</b>. Fire them from the specials rail in battle, and upgrade them inside the <b>Skills</b> tab. Equipped hand skins also grant bonuses — check the Shop cards.</p></div>
         </div>
       </section>
 
@@ -637,9 +637,9 @@ export default function App() {
           </div>
           <div className="about-block">
             <div className="about-title" id="aboutTitle">IDLE SLAPPER</div>
-            <div className="about-line" id="aboutVersion">Version 1.1.0 · Specials & Frenzy</div>
-            <div className="about-line" id="aboutStorage">All progress is stored only on this device — nothing leaves it.</div>
-            <div className="about-line">Privacy Policy — coming with the store release.</div>
+            <div className="about-line" id="aboutVersion">Version 1.2</div>
+            <div className="about-line" id="aboutStorage">Progress is stored on this device and backed up to your cloud save when signed in.</div>
+            <div className="about-line">AdMob, RevenueCat &amp; Firebase privacy details are available in our Privacy Policy.</div>
           </div>
         </div>
       </section>
@@ -699,7 +699,7 @@ export default function App() {
         <div className="menu-actions">
           <div className="menu-feats">
             <span className="mf"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" fill="currentColor"/></svg>50+ FOES</span>
-            <span className="mf"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2.2"/><ellipse cx="12" cy="12" rx="4.2" ry="9" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M3.5 9h17M3.5 15h17" stroke="currentColor" stroke-width="1.8"/></svg>2 WORLDS</span>
+            <span className="mf"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" strokeWidth="2.2"/><ellipse cx="12" cy="12" rx="4.2" ry="9" fill="none" stroke="currentColor" strokeWidth="1.8"/><path d="M3.5 9h17M3.5 15h17" stroke="currentColor" strokeWidth="1.8"/></svg>2 WORLDS</span>
             <span className="mf"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0l2.1 6.9L21 4l-2.9 6.9L24 12l-5.9 1.1L21 20l-6.9-2.9L12 24l-2.1-6.9L3 20l2.9-6.9L0 12l5.9-1.1L3 4l6.9 2.9z" fill="currentColor"/></svg>30 SKILLS</span>
           </div>
           <button id="playBtn" className="play-btn-arcade">

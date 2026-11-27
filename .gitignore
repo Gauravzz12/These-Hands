@@ -43,6 +43,9 @@ keystore.properties
 *revenuecat*.json
 *-credentials.json
 *.p12
+.env
+.env.*
+!.env.example
 
 # Backups & Temp files
 *.bak

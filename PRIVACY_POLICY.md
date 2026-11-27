@@ -25,8 +25,8 @@ Google's privacy practices regarding advertising are governed by the [Google Pri
 When you purchase optional in-game items (such as gems, bundles, or VIP passes), payments are processed directly by Google Play. We do not have access to or store your credit card, debit card, or banking details.
 - Transaction tokens, order IDs, and entitlement states are processed to deliver your purchased virtual items.
 
-#### C. Local Game Save Data
-Your game progression, unlocked hands, coin/gem balances, attribute levels, and settings are stored locally on your device using Android app storage. This data remains on your device unless you clear application storage or uninstall the application.
+#### C. Local & Cloud Game Save Data (Firebase)
+Your game progression, unlocked hands, coin/gem balances, attribute levels, and achievements are stored locally on your device using Android app storage. When cloud save is active, the Game also uses **Firebase Authentication** (an anonymous session by default, or optional Google Sign-In if you link your Google account) and **Cloud Firestore** to back up and restore your save file.
 
 ---
 
@@ -34,7 +34,8 @@ Your game progression, unlocked hands, coin/gem balances, attribute levels, and 
 
 We use collected information solely to:
 - Deliver in-game gameplay, progression, and rewards.
-- Provide rewarded advertisements (e.g., optional 10-minute 2x coin/damage boosts).
+- Back up and restore cloud saves across sessions and devices.
+- Provide rewarded advertisements (e.g., optional 2x coin/damage boosts).
 - Process and validate in-app purchases.
 - Maintain app security, prevent fraud, and ensure game stability.
 
@@ -46,6 +47,7 @@ The Game uses the following third-party SDKs:
 - **Google Play Services & Billing**: [Google Privacy Policy](https://policies.google.com/privacy)
 - **Google AdMob**: [Google AdMob Privacy Policy](https://policies.google.com/technologies/ads)
 - **RevenueCat**: [RevenueCat Privacy Policy](https://www.revenuecat.com/privacy)
+- **Google Firebase (Authentication & Cloud Firestore)**: [Firebase Privacy & Security](https://firebase.google.com/support/privacy)
 
 ---
 
@@ -74,6 +76,6 @@ We may update our Privacy Policy periodically. Any changes will be posted on thi
 ### 7. Contact Us
 
 If you have any questions or feedback regarding this Privacy Policy, please contact us at:
-- **Support Email**: [your-email@example.com]
-- **Developer Name**: [Your Name / Studio Name]
+- **Support Email**: gaurav1234thakurgt@gmail.com
+- **Developer Name**: Gauravzz12
 

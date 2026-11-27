@@ -544,7 +544,7 @@ export const CONFIG = {
       "cost": 80000,
       "prereq": "strongerHands",
       "reqBoss": 9,
-      "fx": "Unlocks PRECISION strikes: tap weak spots for 4.5x critical damage! Max 3/fight (+1 per 5 Luck, max 6)."
+      "fx": "Unlocks PRECISION strikes: tap weak spots for 2.5x critical damage! Max 3/fight (Fortune Luck makes weak spots appear more frequently)."
     },
     {
       "id": "comboMastery",
@@ -623,7 +623,7 @@ export const CONFIG = {
       "cost": 28000000,
       "prereq": "clutchSurge",
       "reqBoss": 29,
-      "fx": "Every 10 slaps builds a shield absorbing 12% of Max HP (max 24% of Max HP)."
+      "fx": "Every 10 slaps builds a shield absorbing 10% of Max HP (max 12% of Max HP)."
     },
     {
       "id": "ironStance1",
@@ -1557,8 +1557,8 @@ export const CONFIG = {
       "id": "doubleSlap",
       "name": "Double Slap",
       "boss": 9,
-      "mult": 7,
-      "multMax": 15,
+      "mult": 4,
+      "multMax": 10,
       "cd": 25,
       "cdMax": 15,
       "kind": "instant",
@@ -1840,11 +1840,6 @@ export const CONFIG = {
       "id": "bundle_dragon",
       "kind": "bundle",
       "ref": "dragon"
-    },
-    {
-      "id": "bundle_steel",
-      "kind": "bundle",
-      "ref": "steel"
     },
     {
       "id": "bundle_cosmic",

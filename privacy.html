@@ -56,8 +56,8 @@
     <h3>B. In-App Purchases (Google Play Billing / RevenueCat)</h3>
     <p>All real-money purchases for optional in-game items (such as gem packs, bundles, or VIP passes) are processed directly and securely through Google Play. We never receive, store, or have access to your payment card or banking details. Google Play and RevenueCat process purchase tokens and transaction receipts solely to credit your items.</p>
 
-    <h3>C. Local Game Save Storage</h3>
-    <p>Your game progress, unlocked skins, currency balances, attribute levels, and achievements are saved locally on your device storage. This data is not transmitted to our servers and remains on your device.</p>
+    <h3>C. Local &amp; Cloud Game Save Storage (Firebase)</h3>
+    <p>Your game progress, unlocked skins, currency balances, attribute levels, and achievements are saved locally on your device. When cloud save is enabled, the Game uses <strong>Firebase Authentication</strong> (anonymous device session by default, or optional Google Sign-In if you choose to link an account) and <strong>Cloud Firestore</strong> to back up and synchronize that save data across sessions and devices.</p>
 
     <h2>2. How We Use Information</h2>
     <p>We use the data collected by third-party SDKs strictly to:</p>
@@ -73,6 +73,7 @@
       <li><strong>Google Play Services & Billing:</strong> <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google Privacy Policy</a></li>
       <li><strong>Google AdMob:</strong> <a href="https://policies.google.com/technologies/ads" target="_blank" rel="noopener">Google AdMob Privacy Policy</a></li>
       <li><strong>RevenueCat:</strong> <a href="https://www.revenuecat.com/privacy" target="_blank" rel="noopener">RevenueCat Privacy Policy</a></li>
+      <li><strong>Google Firebase (Authentication & Cloud Firestore):</strong> <a href="https://firebase.google.com/support/privacy" target="_blank" rel="noopener">Firebase Privacy &amp; Security</a></li>
     </ul>
 
     <h2>4. Children’s Privacy (COPPA Compliance)</h2>

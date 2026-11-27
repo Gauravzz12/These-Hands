@@ -196,25 +196,36 @@ export const NativeBridge = {
 
   async prepareRewardedAd() {
     if (!this.isNative || !this.admobInitialized) return;
+    const isDev = !!(typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.DEV);
     try {
-      console.log('AdMob: Requesting rewarded ad with live unit ID:', REWARDED_AD_UNIT_ID);
+      const adId = REWARDED_AD_UNIT_ID || (isDev ? TEST_REWARDED_AD_UNIT_ID : '');
+      if (!adId) {
+        console.warn('AdMob: No rewarded ad unit ID configured.');
+        this.rewardedPrepared = false;
+        return;
+      }
+      console.log('AdMob: Requesting rewarded ad with unit ID:', adId);
       await AdMob.prepareRewardVideoAd({
-        adId: REWARDED_AD_UNIT_ID,
+        adId,
       });
       this.rewardedPrepared = true;
-      console.log('AdMob: Live rewarded ad prepared successfully.');
+      console.log('AdMob: Rewarded ad prepared successfully.');
     } catch (e) {
-      console.warn('AdMob: Live rewarded unit not filled, falling back to test unit:', e);
-      try {
-        await AdMob.prepareRewardVideoAd({
-          adId: TEST_REWARDED_AD_UNIT_ID,
-        });
-        this.rewardedPrepared = true;
-        console.log('AdMob: Test rewarded ad prepared successfully.');
-      } catch (err2) {
-        console.error('AdMob: Failed to load both live and test ad units:', err2);
-        this.rewardedPrepared = false;
+      if (isDev) {
+        console.warn('AdMob: Live rewarded unit not filled in dev, falling back to test unit:', e);
+        try {
+          await AdMob.prepareRewardVideoAd({
+            adId: TEST_REWARDED_AD_UNIT_ID,
+          });
+          this.rewardedPrepared = true;
+          return;
+        } catch (err2) {
+          console.warn('AdMob: Failed to load test rewarded ad:', err2);
+        }
+      } else {
+        console.warn('AdMob: Rewarded ad not filled:', e);
       }
+      this.rewardedPrepared = false;
     }
   },
 
@@ -245,8 +256,13 @@ export const NativeBridge = {
   // Interstitial: Pre-caches next interstitial for instant playback on every 3rd fight
   async prepareInterstitialAd() {
     if (!this.isNative || !this.admobInitialized) return;
+    const isDev = !!(typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.DEV);
+    const adId = INTERSTITIAL_AD_UNIT_ID || (isDev ? TEST_INTERSTITIAL_AD_UNIT_ID : '');
+    if (!adId) {
+      this.interstitialPrepared = false;
+      return;
+    }
     try {
-      const adId = INTERSTITIAL_AD_UNIT_ID || TEST_INTERSTITIAL_AD_UNIT_ID;
       await AdMob.prepareInterstitial({ adId });
       this.interstitialPrepared = true;
       console.log('AdMob: Interstitial ad prepared successfully.');
@@ -303,8 +319,10 @@ export const NativeBridge = {
   async showBanner() {
     if (!this.isNative) return false;
     if (this.bannerVisible) return true;
+    const isDev = !!(typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.DEV);
+    const adId = BANNER_AD_UNIT_ID || (isDev ? TEST_BANNER_AD_UNIT_ID : '');
+    if (!adId) return false;
     try {
-      const adId = BANNER_AD_UNIT_ID || TEST_BANNER_AD_UNIT_ID;
       await AdMob.showBanner({ adId, adSize: 'ADAPTIVE_BANNER', position: 'BOTTOM_CENTER', margin: 60 });
       this.bannerVisible = true;
       return true;
@@ -368,7 +386,7 @@ export const NativeBridge = {
     if (!this.isNative || !this.purchasesInitialized) return {};
     try {
       const baseIds = productIds || (CONFIG && CONFIG.products ? CONFIG.products.map(p => p.id) : [
-        'bundle_starter', 'bundle_weapon_x', 'bundle_inferno', 'bundle_dragon', 'bundle_steel', 'bundle_cosmic',
+        'bundle_starter', 'bundle_weapon_x', 'bundle_inferno', 'bundle_dragon', 'bundle_cosmic',
         'gem_pouch', 'gem_sack', 'gem_chest', 'gem_vault', 'gem_treasury', 'gem_mountain',
         'feature_offline', 'feature_vip', 'feature_remove_ads', 'feature_frenzy_boost'
       ]);
