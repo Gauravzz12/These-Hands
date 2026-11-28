@@ -13,14 +13,14 @@
     "semantic_hash": "5e6e3cea3e89137071c142dd7835b0ef"
   },
   "android/app/build.gradle": {
-    "mtime": 1794499361.7829843,
-    "seen": 1794534619.5083382,
-    "ast_hash": "4d61e7332902bfebff6107bd7e4fa49a",
+    "mtime": 1795875008.3578079,
+    "seen": 1795875222.3416295,
+    "ast_hash": "fd39fad7885339db71e91e691255390b",
     "semantic_hash": ""
   },
   "android/app/capacitor.build.gradle": {
-    "mtime": 1795813383.1079311,
-    "seen": 1795813411.1486745,
+    "mtime": 1795875266.1308134,
+    "seen": 1795875281.794067,
     "ast_hash": "5ba0be250dd8100eda2e2cc83f54592a",
     "semantic_hash": ""
   },
@@ -49,8 +49,8 @@
     "semantic_hash": "682315a426653617c6a74fc12bef55b6"
   },
   "android/capacitor.settings.gradle": {
-    "mtime": 1795813383.1069312,
-    "seen": 1795813411.1486745,
+    "mtime": 1795875266.1298122,
+    "seen": 1795875281.794067,
     "ast_hash": "f731ce259e4f04813e0c37d6517b7841",
     "semantic_hash": ""
   },
@@ -229,9 +229,9 @@
     "semantic_hash": ""
   },
   "src/game/gameEngine.js": {
-    "mtime": 1795813347.0879712,
-    "seen": 1795813411.1486745,
-    "ast_hash": "8b755c405f0b3e003faded0ee6bcf73c",
+    "mtime": 1795875262.9485953,
+    "seen": 1795875281.794067,
+    "ast_hash": "f74639d65f5bc5016151110ce63f2139",
     "semantic_hash": ""
   },
   "src/game/proceduralEnemies.js": {
@@ -253,9 +253,9 @@
     "semantic_hash": "8dd5584aa251b2d1cb0d3ad37ba77cc7"
   },
   "src/services/nativeBridge.js": {
-    "mtime": 1795813149.1242938,
-    "seen": 1795813411.1486745,
-    "ast_hash": "134b15cfcf7a4ed190c12b4f6e09dcb4",
+    "mtime": 1795875185.5175323,
+    "seen": 1795875222.3416295,
+    "ast_hash": "10ec0c050bb31a36289ee302d66d34c5",
     "semantic_hash": ""
   },
   "sync_engine.cjs": {
@@ -2488,6 +2488,12 @@
     "mtime": 1795810928.940712,
     "seen": 1795813411.150029,
     "ast_hash": "cbb2a6933dff5ec5cf17e4a392b946b7",
+    "semantic_hash": ""
+  },
+  "public/privacy.html": {
+    "mtime": 1795874824.9281962,
+    "seen": 1795875222.3416295,
+    "ast_hash": "5c703b05e7ecc2765a715f6678183ad6",
     "semantic_hash": ""
   },
   "package-lock.json": {

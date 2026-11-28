@@ -54,6 +54,7 @@ export const NativeBridge = {
   interstitialPrepared: false,
   bannerVisible: false,
   activeRewardCallback: null,
+  activeRewardDismissTimer: null,
   activeInterstitialCallback: null,
   activeInterstitialShowing: false,
   productsMap: {},
@@ -86,10 +87,13 @@ export const NativeBridge = {
 
       // 2. Hardware Back Button Handling
       App.addListener('backButton', () => {
-        // Close modals if open
         const mockModal = document.getElementById('mockCheckout');
         const adModal = document.getElementById('adModal');
+        const rushTier = document.getElementById('rushTierOverlay');
         const moreSheet = document.getElementById('moreSheetOverlay');
+        const levelUp = document.getElementById('levelUpOverlay');
+        const modeResult = document.getElementById('modeResultOverlay');
+        const awayCard = document.getElementById('awayCard');
 
         if (mockModal && mockModal.classList.contains('open')) {
           mockModal.classList.remove('open');
@@ -98,8 +102,25 @@ export const NativeBridge = {
         if (adModal && adModal.style.display !== 'none') {
           return; // Don't interrupt rewarded ad
         }
+        if (rushTier && rushTier.classList.contains('open')) {
+          rushTier.classList.remove('open');
+          return;
+        }
         if (moreSheet && moreSheet.style.display !== 'none') {
           moreSheet.style.display = 'none';
+          return;
+        }
+        if (levelUp && levelUp.classList.contains('open')) {
+          levelUp.click();
+          return;
+        }
+        if (modeResult && modeResult.style.display !== 'none') {
+          const mrHome = document.getElementById('mrHomeBtn');
+          if (mrHome) mrHome.click();
+          return;
+        }
+        if (awayCard && awayCard.classList.contains('open')) {
+          awayCard.classList.remove('open');
           return;
         }
 
@@ -133,14 +154,43 @@ export const NativeBridge = {
       // Setup Rewarded Ad listeners
       AdMob.addListener(RewardAdPluginEvents.Rewarded, (reward) => {
         console.log('Native AdMob Reward granted:', reward);
-        if (this.activeRewardCallback) {
-          this.activeRewardCallback(true);
-          this.activeRewardCallback = null;
+        if (this.activeRewardDismissTimer) {
+          clearTimeout(this.activeRewardDismissTimer);
+          this.activeRewardDismissTimer = null;
         }
+        if (this.activeRewardCallback) {
+          const cb = this.activeRewardCallback;
+          this.activeRewardCallback = null;
+          cb(true);
+        }
+      });
+
+      AdMob.addListener(RewardAdPluginEvents.FailedToShow, (err) => {
+        console.warn('AdMob rewarded failed to show:', err);
+        this.rewardedPrepared = false;
+        if (this.activeRewardDismissTimer) {
+          clearTimeout(this.activeRewardDismissTimer);
+          this.activeRewardDismissTimer = null;
+        }
+        if (this.activeRewardCallback) {
+          const cb = this.activeRewardCallback;
+          this.activeRewardCallback = null;
+          cb(false);
+        }
+        this.prepareRewardedAd();
       });
 
       AdMob.addListener(RewardAdPluginEvents.Dismissed, () => {
         this.rewardedPrepared = false;
+        if (this.activeRewardDismissTimer) clearTimeout(this.activeRewardDismissTimer);
+        this.activeRewardDismissTimer = setTimeout(() => {
+          this.activeRewardDismissTimer = null;
+          if (this.activeRewardCallback) {
+            const cb = this.activeRewardCallback;
+            this.activeRewardCallback = null;
+            cb(false);
+          }
+        }, 350);
         this.prepareRewardedAd(); // Pre-load next rewarded ad
       });
 
@@ -243,12 +293,15 @@ export const NativeBridge = {
       }
       if (!this.rewardedPrepared) {
         console.warn('AdMob: Rewarded ad could not be prepared.');
+        this.activeRewardCallback = null;
         return false;
       }
       await AdMob.showRewardVideoAd();
       return true;
     } catch (err) {
       console.warn('Native AdMob show error:', err);
+      this.rewardedPrepared = false;
+      this.activeRewardCallback = null;
       return false;
     }
   },

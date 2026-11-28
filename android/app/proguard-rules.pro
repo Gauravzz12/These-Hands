@@ -36,3 +36,7 @@
 # Cordova plugin compatibility
 -keep class org.apache.cordova.** { *; }
 -dontwarn org.apache.cordova.**
+
+# Capacitor Firebase Authentication (Facebook SDK is optional / excluded)
+-keep class io.capawesome.capacitorjs.plugins.firebase.authentication.** { *; }
+-dontwarn com.facebook.**
