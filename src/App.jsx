@@ -410,7 +410,7 @@ export default function App() {
             <button type="button" id="perksToggle" className="perks-toggle" aria-expanded="false" aria-controls="perksCollapse">
               <div className="perks-toggle-left">
                 <span className="perks-toggle-title">LEVEL PERKS &amp; ABILITIES</span>
-                <span className="perks-toggle-sub" id="perksToggleSub">LV 2 TO 20+ · 0/20 ACTIVE</span>
+                <span className="perks-toggle-sub" id="perksToggleSub">LV 2 TO 50 · 0/25 ACTIVE</span>
               </div>
               <div className="perks-toggle-right">
                 <span className="perks-toggle-hint" id="perksToggleHint">SHOW</span>
@@ -533,7 +533,7 @@ export default function App() {
         </div>
         <div id="helpScroll">
           <div className="help-card"><div className="help-h">1 · YOUR HANDS DO THE WORK</div><p>Your hands slap on their own — your job is to make every slap count. Coins are paid on <b>every strike</b>, so even a fight you lose still earns. Unlock <b>FRENZY</b> in the skill tree, then land hits to charge its meter — misses don't charge it. When the meter is full, tap the glowing <b>FRENZY!</b> button mid-fight: 10 seconds of +50% damage and +30% speed, unleashed when YOU say so.</p></div>
-          <div className="help-card"><div className="help-h">2 · GROW ON THREE FRONTS</div><p><b>Attributes</b> (Power, Speed, Crit, Combo…) have <b>no caps</b> — buy them as high as your coins allow, right up to each attribute's max. Prices are the only wall, and the top levels cost billions, so maxing everything is a long grind. Every player level also grants a permanent perk (Iron Palm, Thick Skin, Vampire Slap…). <b>Skills</b> from the tree are the third front: Second Hand doubles your slap rate, and bosses further in are mathematically impossible without the tree. Attributes alone won't carry you. <b>Precision Instinct</b> in the tree makes a gold weak spot flash on the enemy mid-fight — tap it for a heavy 2.5× precision crit (base cap 3 per fight; Fortune Luck makes weak spots appear more frequently).</p></div>
+          <div className="help-card"><div className="help-h">2 · GROW ON THREE FRONTS</div><p><b>Attributes</b> (Power, Speed, Crit, Combo…) upgrade up to each attribute's permanent max whenever your coins allow. Prices rise steeply, and top levels cost billions, so maxing everything is a long grind. Every player level also grants a permanent perk (Iron Palm, Thick Skin, Vampire Slap…). <b>Skills</b> from the tree are the third front: Second Hand doubles your slap rate, and bosses further in are mathematically impossible without the tree. Attributes alone won't carry you. <b>Precision Instinct</b> in the tree makes a gold weak spot flash on the enemy mid-fight — tap it for a heavy 2.5× precision crit (base cap 3 per fight; Fortune Luck makes weak spots appear more frequently).</p></div>
           <div className="help-card"><div className="help-h">3 · CLIMB THE ROSTER</div><p>Beat an enemy to unlock the next — 50 of them, in 10 groups, with a boss every 10th. Beating enemies is the only thing progression ever asks for. Bosses enrage under 40% HP — faster, harder hits. Beaten enemies can be re-fought any time for coins, and clearing an enemy's group unlocks its <b>HARD</b> rematch on the Levels screen (red button): far tougher, the knockout pays 2.75× a full normal fight’s total payout (slap-coin cap + KO bonus) and a one-time +3 gem bonus.</p></div>
           <div className="help-card"><div className="help-h">4 · EVERY DAY COUNTS</div><p>Defeat the <b>Grumpy Teddy (#5)</b> to unlock the <b>daily chest</b> — a 7-day login streak that pays coins every day and gems on day 7, with amounts that grow with your progress. Defeat the <b>Mischievous Monkey (#10)</b> to unlock <b>daily quests</b>. Check <b>Awards</b> for lifetime stats and achievements (every achievement pays gems), and spend gems in the <b>Shop</b> on hand skins, coin packs and the Offline Earnings unlock.</p></div>
           <div className="help-card"><div className="help-h">5 · WATCH THE COUNTDOWN</div><p>Enemies hit back on the timer under their HP bar. Your HP refills every fight, and levelling up is also defence. If you're walled, the answer is almost always: farm the best enemy you can beat, buy what's cheapest for damage, and come back.</p></div>
@@ -951,7 +951,7 @@ export default function App() {
               <span className="mr-ico gold"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2h12v3h4v2a5 5 0 0 1-5 5h-.42A6 6 0 0 1 13 15.92V18h4v3H7v-3h4v-2.08A6 6 0 0 1 7.42 12H7a5 5 0 0 1-5-5V5h4V2zm-2 5a3 3 0 0 0 3 3V7H4zm16 0h-3v3a3 3 0 0 0 3-3z" fill="currentColor"/></svg></span>
               <span className="mr-main">
                 <span className="mr-title">AWARDS</span>
-                <span className="mr-sub" id="moreAwardsSub">0 / 104 DONE</span>
+                <span className="mr-sub" id="moreAwardsSub">0 / 131 DONE</span>
               </span>
               <span className="mr-badge" id="moreAwardsBadge" style={{ display: 'none' }}>0</span>
               <span className="mr-arrow">›</span>
@@ -968,7 +968,7 @@ export default function App() {
               <span className="mr-ico orange"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.4 13a7.6 7.6 0 0 0 0-2l2-1.6-2-3.4-2.4 1a7.7 7.7 0 0 0-1.7-1L14.8 3H9.2L8.7 5.6a7.7 7.7 0 0 0-1.7 1l-2.4-1-2 3.4L4.6 11a7.6 7.6 0 0 0 0 2l-2 1.6 2 3.4 2.4-1a7.7 7.7 0 0 0 1.7 1l.5 2.6h5.6l.5-2.6a7.7 7.7 0 0 0 1.7-1l2.4 1 2-3.4-2-1.6zM12 15.5a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7z" fill="currentColor"/></svg></span>
               <span className="mr-main">
                 <span className="mr-title">SETTINGS</span>
-                <span className="mr-sub">MUSIC ON · SFX ON</span>
+                <span className="mr-sub" id="moreSettingsSub">MUSIC ON · SFX ON</span>
               </span>
               <span className="mr-arrow">›</span>
             </button>

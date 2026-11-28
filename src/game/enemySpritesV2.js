@@ -2205,7 +2205,7 @@ function loadPoseImage(poseDef) {
         poseDef.gTop = (main.top * step) / ih;
         poseDef.gBot = Math.min(1, ((main.bot + 1) * step) / ih);
         poseDef.gCx = left <= right ? ((left + right) / 2) / iw : 0.5;
-    } catch (err) { /* measurement is best-effort; defaults keep old behaviour */ }
+    } catch { /* measurement is best-effort; defaults keep old behaviour */ }
     poseDef.ready = true;
     poseDef.loading = false;
   };
@@ -2279,7 +2279,7 @@ function canvasBlank(c) {
     const d = x.getImageData(0, 0, 16, 16).data;
     for (let i = 3; i < d.length; i += 4) if (d[i] > 8) return false;
     return true;
-  } catch (e) { return false; }
+  } catch { return false; }
 }
 export function healV2Sprites() {
   let healed = 0;

@@ -79,7 +79,6 @@ export function iconUrl(kind, id) {
 // Hand and skins sprite cache
 let HAND_SPRITE = null;
 let HAND_ASLEEP = null;
-let SKIN_ART = null;
 
 export function getHandSprite() {
   if (HAND_SPRITE) return { main: HAND_SPRITE, asleep: HAND_ASLEEP };

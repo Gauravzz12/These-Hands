@@ -1,6 +1,6 @@
 // These Hands — Authentic Enemies Definition & Sprite Generation
 import { ROSTER } from './roster.js';
-import { CONFIG, calcEnemyHp, calcEnemyDamage, calcEnemyInterval, calcEnemyBounty } from './config.js';
+import { calcEnemyHp, calcEnemyDamage, calcEnemyInterval, calcEnemyBounty } from './config.js';
 import { ENEMY_ART, makeSprite } from './artData.js';
 import { getV2Sprite, isV2Enemy } from './enemySpritesV2.js';
 
@@ -85,7 +85,7 @@ export const ALL_ENEMIES = new Proxy([], {
   has(target, prop) {
     return Reflect.has(buildAllEnemies(), prop);
   },
-  ownKeys(target) {
+  ownKeys(_target) {
     return Reflect.ownKeys(buildAllEnemies());
   },
   getOwnPropertyDescriptor(target, prop) {

@@ -70,7 +70,7 @@ export const NativeBridge = {
       // 1. Status Bar & Splash Screen (True Fullscreen)
       try {
         await StatusBar.hide();
-      } catch (e) {
+      } catch {
         await StatusBar.setStyle({ style: Style.Dark }).catch(() => {});
       }
       await SplashScreen.hide();
@@ -403,7 +403,7 @@ export const NativeBridge = {
       await AdMob.hideBanner();
       this.bannerVisible = false;
       return true;
-    } catch (err) {
+    } catch {
       return false;
     }
   },

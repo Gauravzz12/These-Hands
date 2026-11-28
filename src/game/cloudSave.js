@@ -34,7 +34,7 @@ let status = {
 
 function setStatus(patch) {
   status = Object.assign({}, status, patch);
-  if (hooks && hooks.onStatus) { try { hooks.onStatus(status); } catch (e) {} }
+  if (hooks && hooks.onStatus) { try { hooks.onStatus(status); } catch {} }
 }
 
 function shortErr(e) {
@@ -253,7 +253,7 @@ export async function cloudGoogle() {
         readyStatus();
         await reconcile();
         return;
-      } catch (e2) { /* fall through to error below */ }
+      } catch { /* fall through to error below */ }
     }
     setStatus({ state: 'error', text: 'Google sign-in failed (' + shortErr(e) + ').', canGoogle: !!(user && user.isAnonymous), canSync: !!user });
   }
@@ -268,8 +268,8 @@ export async function cloudSignOut() {
       const { FirebaseAuthentication } = await import('@capacitor-firebase/authentication');
       await FirebaseAuthentication.signOut();
     }
-  } catch (e) {}
-  try { await fb.authM.signOut(auth); } catch (e) {}
+  } catch {}
+  try { await fb.authM.signOut(auth); } catch {}
   // onAuthStateChanged fires with null and a fresh guest session starts,
   // so cloud backup keeps working; the Google account's save stays stored.
 }
