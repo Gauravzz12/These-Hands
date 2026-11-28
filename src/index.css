@@ -1435,7 +1435,7 @@ display: flex; justify-content: space-between; gap: 8px; align-items: center;
 .set-slider::-moz-range-thumb{width:22px;height:22px;border-radius:50%;background:var(--gold);border:2px solid var(--gold-dark);cursor:pointer;box-shadow:0 2px 4px rgba(0,0,0,.3)}
 .ecard-blitz{margin-top:6px;width:100%;padding:6px 4px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:5px;border:2px solid #0f6f5c;border-radius:8px;background:rgba(15,111,92,.08);color:#0b5a4a;font-family:"Nunito",sans-serif;font-weight:900;font-size:12px;letter-spacing:.05em}
 .ecard-blitz:active{transform:scale(.96)}.fx-chip.acc{background:#b97e08}.fx-chip.slow{background:#3f6fb5}.fx-chip.lock{background:#5b4a8a}.fx-chip.burn{background:#d63c30}.fx-chip.shield{background:#177e96}
-.bi-spec{margin-top:7px;font-weight:900;font-size:12.5px;letter-spacing:.04em;color:#ffb59d;text-align:center;padding:0 18px;line-height:1.35}
+.bi-spec{margin-top:10px;white-space:pre-line;font-weight:800;font-size:12.5px;letter-spacing:.03em;color:#ffe9bd;background:rgba(20,6,4,.82);border:2px solid #f59e0b;border-radius:12px;text-align:center;padding:8px 14px;line-height:1.45;max-width:340px;box-shadow:0 6px 18px rgba(0,0,0,.45)}
 .ecard .st.spec-line{color:#d63c30;font-weight:900}
 .rail-circle.spec.locked{filter:grayscale(1);opacity:.45}
 #hangToast {
@@ -1570,16 +1570,22 @@ display: flex; justify-content: space-between; gap: 8px; align-items: center;
 #saveNotice .sn-x { font-weight: 900; opacity: .65; }
 #skinNotice {
 margin: 8px 12px 0;
-padding: 8px 12px;
-border: 2px solid #b97e08;
-border-radius: 10px;
+padding: 9px 12px;
+border: 2.5px solid #221407;
+border-radius: 12px;
 background: #fdf3d7;
-color: #6d4c05;
+color: #5c3a04;
 font-size: 12px; font-weight: 800;
+box-shadow: 3px 3px 0 #221407;
 cursor: pointer;
-display: flex; justify-content: space-between; gap: 8px; align-items: center;
+display: flex; justify-content: space-between; gap: 10px; align-items: center;
 }
-#skinNotice .sn-x { font-weight: 900; opacity: .65; }
+#skinNotice .sn-ico { font-size: 20px; line-height: 1; flex: none; }
+#skinNotice .sn-msg { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; line-height: 1.3; }
+#skinNotice .sn-msg b { font-family: "Bungee", "Nunito", sans-serif; font-size: 12px; color: #221407; letter-spacing: .02em; }
+#skinNotice .sn-msg span { font-size: 11.5px; font-weight: 800; color: #6d4c05; }
+#skinNotice.celebrate { background: linear-gradient(135deg, #fef08a, #fbbf24); border-width: 3px; box-shadow: 4px 4px 0 #221407; animation: endPop .32s cubic-bezier(.2, 1.5, .4, 1); }
+#skinNotice .sn-x { font-weight: 900; opacity: .7; font-size: 14px; }
 #shopFeatures { padding: 12px 12px 0; flex: none; }
 .feature-card {
 border: 3px solid var(--chrome-edge);
@@ -4797,9 +4803,31 @@ margin-top: 7px;
   border: 4px solid #221407;
   border-radius: 22px;
   box-shadow: 10px 12px 0 #221407, 0 30px 60px rgba(0, 0, 0, 0.5);
+  max-height: 92vh;
+  overflow-y: auto;
 }
+#endOverlay .end-badge {
+  display: inline-block;
+  font-family: "Bungee", "Nunito", sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  background: #dcfce7;
+  color: #166534;
+  border: 2.5px solid #221407;
+  border-radius: 999px;
+  padding: 4px 12px;
+  box-shadow: 2.5px 2.5px 0 #221407;
+  margin-bottom: 6px;
+}
+#endOverlay .end-badge.first { background: #fef3c7; color: #92400e; }
+#endOverlay .end-badge.boss { background: linear-gradient(135deg, #fde68a, #f59e0b); color: #221407; }
+#endOverlay .end-badge.elite { background: #e0f2fe; color: #075985; }
+#endOverlay .end-badge.group { background: linear-gradient(135deg, #fef08a, #f59e0b); color: #221407; }
+#endOverlay .end-badge.mastery { background: #ede9fe; color: #5b21b6; }
+#endOverlay .end-badge.hard { background: #fee2e2; color: #991b1b; }
+#endOverlay .end-badge.lose { background: #ffe4e6; color: #9f1239; }
 #endOverlay .end-head {
-  font-size: 42px;
+  font-size: 36px;
   letter-spacing: 0.02em;
   text-shadow: 3px 3px 0 #221407;
 }
@@ -5182,15 +5210,13 @@ margin-top: 7px;
 .fx-chip.anomaly{background:#7c2d12;color:#ffd9a8;border-color:#221407}
 .fx-chip.contract{background:#1e3a8a;color:#dbeafe;border-color:#221407}
 
-/* Feature mode cards (Blitz / Reflex) — sprite-forward */
+/* Feature mode cards (Blitz / Parry Training) — sprite-forward */
 .hub-card.feature{position:relative;overflow:visible}
 .hub-card.feature .hc-img{width:58px;height:58px;flex:0 0 58px;object-fit:contain;background:#fff8e7;border:2.5px solid #221407;border-radius:12px;box-shadow:2.5px 2.5px 0 #221407;padding:2px}
 .hub-card.feature.gold{background:#fff3cf}
-.hub-card.feature.red{background:#ffe9e4}
 .hub-card.feature.locked .hc-img{filter:grayscale(1);opacity:.55}
 #hubGauntletCard{position:relative;overflow:visible}
 .hub-mode-badge{position:absolute;top:-10px;right:10px;font-family:Bungee,cursive;font-size:10px;letter-spacing:.04em;background:#f2b01e;color:#221407;border:2.5px solid #221407;border-radius:999px;padding:3px 9px;box-shadow:2px 2px 0 #221407;transform:rotate(2deg)}
-.hub-card.feature.red .hub-mode-badge{background:#fb7185;color:#fff}
 .hub-card.feature.locked .hub-mode-badge{background:#d6cbb8;color:#6b5b3e}
 
 /* Battle banners live ON the stage now — they never shrink the fight area */
@@ -5207,6 +5233,18 @@ margin-top: 7px;
 .rw-row.total{border-top:2px dashed #b97e08;margin-top:4px;padding-top:5px;font-size:14.5px}
 .rw-row.total .rw-lbl{font-family:Bungee,cursive;font-size:12px}
 .rw-note{font-family:Nunito,sans-serif;font-weight:800;font-size:12px;color:#92400e;margin-top:3px}
+.rw-banners{display:flex;flex-direction:column;gap:6px;margin-top:8px;padding-top:8px;border-top:2px dashed #b97e08}
+.rw-banner{background:#fffdf4;border:2.5px solid #221407;border-radius:10px;padding:6px 10px;font-family:Nunito,sans-serif;font-weight:900;font-size:11.5px;line-height:1.3;color:#221407;box-shadow:2px 2px 0 #221407;text-align:left}
+.rw-banner.group{background:linear-gradient(135deg,#fef08a,#fbbf24);color:#221407}
+.rw-banner.mastery{background:#dcfce7;color:#14532d}
+.rw-banner.special{background:#ede9fe;color:#4c1d95}
+.rw-banner.next{background:#e0f2fe;color:#0c4a6e}
+.fx-chip.boss-spec{background:linear-gradient(135deg,#991b1b,#d97706);border-color:#fde68a;color:#fff}
+.fx-chip.exposed{background:#dc2626;border-color:#fecaca;color:#fff;animation:weakChipPulse .45s ease-in-out infinite alternate}
+#atkRow.imminent .atk-lbl,#atkRow.imminent #atkTime{color:#d97706}
+#atkRow.imminent #atkFill{background:#facc15;box-shadow:0 0 8px rgba(250,204,21,.9)}
+.rail-circle.parry.imminent{box-shadow:0 0 0 3px #fef08a,0 0 18px rgba(250,204,21,.95);animation:parryImminent .26s ease-in-out infinite alternate}
+@keyframes parryImminent{from{transform:scale(1)}to{transform:scale(1.1)}}
 #endOverlay .end-revive-btn.rec,#endOverlay .end-boss-dmg-btn.rec{animation:recPulse .9s infinite;box-shadow:0 0 0 3px #f59e0b,3px 3px 0 #221407}
 @keyframes recPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.045)}}
 .contract-card.done{opacity:.6}

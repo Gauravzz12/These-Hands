@@ -500,7 +500,7 @@ export const CONFIG = {
       "tier": 2,
       "cost": 6500,
       "prereq": "basic",
-      "fx": "Unlocks PARRY: tap PARRY on the enemy's strike flash to negate 100% of damage and counter for 1.5x damage. No cooldown on success \u2014 mistiming locks Parry for 5s."
+      "fx": "Unlocks PARRY: tap PARRY in the 0.16s strike flash to negate 100% of damage and counter for 1.5x damage with no cooldown. Mistiming locks Parry for 5s, halves combo, rushes their next swing, and leaves you EXPOSED (+35% damage taken for 3.5s)."
     },
     {
       "id": "quickReflexes",
@@ -704,7 +704,7 @@ export const CONFIG = {
       "cost": 1200000000,
       "prereq": "ironStance2",
       "reqBoss": 49,
-      "fx": "Parry timing window widens from 0.25s to 0.35s."
+      "fx": "Parry timing window widens from 0.16s to 0.24s."
     }
   ],
   "skillFx": {
@@ -731,8 +731,8 @@ export const CONFIG = {
     "retaliationMult": 3.0,
     "parryChance": 0.15,
     "parryDeflect": 0.5,
-    "parryWindowSec": 0.25,
-    "parryWindowWideSec": 0.35,
+    "parryWindowSec": 0.16,
+    "parryWindowWideSec": 0.24,
     "parryCdSec": 0,
     "parryCounterMult": 1.5, "parryWhiffLockSec": 5.0, "parryWhiffLockIS1Sec": 3.0, "parryCounterIS2Bonus": 0.5,
     "dizzyMult": 1.35,
@@ -1806,11 +1806,11 @@ export const CONFIG = {
     "speedMult": 1.5
   },
   "daily": {
-    "chestDayMult": 0.25,
-    "chestDayRamp": 0.2,
-    "chestDay7Mult": 1.5,
+    "chestDayMult": 1.5,
+    "chestDayRamp": 0.26,
+    "chestDay7Mult": 7.5,
     "chestDay7Gems": 25,
-    "chestMinCoins": 60,
+    "chestMinCoins": 150,
     "questPool": [
       "defeats",
       "battleCoins",
@@ -2244,7 +2244,7 @@ export const CUMULATIVE_BOUNTY_POOL = [
     metric: 'crits',
     goals: [15, 30, 50],
     gems: [2, 3, 4],
-    coinMult: 1.25,
+    coinMult: 2.5,
     isUnlocked: () => true,
     formatDesc: (g) => `Land ${g} total Crits across any fights.`,
   },
@@ -2254,7 +2254,7 @@ export const CUMULATIVE_BOUNTY_POOL = [
     metric: 'stuns',
     goals: [4, 8, 15],
     gems: [2, 3, 4],
-    coinMult: 1.25,
+    coinMult: 2.5,
     isUnlocked: (s) => (s?.attrs?.stun || 0) >= 1,
     formatDesc: (g) => `Trigger ${g} total Stuns across any fights.`,
   },
@@ -2264,7 +2264,7 @@ export const CUMULATIVE_BOUNTY_POOL = [
     metric: 'specialsUsed',
     goals: [3, 6, 10],
     gems: [2, 3, 3],
-    coinMult: 1.25,
+    coinMult: 2.5,
     isUnlocked: (s) => (s?.highestStageCleared || 0) >= 10 || Boolean(s?.hasNonClassicSkin),
     formatDesc: (g) => `Fire ${g} Specials or Skin Powers across any fights.`,
   },
@@ -2274,7 +2274,7 @@ export const CUMULATIVE_BOUNTY_POOL = [
     metric: 'weakSpotsHit',
     goals: [3, 6, 10],
     gems: [3, 3, 4],
-    coinMult: 1.25,
+    coinMult: 2.5,
     isUnlocked: (s) => Boolean(s?.skills?.precisionInstinct),
     formatDesc: (g) => `Tap ${g} Weak Spots across any fights.`,
   },
@@ -2284,7 +2284,7 @@ export const CUMULATIVE_BOUNTY_POOL = [
     metric: 'parries',
     goals: [3, 6, 10],
     gems: [3, 4, 4],
-    coinMult: 1.25,
+    coinMult: 2.5,
     isUnlocked: (s) => Boolean(s?.skills?.deflect),
     formatDesc: (g) => `Land ${g} Parries across any fights.`,
   },
@@ -2294,7 +2294,7 @@ export const CUMULATIVE_BOUNTY_POOL = [
     metric: 'frenzies',
     goals: [1, 2, 3],
     gems: [3, 4, 5],
-    coinMult: 1.25,
+    coinMult: 2.5,
     isUnlocked: (s) => Boolean(s?.skills?.frenzy),
     formatDesc: (g) => `Activate Frenzy ${g} time${g > 1 ? 's' : ''}.`,
   },
@@ -2304,7 +2304,7 @@ export const CUMULATIVE_BOUNTY_POOL = [
     metric: 'winStreak',
     goals: [3, 5, 8],
     gems: [2, 3, 4],
-    coinMult: 1.25,
+    coinMult: 2.5,
     isUnlocked: () => true,
     formatDesc: (g) => `Win ${g} fights in a row.`,
   },
@@ -2314,7 +2314,7 @@ export const CUMULATIVE_BOUNTY_POOL = [
     metric: 'maxCombo',
     goals: [15, 30, 60],
     gems: [2, 3, 4],
-    coinMult: 1.25,
+    coinMult: 2.5,
     isUnlocked: (s) => Boolean(s?.skills?.onTarget),
     formatDesc: (g) => `Reach a ${g}-hit combo streak across fights.`,
   },
@@ -2325,7 +2325,7 @@ export const SHOWDOWN_BOUNTY_POOL = [
     id: 'speed_blitz',
     title: 'Speed Blitz',
     gems: [3, 3, 3],
-    coinMult: 1.50,
+    coinMult: 3.25,
     bossOnly: false,
     requiresMultiHit: false,
     isUnlocked: () => true,
@@ -2338,7 +2338,7 @@ export const SHOWDOWN_BOUNTY_POOL = [
     id: 'untouchable',
     title: 'Untouchable',
     gems: [3, 3, 4],
-    coinMult: 1.50,
+    coinMult: 3.25,
     bossOnly: false,
     requiresMultiHit: false,
     isUnlocked: () => true,
@@ -2348,7 +2348,7 @@ export const SHOWDOWN_BOUNTY_POOL = [
     id: 'clean_hands',
     title: 'Clean Hands',
     gems: [3, 3, 3],
-    coinMult: 1.50,
+    coinMult: 3.25,
     bossOnly: false,
     requiresMultiHit: false,
     isUnlocked: () => true,
@@ -2358,7 +2358,7 @@ export const SHOWDOWN_BOUNTY_POOL = [
     id: 'no_specials',
     title: 'No Specials',
     gems: [2, 3, 3],
-    coinMult: 1.50,
+    coinMult: 3.25,
     bossOnly: false,
     requiresMultiHit: false,
     isUnlocked: (s) => (s?.highestStageCleared || 0) >= 10 || Boolean(s?.hasNonClassicSkin),
@@ -2368,7 +2368,7 @@ export const SHOWDOWN_BOUNTY_POOL = [
     id: 'hardcore_clear',
     title: 'Hardcore Clear',
     gems: [4, 4, 5],
-    coinMult: 1.75,
+    coinMult: 4.0,
     bossOnly: false,
     requiresMultiHit: false,
     isUnlocked: (s) => (s?.highestStageCleared || 0) >= 5,
@@ -2378,7 +2378,7 @@ export const SHOWDOWN_BOUNTY_POOL = [
     id: 'boss_rematch',
     title: 'Boss Rematch',
     gems: [4, 5, 5],
-    coinMult: 1.75,
+    coinMult: 4.0,
     bossOnly: true,
     requiresMultiHit: false,
     isUnlocked: (s) => (s?.highestStageCleared || 0) >= 10,
@@ -2545,10 +2545,35 @@ export function rerollDojoBounty(board, slotIndex, state, enemiesByStage = {}, m
   return { ok: true, contract: replacement };
 }
 
-export function getDojoMasterChestReward(frontierBounty, doubledByAd = false) {
+/**
+ * Returns the average coin cost across the player's current next level-up and
+ * all un-maxed attribute upgrades so bounties and daily rewards stay proportional
+ * to the player's current upgrade economy.
+ */
+export function calcAvgUpgradeCost(playerLevel = 1, attrs = {}) {
+  const maxLv = CONFIG.levelCap || 50;
+  const lvForCost = Math.min(Math.max(1, playerLevel || 1), maxLv - 1);
+  const lvCost = getLevelUpCost(lvForCost);
+
+  const attrCosts = [];
+  for (const key of (CONFIG.attrOrder || [])) {
+    const cfg = CONFIG.attrs?.[key];
+    const maxAttrLv = cfg?.maxLevel || ATTRIBUTE_COSTS_V33[key]?.max || 999;
+    const cur = attrs?.[key] || 0;
+    if (cur >= maxAttrLv) continue;
+    const c = getAttributeCost(key, cur);
+    if (Number.isFinite(c) && c > 0) attrCosts.push(c);
+  }
+  const avgAttrCost = attrCosts.length > 0
+    ? attrCosts.reduce((sum, c) => sum + c, 0) / attrCosts.length
+    : lvCost;
+  return Math.max(100, Math.round((lvCost + avgAttrCost) / 2));
+}
+
+export function getDojoMasterChestReward(upgradeCostAnchor, doubledByAd = false) {
   const mult = doubledByAd ? 2 : 1;
   return {
-    coins: Math.round(frontierBounty * 3 * mult),
+    coins: Math.round(upgradeCostAnchor * 7.5 * mult),
     gems: 10 * mult,
   };
 }

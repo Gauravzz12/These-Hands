@@ -44,7 +44,7 @@ export default function App() {
       <main id="pages">
       <section id="pageHome" className="page active" aria-label="Home">
         <div id="saveNotice" style={{'display': 'none'}} role="status" title="Tap to dismiss">Save data was corrupted — started fresh. Backup kept.<span className="sn-x" aria-hidden="true">✕</span></div>
-        <div id="skinNotice" style={{'display': 'none'}} role="status" title="Tap to dismiss"><span className="sn-msg"></span><span className="sn-x" aria-hidden="true">✕</span></div>
+        <div id="skinNotice" style={{'display': 'none'}} role="status" title="Tap to dismiss"><span className="sn-ico" aria-hidden="true">🎉</span><div className="sn-msg"></div><span className="sn-x" aria-hidden="true">✕</span></div>
         <div id="storageNotice" style={{'display': 'none'}} role="status" title="Tap to dismiss">Saving unavailable in this browser context — progress won't persist here.<span className="sn-x" aria-hidden="true">✕</span></div>
         
         <div className="hub-stage" id="hubStage">
@@ -190,15 +190,6 @@ export default function App() {
               <span className="hc-main">
                 <span className="hc-title">GOLDEN DUMMY BLITZ</span>
                 <span className="hc-sub" id="hubBlitzSub">DEFEAT THE MONKEY (#10) TO UNLOCK</span>
-              </span>
-            </button>
-
-            <button className="hub-card feature red" id="hubReflexCard" type="button">
-              <img className="hc-img" id="hubReflexImg" src="/fx/mode-reflex.webp" alt=""/>
-              <span className="hub-mode-badge" id="hubReflexBadge">DUEL</span>
-              <span className="hc-main">
-                <span className="hc-title">REFLEX SLAP-OFF</span>
-                <span className="hc-sub" id="hubReflexSub">BEAT #10 + DEFLECT & PRECISION INSTINCT</span>
               </span>
             </button>
 
@@ -649,6 +640,7 @@ export default function App() {
         <div className="end-rays" aria-hidden="true"></div>
         <div className="end-card">
           <div id="endTrophy" style={{'display': 'none'}}><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2h12v3h4v2a5 5 0 0 1-5 5h-.42A6 6 0 0 1 13 15.92V18h4v3H7v-3h4v-2.08A6 6 0 0 1 7.42 12H7a5 5 0 0 1-5-5V5h4V2zm-2 5a3 3 0 0 0 3 3V7H4zm16 0h-3v3a3 3 0 0 0 3-3z" fill="currentColor"/></svg></div>
+          <div className="end-badge" id="endBadge" style={{'display': 'none'}}></div>
           <div className="end-head" id="endHead">KNOCKOUT!</div>
           <img id="endSprite" alt="" />
           
@@ -826,7 +818,7 @@ export default function App() {
           <div className="sr-ability">
             <div className="sr-icon"><img id="srIcon" alt="" /></div>
             <div>
-              <div className="sr-new">GRUMPY TEDDY DEFEATED</div>
+              <div className="sr-new" id="srSource">GRUMPY TEDDY DEFEATED</div>
               <div className="sr-name" id="srName">Second Hand</div>
               <div className="sr-fx" id="srFx"></div>
             </div>
