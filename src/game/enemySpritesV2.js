@@ -2155,8 +2155,8 @@ function loadPoseImage(poseDef) {
 
     poseDef.img = c;
     poseDef.imgWhite = buildSilhouetteCanvas(c);
-    poseDef.w = origW;
-    poseDef.h = origH;
+    if (!poseDef.w) poseDef.w = origW;
+    if (!poseDef.h) poseDef.h = origH;
     // Measure the opaque content box so the renderer can plant the
     // character's feet exactly on the stage ground line. Robust version:
     // rows are grouped into clusters and only the heaviest cluster (the
