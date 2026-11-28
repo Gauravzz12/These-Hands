@@ -371,15 +371,24 @@ export const NativeBridge = {
   // Banner: shown on Home, Stages, and Shop screens
   async showBanner() {
     if (!this.isNative) return false;
-    if (this.bannerVisible) return true;
+    this._wantBanner = true;
+    if (this.bannerVisible || this._bannerPending) return true;
     const isDev = !!(typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.DEV);
     const adId = BANNER_AD_UNIT_ID || (isDev ? TEST_BANNER_AD_UNIT_ID : '');
     if (!adId) return false;
+    this._bannerPending = true;
     try {
       await AdMob.showBanner({ adId, adSize: 'ADAPTIVE_BANNER', position: 'BOTTOM_CENTER', margin: 60 });
+      this._bannerPending = false;
       this.bannerVisible = true;
+      if (!this._wantBanner) {
+        await AdMob.hideBanner().catch(() => {});
+        this.bannerVisible = false;
+        return false;
+      }
       return true;
     } catch (err) {
+      this._bannerPending = false;
       console.warn('Native AdMob banner error:', err);
       return false;
     }
@@ -387,7 +396,9 @@ export const NativeBridge = {
 
   async hideBanner() {
     if (!this.isNative) return false;
-    if (!this.bannerVisible) return true;
+    this._wantBanner = false;
+    if (!this.bannerVisible && !this._bannerPending) return true;
+    if (this._bannerPending) return true;
     try {
       await AdMob.hideBanner();
       this.bannerVisible = false;

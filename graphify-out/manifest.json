@@ -19,8 +19,8 @@
     "semantic_hash": ""
   },
   "android/app/capacitor.build.gradle": {
-    "mtime": 1795875266.1308134,
-    "seen": 1795875281.794067,
+    "mtime": 1795876060.2097385,
+    "seen": 1795876108.5501046,
     "ast_hash": "5ba0be250dd8100eda2e2cc83f54592a",
     "semantic_hash": ""
   },
@@ -49,8 +49,8 @@
     "semantic_hash": "682315a426653617c6a74fc12bef55b6"
   },
   "android/capacitor.settings.gradle": {
-    "mtime": 1795875266.1298122,
-    "seen": 1795875281.794067,
+    "mtime": 1795876060.2097385,
+    "seen": 1795876108.5501046,
     "ast_hash": "f731ce259e4f04813e0c37d6517b7841",
     "semantic_hash": ""
   },
@@ -229,9 +229,9 @@
     "semantic_hash": ""
   },
   "src/game/gameEngine.js": {
-    "mtime": 1795875262.9485953,
-    "seen": 1795875281.794067,
-    "ast_hash": "f74639d65f5bc5016151110ce63f2139",
+    "mtime": 1795876036.9951656,
+    "seen": 1795876108.5501046,
+    "ast_hash": "c1e11416fa0a933de932052d44cbcbf8",
     "semantic_hash": ""
   },
   "src/game/proceduralEnemies.js": {
@@ -253,9 +253,9 @@
     "semantic_hash": "8dd5584aa251b2d1cb0d3ad37ba77cc7"
   },
   "src/services/nativeBridge.js": {
-    "mtime": 1795875185.5175323,
-    "seen": 1795875222.3416295,
-    "ast_hash": "10ec0c050bb31a36289ee302d66d34c5",
+    "mtime": 1795876038.6527746,
+    "seen": 1795876108.5501046,
+    "ast_hash": "5259f7ef4654336a88bda47b76eadd14",
     "semantic_hash": ""
   },
   "sync_engine.cjs": {

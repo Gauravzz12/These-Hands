@@ -269,8 +269,11 @@ const Ads={
   refreshBanner(){
     const el=document.getElementById("adBanner");
     const bannerTabs=["home","levels","shop"];
-    const show=!G.adsRemoved&&bannerTabs.includes(G.tab);
-    if(el)el.style.display=show?"flex":"none";
+    const show=!G.menuOpen&&!G.adsRemoved&&bannerTabs.includes(G.tab);
+    const isNative=!!(typeof window!=="undefined"&&window.__nativeBridge&&window.__nativeBridge.isNative);
+    if(el)el.style.display=(!isNative&&IS_DEV_BUILD&&show)?"flex":"none";
+    const app=document.getElementById("app");
+    if(app)app.classList.toggle("has-banner",!!(show&&(isNative||IS_DEV_BUILD)));
     try{
       if(window.__nativeBridge){
         if(show&&window.__nativeBridge.showBanner)window.__nativeBridge.showBanner();
@@ -862,6 +865,7 @@ function handleMasterChestClaim(doubledByAd){
   if(doubledByAd){
     AdsManager.showRewarded("master_chest",(ok)=>{
       if(ok){
+        if(board.masterChestClaimed)return;
         const rw=getDojoMasterChestReward(fb,true);
         creditCoinsQuiet(rw.coins);
         grantGems(rw.gems);
@@ -1795,11 +1799,17 @@ const AD_SPONSORS = [
 ];
 
 function playRewardedAd(onComplete, placement) {
+  if (Ads.isAdPlaying) {
+    if (onComplete) onComplete(false);
+    return;
+  }
+  Ads.isAdPlaying = true;
   if (typeof window !== "undefined" && window.__nativeBridge && window.__nativeBridge.isNative) {
     let settled = false;
     const done = (ok) => {
       if (settled) return;
       settled = true;
+      Ads.isAdPlaying = false;
       if (ok) G.adRewardedGraceUntil = Date.now() + 120000;
       if (onComplete) onComplete(ok);
     };
@@ -1825,6 +1835,7 @@ function playRewardedAd(onComplete, placement) {
 function showWebAdModal(onComplete, placement) {
   const modal = $("adModal");
   if (!modal) {
+    Ads.isAdPlaying = false;
     if (onComplete) onComplete(true);
     return;
   }
@@ -1897,6 +1908,7 @@ function finishRewardedAd() {
 
   const wasInterstitial = adActiveIsInterstitial;
   adActiveIsInterstitial = false;
+  Ads.isAdPlaying = false;
   if (!wasInterstitial) {
     try { Sound.levelUp && Sound.levelUp(); } catch(e){}
     G.adRewardedGraceUntil = Date.now() + 120000;
@@ -2405,10 +2417,12 @@ function showEndOverlay(win){
   atkRowEl.classList.remove("warn");
   endOverlayEl.className="open "+(win?"win":"lose");
   if(autoAdvanceTimer){clearTimeout(autoAdvanceTimer);autoAdvanceTimer=null;}
+  againBtnEl.style.display="";
+  againBtnEl.disabled=false;
   const FM2=G.fightMode;
 const trioEl=$("endGauntletTrio");
 
-if(e&&e.world!=null){
+if(e&&e.world!=null&&!(FM2&&FM2.type==="bossrush")){
   endSpriteEl.style.display="";
   if(e.spr&&e.spr.thumb){endSpriteEl.src=e.spr.thumb;endSpriteEl.alt=e.name;const ps=Math.round(92*Math.min(e.scale||1,1.6));endSpriteEl.style.width=ps+"px";endSpriteEl.style.height=ps+"px"}
   if(trioEl)trioEl.style.display="none";
@@ -2522,7 +2536,7 @@ if(e&&e.world!=null){
     }
   }
 }
-const FM3=G.fightMode;if(FM3&&FM3.type==="bossrush"){nextBtnEl.style.display="none";if(win){endHeadEl.textContent="FIGHT REPORT";const v3=G.lastVictory||{};endSubEl.textContent="All "+FM3.queue.length+" bosses down back-to-back! Earned "+fmtNum((FM3.earned||0)+(v3.rushBonus||0))+" coins this run.";if(v3.rushBonus){const rrows=[["\u{1F590} Strike coins","+"+fmtNum(FM3.earned||0)],["\u{1F451} Rush completion bonus","+"+fmtNum(v3.rushBonus)]];if(v3.rushGem)rrows.push(["\u{1F48E} Completion gems","+"+v3.rushGem]);if(v3.rushEmbers)rrows.push(["\u{1F525} Dragon Lord bonus","+"+v3.rushEmbers]);rrows.push(["\u{1FA99} TOTAL COINS","+"+fmtNum((FM3.earned||0)+v3.rushBonus),1]);endUnlockEl.innerHTML=rewardCardHtml(rrows);endUnlockEl.classList.add("show")}}else{endHeadEl.textContent="\uD83D\uDC51 BOSS RUSH ENDED";endSubEl.textContent="You fell on boss "+(FM3.step+1)+" of "+FM3.queue.length+". Strike coins and boss bonuses are kept \u2014 upgrade and run it again."}}if(FM3&&FM3.type==="endless"){nextBtnEl.style.display="none";endHeadEl.textContent="\uD83C\uDF0A SURVIVAL ENDED \u2014 WAVE "+(FM3.wave||1);endSubEl.textContent="You cleared "+((FM3.wave||1)-1)+" waves and earned "+fmtNum((FM3.earned||0)+(G.fightHitCoins||0))+" coins this run. Best: WAVE "+(G.endlessBest||0)+"."}
+const FM3=G.fightMode;if(FM3&&FM3.type==="bossrush"){nextBtnEl.style.display="none";endUnlockEl.classList.remove("show");endUnlockEl.innerHTML="";if(!G.testMode&&Date.now()<(G.rushReadyAt||0))againBtnEl.style.display="none";chooseBtnEl.textContent="BACK TO HUB";chooseBtnEl.style.display="";if(win){endHeadEl.textContent="FIGHT REPORT";const v3=G.lastVictory||{};endSubEl.textContent="All "+FM3.queue.length+" bosses down back-to-back! Earned "+fmtNum((FM3.earned||0)+(v3.rushBonus||0))+" coins this run.";if(v3.rushBonus){const rrows=[["\u{1F590} Strike coins","+"+fmtNum(FM3.earned||0)],["\u{1F451} Rush completion bonus","+"+fmtNum(v3.rushBonus)]];if(v3.rushGem)rrows.push(["\u{1F48E} Completion gems","+"+v3.rushGem]);if(v3.rushEmbers)rrows.push(["\u{1F525} Dragon Lord bonus","+"+v3.rushEmbers]);rrows.push(["\u{1FA99} TOTAL COINS","+"+fmtNum((FM3.earned||0)+v3.rushBonus),1]);endUnlockEl.innerHTML=rewardCardHtml(rrows);endUnlockEl.classList.add("show")}}else{endHeadEl.textContent="\uD83D\uDC51 BOSS RUSH ENDED";endSubEl.textContent="You fell on boss "+(FM3.step+1)+" of "+FM3.queue.length+". Strike coins and boss bonuses are kept \u2014 upgrade and run it again."}}if(FM3&&FM3.type==="endless"){nextBtnEl.style.display="none";if(!G.testMode&&G.endlessReadyAt&&Date.now()<G.endlessReadyAt)againBtnEl.style.display="none";chooseBtnEl.textContent="BACK TO HUB";chooseBtnEl.style.display="";endHeadEl.textContent="\uD83C\uDF0A SURVIVAL ENDED \u2014 WAVE "+(FM3.wave||1);endSubEl.textContent="You cleared "+((FM3.wave||1)-1)+" waves and earned "+fmtNum((FM3.earned||0)+(G.fightHitCoins||0))+" coins this run. Best: WAVE "+(G.endlessBest||0)+"."}
   const vNorm=G.lastVictory;
   if(win&&vNorm&&!FM2&&!(G.enemy&&G.enemy.world!=null)){
     const rows=[];const notes=[];
@@ -2663,11 +2677,19 @@ againBtnEl.addEventListener("click",()=>{
   if(tutGate())return;
   const FM=G.fightMode;
   if(FM&&FM.type==="bossrush"){
+    if(!G.testMode&&Date.now()<(G.rushReadyAt||0)){
+      toast("\u{1F451} BOSS RUSH recharges in "+fmtTime(Math.ceil(((G.rushReadyAt||0)-Date.now())/1000)));
+      return;
+    }
     hideEndOverlay();
     startBossRush(FM.tier||"campaign");
     return;
   }
   if(FM&&FM.type==="endless"){
+    if(!G.testMode&&G.endlessReadyAt&&Date.now()<G.endlessReadyAt){
+      toast("\u{1F30A} ENDLESS recharges in "+fmtTime(Math.ceil((G.endlessReadyAt-Date.now())/1000)));
+      return;
+    }
     hideEndOverlay();
     startEndless();
     return;
@@ -2699,11 +2721,18 @@ nextBtnEl.addEventListener("click",()=>{
 chooseBtnEl.addEventListener("click",()=>{
   Sound.unlock();
   if(tutGate())return;
+  const wasHubMode=!!(G.fightMode&&(G.fightMode.type==="bossrush"||G.fightMode.type==="endless"));
+  const wasWorld=!!(G.enemy&&G.enemy.world!=null);
   hideEndOverlay();
   G.fightMode=null;
   G.carryHp=null;
   G.pendingRespawn=true;
-  switchTab((G.enemy&&G.enemy.world!=null)?"worlds":"levels");
+  if(wasHubMode){
+    restoreCampaignStage();
+    switchTab("home");
+    return;
+  }
+  switchTab(wasWorld?"worlds":"levels");
 });endHomeBtnEl.addEventListener("click",()=>{Sound.unlock();if(tutGate())return;G.fightMode=null;restoreCampaignStage();switchTab("home")});/* ===== FIRST-LOSS GUIDED TOUR (coach marks: dark blockers + glowing spot + smooth card) ===== */
 let tutState=null;
 function tutGate(){if(G.pendingTutorial&&!G.tutorialDone){G.pendingTutorial=false;hideEndOverlay();switchTab("home");startTutorial();return true}return false}
@@ -3358,7 +3387,7 @@ const Music = {
     this.stop();
     this.mode = mode;
     this.step = 0;
-    try { this.bus.gain.value = mode === "menu" ? 0.85 : 0.95; } catch (e) {}
+    this.updateVolume();
     this.nextT = Sound.ctx.currentTime + 0.05;
     this.timer = setInterval(() => this.tick(), 75);
     this.tick();
@@ -3442,7 +3471,7 @@ $("dbgEmbersBtn")?.addEventListener("click",()=>{if(!allowDebugTools())return;G.
 $("dbgMaxBtn")?.addEventListener("click",()=>{if(!allowDebugTools())return;debugMaxBuild()});
 $("dbgFight49Btn")?.addEventListener("click",()=>{if(!allowDebugTools())return;G.worldFight=null;G.fightMode=null;G.current=49;switchTab("battle")});
 $("dbgFightW05Btn")?.addEventListener("click",()=>{if(!allowDebugTools())return;G.fightMode=null;G.worldFight={world:0,slot:5};switchTab("battle")});
-$("dbgFightW15Btn")?.addEventListener("click",()=>{if(!allowDebugTools())return;G.fightMode=null;G.worldFight={world:1,slot:5};switchTab("battle")});function syncMenuMusicBtn(){const btn=$("menuMusicBtn");if(!btn)return;const on=!!(G.settings&&G.settings.music);btn.classList.toggle("off",!on);btn.classList.toggle("playing",on&&typeof Music!=="undefined"&&!!Music.timer&&Music.mode==="menu");btn.setAttribute("aria-pressed",on?"true":"false");const waves=btn.querySelectorAll(".mwave");for(let i=0;i<waves.length;i++)waves[i].style.display=on?"":"none"}$("menuMusicBtn").addEventListener("click",(ev)=>{ev.stopPropagation();Sound.unlock();setMusic(!G.settings.music)});syncMenuMusicBtn();/* visibility synced in handleAppShow */let resetArmT=0;$("setResetBtn").addEventListener("click",()=>{const btn=$("setResetBtn");if(!btn.classList.contains("armed")){btn.classList.add("armed");btn.textContent="TAP AGAIN TO WIPE";clearTimeout(resetArmT);resetArmT=setTimeout(()=>{btn.classList.remove("armed");btn.textContent="RESET SAVE"},3200);return}clearTimeout(resetArmT);btn.classList.remove("armed");btn.textContent="RESET SAVE";doReset()});$("saveNotice").addEventListener("click",()=>{$("saveNotice").style.display="none"});$("storageNotice").addEventListener("click",()=>{$("storageNotice").style.display="none"});$("skinNotice").addEventListener("click",()=>{$("skinNotice").style.display="none"});function doReset(){Save.clear();G.totalCoins=0;G.shownCoins=0;G.kills=0;G.level=1;G.attrs=defaultAttrs();G.skills=["basic"];G.slapHand="R";G.slapCount=0;G.barrage=0;G.barrageT=0;G.ultCharge=0;G.ultReady=false;G.hitStop=0;G.lostLast=false;G.unlocked=1;G.testMode=false;G.defeated=new Set;G.current=0;G.playerFlashT=0;G.pendingRespawn=false;G.lastVictory=null;G.stats=defaultStats();G.enemyRecords={};G.achievements=[];G.claimedAchievements=[];G.bossRush={clears:0,best:0};G.endlessBest=0;G.claimedSpecials=[];G.trainPool=[];G.contracts=[];G.bountyDay="";G.bountyBoard={freeRerollsLeft:1,adRerollsLeft:2,masterChestClaimed:false,contracts:[]};G.bountyWinStreak=0;G.turf={accrued:{},stations:{},lastSeen:Date.now()};G.blitzBest=0;G.blitzReadyAt=0;G.blitzCharges=2;G.blitzChargeAt=0;G.reflexCharges=2;G.reflexChargeAt=0;G.endlessReadyAt=0;G.blitzGemsClaimed=[];G.bountyBoardBonusDay="";G.rushReadyAt=0;G.anomaly=null;G.runBuffs=null;G.worldsDefeated=[[],[]];G.worldsHardCleared=[[],[]];G.worldsHardMastered=[];G.worldFight=null;G.embers=0;G.arts=[];G.relics={};G.relicClears={};G.relicsEquipped=[];G.fightMode=null;G.carryHp=null;G.weakHintDone=false;G.tutorialDone=false;G.pendingTutorial=false;G.selectedSkill=null;G.wikiDetail=null;G.freshOnReturn=false;G.gems=0;G.skin="classic";G.ownedSkins=["classic"];G.pendingOffline=null;G.bundlesOwned=[];G.hardCleared=new Set;G.hardMastered=[];G.hardMode=false;G.offlineUnlocked=false;G.vipUnlocked=false;G.adFights=0;G.adWins=0;G.adLastShown=0;G.adSessions=0;G.adCoinBoostUntil=0;G.adDmgBoostUntil=0;G.adDmgWins=0;G.adDmgAttempts=0;G.adRewardedGraceUntil=0;G.reviveUsed={};G.reviveAttemptUsed=false;G.blitz=null;G.reflex=null;G.train=null;G.draftOpen=false;G.frenzyBoostUnlocked=false;G.autoAdvance=false;if(typeof updateAutoAdvanceBtn==="function")updateAutoAdvanceBtn();G.settings={music:true,sfx:true};Sound.muted=false;syncSfxBtn();G.gameCompleted=false;G.dragonMilestone=false;G.dragonMastery=0;G.secondWindUsed=false;G.heals=[];G.frenzyMeter=0;G.frenzyT=0;G.frenzyFlashT=0;G.specials={};updateFrenzyBar();G.daily=defaultDaily();G.chest=defaultChest();G.seenIntro=false;G.purchases=[];$("chestCard").style.display="none";dismissLevelUp();bossIntroEl.classList.remove("open");awayCardEl.classList.remove("open");applySkinVisuals();updateProcChip();updateGemHud();G.coinsFx=[];G.dmgNums=[];G.coinNums=[];G.impacts=[];G.poofs=[];G.frags=[];G.dmgLog=[];G.bursts=[];G.claws=[];G.procCount=0;G.venomT=0;G.voidT=0;setPanel(false,true);if(dpsActualEl)dpsActualEl.textContent="0";hideEndOverlay();G.over=null;updateCoinHud();updateKills();renderAttrs();renderStartShowcase();spawnEnemy(true);setRunning(true);switchTab("home");G.menuOpen=true;startMenuEl.classList.add("open");Music.sync();Save.store()}const healHandArt=()=>{try{if(HAND_SPRITE){const p=document.createElement("canvas");p.width=8;p.height=8;const px=p.getContext("2d");px.drawImage(HAND_SPRITE,0,0,8,8);const d=px.getImageData(0,0,8,8).data;let any=false;for(let i=3;i<d.length;i+=4)if(d[i]>8){any=true;break}if(!any){HAND_SPRITE=null;HAND_ASLEEP=null;initHandCanvases();LEFT_SPRITE=null;LEFT_ASLEEP=null;if(typeof initLeftCanvases==="function")initLeftCanvases()}}}catch(e){}};window.addEventListener("pointerdown",(e)=>{
+$("dbgFightW15Btn")?.addEventListener("click",()=>{if(!allowDebugTools())return;G.fightMode=null;G.worldFight={world:1,slot:5};switchTab("battle")});function syncMenuMusicBtn(){const btn=$("menuMusicBtn");if(!btn)return;const on=!!(G.settings&&G.settings.music);btn.classList.toggle("off",!on);btn.classList.toggle("playing",on&&typeof Music!=="undefined"&&!!Music.timer&&Music.mode==="menu");btn.setAttribute("aria-pressed",on?"true":"false");const waves=btn.querySelectorAll(".mwave");for(let i=0;i<waves.length;i++)waves[i].style.display=on?"":"none"}$("menuMusicBtn").addEventListener("click",(ev)=>{ev.stopPropagation();Sound.unlock();setMusic(!G.settings.music)});syncMenuMusicBtn();/* visibility synced in handleAppShow */let resetArmT=0;$("setResetBtn").addEventListener("click",()=>{const btn=$("setResetBtn");if(!btn.classList.contains("armed")){btn.classList.add("armed");btn.textContent="TAP AGAIN TO WIPE";clearTimeout(resetArmT);resetArmT=setTimeout(()=>{btn.classList.remove("armed");btn.textContent="RESET SAVE"},3200);return}clearTimeout(resetArmT);btn.classList.remove("armed");btn.textContent="RESET SAVE";doReset()});$("saveNotice").addEventListener("click",()=>{$("saveNotice").style.display="none"});$("storageNotice").addEventListener("click",()=>{$("storageNotice").style.display="none"});$("skinNotice").addEventListener("click",()=>{$("skinNotice").style.display="none"});function doReset(){Save.clear();G.totalCoins=0;G.shownCoins=0;G.kills=0;G.level=1;G.attrs=defaultAttrs();G.skills=["basic"];G.slapHand="R";G.slapCount=0;G.barrage=0;G.barrageT=0;G.ultCharge=0;G.ultReady=false;G.hitStop=0;G.lostLast=false;G.unlocked=1;G.testMode=false;G.defeated=new Set;G.current=0;G.playerFlashT=0;G.pendingRespawn=false;G.lastVictory=null;G.stats=defaultStats();G.enemyRecords={};G.achievements=[];G.claimedAchievements=[];G.bossRush={clears:0,best:0};G.endlessBest=0;G.claimedSpecials=[];G.trainPool=[];G.contracts=[];G.bountyDay="";G.bountyBoard={freeRerollsLeft:1,adRerollsLeft:2,masterChestClaimed:false,contracts:[]};G.bountyWinStreak=0;G.turf={accrued:{},stations:{},lastSeen:Date.now()};G.blitzBest=0;G.blitzReadyAt=0;G.blitzCharges=2;G.blitzChargeAt=0;G.reflexCharges=2;G.reflexChargeAt=0;G.endlessReadyAt=0;G.blitzGemsClaimed=[];G.bountyBoardBonusDay="";G.rushReadyAt=0;G.anomaly=null;G.runBuffs=null;G.worldsDefeated=[[],[]];G.worldsHardCleared=[[],[]];G.worldsHardMastered=[];G.worldFight=null;G.embers=0;G.arts=[];G.relics={};G.relicClears={};G.relicsEquipped=[];G.fightMode=null;G.carryHp=null;G.weakHintDone=false;G.tutorialDone=false;G.pendingTutorial=false;G.selectedSkill=null;G.wikiDetail=null;G.freshOnReturn=false;G.gems=0;G.skin="classic";G.ownedSkins=["classic"];G.pendingOffline=null;G.bundlesOwned=[];G.hardCleared=new Set;G.hardMastered=[];G.hardMode=false;G.offlineUnlocked=false;G.vipUnlocked=false;G.adFights=0;G.adWins=0;G.adLastShown=0;G.adSessions=0;G.adCoinBoostUntil=0;G.adDmgBoostUntil=0;G.adDmgWins=0;G.adDmgAttempts=0;G.adRewardedGraceUntil=0;Ads.isAdPlaying=false;G.reviveUsed={};G.reviveAttemptUsed=false;G.blitz=null;G.reflex=null;G.train=null;G.draftOpen=false;G.frenzyBoostUnlocked=false;G.autoAdvance=false;if(typeof updateAutoAdvanceBtn==="function")updateAutoAdvanceBtn();G.settings={music:true,sfx:true};Sound.muted=false;syncSfxBtn();G.gameCompleted=false;G.dragonMilestone=false;G.dragonMastery=0;G.secondWindUsed=false;G.heals=[];G.frenzyMeter=0;G.frenzyT=0;G.frenzyFlashT=0;G.specials={};updateFrenzyBar();G.daily=defaultDaily();G.chest=defaultChest();G.seenIntro=false;G.purchases=[];$("chestCard").style.display="none";dismissLevelUp();bossIntroEl.classList.remove("open");awayCardEl.classList.remove("open");applySkinVisuals();updateProcChip();updateGemHud();G.coinsFx=[];G.dmgNums=[];G.coinNums=[];G.impacts=[];G.poofs=[];G.frags=[];G.dmgLog=[];G.bursts=[];G.claws=[];G.procCount=0;G.venomT=0;G.voidT=0;setPanel(false,true);if(dpsActualEl)dpsActualEl.textContent="0";hideEndOverlay();G.over=null;updateCoinHud();updateKills();renderAttrs();renderStartShowcase();spawnEnemy(true);setRunning(true);switchTab("home");G.menuOpen=true;startMenuEl.classList.add("open");Music.sync();Save.store()}const healHandArt=()=>{try{if(HAND_SPRITE){const p=document.createElement("canvas");p.width=8;p.height=8;const px=p.getContext("2d");px.drawImage(HAND_SPRITE,0,0,8,8);const d=px.getImageData(0,0,8,8).data;let any=false;for(let i=3;i<d.length;i+=4)if(d[i]>8){any=true;break}if(!any){HAND_SPRITE=null;HAND_ASLEEP=null;initHandCanvases();LEFT_SPRITE=null;LEFT_ASLEEP=null;if(typeof initLeftCanvases==="function")initLeftCanvases()}}}catch(e){}};window.addEventListener("pointerdown",(e)=>{
   try{Sound.unlock();}catch(err){}
   if(e.target&&e.target.closest("button, .tab-btn, .more-row, .award-row, .booster-circle-btn, .hub-card, .card, .attr-btn, .close-btn, .danger-btn, .set-toggle, .sel-card")){
     Sound.tap();

@@ -2674,7 +2674,8 @@ margin-top: 7px;
   transform: translateX(-50%);
   width: 100%;
   max-width: 520px;
-  height: 60px;
+  min-height: 60px;
+  height: calc(60px + env(safe-area-inset-bottom, 0px));
   background: #fff8ea;
   border-top: 2px solid var(--chrome-edge);
   border-left: 2px solid var(--chrome-edge);
@@ -2993,7 +2994,7 @@ margin-top: 7px;
 /* ─── Page Viewport Padding For BottomNav ─── */
 #pageHome {
   overflow-y: auto;
-  padding-bottom: 72px;
+  padding-bottom: calc(72px + env(safe-area-inset-bottom, 0px));
 }
 #pageHome.active {
   display: flex;
@@ -3004,7 +3005,16 @@ margin-top: 7px;
   display: none !important;
 }
 #pageAttrs, #pageLevels, #pageSkills, #pageShop, #pageSpecials, #pageAwards, #pageQuests, #pageSettings, #pageHelp {
-  padding-bottom: 68px;
+  padding-bottom: calc(68px + env(safe-area-inset-bottom, 0px));
+}
+#app.has-banner #pageHome {
+  padding-bottom: calc(132px + env(safe-area-inset-bottom, 0px));
+}
+#app.has-banner #pageLevels #selList {
+  padding-bottom: 112px;
+}
+#app.has-banner #shopScroll {
+  padding-bottom: calc(108px + env(safe-area-inset-bottom, 0px));
 }
 
 /* ─── Hub Stats Card ─── */
@@ -4559,7 +4569,7 @@ margin-top: 7px;
 /* Round 17 — Menu F: trio poster title stage */
 .ad-banner {
   position: fixed;
-  bottom: 60px;
+  bottom: calc(60px + env(safe-area-inset-bottom, 0px));
   left: 50%;
   transform: translateX(-50%);
   width: 100%;
